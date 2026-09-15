@@ -1,0 +1,114 @@
+{
+  "schema_version": "1.0",
+  "scene_id": "connector",
+  "title": "插头的空间对准",
+  "units": "m",
+  "axes": "right_handed_z_up",
+  "objects": [
+    {
+      "object_id": "P",
+      "label": "蓝色插头",
+      "asset": "assets/meshes/plug.glb",
+      "pose": {
+        "position_m": [
+          -0.04,
+          -0.14,
+          0
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "color": [
+        99,
+        144,
+        174
+      ],
+      "capabilities": [
+        "point",
+        "insert",
+        "inspect_back"
+      ],
+      "anchors": {},
+      "description": ""
+    },
+    {
+      "object_id": "S",
+      "label": "目标插座",
+      "asset": "assets/meshes/socket.glb",
+      "pose": {
+        "position_m": [
+          -0.04,
+          0.13,
+          0
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "color": [
+        180,
+        188,
+        194
+      ],
+      "capabilities": [
+        "point",
+        "inspect_back"
+      ],
+      "anchors": {
+        "insertion": [
+          0,
+          -0.027,
+          0
+        ]
+      },
+      "description": ""
+    },
+    {
+      "object_id": "C",
+      "label": "备用模块",
+      "asset": "assets/meshes/module.glb",
+      "pose": {
+        "position_m": [
+          0.16,
+          0.23,
+          0.025
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "color": [
+        111,
+        166,
+        151
+      ],
+      "capabilities": [
+        "point",
+        "inspect_back"
+      ],
+      "anchors": {},
+      "description": ""
+    }
+  ],
+  "initial_instruction": "演示把 P 插进 S，插好后再检查 C。",
+  "camera_position_m": [
+    0.6,
+    -0.78,
+    0.6
+  ],
+  "camera_look_at_m": [
+    0.03,
+    0.03,
+    0.04
+  ]
+}

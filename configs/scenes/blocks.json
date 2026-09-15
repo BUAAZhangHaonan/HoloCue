@@ -1,0 +1,120 @@
+{
+  "schema_version": "1.0",
+  "scene_id": "blocks",
+  "title": "积木的分步搭建",
+  "units": "m",
+  "axes": "right_handed_z_up",
+  "objects": [
+    {
+      "object_id": "A",
+      "label": "黄色积木",
+      "asset": "assets/meshes/brick.glb",
+      "pose": {
+        "position_m": [
+          -0.15,
+          -0.09,
+          0
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "color": [
+        209,
+        172,
+        93
+      ],
+      "capabilities": [
+        "point",
+        "assemble",
+        "inspect_back"
+      ],
+      "anchors": {},
+      "description": ""
+    },
+    {
+      "object_id": "B",
+      "label": "蓝色积木",
+      "asset": "assets/meshes/brick_blue.glb",
+      "pose": {
+        "position_m": [
+          0.15,
+          -0.03,
+          0
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "color": [
+        99,
+        144,
+        174
+      ],
+      "capabilities": [
+        "point",
+        "assemble",
+        "inspect_back"
+      ],
+      "anchors": {
+        "placement": [
+          0,
+          0,
+          0.034
+        ]
+      },
+      "description": ""
+    },
+    {
+      "object_id": "BASE",
+      "label": "绿色底板",
+      "asset": "assets/meshes/baseplate.glb",
+      "pose": {
+        "position_m": [
+          0,
+          0.2,
+          0
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "color": [
+        111,
+        166,
+        151
+      ],
+      "capabilities": [
+        "point"
+      ],
+      "anchors": {
+        "placement": [
+          0,
+          0,
+          0.011
+        ]
+      },
+      "description": ""
+    }
+  ],
+  "initial_instruction": "先把 A 放到底板 BASE 上，然后检查 B 的背面。",
+  "camera_position_m": [
+    0.68,
+    -0.85,
+    0.72
+  ],
+  "camera_look_at_m": [
+    0,
+    0.1,
+    0.04
+  ]
+}

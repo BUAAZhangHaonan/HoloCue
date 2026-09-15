@@ -1,0 +1,109 @@
+{
+  "schema_version": "1.0",
+  "scene_id": "control_panel",
+  "title": "旋钮与背面检查",
+  "units": "m",
+  "axes": "right_handed_z_up",
+  "objects": [
+    {
+      "object_id": "A",
+      "label": "旋钮 A",
+      "asset": "assets/meshes/knob.glb",
+      "pose": {
+        "position_m": [
+          -0.18,
+          -0.04,
+          0
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "color": [
+        99,
+        144,
+        174
+      ],
+      "capabilities": [
+        "point",
+        "rotate",
+        "inspect_back"
+      ],
+      "anchors": {},
+      "description": ""
+    },
+    {
+      "object_id": "B",
+      "label": "旋钮 B",
+      "asset": "assets/meshes/knob.glb",
+      "pose": {
+        "position_m": [
+          0,
+          0.075,
+          0.025
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "color": [
+        99,
+        144,
+        174
+      ],
+      "capabilities": [
+        "point",
+        "rotate",
+        "inspect_back"
+      ],
+      "anchors": {},
+      "description": "当前操作对象，顶部白线是角度指示线"
+    },
+    {
+      "object_id": "C",
+      "label": "模块 C",
+      "asset": "assets/meshes/module.glb",
+      "pose": {
+        "position_m": [
+          0.18,
+          0.2,
+          0.05
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "color": [
+        111,
+        166,
+        151
+      ],
+      "capabilities": [
+        "point",
+        "inspect_back"
+      ],
+      "anchors": {},
+      "description": "背面有凸出的黄色定位结构"
+    }
+  ],
+  "initial_instruction": "把 B 逆时针转 30 度，接着检查 C 的背面。",
+  "camera_position_m": [
+    0.75,
+    -0.83,
+    0.68
+  ],
+  "camera_look_at_m": [
+    0,
+    0.1,
+    0.06
+  ]
+}

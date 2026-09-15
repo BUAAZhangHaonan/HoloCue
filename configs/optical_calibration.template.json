@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "status": "awaiting_optical_owner",
+  "calibration_id": null,
+  "sigma_definition": {
+    "plane": null,
+    "amplitude_or_intensity": null,
+    "parameterization": null,
+    "units": "m"
+  },
+  "wavelength_m": null,
+  "slm_shape_hw": null,
+  "slm_pitch_m": null,
+  "aperture": null,
+  "phase_encoding": null,
+  "reference_plane_m": null,
+  "world_to_optical_4x4": null,
+  "profiles": {
+    "precise": null,
+    "persistent": null,
+    "neutral": null
+  },
+  "measured_n_sigma_latency_curve": null,
+  "measured_axial_response_data": null,
+  "note": "Interface template only. Null values deliberately block optical execution; relative preview values must not be assigned metres."
+}

@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net">
+  <diagram id="holocue" name="HoloCue 完整链路">
+    <mxGraphModel dx="2200" dy="900" grid="1" page="1" pageWidth="2200" pageHeight="900">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="input" value="用户与场景&#10;&#10;自然语言&#10;对象与任务状态" style="rounded=1;whiteSpace=wrap;html=0;fontFamily=Microsoft YaHei;fontSize=28;fillColor=#EEF5F7;strokeColor=#CCDDE6;" vertex="1" parent="1">
+          <mxGeometry x="65" y="225" width="355" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="agent" value="语义决策&#10;&#10;当前任务与优先级&#10;精确或持续的需求" style="rounded=1;whiteSpace=wrap;html=0;fontFamily=Microsoft YaHei;fontSize=28;fillColor=#EEF5F7;strokeColor=#CCDDE6;" vertex="1" parent="1">
+          <mxGeometry x="490" y="225" width="355" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="mapping" value="确定性映射&#10;&#10;Gaussian 数量&#10;轴向响应配置" style="rounded=1;whiteSpace=wrap;html=0;fontFamily=Microsoft YaHei;fontSize=28;fillColor=#EEF5F7;strokeColor=#CCDDE6;" vertex="1" parent="1">
+          <mxGeometry x="920" y="225" width="355" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="render" value="显示执行&#10;&#10;空间提示与动作&#10;持续刷新" style="rounded=1;whiteSpace=wrap;html=0;fontFamily=Microsoft YaHei;fontSize=28;fillColor=#EEF5F7;strokeColor=#CCDDE6;" vertex="1" parent="1">
+          <mxGeometry x="1350" y="225" width="355" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="optics" value="光学后端&#10;&#10;CGH 与相位编码&#10;SLM 重建" style="rounded=1;whiteSpace=wrap;html=0;fontFamily=Microsoft YaHei;fontSize=28;fillColor=#EEF5F7;strokeColor=#CCDDE6;" vertex="1" parent="1">
+          <mxGeometry x="1780" y="225" width="355" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="state" value="显式任务状态&#10;&#10;暂停与恢复    参数保留    版本校验" style="rounded=1;whiteSpace=wrap;html=0;fontFamily=Microsoft YaHei;fontSize=28;fillColor=#EEF5F7;strokeColor=#CCDDE6;" vertex="1" parent="1">
+          <mxGeometry x="490" y="522" width="790" height="173" as="geometry" />
+        </mxCell>
+        <mxCell id="e0" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;strokeColor=#6789A1;strokeWidth=3;" edge="1" parent="1" source="input" target="agent">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;strokeColor=#6789A1;strokeWidth=3;" edge="1" parent="1" source="agent" target="mapping">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;strokeColor=#6789A1;strokeWidth=3;" edge="1" parent="1" source="mapping" target="render">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;strokeColor=#6789A1;strokeWidth=3;" edge="1" parent="1" source="render" target="optics">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;strokeColor=#6789A1;strokeWidth=3;" edge="1" parent="1" source="agent" target="state">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;strokeColor=#6789A1;strokeWidth=3;" edge="1" parent="1" source="state" target="mapping">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

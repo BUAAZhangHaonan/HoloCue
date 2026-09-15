@@ -1,0 +1,243 @@
+{
+  "$defs": {
+    "Pose": {
+      "additionalProperties": false,
+      "properties": {
+        "position_m": {
+          "default": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Position M",
+          "type": "array"
+        },
+        "wxyz": {
+          "default": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Wxyz",
+          "type": "array"
+        }
+      },
+      "title": "Pose",
+      "type": "object"
+    },
+    "SceneObject": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,47}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "asset": {
+          "title": "Asset",
+          "type": "string"
+        },
+        "pose": {
+          "$ref": "#/$defs/Pose"
+        },
+        "color": {
+          "default": [
+            160,
+            175,
+            190
+          ],
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "Color",
+          "type": "array"
+        },
+        "capabilities": {
+          "items": {
+            "enum": [
+              "point",
+              "rotate",
+              "inspect_back",
+              "insert",
+              "assemble",
+              "wait"
+            ],
+            "type": "string"
+          },
+          "title": "Capabilities",
+          "type": "array"
+        },
+        "anchors": {
+          "additionalProperties": {
+            "maxItems": 3,
+            "minItems": 3,
+            "prefixItems": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "type": "array"
+          },
+          "title": "Anchors",
+          "type": "object"
+        },
+        "description": {
+          "default": "",
+          "title": "Description",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_id",
+        "label",
+        "asset",
+        "pose",
+        "capabilities"
+      ],
+      "title": "SceneObject",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "scene_id": {
+      "title": "Scene Id",
+      "type": "string"
+    },
+    "title": {
+      "title": "Title",
+      "type": "string"
+    },
+    "units": {
+      "const": "m",
+      "default": "m",
+      "title": "Units",
+      "type": "string"
+    },
+    "axes": {
+      "const": "right_handed_z_up",
+      "default": "right_handed_z_up",
+      "title": "Axes",
+      "type": "string"
+    },
+    "objects": {
+      "items": {
+        "$ref": "#/$defs/SceneObject"
+      },
+      "title": "Objects",
+      "type": "array"
+    },
+    "initial_instruction": {
+      "title": "Initial Instruction",
+      "type": "string"
+    },
+    "camera_position_m": {
+      "default": [
+        0.8,
+        -0.85,
+        0.72
+      ],
+      "maxItems": 3,
+      "minItems": 3,
+      "prefixItems": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "number"
+        }
+      ],
+      "title": "Camera Position M",
+      "type": "array"
+    },
+    "camera_look_at_m": {
+      "default": [
+        0.0,
+        0.12,
+        0.08
+      ],
+      "maxItems": 3,
+      "minItems": 3,
+      "prefixItems": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "number"
+        }
+      ],
+      "title": "Camera Look At M",
+      "type": "array"
+    }
+  },
+  "required": [
+    "scene_id",
+    "title",
+    "objects",
+    "initial_instruction"
+  ],
+  "title": "SceneSpec",
+  "type": "object"
+}

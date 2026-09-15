@@ -1,0 +1,138 @@
+{
+  "$defs": {
+    "CueSemantic": {
+      "additionalProperties": false,
+      "properties": {
+        "target_id": {
+          "title": "Target Id",
+          "type": "string"
+        },
+        "action": {
+          "enum": [
+            "point",
+            "rotate",
+            "inspect_back",
+            "insert",
+            "assemble",
+            "wait"
+          ],
+          "title": "Action",
+          "type": "string"
+        },
+        "cue_type": {
+          "enum": [
+            "highlight",
+            "ring_arrow",
+            "straight_arrow",
+            "label",
+            "ghost_motion"
+          ],
+          "title": "Cue Type",
+          "type": "string"
+        },
+        "task_role": {
+          "enum": [
+            "current",
+            "next",
+            "background"
+          ],
+          "title": "Task Role",
+          "type": "string"
+        },
+        "priority": {
+          "maximum": 5,
+          "minimum": 0,
+          "title": "Priority",
+          "type": "integer"
+        },
+        "depth_requirement": {
+          "enum": [
+            "precise",
+            "persistent",
+            "neutral"
+          ],
+          "title": "Depth Requirement",
+          "type": "string"
+        },
+        "instruction": {
+          "maxLength": 180,
+          "minLength": 1,
+          "title": "Instruction",
+          "type": "string"
+        },
+        "angle_deg": {
+          "anyOf": [
+            {
+              "maximum": 360,
+              "minimum": -360,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Angle Deg"
+        },
+        "reference_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reference Id"
+        }
+      },
+      "required": [
+        "target_id",
+        "action",
+        "cue_type",
+        "task_role",
+        "priority",
+        "depth_requirement",
+        "instruction"
+      ],
+      "title": "CueSemantic",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "operation": {
+      "enum": [
+        "replace",
+        "interrupt",
+        "resume",
+        "complete",
+        "pause",
+        "clarify"
+      ],
+      "title": "Operation",
+      "type": "string"
+    },
+    "assistant_message": {
+      "maxLength": 300,
+      "minLength": 1,
+      "title": "Assistant Message",
+      "type": "string"
+    },
+    "cues": {
+      "items": {
+        "$ref": "#/$defs/CueSemantic"
+      },
+      "maxItems": 8,
+      "title": "Cues",
+      "type": "array"
+    }
+  },
+  "required": [
+    "operation",
+    "assistant_message"
+  ],
+  "title": "Decision",
+  "type": "object"
+}

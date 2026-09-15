@@ -1,0 +1,17 @@
+{
+  "scope": "runtime_safety",
+  "independent_session_id": "FILL_FROM_REAL_SUBAGENT_SESSION",
+  "source_sha256": "FILL_FROM_DIGEST",
+  "status": "pending",
+  "visually_inspected": false,
+  "observations": [
+    "Replace with specific independent observations"
+  ],
+  "findings": [],
+  "evidence": [
+    {
+      "path": "runs/path-to-real-evidence",
+      "sha256": "FILL_REAL_SHA256"
+    }
+  ]
+}

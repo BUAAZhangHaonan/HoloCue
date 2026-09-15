@@ -1,0 +1,250 @@
+{
+  "$defs": {
+    "DisplayCue": {
+      "additionalProperties": false,
+      "properties": {
+        "task_id": {
+          "title": "Task Id",
+          "type": "string"
+        },
+        "target_id": {
+          "title": "Target Id",
+          "type": "string"
+        },
+        "task_role": {
+          "title": "Task Role",
+          "type": "string"
+        },
+        "cue_type": {
+          "title": "Cue Type",
+          "type": "string"
+        },
+        "action": {
+          "title": "Action",
+          "type": "string"
+        },
+        "instruction": {
+          "title": "Instruction",
+          "type": "string"
+        },
+        "priority": {
+          "title": "Priority",
+          "type": "integer"
+        },
+        "depth_requirement": {
+          "title": "Depth Requirement",
+          "type": "string"
+        },
+        "n_gaussians": {
+          "minimum": 0,
+          "title": "N Gaussians",
+          "type": "integer"
+        },
+        "sigma_value": {
+          "exclusiveMinimum": 0,
+          "title": "Sigma Value",
+          "type": "number"
+        },
+        "sigma_units": {
+          "enum": [
+            "relative",
+            "m"
+          ],
+          "title": "Sigma Units",
+          "type": "string"
+        },
+        "sigma_profile": {
+          "title": "Sigma Profile",
+          "type": "string"
+        },
+        "pose": {
+          "$ref": "#/$defs/Pose"
+        },
+        "goal_pose": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Pose"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "angle_deg": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Angle Deg"
+        },
+        "reference_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reference Id"
+        }
+      },
+      "required": [
+        "task_id",
+        "target_id",
+        "task_role",
+        "cue_type",
+        "action",
+        "instruction",
+        "priority",
+        "depth_requirement",
+        "n_gaussians",
+        "sigma_value",
+        "sigma_units",
+        "sigma_profile",
+        "pose"
+      ],
+      "title": "DisplayCue",
+      "type": "object"
+    },
+    "Pose": {
+      "additionalProperties": false,
+      "properties": {
+        "position_m": {
+          "default": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Position M",
+          "type": "array"
+        },
+        "wxyz": {
+          "default": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Wxyz",
+          "type": "array"
+        }
+      },
+      "title": "Pose",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "session_id": {
+      "title": "Session Id",
+      "type": "string"
+    },
+    "scene_id": {
+      "title": "Scene Id",
+      "type": "string"
+    },
+    "revision": {
+      "title": "Revision",
+      "type": "integer"
+    },
+    "epoch": {
+      "title": "Epoch",
+      "type": "integer"
+    },
+    "execution": {
+      "title": "Execution",
+      "type": "string"
+    },
+    "renderer_kind": {
+      "enum": [
+        "semantic_preview",
+        "calibrated_optical"
+      ],
+      "title": "Renderer Kind",
+      "type": "string"
+    },
+    "axes": {
+      "const": "right_handed_z_up",
+      "default": "right_handed_z_up",
+      "title": "Axes",
+      "type": "string"
+    },
+    "units": {
+      "const": "m",
+      "default": "m",
+      "title": "Units",
+      "type": "string"
+    },
+    "calibration_id": {
+      "title": "Calibration Id",
+      "type": "string"
+    },
+    "budget_total": {
+      "title": "Budget Total",
+      "type": "integer"
+    },
+    "cues": {
+      "items": {
+        "$ref": "#/$defs/DisplayCue"
+      },
+      "title": "Cues",
+      "type": "array"
+    }
+  },
+  "required": [
+    "session_id",
+    "scene_id",
+    "revision",
+    "epoch",
+    "execution",
+    "renderer_kind",
+    "calibration_id",
+    "budget_total",
+    "cues"
+  ],
+  "title": "DisplayPacket",
+  "type": "object"
+}

@@ -1,0 +1,146 @@
+[
+  {
+    "id": "R01",
+    "title": "Gaussian Wave Splatting",
+    "venue": "SIGGRAPH / ACM TOG，2025",
+    "url": "https://bchao1.github.io/gaussian-wave-splatting/",
+    "verified": "作者项目页与方法说明",
+    "use": "全息表示和波场生成的主要基础。"
+  },
+  {
+    "id": "R02",
+    "title": "Random-phase Wave Splatting",
+    "venue": "arXiv 2508.17480，已读 v2",
+    "url": "https://arxiv.org/html/2508.17480v2",
+    "verified": "预印本全文",
+    "use": "用随机相位和相应混合方法改善离焦、视差及眼盒表现。"
+  },
+  {
+    "id": "R03",
+    "title": "Pupil-Adaptive 3D Holography Beyond Coherent Depth-of-Field",
+    "venue": "arXiv 2409.00028，2024",
+    "url": "https://arxiv.org/abs/2409.00028",
+    "verified": "作者预印本摘要",
+    "use": "瞳孔状态与焦深控制的光学近邻，研究目标为视觉重建。"
+  },
+  {
+    "id": "R04",
+    "title": "Semantic Depth of Field",
+    "venue": "IEEE InfoVis，2001；DOI 10.1109/INFVIS.2001.963286",
+    "url": "https://eagereyes.org/publications/Kosara-InfoVis-2001",
+    "verified": "作者出版页面",
+    "use": "语义相关性控制图像模糊，适合交代清晰度编码的交互背景。"
+  },
+  {
+    "id": "R05",
+    "title": "Tri-Attention Complex-Valued CNN for Multimodal Holographic Digital Human Interaction",
+    "venue": "Optics Express，2026",
+    "url": "https://opticapublishing.figshare.com/collections/Tri-Attention_Complex-Valued_CNN_for_Multimodal_Holographic_Digital_Human_Interaction/8348008",
+    "verified": "出版方补充材料及系统描述",
+    "use": "多 Agent 与真实全息数字人交互的直接先例。"
+  },
+  {
+    "id": "R06",
+    "title": "Guided Reality",
+    "venue": "UIST，2025；DOI 10.1145/3746059.3747784",
+    "url": "https://arxiv.org/html/2508.03547v1",
+    "verified": "预印本全文",
+    "use": "大模型生成多种空间指导形式的直接系统参考。"
+  },
+  {
+    "id": "R07",
+    "title": "GaussLite: Online Task-Conditioned 3D Gaussian Splatting for Real-Time Robotic Mapping",
+    "venue": "arXiv 2606.30809，2026",
+    "url": "https://arxiv.org/html/2606.30809v1",
+    "verified": "预印本全文",
+    "use": "机器人建图的任务相关预算、密度与尺度控制，可选跨领域背景。"
+  },
+  {
+    "id": "R08",
+    "title": "Qwen3.5-4B",
+    "venue": "官方模型卡；访问 2026-09-15",
+    "url": "https://huggingface.co/Qwen/Qwen3.5-4B",
+    "verified": "官方模型卡",
+    "use": "第一阶段本地模型；按官方接口关闭 thinking 并输出结构化结果。"
+  },
+  {
+    "id": "R09",
+    "title": "Qwen3.5-9B",
+    "venue": "官方模型卡；访问 2026-09-15",
+    "url": "https://huggingface.co/Qwen/Qwen3.5-9B",
+    "verified": "官方模型卡",
+    "use": "在资源审查后开展的另一组模型实验。"
+  },
+  {
+    "id": "R10",
+    "title": "vLLM Qwen3.5 deployment recipe",
+    "venue": "官方文档；访问 2026-09-15",
+    "url": "https://docs.vllm.ai/projects/recipes/en/latest/Qwen/Qwen3.5.html",
+    "verified": "官方部署说明",
+    "use": "引擎兼容性、启动参数和非思考模式依据。"
+  },
+  {
+    "id": "R11",
+    "title": "LangGraph Interrupts",
+    "venue": "官方文档；访问 2026-09-15",
+    "url": "https://docs.langchain.com/oss/python/langgraph/interrupts",
+    "verified": "官方 API 说明",
+    "use": "图内暂停与恢复；应用需另外处理外部抢占与重复副作用。"
+  },
+  {
+    "id": "R12",
+    "title": "LangGraph Persistence",
+    "venue": "官方文档；访问 2026-09-15",
+    "url": "https://docs.langchain.com/oss/python/langgraph/persistence",
+    "verified": "官方状态与检查点说明",
+    "use": "本项目用 SQLite 保持任务状态，避免双份权威状态。"
+  },
+  {
+    "id": "R13",
+    "title": "smolagents Customize Agent Plan Interactively",
+    "venue": "官方示例；访问 2026-09-15",
+    "url": "https://huggingface.co/docs/smolagents/examples/plan_customization",
+    "verified": "官方示例",
+    "use": "轻量 Agent 的计划审阅和修改实现。"
+  },
+  {
+    "id": "R14",
+    "title": "Viser",
+    "venue": "官方代码与文档；访问 2026-09-15",
+    "url": "https://github.com/viser-project/viser",
+    "verified": "官方项目",
+    "use": "Python 驱动网页三维场景和交互控件。"
+  },
+  {
+    "id": "R15",
+    "title": "Blender MCP",
+    "venue": "社区项目；访问 2026-09-15",
+    "url": "https://github.com/ahujasid/blender-mcp",
+    "verified": "项目 README 与代码入口",
+    "use": "适合资产创建探索；执行任意 Python 的能力需要隔离。"
+  },
+  {
+    "id": "R16",
+    "title": "BlenderProc",
+    "venue": "官方项目；访问 2026-09-15",
+    "url": "https://github.com/DLR-RM/BlenderProc",
+    "verified": "项目 README",
+    "use": "批量生成 RGB、深度和标注，作为后续数据准备工具。"
+  },
+  {
+    "id": "R17",
+    "title": "hsplat",
+    "venue": "计算成像作者代码；访问 2026-09-15",
+    "url": "https://github.com/computational-imaging/hsplat",
+    "verified": "代码仓库与说明",
+    "use": "后续 Gaussian 全息生成的候选代码接口。"
+  },
+  {
+    "id": "R18",
+    "title": "Viser mesh example",
+    "venue": "官方示例；访问 2026-09-15",
+    "url": "https://viser.studio/main/examples/scene/meshes/",
+    "verified": "官方代码示例",
+    "use": "GLB 资产和网格显示的 API 依据。"
+  }
+]
