@@ -49,3 +49,9 @@ bash scripts/run_viewer.sh
 Viser 显示对象、几何提示、任务状态和示意焦点面板。Gaussian 数量守恒，σ 暂用有版本的相对配置。焦点面板为设计预览，光学数据由合作者后续提供。场景几何来自已知清单，原型的感知条件记录为已知场景输入。
 
 固定资产采用 CC0；代码按 `LICENSE` 使用。第三方代码、软件、模型权重和字体均未打入文件包。模型下载与源服务器拷贝入口已提供。
+
+## 4029 现场执行状态（2026-09-16）
+
+第一阶段已在 4029 现场闭环完成。模型为 Qwen3.5-4B（自 4028 `/home/g203-4028/Models` 只读 rsync 复制，`scripts/validate_model_dir.py` 元数据与分片长度校验通过），vLLM 0.29.0 + torch 2.13.0（CUDA 13.0 运行时，驱动 595.91），物理 GPU 1（`GPU-7ba69fc7-12ac-3dfb-8265-3476ce2504b6`），经 `resource_guard.py` UUID 掩码启动；因系统 nvcc 12.1 无法编译 flashinfer 0.6.18 的 JIT 采样算子，采用 `VLLM_USE_FLASHINFER_SAMPLER=0` 的有记录适配。
+
+现场结果：核心测试 38 passed（LangGraph 已安装，集成测试实跑）；live_smoke 三场景通过（预算守恒 6000/6000）；live_interrupt 打断-恢复通过（task_id 与 30 度参数保留）；docs/05 扩展输入 15/15 通过（提示词迭代 5 轮，全部留痕于 `runs/live_extended_attempt*.json`）；模型断连错误可见、动作冻结；服务重启保留任务。规划延迟中位数 3.83 s（20 样本，p90 6.79 s）。证据在 `runs/`（截图、视频、帧序列、原始模型请求与响应、守卫日志）。三次独立 SubAgent 审查记录在 `runs/reviews/`。`verification/LOCAL_VALIDATION.md` 仍描述交付时环境，范围以本节现场记录为准。
