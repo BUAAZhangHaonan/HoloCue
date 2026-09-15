@@ -21,10 +21,16 @@ class OpenAICompatiblePlanner:
         t0=time.perf_counter()
         scene_view=[{'object_id':o.object_id,'label':o.label,'description':o.description,
                      'capabilities':o.capabilities} for o in scene.objects]
+        # Store.begin() appends the current instruction to history before planning; forwarding it
+        # again inside history made the live model treat a first-turn session as a continuation
+        # and answer "resume". history must contain only prior turns.
+        history=list(s.history)
+        if history and history[-1].get('role')=='user' and history[-1].get('content')==msg.text:
+            history=history[:-1]
         context={'scene_id':scene.scene_id,'objects':scene_view,'queue':[t.model_dump() for t in s.queue],
                  'suspended':[[t.model_dump() for t in q] for q in s.suspended],
                  'completed':[t.semantic.instruction for t in s.completed],
-                 'history':s.history,'execution':s.execution,'user_instruction':msg.text}
+                 'history':history,'execution':s.execution,'user_instruction':msg.text}
         content=[{'type':'text','text':json.dumps(context,ensure_ascii=False)}]
         if msg.image_base64:
             try:data=base64.b64decode(msg.image_base64,validate=True)

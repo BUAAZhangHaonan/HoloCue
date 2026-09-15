@@ -171,6 +171,21 @@ def test_provider_posts_strict_schema_and_disables_thinking(monkeypatch):
     assert captured['response_format']['json_schema']['strict']
     assert d.operation=='replace' and trace['backend_mode']=='live'
 
+def test_provider_history_excludes_current_instruction(monkeypatch):
+    """Store.begin() appends the current text to history; the planner context must not repeat it,
+    otherwise the live model reads a first-turn session as a continuation and answers resume."""
+    import httpx
+    actual=httpx.AsyncClient;captured={}
+    def handler(request):
+        captured.update(json.loads(request.content))
+        return httpx.Response(200,json={'choices':[{'finish_reason':'stop','message':{'content':decision().model_dump_json()}}],'usage':{'total_tokens':20}})
+    monkeypatch.setattr(httpx,'AsyncClient',lambda **kw:actual(transport=httpx.MockTransport(handler),**kw))
+    s=session();s.history=[{'role':'user','content':'把 B 逆时针转 30 度，接着检查 C 的背面。'}]
+    asyncio.run(OpenAICompatiblePlanner().decide(s,load_scene('control_panel'),message(text='把 B 逆时针转 30 度，接着检查 C 的背面。')))
+    context=json.loads(captured['messages'][1]['content'][0]['text'])
+    assert context['history']==[]
+    assert context['user_instruction']=='把 B 逆时针转 30 度，接着检查 C 的背面。'
+
 def test_provider_invalid_json_is_not_repaired(monkeypatch):
     import httpx
     actual=httpx.AsyncClient
