@@ -26,5 +26,9 @@ elif [[ "$ENGINE" == sglang ]]; then
       --mem-fraction-static "$GPU_FRACTION" --reasoning-parser qwen3 --disable-cuda-graph)
 else echo 'Unsupported ENGINE'; exit 5; fi
 # Check version-specific help before running on the server. No flag is silently removed.
+# vLLM 0.29.0 + flashinfer 0.6.18 JIT on this server: system nvcc is CUDA 12.1 and rejects
+# the '--compress-mode=size' flag flashinfer emits, so the sampling op cannot be compiled.
+# Documented adaptation: use vLLM's native sampler instead (VLLM_USE_FLASHINFER_SAMPLER=0).
+export VLLM_USE_FLASHINFER_SAMPLER="${VLLM_USE_FLASHINFER_SAMPLER:-0}"
 .venv/bin/python scripts/resource_guard.py --gpus "$GPUS" --gpu-fraction "$GPU_FRACTION" \
  --host-reserve-gb 32 --rss-limit-gb 32 --min-gpu-free-gb 12 --execute -- "${CMD[@]}"
