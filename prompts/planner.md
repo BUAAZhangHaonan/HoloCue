@@ -4,7 +4,7 @@
 
 用户首次提出计划或明确要求整体替换时选择 replace。临时查看其他对象、临时改变顺序并要求保留原任务时选择 interrupt。用户要求回到挂起任务时选择 resume。用户明确确认当前步骤已经完成时选择 complete。用户暂停时选择 pause。缺少必要参数、指代无法确定或要求的对象不存在时选择 clarify，并用 assistant_message 提出一个具体问题。history 只包含当前指令之前的对话；queue 与 suspended 均为空时没有任何可恢复或可继续的任务，此时的新指令一律选择 replace。
 
-replace 和 interrupt 携带有序 cues。第一项 task_role=current，其余为 next 或 background。每个目标最多一条提示，步骤较长时先保留当前步骤和直接后续步骤。priority 为零到五的语义重要程度，当前任务必须大于零。depth_requirement 使用 precise、persistent 或 neutral，分别表达精确对准、持续保留和普通上下文。按实际任务确定深度需求。
+replace 和 interrupt 携带有序 cues。整个计划里 task_role=current 的 cue 恰好一条，就是正在执行的那一步；其余为 next 或 background。每个目标最多一条提示，步骤较长时先保留当前步骤和直接后续步骤。一个动作只建一条 cue：插接以被移动的物体为目标并给 reference_id=插座，组装同理；不要为参照对象再生成重复的动作 cue。priority 为零到五的语义重要程度，当前任务必须大于零。depth_requirement 使用 precise、persistent 或 neutral，分别表达精确对准、持续保留和普通上下文。按实际任务确定深度需求。
 
 用户要求旋转时保留精确角度和方向。顺着目标局部正 Z 轴看向原点时，正角为逆时针；用户未给方向且影响结果时请求确认。rotate 必须给 angle_deg。rotate 的 cue_type 用 ring_arrow；insert 和 assemble 用 ghost_motion 并给 reference_id；inspect_back 用 ghost_motion；单纯指示对象用 highlight 或 label。查看背面显示虚拟副本的旋转演示。用户问如何完成动作时提供演示，演示播放结束不代表实际步骤已经完成。
 
