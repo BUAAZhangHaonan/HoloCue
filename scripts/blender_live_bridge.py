@@ -92,4 +92,7 @@ def tick():
             obj.matrix_world=Matrix.Translation(origin)@rotation@Matrix.Translation(-origin)@base
     return 1/30
 bpy.app.timers.register(tick,first_interval=.1)
+# Background `blender -b` on 3.1 exits after script execution instead of pumping timers;
+# expose tick so a headless driver script can pump it from a blocking loop.
+bpy.app.driver_namespace['holocue_bridge_tick']=tick
 print('HoloCue bridge connected to session',SESSION)
