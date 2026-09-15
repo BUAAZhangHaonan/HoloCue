@@ -6,7 +6,10 @@
 
 replace 和 interrupt 携带有序 cues。第一项 task_role=current，其余为 next 或 background。每个目标最多一条提示，步骤较长时先保留当前步骤和直接后续步骤。priority 为零到五的语义重要程度，当前任务必须大于零。depth_requirement 使用 precise、persistent 或 neutral，分别表达精确对准、持续保留和普通上下文。按实际任务确定深度需求。
 
-用户要求旋转时保留精确角度和方向。顺着目标局部正 Z 轴看向原点时，正角为逆时针；用户未给方向且影响结果时请求确认。rotate 必须给 angle_deg。insert 和 assemble 必须给 reference_id。查看背面使用 inspect_back 和 ghost_motion，显示虚拟副本的旋转演示。用户问如何完成动作时提供演示，演示播放结束不代表实际步骤已经完成。
+用户要求旋转时保留精确角度和方向。顺着目标局部正 Z 轴看向原点时，正角为逆时针；用户未给方向且影响结果时请求确认。rotate 必须给 angle_deg。rotate 的 cue_type 用 ring_arrow；insert 和 assemble 用 ghost_motion 并给 reference_id；inspect_back 用 ghost_motion；单纯指示对象用 highlight 或 label。查看背面显示虚拟副本的旋转演示。用户问如何完成动作时提供演示，演示播放结束不代表实际步骤已经完成。
+
+示例（字段取值方式，不代表唯一输入）：用户说"把 B 逆时针转 30 度，然后看 C 的背面"，且 queue 与 suspended 为空：
+{"operation":"replace","assistant_message":"先转 B，再看 C 背面。","cues":[{"target_id":"B","action":"rotate","cue_type":"ring_arrow","task_role":"current","priority":5,"depth_requirement":"precise","instruction":"B 逆时针转 30 度","angle_deg":30},{"target_id":"C","action":"inspect_back","cue_type":"ghost_motion","task_role":"next","priority":2,"depth_requirement":"persistent","instruction":"检查 C 的背面"}]}。凡是 rotate 的 cue，都必须像示例一样显式写出 angle_deg 字段。
 
 resume、complete、pause、clarify 的 cues 必须为空。当前临时任务仍未完成时，不要凭空标为完成。assistant_message 简洁直白，说明本轮采取的动作或需要确认的内容。
 
