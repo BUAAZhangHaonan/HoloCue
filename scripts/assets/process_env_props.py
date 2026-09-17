@@ -9,7 +9,7 @@ and <dir>/<cat>/<id>/gltf (extension-less payload next to <id>.bin + textures/).
 Run inside Blender via the resource guard:
   .venv/bin/python scripts/guard/resource_guard.py --rss-limit-gb 12 --execute -- \
       /home/hdd3/zhanghaonan/opt/blender/blender -b -t 4 \
-      --python scripts/assets_v2/process_env_props.py -- --source assets/downloads/polyhaven/models
+      --python scripts/assets/process_env_props.py -- --source assets/downloads/polyhaven/models
 
 Idempotent: existing GLBs are skipped and their entries carried over;
 runs/scene_v2/prop_inventory.json is MERGED, never overwritten, so reruns never

@@ -1,6 +1,6 @@
 """Download CC0 assets from PolyHaven into assets/downloads/polyhaven with md5 verification.
 Only the ids listed in ASSET_LIST below are fetched; every file keeps its md5 from the API.
-Run:  .venv/bin/python scripts/assets_v2/download_polyhaven.py [--models id ...] [--textures id ...] [--dry]
+Run:  .venv/bin/python scripts/assets/download_polyhaven.py [--models id ...] [--textures id ...] [--dry]
 """
 from __future__ import annotations
 import argparse, hashlib, json, sys, time

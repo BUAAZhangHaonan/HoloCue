@@ -7,7 +7,7 @@ generator must never overwrite them. No external assets are downloaded.
 from pathlib import Path
 import math,sys
 import numpy as np,trimesh
-R=Path(__file__).resolve().parents[1]
+R=Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(R/'src'))
 from holocue.geometry import primitive_pool
 
