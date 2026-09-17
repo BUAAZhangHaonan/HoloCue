@@ -9,7 +9,7 @@ SCENES=("$@")
 [[ ${#SCENES[@]} -eq 0 ]] && SCENES=(control_panel connector blocks server_rack drone_bench shelf_picking optical_bench dig_site engine_bay)
 for SCENE in "${SCENES[@]}"; do
   echo "== $SCENE =="
-  .venv/bin/python scripts/resource_guard.py --rss-limit-gb 12 --execute -- \
+  .venv/bin/python scripts/guard/resource_guard.py --rss-limit-gb 12 --execute -- \
     "$BLENDER_BIN" -b -t 4 --python scripts/build_blender_scene.py -- --scene "$SCENE" --render
   .venv/bin/python scripts/annotate_render.py "$SCENE"
 done

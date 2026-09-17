@@ -220,7 +220,7 @@ def test_api_smoke_and_revisions(tmp_path):
         assert r.status_code==409
 
 def test_resource_gpu_allowlist():
-    spec=importlib.util.spec_from_file_location('guard',root()/'scripts/resource_guard.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+    spec=importlib.util.spec_from_file_location('guard',root()/'scripts/guard/resource_guard.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
     assert m.parse_selection('1,2')==[1,2] and m.parse_selection('')==[]
     for value in ['0','1,3','all','1,1','-1']:
         with pytest.raises(ValueError):m.parse_selection(value)

@@ -1,7 +1,7 @@
 """Build the engine_bay (发动机舱维修) v2 scene kit (Blender 3.1.2, CPU, via resource_guard).
 
 Run:
-  cd /home/hdd3/zhanghaonan/projects/holocue && .venv/bin/python scripts/resource_guard.py \
+  cd /home/hdd3/zhanghaonan/projects/holocue && .venv/bin/python scripts/guard/resource_guard.py \
       --rss-limit-gb 12 --execute -- /home/hdd3/zhanghaonan/opt/blender/blender -b -t 4 \
       --python scripts/scenes_v2/build_engine_bay.py 2>&1 | tee runs/scene_v2/build_engine_bay.log
 

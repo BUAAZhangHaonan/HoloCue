@@ -1,7 +1,7 @@
 """Build the dig_site (考古探方发掘) scene kit.
 
 Run (CPU only, via resource guard):
-  cd /home/hdd3/zhanghaonan/projects/holocue && .venv/bin/python scripts/resource_guard.py \
+  cd /home/hdd3/zhanghaonan/projects/holocue && .venv/bin/python scripts/guard/resource_guard.py \
       --rss-limit-gb 12 --execute -- /home/hdd3/zhanghaonan/opt/blender/blender -b -t 4 \
       --python scripts/scenes_v2/build_dig_site.py
   (tee full stdout to runs/scene_v2/build_dig_site.log)

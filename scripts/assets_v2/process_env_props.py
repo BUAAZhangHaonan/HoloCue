@@ -7,7 +7,7 @@ with export_yup=False. Handles both gltf payload layouts: <dir>/<id>/*.gltf
 and <dir>/<cat>/<id>/gltf (extension-less payload next to <id>.bin + textures/).
 
 Run inside Blender via the resource guard:
-  .venv/bin/python scripts/resource_guard.py --rss-limit-gb 12 --execute -- \
+  .venv/bin/python scripts/guard/resource_guard.py --rss-limit-gb 12 --execute -- \
       /home/hdd3/zhanghaonan/opt/blender/blender -b -t 4 \
       --python scripts/assets_v2/process_env_props.py -- --source assets/downloads/polyhaven/models
 

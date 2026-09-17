@@ -30,5 +30,5 @@ else echo 'Unsupported ENGINE'; exit 5; fi
 # the '--compress-mode=size' flag flashinfer emits, so the sampling op cannot be compiled.
 # Documented adaptation: use vLLM's native sampler instead (VLLM_USE_FLASHINFER_SAMPLER=0).
 export VLLM_USE_FLASHINFER_SAMPLER="${VLLM_USE_FLASHINFER_SAMPLER:-0}"
-.venv/bin/python scripts/resource_guard.py --gpus "$GPUS" --gpu-fraction "$GPU_FRACTION" \
+.venv/bin/python scripts/guard/resource_guard.py --gpus "$GPUS" --gpu-fraction "$GPU_FRACTION" \
  --host-reserve-gb 32 --rss-limit-gb 32 --min-gpu-free-gb 12 --execute -- "${CMD[@]}"

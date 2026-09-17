@@ -1,6 +1,6 @@
 """Shared Blender-side helpers for v2 scene kit builds (Blender 3.1.2 API).
 Importable inside kit scripts:  from common import *
-Everything runs CPU-only; kit scripts are launched via scripts/resource_guard.py.
+Everything runs CPU-only; kit scripts are launched via scripts/guard/resource_guard.py.
 """
 import bpy, sys, json, math
 from pathlib import Path
