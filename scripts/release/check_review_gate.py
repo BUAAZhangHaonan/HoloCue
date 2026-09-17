@@ -1,7 +1,7 @@
 """Verify required review artifacts, not whether an AI's observations are scientifically correct."""
 import argparse,hashlib,json
 from pathlib import Path
-ROOT=Path(__file__).resolve().parents[1]
+ROOT=Path(__file__).resolve().parents[2]
 
 def source_digest():
  h=hashlib.sha256()

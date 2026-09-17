@@ -1,7 +1,7 @@
 """Verify every shipped file against MANIFEST.sha256 before making local edits."""
 import hashlib
 from pathlib import Path
-ROOT=Path(__file__).resolve().parents[1]
+ROOT=Path(__file__).resolve().parents[2]
 manifest=ROOT/'MANIFEST.sha256'
 errors=[];count=0
 for line in manifest.read_text(encoding='utf-8').splitlines():
