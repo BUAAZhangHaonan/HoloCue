@@ -2,7 +2,7 @@
 # Burn per-segment Chinese captions into the five fly-through videos and concatenate
 # them into one reel. Run AFTER render_scene_videos.py has produced *_flythrough_raw.mp4.
 set -euo pipefail
-cd "$(dirname "$0")/.."
+cd "$(dirname "$0")/../.."
 FONT=/usr/share/fonts/opentype/noto/NotoSerifCJK-Bold.ttc
 VDIR=runs/scene_v2/videos
 [[ -f "$FONT" ]] || { echo "CJK font missing"; exit 2; }

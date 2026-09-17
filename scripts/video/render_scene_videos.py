@@ -6,7 +6,7 @@ scripts/scene_videos_captions.sh (ffmpeg drawtext), not in 3D.
 
 Run (resource-guarded, CPU):
   .venv/bin/python scripts/guard/resource_guard.py --rss-limit-gb 12 --execute -- \
-    blender -b -t 4 --python scripts/scenes_v2/render_scene_videos.py -- --scene server_rack
+    blender -b -t 4 --python scripts/video/render_scene_videos.py -- --scene server_rack
 """
 import bpy, sys, json, argparse
 from pathlib import Path
