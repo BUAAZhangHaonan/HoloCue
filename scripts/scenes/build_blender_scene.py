@@ -1,5 +1,5 @@
 """Run with the server's existing Blender, no add-on or pip package required.
-blender -b --python scripts/build_blender_scene.py -- --scene control_panel --render
+blender -b --python scripts/scenes/build_blender_scene.py -- --scene control_panel --render
 """
 import bpy,sys,json,argparse,math,os
 from pathlib import Path

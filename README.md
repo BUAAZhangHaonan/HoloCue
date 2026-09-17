@@ -77,7 +77,7 @@ scripts/
 
 - 场景 schema 向后兼容扩展:`environment`(仅渲染的环境道具,不进入 LLM 提示词)与 `render_hints`(ortho_scale/grid_extent/cue_scale/label_offset/fit_camera),`schemas/scene.schema.json` 同步再生成。
 - 成套 CC0 素材:PolyHaven 26 模型 + 13 纹理下载至 `assets/downloads/`(逐文件 md5 校验,来源与许可见 `assets/downloads/SOURCES.md`),加工为纹理内嵌 GLB 于 `assets/meshes/env/`;交互对象程序化建模于 `assets/meshes/<scene>/`。建模脚本在 `scripts/scenes/`,每个场景经 ≥3 轮独立 SubAgent 视觉审核(`runs/scene_v2/REVIEW_CHECKLIST.md`)。
-- 既有缺陷修复(依据 `runs/BUGFIXES_v2.md`):项目 GLB 统一 Z-up 直存约定(修复 Blender 渲染中对象横躺/偏位)、离线渲染 PIL 标签、补光灯追踪 look_at、资产原点守卫 `scripts/assets_v2/check_origins.py`。
+- 既有缺陷修复(依据 `runs/BUGFIXES_v2.md`):项目 GLB 统一 Z-up 直存约定(修复 Blender 渲染中对象横躺/偏位)、离线渲染 PIL 标签、补光灯追踪 look_at、资产原点守卫 `scripts/scenes/check_origins.py`。
 - Viser 界面优化:控制面板标签页化 + 操作按钮组;`fit_camera` 按场景包围盒自动取景。
 
 ## 发动机舱维修复刻轮（2026-09-17）

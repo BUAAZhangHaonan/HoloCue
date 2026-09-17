@@ -1,6 +1,6 @@
 """Deterministic post-render label annotation. Cycles color transforms made in-scene
 FONT labels unreliable; this draws object ids at projected pixel positions instead.
-Run: .venv/bin/python scripts/annotate_render.py <scene>   (after build_blender_scene --render)
+Run: .venv/bin/python scripts/scenes/annotate_render.py <scene>   (after build_blender_scene --render)
 Reads runs/<scene>_label_px.json, annotates runs/<scene>_blender.png in place.
 """
 from __future__ import annotations

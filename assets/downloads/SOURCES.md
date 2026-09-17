@@ -28,7 +28,7 @@ excavated_soil_wall, dirt, gravelly_sand, hessian_230
 
 ## 加工产物
 
-`assets/meshes/env/<id>.glb` 由 `scripts/assets_v2/process_env_props.py`(Blender 3.1.2;合并了原 process_props/process_engine_round 两脚本)从上述原始文件导出,纹理内嵌,几何未修改(仅单位确认与清理摄像机/灯光),尺寸/面数清单见 `runs/scene_v2/prop_inventory.json`。
+`assets/meshes/env/<id>.glb` 由 `scripts/assets/process_env_props.py`(Blender 3.1.2;合并了原 process_props/process_engine_round 两脚本)从上述原始文件导出,纹理内嵌,几何未修改(仅单位确认与清理摄像机/灯光),尺寸/面数清单见 `runs/scene_v2/prop_inventory.json`。
 
 ## 项目内自有资产
 
