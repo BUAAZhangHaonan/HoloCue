@@ -19,7 +19,7 @@ def session():return Session(session_id='s',scene_id='control_panel',backend_mod
 def message(text='x',rid='req',revision=0):return UserMessage(text=text,request_id=rid,expected_revision=revision)
 
 def test_all_scenes_load():
-    # v1 shipped 3 scenes; v2 scene kits (docs/09) add more configs, so only require the v1 core.
+    # The first three shipped scenes stay loadable; later kits (docs/09, docs/10) add configs, so only require that core.
     assert len(list_scenes())>=3
     for s in list_scenes():
         scene=load_scene(s['scene_id'])
@@ -252,7 +252,7 @@ def test_measured_parameters_do_not_claim_optical_execution():
     policy=load_policy();policy['calibration']={'id':'lab-profile','kind':'measured','sigma_units':'m'}
     assert packet(s,scene,policy).renderer_kind=='semantic_preview'
 
-def v2_scene():
+def scene_with_environment():
     x=json.loads((root()/'configs/scenes/control_panel.json').read_text(encoding='utf-8'))
     x['environment']=[{'prop_id':'bench_top','asset':'assets/meshes/baseplate.glb','pose':{'position_m':[0,.08,-.012],'wxyz':[1,0,0,0]},'scale_m':[2.,1.6,.02]},
                       {'prop_id':'side_rail','asset':'assets/meshes/brick.glb'}]
@@ -260,23 +260,23 @@ def v2_scene():
     return x
 
 def test_scene_spec_accepts_environment_and_render_hints():
-    s=SceneSpec.model_validate(v2_scene())
+    s=SceneSpec.model_validate(scene_with_environment())
     assert len(s.objects)==3 and len(s.environment)==2
     assert s.environment[1].pose.wxyz==(1.,0.,0.,0.) and s.environment[1].scale_m==(1.,1.,1.)
     assert (s.render_hints.ortho_scale_m,s.render_hints.grid_extent_m,s.render_hints.cue_scale,s.render_hints.label_offset_m)==(1.4,2.2,.8,.2)
 
 def test_scene_prop_id_pattern_is_enforced():
-    x=v2_scene();x['environment'][0]['prop_id']='9bench'
+    x=scene_with_environment();x['environment'][0]['prop_id']='9bench'
     with pytest.raises(ValidationError):SceneSpec.model_validate(x)
 
 def test_environment_prop_ids_must_be_unique():
-    x=v2_scene();x['environment'][1]['prop_id']=x['environment'][0]['prop_id']
+    x=scene_with_environment();x['environment'][1]['prop_id']=x['environment'][0]['prop_id']
     with pytest.raises(ValidationError):SceneSpec.model_validate(x)
 
-def test_render_hints_defaults_equal_v1_constants():
+def test_render_hints_defaults_equal_first_scene_constants():
     assert (RenderHints().ortho_scale_m,RenderHints().grid_extent_m,RenderHints().cue_scale,RenderHints().label_offset_m)==(.91,1.,1.,.12)
     assert RenderHints().fit_camera is False
-    v1=load_scene('control_panel');assert v1.render_hints==RenderHints() and v1.environment==[]
+    first=load_scene('control_panel');assert first.render_hints==RenderHints() and first.environment==[]
 
 def test_camera_fit_backsoff_along_axis_and_preserves_default():
     from holocue.viewer import Viewer
@@ -305,7 +305,7 @@ def test_display_pose_inspect_back_ends_at_180():
     np.testing.assert_allclose(q,(math.cos(math.pi/2),0.,0.,math.sin(math.pi/2)),atol=1e-12)
 
 def test_environment_props_are_not_planner_objects():
-    scene=SceneSpec.model_validate(v2_scene())
+    scene=SceneSpec.model_validate(scene_with_environment())
     assert len(scene.objects)==3  # environment does not extend the planner-visible object list
     x=decision().model_dump();x['cues'][0]['target_id']='bench_top'
     with pytest.raises(DomainError) as caught:validate_decision(Decision.model_validate(x),scene)

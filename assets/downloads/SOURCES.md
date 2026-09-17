@@ -6,7 +6,7 @@
 
 - 许可:CC0 1.0 Universal(公有领域贡献,可商用、可修改、无需署名)。
 - 下载时间:2026-09-17。
-- 下载方式:`scripts/assets_v2/download_polyhaven.py`(经 api.polyhaven.com 获取文件清单与 md5,逐文件校验后落盘)。
+- 下载方式:`scripts/assets/download_polyhaven.py`(经 api.polyhaven.com 获取文件清单与 md5,逐文件校验后落盘)。
 - 逐文件 md5 校验记录:`polyhaven/polyhaven_download_log.json`(241 个条目,全部 `md5_ok: true`)。
 - 模型目录:`polyhaven/models/<id>/`(.gltf + .bin + 1k jpg 纹理,保持原始相对路径结构)。
 - 纹理目录:`polyhaven/textures/<id>/`(1k jpg 贴图)。

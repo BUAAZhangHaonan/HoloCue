@@ -1,4 +1,4 @@
-"""Build the server_rack v2 scene kit (Blender 3.1.2, CPU-only, via resource_guard.py).
+"""Build the server_rack scene kit (Blender 3.1.2, CPU-only, via resource_guard.py).
 
 Outputs:
   assets/meshes/server_rack/{SPARE,SLOT4,NODE3,ALARM,FAN}.glb      (interactive, origin-centered)

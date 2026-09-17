@@ -1,4 +1,4 @@
-"""Build the engine_bay (发动机舱维修) v2 scene kit (Blender 3.1.2, CPU, via resource_guard).
+"""Build the engine_bay (发动机舱维修) scene kit (Blender 3.1.2, CPU, via resource_guard).
 
 Run:
   cd /home/hdd3/zhanghaonan/projects/holocue && .venv/bin/python scripts/guard/resource_guard.py \

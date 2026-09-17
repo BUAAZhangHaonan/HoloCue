@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Official scene build for all scenes (v1 + v2): .blend + annotated render per scene.
+# Official scene build for all scenes: .blend + annotated render per scene.
 # CPU-only, resource-guarded; per-scene .blend + annotated render + origin guard.
 set -euo pipefail
 cd "$(dirname "$0")/../.."

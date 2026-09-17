@@ -1,7 +1,7 @@
 # SOURCES — 新场景「发动机维修工位」素材（engine_round）
 
 下载时间：2026-09-17 16:20–16:26 (+0800)
-执行方式：复用项目下载器 `scripts/assets_v2/download_polyhaven.py` 的
+执行方式：复用项目下载器 `scripts/assets/download_polyhaven.py` 的
 `fetch`/`download_model`/`md5` 逻辑（import 后仅重定向输出目录到本目录），
 全部文件经 PolyHaven API 提供的 md5 校验通过（0 失败），
 机器日志见同目录 `polyhaven_download_log.json`（155 条记录）。

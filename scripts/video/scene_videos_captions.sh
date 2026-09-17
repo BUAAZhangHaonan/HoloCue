@@ -76,8 +76,8 @@ printf "file '%s/%s'\n" "$VDIR" server_rack_flythrough.mp4 \
   "$VDIR" drone_bench_flythrough.mp4 \
   "$VDIR" shelf_picking_flythrough.mp4 \
   "$VDIR" optical_bench_flythrough.mp4 \
-  "$VDIR" dig_site_flythrough.mp4 > /tmp/v2_video_list.txt
-ffmpeg -y -v error -f concat -safe 0 -i /tmp/v2_video_list.txt \
-  -c copy "$VDIR/holocue_v2_scenes.mp4"
-echo "reel: $VDIR/holocue_v2_scenes.mp4"
+  "$VDIR" dig_site_flythrough.mp4 > /tmp/scene_video_list.txt
+ffmpeg -y -v error -f concat -safe 0 -i /tmp/scene_video_list.txt \
+  -c copy "$VDIR/holocue_scenes_reel.mp4"
+echo "reel: $VDIR/holocue_scenes_reel.mp4"
 ls -la "$VDIR"

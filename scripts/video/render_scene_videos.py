@@ -1,4 +1,4 @@
-"""Per-scene perspective fly-through videos for the five v2 scenes.
+"""Per-scene perspective fly-through videos.
 Opens the official assets/blender/<scene>.blend (composed scene + lighting), animates a
 new perspective camera along the scene's depth-story waypoints with a TRACK_TO target,
 and encodes h264 directly via Blender's FFMPEG output. Captions are burned afterwards by

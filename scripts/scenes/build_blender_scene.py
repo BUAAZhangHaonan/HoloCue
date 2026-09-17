@@ -22,7 +22,7 @@ scene.view_settings.view_transform='Filmic'
 # Project GLBs store Z-up world-frame geometry (the trimesh/Viser contract); Blender's
 # glTF importer unconditionally applies a -90 deg X rotation, so every import is
 # counter-rotated on its parent empty. Without this, objects render tipped sideways
-# and displaced from their JSON pose (v1 renders had this defect).
+# and displaced from their JSON pose (early renders had this defect).
 from mathutils import Quaternion
 CORR=Quaternion((2**-.5,-2**-.5,0.,0.))
 scene.world.color=(.75,.78,.82)
@@ -43,7 +43,7 @@ for o in spec['objects']:
     # Stable parent names provide the shared scene binding for the polling bridge.
     # Labels anchor to the imported mesh's real world bbox: glTF Y-up assets can sit
     # several cm away from the JSON pose inside Blender, which buried flat pose-based
-    # labels inside the mesh (invisible in every v1 render). matrix_world needs a
+    # labels inside the mesh (invisible in every early render). matrix_world needs a
     # depsgraph update after parenting or every bbox reads as the stale local one.
     bpy.context.view_layer.update()
     stack=list(parent.children);lo=Vector((1e9,)*3);hi=Vector((-1e9,)*3)
@@ -86,7 +86,7 @@ if not spec.get('environment'):
 # Enclosed scenes (engine_bay garage) may override via render_hints.fill_lights:
 # the k-scaled legacy rig lands above/behind solid env geometry (garage ceiling
 # z=2.98 occluded all three lights; official render mean luma 20 vs 74-121 for
-# the open v2 scenes, evidence runs/engine_round/build_all_engine.log).
+# the open environment-rich scenes, evidence runs/engine_round/build_all_engine.log).
 aim=Vector(spec['camera_look_at_m'])
 rig=spec.get('render_hints',{}).get('fill_lights')
 if rig:

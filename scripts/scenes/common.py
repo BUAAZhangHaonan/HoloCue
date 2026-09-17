@@ -1,4 +1,4 @@
-"""Shared Blender-side helpers for v2 scene kit builds (Blender 3.1.2 API).
+"""Shared Blender-side helpers for scene kit builds (Blender 3.1.2 API).
 Importable inside kit scripts:  from common import *
 Everything runs CPU-only; kit scripts are launched via scripts/guard/resource_guard.py.
 """

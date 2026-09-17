@@ -22,7 +22,7 @@ from holocue.config import load_scene, root
 KNOWN_CONVENTIONS = {
     # Back face carries cable stubs extending +y; visual center is the chassis.
     'server_rack/NODE3': 'asymmetric cable stubs on back plate',
-    # Origin at the bay mouth (insertion reference plane, like v1 socket S).
+    # Origin at the bay mouth (insertion reference plane, like the connector scene socket S).
     'drone_bench/BAY': 'origin at bay mouth plane; well hangs below',
     # Origin at the hinge axis: rotate cues anchor the rotation center.
     'drone_bench/GUARD': 'origin at hinge axis; cover extends when open',
@@ -51,8 +51,8 @@ def check(scene_id: str, tol: float = 0.25) -> list[str]:
         center = (lo + hi) / 2
         size = hi - lo
         extent = float(np.linalg.norm(size))
-        # Guard against v2 authoring outliers: lateral offset near zero, vertical free to
-        # follow origin-at-contact-plane or origin-at-insertion-end conventions (v1 uses both).
+        # Guard against kit authoring outliers: lateral offset near zero, vertical free to
+        # follow origin-at-contact-plane or origin-at-insertion-end conventions (the first three scenes use both).
         lateral = float(np.linalg.norm(center[:2])) / max(extent, 1e-9)
         z_ok = -0.1 * max(size[2], 1e-9) <= center[2] <= 1.05 * max(size[2], 1e-9)
         status = 'ok' if lateral <= 0.15 and z_ok else 'OFFSET'
