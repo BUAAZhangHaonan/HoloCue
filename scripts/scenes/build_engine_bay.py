@@ -3,7 +3,7 @@
 Run:
   cd /home/hdd3/zhanghaonan/projects/holocue && .venv/bin/python scripts/guard/resource_guard.py \
       --rss-limit-gb 12 --execute -- /home/hdd3/zhanghaonan/opt/blender/blender -b -t 4 \
-      --python scripts/scenes_v2/build_engine_bay.py 2>&1 | tee runs/scene_v2/build_engine_bay.log
+      --python scripts/scenes/build_engine_bay.py 2>&1 | tee runs/scene_v2/build_engine_bay.log
 
 Replicates the AR engine-repair reference photo: transverse inline-4 (EA888-style)
 in an open-hood bay, garage workshop dressing, no human figure. docs/10 is the

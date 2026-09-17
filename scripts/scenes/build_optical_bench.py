@@ -3,7 +3,7 @@
 Run via:
   cd /home/hdd3/zhanghaonan/projects/holocue && .venv/bin/python scripts/guard/resource_guard.py \
       --rss-limit-gb 12 --execute -- /home/hdd3/zhanghaonan/opt/blender/blender -b -t 4 \
-      --python scripts/scenes_v2/build_optical_bench.py
+      --python scripts/scenes/build_optical_bench.py
 
 Layout datum: breadboard TOP is z=0. Breadboard 1.25(y) x 0.65(x) m centered x=0,
 world y in [-0.45,+0.80] (pose y=+0.175). Lab table top at z=-0.06 under everything.

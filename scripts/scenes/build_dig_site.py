@@ -3,7 +3,7 @@
 Run (CPU only, via resource guard):
   cd /home/hdd3/zhanghaonan/projects/holocue && .venv/bin/python scripts/guard/resource_guard.py \
       --rss-limit-gb 12 --execute -- /home/hdd3/zhanghaonan/opt/blender/blender -b -t 4 \
-      --python scripts/scenes_v2/build_dig_site.py
+      --python scripts/scenes/build_dig_site.py
   (tee full stdout to runs/scene_v2/build_dig_site.log)
 
 Produces:

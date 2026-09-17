@@ -6,7 +6,7 @@ Two checks per scene object asset:
    `tol` of its declared origin (the JSON pose positions the origin, not the bbox).
 2. declared-extent sanity: mesh extents > 0 and no NaN.
 
-Usage: .venv/bin/python scripts/assets_v2/check_origins.py <scene_id> [scene_id ...]
+Usage: .venv/bin/python scripts/scenes/check_origins.py <scene_id> [scene_id ...]
 Exit 1 listing failures; prints one line per object.
 """
 from __future__ import annotations
@@ -14,7 +14,7 @@ import sys
 import numpy as np
 import trimesh
 
-sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parents[1] / 'src'))
+sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parents[2] / 'src'))
 from holocue.config import load_scene, root
 
 # Deliberate origin conventions that the lateral/vertical windows cannot infer.

@@ -3,7 +3,7 @@
 Run via:
   cd /home/hdd3/zhanghaonan/projects/holocue && .venv/bin/python scripts/guard/resource_guard.py \
       --rss-limit-gb 12 --execute -- /home/hdd3/zhanghaonan/opt/blender/blender -b -t 4 \
-      --python scripts/scenes_v2/build_drone_bench.py
+      --python scripts/scenes/build_drone_bench.py
 
 Layout datum: bench top z=0, footprint x in [-0.85,0.85], y in [-0.70,0.70]; camera
 [0.55,-0.95,0.62] -> [0,0.05,0.12]. Drone sits inverted (belly up) on a cradle; nose -y.

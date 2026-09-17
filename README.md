@@ -42,7 +42,7 @@ HOLOCUE_MODE=live bash scripts/run_api.sh
 bash scripts/run_viewer.sh
 ```
 
-网页在服务器环回端口 8780，API 在 8750，本地模型在 8000。客户端通过 SSH 隧道访问；不默认开放到公网。Blender 官方场景构建运行 `scripts/build_all_v2.sh`（默认全部场景，也可传场景名单）生成 `.blend` 与标注渲染。
+网页在服务器环回端口 8780，API 在 8750，本地模型在 8000。客户端通过 SSH 隧道访问；不默认开放到公网。Blender 官方场景构建运行 `scripts/scenes/build_all.sh`（默认全部场景，也可传场景名单）生成 `.blend` 与标注渲染。
 
 ## 阶段一的显示定义
 
@@ -55,7 +55,7 @@ Viser 显示对象、几何提示、任务状态和示意焦点面板。Gaussian
 在 v1 三场景之外新增五个完全不同的任务场景,设计与验收依据见 `docs/09_新场景与任务设计.md`(经两轮独立设计评审修订):`server_rack` 数据机柜排障、`drone_bench` 无人机检修台、`shelf_picking` 仓储分拣站、`optical_bench` 光具座同轴校准、`dig_site` 考古探方发掘。每个场景沿视轴 ≥0.4m 调焦距离差分层,单场景至少覆盖两档深度需求,五场景整体覆盖 precise/persistent/neutral 全部三档;对象数 5–8。
 
 - 场景 schema 向后兼容扩展:`environment`(仅渲染的环境道具,不进入 LLM 提示词)与 `render_hints`(ortho_scale/grid_extent/cue_scale/label_offset/fit_camera),`schemas/scene.schema.json` 同步再生成。
-- 成套 CC0 素材:PolyHaven 26 模型 + 13 纹理下载至 `assets/downloads/`(逐文件 md5 校验,来源与许可见 `assets/downloads/SOURCES.md`),加工为纹理内嵌 GLB 于 `assets/meshes/env/`;v2 交互对象程序化建模于 `assets/meshes/<scene>/`。建模脚本在 `scripts/scenes_v2/`,每个场景经 ≥3 轮独立 SubAgent 视觉审核(`runs/scene_v2/REVIEW_CHECKLIST.md`)。
+- 成套 CC0 素材:PolyHaven 26 模型 + 13 纹理下载至 `assets/downloads/`(逐文件 md5 校验,来源与许可见 `assets/downloads/SOURCES.md`),加工为纹理内嵌 GLB 于 `assets/meshes/env/`;v2 交互对象程序化建模于 `assets/meshes/<scene>/`。建模脚本在 `scripts/scenes/`,每个场景经 ≥3 轮独立 SubAgent 视觉审核(`runs/scene_v2/REVIEW_CHECKLIST.md`)。
 - 既有缺陷修复(依据 `runs/BUGFIXES_v2.md`):项目 GLB 统一 Z-up 直存约定(修复 Blender 渲染中对象横躺/偏位)、离线渲染 PIL 标签、补光灯追踪 look_at、资产原点守卫 `scripts/assets_v2/check_origins.py`。
 - Viser 界面优化:控制面板标签页化 + 操作按钮组;`fit_camera` 按场景包围盒自动取景。
 

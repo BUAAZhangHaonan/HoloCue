@@ -8,7 +8,7 @@ import json, sys
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 
 def font(size: int) -> ImageFont.FreeTypeFont:
     for p in ('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf',

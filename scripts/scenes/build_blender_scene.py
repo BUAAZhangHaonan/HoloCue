@@ -4,7 +4,7 @@ blender -b --python scripts/build_blender_scene.py -- --scene control_panel --re
 import bpy,sys,json,argparse,math,os
 from pathlib import Path
 from mathutils import Vector
-ROOT=Path(__file__).resolve().parents[1]
+ROOT=Path(__file__).resolve().parents[2]
 p=argparse.ArgumentParser();p.add_argument('--scene',default='control_panel');p.add_argument('--render',action='store_true');p.add_argument('--out',default='')
 a=p.parse_args(sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else [])
 path=ROOT/'configs/scenes'/f'{a.scene}.json'
