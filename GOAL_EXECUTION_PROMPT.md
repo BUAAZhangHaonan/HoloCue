@@ -21,7 +21,7 @@
 3. 先用显式 replay 联调网页与 Blender 桥接，保持 replay 标签。回放只用于软件检查，不作为最终模型验收。
 4. 在 4029 及已配置连接的 4028 `/home/g203-4028/Models` 中只读查找 Qwen3.5-4B/9B。优先使用完整同名 checkpoint；需要复制时只复制到本项目模型目录。没有可用副本才显式下载官方模型，记录 revision 和文件检查。不要修改源文件。
 5. 首先部署 4B，独立 .venv-model，优先 vLLM，SGLang 可作为明确选择的替代配置。按官方现行说明核对兼容版本和启动参数，记录准确版本。先使用 8192 上下文、单并发、非思考模式、0.70 显存比例。4B/9B、dtype、引擎切换均作为显式实验配置，不能隐藏失败。
-6. 启动 live Agent API 与 Viser，运行 scripts/live_smoke.py 和 scripts/live_interrupt.py。核心必须包括 B 转 30 度、临时查看 C 背面、确认 C 完成、恢复 B 且角度和 task_id 不变。用户打断后旧动作及时冻结，迟到模型响应失效。
+6. 启动 live Agent API 与 Viser，运行 scripts/live_checks/live_smoke.py 和 scripts/live_checks/live_interrupt.py。核心必须包括 B 转 30 度、临时查看 C 背面、确认 C 完成、恢复 B 且角度和 task_id 不变。用户打断后旧动作及时冻结，迟到模型响应失效。
 7. 将同一会话接到 Blender 实时桥接。用带视觉能力的 SubAgent 查看真实 Viser 截图与 Blender 渲染，改正模型尺寸、遮挡、提示朝向、文字和暂停行为。截图必须来自实际运行，不用包内概念图替代。
 8. 在三场景完成自然语言与按钮交互，测试未知对象、缺少角度、无效动作、模型断连、快速连发、服务重启恢复。失败需要在界面和日志可见。模型能力失败也记录，不用规则补正确答案。
 9. 测量模型首个正确提示延迟、实际网页更新、内存与显存峰值，保存样本数与原始记录。页面30Hz目标不等于真实测得30FPS，更不等于CGH帧率。保留有限大小的视频和截图，控制文件体积。
@@ -37,9 +37,9 @@ B 视觉与交互审查。必须具备并使用视觉能力，实际看三个 Vi
 
 C 架构与复现审查。独立按 README 启动或检查重启流程，核验严格语义协议、预算守恒、σ 来源、数据单位、异步取消/旧响应、显式任务完成和未来适配器。重跑测试，核对交付目录与证据是否可复现。
 
-每位保存一份 JSON 与一份易读报告。JSON 参考 verification/REVIEW_TEMPLATE.json，scope 分别为 runtime_safety、interaction_visual、architecture_reproducibility。independent_session_id 必须来自真实独立会话，source_sha256 使用 scripts/check_review_gate.py --digest；evidence 的路径与 SHA256 指向真实文件，视觉审查写 visually_inspected=true。
+每位保存一份 JSON 与一份易读报告。JSON 参考 verification/REVIEW_TEMPLATE.json，scope 分别为 runtime_safety、interaction_visual、architecture_reproducibility。independent_session_id 必须来自真实独立会话，source_sha256 使用 scripts/release/check_review_gate.py --digest；evidence 的路径与 SHA256 指向真实文件，视觉审查写 visually_inspected=true。
 
-审查发现问题先修复，再对最终修改重跑相关检查。收官三份报告必须对应同一个最终代码摘要，至少三份 passed 且无未解决关键问题。执行 scripts/check_review_gate.py。该门只检查记录，不能替代真实复核。没有 SubAgent 工具或视觉能力时明确报告阻塞，不得自写三份报告伪装通过。
+审查发现问题先修复，再对最终修改重跑相关检查。收官三份报告必须对应同一个最终代码摘要，至少三份 passed 且无未解决关键问题。执行 scripts/release/check_review_gate.py。该门只检查记录，不能替代真实复核。没有 SubAgent 工具或视觉能力时明确报告阻塞，不得自写三份报告伪装通过。
 
 ## 不应扩展的工作
 
