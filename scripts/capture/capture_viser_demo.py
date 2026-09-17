@@ -278,14 +278,14 @@ def main() -> None:
                     help="post-action screenshot times in seconds (ghost animation progress)")
     ap.add_argument("--settle", type=float, default=0.8, help="extra settle after DOM confirms an update")
     ap.add_argument("--timeout", type=float, default=150.0, help="per-action wait timeout")
-    ap.add_argument("--root", default=os.environ.get("HOLOCUE_ROOT") or str(here.parent))
+    ap.add_argument("--root", default=os.environ.get("HOLOCUE_ROOT") or str(here.parents[1]))
     args = ap.parse_args()
 
     # Re-exec into the QA env when Playwright is missing here (e.g. run by .venv).
     try:
         import playwright.sync_api  # noqa: F401
     except ImportError:
-        py = Path(args.env) if Path(args.env).is_absolute() else here.parent / args.env
+        py = Path(args.env) if Path(args.env).is_absolute() else here.parents[1] / args.env
         py = py / "bin" / "python"
         if py.exists():
             log(f"playwright missing in {sys.executable}; re-exec into {py}")
