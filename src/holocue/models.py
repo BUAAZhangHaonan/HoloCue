@@ -1,7 +1,6 @@
 """Versioned semantic contracts. All extra fields, including N/sigma from an LLM, are rejected."""
 from __future__ import annotations
 from typing import Literal
-import math
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 class Strict(BaseModel):

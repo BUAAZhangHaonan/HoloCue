@@ -1,6 +1,6 @@
 """Viser front end. One operator/session at a time, with versioned backend polling."""
 from __future__ import annotations
-import argparse,os,time,threading,uuid,json
+import argparse,os,time,threading,uuid
 import httpx,numpy as np,trimesh
 from .config import root,load_scene,list_scenes
 from .models import DisplayPacket

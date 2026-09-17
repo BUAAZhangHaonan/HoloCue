@@ -42,7 +42,7 @@ HOLOCUE_MODE=live bash scripts/run_api.sh
 bash scripts/run_viewer.sh
 ```
 
-网页在服务器环回端口 8780，API 在 8750，本地模型在 8000。客户端通过 SSH 隧道访问；不默认开放到公网。Blender 可另行运行 `scripts/build_blender.sh` 生成三个 `.blend` 场景。
+网页在服务器环回端口 8780，API 在 8750，本地模型在 8000。客户端通过 SSH 隧道访问；不默认开放到公网。Blender 官方场景构建运行 `scripts/build_all_v2.sh`（默认全部场景，也可传场景名单）生成 `.blend` 与标注渲染。
 
 ## 阶段一的显示定义
 

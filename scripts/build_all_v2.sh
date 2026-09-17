@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Official scene build for all scenes (v1 + v2): .blend + annotated render per scene.
-# CPU-only, resource-guarded, mirrors scripts/build_blender.sh conventions.
+# CPU-only, resource-guarded; per-scene .blend + annotated render + origin guard.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 BLENDER_BIN="${BLENDER_BIN:-$(command -v blender || true)}"
