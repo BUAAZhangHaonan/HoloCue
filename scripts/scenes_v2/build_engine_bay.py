@@ -14,7 +14,7 @@ identity), so each GLB's local frame equals the world frame at its pose.
 Outputs:
   assets/meshes/engine_bay/{CLAMP,PLUG,PLUGPORT,OILCAP,TENSIONER,CONN}.glb
   assets/meshes/env/engine_bay_{shell,engine,radiator}.glb  (+ engine_round props
-    produced beforehand by scripts/assets_v2/process_engine_round.py)
+    produced beforehand by scripts/assets_v2/process_env_props.py)
   configs/scenes/engine_bay.json
   runs/scene_v2/engine_bay_kit_preview.png + 4 detail previews
   runs/scene_v2/build_engine_bay.log (assertion JSON evidence)
@@ -77,7 +77,7 @@ LAYOUT = {
         'radiator': {'asset': 'assets/meshes/env/engine_bay_radiator.glb', 'label': '散热器总成',
                      'position': (0, 0, 0)},
     },
-    # PolyHaven props (processed by scripts/assets_v2/process_engine_round.py).
+    # PolyHaven props (processed by scripts/assets_v2/process_env_props.py).
     # rx/ry/rz orient the stored Z-up GLB; center_xy/base_z/center_z place it.
     'props': {
         'tool_cart': {'glb': 'tool_cart.glb', 'label': '工具车', 'scale': 0.8,

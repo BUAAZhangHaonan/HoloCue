@@ -1,39 +1,36 @@
-"""Process the engine_round PolyHaven downloads (assets/raw/engine_round/<cat>/<id>/)
-into single-file Z-up GLBs under assets/meshes/env/.
+"""Process downloaded PolyHaven gltf props into single-file Z-up GLBs under assets/meshes/env/.
 
-Same recipe as scripts/assets_v2/process_props.py (import -> drop non-meshes ->
-transform_apply -> export GLB with export_yup=False), but sourced from the
-engine_round raw tree whose gltf payload is stored as an extension-less file
-named `gltf` next to `<id>.bin` + `textures/`.
-
-Idempotent: existing outputs are skipped, so reruns never clobber current or
-other scenes' products. New inventory entries are MERGED into
-runs/scene_v2/prop_inventory.json (existing keys untouched).
+Unified pipeline for every download batch, replacing the former process_props.py
+(polyhaven models tree) and process_engine_round.py (engine_round raw tree):
+import -> drop non-meshes -> transform_apply(rotation, scale) -> export GLB
+with export_yup=False. Handles both gltf payload layouts: <dir>/<id>/*.gltf
+and <dir>/<cat>/<id>/gltf (extension-less payload next to <id>.bin + textures/).
 
 Run inside Blender via the resource guard:
   .venv/bin/python scripts/resource_guard.py --rss-limit-gb 12 --execute -- \
       /home/hdd3/zhanghaonan/opt/blender/blender -b -t 4 \
-      --python scripts/assets_v2/process_engine_round.py
+      --python scripts/assets_v2/process_env_props.py -- --source assets/downloads/polyhaven/models
+
+Idempotent: existing GLBs are skipped and their entries carried over;
+runs/scene_v2/prop_inventory.json is MERGED, never overwritten, so reruns never
+clobber other scenes' products.
 """
-import bpy, sys, json
+import bpy, sys, json, argparse
 from pathlib import Path
 from mathutils import Vector
 
 ROOT = Path(__file__).resolve().parents[2]
-SRC = ROOT / 'assets/raw/engine_round'
 DST = ROOT / 'assets/meshes/env'
 DST.mkdir(parents=True, exist_ok=True)
 INV = ROOT / 'runs/scene_v2/prop_inventory.json'
 
-# engine_round props this scene kit needs as single-file GLBs. bench_vice_01
-# already exists in env/ from the earlier polyhaven batch (same CC0 asset) and
-# is deliberately NOT rebuilt here.
-WANT = [
-    'flathead_screwdriver', 'ratchet_wrench', 'tool_cart',
-    'WoodenTable_03', 'oil_tin', 'small_oil_can_01', 'lubricant_spray',
-    'steel_frame_shelves_02', 'old_tyre', 'rusted_wheel_rim_01',
-    'old_military_compressor', 'caged_hanging_light', 'mounted_fluorescent_lights',
-]
+p = argparse.ArgumentParser()
+p.add_argument('--source', default='assets/downloads/polyhaven/models',
+               help='batch root relative to repo; ids live in <source>/<id>/ or <source>/<cat>/<id>/')
+p.add_argument('--ids', nargs='*', default=None,
+               help='restrict to these ids (default: every id found under --source)')
+a = p.parse_args(sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else [])
+SRC = ROOT / a.source
 
 def clean():
     bpy.ops.object.select_all(action='SELECT')
@@ -44,32 +41,53 @@ def clean():
             if not x.users:
                 block.remove(x)
 
-def find_gltf(mid):
-    for cat in ('tools', 'garage', 'engine'):
-        d = SRC / cat / mid
-        if not d.is_dir():
-            continue
-        for f in sorted(d.iterdir()):
-            if f.is_file() and (f.name == 'gltf' or f.name.endswith('.gltf')):
-                return f
+def gltf_payload(d: Path):
+    """gltf entry file inside an id directory: *.gltf or an extension-less 'gltf'."""
+    if not d.is_dir():
+        return None
+    for f in sorted(d.iterdir()):
+        if f.is_file() and (f.name.endswith('.gltf') or f.name == 'gltf'):
+            return f
     return None
+
+def find_id_dir(mid: str):
+    direct = SRC / mid
+    if gltf_payload(direct):
+        return direct
+    for cat in sorted(SRC.iterdir()):
+        cand = cat / mid
+        if gltf_payload(cand):
+            return cand
+    return None
+
+def discover_ids():
+    ids = set()
+    for child in sorted(SRC.iterdir()):
+        if gltf_payload(child):
+            ids.add(child.name)
+        elif child.is_dir():
+            for grand in sorted(child.iterdir()):
+                if gltf_payload(grand):
+                    ids.add(grand.name)
+    return sorted(ids)
 
 inv_old = json.loads(INV.read_text()) if INV.exists() else {}
 inv = {}
-for mid in WANT:
+ids = a.ids if a.ids else discover_ids()
+for mid in ids:
     out = DST / f'{mid}.glb'
     if out.exists():
         print(f'skip existing {out.name}', flush=True)
         if mid in inv_old:
             inv[mid] = inv_old[mid]
         continue
-    gltf = find_gltf(mid)
-    if gltf is None:
+    src_dir = find_id_dir(mid)
+    if src_dir is None:
         print(f'ERROR no gltf payload for {mid}', flush=True)
         continue
     clean()
     try:
-        bpy.ops.import_scene.gltf(filepath=str(gltf))
+        bpy.ops.import_scene.gltf(filepath=str(gltf_payload(src_dir)))
     except Exception as e:
         print(f'ERROR importing {mid}: {e}', flush=True)
         continue
@@ -87,7 +105,7 @@ for mid in WANT:
     lo = [1e9] * 3
     hi = [-1e9] * 3
     for o in meshes:
-        tris += sum(len(p.vertices) - 2 for p in o.data.polygons)
+        tris += sum(len(v.vertices) - 2 for v in o.data.polygons)
         for v in o.bound_box:
             w = o.matrix_world @ Vector(v)
             for i in range(3):
@@ -104,5 +122,6 @@ for mid in WANT:
 
 merged = dict(inv_old)
 merged.update(inv)
+INV.parent.mkdir(parents=True, exist_ok=True)
 INV.write_text(json.dumps(merged, indent=1, ensure_ascii=False))
-print(f'engine_round: {len(inv)} new/refreshed entries; inventory total {len(merged)} -> {INV}')
+print(f'processed {len(inv)} new/refreshed of {len(ids)} ids; inventory total {len(merged)} -> {INV}')
