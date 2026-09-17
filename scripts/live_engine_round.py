@@ -8,9 +8,10 @@ Honesty rules: model outputs (raw_response / raw_http_body / decision) are recor
 verbatim. Failures are recorded with their cause and are never retried to overwrite
 the truth; no scripted answers are substituted for model output.
 """
-import argparse, json, os, time, uuid
+import argparse, json, sys
 from pathlib import Path
-import httpx
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from live_client import make_client, req as _req, state as _state, display as _display, send as _send, control as _control, new_session
 
 SCENE = 'engine_bay'
 INIT = '把 CLAMP 逆时针转 90 度，接着把 PLUG 插进 PLUGPORT，最后检查 CONN 的背面。'
@@ -20,8 +21,7 @@ p.add_argument('--api', default='http://127.0.0.1:8750')
 p.add_argument('--out', default='runs/engine_round/live_engine_round.json')
 a = p.parse_args()
 
-headers = {'Authorization': 'Bearer ' + os.environ['HOLOCUE_API_KEY']} if os.getenv('HOLOCUE_API_KEY') else {}
-client = httpx.Client(base_url=a.api, headers=headers, timeout=30)
+client = make_client(a.api, timeout=30)
 report = {'backend_mode': 'live', 'scene': SCENE, 'cases': [], 'summary': {}}
 path = Path(a.out)
 path.parent.mkdir(parents=True, exist_ok=True)
@@ -31,42 +31,20 @@ def save():
     path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding='utf-8')
 
 
-def req(method, url, **kw):
-    r = client.request(method, url, **kw)
-    r.raise_for_status()
-    return r.json()
-
-
-def state(sid):
-    return req('GET', f'/api/v1/sessions/{sid}')
-
-
-def display(sid):
-    return req('GET', f'/api/v1/sessions/{sid}/display')
-
-
-def control(sid, operation):
-    s = state(sid)
-    return req('POST', f'/api/v1/sessions/{sid}/control/{operation}',
-               json={'expected_revision': s['revision']})
+def req(method, url, **kw): return _req(client, method, url, **kw)
+def state(sid): return _state(client, sid)
+def display(sid): return _display(client, sid)
+def control(sid, operation): return _control(client, sid, operation)
 
 
 def say(sid, text, timeout=150.0):
     """One planner turn; returns (job, session_state, display_packet, elapsed)."""
-    s = state(sid)
-    t0 = time.perf_counter()
-    j = req('POST', f'/api/v1/sessions/{sid}/messages',
-            json={'text': text, 'request_id': uuid.uuid4().hex, 'expected_revision': s['revision']})
-    while j['status'] == 'planning':
-        if time.perf_counter() - t0 > timeout:
-            raise TimeoutError('planner timeout')
-        time.sleep(0.3)
-        j = req('GET', '/api/v1/jobs/' + j['id'])
-    return j, state(sid), display(sid), time.perf_counter() - t0
+    j, s, elapsed = _send(client, sid, text, timeout=timeout)
+    return j, s, display(sid), elapsed
 
 
 def new_sid():
-    return req('POST', '/api/v1/sessions', json={'scene_id': SCENE})['session_id']
+    return new_session(client, SCENE)
 
 
 def cues_of(s):

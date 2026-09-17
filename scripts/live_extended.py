@@ -5,26 +5,19 @@ Attempt 2 (this version): each group runs on a fresh session and inputs are boun
 their intended scene, so an early model failure cannot pollute later cases' history.
 Attempt 1 results are kept at runs/live_extended_attempt1.json.
 """
-import argparse,json,time,uuid,os
+import argparse,json,sys,time,uuid
 from pathlib import Path
-import httpx
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from live_client import make_client, req as _req, state as _state, send as _send, new_session
 
 p=argparse.ArgumentParser();p.add_argument('--api',default='http://127.0.0.1:8750');p.add_argument('--out',default='runs/live_extended.json');a=p.parse_args()
-headers={'Authorization':'Bearer '+os.environ['HOLOCUE_API_KEY']} if os.getenv('HOLOCUE_API_KEY') else {}
-client=httpx.Client(base_url=a.api,headers=headers,timeout=10)
+client=make_client(a.api)
 report={'backend_mode':'live','cases':[]}
 path=Path(a.out);path.parent.mkdir(parents=True,exist_ok=True)
 def save():path.write_text(json.dumps(report,ensure_ascii=False,indent=2))
-def req(method,path,**kwargs):
-    r=client.request(method,path,**kwargs);r.raise_for_status();return r.json()
-def state(sid):return req('GET',f'/api/v1/sessions/{sid}')
-def say(sid,text):
-    s=state(sid);t=time.perf_counter()
-    j=req('POST',f'/api/v1/sessions/{sid}/messages',json={'text':text,'request_id':uuid.uuid4().hex,'expected_revision':s['revision']})
-    while j['status']=='planning':
-        if time.perf_counter()-t>120:raise TimeoutError('planner timeout')
-        time.sleep(.3);j=req('GET','/api/v1/jobs/'+j['id'])
-    return j,state(sid),time.perf_counter()-t
+def req(method,path,**kwargs):return _req(client,method,path,**kwargs)
+def state(sid):return _state(client,sid)
+def say(sid,text):return _send(client,sid,text,timeout=120)
 def case(name,sid,text,check):
     try:
         job,s,elapsed=say(sid,text)
@@ -39,7 +32,7 @@ def case(name,sid,text,check):
         report['cases'].append({'name':name,'input':text,'verdict':'HARNESS_ERROR','note':repr(e)})
     save()
 def new_sid(scene='control_panel'):
-    return req('POST','/api/v1/sessions',json={'scene_id':scene})['session_id']
+    return new_session(client,scene)
 
 def ok(cond,note):return ('passed' if cond else 'FAILED_MODEL_BEHAVIOR'),note
 
