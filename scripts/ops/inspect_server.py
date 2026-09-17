@@ -8,7 +8,7 @@ def command(args):
         p=subprocess.run(args,text=True,capture_output=True,timeout=12)
         return {'returncode':p.returncode,'stdout':p.stdout,'stderr':p.stderr}
     except Exception as e:return {'error':str(e)}
-root=Path(__file__).resolve().parents[1]
+root=Path(__file__).resolve().parents[2]
 vm=psutil.virtual_memory();disk=shutil.disk_usage(root)
 report={'platform':platform.platform(),'project_root':str(root),'python':platform.python_version(),
         'memory_gib':{'total':vm.total/1024**3,'available':vm.available/1024**3},

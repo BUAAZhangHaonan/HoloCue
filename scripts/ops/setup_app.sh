@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-cd "$(dirname "$0")/.."
+cd "$(dirname "$0")/../.."
 PYTHON="${PYTHON:-python3}"
 "$PYTHON" -c 'import sys; assert sys.version_info >= (3,11)'
 [[ -d .venv ]] || "$PYTHON" -m venv .venv

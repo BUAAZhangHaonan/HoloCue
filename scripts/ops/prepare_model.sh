@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-cd "$(dirname "$0")/.."
+cd "$(dirname "$0")/../.."
 SIZE="${1:-4B}"
 case "$SIZE" in 4B|9B) ;; *) echo 'Only Qwen3.5-4B and Qwen3.5-9B are authorized'; exit 2;; esac
 DEST="$PWD/models/Qwen3.5-$SIZE"
@@ -22,4 +22,4 @@ elif [[ "${MODEL_SOURCE:-}" == 'local' ]]; then
 else
   echo 'Choose MODEL_SOURCE=ssh, hub, or local explicitly. No automatic source switching.'; exit 6
 fi
-python scripts/validate_model_dir.py "$DEST" | tee "runs/model_${SIZE}_manifest.json"
+python scripts/ops/validate_model_dir.py "$DEST" | tee "runs/model_${SIZE}_manifest.json"

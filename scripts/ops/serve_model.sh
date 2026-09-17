@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-cd "$(dirname "$0")/.."
+cd "$(dirname "$0")/../.."
 ENGINE="${ENGINE:-vllm}"
 SIZE="${MODEL_SIZE:-4B}"
 MODEL_PATH="${MODEL_PATH:-$PWD/models/Qwen3.5-$SIZE}"
@@ -10,7 +10,7 @@ GPU_FRACTION="${GPU_FRACTION:-0.70}"
 [[ -x "$MODEL_PYTHON" ]] || { echo 'Missing isolated model environment'; exit 2; }
 case "$SIZE" in 4B|9B) ;; *) exit 3;; esac
 case "$GPUS" in 1|2) TP=1;; 1,2|2,1) TP=2;; *) echo 'Only physical GPUs 1,2 allowed'; exit 4;; esac
- .venv/bin/python scripts/validate_model_dir.py "$MODEL_PATH"
+ .venv/bin/python scripts/ops/validate_model_dir.py "$MODEL_PATH"
 COMMON=(--model "$MODEL_PATH")
 if [[ "$ENGINE" == vllm ]]; then
  CMD=("$MODEL_PYTHON" -m vllm.entrypoints.openai.api_server --model "$MODEL_PATH"
