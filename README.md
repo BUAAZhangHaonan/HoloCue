@@ -50,6 +50,27 @@ Viser 显示对象、几何提示、任务状态和示意焦点面板。Gaussian
 
 固定资产采用 CC0；代码按 `LICENSE` 使用。第三方代码、软件、模型权重和字体均未打入文件包。模型下载与源服务器拷贝入口已提供。
 
+## 代码布局
+
+`scripts/` 按功能分组，根下无散落脚本；`scene_agent/`（仓库根）是纯 Markdown 的场景提案-审查协议工作区：
+
+```
+scripts/
+├── guard/        resource_guard.py 受控执行原语（所有入口经它启动）
+├── scenes/       官方场景链：build_all.sh（唯一入口，9 场景）、build_blender_scene.py、
+│                 annotate_render.py、check_origins.py、common.py 与六个场景 kit 生成器
+├── assets/       素材管线：download_polyhaven.py、process_env_props.py（合一版）、generate_assets.py（仅几何）
+├── video/        render_scene_videos.py（飞穿渲染）+ scene_videos_captions.sh（字幕/合辑）
+├── live_checks/  live 验收：live_client.py（共享 HTTP 脚手架）+ smoke/interrupt/extended/engine_round
+├── ops/          服务与模型运维：setup_app/inspect_server/prepare_model/validate_model_dir/
+│                 serve_model/run_api/run_viewer/export_packet
+├── capture/      Blender 桥（blender_live_bridge + blender_headless_capture）与
+│                 Viser 采集（capture_viser QA 单帧、capture_viser_demo 剧本录制）
+└── release/      verify_package.py 与 check_review_gate.py
+```
+
+`MANIFEST.sha256` 覆盖全部 git 跟踪文件（`git ls-files` 全量哈希，约 1.6s 验证），不再有收录缺口；改动文件后重导出即可。
+
 ## 场景扩展轮（2026-09-17）
 
 在初版三场景之外新增五个完全不同的任务场景,设计与验收依据见 `docs/09_新场景与任务设计.md`(经两轮独立设计评审修订):`server_rack` 数据机柜排障、`drone_bench` 无人机检修台、`shelf_picking` 仓储分拣站、`optical_bench` 光具座同轴校准、`dig_site` 考古探方发掘。每个场景沿视轴 ≥0.4m 调焦距离差分层,单场景至少覆盖两档深度需求,五场景整体覆盖 precise/persistent/neutral 全部三档;对象数 5–8。
