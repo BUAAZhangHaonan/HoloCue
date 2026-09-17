@@ -27,6 +27,27 @@ class SceneObject(Strict):
     anchors: dict[str,tuple[float,float,float]] = Field(default_factory=dict)
     description: str = ''
 
+class SceneProp(Strict):
+    prop_id: str = Field(pattern=r'^[A-Za-z][A-Za-z0-9_-]{0,47}$')
+    label: str = ''
+    asset: str
+    pose: Pose = Pose()
+    scale_m: tuple[float,float,float] = (1.,1.,1.)
+
+class RenderHints(Strict):
+    ortho_scale_m: float = Field(default=.91, gt=0)
+    grid_extent_m: float = Field(default=1.0, gt=0)
+    cue_scale: float = Field(default=1.0, gt=0)
+    label_offset_m: float = Field(default=.12, ge=0)
+    # Viser perspective cameras auto-fit the scene bbox (70% fill) instead of the
+    # raw JSON camera position, which was authored for orthographic framing.
+    fit_camera: bool = False
+    # Optional explicit Blender fill-light rig (render-only). Scenes whose env
+    # shell encloses the subject (engine_bay garage) must place lights inside the
+    # enclosure: the generic k-scaled rig lands above the ceiling and is fully
+    # shadowed. Entries: [x_m, y_m, z_m, power_W, disk_size_m].
+    fill_lights: list[tuple[float,float,float,float,float]] = Field(default_factory=list)
+
 class SceneSpec(Strict):
     schema_version: Literal['1.0'] = '1.0'
     scene_id: str
@@ -37,10 +58,17 @@ class SceneSpec(Strict):
     initial_instruction: str
     camera_position_m: tuple[float,float,float] = (.8,-.85,.72)
     camera_look_at_m: tuple[float,float,float] = (0.,.12,.08)
+    environment: list[SceneProp] = Field(default_factory=list)
+    render_hints: RenderHints = RenderHints()
     @model_validator(mode='after')
     def unique_ids(self):
         ids=[x.object_id for x in self.objects]
         if len(ids)!=len(set(ids)):raise ValueError('duplicate scene object IDs')
+        return self
+    @model_validator(mode='after')
+    def unique_prop_ids(self):
+        ids=[p.prop_id for p in self.environment]
+        if len(ids)!=len(set(ids)):raise ValueError('duplicate environment prop IDs')
         return self
 
 class CueSemantic(Strict):

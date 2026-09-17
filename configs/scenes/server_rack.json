@@ -1,0 +1,317 @@
+{
+  "schema_version": "1.0",
+  "scene_id": "server_rack",
+  "title": "数据机柜排障",
+  "units": "m",
+  "axes": "right_handed_z_up",
+  "objects": [
+    {
+      "object_id": "SPARE",
+      "label": "备用节点",
+      "asset": "assets/meshes/server_rack/SPARE.glb",
+      "pose": {
+        "position_m": [
+          -0.75,
+          -0.35,
+          0.9
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "color": [
+        150,
+        180,
+        210
+      ],
+      "capabilities": [
+        "point",
+        "insert"
+      ],
+      "anchors": {},
+      "description": "1U 备用计算节点,沿导轨水平插入"
+    },
+    {
+      "object_id": "SLOT4",
+      "label": "4 号槽位",
+      "asset": "assets/meshes/server_rack/SLOT4.glb",
+      "pose": {
+        "position_m": [
+          0,
+          0.28,
+          1.02
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "color": [
+        110,
+        200,
+        160
+      ],
+      "capabilities": [
+        "point"
+      ],
+      "anchors": {
+        "insertion": [
+          0,
+          0,
+          0
+        ]
+      },
+      "description": "空槽位,带导轨与定位柱"
+    },
+    {
+      "object_id": "NODE3",
+      "label": "3 号节点",
+      "asset": "assets/meshes/server_rack/NODE3.glb",
+      "pose": {
+        "position_m": [
+          0,
+          0.33,
+          0.55
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "color": [
+        214,
+        160,
+        80
+      ],
+      "capabilities": [
+        "point",
+        "inspect_back"
+      ],
+      "anchors": {},
+      "description": "背面有四个光纤接口和提把手"
+    },
+    {
+      "object_id": "ALARM",
+      "label": "柜顶告警灯",
+      "asset": "assets/meshes/server_rack/ALARM.glb",
+      "pose": {
+        "position_m": [
+          0,
+          0.3,
+          1.93
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "color": [
+        235,
+        80,
+        80
+      ],
+      "capabilities": [
+        "point",
+        "wait"
+      ],
+      "anchors": {},
+      "description": "红色为故障,绿色为正常"
+    },
+    {
+      "object_id": "FAN",
+      "label": "风扇模块",
+      "asset": "assets/meshes/server_rack/FAN.glb",
+      "pose": {
+        "position_m": [
+          0,
+          0.28,
+          1.45
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "color": [
+        140,
+        140,
+        220
+      ],
+      "capabilities": [
+        "point",
+        "rotate"
+      ],
+      "anchors": {},
+      "description": "滤网需旋转取出,顶部刻线对齐"
+    }
+  ],
+  "initial_instruction": "先把备用节点 SPARE 插进 4 号槽位 SLOT4,然后检查 3 号节点 NODE3 背面的光纤接口,柜顶告警灯 ALARM 全程保持监控。",
+  "camera_position_m": [
+    1.12,
+    -1.02,
+    1.3
+  ],
+  "camera_look_at_m": [
+    -0.3548,
+    0.0219,
+    1.0289
+  ],
+  "environment": [
+    {
+      "prop_id": "rackshell",
+      "label": "19寸机柜主体",
+      "asset": "assets/meshes/env/server_rack_rackshell.glb",
+      "pose": {
+        "position_m": [
+          0,
+          0,
+          0
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "scale_m": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "prop_id": "floorpatch",
+      "label": "防静电架空地板",
+      "asset": "assets/meshes/env/server_rack_floorpatch.glb",
+      "pose": {
+        "position_m": [
+          0,
+          0.3,
+          0
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "scale_m": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "prop_id": "wall",
+      "label": "机房墙体",
+      "asset": "assets/meshes/env/server_rack_wall.glb",
+      "pose": {
+        "position_m": [
+          0,
+          1.6,
+          0
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "scale_m": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "prop_id": "sidecart",
+      "label": "防静电检修车",
+      "asset": "assets/meshes/env/server_rack_sidecart.glb",
+      "pose": {
+        "position_m": [
+          -0.75,
+          -0.35,
+          0
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "scale_m": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "prop_id": "cable_bundle",
+      "label": "线缆束",
+      "asset": "assets/meshes/env/modular_electric_cables.glb",
+      "pose": {
+        "position_m": [
+          0.7361,
+          0.24,
+          0.0
+        ],
+        "wxyz": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "scale_m": [
+        0.4,
+        0.4,
+        0.4
+      ]
+    },
+    {
+      "prop_id": "wall_camera",
+      "label": "墙面监控摄像头",
+      "asset": "assets/meshes/env/security_camera_01.glb",
+      "pose": {
+        "position_m": [
+          -1.28,
+          1.5866,
+          1.4818
+        ],
+        "wxyz": [
+          -0.0,
+          -0.0,
+          -0.0,
+          -1.0
+        ]
+      },
+      "scale_m": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "render_hints": {
+    "ortho_scale_m": 3.738,
+    "grid_extent_m": 2.5,
+    "cue_scale": 1.0,
+    "label_offset_m": 0.12,
+    "fit_camera": true
+  }
+}

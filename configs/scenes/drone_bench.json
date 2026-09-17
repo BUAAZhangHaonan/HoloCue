@@ -1,0 +1,562 @@
+{
+  "schema_version": "1.0",
+  "scene_id": "drone_bench",
+  "title": "无人机检修台",
+  "units": "m",
+  "axes": "right_handed_z_up",
+  "objects": [
+    {
+      "object_id": "BAT",
+      "label": "智能电池",
+      "asset": "assets/meshes/drone_bench/BAT.glb",
+      "pose": {
+        "position_m": [
+          0.38,
+          -0.27,
+          0.0315
+        ],
+        "wxyz": [
+          0.987688,
+          0.0,
+          0.0,
+          0.156434
+        ]
+      },
+      "color": [
+        96,
+        100,
+        108
+      ],
+      "capabilities": [
+        "point",
+        "insert"
+      ],
+      "anchors": {},
+      "description": "黑色电池,沿把手方向插入,底部一端为触点"
+    },
+    {
+      "object_id": "BAY",
+      "label": "电池仓",
+      "asset": "assets/meshes/drone_bench/BAY.glb",
+      "pose": {
+        "position_m": [
+          0.02,
+          0.0,
+          0.148
+        ],
+        "wxyz": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "color": [
+        255,
+        148,
+        36
+      ],
+      "capabilities": [
+        "point"
+      ],
+      "anchors": {
+        "insertion": [
+          0,
+          0,
+          -0.0185
+        ]
+      },
+      "description": "机身腹部卡扣仓,仰放开口朝上,仓底有金色触点针"
+    },
+    {
+      "object_id": "GUARD",
+      "label": "电池护罩",
+      "asset": "assets/meshes/drone_bench/GUARD.glb",
+      "pose": {
+        "position_m": [
+          0.02,
+          0.103,
+          0.146
+        ],
+        "wxyz": [
+          0.690346,
+          -0.153046,
+          0.690346,
+          -0.153046
+        ]
+      },
+      "color": [
+        176,
+        180,
+        190
+      ],
+      "capabilities": [
+        "point",
+        "rotate"
+      ],
+      "anchors": {},
+      "description": "烟灰色半透明护罩,顶部白色刻线为角度指示"
+    },
+    {
+      "object_id": "M1",
+      "label": "前左电机",
+      "asset": "assets/meshes/drone_bench/M1.glb",
+      "pose": {
+        "position_m": [
+          -0.22,
+          -0.22,
+          0.074
+        ],
+        "wxyz": [
+          -0.0,
+          -1.0,
+          -0.0,
+          -0.0
+        ]
+      },
+      "color": [
+        110,
+        168,
+        210
+      ],
+      "capabilities": [
+        "point"
+      ],
+      "anchors": {},
+      "description": "消歧用,仅指认"
+    },
+    {
+      "object_id": "M2",
+      "label": "前右电机",
+      "asset": "assets/meshes/drone_bench/M2.glb",
+      "pose": {
+        "position_m": [
+          0.22,
+          -0.22,
+          0.074
+        ],
+        "wxyz": [
+          -0.0,
+          -1.0,
+          -0.0,
+          -0.0
+        ]
+      },
+      "color": [
+        214,
+        156,
+        102
+      ],
+      "capabilities": [
+        "point"
+      ],
+      "anchors": {},
+      "description": "消歧用,仅指认"
+    },
+    {
+      "object_id": "M3",
+      "label": "左后电机",
+      "asset": "assets/meshes/drone_bench/M3.glb",
+      "pose": {
+        "position_m": [
+          -0.22,
+          0.22,
+          0.074
+        ],
+        "wxyz": [
+          -0.0,
+          -0.92388,
+          0.382683,
+          -0.0
+        ]
+      },
+      "color": [
+        235,
+        140,
+        52
+      ],
+      "capabilities": [
+        "point",
+        "inspect_back"
+      ],
+      "anchors": {},
+      "description": "朝机身一侧径向面上有橙色减震垫,被机臂遮挡"
+    },
+    {
+      "object_id": "M4",
+      "label": "右后电机",
+      "asset": "assets/meshes/drone_bench/M4.glb",
+      "pose": {
+        "position_m": [
+          0.22,
+          0.22,
+          0.074
+        ],
+        "wxyz": [
+          -0.0,
+          -1.0,
+          -0.0,
+          -0.0
+        ]
+      },
+      "color": [
+        148,
+        198,
+        142
+      ],
+      "capabilities": [
+        "point"
+      ],
+      "anchors": {},
+      "description": "消歧用,仅指认"
+    },
+    {
+      "object_id": "VOLTMETER",
+      "label": "台式电压表",
+      "asset": "assets/meshes/drone_bench/VOLTMETER.glb",
+      "pose": {
+        "position_m": [
+          -0.32,
+          0.5,
+          0.0
+        ],
+        "wxyz": [
+          0.997564,
+          0.0,
+          0.0,
+          0.069756
+        ]
+      },
+      "color": [
+        108,
+        196,
+        158
+      ],
+      "capabilities": [
+        "point",
+        "wait"
+      ],
+      "anchors": {},
+      "description": "数码管读数 12.6,过压报红色"
+    }
+  ],
+  "initial_instruction": "把电池 BAT 插进机身电池仓 BAY,顺时针拧紧固定护罩 GUARD 30 度,再检查左后电机 M3 朝机身一侧的减震垫,电压表 VOLTMETER 全程盯着。",
+  "camera_position_m": [
+    0.55,
+    -0.95,
+    0.62
+  ],
+  "camera_look_at_m": [
+    0.0,
+    0.05,
+    0.12
+  ],
+  "environment": [
+    {
+      "prop_id": "drone_bench_table",
+      "label": "",
+      "asset": "assets/meshes/env/drone_bench_table.glb",
+      "pose": {
+        "position_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wxyz": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "scale_m": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "prop_id": "drone_bench_mat",
+      "label": "",
+      "asset": "assets/meshes/env/drone_bench_mat.glb",
+      "pose": {
+        "position_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wxyz": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "scale_m": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "prop_id": "drone_bench_cradle",
+      "label": "",
+      "asset": "assets/meshes/env/drone_bench_cradle.glb",
+      "pose": {
+        "position_m": [
+          0.0,
+          0.0,
+          0.004
+        ],
+        "wxyz": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "scale_m": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "prop_id": "drone_bench_dronebody",
+      "label": "",
+      "asset": "assets/meshes/env/drone_bench_dronebody.glb",
+      "pose": {
+        "position_m": [
+          0.0,
+          0.0,
+          0.094
+        ],
+        "wxyz": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "scale_m": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "prop_id": "drone_bench_partstray",
+      "label": "",
+      "asset": "assets/meshes/env/drone_bench_partstray.glb",
+      "pose": {
+        "position_m": [
+          0.4,
+          -0.56,
+          0.0
+        ],
+        "wxyz": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "scale_m": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "prop_id": "metal_toolbox",
+      "label": "",
+      "asset": "assets/meshes/env/metal_toolbox.glb",
+      "pose": {
+        "position_m": [
+          0.5229,
+          0.4884,
+          0.0
+        ],
+        "wxyz": [
+          0.701836,
+          -0.701836,
+          -0.086175,
+          0.086175
+        ]
+      },
+      "scale_m": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "prop_id": "screwdrivers_02",
+      "label": "",
+      "asset": "assets/meshes/env/screwdrivers_02.glb",
+      "pose": {
+        "position_m": [
+          -0.4054,
+          -0.0501,
+          0.0175
+        ],
+        "wxyz": [
+          0.705384,
+          -0.705384,
+          -0.049325,
+          0.049325
+        ]
+      },
+      "scale_m": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "prop_id": "pliers",
+      "label": "",
+      "asset": "assets/meshes/env/pliers.glb",
+      "pose": {
+        "position_m": [
+          -0.4,
+          0.18,
+          0.1339
+        ],
+        "wxyz": [
+          0.5,
+          -0.5,
+          -0.5,
+          0.5
+        ]
+      },
+      "scale_m": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "prop_id": "bench_vice_01",
+      "label": "",
+      "asset": "assets/meshes/env/bench_vice_01.glb",
+      "pose": {
+        "position_m": [
+          -0.6566,
+          -0.5599,
+          0.0856
+        ],
+        "wxyz": [
+          0.5,
+          -0.5,
+          -0.5,
+          0.5
+        ]
+      },
+      "scale_m": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "prop_id": "magnifying_glass_01",
+      "label": "",
+      "asset": "assets/meshes/env/magnifying_glass_01.glb",
+      "pose": {
+        "position_m": [
+          0.6,
+          -0.3642,
+          0.04
+        ],
+        "wxyz": [
+          0.976296,
+          0.0,
+          -0.21644,
+          0.0
+        ]
+      },
+      "scale_m": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "prop_id": "circuit_board",
+      "label": "",
+      "asset": "assets/meshes/env/circuit_board.glb",
+      "pose": {
+        "position_m": [
+          0.5247,
+          0.4611,
+          0.3118
+        ],
+        "wxyz": [
+          0.703233,
+          -0.703233,
+          -0.073913,
+          0.073913
+        ]
+      },
+      "scale_m": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "prop_id": "retro_multimeter",
+      "label": "",
+      "asset": "assets/meshes/env/retro_multimeter.glb",
+      "pose": {
+        "position_m": [
+          -0.2977,
+          -0.0297,
+          -0.4199
+        ],
+        "wxyz": [
+          0.701057,
+          -0.701057,
+          0.092296,
+          -0.092296
+        ]
+      },
+      "scale_m": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "prop_id": "modular_electric_cables",
+      "label": "",
+      "asset": "assets/meshes/env/modular_electric_cables.glb",
+      "pose": {
+        "position_m": [
+          -0.4739,
+          0.655,
+          0.0
+        ],
+        "wxyz": [
+          0.707107,
+          -0.707107,
+          0.0,
+          0.0
+        ]
+      },
+      "scale_m": [
+        0.4,
+        0.4,
+        0.4
+      ]
+    }
+  ],
+  "render_hints": {
+    "ortho_scale_m": 2.358,
+    "grid_extent_m": 1.8,
+    "cue_scale": 0.8,
+    "label_offset_m": 0.1,
+    "fit_camera": true
+  }
+}

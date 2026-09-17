@@ -1,10 +1,10 @@
-import asyncio,importlib.util,json,sys
+import asyncio,importlib.util,json,math,sys
 from pathlib import Path
 import numpy as np
 import pytest
 from pydantic import ValidationError
 from holocue.config import root,load_scene,load_policy,list_scenes
-from holocue.models import Decision,Session,UserMessage,Pose
+from holocue.models import Decision,DisplayCue,RenderHints,SceneSpec,Session,UserMessage,Pose
 from holocue.state import apply_decision,validate_decision,DomainError,ConflictError
 from holocue.projection import allocate,packet
 from holocue.store import Store
@@ -19,7 +19,8 @@ def session():return Session(session_id='s',scene_id='control_panel',backend_mod
 def message(text='x',rid='req',revision=0):return UserMessage(text=text,request_id=rid,expected_revision=revision)
 
 def test_all_scenes_load():
-    assert len(list_scenes())==3
+    # v1 shipped 3 scenes; v2 scene kits (docs/09) add more configs, so only require the v1 core.
+    assert len(list_scenes())>=3
     for s in list_scenes():
         scene=load_scene(s['scene_id'])
         for obj in scene.objects:assert (root()/obj.asset).is_file()
@@ -250,3 +251,62 @@ def test_measured_parameters_do_not_claim_optical_execution():
     scene=load_scene('control_panel');s=apply_decision(session(),decision(),scene)
     policy=load_policy();policy['calibration']={'id':'lab-profile','kind':'measured','sigma_units':'m'}
     assert packet(s,scene,policy).renderer_kind=='semantic_preview'
+
+def v2_scene():
+    x=json.loads((root()/'configs/scenes/control_panel.json').read_text(encoding='utf-8'))
+    x['environment']=[{'prop_id':'bench_top','asset':'assets/meshes/baseplate.glb','pose':{'position_m':[0,.08,-.012],'wxyz':[1,0,0,0]},'scale_m':[2.,1.6,.02]},
+                      {'prop_id':'side_rail','asset':'assets/meshes/brick.glb'}]
+    x['render_hints']={'ortho_scale_m':1.4,'grid_extent_m':2.2,'cue_scale':.8,'label_offset_m':.2}
+    return x
+
+def test_scene_spec_accepts_environment_and_render_hints():
+    s=SceneSpec.model_validate(v2_scene())
+    assert len(s.objects)==3 and len(s.environment)==2
+    assert s.environment[1].pose.wxyz==(1.,0.,0.,0.) and s.environment[1].scale_m==(1.,1.,1.)
+    assert (s.render_hints.ortho_scale_m,s.render_hints.grid_extent_m,s.render_hints.cue_scale,s.render_hints.label_offset_m)==(1.4,2.2,.8,.2)
+
+def test_scene_prop_id_pattern_is_enforced():
+    x=v2_scene();x['environment'][0]['prop_id']='9bench'
+    with pytest.raises(ValidationError):SceneSpec.model_validate(x)
+
+def test_environment_prop_ids_must_be_unique():
+    x=v2_scene();x['environment'][1]['prop_id']=x['environment'][0]['prop_id']
+    with pytest.raises(ValidationError):SceneSpec.model_validate(x)
+
+def test_render_hints_defaults_equal_v1_constants():
+    assert (RenderHints().ortho_scale_m,RenderHints().grid_extent_m,RenderHints().cue_scale,RenderHints().label_offset_m)==(.91,1.,1.,.12)
+    assert RenderHints().fit_camera is False
+    v1=load_scene('control_panel');assert v1.render_hints==RenderHints() and v1.environment==[]
+
+def test_camera_fit_backsoff_along_axis_and_preserves_default():
+    from holocue.viewer import Viewer
+    import numpy as np
+    spec=load_scene('control_panel')
+    # Default (fit_camera False): JSON camera returned untouched.
+    pos,look=Viewer._camera(object.__new__(Viewer),spec,[])
+    assert list(pos)==list(spec.camera_position_m) and list(look)==list(spec.camera_look_at_m)
+    # fit_camera True: same axis, distance = radius/tan(25°)/0.7 from look_at.
+    spec=spec.model_copy(deep=True);spec.render_hints.fit_camera=True
+    bounds=[(np.array([-.3,-.3,0.]),np.array([.3,.2,.1]))]
+    pos,look=Viewer._camera(object.__new__(Viewer),spec,bounds)
+    import math
+    direction=np.asarray(spec.camera_position_m)-np.asarray(spec.camera_look_at_m)
+    expect=np.asarray(spec.camera_look_at_m)+direction/np.linalg.norm(direction)*(math.hypot(.6,.5,.1)/2/math.tan(math.radians(25.))/.7)
+    assert np.allclose(pos,expect) and np.allclose(look,spec.camera_look_at_m)
+
+def test_display_pose_rotate_end_value_and_sign_about_z():
+    c=DisplayCue(task_id='t',target_id='B',task_role='current',cue_type='ring_arrow',action='rotate',instruction='转 90 度',priority=3,depth_requirement='precise',n_gaussians=10,sigma_value=.01,sigma_units='relative',sigma_profile='fine',pose=Pose(),angle_deg=90)
+    _,q=display_pose(c,2.,True)
+    np.testing.assert_allclose(q,(math.cos(math.pi/4),0.,0.,math.sin(math.pi/4)),atol=1e-12)
+
+def test_display_pose_inspect_back_ends_at_180():
+    c=DisplayCue(task_id='t',target_id='C',task_role='current',cue_type='ghost_motion',action='inspect_back',instruction='查背面',priority=3,depth_requirement='precise',n_gaussians=10,sigma_value=.01,sigma_units='relative',sigma_profile='fine',pose=Pose())
+    _,q=display_pose(c,2.,True)
+    np.testing.assert_allclose(q,(math.cos(math.pi/2),0.,0.,math.sin(math.pi/2)),atol=1e-12)
+
+def test_environment_props_are_not_planner_objects():
+    scene=SceneSpec.model_validate(v2_scene())
+    assert len(scene.objects)==3  # environment does not extend the planner-visible object list
+    x=decision().model_dump();x['cues'][0]['target_id']='bench_top'
+    with pytest.raises(DomainError) as caught:validate_decision(Decision.model_validate(x),scene)
+    assert 'Unknown object' in str(caught.value)

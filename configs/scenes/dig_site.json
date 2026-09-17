@@ -1,0 +1,396 @@
+{
+  "schema_version": "1.0",
+  "scene_id": "dig_site",
+  "title": "考古探方发掘",
+  "units": "m",
+  "axes": "right_handed_z_up",
+  "objects": [
+    {
+      "object_id": "POT3",
+      "label": "3 号陶片",
+      "asset": "assets/meshes/dig_site/POT3.glb",
+      "pose": {
+        "position_m": [
+          0.35,
+          0.726,
+          -0.25
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "color": [
+        196,
+        98,
+        54
+      ],
+      "capabilities": [
+        "point",
+        "inspect_back"
+      ],
+      "anchors": {},
+      "description": "直立嵌于南壁,内壁有绳纹刻痕"
+    },
+    {
+      "object_id": "FLAG",
+      "label": "红色标记旗",
+      "asset": "assets/meshes/dig_site/FLAG.glb",
+      "pose": {
+        "position_m": [
+          0.02,
+          -0.88,
+          0.0
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "color": [
+        211,
+        54,
+        44
+      ],
+      "capabilities": [
+        "point",
+        "assemble"
+      ],
+      "anchors": {},
+      "description": "30cm 旗杆,局部 +Z 沿杆、尖端在原点"
+    },
+    {
+      "object_id": "BONE",
+      "label": "骨化石",
+      "asset": "assets/meshes/dig_site/BONE.glb",
+      "pose": {
+        "position_m": [
+          0.18,
+          -0.1,
+          -0.45
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "color": [
+        226,
+        214,
+        182
+      ],
+      "capabilities": [
+        "point"
+      ],
+      "anchors": {
+        "placement": [
+          0.0,
+          -0.08,
+          0.02
+        ]
+      },
+      "description": "出露长骨,旗插其北侧"
+    },
+    {
+      "object_id": "STAY",
+      "label": "全站仪",
+      "asset": "assets/meshes/dig_site/STAY.glb",
+      "pose": {
+        "position_m": [
+          0.5,
+          1.22,
+          0.0
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "color": [
+        232,
+        196,
+        84
+      ],
+      "capabilities": [
+        "point",
+        "wait"
+      ],
+      "anchors": {},
+      "description": "测站锁定,镜头朝探方"
+    },
+    {
+      "object_id": "POT1",
+      "label": "1 号陶片",
+      "asset": "assets/meshes/dig_site/POT1.glb",
+      "pose": {
+        "position_m": [
+          -0.727,
+          -0.3,
+          -0.36
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "color": [
+        168,
+        120,
+        96
+      ],
+      "capabilities": [
+        "point"
+      ],
+      "anchors": {},
+      "description": "消歧用,仅指认"
+    },
+    {
+      "object_id": "POT2",
+      "label": "2 号陶片",
+      "asset": "assets/meshes/dig_site/POT2.glb",
+      "pose": {
+        "position_m": [
+          0.705,
+          0.3,
+          -0.472
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "color": [
+        176,
+        88,
+        60
+      ],
+      "capabilities": [
+        "point"
+      ],
+      "anchors": {},
+      "description": "消歧用,仅指认"
+    },
+    {
+      "object_id": "TROWEL",
+      "label": "手铲",
+      "asset": "assets/meshes/dig_site/TROWEL.glb",
+      "pose": {
+        "position_m": [
+          -0.8,
+          -0.08,
+          0.01
+        ],
+        "wxyz": [
+          0.953717,
+          -0.0,
+          -0.0,
+          -0.300706
+        ]
+      },
+      "color": [
+        150,
+        156,
+        164
+      ],
+      "capabilities": [
+        "point",
+        "rotate"
+      ],
+      "anchors": {},
+      "description": "刃口朝向与柄线对齐"
+    }
+  ],
+  "initial_instruction": "把 3 号陶片 POT3 翻过来看内壁刻纹,然后在骨化石 BONE 旁边插红色标记旗 FLAG,坑边全站仪 STAY 保持锁定别碰。",
+  "camera_position_m": [
+    1.35,
+    -1.35,
+    1.05
+  ],
+  "camera_look_at_m": [
+    -0.494,
+    0.848,
+    0.173
+  ],
+  "environment": [
+    {
+      "prop_id": "dig_site_ground",
+      "label": "探方坑体与土堆",
+      "asset": "assets/meshes/env/dig_site_ground.glb",
+      "pose": {
+        "position_m": [
+          0,
+          0,
+          0
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "scale_m": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "prop_id": "dig_site_equipmentpad",
+      "label": "坑边装备垫与文物箱",
+      "asset": "assets/meshes/env/dig_site_equipmentpad.glb",
+      "pose": {
+        "position_m": [
+          0.5,
+          -1.1200000047683716,
+          0.0
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "scale_m": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "prop_id": "trowel_01",
+      "label": "",
+      "asset": "assets/meshes/env/trowel_01.glb",
+      "pose": {
+        "position_m": [
+          -0.98,
+          -0.62,
+          0.04718
+        ],
+        "wxyz": [
+          0.991445,
+          0.0,
+          0.0,
+          0.130526
+        ]
+      },
+      "scale_m": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "prop_id": "stone_01",
+      "label": "",
+      "asset": "assets/meshes/env/stone_01.glb",
+      "pose": {
+        "position_m": [
+          1.15,
+          -0.85,
+          0.01464
+        ],
+        "wxyz": [
+          0.965926,
+          0.0,
+          0.0,
+          0.258819
+        ]
+      },
+      "scale_m": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "prop_id": "rock_07",
+      "label": "",
+      "asset": "assets/meshes/env/rock_07.glb",
+      "pose": {
+        "position_m": [
+          1.0,
+          0.95,
+          0.00191
+        ],
+        "wxyz": [
+          0.939693,
+          0.0,
+          0.0,
+          0.34202
+        ]
+      },
+      "scale_m": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "prop_id": "rock_07_b",
+      "label": "",
+      "asset": "assets/meshes/env/rock_07.glb",
+      "pose": {
+        "position_m": [
+          -0.45,
+          1.1,
+          0.00153
+        ],
+        "wxyz": [
+          0.976296,
+          -0.0,
+          -0.0,
+          -0.21644
+        ]
+      },
+      "scale_m": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    {
+      "prop_id": "rusted_spade_01",
+      "label": "铁锹",
+      "asset": "assets/meshes/env/rusted_spade_01.glb",
+      "pose": {
+        "position_m": [
+          -0.89378,
+          0.50257,
+          0.52951
+        ],
+        "wxyz": [
+          0.932954,
+          -0.215389,
+          -0.064887,
+          0.281058
+        ]
+      },
+      "scale_m": [
+        1,
+        1,
+        1
+      ]
+    }
+  ],
+  "render_hints": {
+    "ortho_scale_m": 3.81,
+    "grid_extent_m": 2.5,
+    "cue_scale": 1.0,
+    "label_offset_m": 0.25,
+    "fit_camera": true
+  }
+}

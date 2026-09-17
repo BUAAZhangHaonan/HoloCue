@@ -1,0 +1,409 @@
+{
+  "schema_version": "1.0",
+  "scene_id": "optical_bench",
+  "title": "光具座同轴校准",
+  "units": "m",
+  "axes": "right_handed_z_up",
+  "objects": [
+    {
+      "object_id": "L1",
+      "label": "一号透镜",
+      "asset": "assets/meshes/optical_bench/L1.glb",
+      "pose": {
+        "position_m": [
+          0.15,
+          -0.05,
+          0.044
+        ],
+        "wxyz": [
+          0.984808,
+          0.0,
+          0.0,
+          0.173648
+        ]
+      },
+      "color": [
+        140,
+        220,
+        205
+      ],
+      "capabilities": [
+        "point",
+        "insert"
+      ],
+      "anchors": {},
+      "description": "Φ25 双凸透镜,黑色 kinematic 镜架带三颗调节螺钉与锁紧旋钮,待插入柱位"
+    },
+    {
+      "object_id": "POST2",
+      "label": "二号柱位",
+      "asset": "assets/meshes/optical_bench/POST2.glb",
+      "pose": {
+        "position_m": [
+          0.0,
+          0.15,
+          0.0
+        ],
+        "wxyz": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "color": [
+        255,
+        170,
+        40
+      ],
+      "capabilities": [
+        "point"
+      ],
+      "anchors": {
+        "insertion": [
+          0,
+          0,
+          0.1
+        ]
+      },
+      "description": "面包板定位柱位,Ø12 柱顶带定位销与橙色标记环,插入终点为柱顶+0.03"
+    },
+    {
+      "object_id": "L2",
+      "label": "二号透镜",
+      "asset": "assets/meshes/optical_bench/L2.glb",
+      "pose": {
+        "position_m": [
+          0.0,
+          0.35,
+          0.0
+        ],
+        "wxyz": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "color": [
+        90,
+        160,
+        235
+      ],
+      "capabilities": [
+        "point"
+      ],
+      "anchors": {},
+      "description": "已装调好的另一枚同款透镜,已在光路中(与 L1 指代易混,消歧用)"
+    },
+    {
+      "object_id": "M",
+      "label": "折转反射镜",
+      "asset": "assets/meshes/optical_bench/M.glb",
+      "pose": {
+        "position_m": [
+          0.0,
+          0.55,
+          0.0
+        ],
+        "wxyz": [
+          0.67559,
+          0.0,
+          0.0,
+          0.737277
+        ]
+      },
+      "color": [
+        220,
+        225,
+        235
+      ],
+      "capabilities": [
+        "point",
+        "rotate",
+        "inspect_back"
+      ],
+      "anchors": {},
+      "description": "Ø25 折转反射镜,镜面近垂直光路作约 10° 微折转;背面径向面有镀膜编号 HR-45°-1064,白色刻线为入射基准,底座带 0-90° 刻度弧"
+    },
+    {
+      "object_id": "TARGET",
+      "label": "靶屏",
+      "asset": "assets/meshes/optical_bench/TARGET.glb",
+      "pose": {
+        "position_m": [
+          -0.106,
+          1.15,
+          -0.06
+        ],
+        "wxyz": [
+          0.087156,
+          -0.0,
+          -0.0,
+          -0.996195
+        ]
+      },
+      "color": [
+        240,
+        240,
+        235
+      ],
+      "capabilities": [
+        "point",
+        "wait"
+      ],
+      "anchors": {},
+      "description": "远端白色靶屏,十字线与同心圆刻度,屏上红色光斑位置即同轴判据"
+    }
+  ],
+  "initial_instruction": "把透镜 L1 插进二号柱位 POST2,再把反射镜 M 顺时针转 15 度把光斑引向靶屏,全程盯着 TARGET 上光斑的位置,最后看 M 背面的镀膜编号。",
+  "camera_position_m": [
+    0.5,
+    -0.85,
+    0.55
+  ],
+  "camera_look_at_m": [
+    0.0,
+    0.45,
+    0.15
+  ],
+  "environment": [
+    {
+      "prop_id": "optical_bench_breadboard",
+      "label": "",
+      "asset": "assets/meshes/env/optical_bench_breadboard.glb",
+      "pose": {
+        "position_m": [
+          0.0,
+          0.175,
+          0.0
+        ],
+        "wxyz": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "scale_m": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "prop_id": "optical_bench_laser",
+      "label": "",
+      "asset": "assets/meshes/env/optical_bench_laser.glb",
+      "pose": {
+        "position_m": [
+          0.0,
+          -0.3,
+          0.0
+        ],
+        "wxyz": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "scale_m": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "prop_id": "optical_bench_table",
+      "label": "",
+      "asset": "assets/meshes/env/optical_bench_table.glb",
+      "pose": {
+        "position_m": [
+          0.0,
+          0.5,
+          -0.06
+        ],
+        "wxyz": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "scale_m": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "prop_id": "optical_bench_beam",
+      "label": "",
+      "asset": "assets/meshes/env/optical_bench_beam.glb",
+      "pose": {
+        "position_m": [
+          0.0,
+          0.55,
+          0.12
+        ],
+        "wxyz": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "scale_m": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "prop_id": "optical_bench_mat",
+      "label": "",
+      "asset": "assets/meshes/env/optical_bench_mat.glb",
+      "pose": {
+        "position_m": [
+          0.43,
+          0.08,
+          -0.06
+        ],
+        "wxyz": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "scale_m": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "prop_id": "desk_lamp_arm_01",
+      "label": "",
+      "asset": "assets/meshes/env/desk_lamp_arm_01.glb",
+      "pose": {
+        "position_m": [
+          -0.4345,
+          -0.2057,
+          0.028
+        ],
+        "wxyz": [
+          0.430459,
+          -0.430459,
+          -0.560986,
+          0.560986
+        ]
+      },
+      "scale_m": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "prop_id": "screwdrivers_02",
+      "label": "",
+      "asset": "assets/meshes/env/screwdrivers_02.glb",
+      "pose": {
+        "position_m": [
+          0.4546,
+          0.0299,
+          -0.0425
+        ],
+        "wxyz": [
+          0.705384,
+          -0.705384,
+          -0.049325,
+          0.049325
+        ]
+      },
+      "scale_m": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "prop_id": "magnifying_glass_01",
+      "label": "",
+      "asset": "assets/meshes/env/magnifying_glass_01.glb",
+      "pose": {
+        "position_m": [
+          0.45,
+          0.1063,
+          -0.0206
+        ],
+        "wxyz": [
+          0.08509,
+          -0.972581,
+          -0.018864,
+          0.215616
+        ]
+      },
+      "scale_m": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "prop_id": "binder_notebook",
+      "label": "",
+      "asset": "assets/meshes/env/binder_notebook.glb",
+      "pose": {
+        "position_m": [
+          -0.5513,
+          0.4876,
+          -0.0579
+        ],
+        "wxyz": [
+          0.701836,
+          -0.701836,
+          -0.086175,
+          0.086175
+        ]
+      },
+      "scale_m": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "prop_id": "circuit_board",
+      "label": "",
+      "asset": "assets/meshes/env/circuit_board.glb",
+      "pose": {
+        "position_m": [
+          0.3044,
+          1.2621,
+          -0.054
+        ],
+        "wxyz": [
+          0.690346,
+          -0.690346,
+          -0.153046,
+          0.153046
+        ]
+      },
+      "scale_m": [
+        1,
+        1,
+        1
+      ]
+    }
+  ],
+  "render_hints": {
+    "ortho_scale_m": 1.366,
+    "grid_extent_m": 1.6,
+    "cue_scale": 0.5,
+    "label_offset_m": 0.06,
+    "fit_camera": true
+  }
+}

@@ -1,0 +1,456 @@
+{
+  "schema_version": "1.0",
+  "scene_id": "shelf_picking",
+  "title": "仓储分拣站",
+  "units": "m",
+  "axes": "right_handed_z_up",
+  "objects": [
+    {
+      "object_id": "RED",
+      "label": "红色包裹",
+      "asset": "assets/meshes/shelf_picking/RED.glb",
+      "pose": {
+        "position_m": [
+          -0.35,
+          0.5,
+          1.01
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "color": [
+        176,
+        58,
+        42
+      ],
+      "capabilities": [
+        "point",
+        "assemble"
+      ],
+      "anchors": {},
+      "description": "二层标准件包裹"
+    },
+    {
+      "object_id": "BLUE",
+      "label": "蓝色周转箱",
+      "asset": "assets/meshes/shelf_picking/BLUE.glb",
+      "pose": {
+        "position_m": [
+          0.35,
+          0.47,
+          0.5
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "color": [
+        46,
+        94,
+        168
+      ],
+      "capabilities": [
+        "point",
+        "rotate",
+        "inspect_back"
+      ],
+      "anchors": {},
+      "description": "+Y 侧贴发货面单"
+    },
+    {
+      "object_id": "BASKET",
+      "label": "拣选篮",
+      "asset": "assets/meshes/shelf_picking/BASKET.glb",
+      "pose": {
+        "position_m": [
+          0.0,
+          -0.35,
+          0.0
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "color": [
+        74,
+        72,
+        70
+      ],
+      "capabilities": [
+        "point"
+      ],
+      "anchors": {
+        "placement": [
+          0.0,
+          -0.0198,
+          0.2525
+        ]
+      },
+      "description": "软底拣选篮"
+    },
+    {
+      "object_id": "CONV",
+      "label": "传送带端部",
+      "asset": "assets/meshes/shelf_picking/CONV.glb",
+      "pose": {
+        "position_m": [
+          1.45,
+          1.35,
+          0.785
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "color": [
+        128,
+        132,
+        136
+      ],
+      "capabilities": [
+        "point",
+        "wait"
+      ],
+      "anchors": {},
+      "description": "到位指示灯在端部"
+    },
+    {
+      "object_id": "GREEN",
+      "label": "端部绿箱",
+      "asset": "assets/meshes/shelf_picking/GREEN.glb",
+      "pose": {
+        "position_m": [
+          1.45,
+          1.3,
+          0.855
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "color": [
+        56,
+        150,
+        72
+      ],
+      "capabilities": [
+        "point",
+        "wait"
+      ],
+      "anchors": {},
+      "description": "补货标记箱(静止)"
+    }
+  ],
+  "initial_instruction": "把第二层的红色包裹 RED 放进拣选篮 BASKET,然后翻看蓝箱 BLUE 背面的面单,同时留意传送带 CONV 端部有没有绿箱 GREEN 到位。",
+  "camera_position_m": [
+    0.35,
+    -1.15,
+    1.05
+  ],
+  "camera_look_at_m": [
+    0.56149,
+    0.62479,
+    0.61816
+  ],
+  "environment": [
+    {
+      "prop_id": "shelf_picking_shelfwall",
+      "label": "",
+      "asset": "assets/meshes/env/shelf_picking_shelfwall.glb",
+      "pose": {
+        "position_m": [
+          0.0,
+          0.35,
+          0.0
+        ],
+        "wxyz": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "scale_m": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "prop_id": "shelf_picking_conveyorbody",
+      "label": "",
+      "asset": "assets/meshes/env/shelf_picking_conveyorbody.glb",
+      "pose": {
+        "position_m": [
+          1.45,
+          1.53,
+          0.785
+        ],
+        "wxyz": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "scale_m": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "prop_id": "shelf_picking_floor",
+      "label": "",
+      "asset": "assets/meshes/env/shelf_picking_floor.glb",
+      "pose": {
+        "position_m": [
+          0.0,
+          1.2,
+          0.0
+        ],
+        "wxyz": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "scale_m": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "prop_id": "shelf_picking_wallpanel",
+      "label": "",
+      "asset": "assets/meshes/env/shelf_picking_wallpanel.glb",
+      "pose": {
+        "position_m": [
+          0.0,
+          3.21,
+          1.4
+        ],
+        "wxyz": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "scale_m": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "prop_id": "cardboard_box_01",
+      "label": "",
+      "asset": "assets/meshes/env/cardboard_box_01.glb",
+      "pose": {
+        "position_m": [
+          -0.55,
+          0.6,
+          1.42676
+        ],
+        "wxyz": [
+          0.99863,
+          0.0,
+          0.0,
+          -0.052336
+        ]
+      },
+      "scale_m": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "prop_id": "plastic_crate_01",
+      "label": "",
+      "asset": "assets/meshes/env/plastic_crate_01.glb",
+      "pose": {
+        "position_m": [
+          -0.45,
+          0.6,
+          0.42
+        ],
+        "wxyz": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "scale_m": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "prop_id": "plastic_crate_02",
+      "label": "",
+      "asset": "assets/meshes/env/plastic_crate_02.glb",
+      "pose": {
+        "position_m": [
+          0.6,
+          0.62,
+          0.92002
+        ],
+        "wxyz": [
+          0.999657,
+          0.0,
+          0.0,
+          0.026177
+        ]
+      },
+      "scale_m": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "prop_id": "wooden_crate_02",
+      "label": "",
+      "asset": "assets/meshes/env/wooden_crate_02.glb",
+      "pose": {
+        "position_m": [
+          1.3,
+          0.52,
+          0.00982
+        ],
+        "wxyz": [
+          0.994522,
+          0.0,
+          0.0,
+          0.104528
+        ]
+      },
+      "scale_m": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "prop_id": "Barrel_02",
+      "label": "",
+      "asset": "assets/meshes/env/Barrel_02.glb",
+      "pose": {
+        "position_m": [
+          -1.62,
+          1.02,
+          0.0
+        ],
+        "wxyz": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "scale_m": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "prop_id": "cement_bag",
+      "label": "",
+      "asset": "assets/meshes/env/cement_bag.glb",
+      "pose": {
+        "position_m": [
+          -1.6,
+          0.54,
+          0.30367
+        ],
+        "wxyz": [
+          0.866025,
+          0.5,
+          0.0,
+          0.0
+        ]
+      },
+      "scale_m": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "prop_id": "hand_truck",
+      "label": "",
+      "asset": "assets/meshes/env/hand_truck.glb",
+      "pose": {
+        "position_m": [
+          -1.4,
+          0.1,
+          0.01665
+        ],
+        "wxyz": [
+          0.996195,
+          -0.087156,
+          0.0,
+          0.0
+        ]
+      },
+      "scale_m": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "prop_id": "steel_frame_shelves_02",
+      "label": "",
+      "asset": "assets/meshes/env/steel_frame_shelves_02.glb",
+      "pose": {
+        "position_m": [
+          -1.75,
+          2.55,
+          0.00085
+        ],
+        "wxyz": [
+          0.987688,
+          0.0,
+          0.0,
+          0.156434
+        ]
+      },
+      "scale_m": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    }
+  ],
+  "render_hints": {
+    "ortho_scale_m": 2.84,
+    "grid_extent_m": 2.5,
+    "cue_scale": 1.0,
+    "label_offset_m": 0.12,
+    "fit_camera": true
+  }
+}

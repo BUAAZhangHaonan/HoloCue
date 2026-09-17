@@ -55,6 +55,68 @@
       "title": "Pose",
       "type": "object"
     },
+    "RenderHints": {
+      "additionalProperties": false,
+      "properties": {
+        "ortho_scale_m": {
+          "default": 0.91,
+          "exclusiveMinimum": 0,
+          "title": "Ortho Scale M",
+          "type": "number"
+        },
+        "grid_extent_m": {
+          "default": 1.0,
+          "exclusiveMinimum": 0,
+          "title": "Grid Extent M",
+          "type": "number"
+        },
+        "cue_scale": {
+          "default": 1.0,
+          "exclusiveMinimum": 0,
+          "title": "Cue Scale",
+          "type": "number"
+        },
+        "label_offset_m": {
+          "default": 0.12,
+          "minimum": 0,
+          "title": "Label Offset M",
+          "type": "number"
+        },
+        "fit_camera": {
+          "default": false,
+          "title": "Fit Camera",
+          "type": "boolean"
+        },
+        "fill_lights": {
+          "items": {
+            "maxItems": 5,
+            "minItems": 5,
+            "prefixItems": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "type": "array"
+          },
+          "title": "Fill Lights",
+          "type": "array"
+        }
+      },
+      "title": "RenderHints",
+      "type": "object"
+    },
     "SceneObject": {
       "additionalProperties": false,
       "properties": {
@@ -146,6 +208,69 @@
       ],
       "title": "SceneObject",
       "type": "object"
+    },
+    "SceneProp": {
+      "additionalProperties": false,
+      "properties": {
+        "prop_id": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,47}$",
+          "title": "Prop Id",
+          "type": "string"
+        },
+        "label": {
+          "default": "",
+          "title": "Label",
+          "type": "string"
+        },
+        "asset": {
+          "title": "Asset",
+          "type": "string"
+        },
+        "pose": {
+          "$ref": "#/$defs/Pose",
+          "default": {
+            "position_m": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "wxyz": [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "scale_m": {
+          "default": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Scale M",
+          "type": "array"
+        }
+      },
+      "required": [
+        "prop_id",
+        "asset"
+      ],
+      "title": "SceneProp",
+      "type": "object"
     }
   },
   "additionalProperties": false,
@@ -230,6 +355,24 @@
       ],
       "title": "Camera Look At M",
       "type": "array"
+    },
+    "environment": {
+      "items": {
+        "$ref": "#/$defs/SceneProp"
+      },
+      "title": "Environment",
+      "type": "array"
+    },
+    "render_hints": {
+      "$ref": "#/$defs/RenderHints",
+      "default": {
+        "ortho_scale_m": 0.91,
+        "grid_extent_m": 1.0,
+        "cue_scale": 1.0,
+        "label_offset_m": 0.12,
+        "fit_camera": false,
+        "fill_lights": []
+      }
     }
   },
   "required": [
