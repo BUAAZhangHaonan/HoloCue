@@ -7,8 +7,8 @@ Run (CPU only, via resource guard):
   (tee full stdout to runs/scene_v2/build_dig_site.log)
 
 Produces:
-  assets/meshes/dig_site/{POT3,FLAG,BONE,STAY,POT1,POT2,TROWEL}.glb   (interactive)
-  assets/meshes/env/dig_site_{ground,equipmentpad}.glb                (procedural env)
+  scenes/dig_site/meshes/{POT3,FLAG,BONE,STAY,POT1,POT2,TROWEL}.glb   (interactive)
+  scenes/dig_site/meshes/env/dig_site_{ground,equipmentpad}.glb                (procedural env)
   scenes/dig_site/scene.json
   runs/scene_v2/dig_site_kit_preview.png        (ortho over the task volume: pit +
                                                  interactives + labels, heap/spade crop)
@@ -36,7 +36,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from common import *  # noqa: F401,F403
 from mathutils import Vector, Euler, Quaternion
 
-MESH_OUT = ROOT / 'assets/meshes/dig_site'
+MESH_OUT = ROOT / 'scenes/dig_site/meshes'
+SCENE_ENV = scene_env('dig_site')
 ENV_OUT = ROOT / 'assets/meshes/env'
 RAD = math.radians
 
@@ -816,14 +817,14 @@ def main():
         return lo, hi
 
     clear_scene()
-    build_part('ground', build_ground(), ENV_OUT / 'dig_site_ground.glb')
+    build_part('ground', build_ground(), SCENE_ENV / 'dig_site_ground.glb')
     for kind in ('POT3', 'POT1', 'POT2'):
         build_part(kind, build_sherd(kind), MESH_OUT / f'{kind}.glb')
     build_part('FLAG', build_flag(), MESH_OUT / 'FLAG.glb')
     build_part('BONE', build_bone(), MESH_OUT / 'BONE.glb')
     build_part('STAY', build_stay(), MESH_OUT / 'STAY.glb')
     build_part('TROWEL', build_trowel(), MESH_OUT / 'TROWEL.glb')
-    build_part('equipmentpad', build_equipmentpad(), ENV_OUT / 'dig_site_equipmentpad.glb')
+    build_part('equipmentpad', build_equipmentpad(), SCENE_ENV / 'dig_site_equipmentpad.glb')
     print(json.dumps({'exported': table}, indent=1), flush=True)
 
     # =========================================================== compose preview
@@ -847,16 +848,16 @@ def main():
     add_part('TROWEL', MESH_OUT / 'TROWEL.glb', POSES['TROWEL'],
              wxyz=(q_yaw.w, q_yaw.x, q_yaw.y, q_yaw.z))
 
-    add_part('dig_site_ground', ENV_OUT / 'dig_site_ground.glb', (0, 0, 0))
-    add_part('dig_site_equipmentpad', ENV_OUT / 'dig_site_equipmentpad.glb',
+    add_part('dig_site_ground', SCENE_ENV / 'dig_site_ground.glb', (0, 0, 0))
+    add_part('dig_site_equipmentpad', SCENE_ENV / 'dig_site_equipmentpad.glb',
              (PAD_O.x, PAD_O.y, PAD_O.z))
 
     env_json = [
         {'prop_id': 'dig_site_ground', 'label': '探方坑体与土堆',
-         'asset': 'assets/meshes/env/dig_site_ground.glb',
+         'asset': 'scenes/dig_site/meshes/env/dig_site_ground.glb',
          'pose': {'position_m': [0, 0, 0], 'wxyz': [1, 0, 0, 0]}, 'scale_m': [1, 1, 1]},
         {'prop_id': 'dig_site_equipmentpad', 'label': '坑边装备垫与文物箱',
-         'asset': 'assets/meshes/env/dig_site_equipmentpad.glb',
+         'asset': 'scenes/dig_site/meshes/env/dig_site_equipmentpad.glb',
          'pose': {'position_m': [PAD_O.x, PAD_O.y, PAD_O.z], 'wxyz': [1, 0, 0, 0]},
          'scale_m': [1, 1, 1]},
     ]
@@ -1493,7 +1494,7 @@ def main():
     obj_json = []
     for oid, d in obj_defs.items():
         obj_json.append({'object_id': oid, 'label': d['label'],
-                         'asset': f'assets/meshes/dig_site/{oid}.glb',
+                         'asset': f'scenes/dig_site/meshes/{oid}.glb',
                          'pose': {'position_m': list(v3t(POSES[oid])),
                                   'wxyz': wxyz_by.get(oid, [1, 0, 0, 0])},
                          'color': list(d['color']), 'capabilities': d['caps'],
@@ -1573,8 +1574,8 @@ def main():
         'TROWEL': axd(POSES['TROWEL'])},
         'design_approx_m': {'POT3': 2.0, 'BONE': 2.3, 'STAY': 3.1, 'TROWEL': 1.8}}), flush=True)
 
-    files = sorted(MESH_OUT.glob('*.glb')) + [ENV_OUT / 'dig_site_ground.glb',
-                                              ENV_OUT / 'dig_site_equipmentpad.glb',
+    files = sorted(MESH_OUT.glob('*.glb')) + [SCENE_ENV / 'dig_site_ground.glb',
+                                              SCENE_ENV / 'dig_site_equipmentpad.glb',
                                               OUT_RUNS / 'dig_site_kit_preview.png',
                                               OUT_RUNS / 'dig_site_kit_preview_pit.png',
                                               OUT_RUNS / 'dig_site_kit_preview_pot3.png',

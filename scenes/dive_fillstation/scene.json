@@ -8,7 +8,7 @@
     {
       "object_id": "QRC",
       "label": "充装软管接头",
-      "asset": "assets/meshes/review/dive_fillstation/QRC.glb",
+      "asset": "scenes/dive_fillstation/meshes/QRC.glb",
       "pose": {
         "position_m": [
           0,
@@ -32,7 +32,7 @@
     {
       "object_id": "VALVE",
       "label": "3号瓶阀",
-      "asset": "assets/meshes/review/dive_fillstation/VALVE.glb",
+      "asset": "scenes/dive_fillstation/meshes/VALVE.glb",
       "pose": {
         "position_m": [
           0,
@@ -61,7 +61,7 @@
     {
       "object_id": "BOTTLE3",
       "label": "3号气瓶",
-      "asset": "assets/meshes/review/dive_fillstation/BOTTLE3.glb",
+      "asset": "scenes/dive_fillstation/meshes/BOTTLE3.glb",
       "pose": {
         "position_m": [
           0,
@@ -85,7 +85,7 @@
     {
       "object_id": "BOTTLE1",
       "label": "1号气瓶",
-      "asset": "assets/meshes/review/dive_fillstation/BOTTLE1.glb",
+      "asset": "scenes/dive_fillstation/meshes/BOTTLE1.glb",
       "pose": {
         "position_m": [
           0,
@@ -109,7 +109,7 @@
     {
       "object_id": "BOTTLE2",
       "label": "2号气瓶",
-      "asset": "assets/meshes/review/dive_fillstation/BOTTLE2.glb",
+      "asset": "scenes/dive_fillstation/meshes/BOTTLE2.glb",
       "pose": {
         "position_m": [
           0,
@@ -133,7 +133,7 @@
     {
       "object_id": "STEM",
       "label": "3号路阀杆",
-      "asset": "assets/meshes/review/dive_fillstation/STEM.glb",
+      "asset": "scenes/dive_fillstation/meshes/STEM.glb",
       "pose": {
         "position_m": [
           0,
@@ -157,7 +157,7 @@
     {
       "object_id": "GAUGES",
       "label": "压力表组",
-      "asset": "assets/meshes/review/dive_fillstation/GAUGES.glb",
+      "asset": "scenes/dive_fillstation/meshes/GAUGES.glb",
       "pose": {
         "position_m": [
           0,

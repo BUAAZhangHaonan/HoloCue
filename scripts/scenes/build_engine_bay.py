@@ -12,8 +12,8 @@ design source; LAYOUT below is the single source of truth for world poses
 identity), so each GLB's local frame equals the world frame at its pose.
 
 Outputs:
-  assets/meshes/engine_bay/{CLAMP,PLUG,PLUGPORT,OILCAP,TENSIONER,CONN}.glb
-  assets/meshes/env/engine_bay_{shell,engine,radiator}.glb  (+ engine_round props
+  scenes/engine_bay/meshes/{CLAMP,PLUG,PLUGPORT,OILCAP,TENSIONER,CONN}.glb
+  scenes/engine_bay/meshes/env/engine_bay_{shell,engine,radiator}.glb  (+ engine_round props
     produced beforehand by scripts/assets/process_env_props.py)
   scenes/engine_bay/scene.json
   runs/scene_v2/engine_bay_kit_preview.png + 4 detail previews
@@ -36,7 +36,8 @@ from mathutils.bvhtree import BVHTree
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from common import *  # noqa: F401,F403
 
-KIT = ROOT / 'assets/meshes/engine_bay'
+KIT = ROOT / 'scenes/engine_bay/meshes'
+SCENE_ENV = scene_env('engine_bay')
 RAD = math.radians
 
 # ----------------------------------------------------------------------------
@@ -70,11 +71,11 @@ LAYOUT = {
                  'anchors': {}, 'description': '针脚面朝发动机内侧，需翻转检查背面'},
     },
     'env': {
-        'shell': {'asset': 'assets/meshes/env/engine_bay_shell.glb', 'label': '机舱与车库结构',
+        'shell': {'asset': 'scenes/engine_bay/meshes/env/engine_bay_shell.glb', 'label': '机舱与车库结构',
                   'position': (0, 0, 0)},
-        'engine': {'asset': 'assets/meshes/env/engine_assembly.glb', 'label': '横置直列四缸发动机',
+        'engine': {'asset': 'scenes/engine_bay/meshes/env/engine_assembly.glb', 'label': '横置直列四缸发动机',
                    'position': (0, 0, 0)},
-        'radiator': {'asset': 'assets/meshes/env/engine_bay_radiator.glb', 'label': '散热器总成',
+        'radiator': {'asset': 'scenes/engine_bay/meshes/env/engine_bay_radiator.glb', 'label': '散热器总成',
                      'position': (0, 0, 0)},
     },
     # PolyHaven props (processed by scripts/assets/process_env_props.py).
@@ -906,9 +907,9 @@ def main():
     paths = {}
     for oid in LAYOUT['objects']:
         paths[oid] = build_and_export(oid, globals()[f'build_{oid.lower()}'], KIT / f'{oid}.glb')
-    paths['shell'] = build_and_export('shell', build_shell, ENV / 'engine_bay_shell.glb')
-    paths['engine'] = build_and_export('engine', build_engine, ENV / 'engine_assembly.glb')
-    paths['radiator'] = build_and_export('radiator', build_radiator, ENV / 'engine_bay_radiator.glb')
+    paths['shell'] = build_and_export('shell', build_shell, SCENE_ENV / 'engine_bay_shell.glb')
+    paths['engine'] = build_and_export('engine', build_engine, SCENE_ENV / 'engine_assembly.glb')
+    paths['radiator'] = build_and_export('radiator', build_radiator, SCENE_ENV / 'engine_bay_radiator.glb')
 
     # ---------------- full-scene composition ----------------
     clear_scene()
@@ -1139,7 +1140,7 @@ def main():
     def obj_entry(oid):
         s = LAYOUT['objects'][oid]
         pos, wxyz = s['pose']
-        return {'object_id': oid, 'label': s['label'], 'asset': f'assets/meshes/engine_bay/{oid}.glb',
+        return {'object_id': oid, 'label': s['label'], 'asset': f'scenes/engine_bay/meshes/{oid}.glb',
                 'pose': {'position_m': [round(v, 4) for v in pos], 'wxyz': list(wxyz)},
                 'color': list(s['color']), 'capabilities': s['capabilities'],
                 'anchors': {k: list(v) for k, v in s['anchors'].items()},

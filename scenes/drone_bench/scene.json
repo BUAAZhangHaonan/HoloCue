@@ -8,7 +8,7 @@
     {
       "object_id": "BAT",
       "label": "智能电池",
-      "asset": "assets/meshes/drone_bench/BAT.glb",
+      "asset": "scenes/drone_bench/meshes/BAT.glb",
       "pose": {
         "position_m": [
           0.38,
@@ -37,7 +37,7 @@
     {
       "object_id": "BAY",
       "label": "电池仓",
-      "asset": "assets/meshes/drone_bench/BAY.glb",
+      "asset": "scenes/drone_bench/meshes/BAY.glb",
       "pose": {
         "position_m": [
           0.02,
@@ -71,7 +71,7 @@
     {
       "object_id": "GUARD",
       "label": "电池护罩",
-      "asset": "assets/meshes/drone_bench/GUARD.glb",
+      "asset": "scenes/drone_bench/meshes/GUARD.glb",
       "pose": {
         "position_m": [
           0.02,
@@ -100,7 +100,7 @@
     {
       "object_id": "M1",
       "label": "前左电机",
-      "asset": "assets/meshes/drone_bench/M1.glb",
+      "asset": "scenes/drone_bench/meshes/M1.glb",
       "pose": {
         "position_m": [
           -0.22,
@@ -128,7 +128,7 @@
     {
       "object_id": "M2",
       "label": "前右电机",
-      "asset": "assets/meshes/drone_bench/M2.glb",
+      "asset": "scenes/drone_bench/meshes/M2.glb",
       "pose": {
         "position_m": [
           0.22,
@@ -156,7 +156,7 @@
     {
       "object_id": "M3",
       "label": "左后电机",
-      "asset": "assets/meshes/drone_bench/M3.glb",
+      "asset": "scenes/drone_bench/meshes/M3.glb",
       "pose": {
         "position_m": [
           -0.22,
@@ -185,7 +185,7 @@
     {
       "object_id": "M4",
       "label": "右后电机",
-      "asset": "assets/meshes/drone_bench/M4.glb",
+      "asset": "scenes/drone_bench/meshes/M4.glb",
       "pose": {
         "position_m": [
           0.22,
@@ -213,7 +213,7 @@
     {
       "object_id": "VOLTMETER",
       "label": "台式电压表",
-      "asset": "assets/meshes/drone_bench/VOLTMETER.glb",
+      "asset": "scenes/drone_bench/meshes/VOLTMETER.glb",
       "pose": {
         "position_m": [
           -0.32,
@@ -255,7 +255,7 @@
     {
       "prop_id": "drone_bench_table",
       "label": "",
-      "asset": "assets/meshes/env/drone_bench_table.glb",
+      "asset": "scenes/drone_bench/meshes/env/drone_bench_table.glb",
       "pose": {
         "position_m": [
           0.0,
@@ -278,7 +278,7 @@
     {
       "prop_id": "drone_bench_mat",
       "label": "",
-      "asset": "assets/meshes/env/drone_bench_mat.glb",
+      "asset": "scenes/drone_bench/meshes/env/drone_bench_mat.glb",
       "pose": {
         "position_m": [
           0.0,
@@ -301,7 +301,7 @@
     {
       "prop_id": "drone_bench_cradle",
       "label": "",
-      "asset": "assets/meshes/env/drone_bench_cradle.glb",
+      "asset": "scenes/drone_bench/meshes/env/drone_bench_cradle.glb",
       "pose": {
         "position_m": [
           0.0,
@@ -324,7 +324,7 @@
     {
       "prop_id": "drone_bench_dronebody",
       "label": "",
-      "asset": "assets/meshes/env/drone_bench_dronebody.glb",
+      "asset": "scenes/drone_bench/meshes/env/drone_bench_dronebody.glb",
       "pose": {
         "position_m": [
           0.0,
@@ -347,7 +347,7 @@
     {
       "prop_id": "drone_bench_partstray",
       "label": "",
-      "asset": "assets/meshes/env/drone_bench_partstray.glb",
+      "asset": "scenes/drone_bench/meshes/env/drone_bench_partstray.glb",
       "pose": {
         "position_m": [
           0.4,

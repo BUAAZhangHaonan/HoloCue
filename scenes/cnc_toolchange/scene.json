@@ -8,7 +8,7 @@
     {
       "object_id": "MODESWITCH",
       "label": "模式选择旋钮",
-      "asset": "assets/meshes/review/cnc_toolchange/MODESWITCH.glb",
+      "asset": "scenes/cnc_toolchange/meshes/MODESWITCH.glb",
       "pose": {
         "position_m": [
           0,
@@ -32,7 +32,7 @@
     {
       "object_id": "T09",
       "label": "9号镗刀柄",
-      "asset": "assets/meshes/review/cnc_toolchange/T09.glb",
+      "asset": "scenes/cnc_toolchange/meshes/T09.glb",
       "pose": {
         "position_m": [
           0,
@@ -56,7 +56,7 @@
     {
       "object_id": "POCKET9",
       "label": "9号刀套",
-      "asset": "assets/meshes/review/cnc_toolchange/POCKET9.glb",
+      "asset": "scenes/cnc_toolchange/meshes/POCKET9.glb",
       "pose": {
         "position_m": [
           0,
@@ -85,7 +85,7 @@
     {
       "object_id": "T03",
       "label": "3号镗刀柄",
-      "asset": "assets/meshes/review/cnc_toolchange/T03.glb",
+      "asset": "scenes/cnc_toolchange/meshes/T03.glb",
       "pose": {
         "position_m": [
           0,
@@ -109,7 +109,7 @@
     {
       "object_id": "MAG",
       "label": "刀库盘",
-      "asset": "assets/meshes/review/cnc_toolchange/MAG.glb",
+      "asset": "scenes/cnc_toolchange/meshes/MAG.glb",
       "pose": {
         "position_m": [
           0,
@@ -132,7 +132,7 @@
     {
       "object_id": "PANEL",
       "label": "控制面板",
-      "asset": "assets/meshes/review/cnc_toolchange/PANEL.glb",
+      "asset": "scenes/cnc_toolchange/meshes/PANEL.glb",
       "pose": {
         "position_m": [
           0,

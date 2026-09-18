@@ -8,7 +8,7 @@
     {
       "object_id": "A",
       "label": "旋钮 A",
-      "asset": "assets/meshes/knob.glb",
+      "asset": "assets/meshes/common/knob.glb",
       "pose": {
         "position_m": [
           -0.18,
@@ -38,7 +38,7 @@
     {
       "object_id": "B",
       "label": "旋钮 B",
-      "asset": "assets/meshes/knob.glb",
+      "asset": "assets/meshes/common/knob.glb",
       "pose": {
         "position_m": [
           0,
@@ -68,7 +68,7 @@
     {
       "object_id": "C",
       "label": "模块 C",
-      "asset": "assets/meshes/module.glb",
+      "asset": "assets/meshes/common/module.glb",
       "pose": {
         "position_m": [
           0.18,

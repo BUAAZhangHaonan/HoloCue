@@ -1,8 +1,8 @@
 """Build the server_rack scene kit (Blender 3.1.2, CPU-only, via resource_guard.py).
 
 Outputs:
-  assets/meshes/server_rack/{SPARE,SLOT4,NODE3,ALARM,FAN}.glb      (interactive, origin-centered)
-  assets/meshes/env/server_rack_{rackshell,floorpatch,wall,sidecart}.glb (procedural environment)
+  scenes/server_rack/meshes/{SPARE,SLOT4,NODE3,ALARM,FAN}.glb      (interactive, origin-centered)
+  scenes/server_rack/meshes/env/server_rack_{rackshell,floorpatch,wall,sidecart}.glb (procedural environment)
   scenes/server_rack/scene.json                                  (extended SceneSpec)
   runs/scene_v2/server_rack_kit_preview.png / ..._back.png         (self-review evidence)
 
@@ -23,7 +23,8 @@ from mathutils import Vector, Euler, Quaternion
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from common import *  # noqa: F401,F403  (pbr, flat, box, cyl, export_glb, ...)
 
-KIT_DIR = ROOT / 'assets/meshes/server_rack'
+KIT_DIR = ROOT / 'scenes/server_rack/meshes'
+SCENE_ENV = scene_env('server_rack')
 
 # ----------------------------------------------------------------------------
 # LAYOUT (single source of truth)
@@ -63,13 +64,13 @@ LAYOUT = {
                 'anchors': {}, 'description': '滤网需旋转取出,顶部刻线对齐'},
     },
     'env': {  # procedural parts (origin conventions documented per builder)
-        'rackshell': {'asset': 'assets/meshes/env/server_rack_rackshell.glb',
+        'rackshell': {'asset': 'scenes/server_rack/meshes/env/server_rack_rackshell.glb',
                       'label': '19寸机柜主体', 'position': (0, 0, 0)},
-        'floorpatch': {'asset': 'assets/meshes/env/server_rack_floorpatch.glb',
+        'floorpatch': {'asset': 'scenes/server_rack/meshes/env/server_rack_floorpatch.glb',
                        'label': '防静电架空地板', 'position': (0, 0.3, 0)},
-        'wall': {'asset': 'assets/meshes/env/server_rack_wall.glb',
+        'wall': {'asset': 'scenes/server_rack/meshes/env/server_rack_wall.glb',
                  'label': '机房墙体', 'position': (0, 1.6, 0)},
-        'sidecart': {'asset': 'assets/meshes/env/server_rack_sidecart.glb',
+        'sidecart': {'asset': 'scenes/server_rack/meshes/env/server_rack_sidecart.glb',
                      'label': '防静电检修车', 'position': (-0.75, -0.35, 0)},
     },
     'props': {  # downloaded CC0 props: scale / target / z-mode fixed at build time
@@ -739,7 +740,7 @@ def main():
     exported['FAN'] = build_and_export('FAN', build_fan, KIT_DIR / 'FAN.glb')
     for part, fn in (('rackshell', build_rackshell), ('floorpatch', build_floorpatch),
                      ('wall', build_wall), ('sidecart', build_sidecart)):
-        exported[part] = build_and_export(part, fn, ENV / f'server_rack_{part}.glb')
+        exported[part] = build_and_export(part, fn, SCENE_ENV / f'server_rack_{part}.glb')
 
     table = [{'part': k, 'glb': str(v['path'].relative_to(ROOT)), 'mesh_tris': v['tris'],
               'bytes': v['path'].stat().st_size} for k, v in exported.items()]
@@ -827,7 +828,7 @@ def main():
     def obj_entry(oid):
         s = LAYOUT['objects'][oid]
         pos, wxyz = s['pose']
-        return {'object_id': oid, 'label': s['label'], 'asset': f'assets/meshes/server_rack/{oid}.glb',
+        return {'object_id': oid, 'label': s['label'], 'asset': f'scenes/server_rack/meshes/{oid}.glb',
                 'pose': {'position_m': [round(v, 4) for v in pos], 'wxyz': list(wxyz)},
                 'color': list(s['color']), 'capabilities': s['capabilities'],
                 'anchors': {k: list(v) for k, v in s['anchors'].items()},

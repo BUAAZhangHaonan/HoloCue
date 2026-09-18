@@ -8,7 +8,7 @@
     {
       "object_id": "RED",
       "label": "红色包裹",
-      "asset": "assets/meshes/shelf_picking/RED.glb",
+      "asset": "scenes/shelf_picking/meshes/RED.glb",
       "pose": {
         "position_m": [
           -0.35,
@@ -37,7 +37,7 @@
     {
       "object_id": "BLUE",
       "label": "蓝色周转箱",
-      "asset": "assets/meshes/shelf_picking/BLUE.glb",
+      "asset": "scenes/shelf_picking/meshes/BLUE.glb",
       "pose": {
         "position_m": [
           0.35,
@@ -67,7 +67,7 @@
     {
       "object_id": "BASKET",
       "label": "拣选篮",
-      "asset": "assets/meshes/shelf_picking/BASKET.glb",
+      "asset": "scenes/shelf_picking/meshes/BASKET.glb",
       "pose": {
         "position_m": [
           0.0,
@@ -101,7 +101,7 @@
     {
       "object_id": "CONV",
       "label": "传送带端部",
-      "asset": "assets/meshes/shelf_picking/CONV.glb",
+      "asset": "scenes/shelf_picking/meshes/CONV.glb",
       "pose": {
         "position_m": [
           1.45,
@@ -130,7 +130,7 @@
     {
       "object_id": "GREEN",
       "label": "端部绿箱",
-      "asset": "assets/meshes/shelf_picking/GREEN.glb",
+      "asset": "scenes/shelf_picking/meshes/GREEN.glb",
       "pose": {
         "position_m": [
           1.45,
@@ -172,7 +172,7 @@
     {
       "prop_id": "shelf_picking_shelfwall",
       "label": "",
-      "asset": "assets/meshes/env/shelf_picking_shelfwall.glb",
+      "asset": "scenes/shelf_picking/meshes/env/shelf_picking_shelfwall.glb",
       "pose": {
         "position_m": [
           0.0,
@@ -195,7 +195,7 @@
     {
       "prop_id": "shelf_picking_conveyorbody",
       "label": "",
-      "asset": "assets/meshes/env/shelf_picking_conveyorbody.glb",
+      "asset": "scenes/shelf_picking/meshes/env/shelf_picking_conveyorbody.glb",
       "pose": {
         "position_m": [
           1.45,
@@ -218,7 +218,7 @@
     {
       "prop_id": "shelf_picking_floor",
       "label": "",
-      "asset": "assets/meshes/env/shelf_picking_floor.glb",
+      "asset": "scenes/shelf_picking/meshes/env/shelf_picking_floor.glb",
       "pose": {
         "position_m": [
           0.0,
@@ -241,7 +241,7 @@
     {
       "prop_id": "shelf_picking_wallpanel",
       "label": "",
-      "asset": "assets/meshes/env/shelf_picking_wallpanel.glb",
+      "asset": "scenes/shelf_picking/meshes/env/shelf_picking_wallpanel.glb",
       "pose": {
         "position_m": [
           0.0,

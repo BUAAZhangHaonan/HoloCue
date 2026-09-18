@@ -8,7 +8,7 @@
     {
       "object_id": "A",
       "label": "黄色积木",
-      "asset": "assets/meshes/brick.glb",
+      "asset": "assets/meshes/common/brick.glb",
       "pose": {
         "position_m": [
           -0.15,
@@ -38,7 +38,7 @@
     {
       "object_id": "B",
       "label": "蓝色积木",
-      "asset": "assets/meshes/brick_blue.glb",
+      "asset": "assets/meshes/common/brick_blue.glb",
       "pose": {
         "position_m": [
           0.15,
@@ -74,7 +74,7 @@
     {
       "object_id": "BASE",
       "label": "绿色底板",
-      "asset": "assets/meshes/baseplate.glb",
+      "asset": "assets/meshes/common/baseplate.glb",
       "pose": {
         "position_m": [
           0,

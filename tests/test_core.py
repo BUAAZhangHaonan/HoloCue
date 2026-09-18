@@ -227,7 +227,7 @@ def test_resource_gpu_allowlist():
 
 def test_asset_glbs_are_readable():
     import trimesh
-    files=list((root()/'assets/meshes').glob('*.glb'));assert len(files)==9
+    files=list((root()/'assets/meshes/common').glob('*.glb'));assert len(files)==9
     for p in files:
         m=trimesh.load(p,force='mesh');assert len(m.vertices)>0 and len(m.faces)>0
         assert np.isfinite(m.vertices).all()

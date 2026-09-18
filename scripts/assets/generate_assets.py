@@ -33,9 +33,9 @@ assets['straight_arrow']=merge([box((.009,.075,.004),(0,.0,.003),C['green']),tri
 cone=trimesh.creation.cone(radius=.022,height=.034,sections=3);cone.apply_transform(trimesh.transformations.rotation_matrix(-math.pi/2,[1,0,0]));cone.apply_translation((0,.035,.005));col(cone,C['green'])
 assets['straight_arrow']=merge([box((.009,.075,.004),(0,0,.005),C['green']),cone])
 for name,m in assets.items():
- (R/'assets/meshes'/f'{name}.glb').write_bytes(trimesh.Scene(m).export(file_type='glb'))
+ (R/'assets/meshes/common'/f'{name}.glb').write_bytes(trimesh.Scene(m).export(file_type='glb'))
  # OBJ provides an importer-independent geometry alternative; GLB retains materials.
- (R/'assets/meshes'/f'{name}.obj').write_text(trimesh.exchange.obj.export_obj(m,include_color=True),encoding='utf-8')
+ (R/'assets/meshes/common'/f'{name}.obj').write_text(trimesh.exchange.obj.export_obj(m,include_color=True),encoding='utf-8')
 (R/'assets/gaussians').mkdir(exist_ok=True)
 for k in ['ring_arrow','straight_arrow','highlight']:
  np.savez_compressed(R/'assets/gaussians'/f'{k}.npz',positions=primitive_pool(k),provenance=np.array('geometric_preview_pool_not_optically_fitted'))

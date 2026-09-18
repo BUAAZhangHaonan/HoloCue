@@ -19,7 +19,8 @@ from common import *  # noqa: F401,F403
 from common import _framed_extents, _projected_size
 from mathutils import Vector, Euler, Quaternion, Matrix
 
-KIT = ROOT/'assets/meshes/drone_bench'
+KIT = ROOT/'scenes/drone_bench/meshes'
+SCENE_ENV = scene_env('drone_bench')
 FONT_PATH = Path('/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc')
 
 def rdeg(a): return math.radians(a)
@@ -438,15 +439,15 @@ def build_all_kits():
     out['VOLTMETER'] = export_glb(build_voltmeter(), KIT/'VOLTMETER.glb')
     env = {}
     wipe(); mats()
-    env['table'] = export_glb(build_table(), ENV/'drone_bench_table.glb')
+    env['table'] = export_glb(build_table(), SCENE_ENV/'drone_bench_table.glb')
     wipe(); mats()
-    env['mat'] = export_glb(build_mat(), ENV/'drone_bench_mat.glb')
+    env['mat'] = export_glb(build_mat(), SCENE_ENV/'drone_bench_mat.glb')
     wipe(); mats()
-    env['cradle'] = export_glb(build_cradle(), ENV/'drone_bench_cradle.glb')
+    env['cradle'] = export_glb(build_cradle(), SCENE_ENV/'drone_bench_cradle.glb')
     wipe(); mats()
-    env['dronebody'] = export_glb(build_dronebody(), ENV/'drone_bench_dronebody.glb')
+    env['dronebody'] = export_glb(build_dronebody(), SCENE_ENV/'drone_bench_dronebody.glb')
     wipe(); mats()
-    env['partstray'] = export_glb(build_tray(), ENV/'drone_bench_partstray.glb')
+    env['partstray'] = export_glb(build_tray(), SCENE_ENV/'drone_bench_partstray.glb')
     wipe()
     return out, env
 
@@ -692,13 +693,13 @@ def main():
     for oid, (pos, quat) in OBJ_POSES.items():
         label, color, caps, anchors, desc = OBJ_META[oid]
         objects.append({
-            'object_id': oid, 'label': label, 'asset': f'assets/meshes/drone_bench/{oid}.glb',
+            'object_id': oid, 'label': label, 'asset': f'scenes/drone_bench/meshes/{oid}.glb',
             'pose': {'position_m': [round(c, 4) for c in pos], 'wxyz': q2list(quat)},
             'color': color, 'capabilities': caps, 'anchors': anchors, 'description': desc,
         })
     environment = []
     for pid, (pos, quat) in ENV_POSES.items():
-        environment.append({'prop_id': pid, 'label': '', 'asset': f'assets/meshes/env/{pid}.glb',
+        environment.append({'prop_id': pid, 'label': '', 'asset': f'scenes/drone_bench/meshes/env/{pid}.glb',
                             'pose': {'position_m': [round(c, 4) for c in pos], 'wxyz': q2list(quat)},
                             'scale_m': [1.0, 1.0, 1.0]})
     for pid, (key, cxy, bz, rz, ex, sc) in PROPS.items():

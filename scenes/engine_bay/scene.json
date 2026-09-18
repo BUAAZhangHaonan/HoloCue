@@ -8,7 +8,7 @@
     {
       "object_id": "CLAMP",
       "label": "进气软管卡箍",
-      "asset": "assets/meshes/engine_bay/CLAMP.glb",
+      "asset": "scenes/engine_bay/meshes/CLAMP.glb",
       "pose": {
         "position_m": [
           -0.18,
@@ -37,7 +37,7 @@
     {
       "object_id": "PLUG",
       "label": "新火花塞",
-      "asset": "assets/meshes/engine_bay/PLUG.glb",
+      "asset": "scenes/engine_bay/meshes/PLUG.glb",
       "pose": {
         "position_m": [
           0.12,
@@ -66,7 +66,7 @@
     {
       "object_id": "PLUGPORT",
       "label": "三缸火花塞孔",
-      "asset": "assets/meshes/engine_bay/PLUGPORT.glb",
+      "asset": "scenes/engine_bay/meshes/PLUGPORT.glb",
       "pose": {
         "position_m": [
           0.12,
@@ -100,7 +100,7 @@
     {
       "object_id": "OILCAP",
       "label": "机油加注口盖",
-      "asset": "assets/meshes/engine_bay/OILCAP.glb",
+      "asset": "scenes/engine_bay/meshes/OILCAP.glb",
       "pose": {
         "position_m": [
           -0.28,
@@ -129,7 +129,7 @@
     {
       "object_id": "TENSIONER",
       "label": "皮带张紧轮",
-      "asset": "assets/meshes/engine_bay/TENSIONER.glb",
+      "asset": "scenes/engine_bay/meshes/TENSIONER.glb",
       "pose": {
         "position_m": [
           0.48,
@@ -158,7 +158,7 @@
     {
       "object_id": "CONN",
       "label": "变速箱侧连接器",
-      "asset": "assets/meshes/engine_bay/CONN.glb",
+      "asset": "scenes/engine_bay/meshes/CONN.glb",
       "pose": {
         "position_m": [
           0.55,
@@ -200,7 +200,7 @@
     {
       "prop_id": "shell",
       "label": "机舱与车库结构",
-      "asset": "assets/meshes/env/engine_bay_shell.glb",
+      "asset": "scenes/engine_bay/meshes/env/engine_bay_shell.glb",
       "pose": {
         "position_m": [
           0,
@@ -223,7 +223,7 @@
     {
       "prop_id": "engine",
       "label": "横置直列四缸发动机",
-      "asset": "assets/meshes/env/engine_assembly.glb",
+      "asset": "scenes/engine_bay/meshes/env/engine_assembly.glb",
       "pose": {
         "position_m": [
           0,
@@ -246,7 +246,7 @@
     {
       "prop_id": "radiator",
       "label": "散热器总成",
-      "asset": "assets/meshes/env/engine_bay_radiator.glb",
+      "asset": "scenes/engine_bay/meshes/env/engine_bay_radiator.glb",
       "pose": {
         "position_m": [
           0,

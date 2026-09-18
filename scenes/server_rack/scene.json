@@ -8,7 +8,7 @@
     {
       "object_id": "SPARE",
       "label": "备用节点",
-      "asset": "assets/meshes/server_rack/SPARE.glb",
+      "asset": "scenes/server_rack/meshes/SPARE.glb",
       "pose": {
         "position_m": [
           -0.75,
@@ -37,7 +37,7 @@
     {
       "object_id": "SLOT4",
       "label": "4 号槽位",
-      "asset": "assets/meshes/server_rack/SLOT4.glb",
+      "asset": "scenes/server_rack/meshes/SLOT4.glb",
       "pose": {
         "position_m": [
           0,
@@ -71,7 +71,7 @@
     {
       "object_id": "NODE3",
       "label": "3 号节点",
-      "asset": "assets/meshes/server_rack/NODE3.glb",
+      "asset": "scenes/server_rack/meshes/NODE3.glb",
       "pose": {
         "position_m": [
           0,
@@ -100,7 +100,7 @@
     {
       "object_id": "ALARM",
       "label": "柜顶告警灯",
-      "asset": "assets/meshes/server_rack/ALARM.glb",
+      "asset": "scenes/server_rack/meshes/ALARM.glb",
       "pose": {
         "position_m": [
           0,
@@ -129,7 +129,7 @@
     {
       "object_id": "FAN",
       "label": "风扇模块",
-      "asset": "assets/meshes/server_rack/FAN.glb",
+      "asset": "scenes/server_rack/meshes/FAN.glb",
       "pose": {
         "position_m": [
           0,
@@ -171,7 +171,7 @@
     {
       "prop_id": "rackshell",
       "label": "19寸机柜主体",
-      "asset": "assets/meshes/env/server_rack_rackshell.glb",
+      "asset": "scenes/server_rack/meshes/env/server_rack_rackshell.glb",
       "pose": {
         "position_m": [
           0,
@@ -194,7 +194,7 @@
     {
       "prop_id": "floorpatch",
       "label": "防静电架空地板",
-      "asset": "assets/meshes/env/server_rack_floorpatch.glb",
+      "asset": "scenes/server_rack/meshes/env/server_rack_floorpatch.glb",
       "pose": {
         "position_m": [
           0,
@@ -217,7 +217,7 @@
     {
       "prop_id": "wall",
       "label": "机房墙体",
-      "asset": "assets/meshes/env/server_rack_wall.glb",
+      "asset": "scenes/server_rack/meshes/env/server_rack_wall.glb",
       "pose": {
         "position_m": [
           0,
@@ -240,7 +240,7 @@
     {
       "prop_id": "sidecart",
       "label": "防静电检修车",
-      "asset": "assets/meshes/env/server_rack_sidecart.glb",
+      "asset": "scenes/server_rack/meshes/env/server_rack_sidecart.glb",
       "pose": {
         "position_m": [
           -0.75,

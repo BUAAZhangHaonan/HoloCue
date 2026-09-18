@@ -8,7 +8,7 @@
     {
       "object_id": "P",
       "label": "蓝色插头",
-      "asset": "assets/meshes/plug.glb",
+      "asset": "assets/meshes/common/plug.glb",
       "pose": {
         "position_m": [
           -0.04,
@@ -38,7 +38,7 @@
     {
       "object_id": "S",
       "label": "目标插座",
-      "asset": "assets/meshes/socket.glb",
+      "asset": "assets/meshes/common/socket.glb",
       "pose": {
         "position_m": [
           -0.04,
@@ -73,7 +73,7 @@
     {
       "object_id": "C",
       "label": "备用模块",
-      "asset": "assets/meshes/module.glb",
+      "asset": "assets/meshes/common/module.glb",
       "pose": {
         "position_m": [
           0.16,

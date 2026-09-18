@@ -6,8 +6,8 @@ Run (CPU only, via resource guard):
       --python scripts/scenes/build_shelf_picking.py
 
 Produces:
-  assets/meshes/shelf_picking/{RED,BLUE,BASKET,CONV,GREEN}.glb      (interactive, origin rules below)
-  assets/meshes/env/shelf_picking_{shelfwall,conveyorbody,floor,wallpanel}.glb
+  scenes/shelf_picking/meshes/{RED,BLUE,BASKET,CONV,GREEN}.glb      (interactive, origin rules below)
+  scenes/shelf_picking/meshes/env/shelf_picking_{shelfwall,conveyorbody,floor,wallpanel}.glb
   scenes/shelf_picking/scene.json
   runs/scene_v2/shelf_picking_kit_preview.png        (ortho framed tight on the task triangle)
   runs/scene_v2/shelf_picking_kit_preview_persp.png  (50mm perspective companion, depth evidence)
@@ -24,7 +24,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from common import *  # noqa: F401,F403
 from mathutils import Vector, Euler
 
-MESH_OUT = ROOT / 'assets/meshes/shelf_picking'
+MESH_OUT = ROOT / 'scenes/shelf_picking/meshes'
+SCENE_ENV = scene_env('shelf_picking')
 ENV_OUT = ROOT / 'assets/meshes/env'
 
 RAD = math.radians
@@ -266,7 +267,7 @@ filler('cC', (0.24, 0.18, 0.16), 0.82, 0.62, 0.50, -12)
 filler('cD', (0.24, 0.18, 0.15), 0.05, 0.66, 0.995, 20)
 filler('cE', (0.26, 0.20, 0.14), 0.48, 0.58, 1.49, -8)
 filler('cF', (0.18, 0.14, 0.12), -0.55, 0.60, 1.822, 15)
-export_glb([o for o in bpy.data.objects if o.name.startswith('SHELF_')], ENV_OUT / 'shelf_picking_shelfwall.glb')
+export_glb([o for o in bpy.data.objects if o.name.startswith('SHELF_')], SCENE_ENV / 'shelf_picking_shelfwall.glb')
 
 # ================================================================ 7. conveyorbody (origin front-end center at belt top; local y+ toward wall)
 clear_scene()
@@ -285,21 +286,21 @@ for ly in (0.25, 1.35):
         box(f'BED_leg_{sx}_{ly}', (0.05, 0.05, 0.70), (0.18 * sx, ly, -0.43), m_cdark, bevel=0.0)
         box(f'BED_foot_{sx}_{ly}', (0.09, 0.09, 0.012), (0.18 * sx, ly, -0.774), m_cdark, bevel=0.0)
     box(f'BED_brace_{ly}', (0.36, 0.04, 0.04), (0, ly, -0.55), m_cdark, bevel=0.0)
-export_glb([o for o in bpy.data.objects if o.name.startswith('BED_')], ENV_OUT / 'shelf_picking_conveyorbody.glb')
+export_glb([o for o in bpy.data.objects if o.name.startswith('BED_')], SCENE_ENV / 'shelf_picking_conveyorbody.glb')
 
 # ================================================================ 8. floor (origin center) + painted lane
 clear_scene()
 m_conc = pbr('floor_conc', 'concrete_floor_worn_001', scale=2.0, roughness=0.95)
 box('FLOOR_slab', (5.0, 4.0, 0.03), (0, 0, -0.015), m_conc, bevel=0.0)
 box('FLOOR_lane', (0.07, 1.55, 0.006), (-0.55, -0.95, 0.004), flat('lane_yellow', (0.85, 0.62, 0.08), roughness=0.6), bevel=0.0)
-export_glb([o for o in bpy.data.objects if o.name.startswith('FLOOR_')], ENV_OUT / 'shelf_picking_floor.glb')
+export_glb([o for o in bpy.data.objects if o.name.startswith('FLOOR_')], SCENE_ENV / 'shelf_picking_floor.glb')
 
 # ================================================================ 9. wallpanel (origin center)
 clear_scene()
 m_wall = pbr('wall_factory', 'factory_wall', scale=2.5, roughness=0.95)
 box('WALL_panel', (5.0, 0.06, 2.8), (0, 0, 0), m_wall, bevel=0.0)
 box('WALL_base', (5.0, 0.065, 0.18), (0, 0, -1.31), flat('wall_base', (0.55, 0.56, 0.58), roughness=0.8), bevel=0.0)
-export_glb([o for o in bpy.data.objects if o.name.startswith('WALL_')], ENV_OUT / 'shelf_picking_wallpanel.glb')
+export_glb([o for o in bpy.data.objects if o.name.startswith('WALL_')], SCENE_ENV / 'shelf_picking_wallpanel.glb')
 
 # ================================================================ 10. compose preview at JSON poses
 clear_scene()
@@ -307,10 +308,10 @@ world_bg((0.60, 0.64, 0.70, 1.0), 0.9)
 
 env_specs = [
     # procedural parts
-    ('shelf_picking_shelfwall',   'assets/meshes/env/shelf_picking_shelfwall.glb',   (0.0, SHELF_FACE_Y, 0.0), (0, 0, 0), (1, 1, 1), None),
-    ('shelf_picking_conveyorbody','assets/meshes/env/shelf_picking_conveyorbody.glb',(1.45, 1.53, ROLLER_TOP_Z), (0, 0, 0), (1, 1, 1), None),
-    ('shelf_picking_floor',       'assets/meshes/env/shelf_picking_floor.glb',        (0.0, 1.20, 0.0), (0, 0, 0), (1, 1, 1), None),
-    ('shelf_picking_wallpanel',   'assets/meshes/env/shelf_picking_wallpanel.glb',    (0.0, 3.21, 1.40), (0, 0, 0), (1, 1, 1), None),
+    ('shelf_picking_shelfwall',   'scenes/shelf_picking/meshes/env/shelf_picking_shelfwall.glb',   (0.0, SHELF_FACE_Y, 0.0), (0, 0, 0), (1, 1, 1), None),
+    ('shelf_picking_conveyorbody','scenes/shelf_picking/meshes/env/shelf_picking_conveyorbody.glb',(1.45, 1.53, ROLLER_TOP_Z), (0, 0, 0), (1, 1, 1), None),
+    ('shelf_picking_floor',       'scenes/shelf_picking/meshes/env/shelf_picking_floor.glb',        (0.0, 1.20, 0.0), (0, 0, 0), (1, 1, 1), None),
+    ('shelf_picking_wallpanel',   'scenes/shelf_picking/meshes/env/shelf_picking_wallpanel.glb',    (0.0, 3.21, 1.40), (0, 0, 0), (1, 1, 1), None),
     # downloaded props (probe-derived local bboxes; z finalised by settle)
     ('cardboard_box_01',  'assets/meshes/env/cardboard_box_01.glb',  (-0.55, 0.60, BOARD_TOPS[2]), (0, 0, -6), (1, 1, 1), BOARD_TOPS[2]),
     ('plastic_crate_01',  'assets/meshes/env/plastic_crate_01.glb',  (-0.45, 0.60, BOARD_TOPS[0]), (0, 0, 0), (1, 1, 1), BOARD_TOPS[0]),
@@ -355,7 +356,7 @@ for oid, d in obj_defs.items():
     p = parent_to('HC_' + oid, objs, location=POSES[oid]['pos'])
     if d['rest'] is not None:
         settle(p, d['rest'])
-    obj_json.append({'object_id': oid, 'label': d['label'], 'asset': f'assets/meshes/shelf_picking/{oid}.glb',
+    obj_json.append({'object_id': oid, 'label': d['label'], 'asset': f'scenes/shelf_picking/meshes/{oid}.glb',
                      'pose': {'position_m': v3(p.location), 'wxyz': [1, 0, 0, 0]},
                      'color': list(d['color']), 'capabilities': d['caps'],
                      'anchors': d.get('anchors', {}), 'description': d['desc']})
@@ -453,7 +454,7 @@ spec = {
 write_scene_json('shelf_picking', spec)
 
 # ================================================================ 12. reports
-files = sorted(MESH_OUT.glob('*.glb')) + sorted(ENV_OUT.glob('shelf_picking_*.glb')) + \
+files = sorted(MESH_OUT.glob('*.glb')) + sorted(SCENE_ENV.glob('shelf_picking_*.glb')) + \
         [OUT_RUNS / 'shelf_picking_kit_preview.png', OUT_RUNS / 'shelf_picking_kit_preview_persp.png',
          OUT_RUNS / 'shelf_picking_kit_preview_blue.png', ROOT / 'scenes/shelf_picking/scene.json']
 print(json.dumps({'file_table': {str(f.relative_to(ROOT)): f.stat().st_size for f in files}}, indent=1), flush=True)

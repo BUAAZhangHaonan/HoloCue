@@ -24,7 +24,8 @@ from common import *  # noqa: F401,F403
 from common import _framed_extents, _projected_size
 from mathutils import Vector, Euler, Quaternion, Matrix
 
-KIT = ROOT/'assets/meshes/optical_bench'
+KIT = ROOT/'scenes/optical_bench/meshes'
+SCENE_ENV = scene_env('optical_bench')
 FONT_PATH = Path('/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc')
 
 BEAM_Z = 0.120                     # world beam height above breadboard top
@@ -411,15 +412,15 @@ def build_all_kits():
     out['TARGET'] = export_glb(build_TARGET(), KIT/'TARGET.glb')
     env = {}
     wipe(); mats()
-    env['breadboard'] = export_glb(build_breadboard(), ENV/'optical_bench_breadboard.glb')
+    env['breadboard'] = export_glb(build_breadboard(), SCENE_ENV/'optical_bench_breadboard.glb')
     wipe(); mats()
-    env['laser'] = export_glb(build_laser(), ENV/'optical_bench_laser.glb')
+    env['laser'] = export_glb(build_laser(), SCENE_ENV/'optical_bench_laser.glb')
     wipe(); mats()
-    env['table'] = export_glb(build_table(), ENV/'optical_bench_table.glb')
+    env['table'] = export_glb(build_table(), SCENE_ENV/'optical_bench_table.glb')
     wipe(); mats()
-    env['beam'] = export_glb(build_beam(), ENV/'optical_bench_beam.glb')
+    env['beam'] = export_glb(build_beam(), SCENE_ENV/'optical_bench_beam.glb')
     wipe(); mats()
-    env['mat'] = export_glb(build_toolmat(), ENV/'optical_bench_mat.glb')
+    env['mat'] = export_glb(build_toolmat(), SCENE_ENV/'optical_bench_mat.glb')
     wipe()
     return out, env
 
@@ -720,13 +721,13 @@ def main():
     for oid, (pos, quat) in OBJ_POSES.items():
         label, color, caps, anchors, desc = OBJ_META[oid]
         objects.append({
-            'object_id': oid, 'label': label, 'asset': f'assets/meshes/optical_bench/{oid}.glb',
+            'object_id': oid, 'label': label, 'asset': f'scenes/optical_bench/meshes/{oid}.glb',
             'pose': {'position_m': [round(c, 4) for c in pos], 'wxyz': q2list(quat)},
             'color': color, 'capabilities': caps, 'anchors': anchors, 'description': desc,
         })
     environment = []
     for pid, (pos, quat) in ENV_POSES.items():
-        environment.append({'prop_id': pid, 'label': '', 'asset': f'assets/meshes/env/{pid}.glb',
+        environment.append({'prop_id': pid, 'label': '', 'asset': f'scenes/optical_bench/meshes/env/{pid}.glb',
                             'pose': {'position_m': [round(c, 4) for c in pos], 'wxyz': q2list(quat)},
                             'scale_m': [1.0, 1.0, 1.0]})
     for pid, (key, cxy, bz, rz, ex, sc) in PROPS.items():

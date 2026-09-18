@@ -8,7 +8,7 @@
     {
       "object_id": "PUMPCASSETTE",
       "label": "一次性泵盒",
-      "asset": "assets/meshes/review/infusion_ward/PUMPCASSETTE.glb",
+      "asset": "scenes/infusion_ward/meshes/PUMPCASSETTE.glb",
       "pose": {
         "position_m": [
           0,
@@ -32,7 +32,7 @@
     {
       "object_id": "SLOT2",
       "label": "2号泵槽",
-      "asset": "assets/meshes/review/infusion_ward/SLOT2.glb",
+      "asset": "scenes/infusion_ward/meshes/SLOT2.glb",
       "pose": {
         "position_m": [
           0,
@@ -61,7 +61,7 @@
     {
       "object_id": "STOPCOCK",
       "label": "三通旋塞",
-      "asset": "assets/meshes/review/infusion_ward/STOPCOCK.glb",
+      "asset": "scenes/infusion_ward/meshes/STOPCOCK.glb",
       "pose": {
         "position_m": [
           0,
@@ -85,7 +85,7 @@
     {
       "object_id": "BAG1",
       "label": "5%糖袋",
-      "asset": "assets/meshes/review/infusion_ward/BAG1.glb",
+      "asset": "scenes/infusion_ward/meshes/BAG1.glb",
       "pose": {
         "position_m": [
           0,
@@ -109,7 +109,7 @@
     {
       "object_id": "BAG2",
       "label": "10%盐水袋",
-      "asset": "assets/meshes/review/infusion_ward/BAG2.glb",
+      "asset": "scenes/infusion_ward/meshes/BAG2.glb",
       "pose": {
         "position_m": [
           0,
@@ -132,7 +132,7 @@
     {
       "object_id": "MONITOR",
       "label": "床头监护仪",
-      "asset": "assets/meshes/review/infusion_ward/MONITOR.glb",
+      "asset": "scenes/infusion_ward/meshes/MONITOR.glb",
       "pose": {
         "position_m": [
           0,

@@ -8,7 +8,7 @@
     {
       "object_id": "L1",
       "label": "一号透镜",
-      "asset": "assets/meshes/optical_bench/L1.glb",
+      "asset": "scenes/optical_bench/meshes/L1.glb",
       "pose": {
         "position_m": [
           0.15,
@@ -37,7 +37,7 @@
     {
       "object_id": "POST2",
       "label": "二号柱位",
-      "asset": "assets/meshes/optical_bench/POST2.glb",
+      "asset": "scenes/optical_bench/meshes/POST2.glb",
       "pose": {
         "position_m": [
           0.0,
@@ -71,7 +71,7 @@
     {
       "object_id": "L2",
       "label": "二号透镜",
-      "asset": "assets/meshes/optical_bench/L2.glb",
+      "asset": "scenes/optical_bench/meshes/L2.glb",
       "pose": {
         "position_m": [
           0.0,
@@ -99,7 +99,7 @@
     {
       "object_id": "M",
       "label": "折转反射镜",
-      "asset": "assets/meshes/optical_bench/M.glb",
+      "asset": "scenes/optical_bench/meshes/M.glb",
       "pose": {
         "position_m": [
           0.0,
@@ -129,7 +129,7 @@
     {
       "object_id": "TARGET",
       "label": "靶屏",
-      "asset": "assets/meshes/optical_bench/TARGET.glb",
+      "asset": "scenes/optical_bench/meshes/TARGET.glb",
       "pose": {
         "position_m": [
           -0.106,
@@ -171,7 +171,7 @@
     {
       "prop_id": "optical_bench_breadboard",
       "label": "",
-      "asset": "assets/meshes/env/optical_bench_breadboard.glb",
+      "asset": "scenes/optical_bench/meshes/env/optical_bench_breadboard.glb",
       "pose": {
         "position_m": [
           0.0,
@@ -194,7 +194,7 @@
     {
       "prop_id": "optical_bench_laser",
       "label": "",
-      "asset": "assets/meshes/env/optical_bench_laser.glb",
+      "asset": "scenes/optical_bench/meshes/env/optical_bench_laser.glb",
       "pose": {
         "position_m": [
           0.0,
@@ -217,7 +217,7 @@
     {
       "prop_id": "optical_bench_table",
       "label": "",
-      "asset": "assets/meshes/env/optical_bench_table.glb",
+      "asset": "scenes/optical_bench/meshes/env/optical_bench_table.glb",
       "pose": {
         "position_m": [
           0.0,
@@ -240,7 +240,7 @@
     {
       "prop_id": "optical_bench_beam",
       "label": "",
-      "asset": "assets/meshes/env/optical_bench_beam.glb",
+      "asset": "scenes/optical_bench/meshes/env/optical_bench_beam.glb",
       "pose": {
         "position_m": [
           0.0,
@@ -263,7 +263,7 @@
     {
       "prop_id": "optical_bench_mat",
       "label": "",
-      "asset": "assets/meshes/env/optical_bench_mat.glb",
+      "asset": "scenes/optical_bench/meshes/env/optical_bench_mat.glb",
       "pose": {
         "position_m": [
           0.43,

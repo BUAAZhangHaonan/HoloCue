@@ -8,8 +8,18 @@ from mathutils import Vector, Euler, Quaternion
 
 ROOT = Path(__file__).resolve().parents[2]
 TEX = ROOT/'assets/downloads/polyhaven/textures'
-ENV = ROOT/'assets/meshes/env'
+ENV = ROOT/'assets/meshes/env'  # shared pool; scene-owned env props live in scenes/<id>/meshes/env
 OUT_RUNS = ROOT/'runs/scene_v2'
+
+
+def scene_kit(scene_id: str) -> Path:
+    """Per-scene kit folder (config, meshes, blend, docs, reviews)."""
+    return ROOT/'scenes'/scene_id
+
+
+def scene_env(scene_id: str) -> Path:
+    """Scene-owned environment props inside the kit."""
+    return scene_kit(scene_id)/'meshes/env'
 
 # Project GLBs store Z-up world-frame geometry (the trimesh/Viser contract). Blender's
 # glTF importer always applies -90 deg X, so every re-import is counter-rotated on its
