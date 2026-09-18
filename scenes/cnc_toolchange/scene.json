@@ -11,9 +11,9 @@
       "asset": "scenes/cnc_toolchange/meshes/MODESWITCH.glb",
       "pose": {
         "position_m": [
-          0,
-          0,
-          0
+          0.1,
+          1.0,
+          1.45
         ],
         "wxyz": [
           1,
@@ -22,22 +22,27 @@
           0
         ]
       },
+      "color": [
+        225,
+        225,
+        235
+      ],
       "capabilities": [
         "point",
         "rotate"
       ],
       "anchors": {},
-      "description": "模式选择旋钮"
+      "description": "面板三档旋钮:自动/手动/编辑,白线指示当前档"
     },
     {
       "object_id": "T09",
-      "label": "9号镗刀柄",
+      "label": "9 号镗刀柄",
       "asset": "scenes/cnc_toolchange/meshes/T09.glb",
       "pose": {
         "position_m": [
-          0,
-          0,
-          0
+          0.3,
+          0.0,
+          1.03
         ],
         "wxyz": [
           1,
@@ -46,22 +51,27 @@
           0
         ]
       },
+      "color": [
+        205,
+        190,
+        150
+      ],
       "capabilities": [
         "point",
         "insert"
       ],
       "anchors": {},
-      "description": "9号镗刀柄"
+      "description": "BT40 柄+拉钉,待入库,平放在刀臂托盘上"
     },
     {
       "object_id": "POCKET9",
-      "label": "9号刀套",
+      "label": "9 号刀套",
       "asset": "scenes/cnc_toolchange/meshes/POCKET9.glb",
       "pose": {
         "position_m": [
-          0,
-          0,
-          0
+          0.72,
+          0.08,
+          1.12
         ],
         "wxyz": [
           1,
@@ -70,6 +80,11 @@
           0
         ]
       },
+      "color": [
+        95,
+        95,
+        105
+      ],
       "capabilities": [
         "point"
       ],
@@ -80,17 +95,17 @@
           0
         ]
       },
-      "description": "9号刀套"
+      "description": "当前朝向开口的空刀套,套孔中轴即满插终点"
     },
     {
       "object_id": "T03",
-      "label": "3号镗刀柄",
+      "label": "3 号镗刀柄",
       "asset": "scenes/cnc_toolchange/meshes/T03.glb",
       "pose": {
         "position_m": [
-          0,
-          0,
-          0
+          0.35,
+          0.38,
+          1.2
         ],
         "wxyz": [
           1,
@@ -99,12 +114,17 @@
           0
         ]
       },
+      "color": [
+        210,
+        155,
+        120
+      ],
       "capabilities": [
         "point",
         "inspect_back"
       ],
       "anchors": {},
-      "description": "3号镗刀柄"
+      "description": "刀具车上平放(局部 Z 竖直);拉钉端面法线沿刀柄轴线(水平),垂直于局部 Z,为径向面"
     },
     {
       "object_id": "MAG",
@@ -112,9 +132,9 @@
       "asset": "scenes/cnc_toolchange/meshes/MAG.glb",
       "pose": {
         "position_m": [
-          0,
-          0,
-          0
+          0.72,
+          0.33,
+          1.37
         ],
         "wxyz": [
           1,
@@ -123,16 +143,63 @@
           0
         ]
       },
+      "color": [
+        135,
+        140,
+        150
+      ],
       "capabilities": [
         "point"
       ],
       "anchors": {},
-      "description": "刀库盘"
+      "description": "12 工位圆盘,电控转位,不可手动盘(能力负例用)"
     },
     {
       "object_id": "PANEL",
       "label": "控制面板",
       "asset": "scenes/cnc_toolchange/meshes/PANEL.glb",
+      "pose": {
+        "position_m": [
+          0.1,
+          1.02,
+          1.45
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "color": [
+        70,
+        80,
+        95
+      ],
+      "capabilities": [
+        "point",
+        "wait"
+      ],
+      "anchors": {},
+      "description": "程序状态屏+报警灯,与 MODESWITCH 同板,监控用(报警为脚本时间线事件)"
+    }
+  ],
+  "initial_instruction": "先把模式旋钮 MODESWITCH 顺时针拧 90 度切到手动档,把镗刀 T09 插进刀库当前的 9 号刀套 POCKET9,再拿起刀具车上的 T03,翻看柄尾的拉钉有没有松动,控制面板 PANEL 全程盯着报警灯。",
+  "camera_position_m": [
+    1.05,
+    -0.95,
+    1.45
+  ],
+  "camera_look_at_m": [
+    0.0,
+    0.45,
+    1.15
+  ],
+  "environment": [
+    {
+      "prop_id": "machine_shell",
+      "label": "机床立柱与安全门",
+      "asset": "scenes/cnc_toolchange/meshes/env/cnc_toolchange_machine_shell.glb",
       "pose": {
         "position_m": [
           0,
@@ -146,31 +213,110 @@
           0
         ]
       },
-      "capabilities": [
-        "point",
-        "wait"
-      ],
-      "anchors": {},
-      "description": "控制面板"
+      "scale_m": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "prop_id": "machine_interior",
+      "label": "工作台与主轴",
+      "asset": "scenes/cnc_toolchange/meshes/env/cnc_toolchange_machine_interior.glb",
+      "pose": {
+        "position_m": [
+          0,
+          0,
+          0
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "scale_m": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "prop_id": "tool_tray",
+      "label": "刀臂托盘",
+      "asset": "scenes/cnc_toolchange/meshes/env/cnc_toolchange_tool_tray.glb",
+      "pose": {
+        "position_m": [
+          0,
+          0,
+          0
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "scale_m": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "prop_id": "tool_cart",
+      "label": "中段刀具车",
+      "asset": "scenes/cnc_toolchange/meshes/env/cnc_toolchange_tool_cart.glb",
+      "pose": {
+        "position_m": [
+          0,
+          0,
+          0
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "scale_m": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "prop_id": "room",
+      "label": "车间地面与墙体",
+      "asset": "scenes/cnc_toolchange/meshes/env/cnc_toolchange_room.glb",
+      "pose": {
+        "position_m": [
+          0,
+          0,
+          0
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "scale_m": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
-  "initial_instruction": "先把模式旋钮 MODESWITCH 顺时针拧 90 度切到手动档,把镗刀 T09 插进刀库当前的 9 号刀套 POCKET9,再拿起刀具车上的 T03,翻看柄尾的拉钉有没有松动,控制面板 PANEL 全程盯着报警灯。",
-  "camera_position_m": [
-    4.2,
-    -5.2,
-    3.2
-  ],
-  "camera_look_at_m": [
-    0.25,
-    0.4,
-    1.35
-  ],
-  "environment": [],
   "render_hints": {
-    "ortho_scale_m": 4.8,
-    "grid_extent_m": 4.0,
+    "ortho_scale_m": 3.898,
+    "grid_extent_m": 3.0,
     "cue_scale": 1.0,
     "label_offset_m": 0.12,
-    "fit_camera": false
+    "fit_camera": true
   }
 }

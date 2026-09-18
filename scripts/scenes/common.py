@@ -21,6 +21,158 @@ def scene_env(scene_id: str) -> Path:
     """Scene-owned environment props inside the kit."""
     return scene_kit(scene_id)/'meshes/env'
 
+
+# --------------------------------------------------------------------------
+# Generic as-built assertions shared by the kit builders (reviewed-design
+# evidence): depth layering, ortho framing, sightline occlusion, radial-face
+# back views. All checks print a JSON evidence line and raise on failure.
+# --------------------------------------------------------------------------
+
+def screen_basis(cam_pos, look):
+    """(fwd, right, up) basis for a view axis from cam_pos toward look."""
+    fwd = (Vector(look) - Vector(cam_pos)).normalized()
+    ref = Vector((0, 0, 1)).cross(fwd)
+    if ref.length < 1e-6:
+        ref = Vector((1, 0, 0)).cross(fwd)
+    right = ref.normalized()
+    return fwd, right, fwd.cross(right).normalized()
+
+
+def objs_bbox(objs):
+    """World bbox of objects; caller is responsible for the depsgraph update."""
+    lo = Vector((1e9,)*3); hi = Vector((-1e9,)*3)
+    for o in objs:
+        for v in o.bound_box:
+            w = o.matrix_world @ Vector(v)
+            lo.x = min(lo.x, w.x); lo.y = min(lo.y, w.y); lo.z = min(lo.z, w.z)
+            hi.x = max(hi.x, w.x); hi.y = max(hi.y, w.y); hi.z = max(hi.z, w.z)
+    return lo, hi
+
+
+def verify_depths(cam_pos, look, rows, expect, tol=0.06, min_gap=0.3):
+    """rows: {label: world point}; expect: {label: design depth m}. Asserts the
+    as-built depths match the reviewed design table, and that the DISTINCT
+    design layers (same-layer dual roles allowed) stay >=min_gap apart."""
+    fwd = screen_basis(cam_pos, look)[0]
+    got = {k: float((Vector(p) - Vector(cam_pos)) @ fwd) for k, p in rows.items()}
+    for k, want in expect.items():
+        assert abs(got[k] - want) <= tol, f'{k}: depth {got[k]:.3f} vs design {want}'
+    layers = sorted({round(w, 1) for w in expect.values()}, reverse=True)
+    gaps = {f'{a:g}m-{b:g}m': round(a - b, 3) for a, b in zip(layers, layers[1:])}
+    print(json.dumps({'depth_verification': {'depths_m': {k: round(v, 3) for k, v in got.items()},
+                                              'design_m': expect, 'layer_gaps_m': gaps}},
+                     ensure_ascii=False), flush=True)
+    assert all(g >= min_gap for g in gaps.values()), f'design layer gap < {min_gap}m: {gaps}'
+    return got
+
+
+def _px_range(lo, hi, cam_pos, right, up, ortho, res):
+    half_v = ortho / 2 * res[1] / res[0]
+    cs = [Vector((x, y, z)) for x in (lo.x, hi.x) for y in (lo.y, hi.y) for z in (lo.z, hi.z)]
+    u = [(c - cam_pos) @ right for c in cs]
+    v = [(c - cam_pos) @ up for c in cs]
+    px0 = int(round((min(u) + ortho / 2) / ortho * res[0]))
+    px1 = int(round((max(u) + ortho / 2) / ortho * res[0]))
+    py0 = int(round((half_v - max(v)) / (2 * half_v) * res[1]))
+    py1 = int(round((half_v - min(v)) / (2 * half_v) * res[1]))
+    return px0, py0, px1, py1
+
+
+def verify_frame(cam_pos, look, ortho, items, res=(1280, 900), margin=0.06):
+    """items: {label: (lo, hi) world bboxes}; asserts every item inside the
+    ortho frame with >=margin*100%% border on each side. Returns the report."""
+    _, right, up = screen_basis(cam_pos, look)
+    out = {}
+    for name, (lo, hi) in items.items():
+        px0, py0, px1, py1 = _px_range(lo, hi, Vector(cam_pos), right, up, ortho, res)
+        out[name] = {'px': [px0, py0, px1, py1],
+                     'margin_pct': {'left': round(px0 / res[0] * 100, 1),
+                                    'right': round((res[0] - px1) / res[0] * 100, 1),
+                                    'top': round(py0 / res[1] * 100, 1),
+                                    'bottom': round((res[1] - py1) / res[1] * 100, 1)}}
+    worst = min(min(v['margin_pct'].values()) for v in out.values())
+    print(json.dumps({'frame_verification': {'res': list(res), 'ortho_scale_m': round(ortho, 3),
+                                              'items': out, 'worst_margin_pct': worst}},
+                     ensure_ascii=False), flush=True)
+    assert worst >= margin * 100 - 0.5, f'framing margin below {margin*100:.0f}%: {out}'
+    return out
+
+
+def _obj_bvh(obj):
+    """World-space BVH for one mesh object (matrix_world baked in, so ray_cast
+    takes world-frame origins/directions)."""
+    import bmesh
+    from mathutils.bvhtree import BVHTree
+    deps = bpy.context.evaluated_depsgraph_get()
+    ev = obj.evaluated_get(deps)
+    mesh = ev.to_mesh()
+    bm = bmesh.new()
+    bm.from_mesh(mesh)
+    bm.transform(obj.matrix_world)
+    bv = BVHTree.FromBMesh(bm)
+    bm.free()
+    ev.to_mesh_clear()
+    return bv
+
+
+def _bbox_grid(lo, hi, nu=5, nv=3, nw=5):
+    def fr(a, b, n):
+        return [a] if n == 1 else [a + (b - a) * k / (n - 1) for k in range(n)]
+    return [Vector((x, y, z)) for x in fr(lo.x, hi.x, nu)
+            for y in fr(lo.y, hi.y, nv) for z in fr(lo.z, hi.z, nw)]
+
+
+def verify_visibility(cam_pos, subjects, blockers, min_frac=0.55):
+    """subjects: {label: (lo, hi, own_meshes)}; blockers: mesh objects. Perspective
+    rays from the camera to a bbox grid per subject; a ray is blocked when a
+    blocker BVH (the subject's own meshes excluded) is hit first. Asserts each
+    subject keeps >=min_frac of its grid visible."""
+    bvhs = [(_obj_bvh(o), o) for o in blockers if o.type == 'MESH']
+    report = {}
+    for name, (lo, hi, own) in subjects.items():
+        own = set(own)
+        rays = [(bv, o) for bv, o in bvhs if o not in own]
+        pts = _bbox_grid(lo, hi)
+        vis = 0
+        for p in pts:
+            d = p - Vector(cam_pos)
+            dist = d.length
+            d = d.normalized()  # normalized() returns a copy; BVH distances are world units
+            hit = False
+            for bv, o in rays:
+                loc, nrm, idx, dst = bv.ray_cast(Vector(cam_pos), d)
+                if loc is not None and dst < dist - 1e-3:
+                    hit = True
+                    break
+            vis += 0 if hit else 1
+        frac = vis / len(pts)
+        report[name] = round(frac, 3)
+        assert frac >= min_frac, f'{name} visibility {frac:.2f} < {min_frac} (occluded)'
+    print(json.dumps({'visibility_verification': report}), flush=True)
+    return report
+
+
+def verify_back_radial(name, pose, center_local, normal_local, cam_pos, tol=0.08):
+    """inspect_back evidence for a subject whose info face must be a radial
+    face (normal ⟂ local Z): asserts perpendicularity and that the ghost copy
+    rotated 180° about local Z turns the face toward the camera."""
+    pos, wxyz = pose
+    pos = Vector(pos)
+    q = Quaternion(wxyz)
+    z = q @ Vector((0, 0, 1))
+    n = q @ Vector(normal_local)
+    perp = abs(n.normalized() @ z.normalized())
+    assert perp <= tol, f'{name}: info face normal not radial (dot|n.z|={perp:.3f})'
+    flip = Quaternion(z, math.pi) @ q
+    n2 = (flip @ Vector(normal_local)).normalized()
+    c2 = pos + flip @ Vector(center_local)
+    toward = (Vector(cam_pos) - c2).normalized()
+    facing = float(n2 @ toward)
+    assert facing > 0.2, f'{name}: flipped info face does not face camera (dot={facing:.3f})'
+    print(json.dumps({'back_view_verification': {name: {
+        'normal_local_z_dot': round(perp, 4), 'flip_faces_camera_dot': round(facing, 3),
+        'flipped_center_m': [round(v, 3) for v in c2]}}}, ensure_ascii=False), flush=True)
+
 # Project GLBs store Z-up world-frame geometry (the trimesh/Viser contract). Blender's
 # glTF importer always applies -90 deg X, so every re-import is counter-rotated on its
 # parent empty; exports disable the exporter's Y-up conversion to keep files Z-up.

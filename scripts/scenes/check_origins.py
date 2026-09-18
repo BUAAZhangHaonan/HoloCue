@@ -37,6 +37,15 @@ KNOWN_CONVENTIONS = {
     'engine_bay/PLUGPORT': 'origin at well mouth plane; bore extends below into the head',
     # Origin at the shell center; the corrugated tail + wire extend -y from it.
     'engine_bay/CONN': 'tail wire extends -y from the shell center',
+    # Origin at the bore mouth (insertion anchor plane); the bore extends +x
+    # into the disc rim, so the bbox center sits behind the origin.
+    'cnc_toolchange/POCKET9': 'origin at bore mouth plane; bore extends +x into the disc rim',
+    # Origin at the valve outlet mouth (insertion anchor); body extends +y up
+    # onto the bottle neck, offsetting the bbox center.
+    'dive_fillstation/VALVE': 'origin at valve outlet mouth; body extends up onto the bottle neck',
+    # Origin at the pump-slot mouth (insertion anchor); the channel recesses
+    # into the pump face, offsetting the bbox center.
+    'infusion_ward/SLOT2': 'origin at slot mouth plane; channel recesses into the pump face',
 }
 
 # Project GLBs store Z-up world-frame geometry as-is (trimesh/Viser contract); no
