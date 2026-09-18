@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "scene_id": "TEMPLATE",
+  "title": "场景标题（中文）",
+  "units": "m",
+  "axes": "right_handed_z_up",
+  "objects": [
+    {
+      "object_id": "OBJ1",
+      "label": "对象中文标签",
+      "asset": "scenes/TEMPLATE/meshes/OBJ1.glb",
+      "pose": {"position_m": [0.0, 0.0, 0.0], "wxyz": [1, 0, 0, 0]},
+      "color": [200, 200, 210],
+      "capabilities": ["point", "rotate"],
+      "anchors": {},
+      "description": "消歧/朝向语义描述（不是 label 复读）"
+    }
+  ],
+  "initial_instruction": "把 OBJ1 ... （自然语言多步任务，含指代/角度/打断语义）",
+  "camera_position_m": [1.0, -1.0, 1.4],
+  "camera_look_at_m": [0.0, 0.5, 1.1],
+  "environment": [
+    {
+      "prop_id": "stage",
+      "label": "环境道具中文标签",
+      "asset": "scenes/TEMPLATE/meshes/env/TEMPLATE_stage.glb",
+      "pose": {"position_m": [0, 0, 0], "wxyz": [1, 0, 0, 0]},
+      "scale_m": [1.0, 1.0, 1.0]
+    }
+  ],
+  "render_hints": {"ortho_scale_m": 2.5, "grid_extent_m": 3.0, "cue_scale": 1.0, "label_offset_m": 0.12, "fit_camera": true}
+}
