@@ -1,0 +1,201 @@
+{
+  "schema_version": "1.0",
+  "scene_id": "dive_fillstation",
+  "title": "潜水气瓶充装前核验与接通",
+  "units": "m",
+  "axes": "right_handed_z_up",
+  "objects": [
+    {
+      "object_id": "QRC",
+      "label": "充装软管接头",
+      "asset": "assets/meshes/review/dive_fillstation/QRC.glb",
+      "pose": {
+        "position_m": [
+          0,
+          0,
+          0
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "capabilities": [
+        "point",
+        "insert"
+      ],
+      "anchors": {},
+      "description": "充装软管接头"
+    },
+    {
+      "object_id": "VALVE",
+      "label": "3号瓶阀",
+      "asset": "assets/meshes/review/dive_fillstation/VALVE.glb",
+      "pose": {
+        "position_m": [
+          0,
+          0,
+          0
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "capabilities": [
+        "point"
+      ],
+      "anchors": {
+        "insertion": [
+          0,
+          0,
+          0
+        ]
+      },
+      "description": "3号瓶阀"
+    },
+    {
+      "object_id": "BOTTLE3",
+      "label": "3号气瓶",
+      "asset": "assets/meshes/review/dive_fillstation/BOTTLE3.glb",
+      "pose": {
+        "position_m": [
+          0,
+          0,
+          0
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "capabilities": [
+        "point",
+        "inspect_back"
+      ],
+      "anchors": {},
+      "description": "3号气瓶"
+    },
+    {
+      "object_id": "BOTTLE1",
+      "label": "1号气瓶",
+      "asset": "assets/meshes/review/dive_fillstation/BOTTLE1.glb",
+      "pose": {
+        "position_m": [
+          0,
+          0,
+          0
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "capabilities": [
+        "point",
+        "inspect_back"
+      ],
+      "anchors": {},
+      "description": "1号气瓶"
+    },
+    {
+      "object_id": "BOTTLE2",
+      "label": "2号气瓶",
+      "asset": "assets/meshes/review/dive_fillstation/BOTTLE2.glb",
+      "pose": {
+        "position_m": [
+          0,
+          0,
+          0
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "capabilities": [
+        "point",
+        "inspect_back"
+      ],
+      "anchors": {},
+      "description": "2号气瓶"
+    },
+    {
+      "object_id": "STEM",
+      "label": "3号路阀杆",
+      "asset": "assets/meshes/review/dive_fillstation/STEM.glb",
+      "pose": {
+        "position_m": [
+          0,
+          0,
+          0
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "capabilities": [
+        "point",
+        "rotate"
+      ],
+      "anchors": {},
+      "description": "3号路阀杆"
+    },
+    {
+      "object_id": "GAUGES",
+      "label": "压力表组",
+      "asset": "assets/meshes/review/dive_fillstation/GAUGES.glb",
+      "pose": {
+        "position_m": [
+          0,
+          0,
+          0
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "capabilities": [
+        "point",
+        "wait"
+      ],
+      "anchors": {},
+      "description": "压力表组"
+    }
+  ],
+  "initial_instruction": "把充装软管接头 QRC 接到 3 号气瓶瓶阀 VALVE 的出口上,接好后核对 BOTTLE3 瓶肩的检验钢印在不在有效期内,确认无误再把汇流排 3 号路阀杆 STEM 逆时针开 90 度,压力表组 GAUGES 全程盯着别超压。",
+  "camera_position_m": [
+    0.3,
+    -4.9,
+    2.85
+  ],
+  "camera_look_at_m": [
+    0.1,
+    0.75,
+    1.35
+  ],
+  "environment": [],
+  "render_hints": {
+    "ortho_scale_m": 4.8,
+    "grid_extent_m": 4.0,
+    "cue_scale": 1.0,
+    "label_offset_m": 0.12,
+    "fit_camera": false
+  }
+}

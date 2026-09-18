@@ -1,0 +1,176 @@
+{
+  "schema_version": "1.0",
+  "scene_id": "cnc_toolchange",
+  "title": "立式加工中心手动装刀与拉钉点检",
+  "units": "m",
+  "axes": "right_handed_z_up",
+  "objects": [
+    {
+      "object_id": "MODESWITCH",
+      "label": "模式选择旋钮",
+      "asset": "assets/meshes/review/cnc_toolchange/MODESWITCH.glb",
+      "pose": {
+        "position_m": [
+          0,
+          0,
+          0
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "capabilities": [
+        "point",
+        "rotate"
+      ],
+      "anchors": {},
+      "description": "模式选择旋钮"
+    },
+    {
+      "object_id": "T09",
+      "label": "9号镗刀柄",
+      "asset": "assets/meshes/review/cnc_toolchange/T09.glb",
+      "pose": {
+        "position_m": [
+          0,
+          0,
+          0
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "capabilities": [
+        "point",
+        "insert"
+      ],
+      "anchors": {},
+      "description": "9号镗刀柄"
+    },
+    {
+      "object_id": "POCKET9",
+      "label": "9号刀套",
+      "asset": "assets/meshes/review/cnc_toolchange/POCKET9.glb",
+      "pose": {
+        "position_m": [
+          0,
+          0,
+          0
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "capabilities": [
+        "point"
+      ],
+      "anchors": {
+        "insertion": [
+          0,
+          0,
+          0
+        ]
+      },
+      "description": "9号刀套"
+    },
+    {
+      "object_id": "T03",
+      "label": "3号镗刀柄",
+      "asset": "assets/meshes/review/cnc_toolchange/T03.glb",
+      "pose": {
+        "position_m": [
+          0,
+          0,
+          0
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "capabilities": [
+        "point",
+        "inspect_back"
+      ],
+      "anchors": {},
+      "description": "3号镗刀柄"
+    },
+    {
+      "object_id": "MAG",
+      "label": "刀库盘",
+      "asset": "assets/meshes/review/cnc_toolchange/MAG.glb",
+      "pose": {
+        "position_m": [
+          0,
+          0,
+          0
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "capabilities": [
+        "point"
+      ],
+      "anchors": {},
+      "description": "刀库盘"
+    },
+    {
+      "object_id": "PANEL",
+      "label": "控制面板",
+      "asset": "assets/meshes/review/cnc_toolchange/PANEL.glb",
+      "pose": {
+        "position_m": [
+          0,
+          0,
+          0
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "capabilities": [
+        "point",
+        "wait"
+      ],
+      "anchors": {},
+      "description": "控制面板"
+    }
+  ],
+  "initial_instruction": "先把模式旋钮 MODESWITCH 顺时针拧 90 度切到手动档,把镗刀 T09 插进刀库当前的 9 号刀套 POCKET9,再拿起刀具车上的 T03,翻看柄尾的拉钉有没有松动,控制面板 PANEL 全程盯着报警灯。",
+  "camera_position_m": [
+    4.2,
+    -5.2,
+    3.2
+  ],
+  "camera_look_at_m": [
+    0.25,
+    0.4,
+    1.35
+  ],
+  "environment": [],
+  "render_hints": {
+    "ortho_scale_m": 4.8,
+    "grid_extent_m": 4.0,
+    "cue_scale": 1.0,
+    "label_offset_m": 0.12,
+    "fit_camera": false
+  }
+}
