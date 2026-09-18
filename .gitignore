@@ -7,5 +7,5 @@ __pycache__/
 models/
 runs/
 !runs/.gitkeep
-assets/blender/*.blend1
+scenes/*/blend/*.blend1
 verification/server_*/

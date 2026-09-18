@@ -1,5 +1,5 @@
 """Per-scene perspective fly-through videos.
-Opens the official assets/blender/<scene>.blend (composed scene + lighting), animates a
+Opens the official scenes/<scene>/blend/<scene>.blend (composed scene + lighting), animates a
 new perspective camera along the scene's depth-story waypoints with a TRACK_TO target,
 and encodes h264 directly via Blender's FFMPEG output. Captions are burned afterwards by
 scripts/scene_videos_captions.sh (ffmpeg drawtext), not in 3D.
@@ -89,7 +89,7 @@ WAYPOINTS = {
 def main():
     scene_id = a.scene
     duration, wps = WAYPOINTS[scene_id]
-    blend = ROOT/'assets/blender'/f'{scene_id}.blend'
+    blend = ROOT/'scenes'/scene_id/'blend'/f'{scene_id}.blend'
     bpy.ops.wm.open_mainfile(filepath=str(blend))
     sc = bpy.context.scene
     sc.render.engine = 'CYCLES'; sc.cycles.samples = a.samples

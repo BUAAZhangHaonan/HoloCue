@@ -3,7 +3,7 @@ Blender 3.1 background mode exits instead of pumping timers, so this script driv
 bridge tick from a blocking loop and renders timestamped frames while the session evolves.
 
 Usage (CPU, through scripts/guard/resource_guard.py):
-  HOLOCUE_SESSION_ID=<sid> blender -b assets/blender/control_panel.blend \
+  HOLOCUE_SESSION_ID=<sid> blender -b scenes/control_panel/blend/control_panel.blend \
     --python scripts/blender_live_bridge.py --python scripts/blender_headless_capture.py
 """
 import bpy,os,time,json

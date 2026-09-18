@@ -103,7 +103,7 @@ camera.rotation_euler=(Vector(spec['camera_look_at_m'])-camera.location).to_trac
 camera.data.type='ORTHO';camera.data.ortho_scale=ortho;camera.data.lens=45;scene.camera=camera
 scene['holocue_scene_id']=a.scene
 scene['holocue_render_kind']='geometric_interaction_preview'
-out=Path(a.out) if a.out else ROOT/'assets/blender'/f'{a.scene}.blend';out.parent.mkdir(parents=True,exist_ok=True)
+out=Path(a.out) if a.out else ROOT/'scenes'/a.scene/'blend'/f'{a.scene}.blend';out.parent.mkdir(parents=True,exist_ok=True)
 bpy.ops.wm.save_as_mainfile(filepath=str(out))
 if a.render:
     scene.render.filepath=str(ROOT/'runs'/f'{a.scene}_blender.png');Path(scene.render.filepath).parent.mkdir(parents=True,exist_ok=True)
