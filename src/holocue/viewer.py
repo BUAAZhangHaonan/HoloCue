@@ -26,10 +26,15 @@ class Viewer:
         # task controls; the four operations share one button group row.
         # viser 1.1.1: tab-group handles are not context managers, tab handles are.
         tabs=self.server.gui.add_tab_group()
+        # HOLOCUE_INITIAL_SCENE selects the kit the viewer opens with (evidence
+        # captures per scene); default stays the first kit in the sorted list.
+        init_id=os.environ.get('HOLOCUE_INITIAL_SCENE') or items[0]['scene_id']
+        init_title=next((i['title'] for i in items if i['scene_id']==init_id),items[0]['title'])
+        init_instruction=next((i['initial_instruction'] for i in items if i['title']==init_title),'')
         with tabs.add_tab('任务'):
             self.status=self.server.gui.add_markdown('正在连接后端')
-            self.scene_choice=self.server.gui.add_dropdown('场景',options=list(self.titles),initial_value=items[0]['title'])
-            self.command=self.server.gui.add_text('输入任务',initial_value=items[0]['initial_instruction'])
+            self.scene_choice=self.server.gui.add_dropdown('场景',options=list(self.titles),initial_value=init_title)
+            self.command=self.server.gui.add_text('输入任务',initial_value=init_instruction)
             self.actions=self.server.gui.add_button_group('操作',['发送并更新任务','立即暂停','确认完成','继续'])
             self.detail=self.server.gui.add_markdown('任务尚未开始')
         with tabs.add_tab('显示'):
@@ -58,7 +63,7 @@ class Viewer:
                 if self.active_scene:
                     pos,look=self._camera(self.active_scene,self.scene_bounds.get(self.active_scene.scene_id,[]))
                     client.camera.position=pos;client.camera.look_at=look
-        self.load(items[0]['scene_id'])
+        self.load(init_id)
     def _camera(self,spec,bounds):
         """JSON camera by default; with fit_camera, back off along its axis until the
         scene bbox fills ~70% of a 50 deg perspective view (JSON positions were
