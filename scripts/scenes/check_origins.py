@@ -43,6 +43,9 @@ KNOWN_CONVENTIONS = {
     # Origin at the valve outlet mouth (insertion anchor); body extends +y up
     # onto the bottle neck, offsetting the bbox center.
     'dive_fillstation/VALVE': 'origin at valve outlet mouth; body extends up onto the bottle neck',
+    # Origin at the coupler socket mouth (insertion reference face); the sleeve
+    # and hose tail extend +y behind it.
+    'dive_fillstation/QRC': 'origin at socket mouth plane; sleeve extends +y',
     # Origin at the pump-slot mouth (insertion anchor); the channel recesses
     # into the pump face, offsetting the bbox center.
     'infusion_ward/SLOT2': 'origin at slot mouth plane; channel recesses into the pump face',

@@ -11,9 +11,9 @@
       "asset": "scenes/dive_fillstation/meshes/QRC.glb",
       "pose": {
         "position_m": [
-          0,
-          0,
-          0
+          0.5,
+          -0.1,
+          0.85
         ],
         "wxyz": [
           1,
@@ -22,22 +22,27 @@
           0
         ]
       },
+      "color": [
+        185,
+        190,
+        195
+      ],
       "capabilities": [
         "point",
         "insert"
       ],
       "anchors": {},
-      "description": "充装软管接头"
+      "description": "3 号路固定软管末端的快插接头,套口即局部原点"
     },
     {
       "object_id": "VALVE",
-      "label": "3号瓶阀",
+      "label": "3 号瓶阀",
       "asset": "scenes/dive_fillstation/meshes/VALVE.glb",
       "pose": {
         "position_m": [
-          0,
-          0,
-          0
+          0.25,
+          -0.05,
+          0.63
         ],
         "wxyz": [
           1,
@@ -46,6 +51,11 @@
           0
         ]
       },
+      "color": [
+        120,
+        125,
+        135
+      ],
       "capabilities": [
         "point"
       ],
@@ -56,17 +66,17 @@
           0
         ]
       },
-      "description": "3号瓶阀"
+      "description": "瓶阀出口朝充装员,带单向阀;出口局部原点即插接终点"
     },
     {
       "object_id": "BOTTLE3",
-      "label": "3号气瓶",
+      "label": "3 号气瓶",
       "asset": "scenes/dive_fillstation/meshes/BOTTLE3.glb",
       "pose": {
         "position_m": [
-          0,
-          0,
-          0
+          0.25,
+          -0.05,
+          0.26
         ],
         "wxyz": [
           1,
@@ -75,22 +85,27 @@
           0
         ]
       },
+      "color": [
+        230,
+        180,
+        40
+      ],
       "capabilities": [
         "point",
         "inspect_back"
       ],
       "anchors": {},
-      "description": "3号气瓶"
+      "description": "瓶肩环带打检验钢印与编号;站立位局部 Z 沿瓶轴(竖直),钢印面法线水平,垂直于局部 Z,为径向面"
     },
     {
       "object_id": "BOTTLE1",
-      "label": "1号气瓶",
+      "label": "1 号气瓶",
       "asset": "scenes/dive_fillstation/meshes/BOTTLE1.glb",
       "pose": {
         "position_m": [
-          0,
-          0,
-          0
+          -0.5,
+          -0.12,
+          0.26
         ],
         "wxyz": [
           1,
@@ -99,22 +114,27 @@
           0
         ]
       },
+      "color": [
+        230,
+        180,
+        40
+      ],
       "capabilities": [
         "point",
         "inspect_back"
       ],
       "anchors": {},
-      "description": "1号气瓶"
+      "description": "消歧用,同型;瓶肩钢印可查"
     },
     {
       "object_id": "BOTTLE2",
-      "label": "2号气瓶",
+      "label": "2 号气瓶",
       "asset": "scenes/dive_fillstation/meshes/BOTTLE2.glb",
       "pose": {
         "position_m": [
-          0,
-          0,
-          0
+          -0.12,
+          -0.1,
+          0.26
         ],
         "wxyz": [
           1,
@@ -123,36 +143,46 @@
           0
         ]
       },
+      "color": [
+        230,
+        180,
+        40
+      ],
       "capabilities": [
         "point",
         "inspect_back"
       ],
       "anchors": {},
-      "description": "2号气瓶"
+      "description": "消歧用,同型;瓶肩钢印可查"
     },
     {
       "object_id": "STEM",
-      "label": "3号路阀杆",
+      "label": "3 号路阀杆",
       "asset": "scenes/dive_fillstation/meshes/STEM.glb",
       "pose": {
         "position_m": [
-          0,
-          0,
-          0
+          0.3,
+          0.55,
+          1.2
         ],
         "wxyz": [
-          1,
-          0,
-          0,
-          0
+          0.7071,
+          0.7071,
+          0.0,
+          0.0
         ]
       },
+      "color": [
+        200,
+        60,
+        50
+      ],
       "capabilities": [
         "point",
         "rotate"
       ],
       "anchors": {},
-      "description": "3号路阀杆"
+      "description": "汇流排 3 号路阀杆,手柄垂直向下为关,逆时针 90 度全开"
     },
     {
       "object_id": "GAUGES",
@@ -160,6 +190,48 @@
       "asset": "scenes/dive_fillstation/meshes/GAUGES.glb",
       "pose": {
         "position_m": [
+          0.1,
+          1.3,
+          1.5
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "color": [
+        240,
+        240,
+        240
+      ],
+      "capabilities": [
+        "point",
+        "wait"
+      ],
+      "anchors": {},
+      "description": "多路缸压指示,超压区红刻度(读数为脚本时间线)"
+    }
+  ],
+  "initial_instruction": "把充装软管接头 QRC 接到 3 号气瓶瓶阀 VALVE 的出口上,接好后核对 BOTTLE3 瓶肩的检验钢印在不在有效期内,确认无误再把汇流排 3 号路阀杆 STEM 逆时针开 90 度,压力表组 GAUGES 全程盯着别超压。",
+  "camera_position_m": [
+    0.3,
+    -1.05,
+    1.3
+  ],
+  "camera_look_at_m": [
+    0.05,
+    0.6,
+    1.0
+  ],
+  "environment": [
+    {
+      "prop_id": "filling_station",
+      "label": "充装位地垫与固定链",
+      "asset": "scenes/dive_fillstation/meshes/env/dive_fillstation_filling_station.glb",
+      "pose": {
+        "position_m": [
           0,
           0,
           0
@@ -171,31 +243,110 @@
           0
         ]
       },
-      "capabilities": [
-        "point",
-        "wait"
-      ],
-      "anchors": {},
-      "description": "压力表组"
+      "scale_m": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "prop_id": "manifold_bank",
+      "label": "六路汇流排",
+      "asset": "scenes/dive_fillstation/meshes/env/dive_fillstation_manifold_bank.glb",
+      "pose": {
+        "position_m": [
+          0,
+          0,
+          0
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "scale_m": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "prop_id": "line3_hose",
+      "label": "3 号路充装软管",
+      "asset": "scenes/dive_fillstation/meshes/env/dive_fillstation_line3_hose.glb",
+      "pose": {
+        "position_m": [
+          0,
+          0,
+          0
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "scale_m": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "prop_id": "compressor",
+      "label": "空气压缩机",
+      "asset": "scenes/dive_fillstation/meshes/env/dive_fillstation_compressor.glb",
+      "pose": {
+        "position_m": [
+          0,
+          0,
+          0
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "scale_m": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "prop_id": "room",
+      "label": "充装间地面与墙体",
+      "asset": "scenes/dive_fillstation/meshes/env/dive_fillstation_room.glb",
+      "pose": {
+        "position_m": [
+          0,
+          0,
+          0
+        ],
+        "wxyz": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "scale_m": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
-  "initial_instruction": "把充装软管接头 QRC 接到 3 号气瓶瓶阀 VALVE 的出口上,接好后核对 BOTTLE3 瓶肩的检验钢印在不在有效期内,确认无误再把汇流排 3 号路阀杆 STEM 逆时针开 90 度,压力表组 GAUGES 全程盯着别超压。",
-  "camera_position_m": [
-    0.3,
-    -4.9,
-    2.85
-  ],
-  "camera_look_at_m": [
-    0.1,
-    0.75,
-    1.35
-  ],
-  "environment": [],
   "render_hints": {
-    "ortho_scale_m": 4.8,
-    "grid_extent_m": 4.0,
+    "ortho_scale_m": 7.171,
+    "grid_extent_m": 3.0,
     "cue_scale": 1.0,
     "label_offset_m": 0.12,
-    "fit_camera": false
+    "fit_camera": true
   }
 }
