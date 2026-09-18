@@ -3,7 +3,7 @@
 Outputs:
   assets/meshes/server_rack/{SPARE,SLOT4,NODE3,ALARM,FAN}.glb      (interactive, origin-centered)
   assets/meshes/env/server_rack_{rackshell,floorpatch,wall,sidecart}.glb (procedural environment)
-  configs/scenes/server_rack.json                                  (extended SceneSpec)
+  scenes/server_rack/scene.json                                  (extended SceneSpec)
   runs/scene_v2/server_rack_kit_preview.png / ..._back.png         (self-review evidence)
 
 LAYOUT below is the single source of truth for world poses (y=0 at rack front,

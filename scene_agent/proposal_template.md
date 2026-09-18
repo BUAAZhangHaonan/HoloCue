@@ -8,7 +8,7 @@
 
 ## 视点与深度
 
-`camera_position_m=[x,y,z]`,`camera_look_at_m=[x,y,z]`(设计初值,建模定稿后以 `configs/scenes/<id>.json` 实测为准)。
+`camera_position_m=[x,y,z]`,`camera_look_at_m=[x,y,z]`(设计初值,建模定稿后以 `scenes/<id>/scene.json` 实测为准)。
 
 | 层 | 对象 | 位置概要 | 沿视轴距离 | task_role / depth_requirement | N/σ 倾向 |
 |---|---|---|---|---|---|

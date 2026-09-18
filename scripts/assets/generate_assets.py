@@ -1,6 +1,6 @@
 """Regenerate the original base geometry (nine GLB/OBJ pairs + gaussian pools) only.
 
-Scene/fixture JSON (configs/scenes, examples/replay.json) and assets/ASSET_LICENSE.md
+Scene/fixture JSON (scenes/<id>/scene.json, examples/replay.json) and assets/ASSET_LICENSE.md
 are hand-curated sources of truth with later field fixes and license sections; this
 generator must never overwrite them. No external assets are downloaded.
 """

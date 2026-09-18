@@ -224,7 +224,7 @@ def render_preview(out_name: str, cam_pos, look_at, objs=None, ortho=None, persp
     return used
 
 def write_scene_json(scene_id: str, spec: dict):
-    path = ROOT/'configs/scenes'/f'{scene_id}.json'
+    path = ROOT/'scenes'/scene_id/'scene.json'
     path.write_text(json.dumps(spec, ensure_ascii=False, indent=2), encoding='utf-8')
     print(json.dumps({'scene_json': str(path)}), flush=True)
     return path

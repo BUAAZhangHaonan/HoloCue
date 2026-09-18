@@ -5,7 +5,7 @@ ROOT=Path(__file__).resolve().parents[2]
 
 def source_digest():
  h=hashlib.sha256()
- for folder in ['src','scripts','configs','prompts','tests']:
+ for folder in ['src','scripts','configs','scenes','prompts','tests']:
   for p in sorted((ROOT/folder).rglob('*')):
    if p.is_file() and '__pycache__' not in str(p) and p.suffix!='.pyc':
     h.update(str(p.relative_to(ROOT)).encode());h.update(p.read_bytes())

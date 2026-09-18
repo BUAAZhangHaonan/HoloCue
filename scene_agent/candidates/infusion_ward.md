@@ -17,7 +17,7 @@ round1 审查(major):① realism——v1 把标签核对安排在三通开放(�
 
 ## 视点与深度
 
-`camera_position_m=[0.40,-1.05,1.45]`,`camera_look_at_m=[-0.15,0.55,1.35]`(设计初值)。沿视轴距离按 |(P−C)·d̂| 计算,下表与所给世界位坐标自洽(建模定稿后以 `configs/scenes/<id>.json` 实测为准)。
+`camera_position_m=[0.40,-1.05,1.45]`,`camera_look_at_m=[-0.15,0.55,1.35]`(设计初值)。沿视轴距离按 |(P−C)·d̂| 计算,下表与所给世界位坐标自洽(建模定稿后以 `scenes/<id>/scene.json` 实测为准)。
 
 | 层 | 对象 | 世界位概要(设计初值) | 沿视轴距离 | task_role / depth_requirement | N/σ 倾向 |
 |---|---|---|---|---|---|

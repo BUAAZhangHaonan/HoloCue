@@ -7,8 +7,8 @@ from mathutils import Vector
 ROOT=Path(__file__).resolve().parents[2]
 p=argparse.ArgumentParser();p.add_argument('--scene',default='control_panel');p.add_argument('--render',action='store_true');p.add_argument('--out',default='')
 a=p.parse_args(sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else [])
-path=ROOT/'configs/scenes'/f'{a.scene}.json'
-if path.parent!=ROOT/'configs/scenes':raise ValueError('invalid scene path')
+path=ROOT/'scenes'/a.scene/'scene.json'
+if path.parent!=ROOT/'scenes'/a.scene:raise ValueError('invalid scene path')
 spec=json.loads(path.read_text())
 bpy.ops.object.select_all(action='SELECT');bpy.ops.object.delete(use_global=False)
 scene=bpy.context.scene;scene.unit_settings.system='METRIC';scene.unit_settings.scale_length=1.

@@ -253,7 +253,7 @@ def test_measured_parameters_do_not_claim_optical_execution():
     assert packet(s,scene,policy).renderer_kind=='semantic_preview'
 
 def scene_with_environment():
-    x=json.loads((root()/'configs/scenes/control_panel.json').read_text(encoding='utf-8'))
+    x=json.loads((root()/'scenes/control_panel/scene.json').read_text(encoding='utf-8'))
     x['environment']=[{'prop_id':'bench_top','asset':'assets/meshes/baseplate.glb','pose':{'position_m':[0,.08,-.012],'wxyz':[1,0,0,0]},'scale_m':[2.,1.6,.02]},
                       {'prop_id':'side_rail','asset':'assets/meshes/brick.glb'}]
     x['render_hints']={'ortho_scale_m':1.4,'grid_extent_m':2.2,'cue_scale':.8,'label_offset_m':.2}

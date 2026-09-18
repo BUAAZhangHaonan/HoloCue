@@ -9,7 +9,7 @@ Run (CPU only, via resource guard):
 Produces:
   assets/meshes/dig_site/{POT3,FLAG,BONE,STAY,POT1,POT2,TROWEL}.glb   (interactive)
   assets/meshes/env/dig_site_{ground,equipmentpad}.glb                (procedural env)
-  configs/scenes/dig_site.json
+  scenes/dig_site/scene.json
   runs/scene_v2/dig_site_kit_preview.png        (ortho over the task volume: pit +
                                                  interactives + labels, heap/spade crop)
   runs/scene_v2/dig_site_kit_preview_pit.png    (tight ortho on the pit interior:
@@ -1579,7 +1579,7 @@ def main():
                                               OUT_RUNS / 'dig_site_kit_preview_pit.png',
                                               OUT_RUNS / 'dig_site_kit_preview_pot3.png',
                                               OUT_RUNS / 'dig_site_kit_preview_stay.png',
-                                              ROOT / 'configs/scenes/dig_site.json']
+                                              ROOT / 'scenes/dig_site/scene.json']
     print(json.dumps({'file_table': {str(f.relative_to(ROOT)): f.stat().st_size for f in files}},
                      indent=1), flush=True)
     print(json.dumps({'camera_final': {'position': list(CAM_POS), 'look_at': list(CAM_LOOK)},

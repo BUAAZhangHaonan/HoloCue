@@ -15,7 +15,7 @@ Outputs:
   assets/meshes/engine_bay/{CLAMP,PLUG,PLUGPORT,OILCAP,TENSIONER,CONN}.glb
   assets/meshes/env/engine_bay_{shell,engine,radiator}.glb  (+ engine_round props
     produced beforehand by scripts/assets/process_env_props.py)
-  configs/scenes/engine_bay.json
+  scenes/engine_bay/scene.json
   runs/scene_v2/engine_bay_kit_preview.png + 4 detail previews
   runs/scene_v2/build_engine_bay.log (assertion JSON evidence)
 
@@ -1166,7 +1166,7 @@ def main():
     }
     write_scene_json(LAYOUT['scene_id'], spec_out)
     # post-write recheck (JSON is rewritten by this script; fit_camera must survive)
-    reread = json.loads((ROOT / 'configs/scenes/engine_bay.json').read_text(encoding='utf-8'))
+    reread = json.loads((ROOT / 'scenes/engine_bay/scene.json').read_text(encoding='utf-8'))
     assert reread['render_hints']['fit_camera'] is True
     assert reread['initial_instruction'] == LAYOUT['initial_instruction']
     print(json.dumps({'final_camera': {'position_m': list(LAYOUT['camera_position_m']),

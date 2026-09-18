@@ -57,7 +57,7 @@ from urllib.request import Request, urlopen
 
 # Default embedded script: engine_bay demo for the engine round. Content is a
 # template only -- what actually runs is always fully decided by --steps (or this
-# default when --steps is omitted). engine_bay must exist in configs/scenes by then.
+# default when --steps is omitted). engine_bay must exist in scenes/engine_bay by then.
 DEFAULT_STEPS = [
     {"action": "wait", "s": 3},
     {"action": "message",

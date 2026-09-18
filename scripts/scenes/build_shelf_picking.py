@@ -8,7 +8,7 @@ Run (CPU only, via resource guard):
 Produces:
   assets/meshes/shelf_picking/{RED,BLUE,BASKET,CONV,GREEN}.glb      (interactive, origin rules below)
   assets/meshes/env/shelf_picking_{shelfwall,conveyorbody,floor,wallpanel}.glb
-  configs/scenes/shelf_picking.json
+  scenes/shelf_picking/scene.json
   runs/scene_v2/shelf_picking_kit_preview.png        (ortho framed tight on the task triangle)
   runs/scene_v2/shelf_picking_kit_preview_persp.png  (50mm perspective companion, depth evidence)
   runs/scene_v2/shelf_picking_kit_preview_blue.png   (close 3/4 of BLUE label face)
@@ -455,7 +455,7 @@ write_scene_json('shelf_picking', spec)
 # ================================================================ 12. reports
 files = sorted(MESH_OUT.glob('*.glb')) + sorted(ENV_OUT.glob('shelf_picking_*.glb')) + \
         [OUT_RUNS / 'shelf_picking_kit_preview.png', OUT_RUNS / 'shelf_picking_kit_preview_persp.png',
-         OUT_RUNS / 'shelf_picking_kit_preview_blue.png', ROOT / 'configs/scenes/shelf_picking.json']
+         OUT_RUNS / 'shelf_picking_kit_preview_blue.png', ROOT / 'scenes/shelf_picking/scene.json']
 print(json.dumps({'file_table': {str(f.relative_to(ROOT)): f.stat().st_size for f in files}}, indent=1), flush=True)
 
 bp = obj_json[[o['object_id'] for o in obj_json].index('BASKET')]['pose']['position_m']
