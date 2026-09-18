@@ -19,8 +19,8 @@ def session():return Session(session_id='s',scene_id='control_panel',backend_mod
 def message(text='x',rid='req',revision=0):return UserMessage(text=text,request_id=rid,expected_revision=revision)
 
 def test_all_scenes_load():
-    # The first three shipped scenes stay loadable; later kits (docs/09, docs/10) add configs, so only require that core.
-    assert len(list_scenes())>=3
+    # Every shipped kit must load through the loader (scenes/*/scene.json).
+    assert len(list_scenes())==12
     for s in list_scenes():
         scene=load_scene(s['scene_id'])
         for obj in scene.objects:assert (root()/obj.asset).is_file()
@@ -231,6 +231,26 @@ def test_asset_glbs_are_readable():
     for p in files:
         m=trimesh.load(p,force='mesh');assert len(m.vertices)>0 and len(m.faces)>0
         assert np.isfinite(m.vertices).all()
+
+def test_kit_glbs_are_readable():
+    # Every kit-owned GLB (interactive objects + scene env props) must parse as
+    # a mesh with finite vertices - catches truncated/empty kit exports.
+    import trimesh
+    files=sorted((root()).glob('scenes/*/meshes/**/*.glb'))
+    assert len(files)>=80
+    for p in files:
+        m=trimesh.load(p,force='mesh');assert len(m.vertices)>0 and len(m.faces)>0, p
+        assert np.isfinite(m.vertices).all(), p
+
+def test_scene_kits_conform():
+    # The per-scene management contract (scenes/_template/KIT_CHECKLIST.md) is
+    # enforced by scripts/scenes/check_scene_kit.py; keep it green in pytest so
+    # a half-migrated kit fails CI, not the review gate.
+    import importlib.util
+    spec=importlib.util.spec_from_file_location('check_scene_kit',root()/'scripts/scenes/check_scene_kit.py')
+    mod=importlib.util.module_from_spec(spec);spec.loader.exec_module(mod)
+    for s in list_scenes():
+        assert not mod.check(s['scene_id']), f"kit contract violations: {mod.check(s['scene_id'])}"
 
 @pytest.mark.integration
 def test_langgraph_integration():
