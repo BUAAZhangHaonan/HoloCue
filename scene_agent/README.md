@@ -13,8 +13,8 @@
    - `feasibility` — 工程可行与差异化(合法枚举、锚点、资产量级、与现有 9 场景任务图不重合)
    报告写入 `reviews/<scene_id>/round<N>_<role>.md`,结论行 `VERDICT: pass|fail`。
 3. **判定与迭代**:
-   - 三份报告全部 pass → 提案复制登记到 `candidates/`,记入 `candidates/INDEX.md`。
-   - 任一 fail → 主进程修订出 `vN+1`(旧版保留),**三轮审查全部重跑**(round N+1),因为修订改的是整份提案。
+   - 三份报告全部 pass → 设计正本随场景套件归档为 `scenes/<scene_id>/docs/design.md`,评审报告移入 `scenes/<scene_id>/reviews/`,`candidates/INDEX.md` 记录通过版本与轮次;proposals 中的过程稿随归档清理(历史在 git)。
+   - 任一 fail → 主进程修订出 `vN+1`(迭代期间旧版保留于 `proposals/`),**三轮审查全部重跑**(round N+1),因为修订改的是整份提案。
    - 修订不设轮数上限,但每轮全量留痕;连续 fail 说明方向不对,应放弃该 scene_id 并留档。
 4. **边界**:通过备选 ≠ 建模定稿。备选场景进入建模后仍沿用 `docs/09` §验收要点(含 Blender 渲染后的三轮独立视觉审核),那是另一道门。
 
@@ -25,9 +25,9 @@
 | `requirements.md` | 审查依据(三轮共用,含现有场景任务图基准) |
 | `reviewers.md` | 三个审查章程与报告格式 |
 | `proposal_template.md` | 提案结构模板(对齐 docs/09 场景设计) |
-| `proposals/` | 主进程提案,按 `<scene_id>_v<N>.md` 版本化 |
-| `reviews/<scene_id>/` | 各轮审查报告(roundN_research/realism/feasibility) |
-| `candidates/` | 三轮全通过后的备选归档 + INDEX |
+| `proposals/` | 主进程提案工作区,按 `<scene_id>_v<N>.md` 版本化;归档后过程稿清理(历史在 git) |
+| `reviews/<scene_id>/` | 审查进行时的各轮报告暂存(roundN_research/realism/feasibility);归档后移入 `scenes/<scene_id>/reviews/` |
+| `candidates/` | 三轮全通过后的归档索引(INDEX);设计正本与报告在对应场景套件内 |
 
 ## 运行记录
 
