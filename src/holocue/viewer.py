@@ -63,7 +63,11 @@ class Viewer:
                 if self.active_scene:
                     pos,look=self._camera(self.active_scene,self.scene_bounds.get(self.active_scene.scene_id,[]))
                     client.camera.position=pos;client.camera.look_at=look
-        self.load(init_id)
+        try:
+            self.load(init_id)
+        except Exception as e:  # noqa: BLE001 - fall back loudly, never crash the viewer
+            print(f'[viewer] HOLOCUE_INITIAL_SCENE={init_id!r} failed ({e!r}); loading first kit instead')
+            self.load(items[0]['scene_id'])
     def _camera(self,spec,bounds):
         """JSON camera by default; with fit_camera, back off along its axis until the
         scene bbox fills ~70% of a 50 deg perspective view (JSON positions were

@@ -75,6 +75,7 @@ def snap(job, s, d, elapsed):
         'assistant_message': s['assistant_message'], 'last_error': s.get('last_error'),
         'cues': cues_of(s), 'display_cues': len(d['cues']) if 'cues' in d else None,
         'raw_decision': (job.get('data') or {}).get('decision'),
+        'prompt_sha256': (job.get('data') or {}).get('prompt_sha256'),
     }
 
 

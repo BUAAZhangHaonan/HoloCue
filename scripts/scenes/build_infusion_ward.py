@@ -52,9 +52,9 @@ LAYOUT = {
         'BAG1': {'pose': ([-0.05, 0.55, 1.80], (1, 0, 0, 0)), 'label': '5% 糖袋',
                  'color': (230, 235, 240), 'capabilities': ['point', 'inspect_back'],
                  'anchors': {}, 'description': '背面贴配置标签(5% 葡萄糖);袋体贴面为径向面'},
-        'BAG2': {'pose': ([-0.42, 0.55, 1.80], (1, 0, 0, 0)), 'label': '10% 盐水袋',
+        'BAG2': {'pose': ([-0.42, 0.55, 1.80], (1, 0, 0, 0)), 'label': '10% 糖袋',
                  'color': (230, 235, 240), 'capabilities': ['point'],
-                 'anchors': {}, 'description': '消歧用,同型备用袋,背面标签为 10% 氯化钠'},
+                 'anchors': {}, 'description': '消歧用,同型备用袋,背面标签为 10% 葡萄糖'},
         'MONITOR': {'pose': ([-0.35, 1.35, 1.60], (1, 0, 0, 0)), 'label': '床头监护仪',
                     'color': (60, 70, 80), 'capabilities': ['point', 'wait'],
                     'anchors': {}, 'description': '心率/血氧数值,报警时黄色闪烁(报警为脚本时间线事件)'},
@@ -275,7 +275,7 @@ def main():
         'SLOT2': build_slot2,
         'STOPCOCK': build_stopcock,
         'BAG1': lambda: build_bag(M_FLUID, '5% GS 500ml'),
-        'BAG2': lambda: build_bag(M_FLUID, '10% NaCl 500ml'),
+        'BAG2': lambda: build_bag(M_FLUID, '10% GS 500ml'),
         'MONITOR': build_monitor,
     }
     for oid, fn in builders.items():

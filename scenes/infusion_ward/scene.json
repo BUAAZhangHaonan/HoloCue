@@ -128,7 +128,7 @@
     },
     {
       "object_id": "BAG2",
-      "label": "10% 盐水袋",
+      "label": "10% 糖袋",
       "asset": "scenes/infusion_ward/meshes/BAG2.glb",
       "pose": {
         "position_m": [
@@ -152,7 +152,7 @@
         "point"
       ],
       "anchors": {},
-      "description": "消歧用,同型备用袋,背面标签为 10% 氯化钠"
+      "description": "消歧用,同型备用袋,背面标签为 10% 葡萄糖"
     },
     {
       "object_id": "MONITOR",
