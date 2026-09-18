@@ -33,7 +33,7 @@
         "inspect_back"
       ],
       "anchors": {},
-      "description": ""
+      "description": "黄色积木,叠放任务的当前对象,placement 终点由 BASE 锚点决定"
     },
     {
       "object_id": "B",
@@ -69,7 +69,7 @@
           0.034
         ]
       },
-      "description": ""
+      "description": "蓝色积木,第二步背面检查对象,与 A 构成颜色消歧组"
     },
     {
       "object_id": "BASE",
@@ -103,10 +103,10 @@
           0.011
         ]
       },
-      "description": ""
+      "description": "绿色底板,A 的放置基准面(placement 锚点所在)"
     }
   ],
-  "initial_instruction": "先把 A 放到底板 BASE 上，然后检查 B 的背面。",
+  "initial_instruction": "先把 A 放到底板 BASE 上,然后检查 B 的背面。",
   "camera_position_m": [
     0.68,
     -0.85,

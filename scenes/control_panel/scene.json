@@ -33,7 +33,7 @@
         "inspect_back"
       ],
       "anchors": {},
-      "description": ""
+      "description": "旋钮 A,角度操作混淆项,顶部无指示线"
     },
     {
       "object_id": "B",
@@ -63,7 +63,7 @@
         "inspect_back"
       ],
       "anchors": {},
-      "description": "当前操作对象，顶部白线是角度指示线"
+      "description": "当前操作对象,顶部白线是角度指示线"
     },
     {
       "object_id": "C",
@@ -95,7 +95,7 @@
       "description": "背面有凸出的黄色定位结构"
     }
   ],
-  "initial_instruction": "把 B 逆时针转 30 度，接着检查 C 的背面。",
+  "initial_instruction": "把 B 逆时针转 30 度,接着检查 C 的背面。",
   "camera_position_m": [
     0.75,
     -0.83,

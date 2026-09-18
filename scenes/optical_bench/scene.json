@@ -138,8 +138,8 @@
         ],
         "wxyz": [
           0.087156,
-          -0.0,
-          -0.0,
+          0.0,
+          0.0,
           -0.996195
         ]
       },
@@ -170,7 +170,7 @@
   "environment": [
     {
       "prop_id": "optical_bench_breadboard",
-      "label": "",
+      "label": "光学面包板",
       "asset": "scenes/optical_bench/meshes/env/optical_bench_breadboard.glb",
       "pose": {
         "position_m": [
@@ -193,7 +193,7 @@
     },
     {
       "prop_id": "optical_bench_laser",
-      "label": "",
+      "label": "激光器",
       "asset": "scenes/optical_bench/meshes/env/optical_bench_laser.glb",
       "pose": {
         "position_m": [
@@ -216,7 +216,7 @@
     },
     {
       "prop_id": "optical_bench_table",
-      "label": "",
+      "label": "光学平台",
       "asset": "scenes/optical_bench/meshes/env/optical_bench_table.glb",
       "pose": {
         "position_m": [
@@ -239,7 +239,7 @@
     },
     {
       "prop_id": "optical_bench_beam",
-      "label": "",
+      "label": "导轨光梁",
       "asset": "scenes/optical_bench/meshes/env/optical_bench_beam.glb",
       "pose": {
         "position_m": [
@@ -262,7 +262,7 @@
     },
     {
       "prop_id": "optical_bench_mat",
-      "label": "",
+      "label": "工作台垫",
       "asset": "scenes/optical_bench/meshes/env/optical_bench_mat.glb",
       "pose": {
         "position_m": [
@@ -285,7 +285,7 @@
     },
     {
       "prop_id": "desk_lamp_arm_01",
-      "label": "",
+      "label": "工作台灯",
       "asset": "assets/meshes/env/desk_lamp_arm_01.glb",
       "pose": {
         "position_m": [
@@ -308,7 +308,7 @@
     },
     {
       "prop_id": "screwdrivers_02",
-      "label": "",
+      "label": "螺丝刀组",
       "asset": "assets/meshes/env/screwdrivers_02.glb",
       "pose": {
         "position_m": [
@@ -331,7 +331,7 @@
     },
     {
       "prop_id": "magnifying_glass_01",
-      "label": "",
+      "label": "放大镜",
       "asset": "assets/meshes/env/magnifying_glass_01.glb",
       "pose": {
         "position_m": [
@@ -354,7 +354,7 @@
     },
     {
       "prop_id": "binder_notebook",
-      "label": "",
+      "label": "实验记录本",
       "asset": "assets/meshes/env/binder_notebook.glb",
       "pose": {
         "position_m": [
@@ -377,7 +377,7 @@
     },
     {
       "prop_id": "circuit_board",
-      "label": "",
+      "label": "电路板",
       "asset": "assets/meshes/env/circuit_board.glb",
       "pose": {
         "position_m": [

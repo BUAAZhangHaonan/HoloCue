@@ -194,8 +194,8 @@
         ],
         "wxyz": [
           0.953717,
-          -0.0,
-          -0.0,
+          0.0,
+          0.0,
           -0.300706
         ]
       },
@@ -254,7 +254,7 @@
       "pose": {
         "position_m": [
           0.5,
-          -1.1200000047683716,
+          -1.12,
           0.0
         ],
         "wxyz": [
@@ -272,7 +272,7 @@
     },
     {
       "prop_id": "trowel_01",
-      "label": "",
+      "label": "手铲",
       "asset": "assets/meshes/env/trowel_01.glb",
       "pose": {
         "position_m": [
@@ -295,7 +295,7 @@
     },
     {
       "prop_id": "stone_01",
-      "label": "",
+      "label": "石块",
       "asset": "assets/meshes/env/stone_01.glb",
       "pose": {
         "position_m": [
@@ -318,7 +318,7 @@
     },
     {
       "prop_id": "rock_07",
-      "label": "",
+      "label": "岩石 A",
       "asset": "assets/meshes/env/rock_07.glb",
       "pose": {
         "position_m": [
@@ -341,7 +341,7 @@
     },
     {
       "prop_id": "rock_07_b",
-      "label": "",
+      "label": "岩石 B",
       "asset": "assets/meshes/env/rock_07.glb",
       "pose": {
         "position_m": [
@@ -351,8 +351,8 @@
         ],
         "wxyz": [
           0.976296,
-          -0.0,
-          -0.0,
+          0.0,
+          0.0,
           -0.21644
         ]
       },

@@ -33,7 +33,7 @@
         "inspect_back"
       ],
       "anchors": {},
-      "description": ""
+      "description": "蓝色插头,插入终点由插座 S 口面锚点唯一决定"
     },
     {
       "object_id": "S",
@@ -68,7 +68,7 @@
           0
         ]
       },
-      "description": ""
+      "description": "目标插座,口面即 insertion 锚点"
     },
     {
       "object_id": "C",
@@ -97,10 +97,10 @@
         "inspect_back"
       ],
       "anchors": {},
-      "description": ""
+      "description": "备用模块,背面检查对象,混淆项"
     }
   ],
-  "initial_instruction": "演示把 P 插进 S，插好后再检查 C。",
+  "initial_instruction": "演示把 P 插进 S,插好后再检查 C。",
   "camera_position_m": [
     0.6,
     -0.78,

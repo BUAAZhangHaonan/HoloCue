@@ -32,7 +32,7 @@
         "rotate"
       ],
       "anchors": {},
-      "description": "蜗虫式进气软管卡箍，黄锌色，逆时针松开"
+      "description": "蜗虫式进气软管卡箍,黄锌色,逆时针松开"
     },
     {
       "object_id": "PLUG",
@@ -61,7 +61,7 @@
         "insert"
       ],
       "anchors": {},
-      "description": "陶瓷白新火花塞，倒放在气门室盖前托槽内"
+      "description": "陶瓷白新火花塞,倒放在气门室盖前托槽内"
     },
     {
       "object_id": "PLUGPORT",
@@ -124,7 +124,7 @@
         "rotate"
       ],
       "anchors": {},
-      "description": "黑色塑料旋盖，顶部有开启方向箭头"
+      "description": "黑色塑料旋盖,顶部有开启方向箭头"
     },
     {
       "object_id": "TENSIONER",
@@ -153,7 +153,7 @@
         "rotate"
       ],
       "anchors": {},
-      "description": "发动机右端多楔带张紧轮，六角位释放张紧"
+      "description": "发动机右端多楔带张紧轮,六角位释放张紧"
     },
     {
       "object_id": "CONN",
@@ -182,10 +182,10 @@
         "inspect_back"
       ],
       "anchors": {},
-      "description": "针脚面朝发动机内侧，需翻转检查背面"
+      "description": "针脚面朝发动机内侧,需翻转检查背面"
     }
   ],
-  "initial_instruction": "把 CLAMP 逆时针转 90 度，接着把 PLUG 插进 PLUGPORT，最后检查 CONN 的背面。",
+  "initial_instruction": "把 CLAMP 逆时针转 90 度,接着把 PLUG 插进 PLUGPORT,最后检查 CONN 的背面。",
   "camera_position_m": [
     -0.85,
     1.55,

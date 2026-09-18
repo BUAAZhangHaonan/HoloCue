@@ -42,3 +42,7 @@
 **环境**:探方坑体(细分面+噪声位移+顶点色分层,PolyHaven `excavated_soil_wall` 纹理增强)、坑口土堆(`dirt`/`gravelly_sand`)、`trowel_01`(TROWEL 外观基准)、`rusted_spade_01`、毛刷/卷尺(程序化)、`hessian_230` 麻布沙袋、`wooden_crate_01` 文物箱、`stone_01`/`rock_07` 点缀、程序化全站仪+三脚架、`ceramic_pot` 文物箱内整罐。`render_hints`:ortho_scale≈2.1,grid_extent≈2.5,cue_scale=1.0,label_offset=0.25(标签抬出坑口)。
 
 ---
+
+## 状态注记（2026-09-18）
+
+scene_agent/requirements.md 的真实性判据将本场景标记为"判定猎奇、待替换"；本轮套件化整理维持其官方链地位不变，后续如启用替换场景，按 `scenes/_template/KIT_CHECKLIST.md` 走全流程后移除本套件。

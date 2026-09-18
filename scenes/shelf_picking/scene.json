@@ -171,7 +171,7 @@
   "environment": [
     {
       "prop_id": "shelf_picking_shelfwall",
-      "label": "",
+      "label": "货架墙",
       "asset": "scenes/shelf_picking/meshes/env/shelf_picking_shelfwall.glb",
       "pose": {
         "position_m": [
@@ -194,7 +194,7 @@
     },
     {
       "prop_id": "shelf_picking_conveyorbody",
-      "label": "",
+      "label": "输送机机体",
       "asset": "scenes/shelf_picking/meshes/env/shelf_picking_conveyorbody.glb",
       "pose": {
         "position_m": [
@@ -217,7 +217,7 @@
     },
     {
       "prop_id": "shelf_picking_floor",
-      "label": "",
+      "label": "地面区块",
       "asset": "scenes/shelf_picking/meshes/env/shelf_picking_floor.glb",
       "pose": {
         "position_m": [
@@ -240,7 +240,7 @@
     },
     {
       "prop_id": "shelf_picking_wallpanel",
-      "label": "",
+      "label": "墙板",
       "asset": "scenes/shelf_picking/meshes/env/shelf_picking_wallpanel.glb",
       "pose": {
         "position_m": [
@@ -263,7 +263,7 @@
     },
     {
       "prop_id": "cardboard_box_01",
-      "label": "",
+      "label": "纸箱",
       "asset": "assets/meshes/env/cardboard_box_01.glb",
       "pose": {
         "position_m": [
@@ -286,7 +286,7 @@
     },
     {
       "prop_id": "plastic_crate_01",
-      "label": "",
+      "label": "塑料筐一号",
       "asset": "assets/meshes/env/plastic_crate_01.glb",
       "pose": {
         "position_m": [
@@ -309,7 +309,7 @@
     },
     {
       "prop_id": "plastic_crate_02",
-      "label": "",
+      "label": "塑料筐二号",
       "asset": "assets/meshes/env/plastic_crate_02.glb",
       "pose": {
         "position_m": [
@@ -332,7 +332,7 @@
     },
     {
       "prop_id": "wooden_crate_02",
-      "label": "",
+      "label": "木箱",
       "asset": "assets/meshes/env/wooden_crate_02.glb",
       "pose": {
         "position_m": [
@@ -355,7 +355,7 @@
     },
     {
       "prop_id": "Barrel_02",
-      "label": "",
+      "label": "物料桶",
       "asset": "assets/meshes/env/Barrel_02.glb",
       "pose": {
         "position_m": [
@@ -378,7 +378,7 @@
     },
     {
       "prop_id": "cement_bag",
-      "label": "",
+      "label": "水泥袋",
       "asset": "assets/meshes/env/cement_bag.glb",
       "pose": {
         "position_m": [
@@ -401,7 +401,7 @@
     },
     {
       "prop_id": "hand_truck",
-      "label": "",
+      "label": "手推车",
       "asset": "assets/meshes/env/hand_truck.glb",
       "pose": {
         "position_m": [
@@ -424,7 +424,7 @@
     },
     {
       "prop_id": "steel_frame_shelves_02",
-      "label": "",
+      "label": "钢架货架",
       "asset": "assets/meshes/env/steel_frame_shelves_02.glb",
       "pose": {
         "position_m": [
