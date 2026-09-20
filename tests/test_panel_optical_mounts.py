@@ -6,6 +6,7 @@ import pytest
 from holocue import modeling
 from holocue.config import root,load_scene
 from holocue.assets import load_asset
+from holocue.models import SceneSpec
 from panel_optical_geometry import mesh_map,fingerprint,material,cavity_evidence,latch_seat_evidence,bottom_contacts,exterior_evidence,sweep
 
 FIXTURE_DIR=Path(__file__).parent/'fixtures/panel_optical_mounts'
@@ -22,7 +23,11 @@ def pack(request,tmp_path_factory):
     return {'scene_id':sid,'spec':spec,'directory':directory,'raw':raw,'loaded':loaded,'world':world,'raw_world':raw_world}
 
 def test_only_exact_whitelist_changes_geometry_and_all_contracts_survive(pack):
-    sid=pack['scene_id'];old=BASELINE['scenes'][sid];spec=pack['spec'];assert spec.model_dump(mode='json')==old['scene_contract']
+    sid=pack['scene_id'];old=BASELINE['scenes'][sid];spec=pack['spec']
+    original=SceneSpec.model_validate(old['scene_contract'])
+    # Only the explicitly tested optical environment orientation is new.
+    original.render_hints.environment_wxyz=spec.render_hints.environment_wxyz
+    assert spec==original
     for env in (pack['loaded']['workstation'],mesh_map(load_asset(str(root()/spec.environment[0].asset),spec.asset_axes))):
         assert set(env)==set(old['environment_fingerprints'])
         for name,digest in old['environment_fingerprints'].items():

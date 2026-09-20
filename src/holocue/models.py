@@ -77,6 +77,14 @@ class RenderHints(Strict):
     viewport_margin: float = Field(default=.14,ge=.05,le=.35)
     background_rgb: tuple[int,int,int] = (233,238,242)
     workspace_bounds_m: tuple[tuple[float,float,float],tuple[float,float,float]] | None = None
+    environment_wxyz: tuple[float,float,float,float] = (1.,0.,0.,0.)
+
+    @field_validator('environment_wxyz')
+    @classmethod
+    def environment_unit_quaternion(cls,value):
+        if abs(sum(component*component for component in value)-1)>1e-4:
+            raise ValueError('environment_wxyz must be a unit quaternion')
+        return value
 
 class TaskStep(Strict):
     target_id: str

@@ -274,6 +274,15 @@
     "RenderHints": {
       "additionalProperties": false,
       "properties": {
+        "environment_wxyz": {
+          "default": [1.0, 0.0, 0.0, 0.0],
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [{"type": "number"}, {"type": "number"}, {"type": "number"}, {"type": "number"}],
+          "title": "Environment Wxyz",
+          "description": "Finite unit quaternion; norm is validated by RenderHints.",
+          "type": "array"
+        },
         "ortho_scale_m": {
           "default": 0.91,
           "exclusiveMinimum": 0,

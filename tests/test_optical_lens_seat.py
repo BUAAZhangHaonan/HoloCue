@@ -58,6 +58,7 @@ def lenses(tmp_path_factory):
 def test_original_optical_task_camera_and_object_contracts_are_unchanged(lenses):
     spec,_,_=lenses
     original=SceneSpec.model_validate(json.loads((FIXTURE/'scene.json').read_text()))
+    original.render_hints.environment_wxyz=spec.render_hints.environment_wxyz
     assert spec==original
 
 @pytest.mark.parametrize('oid',['L1','L2'])

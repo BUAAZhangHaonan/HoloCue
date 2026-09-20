@@ -83,7 +83,8 @@ class SceneRenderer:
         scene=client.scene
         scene.set_up_direction('+z')
         # Modest HDR fill preserves white markings and recessed surface contrast.
-        scene.configure_environment_map('studio',background=False,environment_intensity=.1)
+        scene.configure_environment_map('studio',background=False,environment_intensity=.1,
+            environment_wxyz=spec.render_hints.environment_wxyz)
         # Direct lighting keeps material shading without approximate cascade
         # shadow bands obscuring small inspection surfaces and printed labels.
         scene.configure_default_lights(enabled=True,cast_shadow=False)
