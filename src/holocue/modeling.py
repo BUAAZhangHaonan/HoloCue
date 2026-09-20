@@ -159,6 +159,11 @@ def make_object(obj: SceneObject) -> Assembly:
         for theta in np.linspace(0,2*np.pi,28,endpoint=False):
             a.cylinder(min(x,y)*.018,z*.62,(min(x,y)*.437*np.cos(theta),min(x,y)*.437*np.sin(theta),z*.05),DARK,name='knurl')
         a.box((x*.065,y*.29,z*.025),(0,y*.23,z*.412),LIGHT,name='index_mark')
+        if obj.object_id=='OILCAP':
+            # Join the cap's original flange and grip without moving either.
+            a.cylinder(min(x,y)/3,z*.02,(0,0,-z*.31),c,name='cap_grip_collar')
+        elif obj.object_id in ('A','B','GUARD'):
+            a.cylinder(min(x,y)/3,z*.02,(0,0,-z*.31),c,name='mount_neck')
         a.transform(trimesh.geometry.align_vectors([0,0,1],obj.interaction.rotation_axis_local))
     elif k=='module':
         a.box((x,y,z),(0,0,0),c,name='housing')
@@ -284,14 +289,26 @@ def make_object(obj: SceneObject) -> Assembly:
         a.label(obj.object_id+'\nBATCH 027',(0,y/2+.001,0),x*.70,z*.50,(0,1,0))
     elif k in ('lens','mirror'):
         center=(0,0,z*.16)
-        a.ring(x*.34,x*.48,y*.54,center,DARK,(0,1,0),'optic_retainer')
+        lens_seat=k=='lens' and obj.object_id in ('L1','L2')
+        if lens_seat:
+            # Preserve the original 48-sided ring surfaces around a real blind
+            # seat. Its bottom face receives the post below the optical opening.
+            plane=cq.Plane(origin=(0,-y*.27,z*.16),xDir=(1,0,0),normal=(0,1,0))
+            ring=cq.Workplane(plane).polygon(48,x*.96).polygon(48,x*.68).extrude(y*.54)
+            seat=cq.Workplane('XY').workplane(offset=-z*.5-.005).circle(.0071).extrude(z*.5-.015)
+            a.add(cad_mesh(ring.cut(seat)),DARK,metal=.6,name='optic_retainer')
+        else:
+            a.ring(x*.34,x*.48,y*.54,center,DARK,(0,1,0),'optic_retainer')
         if k=='lens':
             a.sphere((x*.35,y*.15,x*.35),center,(145,192,202),'convex_lens')
         else:
             a.add(trimesh.creation.cylinder(x*.35,.004,sections=64),
                   (192,209,218),(0,-y*.20,z*.16),axis=(0,1,0),
                   metal=.95,rough=.08,name='mirror_face')
-        a.cylinder(.007,z*.5,(0,0,-z*.25),STEEL,name='mounting_post')
+        if lens_seat:
+            a.cylinder(.007,z*.5-.020,(0,0,(-z*.5-.020)/2),STEEL,name='mounting_post')
+        else:
+            a.cylinder(.007,z*.5,(0,0,-z*.25),STEEL,name='mounting_post')
         for xx in (-x*.37,x*.37):a.cylinder(.005,.018,(xx,y*.36,z*.18),BRASS,(0,1,0),'adjuster')
         if k=='mirror':
             base_radius=min(x*.40,y*.48)
@@ -374,11 +391,14 @@ def make_object(obj: SceneObject) -> Assembly:
         a.cylinder(z*.47,y*.48,(0,y*.20,0),(144,98,56),(0,1,0),'handle')
         a.cylinder(.005,y*.20,(0,-y*.02,0),STEEL,(0,1,0),'tang')
     elif k=='screw':
-        a.cylinder(y*.28,x*.74,(-x*.06,0,0),STEEL,(1,0,0),'threaded_shank')
+        extension=.019 if obj.object_id=='CLAMP' else 0.
+        # Extend only the front of this clamp's shaft; its rear and ring teeth
+        # stay fixed while the original head clears the molded hose shoulder.
+        a.cylinder(y*.28,x*.74+extension,(-x*.06+extension/2,0,0),STEEL,(1,0,0),'threaded_shank')
         for xx in np.linspace(-x*.40,x*.18,9):a.ring(y*.26,y*.36,.001,(xx,0,0),STEEL,(1,0,0),'thread')
         head=trimesh.creation.cylinder(y*.53,x*.23,sections=6)
-        a.add(head,c,(x*.30,0,0),axis=(1,0,0),metal=.7,name='hex_head')
-        a.box((.001,y*.65,.0018),(x*.423,0,0),DARK,name='driver_slot')
+        a.add(head,c,(x*.30+extension,0,0),axis=(1,0,0),metal=.7,name='hex_head')
+        a.box((.001,y*.65,.0018),(x*.423+extension,0,0),DARK,name='driver_slot')
     elif k=='sparkplug':
         a.cylinder(.007,z*.39,(0,0,z*.20),LIGHT,name='ceramic')
         for zz in np.linspace(0,z*.33,6):a.cylinder(.008,.003,(0,0,zz),LIGHT,name='ceramic_rib')
@@ -442,9 +462,10 @@ def make_object(obj: SceneObject) -> Assembly:
         a.label('TRAINING\n'+obj.object_id,(0,y*.491,z*.22),x*.75,z*.13,(0,1,0))
         a.label(obj.object_id,(0,-y*.493,0),x*.75,z*.15)
     elif k=='lever':
-        a.cylinder(.016,.032,(0,0,0),BRASS,(0,-1,0),'spindle')
-        a.box((x*.26,y*.55,z*.80),(0,-y*.6,z*.23),c,name='handle')
-        a.cylinder(.010,.006,(0,-y*.8,0),STEEL,(0,-1,0),'retaining_bolt')
+        handle_y=-y*2
+        a.cylinder(.016,.016-handle_y,(0,(.016+handle_y)/2,0),BRASS,(0,-1,0),'spindle')
+        a.box((x*.26,y*.55,z*.80),(0,handle_y,z*.23),c,name='handle')
+        a.cylinder(.010,.006,(0,handle_y-y*.2,0),STEEL,(0,-1,0),'retaining_bolt')
     elif k=='gauges':
         a.box((x,y,z),(0,0,0),DARK)
         for xx in (-x*.31,0,x*.31):
@@ -468,9 +489,16 @@ def make_object(obj: SceneObject) -> Assembly:
         hollow_front(a,(x,y,z),.006,c)
         for xx in (-x*.30,x*.30):a.box((.004,y*.7,.004),(xx,0,-z*.35),STEEL,name='guide')
     elif k=='stopcock':
-        a.cylinder(.009,.025,(0,0,0),STEEL,(0,-1,0),'rotor')
-        a.box((x,.009,.014),(0,-y*.45,0),c,name='handle')
-        a.box((.014,.009,z*.52),(0,-y*.45,z*.18),c,name='pointer')
+        # Extend the shaft towards the unchanged handle, keeping the rear cap
+        # at +.0125 and the authored rotation axis at the object origin.
+        a.cylinder(.009,.02925,(0,-.002125,0),STEEL,(0,-1,0),'rotor')
+        # Preserve both rounded shapes, but make their overlapping material one
+        # solid so the visible front/back planes are represented only once.
+        handle=cq.Workplane('XY').box(x,.009,.014).edges().fillet(min(min(x,.009,.014)*.16,.006))
+        pointer=cq.Workplane('XY').box(.014,.009,z*.52).edges().fillet(min(min(.014,.009,z*.52)*.16,.006))
+        handle=handle.translate((0,-y*.45,0))
+        pointer=pointer.translate((0,-y*.45,z*.18))
+        a.add(cad_mesh(handle.union(pointer)),c,name='handle_pointer')
     elif k=='training_bag':
         a.box((x,y,z*.89),(0,0,-z*.025),c,name='bag_body')
         a.box((x,.009,.016),(0,0,z*.45),LIGHT,name='welded_seal')
@@ -496,6 +524,62 @@ def table(a,center,size=(.90,.75),top=.03,height=.73,color=LIGHT):
 def tube_path(a,points,radius,color=RUBBER):
     for start,end in zip(points,points[1:]):a.rod(start,end,radius,color)
     for point in points[1:-1]:a.sphere((radius,)*3,point,color)
+
+
+def engine_clamp_hose(a):
+    """Molded hose shoulder and band-mounted seat, on the original path.
+
+    The nine existing screw teeth are annular teaching geometry, not a helix.
+    Matching internal grooves let that unchanged geometry turn in a metal seat.
+    """
+    points=np.asarray([(-.46,-.25,1.04),(-.32,-.12,1.06),(-.27,.06,1.03)])
+
+    def faceted_solid(mesh):
+        # Preserve the authored twenty-sided tubes and faceted elbow exterior;
+        # rebuilding them as circular CAD primitives would change other walls.
+        faces=[cq.Face.makeFromWires(cq.Wire.makePolygon(
+            [cq.Vector(*v) for v in triangle],close=True)) for triangle in mesh.triangles]
+        return cq.Workplane(obj=cq.Solid.makeSolid(cq.Shell.makeShell(faces)))
+
+    def roof_cutter(setback=0.):
+        high,low=1.122-setback,1.087-setback
+        return (cq.Workplane('YZ').moveTo(-.3,high).lineTo(-.166,high)
+            .bezier([(-.166+.05/3,high),(-.116-.05/3,low),(-.116,low)],includeCurrent=True)
+            .lineTo(-.084,low)
+            .bezier([(-.084+.05/3,low),(-.034-.05/3,high),(-.034,high)],includeCurrent=True)
+            .lineTo(.15,high).lineTo(.15,1.3).lineTo(-.3,1.3).close().extrude(1.,both=True))
+
+    lumen=cq.Workplane(obj=cq.Solid.makeSphere(.045,cq.Vector(*points[1]),angleDegrees1=-90))
+    originals=[]
+    for start,end in zip(points,points[1:]):
+        delta=end-start
+        bore=cq.Solid.makeCylinder(.045,float(np.linalg.norm(delta)),cq.Vector(*start),cq.Vector(*delta))
+        lumen=lumen.union(bore)
+        originals.append(trimesh.creation.cylinder(radius=.052,segment=[start,end],sections=20))
+    elbow=trimesh.creation.icosphere(subdivisions=2,radius=.052)
+    elbow.apply_translation(points[1]);originals.append(elbow)
+    lumen=lumen.cut(roof_cutter(.010))
+    outer_cut=roof_cutter()
+    for index,mesh in enumerate(originals):
+        # Keep each original node/material, including the existing overlaps at
+        # the elbow, but subtract the same continuous lumen from all three.
+        wall=faceted_solid(mesh).cut(outer_cut).cut(lumen)
+        a.add(cad_mesh(wall),DARK,metal=.45 if index<2 else 0.,
+              name='tube' if index<2 else 'rounded_part')
+
+    band=trimesh.creation.annulus(.051,.055,.023,sections=48)
+    band.apply_transform(trimesh.geometry.align_vectors([0,0,1],[0,1,0]))
+    band.apply_translation(points[1])
+    axis=cq.Vector(1,0,0)
+    seat=cq.Workplane(obj=cq.Solid.makeCylinder(.011,.051905,cq.Vector(-.32421,-.10,1.10),axis))
+    shoe=cq.Workplane('XY').box(.032,.028,.0025).translate((-.306,-.10,1.08825))
+    seat=seat.union(shoe)
+    bore=cq.Solid.makeCylinder(.0052,.06,cq.Vector(-.32021,-.10,1.10),axis)
+    seat=seat.cut(bore)
+    for xx in np.linspace(-.3188,-.29154,9):
+        groove=cq.Solid.makeCylinder(.0066,.0012,cq.Vector(float(xx)-.0006,-.10,1.10),axis)
+        seat=seat.cut(groove)
+    a.add(cad_mesh(faceted_solid(band).union(seat)),STEEL,metal=.6,name='clamp_band')
 
 
 def inlaid_work_surface(a,spec):
@@ -567,7 +651,13 @@ def make_environment(spec: SceneSpec) -> Assembly:
             for xx in np.linspace(-.48,.48,17):a.box((.0006,length*.91,.0004),(xx,center_y,.0333),(76,111,116),name='mat_line')
         a.box((3,3,.035),(0,0,-.755),(165,176,184),name='floor')
     if sid=='control_panel':
-        a.box((.41,.18,.025),(-.08,-.04,.0425),(117,137,153),name='instrument_panel')
+        panel=cq.Workplane('XY').box(.41,.18,.025).edges().fillet(.004).translate((-.08,-.04,.0425))
+        for oid in ('A','B'):
+            o=objects[oid];px,py,pz=o.pose.position_m
+            seat_z=pz-o.size_m[2]*.44
+            recess=cq.Workplane('XY').center(px,py).circle(min(o.size_m[:2])*.47+.00025)
+            panel=panel.cut(recess.extrude(.056-seat_z).translate((0,0,seat_z)))
+        a.add(cad_mesh(panel),(117,137,153),name='instrument_panel')
         a.box((.145,.12,.015),(.18,.17,.0375),DARK,name='module_support')
         for oid in ('A','B'):
             p=np.asarray(objects[oid].pose.position_m)
@@ -584,7 +674,12 @@ def make_environment(spec: SceneSpec) -> Assembly:
         body=cq.Workplane('XY').box(.19,.24,.09).edges().fillet(.008)
         opening=cq.Workplane('XY').box(.105,.153,.08).translate((0,0,.04))
         a.add(cad_mesh(body.cut(opening)),LIGHT,(0,.025,.090),name='airframe')
-        a.box((.028,.040,.038),(.072,.025,.151),DARK,name='latch_support')
+        support=cq.Workplane('XY').box(.028,.040,.038).edges().fillet(.00448).translate((.072,.025,.151))
+        latch=objects['GUARD'];px,py,pz=latch.pose.position_m
+        seat_z=pz-latch.size_m[2]*.44
+        # This shallow circular seat opens through the support's narrow sides.
+        recess=cq.Workplane('XY').center(px,py).circle(min(latch.size_m[:2])*.47+.00025)
+        a.add(cad_mesh(support.cut(recess.extrude(.171-seat_z).translate((0,0,seat_z)))),DARK,name='latch_support')
         for xx in (-.22,.22):
             for yy in (-.22,.22):
                 a.rod((np.sign(xx)*.07,np.sign(yy)*.075,.096),(xx,yy,.099),.016,DARK,'arm')
@@ -597,7 +692,13 @@ def make_environment(spec: SceneSpec) -> Assembly:
             for yy in np.arange(-.19,.96,.035):a.cylinder(.002,.001,(xx,yy,.0555),DARK,name='threaded_hole')
         for oid in ('L2','M'):
             o=objects[oid];px,py,pz=o.pose.position_m
-            a.cylinder(.014,.050,(px,py,.079),STEEL,name='fixed_post')
+            # Retain the original forty-sided outside wall; only the axial
+            # blind bore removes material above the existing shaft end.
+            rim=[(.014*np.cos(t),.014*np.sin(t)) for t in np.linspace(0,2*np.pi,40,endpoint=False)]
+            post=cq.Workplane('XY').polyline(rim).close().extrude(.050).translate((px,py,.054))
+            seat_z=pz-o.size_m[2]*.5
+            bore=cq.Workplane('XY').center(px,py).circle(.00725).extrude(.105-seat_z).translate((0,0,seat_z))
+            a.add(cad_mesh(post.cut(bore)),STEEL,metal=.65,name='fixed_post')
             a.box((.09,.08,.012),(px,py,.061),DARK,name='post_base')
         a.box((.15,.13,.015),(.22,-.12,.058),DARK,name='optic_tray')
         a.cylinder(.012,.045,(-.31,.88,.058),STEEL,name='screen_post')
@@ -663,8 +764,7 @@ def make_environment(spec: SceneSpec) -> Assembly:
             a.cylinder(.018,.023,(xx,-.112,.82),BRASS,(0,-1,0),'core_plug')
         for yy in np.linspace(-.01,.30,4):
             tube_path(a,[(-.16,yy,1.00),(-.31,yy,1.04),(-.40,yy,.93)],.033,STEEL)
-        tube_path(a,[(-.46,-.25,1.04),(-.32,-.12,1.06),(-.27,.06,1.03)],.052,DARK)
-        a.ring(.051,.055,.023,(-.32,-.12,1.06),STEEL,(0,1,0),'clamp_band')
+        engine_clamp_hose(a)
         a.box((.15,.13,.025),(.27,-.27,1.0075),DARK,name='sparkplug_tray')
         a.box((.12,.12,.05),(.44,-.15,.985),DARK,name='connector_rest')
         for yy in (.04,.24):a.cylinder(.073,.030,(.38,yy,.90),DARK,(1,0,0),'belt_pulley')
@@ -712,12 +812,53 @@ def make_environment(spec: SceneSpec) -> Assembly:
             a.ring(.093,.101,.024,(xx,.06,.44),STEEL,name='bottle_restraint')
             a.rod((xx,.16,.44),(xx,.37,.44),.012,STEEL,'restraint_bracket')
         a.box((1.10,.10,1.05),(0,.77,1.02),(124,151,166),name='manifold_panel')
-        a.rod((-.42,.62,1.25),(.45,.62,1.25),.024,BRASS,'manifold')
+        # Keep the original faceted manifold and hose cross sections outside
+        # this local valve junction. A blind shaft seat replaces solid overlap.
+        def valve_segment(start,end,radius):
+            segment=trimesh.creation.cylinder(radius=radius,segment=np.asarray([start,end]),sections=20)
+            direction=np.asarray(end)-start;length=np.linalg.norm(direction);direction/=length
+            ring=segment.vertices[np.abs((segment.vertices-start)@direction)<1e-8]
+            ring=ring[np.linalg.norm(ring-start,axis=1)>radius/2]
+            u=ring[0]-start;v=np.cross(direction,u)
+            ring=ring[np.argsort(np.arctan2((ring-start)@v,(ring-start)@u))]
+            wire=cq.Wire.makePolygon([cq.Vector(*p) for p in ring],close=True)
+            return cq.Workplane(obj=cq.Solid.extrudeLinear(wire,[],cq.Vector(*(direction*length))))
+        hose_points=[(.34,.61,1.25),(.49,.53,1.05),(.62,.22,.58),(.70,.10,.72),(.67,.08,.90)]
+        hose_joint=tuple(np.asarray(hose_points[0])+.16*(np.asarray(hose_points[1])-hose_points[0]))
+        manifold=valve_segment((-.42,.62,1.25),(.45,.62,1.25),.024)
+        boss=cq.Workplane(cq.Plane(origin=(.34,.584,1.25),normal=(0,1,0))).circle(.022).extrude(.052)
+        branch=valve_segment(hose_points[0],hose_joint,.012)
+        bore=cq.Workplane(cq.Plane(origin=(.34,.570,1.25),normal=(0,1,0))).circle(.01625).extrude(.056)
+        a.add(cad_mesh(manifold.union(boss).union(branch).cut(bore)),BRASS,metal=.45,name='manifold')
         table(a,(.55,-.30),(.28,.25),.861,.80)
-        tube_path(a,[(.34,.61,1.25),(.49,.53,1.05),(.62,.22,.58),(.70,.10,.72),(.67,.08,.90)],.012,RUBBER)
+        tube_path(a,[hose_joint,*hose_points[1:]],.012,RUBBER)
         a.cylinder(.017,.030,(.67,.08,.91),DARK,name='parked_hose_cap')
         a.rod((.67,.09,.88),(.67,.73,.88),.006,STEEL,'hose_storage_hook')
         a.label('DEPRESSURIZED\nTRAINING EQUIPMENT',(0,.712,.94),.70,.23)
+        # Keep the bottle poses and original detail meshes. These annular seats
+        # bear against the flat boot undersides, leaving the lower domes clear.
+        for obj in spec.objects:
+            if obj.object_id in ('BOTTLE1','BOTTLE2','BOTTLE3'):
+                xx,yy,zz=obj.pose.position_m
+                boot_bottom=zz-obj.size_m[2]*.43-.0125
+                seat_height=boot_bottom-.19
+                a.ring(obj.size_m[0]*.46,.105,seat_height,
+                       (xx,yy,.19+seat_height/2),RUBBER,name='bottle_seat')
+        for xx in (-.44,.44):
+            for yy in (-.065,.20):
+                a.cylinder(.045,.07,(xx,yy,.035),RUBBER,name='rack_foot')
+        # A floor-supported rear frame carries the panel and connects to the
+        # rack; the bottles themselves do not carry the panel.
+        for xx in (-.46,.46):
+            a.cylinder(.045,.04,(xx,.77,.02),RUBBER,name='panel_foot')
+            a.cylinder(.022,.49,(xx,.77,.285),STEEL,name='panel_post')
+            a.rod((xx,.23,.13),(xx,.77,.13),.018,STEEL,'rack_rear_tie')
+        for xx in (-.35,0,.35):
+            a.rod((xx,.36,.44),(xx,.735,.54),.012,STEEL,'restraint_panel_brace')
+        for xx in (-.24,.24):
+            a.rod((xx,.62,1.25),(xx,.735,1.25),.012,STEEL,'manifold_standoff')
+        for xx in (-.14,.14):
+            a.box((.035,.035,.035),(xx,.711,1.515),DARK,name='gauge_panel_mount')
     elif sid=='infusion_ward':
         a.box((2.6,2.6,.06),(0,.20,-.03),(186,199,203),name='training_room_floor')
         table(a,(-.45,-.22),(.50,.44),.95,.88)
@@ -733,6 +874,68 @@ def make_environment(spec: SceneSpec) -> Assembly:
         a.rod((-.44,.62,1.27),(-.44,.62,.08),.015,STEEL,'monitor_stand')
         a.rod((.065,.17,1.01),(.135,.17,1.01),.007,LIGHT,'static_stopcock_body')
         a.label('TEACHING EQUIPMENT',(-.45,-.443,.88),.38,.10)
+        # Add physical supports without moving the teaching objects or replacing
+        # any authored detail. Each support meets the existing mating surfaces.
+        a.cylinder(.15,.026,(-.44,.62,.013),DARK,name='monitor_floor_base')
+        a.rod((-.44,.62,.024),(-.44,.62,.09),.015,STEEL,'monitor_stand_extension')
+        a.ring(.0135,.022,.04,(.03,.49,1.30),STEEL,name='pump_pole_clamp')
+        a.rod((.05,.35,1.30),(.03,.49,1.30),.015,STEEL,'pump_pole_bracket')
+        a.box((.085,.005,.09),(.05,.244,1.30),LIGHT,name='slot_chassis_mount')
+        a.ring(.0135,.021,.03,(.03,.49,1.01),STEEL,name='stopcock_pole_clamp')
+        a.rod((.10,.173,1.01),(.03,.49,1.01),.007,STEEL,'stopcock_pole_bracket')
+        # The stationary journal starts exactly at the rotor rear cap, leaving
+        # its -Y axis and complete 90-degree handle sweep unchanged.
+        a.cylinder(.007,.0115,(.10,.16825,1.01),LIGHT,(0,1,0),'stopcock_rotor_journal')
+        a.cylinder(.014,.022,(.03,.49,1.935),STEEL,name='pole_hanger_socket')
+        for theta in np.linspace(0,2*np.pi,5,endpoint=False):
+            end=(.03+.30*np.cos(theta),.49+.30*np.sin(theta),.045)
+            a.ring(.031,.045,.025,end,RUBBER,(1,0,0),'caster_floor_tread')
+        for xx in (-.66,-.24):
+            for yy in (-.396,-.044):
+                a.box((.035,.035,.04),(xx,yy,.02),DARK,name='table_floor_foot')
     else:
         raise ValueError(f'unknown workstation {sid}')
+    # Append floor supports after the authored environment so original node IDs,
+    # materials, task objects, and their reference frames remain unchanged.
+    if sid in ('control_panel','optical_bench'):
+        cy=.37 if sid=='optical_bench' else .12
+        depth=1.5 if sid=='optical_bench' else .94
+        for xx in (-1.05*.42,1.05*.42):
+            for yy in (cy-depth*.40,cy+depth*.40):
+                a.box((.035,.035,.0025),(xx,yy,-.73625),DARK,name='table_ground_foot')
+    elif sid=='cnc_toolchange':
+        for xx in (.05-1.25*.42,.05+1.25*.42):
+            for yy in (-.05-.74*.40,-.05+.74*.40):
+                a.box((.035,.035,.04),(xx,yy,.02),DARK,name='table_ground_foot')
+    elif sid=='dive_fillstation':
+        for xx in (.55-.28*.42,.55+.28*.42):
+            for yy in (-.30-.25*.40,-.30+.25*.40):
+                a.box((.035,.035,.026),(xx,yy,.013),DARK,name='table_ground_foot')
+    elif sid=='server_rack':
+        for cx in (-.72,.72):
+            for xx in (cx-.55*.42,cx+.55*.42):
+                for yy in (-.22-.61*.40,-.22+.61*.40):
+                    a.box((.035,.035,.025),(xx,yy,.0125),DARK,name='table_ground_foot')
+        for xx in (-.28,.28):
+            for yy in (-.045,.61):
+                a.box((.035,.035,.04),(xx,yy,.02),DARK,name='rack_ground_foot')
+    elif sid=='shelf_picking':
+        for cx,cy,width,depth in ((-.25,-.62,.49,.41),(.64,-.14,.42,.40),(1.08,.70,.44,1.05)):
+            for xx in (cx-width*.42,cx+width*.42):
+                for yy in (cy-depth*.40,cy+depth*.40):
+                    a.box((.035,.035,.025),(xx,yy,.0125),DARK,name='table_ground_foot')
+    elif sid=='engine_bay':
+        # A fixed teaching stand bears on the existing cradle underside z=.535.
+        for xx in (-.46,.46):
+            a.box((.12,1.10,.04),(xx,.20,.02),DARK,name='engine_stand_base')
+            for yy in (-.17,.57):
+                a.box((.08,.08,.495),(xx,yy,.2875),STEEL,metal=.55,name='engine_stand_post')
+        # The fender/crossmember frame and connector rest have separate gaps
+        # above the cradle. Join each to its existing bearing surfaces.
+        for xx in (-.57,.57):
+            a.box((.045,.12,.07),(xx,.20,.82),STEEL,metal=.55,name='engine_fender_riser')
+        a.box((.055,.055,.175),(.44,-.15,.8725),STEEL,metal=.55,name='engine_connector_post')
+        for yy in (.04,.24):
+            a.cylinder(.014,.025,(.3525,yy,.90),STEEL,(1,0,0),'engine_pulley_axle')
+        a.cylinder(.005,.0027,(.27,-.27,1.02135),DARK,name='sparkplug_rest_pad')
     return a
