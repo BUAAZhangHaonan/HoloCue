@@ -2,6 +2,7 @@
 from __future__ import annotations
 import sqlite3,json,time,hashlib
 from pathlib import Path
+from contextlib import contextmanager
 from uuid import uuid4
 from .models import Session,UserMessage,Decision,SceneSpec
 from .state import ConflictError,apply_decision
@@ -19,8 +20,15 @@ class Store:
             CREATE TABLE IF NOT EXISTS events(seq INTEGER PRIMARY KEY AUTOINCREMENT,
                 session_id TEXT NOT NULL, timestamp REAL NOT NULL, kind TEXT NOT NULL, data TEXT NOT NULL);
             """)
+    @contextmanager
     def connection(self):
-        c=sqlite3.connect(self.path,timeout=10);c.row_factory=sqlite3.Row;return c
+        c=sqlite3.connect(self.path,timeout=10)
+        c.row_factory=sqlite3.Row
+        try:
+            with c:
+                yield c
+        finally:
+            c.close()
     def _read(self,c,sid):
         r=c.execute('SELECT data FROM sessions WHERE id=?',(sid,)).fetchone()
         if r is None:raise KeyError(sid)
@@ -30,8 +38,8 @@ class Store:
     def _event(self,c,sid,kind,data):
         c.execute('INSERT INTO events(session_id,timestamp,kind,data) VALUES(?,?,?,?)',
                   (sid,time.time(),kind,json.dumps(data,ensure_ascii=False)))
-    def create(self,scene_id,backend_mode):
-        s=Session(session_id=uuid4().hex,scene_id=scene_id,backend_mode=backend_mode)
+    def create(self,scene_id,backend_mode,scene_fingerprint=''):
+        s=Session(session_id=uuid4().hex,scene_id=scene_id,backend_mode=backend_mode,scene_fingerprint=scene_fingerprint)
         with self.connection() as c:self._save(c,s);self._event(c,s.session_id,'created',s.model_dump())
         return s
     def get(self,sid):

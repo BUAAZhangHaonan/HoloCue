@@ -115,10 +115,17 @@
       "type": "string"
     },
     "assistant_message": {
-      "maxLength": 300,
-      "minLength": 1,
-      "title": "Assistant Message",
-      "type": "string"
+      "anyOf": [
+        {
+          "maxLength": 300,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Assistant Message"
     },
     "cues": {
       "items": {

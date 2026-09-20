@@ -1,5 +1,221 @@
 {
   "$defs": {
+    "Interaction": {
+      "additionalProperties": false,
+      "properties": {
+        "rotation_axis_local": {
+          "default": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Rotation Axis Local",
+          "type": "array"
+        },
+        "pivot_local_m": {
+          "default": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Pivot Local M",
+          "type": "array"
+        },
+        "mating_pose": {
+          "$ref": "#/$defs/Pose"
+        },
+        "departure_axis_local": {
+          "default": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Departure Axis Local",
+          "type": "array"
+        },
+        "departure_distance_m": {
+          "default": 0.08,
+          "exclusiveMinimum": 0,
+          "title": "Departure Distance M",
+          "type": "number"
+        },
+        "approach_axis_local": {
+          "default": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Approach Axis Local",
+          "type": "array"
+        },
+        "approach_distance_m": {
+          "default": 0.12,
+          "exclusiveMinimum": 0,
+          "title": "Approach Distance M",
+          "type": "number"
+        },
+        "transit_height_m": {
+          "default": 0.15,
+          "minimum": 0,
+          "title": "Transit Height M",
+          "type": "number"
+        },
+        "inspect_point_local_m": {
+          "default": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Inspect Point Local M",
+          "type": "array"
+        },
+        "inspect_normal_local": {
+          "default": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Inspect Normal Local",
+          "type": "array"
+        },
+        "inspect_extent_m": {
+          "anyOf": [
+            {
+              "maxItems": 2,
+              "minItems": 2,
+              "prefixItems": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                }
+              ],
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Inspect Extent M"
+        },
+        "inspect_cue_clearance_m": {
+          "default": 0.002,
+          "minimum": 0,
+          "title": "Inspect Cue Clearance M",
+          "type": "number"
+        },
+        "cue_offset_local_m": {
+          "default": [
+            0.0,
+            0.0,
+            0.04
+          ],
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Cue Offset Local M",
+          "type": "array"
+        },
+        "duration_s": {
+          "default": 3.0,
+          "exclusiveMinimum": 0,
+          "title": "Duration S",
+          "type": "number"
+        }
+      },
+      "title": "Interaction",
+      "type": "object"
+    },
     "Pose": {
       "additionalProperties": false,
       "properties": {
@@ -83,7 +299,7 @@
           "type": "number"
         },
         "fit_camera": {
-          "default": false,
+          "default": true,
           "title": "Fit Camera",
           "type": "boolean"
         },
@@ -112,6 +328,90 @@
           },
           "title": "Fill Lights",
           "type": "array"
+        },
+        "fov_y_deg": {
+          "default": 42.0,
+          "maximum": 80,
+          "minimum": 20,
+          "title": "Fov Y Deg",
+          "type": "number"
+        },
+        "viewport_margin": {
+          "default": 0.14,
+          "maximum": 0.35,
+          "minimum": 0.05,
+          "title": "Viewport Margin",
+          "type": "number"
+        },
+        "background_rgb": {
+          "default": [
+            233,
+            238,
+            242
+          ],
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "Background Rgb",
+          "type": "array"
+        },
+        "workspace_bounds_m": {
+          "anyOf": [
+            {
+              "maxItems": 2,
+              "minItems": 2,
+              "prefixItems": [
+                {
+                  "maxItems": 3,
+                  "minItems": 3,
+                  "prefixItems": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "number"
+                    }
+                  ],
+                  "type": "array"
+                },
+                {
+                  "maxItems": 3,
+                  "minItems": 3,
+                  "prefixItems": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "number"
+                    }
+                  ],
+                  "type": "array"
+                }
+              ],
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Workspace Bounds M"
         }
       },
       "title": "RenderHints",
@@ -197,6 +497,43 @@
           "default": "",
           "title": "Description",
           "type": "string"
+        },
+        "frames": {
+          "additionalProperties": {
+            "$ref": "#/$defs/Pose"
+          },
+          "title": "Frames",
+          "type": "object"
+        },
+        "interaction": {
+          "$ref": "#/$defs/Interaction"
+        },
+        "recipe": {
+          "default": "",
+          "title": "Recipe",
+          "type": "string"
+        },
+        "size_m": {
+          "default": [
+            0.1,
+            0.1,
+            0.1
+          ],
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Size M",
+          "type": "array"
         }
       },
       "required": [
@@ -227,20 +564,7 @@
           "type": "string"
         },
         "pose": {
-          "$ref": "#/$defs/Pose",
-          "default": {
-            "position_m": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "wxyz": [
-              1.0,
-              0.0,
-              0.0,
-              0.0
-            ]
-          }
+          "$ref": "#/$defs/Pose"
         },
         "scale_m": {
           "default": [
@@ -271,13 +595,108 @@
       ],
       "title": "SceneProp",
       "type": "object"
+    },
+    "TaskContract": {
+      "additionalProperties": false,
+      "properties": {
+        "setting": {
+          "title": "Setting",
+          "type": "string"
+        },
+        "ordered_steps": {
+          "items": {
+            "$ref": "#/$defs/TaskStep"
+          },
+          "title": "Ordered Steps",
+          "type": "array"
+        },
+        "persistent_targets": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Persistent Targets",
+          "type": "array"
+        },
+        "interrupt_target": {
+          "title": "Interrupt Target",
+          "type": "string"
+        },
+        "interrupt_instruction": {
+          "title": "Interrupt Instruction",
+          "type": "string"
+        }
+      },
+      "required": [
+        "setting",
+        "ordered_steps",
+        "interrupt_target",
+        "interrupt_instruction"
+      ],
+      "title": "TaskContract",
+      "type": "object"
+    },
+    "TaskStep": {
+      "additionalProperties": false,
+      "properties": {
+        "target_id": {
+          "title": "Target Id",
+          "type": "string"
+        },
+        "action": {
+          "title": "Action",
+          "type": "string"
+        },
+        "reference_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reference Id"
+        },
+        "angle_deg": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Angle Deg"
+        },
+        "depth_requirement": {
+          "default": "precise",
+          "enum": [
+            "precise",
+            "persistent",
+            "neutral"
+          ],
+          "title": "Depth Requirement",
+          "type": "string"
+        }
+      },
+      "required": [
+        "target_id",
+        "action"
+      ],
+      "title": "TaskStep",
+      "type": "object"
     }
   },
   "additionalProperties": false,
   "properties": {
     "schema_version": {
-      "const": "1.0",
-      "default": "1.0",
+      "default": "1.1",
+      "enum": [
+        "1.0",
+        "1.1"
+      ],
       "title": "Schema Version",
       "type": "string"
     },
@@ -356,6 +775,15 @@
       "title": "Camera Look At M",
       "type": "array"
     },
+    "asset_axes": {
+      "default": "project_z_up",
+      "enum": [
+        "gltf_y_up",
+        "project_z_up"
+      ],
+      "title": "Asset Axes",
+      "type": "string"
+    },
     "environment": {
       "items": {
         "$ref": "#/$defs/SceneProp"
@@ -364,15 +792,18 @@
       "type": "array"
     },
     "render_hints": {
-      "$ref": "#/$defs/RenderHints",
-      "default": {
-        "ortho_scale_m": 0.91,
-        "grid_extent_m": 1.0,
-        "cue_scale": 1.0,
-        "label_offset_m": 0.12,
-        "fit_camera": false,
-        "fill_lights": []
-      }
+      "$ref": "#/$defs/RenderHints"
+    },
+    "task_contract": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/TaskContract"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
     }
   },
   "required": [

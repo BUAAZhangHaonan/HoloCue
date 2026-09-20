@@ -2,11 +2,11 @@
   "schema_version": "1.0",
   "n_budget": 6000,
   "allocation": "largest_remainder_proportional_priority_baseline",
-  "calibration": {"id": "preview-relative-v1", "kind": "illustrative", "sigma_units": "relative"},
+  "calibration": {"id": "preview-relative-v1", "kind": "analytic_preview", "sigma_units": "relative"},
   "profiles": {
     "precise": {"name": "narrow", "sigma": 1.0},
     "persistent": {"name": "broad", "sigma": 2.5},
     "neutral": {"name": "context", "sigma": 4.0}
   },
-  "note": "These normalized values are visualization fixtures, not measured optical parameters. The optical owner replaces this versioned file after calibration."
+  "note": "Relative widths feed the declared analytical envelope profile. Calibrated optical adapters provide their own versioned physical response."
 }

@@ -94,6 +94,15 @@
           ],
           "default": null,
           "title": "Reference Id"
+        },
+        "interaction": {
+          "$ref": "#/$defs/Interaction"
+        },
+        "cue_extent_m": {
+          "default": 0.1,
+          "exclusiveMinimum": 0,
+          "title": "Cue Extent M",
+          "type": "number"
         }
       },
       "required": [
@@ -112,6 +121,222 @@
         "pose"
       ],
       "title": "DisplayCue",
+      "type": "object"
+    },
+    "Interaction": {
+      "additionalProperties": false,
+      "properties": {
+        "rotation_axis_local": {
+          "default": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Rotation Axis Local",
+          "type": "array"
+        },
+        "pivot_local_m": {
+          "default": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Pivot Local M",
+          "type": "array"
+        },
+        "mating_pose": {
+          "$ref": "#/$defs/Pose"
+        },
+        "departure_axis_local": {
+          "default": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Departure Axis Local",
+          "type": "array"
+        },
+        "departure_distance_m": {
+          "default": 0.08,
+          "exclusiveMinimum": 0,
+          "title": "Departure Distance M",
+          "type": "number"
+        },
+        "approach_axis_local": {
+          "default": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Approach Axis Local",
+          "type": "array"
+        },
+        "approach_distance_m": {
+          "default": 0.12,
+          "exclusiveMinimum": 0,
+          "title": "Approach Distance M",
+          "type": "number"
+        },
+        "transit_height_m": {
+          "default": 0.15,
+          "minimum": 0,
+          "title": "Transit Height M",
+          "type": "number"
+        },
+        "inspect_point_local_m": {
+          "default": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Inspect Point Local M",
+          "type": "array"
+        },
+        "inspect_normal_local": {
+          "default": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Inspect Normal Local",
+          "type": "array"
+        },
+        "inspect_extent_m": {
+          "anyOf": [
+            {
+              "maxItems": 2,
+              "minItems": 2,
+              "prefixItems": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                }
+              ],
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Inspect Extent M"
+        },
+        "inspect_cue_clearance_m": {
+          "default": 0.002,
+          "minimum": 0,
+          "title": "Inspect Cue Clearance M",
+          "type": "number"
+        },
+        "cue_offset_local_m": {
+          "default": [
+            0.0,
+            0.0,
+            0.04
+          ],
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Cue Offset Local M",
+          "type": "array"
+        },
+        "duration_s": {
+          "default": 3.0,
+          "exclusiveMinimum": 0,
+          "title": "Duration S",
+          "type": "number"
+        }
+      },
+      "title": "Interaction",
       "type": "object"
     },
     "Pose": {
@@ -173,8 +398,11 @@
   "additionalProperties": false,
   "properties": {
     "schema_version": {
-      "const": "1.0",
-      "default": "1.0",
+      "default": "1.1",
+      "enum": [
+        "1.0",
+        "1.1"
+      ],
       "title": "Schema Version",
       "type": "string"
     },
@@ -232,6 +460,13 @@
       },
       "title": "Cues",
       "type": "array"
+    },
+    "object_poses": {
+      "additionalProperties": {
+        "$ref": "#/$defs/Pose"
+      },
+      "title": "Object Poses",
+      "type": "object"
     }
   },
   "required": [

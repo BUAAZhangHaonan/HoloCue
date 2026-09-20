@@ -1,5 +1,6 @@
 from __future__ import annotations
 import argparse,os,hmac
+from pathlib import Path
 from contextlib import asynccontextmanager
 from fastapi import FastAPI,Depends,HTTPException,Header
 from fastapi.responses import JSONResponse
@@ -13,12 +14,15 @@ class NewSession(Strict):scene_id:str
 
 def create_app(service=None)->FastAPI:
     if service is None:
-        from .provider import OpenAICompatiblePlanner,ReplayPlanner
+        from .provider import OpenAICompatiblePlanner
         from .graph import GraphPlanner
         mode=os.environ.get('HOLOCUE_MODE','live')
-        if mode not in ('live','replay'):raise ValueError('HOLOCUE_MODE must be live or replay')
-        provider=OpenAICompatiblePlanner() if mode=='live' else ReplayPlanner(root()/'examples/replay.json')
-        service=Service(Store(root()/'runs/state.sqlite'),GraphPlanner(provider))
+        if mode!='live':raise ValueError('HOLOCUE_MODE must be live')
+        provider=OpenAICompatiblePlanner()
+        state_path=Path(os.environ.get('HOLOCUE_STATE_PATH',str(root()/'runs/simulation/state.sqlite'))).resolve()
+        if not state_path.is_relative_to(root().resolve()):
+            raise ValueError('HOLOCUE_STATE_PATH must be inside the project')
+        service=Service(Store(state_path),GraphPlanner(provider))
     async def authorization(authorization:str|None=Header(default=None)):
         key=os.environ.get('HOLOCUE_API_KEY','')
         if key and not hmac.compare_digest(authorization or '',f'Bearer {key}'):
@@ -28,7 +32,7 @@ def create_app(service=None)->FastAPI:
         service.store.recover()
         yield
         await service.close()
-    app=FastAPI(title='HoloCue',version='0.1.0',lifespan=lifespan,dependencies=[Depends(authorization)])
+    app=FastAPI(title='HoloCue',version='0.2.0',lifespan=lifespan,dependencies=[Depends(authorization)])
     app.state.service=service
     @app.exception_handler(ConflictError)
     async def conflict(req,e):return JSONResponse(status_code=409,content={'detail':str(e)})
@@ -39,7 +43,7 @@ def create_app(service=None)->FastAPI:
     @app.exception_handler(FileNotFoundError)
     async def file_missing(req,e):return JSONResponse(status_code=404,content={'detail':'scene/resource not found'})
     @app.get('/health')
-    def health():return {'status':'ok','backend_mode':service.planner.mode,'renderer_kind':'semantic_preview','schema_version':'1.0'}
+    def health():return {'status':'ok','backend_mode':service.planner.mode,'renderer_kind':'semantic_preview','schema_version':'1.1'}
     @app.get('/api/v1/scenes')
     def scenes():return list_scenes()
     @app.get('/api/v1/scenes/{scene_id}')
@@ -54,6 +58,8 @@ def create_app(service=None)->FastAPI:
     def job(jid:str):return service.store.job(jid)
     @app.get('/api/v1/sessions/{sid}/display')
     def display(sid:str):return service.display(sid)
+    @app.get('/api/v1/sessions/{sid}/snapshot')
+    def snapshot(sid:str):return service.snapshot(sid)
     @app.get('/api/v1/sessions/{sid}/events')
     def events(sid:str):return service.store.events(sid)
     @app.post('/api/v1/sessions/{sid}/control/{operation}')
