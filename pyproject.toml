@@ -9,11 +9,11 @@ requires-python = ">=3.11"
 dependencies = [
  "pydantic>=2.10,<3", "fastapi>=0.115,<1", "uvicorn>=0.30,<1",
  "httpx>=0.27,<1", "numpy>=1.26,<3", "trimesh>=4.11.1,<5", "pillow>=10,<13",
- "psutil>=5.9,<8", "langgraph>=1.0,<2", "viser==1.1.1", "scipy>=1.14,<2"
+ "psutil>=5.9,<8", "langgraph>=1.0,<2", "viser==1.1.1", "scipy>=1.14,<2", "safetensors>=0.4,<1"
 ]
 [project.optional-dependencies]
 dev = ["pytest>=8,<10", "pytest-asyncio>=0.24,<2", "ruff>=0.9"]
-simulation = ["cadquery>=2.8,<3", "vtk>=9.6,<10", "playwright>=1.45,<2", "networkx>=3,<4"]
+simulation = ["cadquery>=2.8,<3", "vtk>=9.6,<10", "playwright>=1.45,<2", "networkx>=3,<4", "pygltflib>=1.16,<2"]
 [project.scripts]
 holocue-api = "holocue.api:main"
 holocue-viewer = "holocue.viewer:main"
