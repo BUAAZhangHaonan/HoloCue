@@ -1,41 +1,30 @@
 """Real GLB round trips for smooth surfaces, hard rims and textured labels."""
-import json
-import struct
-
 import numpy as np
 import pytest
 import trimesh
+from pygltflib import GLTF2
+from trimesh.exchange.gltf import load_glb
 
 from holocue.modeling import Assembly
 
 
 def glb_contents(path):
-    data = path.read_bytes()
-    magic, version, length = struct.unpack_from('<4sII', data)
-    assert (magic, version, length) == (b'glTF', 2, len(data))
-    json_size, kind = struct.unpack_from('<I4s', data, 12)
-    assert kind == b'JSON'
-    document = json.loads(data[20:20+json_size])
-    binary_size, kind = struct.unpack_from('<I4s', data, 20+json_size)
-    assert kind == b'BIN\x00'
-    return document, data[28+json_size:28+json_size+binary_size]
+    document = GLTF2().load(str(path))
+    assert document.asset.version == '2.0'
+    with path.open('rb') as stream:
+        decoded = load_glb(stream, ignore_broken=False, merge_primitives=False)
+    return document, decoded
 
 
-def accessor(document, binary, index):
-    description = document['accessors'][index]
-    assert 'sparse' not in description
-    view = document['bufferViews'][description['bufferView']]
-    dtype = np.dtype({5121: 'u1', 5123: '<u2', 5125: '<u4', 5126: '<f4'}[description['componentType']])
-    width = {'SCALAR': 1, 'VEC2': 2, 'VEC3': 3}[description['type']]
-    offset = view.get('byteOffset', 0)+description.get('byteOffset', 0)
-    stride = view.get('byteStride', width*dtype.itemsize)
-    return np.ndarray((description['count'], width), dtype=dtype, buffer=binary,
-                      offset=offset, strides=(stride, dtype.itemsize)).copy()
+def geometry(decoded, node_name):
+    edges = [edge for edge in decoded['graph'] if edge['frame_to'] == node_name]
+    assert len(edges) == 1 and 'geometry' in edges[0]
+    return decoded['geometry'][edges[0]['geometry']]
 
 
 def primitive(document, node_name):
-    node = next(node for node in document['nodes'] if node.get('name') == node_name)
-    primitives = document['meshes'][node['mesh']]['primitives']
+    node = next(node for node in document.nodes if node.name == node_name)
+    primitives = document.meshes[node.mesh].primitives
     assert len(primitives) == 1
     return primitives[0]
 
@@ -66,20 +55,22 @@ def exported_probe(tmp_path):
 def test_exported_cylinder_smooth_sides_and_hard_flat_caps(exported_probe):
     document, binary, _, _, _ = exported_probe
     # Inspect actual exported NORMAL accessors, not normals recomputed by reload.
-    for mesh in document['meshes']:
-        for part in mesh['primitives']:
-            attributes = part['attributes']
-            assert 'NORMAL' in attributes
-            normals = accessor(document, binary, attributes['NORMAL'])
-            positions = accessor(document, binary, attributes['POSITION'])
+    for node in document.nodes:
+        if node.mesh is not None:
+            part = primitive(document, node.name)
+            assert part.attributes.NORMAL is not None
+            assert document.accessors[part.attributes.NORMAL].componentType == 5126
+            raw = geometry(binary, node.name)
+            normals = np.asarray(raw['vertex_normals'])
+            positions = np.asarray(raw['vertices'])
             assert normals.shape == positions.shape
             assert np.isfinite(normals).all()
             np.testing.assert_allclose(np.linalg.norm(normals, axis=1), 1, atol=2e-6)
 
-    part = primitive(document, 'normal_probe/0000_cylinder')
-    positions = accessor(document, binary, part['attributes']['POSITION'])
-    normals = accessor(document, binary, part['attributes']['NORMAL'])
-    faces = accessor(document, binary, part['indices']).reshape(-1, 3)
+    raw = geometry(binary, 'normal_probe/0000_cylinder')
+    positions = np.asarray(raw['vertices'])
+    normals = np.asarray(raw['vertex_normals'])
+    faces = np.asarray(raw['faces'])
     # The exporter may bake its Y-up conversion or put it in a node transform.
     # In either representation, this unrotated cylinder has a cardinal axis.
     axis = int(np.argmax(np.ptp(positions, axis=0)))
@@ -113,10 +104,10 @@ def test_exported_pbr_values_survive_smoothing_and_reload(exported_probe):
         ('normal_probe/0001_pbr_probe', (201, 61, 22, 255), .37, .68),
     ]:
         part = primitive(document, node_name)
-        material = document['materials'][part['material']]['pbrMetallicRoughness']
-        assert material['baseColorFactor'] == pytest.approx(np.asarray(color)/255)
-        assert material['metallicFactor'] == pytest.approx(metal)
-        assert material['roughnessFactor'] == pytest.approx(rough)
+        material = document.materials[part.material].pbrMetallicRoughness
+        assert material.baseColorFactor == pytest.approx(np.asarray(color)/255)
+        assert material.metallicFactor == pytest.approx(metal)
+        assert material.roughnessFactor == pytest.approx(rough)
         actual = mesh_for_node(reloaded, node_name).visual.material
         np.testing.assert_array_equal(actual.baseColorFactor, color)
         assert actual.metallicFactor == pytest.approx(metal)
@@ -126,11 +117,11 @@ def test_exported_pbr_values_survive_smoothing_and_reload(exported_probe):
 def test_label_uv_and_embedded_texture_survive_normal_export(exported_probe):
     document, _, reloaded, expected_uv, expected_image = exported_probe
     part = primitive(document, 'normal_probe/label_2')
-    assert 'NORMAL' in part['attributes']
-    assert 'TEXCOORD_0' in part['attributes']
-    pbr = document['materials'][part['material']]['pbrMetallicRoughness']
-    texture = document['textures'][pbr['baseColorTexture']['index']]
-    assert 'bufferView' in document['images'][texture['source']], 'Label image must be embedded in the GLB'
+    assert part.attributes.NORMAL is not None
+    assert part.attributes.TEXCOORD_0 is not None
+    pbr = document.materials[part.material].pbrMetallicRoughness
+    texture = document.textures[pbr.baseColorTexture.index]
+    assert document.images[texture.source].bufferView is not None, 'Label image must be embedded in the GLB'
     actual = mesh_for_node(reloaded, 'normal_probe/label_2').visual
     np.testing.assert_allclose(actual.uv, expected_uv, atol=1e-7)
     np.testing.assert_array_equal(np.asarray(actual.material.baseColorTexture.convert('RGBA')), expected_image)

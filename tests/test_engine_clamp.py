@@ -1,6 +1,6 @@
 """Generated/GLB geometry regressions for the locally molded engine hose seat."""
 from pathlib import Path
-import hashlib,json,struct
+import hashlib,json
 import numpy as np
 import pytest
 import trimesh
@@ -8,7 +8,9 @@ import vtk
 from vtk.util.numpy_support import numpy_to_vtk,vtk_to_numpy
 from holocue.assets import load_asset
 from holocue.config import load_scene
+from holocue.glb_attributes import exported_normals
 from holocue.modeling import make_environment,make_object
+from holocue.models import SceneSpec
 from holocue.spatial import matrix,trajectory
 from holocue.render_validation import polydata
 from scripts.tests.audit_geometry import ordered_steps,parts
@@ -33,21 +35,6 @@ def fingerprint(mesh):
         'texture_sha256':None if texture is None else hashlib.sha256(np.asarray(texture).tobytes()).hexdigest()}
     result['uv']=None if mesh.visual.uv is None else hashlib.sha256(np.asarray(mesh.visual.uv,dtype='<f8').tobytes()).hexdigest()
     return result
-
-
-def exported_normals(path,node_name):
-    """Read the exported NORMAL accessor without recomputing from float32 POSITION."""
-    data=path.read_bytes();length,kind=struct.unpack_from('<II',data,12)
-    assert kind==0x4e4f534a
-    document=json.loads(data[20:20+length]);binary=20+length+8
-    node=next(node for node in document['nodes'] if node.get('name')==node_name)
-    primitive=document['meshes'][node['mesh']]['primitives'][0]
-    accessor=document['accessors'][primitive['attributes']['NORMAL']]
-    view=document['bufferViews'][accessor['bufferView']]
-    assert accessor['componentType']==5126 and accessor['type']=='VEC3'
-    assert view.get('byteStride',12)==12
-    offset=binary+view.get('byteOffset',0)+accessor.get('byteOffset',0)
-    return np.frombuffer(data,dtype='<f4',count=accessor['count']*3,offset=offset).reshape(-1,3)
 
 
 def field(mesh):
@@ -108,7 +95,7 @@ def engine(tmp_path_factory):
 
 
 def test_engine_contract_unchanged(engine):
-    assert engine['spec'].model_dump(mode='json')==engine['baseline']['scene']
+    assert engine['spec']==SceneSpec.model_validate(engine['baseline']['scene'])
 
 
 def test_only_authorized_nodes_change_and_materials_stay(engine):
