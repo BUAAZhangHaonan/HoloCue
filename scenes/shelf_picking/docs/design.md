@@ -1,45 +1,32 @@
-> 本设计分册提取自 `docs/09_新场景与任务设计.md`（扩展轮，评审修订版）；四判据、与初版关系、验收要点以该总纲为准。
+# 货架拣选与包裹核验
 
-## 场景六 `shelf_picking` 仓储分拣站
+静止输送设备与人工拣选教学区。 当前配置为 [scene.json](../scene.json)，初始输入使用其中的 `initial_instruction`。
 
-**世界**:小型仓库拣选工位:三层层板货架靠墙,近处地面拣选篮,最深处小型传送带端部。任务图差异化标记:**双 background 监控**(CONV 端部 + GREEN 标记箱)+ 同深度不同角色的对照(RED 与 BLUE 同在二层,一 current 一 next/neutral——角色与深度解耦,留作对照实验条件)。
+## 任务与打断
 
-**视点与深度**:`camera_position_m=[0.35,-1.15,1.05]`,`camera_look_at_m=[0,0.45,0.6]`。
-| 层 | 对象 | 位置(y,z) | 沿视轴距离 | role / depth | N/σ 倾向 |
-|---|---|---|---|---|---|
-| 近 | BASKET 拣选篮(放置锚点) | y≈-0.35, z≈0.02 | ≈1.0m | 锚点对象 | — |
-| 中 | RED 二层包裹 | y≈+0.35, z≈0.75 | ≈1.7m | current / precise | 高 N,小 σ |
-| 中 | BLUE 一层周转箱 | y≈+0.35, z≈0.45 | ≈1.6m | next / **neutral** | 中 N,中 σ |
-| 远 | CONV 传送带端部 | y≈+1.35 | ≈2.6m | background / persistent | 低 N,大 σ |
-| 远 | GREEN 端部标记箱 | y≈+1.30 | ≈2.55m | background / persistent | 低 N,大 σ |
+1. RED：放置，接收对象 BASKET。
+2. BLUE：结构检查。
 
-GREEN 为传送带端部**静止标记箱**(场景对象位姿静态,"补货是否到达"由查看端部状态判断,不声明运动行为)。
+常驻目标：CONV、GREEN。
 
-**任务脚本**:
-- 初始指令:`把第二层的红色包裹 RED 放进拣选篮 BASKET,然后翻看蓝箱 BLUE 背面的面单,同时留意传送带 CONV 端部有没有绿箱 GREEN 到位。`
-- 打断:`先看 BLUE 的面单,包裹的事保留。`
-- 扩展测试输入:
+临时检查输入：临时查看 BLUE 的面单，保持 RED 的拣选计划。
 
-| 输入 | 检查点 |
-|---|---|
-| 把那个箱子翻过来 | RED/BLUE/GREEN 三箱在清单 → clarify |
-| 把 RED 挪过去 | 目标不明(BASKET?CONV?)→ clarify |
-| RED 先别放,蓝箱面单要紧 | 顺序对调,interrupt 语义 |
-| 把 BASKET 翻过来看 | BASKET 无 inspect_back → 校验拒绝 |
-| 绿箱到了先处理绿箱 | GREEN 变 current;原任务挂起 |
-| 快速连发两条 | epoch 竞争,仅最新可提交 |
+检查完成后恢复原任务，核对 task_id、动作参数、接收对象和原步骤顺序。动画终点保持等待确认；明确完成后才更新实体位姿。同一对象出现多个动作时，分别保留步骤。
 
-**为什么强契合**:1.7m 纵深上"低头放包裹 + 抬眼盯补货"是最典型的近操作/远监控注意力冲突(1.0m vs 2.6m 调焦差);双 background 是五场景中唯一的"双远层常驻"结构。RED/BLUE 同深度不同角色把"任务角色"与"物理深度"解耦,直接支撑论文的变量分离论证。颜色+层位指代、双任务并行超出规则解析器。BLUE 面单为径向面(箱体贴 +Y 侧),转台式查看成立。
+## 对象与结构
 
-**交互对象**:
-| id | label | capabilities | anchors | description |
-|---|---|---|---|---|
-| RED | 红色包裹 | point, assemble | — | 二层标准件包裹 |
-| BLUE | 蓝色周转箱 | point, rotate, inspect_back | — | +Y 侧贴发货面单 |
-| BASKET | 拣选篮 | point | placement=[0,-0.0198,0.2525](pose 世界位 [0,-0.35,0.02];重制藤篮,锚点高于篮口 17mm) | 软底拣选篮 |
-| CONV | 传送带端部 | point, wait | — | 到位指示灯在端部 |
-| GREEN | 端部绿箱 | point, wait | — | 补货标记箱(静止) |
+| 对象 | 名称 | 动作能力 | 结构与观察说明 |
+|---|---|---|---|
+| RED | 红色包裹 | point、assemble | 包裹沿货架前方退出，离开层板后抬升并移向拣选篮。 |
+| BLUE | 蓝色周转箱 | point、rotate、inspect_back | 独立检验台上的周转箱，+Y 面具有大尺寸面单。 |
+| BASKET | 拣选篮 | point | 带推车支承，内腔尺寸能够容纳 RED。 |
+| CONV | 输送带状态面板 | point、wait | 输送带旁的训练状态面板。 |
+| GREEN | 绿色到位箱 | point、wait | 已静止在输送带端部，可进行到位确认。 |
 
-**环境**:三层层板货架(PolyHaven `steel_frame_shelves_02` 骨架+程序化层板)、`cardboard_box_01`/`plastic_crate_01`/`plastic_crate_02`/`wooden_crate_02`/`Barrel_02`/`cement_bag` 堆货、`hand_truck`、程序化传送带、`concrete_floor_worn_001` 地面。`render_hints`:ortho_scale≈2.0,grid_extent≈2.5,cue_scale=1.0,label_offset=0.12。
+尺寸、位姿、转轴、接合坐标系与检查面以配置为共同来源。资产使用标准 glTF 坐标，运行时使用米制、Z 轴向上的世界坐标。工作区域取景涵盖任务对象，结构检查对准模型中的实际部件。
 
----
+## 构建和验收
+
+统一资产构建入口为 `scripts/scenes/build_simulation_assets.py`，原生构建入口为 `scripts/scenes/build_all.sh`。生成的 Blender 文件位于本场景目录的 `scene.blend`。调整资产时核对已有有效细节、材质、纹理与许可来源。
+
+按照 [验证标准](../../../docs/VALIDATION.md) 完成自动、几何、真实模型、Viser 和 Blender 检查。原生图像与视频覆盖工作区域、操作特写、检查面、起点、动作过程、终点等待、临时检查与恢复；Viser 同时检查宽屏与较窄窗口。最终报告关联实际代码摘要与证据。历史提案、评审和运行记录保留其原始证据含义，当前版本的完成状态由本次验收记录确定。

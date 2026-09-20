@@ -1,41 +1,32 @@
-> 本设计分册提取自 `docs/09_新场景与任务设计.md`（扩展轮，评审修订版）；四判据、与初版关系、验收要点以该总纲为准。
+# 机柜维护与备用节点安装
 
-## 场景四 `server_rack` 数据机柜排障
+断电机柜维护训练，两台检修车提供独立的支承和观察空间。 当前配置为 [scene.json](../scene.json)，初始输入使用其中的 `initial_instruction`。
 
-**世界**:模块化数据中心机柜排障。运维工程师站在机柜前门侧:前面板插满 1U/2U 节点与交换机,柜顶告警灯,最深处节点背面被多层机架结构遮挡。
+## 任务与打断
 
-**视点与深度(调焦距离为沿视轴近似值)**:`camera_position_m=[1.12,-1.02,1.30]`,`camera_look_at_m=[-0.3548,0.0219,1.0289]`(as-built,含小车与柜顶全画幅)。本文各场景的 ortho_scale、锚点数值为设计初值;建模定稿后以 `scenes/<id>/scene.json` 与 `runs/scene_v2/build_<id>.log` 的实测为准。
-| 层 | 对象 | 位置(y,z) | 沿视轴距离 | task_role / depth_requirement | N/σ 倾向 |
-|---|---|---|---|---|---|
-| 近 | SPARE→SLOT4 插入 | y≈-0.25, z≈1.02 | ≈1.6m | current / precise | 高 N,小 σ |
-| 中 | NODE3 背面(机柜深处) | y≈+0.33, z≈0.55(下移深仓位) | ≈2.3m | next / persistent | 中 N,大 σ |
-| 远 | ALARM 柜顶告警灯 | y≈+0.35, z≈1.62 | ≈2.6m | background / persistent | 低 N,大 σ |
+1. SPARE：插入，接收对象 SLOT4。
+2. NODE3：结构检查。
 
-**任务脚本**:
-- 初始指令:`先把备用节点 SPARE 插进 4 号槽位 SLOT4,然后检查 3 号节点 NODE3 背面的光纤接口,柜顶告警灯 ALARM 全程保持监控。`
-- 打断:`先停下,看看 NODE3 背面,SPARE 的插入任务保留。` → interrupt,NODE3 变 current,原队列挂起;`恢复刚才 SPARE 的插入任务。` → resume。
-- 扩展测试输入:
+常驻目标：ALARM。
 
-| 输入 | 检查点 |
-|---|---|
-| 把 FAN 拧一下 | FAN 有 rotate 但缺角度 → clarify,不编造 0 度 |
-| 把 NODE3 拧一下 | NODE3 无 rotate 能力 → 校验层拒绝(对应初版"C 转 30 度"用例) |
-| 把 SPARE 再往里插一点 | 锚点动作终点唯一 → interrupt 按既有 SLOT4 锚点演示,不 clarify 不改终点 |
-| 先拔 FAN 看滤网背面 | FAN 无 inspect_back → 校验拒绝 |
-| 告警灯红了你先停一下 | 语义上暂停;事件来源为确定性脚本时间线,非感知网络 |
-| 连续快速发两条指令 | 只有最新 epoch 可提交 |
+临时检查输入：临时检查 NODE3 的背面端口，保存当前安装任务。
 
-**为什么强契合**:近端对准 4 号槽位精插与远端柜顶告警监控发生在同一任务里、不同调焦面(1.6m vs 2.6m);平面基线(角落 HUD 常亮指示)不提供调焦轴,告警与操作共享屏幕注意资源——全息分层的收益假设在此最典型,由对照实验测定。NODE3 背面在机柜内部,被前部节点与理线架多层遮挡,转台式 ghost 副本是自然的查看方式。指令含槽位编号指代、部件级描述("背面的光纤接口")、"全程保持监控"持续性要求,需要 LLM 区分 current/next/background 三角色。任务图差异化标记:本场景是"单 precise 精插 + 深处查背面 + 远层监控"结构。
+检查完成后恢复原任务，核对 task_id、动作参数、接收对象和原步骤顺序。动画终点保持等待确认；明确完成后才更新实体位姿。同一对象出现多个动作时，分别保留步骤。
 
-**交互对象(锚点为参照对象局部坐标)**:
-| id | label | capabilities | anchors | description |
-|---|---|---|---|---|
-| SPARE | 备用节点 | point, insert | — | 1U 备用计算节点,沿导轨水平插入 |
-| SLOT4 | 4 号槽位 | point | insertion=[0,0,0](pose 世界位 [0,0.28,1.02],槽体中心即终点,SPARE 满插就位) | 空槽位,带导轨与定位柱 |
-| NODE3 | 3 号节点 | point, inspect_back | — | 背面有四个光纤接口和提把手 |
-| ALARM | 柜顶告警灯 | point, wait | — | 红色为故障,绿色为正常 |
-| FAN | 风扇模块 | point, rotate | — | 滤网需旋转取出,顶部刻线对齐 |
+## 对象与结构
 
-**环境**:机柜框架(立柱+前后门框)、已装节点面板×6(散热孔与小 LED 点缀)、理线架与线缆束、防静电架空地板、机房墙。素材策略:PolyHaven `worn_metal_rack`(915×600×1900mm,作机柜骨架)+ `modular_electric_cables`(线缆束)+ `circuit_board` + `security_camera_01`;PBR 纹理 `metal_plate_02`/`factory_wall`/`hangar_concrete_floor`;1U 面板程序化建模。`render_hints`:ortho_scale≈2.2,grid_extent≈2.5,cue_scale=1.0,label_offset=0.12。
+| 对象 | 名称 | 动作能力 | 结构与观察说明 |
+|---|---|---|---|
+| SPARE | 备用计算节点 | point、insert | 已断电的 1U 节点，后端朝 +Y，沿两侧导轨装入槽位。 |
+| SLOT4 | 四号空槽位 | point | 导轨净宽大于节点宽度，后部止挡限定最终位置。 |
+| NODE3 | 待检三号节点 | point、inspect_back | 已取出并置于检修车，背面光纤口位于 +Y。 |
+| ALARM | 柜顶状态灯 | point、wait | 由仿真事件控制的状态指示器。 |
+| FAN | 风扇盖锁扣 | point、rotate | 风扇盖上的四分之一圈锁扣，转轴朝 -Y。 |
 
----
+尺寸、位姿、转轴、接合坐标系与检查面以配置为共同来源。资产使用标准 glTF 坐标，运行时使用米制、Z 轴向上的世界坐标。工作区域取景涵盖任务对象，结构检查对准模型中的实际部件。
+
+## 构建和验收
+
+统一资产构建入口为 `scripts/scenes/build_simulation_assets.py`，原生构建入口为 `scripts/scenes/build_all.sh`。生成的 Blender 文件位于本场景目录的 `scene.blend`。调整资产时核对已有有效细节、材质、纹理与许可来源。
+
+按照 [验证标准](../../../docs/VALIDATION.md) 完成自动、几何、真实模型、Viser 和 Blender 检查。原生图像与视频覆盖工作区域、操作特写、检查面、起点、动作过程、终点等待、临时检查与恢复；Viser 同时检查宽屏与较窄窗口。最终报告关联实际代码摘要与证据。历史提案、评审和运行记录保留其原始证据含义，当前版本的完成状态由本次验收记录确定。
