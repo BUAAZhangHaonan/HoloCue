@@ -1,0 +1,4998 @@
+{
+  "scene": {
+    "schema_version": "1.1",
+    "scene_id": "engine_bay",
+    "title": "\u53d1\u52a8\u673a\u6559\u5b66\u53f0\u7ed3\u6784\u68c0\u67e5",
+    "units": "m",
+    "axes": "right_handed_z_up",
+    "objects": [
+      {
+        "object_id": "CLAMP",
+        "label": "\u5361\u7b8d\u8c03\u8282\u87ba\u9489",
+        "asset": "scenes/engine_bay/meshes/CLAMP.glb",
+        "pose": {
+          "position_m": [
+            -0.3,
+            -0.1,
+            1.1
+          ],
+          "wxyz": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "color": [
+          186,
+          170,
+          115
+        ],
+        "capabilities": [
+          "point",
+          "rotate"
+        ],
+        "anchors": {},
+        "description": "\u56fa\u5b9a\u5361\u7b8d\u5e26\u4e0a\u7684\u8c03\u8282\u87ba\u9489\uff0c\u5c40\u90e8 +X \u4e3a\u8f6c\u8f74\u3002",
+        "frames": {},
+        "interaction": {
+          "rotation_axis_local": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "pivot_local_m": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mating_pose": {
+            "position_m": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "wxyz": [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "departure_axis_local": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "departure_distance_m": 0.08,
+          "approach_axis_local": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "approach_distance_m": 0.12,
+          "transit_height_m": 0.15,
+          "inspect_point_local_m": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "inspect_normal_local": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "inspect_extent_m": null,
+          "inspect_cue_clearance_m": 0.002,
+          "detail_direction_local": null,
+          "cue_offset_local_m": [
+            0.04,
+            0.0,
+            0.0
+          ],
+          "duration_s": 3.0
+        },
+        "recipe": "screw",
+        "size_m": [
+          0.047,
+          0.018,
+          0.018
+        ]
+      },
+      {
+        "object_id": "PLUG",
+        "label": "\u6559\u5b66\u706b\u82b1\u585e",
+        "asset": "scenes/engine_bay/meshes/PLUG.glb",
+        "pose": {
+          "position_m": [
+            0.27,
+            -0.27,
+            1.065
+          ],
+          "wxyz": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "color": [
+          220,
+          222,
+          217
+        ],
+        "capabilities": [
+          "point",
+          "insert"
+        ],
+        "anchors": {},
+        "description": "\u9676\u74f7\u7edd\u7f18\u4f53\u671d\u4e0a\uff0c\u87ba\u7eb9\u7aef\u671d\u4e0b\uff1b\u672c\u52a8\u4f5c\u6f14\u793a\u8f74\u5411\u5b9a\u4f4d\u3002",
+        "frames": {},
+        "interaction": {
+          "rotation_axis_local": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "pivot_local_m": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mating_pose": {
+            "position_m": [
+              0.0,
+              0.0,
+              -0.045
+            ],
+            "wxyz": [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "departure_axis_local": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "departure_distance_m": 0.08,
+          "approach_axis_local": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "approach_distance_m": 0.12,
+          "transit_height_m": 0.12,
+          "inspect_point_local_m": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "inspect_normal_local": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "inspect_extent_m": null,
+          "inspect_cue_clearance_m": 0.002,
+          "detail_direction_local": null,
+          "cue_offset_local_m": [
+            0.0,
+            0.0,
+            0.04
+          ],
+          "duration_s": 3.0
+        },
+        "recipe": "sparkplug",
+        "size_m": [
+          0.021,
+          0.021,
+          0.09
+        ]
+      },
+      {
+        "object_id": "PLUGPORT",
+        "label": "\u706b\u82b1\u585e\u5b9a\u4f4d\u5b54",
+        "asset": "scenes/engine_bay/meshes/PLUGPORT.glb",
+        "pose": {
+          "position_m": [
+            0.16,
+            0.26,
+            1.055
+          ],
+          "wxyz": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "color": [
+          95,
+          109,
+          117
+        ],
+        "capabilities": [
+          "point"
+        ],
+        "anchors": {
+          "insertion": [
+            0.0,
+            0.0,
+            -0.024
+          ]
+        },
+        "description": "\u4e2d\u7a7a\u4e95\u53e3\u9732\u51fa\uff0c\u8f74\u5411\u5b9a\u4f4d\u7ec8\u70b9\u4f4d\u4e8e\u5b54\u5185\u3002",
+        "frames": {},
+        "interaction": {
+          "rotation_axis_local": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "pivot_local_m": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mating_pose": {
+            "position_m": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "wxyz": [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "departure_axis_local": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "departure_distance_m": 0.08,
+          "approach_axis_local": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "approach_distance_m": 0.12,
+          "transit_height_m": 0.15,
+          "inspect_point_local_m": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "inspect_normal_local": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "inspect_extent_m": null,
+          "inspect_cue_clearance_m": 0.002,
+          "detail_direction_local": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "cue_offset_local_m": [
+            0.0,
+            0.0,
+            0.04
+          ],
+          "duration_s": 3.0
+        },
+        "recipe": "bore",
+        "size_m": [
+          0.052,
+          0.052,
+          0.064
+        ]
+      },
+      {
+        "object_id": "OILCAP",
+        "label": "\u673a\u6cb9\u53e3\u6559\u5b66\u65cb\u76d6",
+        "asset": "scenes/engine_bay/meshes/OILCAP.glb",
+        "pose": {
+          "position_m": [
+            -0.13,
+            0.16,
+            1.105
+          ],
+          "wxyz": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "color": [
+          51,
+          61,
+          66
+        ],
+        "capabilities": [
+          "point",
+          "rotate"
+        ],
+        "anchors": {},
+        "description": "",
+        "frames": {},
+        "interaction": {
+          "rotation_axis_local": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "pivot_local_m": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mating_pose": {
+            "position_m": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "wxyz": [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "departure_axis_local": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "departure_distance_m": 0.08,
+          "approach_axis_local": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "approach_distance_m": 0.12,
+          "transit_height_m": 0.15,
+          "inspect_point_local_m": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "inspect_normal_local": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "inspect_extent_m": null,
+          "inspect_cue_clearance_m": 0.002,
+          "detail_direction_local": null,
+          "cue_offset_local_m": [
+            0.0,
+            0.0,
+            0.04
+          ],
+          "duration_s": 3.0
+        },
+        "recipe": "knob",
+        "size_m": [
+          0.075,
+          0.075,
+          0.032
+        ]
+      },
+      {
+        "object_id": "TENSIONER",
+        "label": "\u5f20\u7d27\u673a\u6784\u516d\u89d2\u4f4d",
+        "asset": "scenes/engine_bay/meshes/TENSIONER.glb",
+        "pose": {
+          "position_m": [
+            0.38,
+            0.16,
+            0.91
+          ],
+          "wxyz": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "color": [
+          164,
+          171,
+          175
+        ],
+        "capabilities": [
+          "point",
+          "rotate"
+        ],
+        "anchors": {},
+        "description": "",
+        "frames": {},
+        "interaction": {
+          "rotation_axis_local": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "pivot_local_m": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mating_pose": {
+            "position_m": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "wxyz": [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "departure_axis_local": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "departure_distance_m": 0.08,
+          "approach_axis_local": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "approach_distance_m": 0.12,
+          "transit_height_m": 0.15,
+          "inspect_point_local_m": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "inspect_normal_local": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "inspect_extent_m": null,
+          "inspect_cue_clearance_m": 0.002,
+          "detail_direction_local": null,
+          "cue_offset_local_m": [
+            0.0,
+            0.0,
+            0.04
+          ],
+          "duration_s": 3.0
+        },
+        "recipe": "screw",
+        "size_m": [
+          0.035,
+          0.022,
+          0.022
+        ]
+      },
+      {
+        "object_id": "CONN",
+        "label": "\u5df2\u65ad\u5f00\u7684\u4fa7\u8fde\u63a5\u5668",
+        "asset": "scenes/engine_bay/meshes/CONN.glb",
+        "pose": {
+          "position_m": [
+            0.44,
+            -0.15,
+            1.045
+          ],
+          "wxyz": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "color": [
+          195,
+          118,
+          51
+        ],
+        "capabilities": [
+          "point",
+          "inspect_back"
+        ],
+        "anchors": {
+          "label": [
+            -0.04,
+            0.0,
+            0.025
+          ]
+        },
+        "description": "\u62c6\u79bb\u7ebf\u675f\u5e76\u7f6e\u4e8e\u68c0\u4fee\u652f\u5ea7\uff0c\u80cc\u9762 +Y \u7aef\u5b50\u53ef\u89c2\u5bdf\u3002",
+        "frames": {},
+        "interaction": {
+          "rotation_axis_local": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "pivot_local_m": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mating_pose": {
+            "position_m": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "wxyz": [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "departure_axis_local": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "departure_distance_m": 0.08,
+          "approach_axis_local": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "approach_distance_m": 0.12,
+          "transit_height_m": 0.15,
+          "inspect_point_local_m": [
+            0.0,
+            0.036,
+            0.0
+          ],
+          "inspect_normal_local": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "inspect_extent_m": null,
+          "inspect_cue_clearance_m": 0.002,
+          "detail_direction_local": null,
+          "cue_offset_local_m": [
+            0.0,
+            0.0,
+            0.04
+          ],
+          "duration_s": 3.0
+        },
+        "recipe": "module",
+        "size_m": [
+          0.08,
+          0.07,
+          0.07
+        ]
+      }
+    ],
+    "initial_instruction": "\u5c06 CLAMP \u7684\u8c03\u8282\u87ba\u9489\u9006\u65f6\u9488\u8f6c 90 \u5ea6\uff0c\u6f14\u793a PLUG \u6cbf PLUGPORT \u8f74\u7ebf\u8fdb\u5165\u5b9a\u4f4d\u4f4d\u7f6e\uff0c\u518d\u68c0\u67e5 CONN \u80cc\u9762\u7684\u7aef\u5b50\u3002",
+    "camera_position_m": [
+      1.6,
+      -2.3,
+      2.15
+    ],
+    "camera_look_at_m": [
+      0.0,
+      0.18,
+      0.99
+    ],
+    "asset_axes": "gltf_y_up",
+    "environment": [
+      {
+        "prop_id": "workstation",
+        "label": "",
+        "asset": "scenes/engine_bay/meshes/env/workstation.glb",
+        "pose": {
+          "position_m": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "wxyz": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "scale_m": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    ],
+    "render_hints": {
+      "ortho_scale_m": 0.91,
+      "grid_extent_m": 1.0,
+      "cue_scale": 1.0,
+      "label_offset_m": 0.12,
+      "fit_camera": true,
+      "fill_lights": [],
+      "fov_y_deg": 42.0,
+      "viewport_margin": 0.14,
+      "background_rgb": [
+        233,
+        238,
+        242
+      ],
+      "workspace_bounds_m": [
+        [
+          -0.71,
+          -0.49,
+          0.67
+        ],
+        [
+          0.71,
+          0.97,
+          1.98
+        ]
+      ]
+    },
+    "task_contract": {
+      "setting": "\u51b7\u6001\u3001\u65ad\u7535\u53d1\u52a8\u673a\u6559\u5b66\u53f0\uff0c\u63d0\u793a\u6f14\u793a\u96f6\u4ef6\u4f4d\u7f6e\u548c\u8fd0\u52a8\u65b9\u5411\u3002",
+      "ordered_steps": [
+        {
+          "target_id": "CLAMP",
+          "action": "rotate",
+          "reference_id": null,
+          "angle_deg": 90.0,
+          "depth_requirement": "precise"
+        },
+        {
+          "target_id": "PLUG",
+          "action": "insert",
+          "reference_id": "PLUGPORT",
+          "angle_deg": null,
+          "depth_requirement": "precise"
+        },
+        {
+          "target_id": "CONN",
+          "action": "inspect_back",
+          "reference_id": null,
+          "angle_deg": null,
+          "depth_requirement": "persistent"
+        }
+      ],
+      "persistent_targets": [],
+      "interrupt_target": "CONN",
+      "interrupt_instruction": "\u4e34\u65f6\u68c0\u67e5 CONN \u7aef\u5b50\uff0c\u4fdd\u7559\u5361\u7b8d\u89d2\u5ea6\u548c\u539f\u6765\u7684\u4efb\u52a1\u987a\u5e8f\u3002"
+    }
+  },
+  "fingerprints": {
+    "CLAMP": {
+      "CLAMP/0011_driver_slot": {
+        "vertices": "98c64d9caef7e4a545915390cff61f116313d0394982f1a37ae82a2a9f52800d",
+        "faces": "945c105b7c278a7faed2dbf1a2856a3d09b2a99811024cc7c665066705f87eaa",
+        "vertex_normals": "45506d7a175d49e23c91ac71273c202f4619d0c78bd7c557a040a3a25da88c01",
+        "material": {
+          "name": "driver_slot_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "CLAMP/0010_hex_head": {
+        "vertices": "540709410fd7d29524376f850c7b108fe925fa1f21bea5c8045d15258f0a6902",
+        "faces": "98ada860caf7d7532a478c1029aa5285f1a1b004da15d4862efbd7a6d1844ad4",
+        "vertex_normals": "74679b8e94f5d48e9ee42fd27d4aa0404c6a93f54984f545b8ec75bfb9868a3f",
+        "material": {
+          "name": "hex_head_material",
+          "baseColorFactor": [
+            186,
+            170,
+            115,
+            255
+          ],
+          "metallicFactor": 0.7,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "CLAMP/0009_thread": {
+        "vertices": "1af97f87190a8e18b1c0c0da3f81f817e70720b7885d189557402a965f79eae5",
+        "faces": "64966beebf328538f69513ae058b8ace37a400c95e882ea75b12165e6490d993",
+        "vertex_normals": "cd19fd05d591bf0f2ef47b06bc592086548a721eaf3bba45b46ef962ce1e3bbb",
+        "material": {
+          "name": "thread_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.6,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "CLAMP/0008_thread": {
+        "vertices": "51a9169904877f9ba2fb501f1b07ed0564f2968707b101bc1e156697b5d2ab84",
+        "faces": "64966beebf328538f69513ae058b8ace37a400c95e882ea75b12165e6490d993",
+        "vertex_normals": "cd19fd05d591bf0f2ef47b06bc592086548a721eaf3bba45b46ef962ce1e3bbb",
+        "material": {
+          "name": "thread_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.6,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "CLAMP/0007_thread": {
+        "vertices": "0323d59d2eca05818f4880b38039bee4d4026e25f2390e16c3615ce588b338d3",
+        "faces": "64966beebf328538f69513ae058b8ace37a400c95e882ea75b12165e6490d993",
+        "vertex_normals": "70ea58e72a12456c460ce6345de57bba88b5f279b13e60d2acce82d44fd6dd1a",
+        "material": {
+          "name": "thread_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.6,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "CLAMP/0006_thread": {
+        "vertices": "6919c4d3d9fde3ada0c42c3573258b71fad8fc6e1296acd09bce9a547c16116e",
+        "faces": "64966beebf328538f69513ae058b8ace37a400c95e882ea75b12165e6490d993",
+        "vertex_normals": "cd19fd05d591bf0f2ef47b06bc592086548a721eaf3bba45b46ef962ce1e3bbb",
+        "material": {
+          "name": "thread_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.6,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "CLAMP/0005_thread": {
+        "vertices": "8e4f3d4fd4acc3561835ffe85d9c48d00ea78e761664a1749ced15f98750d036",
+        "faces": "64966beebf328538f69513ae058b8ace37a400c95e882ea75b12165e6490d993",
+        "vertex_normals": "cb8a230a81b93f51a8389ef8d0d7d61cdce596900ed788accf2d50752c106e20",
+        "material": {
+          "name": "thread_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.6,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "CLAMP/0004_thread": {
+        "vertices": "a4d313d45bca3d5d3da1cf4096ba38d438b07fe1718331f853ccf809708726ca",
+        "faces": "64966beebf328538f69513ae058b8ace37a400c95e882ea75b12165e6490d993",
+        "vertex_normals": "6b15f00340ceabf08a3235c2aa4f4a09ca29a9a704135f7ac5a4a559d5ec63f4",
+        "material": {
+          "name": "thread_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.6,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "CLAMP/0003_thread": {
+        "vertices": "532c263f027f31a7bc5b327c1a158174cf38a0a268924b19c4380fffef6bff68",
+        "faces": "64966beebf328538f69513ae058b8ace37a400c95e882ea75b12165e6490d993",
+        "vertex_normals": "cd19fd05d591bf0f2ef47b06bc592086548a721eaf3bba45b46ef962ce1e3bbb",
+        "material": {
+          "name": "thread_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.6,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "CLAMP/0002_thread": {
+        "vertices": "e5da57ce52f7369ce24e9984e279e6271f340e1e6911039fa15c0e7bf7b76d34",
+        "faces": "64966beebf328538f69513ae058b8ace37a400c95e882ea75b12165e6490d993",
+        "vertex_normals": "cd19fd05d591bf0f2ef47b06bc592086548a721eaf3bba45b46ef962ce1e3bbb",
+        "material": {
+          "name": "thread_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.6,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "CLAMP/0001_thread": {
+        "vertices": "9514be2697511aabe8231fb52f4535eeb306595fdb0f7783abbf69ce6b25f4e4",
+        "faces": "64966beebf328538f69513ae058b8ace37a400c95e882ea75b12165e6490d993",
+        "vertex_normals": "cd19fd05d591bf0f2ef47b06bc592086548a721eaf3bba45b46ef962ce1e3bbb",
+        "material": {
+          "name": "thread_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.6,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "CLAMP/0000_threaded_shank": {
+        "vertices": "507b163e0d9c002d28978568352ae23bfd8eeb0d9ae00cf59c8c6f57cd864ea2",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "06de64a2b5edb0cb117f9cc7cdde16445eccf82581bd57e745718969921f8952",
+        "material": {
+          "name": "threaded_shank_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.65,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      }
+    },
+    "PLUG": {
+      "PLUG/0019_terminal": {
+        "vertices": "942870c0b59056f38f87dd73b5b0f5251ddfb2f5e4d0e3ae3335e12c1160c242",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "1d8717d4e3a584469957b676eecd6d3d8f4e818129afe01e8143f0b14f472cae",
+        "material": {
+          "name": "terminal_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.65,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "PLUG/0018_thread": {
+        "vertices": "033260b642a5cee5ac084f842279420af0de7cc2b4e97f4ee10c9049a179f9df",
+        "faces": "64966beebf328538f69513ae058b8ace37a400c95e882ea75b12165e6490d993",
+        "vertex_normals": "f02e36c24d7c8e20167cf98be2b24dbabcfdf74a4e79bcb825f240f682b8f337",
+        "material": {
+          "name": "thread_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.6,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "PLUG/0017_thread": {
+        "vertices": "bf3a627d93ff170b2e49686ea2d60e9eb0bb8ff3a7c09be17fd0fc751eab11d7",
+        "faces": "64966beebf328538f69513ae058b8ace37a400c95e882ea75b12165e6490d993",
+        "vertex_normals": "f02e36c24d7c8e20167cf98be2b24dbabcfdf74a4e79bcb825f240f682b8f337",
+        "material": {
+          "name": "thread_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.6,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "PLUG/0016_thread": {
+        "vertices": "ed099685c18a952f21576251f178027fc46d260f8a839ec8db1680a9bf099474",
+        "faces": "64966beebf328538f69513ae058b8ace37a400c95e882ea75b12165e6490d993",
+        "vertex_normals": "f02e36c24d7c8e20167cf98be2b24dbabcfdf74a4e79bcb825f240f682b8f337",
+        "material": {
+          "name": "thread_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.6,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "PLUG/0015_thread": {
+        "vertices": "81f8160b325c717cf25311ecd493228a8a8d49f5e40f805ebbbb4ccba32f533a",
+        "faces": "64966beebf328538f69513ae058b8ace37a400c95e882ea75b12165e6490d993",
+        "vertex_normals": "f02e36c24d7c8e20167cf98be2b24dbabcfdf74a4e79bcb825f240f682b8f337",
+        "material": {
+          "name": "thread_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.6,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "PLUG/0014_thread": {
+        "vertices": "6bd67290a8a111685610c69bf5a71dab4255ca61c1a669052decc2b741eff3d7",
+        "faces": "64966beebf328538f69513ae058b8ace37a400c95e882ea75b12165e6490d993",
+        "vertex_normals": "f02e36c24d7c8e20167cf98be2b24dbabcfdf74a4e79bcb825f240f682b8f337",
+        "material": {
+          "name": "thread_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.6,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "PLUG/0013_thread": {
+        "vertices": "930e99b9a40b162f199af98c4464b070305ee0d3c1820446bbbdd9ed5b809acd",
+        "faces": "64966beebf328538f69513ae058b8ace37a400c95e882ea75b12165e6490d993",
+        "vertex_normals": "f02e36c24d7c8e20167cf98be2b24dbabcfdf74a4e79bcb825f240f682b8f337",
+        "material": {
+          "name": "thread_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.6,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "PLUG/0012_thread": {
+        "vertices": "70e39a98e1dce47e21ae8bde6804c1ac4366b75ee3490eebbb81b19eb5bb16a6",
+        "faces": "64966beebf328538f69513ae058b8ace37a400c95e882ea75b12165e6490d993",
+        "vertex_normals": "b40e14836b1c6b931fe55327cc0a0163f0e1ecf401f53010aa77232739543210",
+        "material": {
+          "name": "thread_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.6,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "PLUG/0011_thread": {
+        "vertices": "12f6c27d6ce4bf8cde294d03f614e1a3e53085b98c8d2f849fcb8ea97b224377",
+        "faces": "64966beebf328538f69513ae058b8ace37a400c95e882ea75b12165e6490d993",
+        "vertex_normals": "33578d3724493fc709c2e263d042d1423d40311e95973e162ef24e32fd13ba4b",
+        "material": {
+          "name": "thread_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.6,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "PLUG/0010_thread": {
+        "vertices": "07332e88da88cca0239019fe23a5fc2330cc6748a8bd2ca03a5debe758166299",
+        "faces": "64966beebf328538f69513ae058b8ace37a400c95e882ea75b12165e6490d993",
+        "vertex_normals": "b40e14836b1c6b931fe55327cc0a0163f0e1ecf401f53010aa77232739543210",
+        "material": {
+          "name": "thread_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.6,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "PLUG/0009_thread": {
+        "vertices": "93ae30406dc71cadf7cee7a9e17ebc4c4695bd653c71ee08c5ac8efc6f11d26f",
+        "faces": "64966beebf328538f69513ae058b8ace37a400c95e882ea75b12165e6490d993",
+        "vertex_normals": "33578d3724493fc709c2e263d042d1423d40311e95973e162ef24e32fd13ba4b",
+        "material": {
+          "name": "thread_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.6,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "PLUG/0008_threaded_shell": {
+        "vertices": "d40ec6cac5783e50c654be936788c9c1251adfc00a407e6e80957e39be8e7dd1",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "4a78b2261e5dd3112a3a0e46f7e230762bb9f1e002a9949a84a2e0220148a13a",
+        "material": {
+          "name": "threaded_shell_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.65,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "PLUG/0007_hex_nut": {
+        "vertices": "a78c15f377b4b623ff21d213fdafc132af66b6d06cd0579ba26f99f6c0dced88",
+        "faces": "98ada860caf7d7532a478c1029aa5285f1a1b004da15d4862efbd7a6d1844ad4",
+        "vertex_normals": "7b1c95c418321bfc01899f996f2ec5255500da7b4e76d0257cb7c1ecfcec8cb2",
+        "material": {
+          "name": "hex_nut_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.8,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "PLUG/0006_ceramic_rib": {
+        "vertices": "58eb751a08eee25dc471544e5a138b233a0136c449ab5f1600d8c3b340a9d49a",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "3ceb9771e1e41b9303237e8d72c30b8742e3d2272112d4556373675dd727710f",
+        "material": {
+          "name": "ceramic_rib_material",
+          "baseColorFactor": [
+            207,
+            215,
+            221,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "PLUG/0005_ceramic_rib": {
+        "vertices": "beb1e13575e9923e1ac7d46c5793b34a3174561ce5e19c1bd72802d6d28e1e93",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "3ceb9771e1e41b9303237e8d72c30b8742e3d2272112d4556373675dd727710f",
+        "material": {
+          "name": "ceramic_rib_material",
+          "baseColorFactor": [
+            207,
+            215,
+            221,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "PLUG/0004_ceramic_rib": {
+        "vertices": "62060948ab2bdc069743aaff2e33457244e71b60f7773cda68b0775b6c95372c",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "ebe10cc80110cd2d0ef189c5d4bd49d0f8285b72d94cb67fe16aff07fa2c46be",
+        "material": {
+          "name": "ceramic_rib_material",
+          "baseColorFactor": [
+            207,
+            215,
+            221,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "PLUG/0003_ceramic_rib": {
+        "vertices": "fb5c1ab2860b9f5c541a79851310c50131de924b67d4ae8473b6ab791a21f7d6",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "ebe10cc80110cd2d0ef189c5d4bd49d0f8285b72d94cb67fe16aff07fa2c46be",
+        "material": {
+          "name": "ceramic_rib_material",
+          "baseColorFactor": [
+            207,
+            215,
+            221,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "PLUG/0002_ceramic_rib": {
+        "vertices": "4cde7d51d77f549d130902f49b5a5c161fdffdba732778b9d1da53635ad4f86e",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "2ad79805e1de849ea4133f51c4ee9aaade6f4e721bc8067d97f48751e48862a4",
+        "material": {
+          "name": "ceramic_rib_material",
+          "baseColorFactor": [
+            207,
+            215,
+            221,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "PLUG/0001_ceramic_rib": {
+        "vertices": "0505088aedf0a123340398d51860f444738a992b43476823387eeb56ae6e72a0",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "2ad79805e1de849ea4133f51c4ee9aaade6f4e721bc8067d97f48751e48862a4",
+        "material": {
+          "name": "ceramic_rib_material",
+          "baseColorFactor": [
+            207,
+            215,
+            221,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "PLUG/0000_ceramic": {
+        "vertices": "f4e1909040aaaca19b0ce6b3ed415e875e08f736334d2fa612cad79c250877fa",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "c7f0153dec5f909b4793f10244ae2ef4020e1adfcac5814c2b6c2a0631d36054",
+        "material": {
+          "name": "ceramic_material",
+          "baseColorFactor": [
+            207,
+            215,
+            221,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      }
+    },
+    "PLUGPORT": {
+      "PLUGPORT/0001_seating_face": {
+        "vertices": "734e532f4d1b003a0b03f2f35c78a851230033094672690fcbac6459ef6c8e9f",
+        "faces": "64966beebf328538f69513ae058b8ace37a400c95e882ea75b12165e6490d993",
+        "vertex_normals": "be19e0fc259599f4ddebe535c268cbaba9b8e7bc15a122c52295be28408488c1",
+        "material": {
+          "name": "seating_face_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.6,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "PLUGPORT/0000_receiver_bore": {
+        "vertices": "838e86a2b31c986991115bc81369ae101c380eb2e79f0406fbbe186c32cebd47",
+        "faces": "64966beebf328538f69513ae058b8ace37a400c95e882ea75b12165e6490d993",
+        "vertex_normals": "51484ce4a0fcc6af746d9abaca0fe750dd22be693d18c976b9e4cc878e8daa66",
+        "material": {
+          "name": "receiver_bore_material",
+          "baseColorFactor": [
+            95,
+            109,
+            117,
+            255
+          ],
+          "metallicFactor": 0.6,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      }
+    },
+    "OILCAP": {
+      "OILCAP/0031_cap_grip_collar": {
+        "vertices": "4ab989ca386bb05609582b5131c6f50f170611ef71f616d2cda28d3a41d56d04",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "cdb1f883c96113c5d5976401bf2e222baddecff03709f66c61db2b21e279ddb2",
+        "material": {
+          "name": "cap_grip_collar_material",
+          "baseColorFactor": [
+            51,
+            61,
+            66,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "OILCAP/0030_index_mark": {
+        "vertices": "7314dacdbfe5685d2f93072eda54daa21fb75b9e0598a452a507e917bd744654",
+        "faces": "3ccafb70c5598e19441e1eeca877ba4b6d09670410d707718d1965ce41ac24d8",
+        "vertex_normals": "6bc986c2695ad2262b81e3ab7a6967715da794c824b3793c7d207712ac741f2d",
+        "material": {
+          "name": "index_mark_material",
+          "baseColorFactor": [
+            207,
+            215,
+            221,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "OILCAP/0029_knurl": {
+        "vertices": "64f92271a6e1efe1ac689efff118c5963518cc08af3fa797d6bba0b61b21c134",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "1ec444759ff8b324c02c4deb34abd9581a2268017bdf1f0a492b9911220179ba",
+        "material": {
+          "name": "knurl_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "OILCAP/0028_knurl": {
+        "vertices": "6111d28e1a2dd385da0928f561dff93f96cd6bafe085e6fd5c7041ab8bcae8ba",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "5cfdb6055d55ab29bd746584288b8bdd0473cf098d711cabfe31de67c9cb3008",
+        "material": {
+          "name": "knurl_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "OILCAP/0027_knurl": {
+        "vertices": "72233a917f49c5813ce284f18db805bc5b06c134574c333501c4546b6a650d0f",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "6ede034d997d40ef8db3ff1aea84dace2bd8cb9e8a5380c2918064f9f30b05e2",
+        "material": {
+          "name": "knurl_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "OILCAP/0026_knurl": {
+        "vertices": "ffb66e9cb948242d18791ba13a29b53b5f950b42a0fe7c8d21cb48f68c71ad6d",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "4a051e045d804b77dbd85acd664f11146d5272eddf297c84e699a6e3c561af64",
+        "material": {
+          "name": "knurl_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "OILCAP/0025_knurl": {
+        "vertices": "86d9062525b10c92a9c66c8d0ce0e727ac2752a219bf4040fe2b114cd36d4d97",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "50ede1af7ba66d9b6e6fbea6624c2eea21faa1f3034a13652bc12b6569813498",
+        "material": {
+          "name": "knurl_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "OILCAP/0024_knurl": {
+        "vertices": "a8b6820789c5049764b65f8b1946b647c86183fc02bfa0916f414d776aade45e",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "0665b2e25a93ecaaea7ccb663d1c3c067d634e4edd6befeb0ecd1507fb9e7ac2",
+        "material": {
+          "name": "knurl_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "OILCAP/0023_knurl": {
+        "vertices": "1bf6f4fb0050ce943fd9fec0b1dd87ffba9bb5238223ce4a3e1315dc98792ea5",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "d4c773acbf5fb4c655ce748d73805aefb16589d0b599a1e76c83594592e908b2",
+        "material": {
+          "name": "knurl_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "OILCAP/0022_knurl": {
+        "vertices": "aed1e43c94c534b54421bf3394a50a69e1553c88a2a9d9e27d39b0edc0ca7926",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "b645f49894408124d527ee20926c9fb83226ddbc878052570ec703d8c9af6f0b",
+        "material": {
+          "name": "knurl_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "OILCAP/0021_knurl": {
+        "vertices": "a80a6aff76f5452aae1a0f8a6aff21a58e03672db8cb94163d8ee85509e35ac7",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "614e4a7688e65c8a4805b6f27db5a88a9956338ca8d828188af33db5d369ba8a",
+        "material": {
+          "name": "knurl_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "OILCAP/0020_knurl": {
+        "vertices": "ab4427ac9203989d7c9901c3e1f4ba3a760cc7e3b317ed1c2d698d16573eabf4",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "d3525f0362ad4cfcf5e99dfff5b560099a0db0edc63ea4a4a2878eabc455b017",
+        "material": {
+          "name": "knurl_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "OILCAP/0019_knurl": {
+        "vertices": "a85a2ccbfab16f5ca9b0a2995a738c3d5b2da6b80a79f1330712fc2e2a3ba46c",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "5258fc7893624f3bfc27693fadd4feb3dbd5e64916b28a1043a2ef05cdd4b2d3",
+        "material": {
+          "name": "knurl_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "OILCAP/0018_knurl": {
+        "vertices": "35f353fae1fa4a0733e0a3cf8067bc889ef78db64c1f03bd242efa9c5226fd59",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "a84e1d7cf53c4b203f66cf4499863848ea540afb4d63a643ad465307fa84943b",
+        "material": {
+          "name": "knurl_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "OILCAP/0017_knurl": {
+        "vertices": "ef99cf0d71db546b56164487087d55828c6298855061d17e926c301a983a2044",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "c20262661ee839bcbc2160c384f9cde4858abc73557295e71dbafe9cd97744ea",
+        "material": {
+          "name": "knurl_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "OILCAP/0016_knurl": {
+        "vertices": "9734c79ed1fa5c0b63451a368ae8c051258f992e9573c81fecbd72b26d95c062",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "6c71d59b2e2c751534a1a794d97f685701c0542a042dfc9fa304cbcb40ccfc3a",
+        "material": {
+          "name": "knurl_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "OILCAP/0015_knurl": {
+        "vertices": "255986074a6a558e65b2d53d4fce445448d279f3dd8718edc493aac201b80588",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "e33e9849d7fca997d472dfdb6b80517b08959918839f49b835207346f0a9eb64",
+        "material": {
+          "name": "knurl_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "OILCAP/0014_knurl": {
+        "vertices": "f3456c7ad12e77b7837f00572de9fd3d6dba0c0764993d73c9edc75eacb8550e",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "7d07fd06ead0da66b3add337b4e11bc372d1cd11bbc3c9ecc438dda6e8e52d86",
+        "material": {
+          "name": "knurl_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "OILCAP/0013_knurl": {
+        "vertices": "dd4743a529a85009e25540c5346d2fea8a085b1d6d3c7a25d79c79500d44db2c",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "15edeb079a386f75379b716306a741869ed29fc3262add388a16a0317bd9defa",
+        "material": {
+          "name": "knurl_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "OILCAP/0012_knurl": {
+        "vertices": "28165915cbaa1ee8e4c7af62a7f61bb8fdc93e5a6b0a12547114f3d4c2a6650d",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "8cfa00bff02386f430e70eebb9d4e3ad58ffe43883a10e09cbd20a8c85f050d9",
+        "material": {
+          "name": "knurl_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "OILCAP/0011_knurl": {
+        "vertices": "bd7df502657691a3bf10e73c0f0d9571bdadc2fcce13f3a894bedd4016d70692",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "57898b880508d6405c560b5f9294a2f078cde1312dbfb0f3078224d6dd982fb7",
+        "material": {
+          "name": "knurl_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "OILCAP/0010_knurl": {
+        "vertices": "5a48941b753833e6b4a15e6b5afa0118e8df2aee60911273f6ab45891b2b37b6",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "27b1393ada29bc60a967408098ac5eef5eb4eda9d57923ec452b71d040f65ebd",
+        "material": {
+          "name": "knurl_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "OILCAP/0009_knurl": {
+        "vertices": "e50d5417e726be62e8583c54cf95615832f450cfc172956e6789be56575848a8",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "02fbbb73b99ea48bfe552a51a4bba73c2c5097e5fe3cb50c9a7f310a07d0b3fd",
+        "material": {
+          "name": "knurl_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "OILCAP/0008_knurl": {
+        "vertices": "325ce57bc06bf73a5b88f9926be95fb83c64099423d532532e01d953dc4cb1fe",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "1cadc002734f909c49cb0c48f4caa6eef44ca5b3529abeda24b52373b675c5ab",
+        "material": {
+          "name": "knurl_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "OILCAP/0007_knurl": {
+        "vertices": "b5bb527dbb8b9d85e1dc68249210c34f111dba08ddfe716b2d22399e1bb43760",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "3854fe23849b4080409432550a938759777a4712792a0d6eae960066dd077b55",
+        "material": {
+          "name": "knurl_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "OILCAP/0006_knurl": {
+        "vertices": "5f99417d49bb70f8e13ea769705b1287f5093f978e1cbd967c6fe80adab45f08",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "fad20fe1f9d4bd3a0a426854cdf6d583b398fde04d9b077c9dea6a60f22a7217",
+        "material": {
+          "name": "knurl_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "OILCAP/0005_knurl": {
+        "vertices": "9c6be302686747f9d0f3c57068bd444c4d3ddd9886cf677123b45fe105a2a4fc",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "2f8f548c2e42bb827bce47067de3589848fba7c0e7e4e2001049944321d11207",
+        "material": {
+          "name": "knurl_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "OILCAP/0004_knurl": {
+        "vertices": "bc0e63d4a6cd7b8a5ed8ab0938f5755a2ea01e9f4825123032fb22521dca1827",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "ab4b59adb6b2957c59b2071b28221a4b4d77483b1b9a54fcb8df878e309a5e2e",
+        "material": {
+          "name": "knurl_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "OILCAP/0003_knurl": {
+        "vertices": "483f00d691f7f7430919c9c9cb76109ad2d8715e0b668d44dd0464335dde273d",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "4b2682f9c83913f8578aa214b509968fe7f86d4e613bbc02753431314f3f3b3b",
+        "material": {
+          "name": "knurl_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "OILCAP/0002_knurl": {
+        "vertices": "9ab981e9bcc2a1ee809b4ff5ae96443eb42744b1586e17a27e97cde7895c98c6",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "4558c72cd1372bc17cae71d395d8fcb491e2f73da730b537ffc2db8570213918",
+        "material": {
+          "name": "knurl_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "OILCAP/0001_flange": {
+        "vertices": "ec4c2ec906c80fc1caded15652b4d3b7d9f4573e7f0a9b92a589c10a76af21f9",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "1df5b188d553db91e99c2ada22b55cf70d78f8f9456fb9626edba4c03e53ea68",
+        "material": {
+          "name": "flange_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "OILCAP/0000_grip": {
+        "vertices": "2bfdebbc7ff42fe7abd36d60e6d78ccb682afc8bd99fc97e3b9e504f72f9b4be",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "55ed47c456397c82e5d512dfdf1cbe8d34d6b13f53c75ded87cf77d321e5e62a",
+        "material": {
+          "name": "grip_material",
+          "baseColorFactor": [
+            51,
+            61,
+            66,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      }
+    },
+    "TENSIONER": {
+      "TENSIONER/0011_driver_slot": {
+        "vertices": "a46ba59f3a7b1e1a25b93738ef040e96a377543e4490ac5595c326f3fad0bb19",
+        "faces": "945c105b7c278a7faed2dbf1a2856a3d09b2a99811024cc7c665066705f87eaa",
+        "vertex_normals": "0259604ccb92475329b2588a13ef321355178db04872fe8dc3de9d0b1321b4f5",
+        "material": {
+          "name": "driver_slot_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "TENSIONER/0010_hex_head": {
+        "vertices": "9dcd25f3a1aa107a3f2f5fabf7463fd727d760c090cca612870bd5e2c0f26908",
+        "faces": "98ada860caf7d7532a478c1029aa5285f1a1b004da15d4862efbd7a6d1844ad4",
+        "vertex_normals": "7337db9b77a9d0b389b73ebe5671c772176a216c96cd00ab431a3ca13ab8caa4",
+        "material": {
+          "name": "hex_head_material",
+          "baseColorFactor": [
+            164,
+            171,
+            175,
+            255
+          ],
+          "metallicFactor": 0.7,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "TENSIONER/0009_thread": {
+        "vertices": "4763ae7f844233006c428dcef11a7a5b7117aa46dc307ab741dd06b7c5a35bb3",
+        "faces": "64966beebf328538f69513ae058b8ace37a400c95e882ea75b12165e6490d993",
+        "vertex_normals": "153054f6de40473a8e69500bb108dbd90664963e220af7ab84face538b1595f7",
+        "material": {
+          "name": "thread_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.6,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "TENSIONER/0008_thread": {
+        "vertices": "ae8395d4054593bb08a1f4fbc692d83d963fa8c977447c0d044f7b8e38abd31b",
+        "faces": "64966beebf328538f69513ae058b8ace37a400c95e882ea75b12165e6490d993",
+        "vertex_normals": "26d2b4e9c8c81a8dc907fbb03c89abc3a0aa6ad27c34f3175218e231b3b49bb3",
+        "material": {
+          "name": "thread_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.6,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "TENSIONER/0007_thread": {
+        "vertices": "31c9b6a7b79f72a20807c9bd79f29a31438219a00ed61168ca8c6fd3ed45a9eb",
+        "faces": "64966beebf328538f69513ae058b8ace37a400c95e882ea75b12165e6490d993",
+        "vertex_normals": "484420e0f095a961f29c17b0e625205dc8e0d3be86757c2b424991c18e7fb406",
+        "material": {
+          "name": "thread_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.6,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "TENSIONER/0006_thread": {
+        "vertices": "6d5bad5d45e5cffaefe17ae15783f9caa93be5ba653717c0e9317e8fd9ee7e3c",
+        "faces": "64966beebf328538f69513ae058b8ace37a400c95e882ea75b12165e6490d993",
+        "vertex_normals": "26d2b4e9c8c81a8dc907fbb03c89abc3a0aa6ad27c34f3175218e231b3b49bb3",
+        "material": {
+          "name": "thread_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.6,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "TENSIONER/0005_thread": {
+        "vertices": "5cde111ee4c7fbdbf0f2607f907115cd484cd0845fff781a7a15efbef9c01dbe",
+        "faces": "64966beebf328538f69513ae058b8ace37a400c95e882ea75b12165e6490d993",
+        "vertex_normals": "153054f6de40473a8e69500bb108dbd90664963e220af7ab84face538b1595f7",
+        "material": {
+          "name": "thread_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.6,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "TENSIONER/0004_thread": {
+        "vertices": "abf0f0074da4a6e0331e3ab6936afa6bfdcde48caef61e54cc09df7bb4cbe7c9",
+        "faces": "64966beebf328538f69513ae058b8ace37a400c95e882ea75b12165e6490d993",
+        "vertex_normals": "153054f6de40473a8e69500bb108dbd90664963e220af7ab84face538b1595f7",
+        "material": {
+          "name": "thread_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.6,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "TENSIONER/0003_thread": {
+        "vertices": "24f2c6c578c6453037df000f36e23347b0ec4ca725dbc0edd1f321292799c635",
+        "faces": "64966beebf328538f69513ae058b8ace37a400c95e882ea75b12165e6490d993",
+        "vertex_normals": "153054f6de40473a8e69500bb108dbd90664963e220af7ab84face538b1595f7",
+        "material": {
+          "name": "thread_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.6,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "TENSIONER/0002_thread": {
+        "vertices": "0a1f7b868b91f3a2f66c70f0c874786e38f81c10375fd2f3cd4ac9e65e93a449",
+        "faces": "64966beebf328538f69513ae058b8ace37a400c95e882ea75b12165e6490d993",
+        "vertex_normals": "153054f6de40473a8e69500bb108dbd90664963e220af7ab84face538b1595f7",
+        "material": {
+          "name": "thread_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.6,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "TENSIONER/0001_thread": {
+        "vertices": "4c5445da420406210baad1427b54b5ebec8088b9e3f7378afbf397bc22ba9327",
+        "faces": "64966beebf328538f69513ae058b8ace37a400c95e882ea75b12165e6490d993",
+        "vertex_normals": "920fc06acf43590247759d3e2c6de70ddc9e0d62c8f044ea8f763322797c993a",
+        "material": {
+          "name": "thread_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.6,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "TENSIONER/0000_threaded_shank": {
+        "vertices": "2ee21eeea56be798205f2627f5d473f46140dcb77eb710d89f3310f171cc889d",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "571a8c01ca129cb02e44637fb2de3dbd8421d0bf7191467645524bb99cbc9d8f",
+        "material": {
+          "name": "threaded_shank_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.65,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      }
+    },
+    "CONN": {
+      "CONN/0012_fastener": {
+        "vertices": "98ff12102bc948327f0e26b5812c70a0c790fe7cdf2aa41067b00e0688cb3554",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "293661872b610f113baeac1f65d894fa29fcc2f3667922d570be2a67dce0b33d",
+        "material": {
+          "name": "fastener_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.65,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "CONN/0011_fastener": {
+        "vertices": "4f315327bb1e898f3d4309fa7a51e05d25e2f190d8b7e65ff20473d23682ef8d",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "293661872b610f113baeac1f65d894fa29fcc2f3667922d570be2a67dce0b33d",
+        "material": {
+          "name": "fastener_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.65,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "CONN/0010_fastener": {
+        "vertices": "b7254538d0e7d2b8882b4fb9ded37109666152bd2b708003fea502e179b0cb1d",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "b80bcd749f4e6d137349f8d702bbb09a2695e0bd8caefb4851b77efdd43c5e36",
+        "material": {
+          "name": "fastener_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.65,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "CONN/0009_fastener": {
+        "vertices": "63acb1d94b05166d38fe0e47b5ece3d51808fd7999198c1074d51aca4b480e15",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "b80bcd749f4e6d137349f8d702bbb09a2695e0bd8caefb4851b77efdd43c5e36",
+        "material": {
+          "name": "fastener_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.65,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "CONN/label_8": {
+        "vertices": "a15fe02ec40b8056ff72393eb57422b16cc143a66f71c2222162a468354966f9",
+        "faces": "588155b6e6708a8cfa760da51896fc20cc2ef0f14ceb2b8e037dac125f2a3f32",
+        "vertex_normals": "c511674f2332f55ddfa38c2de8ffdf1fa7d8cee5662b304fce26e3cb212eaaef",
+        "material": {
+          "name": null,
+          "baseColorFactor": null,
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.75,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": "e8bb24ed07598e704da60020ee52d56701480d737721f8f1cbf1d9914ee13329"
+        },
+        "uv": "39b0ce9f8bb751d3cda95dff4ccbd2f76aa8be076e08f92cd3a2ce32d7fd5d9e"
+      },
+      "CONN/0007_terminal": {
+        "vertices": "9530f85471531a72a605f618ea52ede79e42435e5dcb9cbbf0e34915fd76385e",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "1bd5c81647bb3c8269d0719e69d1800c2a04ea85538c87f8e1d297eeb1383d45",
+        "material": {
+          "name": "terminal_material",
+          "baseColorFactor": [
+            178,
+            150,
+            82,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "CONN/0006_terminal": {
+        "vertices": "4d0289c9c186b2034c0ef9a89508b60a1b377a661d99f9ae6eb572c6bb96f3af",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "e71b5ffbfca136869ae3b3a2f2df91a1e5f3bcb69f2daa9a789443c596f1e967",
+        "material": {
+          "name": "terminal_material",
+          "baseColorFactor": [
+            178,
+            150,
+            82,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "CONN/0005_terminal": {
+        "vertices": "a9f71bb1052b6e348bc6ff57b12afe14128e39985ca6f6950a56dac3b5b97b1b",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "b85d400cf08a594d5388bb047dc590a37977b2ce14f4d38e5596a0ff08f4cf3e",
+        "material": {
+          "name": "terminal_material",
+          "baseColorFactor": [
+            178,
+            150,
+            82,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "CONN/0004_terminal": {
+        "vertices": "e136b79c26226af5cbfe422afba0f0929695bcffe9f419dbc6055a497b25c21d",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "fe6d5b171f8fee5f3ead518757d09fa7bc4b533f5606436a3ed9222cc01eba20",
+        "material": {
+          "name": "terminal_material",
+          "baseColorFactor": [
+            178,
+            150,
+            82,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "CONN/0003_polarizing_key": {
+        "vertices": "a1b0ae4ef5b8479ef21d8e0ae9c5a1ef62739e15e02a8dd30c508beff97f8f9b",
+        "faces": "e1cab65844bc313880198cba8b6cc3cc168026b7d5ff3ac651cde904d5e5da44",
+        "vertex_normals": "32520a2416d8835702c3f50f629364b89f783b784dc5173a42475fea2ca84c6d",
+        "material": {
+          "name": "polarizing_key_material",
+          "baseColorFactor": [
+            219,
+            132,
+            47,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "CONN/label_2": {
+        "vertices": "2497d880dc749f769fe393a0abcecd9f16f7a7d7449e65be52c3cc6edcd08c37",
+        "faces": "588155b6e6708a8cfa760da51896fc20cc2ef0f14ceb2b8e037dac125f2a3f32",
+        "vertex_normals": "7efd6d79b7d3482f83f33aad0c72f9bea5742b1c4eb04a2baa214f1510da5dc4",
+        "material": {
+          "name": null,
+          "baseColorFactor": null,
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.75,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": "3183c394af08277dd901ca47fa65e16ac943885ab770ea55bb87b1e56ce8c724"
+        },
+        "uv": "39b0ce9f8bb751d3cda95dff4ccbd2f76aa8be076e08f92cd3a2ce32d7fd5d9e"
+      },
+      "CONN/0001_front_panel": {
+        "vertices": "cdc03a1da25ea8ae807eeb943c1ad58e0b5f22a44a45ec41f646f6d2de607b50",
+        "faces": "5e57ab8889677b2466360997764f3834e275fffa291271f20a885977d1e37092",
+        "vertex_normals": "0d462d8de004c6654bfbc3e4f8c9a99171278a339f7230bc6bee0cd50075399f",
+        "material": {
+          "name": "front_panel_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "CONN/0000_housing": {
+        "vertices": "8fa4841b4077d9a0e8bea0eef0b1aef2aeb66a9533dcdf4f5c786abf34a066e5",
+        "faces": "6ced0e6f09517de1a4f195ff15c813c47adf21f9c8903de294b64e8736c47880",
+        "vertex_normals": "ab42727d40387edeccc50aa13d3d516280bedd89b19b4201e2ecb1d4b5360efb",
+        "material": {
+          "name": "housing_material",
+          "baseColorFactor": [
+            195,
+            118,
+            51,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      }
+    },
+    "workstation": {
+      "engine_bay_environment/0124_sparkplug_rest_pad": {
+        "vertices": "fdaa145a46d8ab2d88fd6dd326f91de7c1136e11ea020017b8486424a7b43d92",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "959c495f401d044e6063593629ce6ab6c39eb18dfffa097c704d94f1e4434255",
+        "material": {
+          "name": "sparkplug_rest_pad_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0123_engine_pulley_axle": {
+        "vertices": "bb22fd5da62dbd62e08b727347e2617b9afea8dcb977751611cf5a4b6518ec31",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "268d2a65f4dae29421c10746f1f551aeffdce819784d084af0c46e2c033b4e69",
+        "material": {
+          "name": "engine_pulley_axle_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.65,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0122_engine_pulley_axle": {
+        "vertices": "f9ae0a8b6ef0fbcd2db82134708edeea35f165d38f352cc99790e528281aeeed",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "ca99448707f4b2daf39dcb776decf160e59914930513250ad8c771cba30c6697",
+        "material": {
+          "name": "engine_pulley_axle_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.65,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0121_engine_connector_post": {
+        "vertices": "2d342d391f0b9c4d789c171c4dd05a8a95d689275e1777ffb24bc68f0b1b3aa1",
+        "faces": "02abb9f379201bb5c720a36065159de1457737855272b5fe8c57a54823391e5b",
+        "vertex_normals": "b5bcea72aa35b3da7dbbad06bdbb570f2747ec10ce31fd0ee9bc98dc3feb1647",
+        "material": {
+          "name": "engine_connector_post_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.55,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0120_engine_fender_riser": {
+        "vertices": "ccb228b2950133aaa73a6bdc0b3a4dc26180c0cde3fbfe4834df67a6eb2d91dd",
+        "faces": "d65028f9ff097c7c3c5364e034cef675c781b1d10dae5cf8b1d10dede9543911",
+        "vertex_normals": "b85b7363324fbfdb6ba2869f27f08732d993b3309f1fa5d424e282bc9f7a8147",
+        "material": {
+          "name": "engine_fender_riser_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.55,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0119_engine_fender_riser": {
+        "vertices": "26cf3cb02e9a0be47c43e0d08cb31da249971b803a86ab9304b1247772872675",
+        "faces": "d65028f9ff097c7c3c5364e034cef675c781b1d10dae5cf8b1d10dede9543911",
+        "vertex_normals": "49f89754487bf2f5000787fec709af5fded3b519b98571e79131c66f6c546add",
+        "material": {
+          "name": "engine_fender_riser_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.55,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0118_engine_stand_post": {
+        "vertices": "40dedde8b745cd1b4b9eddebc9c4dbb2a74107d1968e03c8499345a264a77193",
+        "faces": "4f70340534dc06a75cf47abf42367aeaa9a202b57c9aeabb9e1dcdc41091e4eb",
+        "vertex_normals": "cc7d2ad60fd440a460b6b58b2760fe1b3a67a486041d3b9e99af24c4d27d8c1f",
+        "material": {
+          "name": "engine_stand_post_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.55,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0117_engine_stand_post": {
+        "vertices": "4553f2234eb399e84728f8f9a39081fcf439c4ca2611f12419113a14e5af1fe2",
+        "faces": "4f70340534dc06a75cf47abf42367aeaa9a202b57c9aeabb9e1dcdc41091e4eb",
+        "vertex_normals": "cb8a3825c4247a5b0ac1b3f8eda9889fef9178e22a8981ba4b6f2a3ce2caf88d",
+        "material": {
+          "name": "engine_stand_post_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.55,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0116_engine_stand_base": {
+        "vertices": "52a724efa0440774e76eae9c5c23c156c9efb52a283657aab82d3509ee1265aa",
+        "faces": "920c8f83f9b416b08b2e8c391a762d8ed904ce4f363e58d160529315acfe7b25",
+        "vertex_normals": "d90e94c79e228edd2104506526a6a0c94bbcfcabce0cb5c4aac606008826d436",
+        "material": {
+          "name": "engine_stand_base_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0115_engine_stand_post": {
+        "vertices": "072b9ac662ab7678dc6ccf0855b32a46a71bed0421d88ec73f8d06f8d6ae5bdb",
+        "faces": "4f70340534dc06a75cf47abf42367aeaa9a202b57c9aeabb9e1dcdc41091e4eb",
+        "vertex_normals": "5684c5fcab665f1068695a195063765b58ca447313729928d358adaf518343ba",
+        "material": {
+          "name": "engine_stand_post_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.55,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0114_engine_stand_post": {
+        "vertices": "840545cba0f26f0790b62d8557b76a2089a7c428f751bde79a27d0c0bdcd4774",
+        "faces": "4f70340534dc06a75cf47abf42367aeaa9a202b57c9aeabb9e1dcdc41091e4eb",
+        "vertex_normals": "d06a5aa1c21763d1aae6d68a0f2aa14e8f314121f19e1c3d3be5332dd93670ea",
+        "material": {
+          "name": "engine_stand_post_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.55,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0113_engine_stand_base": {
+        "vertices": "cf665715d22f76c0c50a0897aa8957dd46d6bb86400e4780f3edecaee7ae163f",
+        "faces": "920c8f83f9b416b08b2e8c391a762d8ed904ce4f363e58d160529315acfe7b25",
+        "vertex_normals": "d49470752e63b96ac4dd9ab5929e376857ed12e15709c90b4a8ba6a18ba73bb5",
+        "material": {
+          "name": "engine_stand_base_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0112_hood_strut": {
+        "vertices": "4ee8df48beb421b1b3d7e05305cd0ff533655016af59a75c936b8f293bc5707b",
+        "faces": "7978b61c5bc1ed24800514b4afce47eee9ede9b6a0fea0d45f0b6666f92b756e",
+        "vertex_normals": "1578cc1061f5b7036beffa2fae783863b6333043f87b0fd6834a3ab7950b9ab9",
+        "material": {
+          "name": "hood_strut_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.45,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0111_hood_inner_rib": {
+        "vertices": "46719f1ef6fcade6a10a97908441a2320a0c65c83de1749934c331568bd28b47",
+        "faces": "707fca5b69f696c68332173f6d47f7d32f43b18f19036aca80ad39a8585ed111",
+        "vertex_normals": "c56ab7f5c1eeb4343db639021f90c848ac3507c164dc15d960066f4e9a2b27b2",
+        "material": {
+          "name": "hood_inner_rib_material",
+          "baseColorFactor": [
+            49,
+            80,
+            101,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0110_hood_inner_rib": {
+        "vertices": "93ef9ae97ba604a170d789659a68054bcd76c1ad9fcd723eab70b8f0f7257a64",
+        "faces": "707fca5b69f696c68332173f6d47f7d32f43b18f19036aca80ad39a8585ed111",
+        "vertex_normals": "bf270bd7a61d897ba71dd83eb585b26a19e0fc3cceb10abfbfb098ca7ffbb9a1",
+        "material": {
+          "name": "hood_inner_rib_material",
+          "baseColorFactor": [
+            49,
+            80,
+            101,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0109_hood_inner_rib": {
+        "vertices": "4041891e8edea8232c7cca22091e4baea3c9c4516b20dd603d62fffb830e5f9e",
+        "faces": "707fca5b69f696c68332173f6d47f7d32f43b18f19036aca80ad39a8585ed111",
+        "vertex_normals": "31dd5dda481b26f33f12d2d4988df4ca9d98145b5ce6ddd4a56922563887603e",
+        "material": {
+          "name": "hood_inner_rib_material",
+          "baseColorFactor": [
+            49,
+            80,
+            101,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0108_open_hood": {
+        "vertices": "a515dd23eaaed909234b73cd06e3dc937031da07a00e372af692fed5839299ef",
+        "faces": "ba3e359aa04e44f6ad44b1be2675f4e4bdbe5b479bf4318586da6ca9e93f8812",
+        "vertex_normals": "587d43bed5b4fad78e2be9eb87f14e412c5eca389361dda0abe32af4924c4aca",
+        "material": {
+          "name": "open_hood_material",
+          "baseColorFactor": [
+            42,
+            98,
+            136,
+            255
+          ],
+          "metallicFactor": 0.45,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0107_radiator_fin": {
+        "vertices": "ac3a888215616df47f2560549a6ccd0b2da5c8705c1f8f3c12e75a96e891ee48",
+        "faces": "72c989f8b50a561f65bb9119d2c423a3d4d31ce1eea0bbceba90db4f8e93f349",
+        "vertex_normals": "184f97ec4f6f3cea641aa240171358f41d08e79abdf618684655ddb8f71d9cb5",
+        "material": {
+          "name": "radiator_fin_material",
+          "baseColorFactor": [
+            96,
+            112,
+            120,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0106_radiator_fin": {
+        "vertices": "49f3a327a7997fc77090b81f63eaf18749b013c48dd29b507147fed7b76d2743",
+        "faces": "72c989f8b50a561f65bb9119d2c423a3d4d31ce1eea0bbceba90db4f8e93f349",
+        "vertex_normals": "b3b367bcc3a6c3ef977e25cc18a6ccc54fd6728dd586bc98589ff4f64479a187",
+        "material": {
+          "name": "radiator_fin_material",
+          "baseColorFactor": [
+            96,
+            112,
+            120,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0105_radiator_fin": {
+        "vertices": "4a862eadd18f1ad1587d9f77dbecb785bb86c34818fc0e02c411377399ad174a",
+        "faces": "72c989f8b50a561f65bb9119d2c423a3d4d31ce1eea0bbceba90db4f8e93f349",
+        "vertex_normals": "bd8bed92ee761c688745157c14ba17391fbf249a3e3b81c86fdf5d67971e37f6",
+        "material": {
+          "name": "radiator_fin_material",
+          "baseColorFactor": [
+            96,
+            112,
+            120,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0104_radiator_fin": {
+        "vertices": "3fc79e6b6174d5a19b903acbc6147845810ce1d74ccde162645badebbd342fcf",
+        "faces": "72c989f8b50a561f65bb9119d2c423a3d4d31ce1eea0bbceba90db4f8e93f349",
+        "vertex_normals": "448f086ad56fd85b7b587340d49edd7566c3ad3bc0bcb6c4b6884d893d6310bd",
+        "material": {
+          "name": "radiator_fin_material",
+          "baseColorFactor": [
+            96,
+            112,
+            120,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0103_radiator_fin": {
+        "vertices": "2a8fea62d5e972a080d96843a3346d8e2a6193c2cef671ee3c87e0c4af493f3f",
+        "faces": "72c989f8b50a561f65bb9119d2c423a3d4d31ce1eea0bbceba90db4f8e93f349",
+        "vertex_normals": "4f4598ad88c1b4237aeb18fd0a9f4d0ce5bddd48a96e8548ec9d08cd5f5ca8b8",
+        "material": {
+          "name": "radiator_fin_material",
+          "baseColorFactor": [
+            96,
+            112,
+            120,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0102_radiator_fin": {
+        "vertices": "d502ddeb5d3d75f03579117e1be1c2e9d7fca38a6b38ab71ec60924680f32f0d",
+        "faces": "72c989f8b50a561f65bb9119d2c423a3d4d31ce1eea0bbceba90db4f8e93f349",
+        "vertex_normals": "23f04c8b3ea0d2991cf939dacd21d643b0c01148d7072b3ed5c7c5be5ddbf506",
+        "material": {
+          "name": "radiator_fin_material",
+          "baseColorFactor": [
+            96,
+            112,
+            120,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0101_radiator_fin": {
+        "vertices": "cd2e1df3c9213819a6da9d9b44ee3a8990882c0597c274d2c895165375b09b14",
+        "faces": "72c989f8b50a561f65bb9119d2c423a3d4d31ce1eea0bbceba90db4f8e93f349",
+        "vertex_normals": "b15ba5c957112f64c84fdfc913ec5493b5c8f73cf82ec2e4951ca585bfc1b195",
+        "material": {
+          "name": "radiator_fin_material",
+          "baseColorFactor": [
+            96,
+            112,
+            120,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0100_radiator_fin": {
+        "vertices": "5c2b7994e298e634c2bafd9f949e476249ec668c19de0ad7c8ac5156fb014da7",
+        "faces": "72c989f8b50a561f65bb9119d2c423a3d4d31ce1eea0bbceba90db4f8e93f349",
+        "vertex_normals": "ee72bbf2aae4f83bd91cfa7862038bd7b521121a2de79e08b090369a340ee641",
+        "material": {
+          "name": "radiator_fin_material",
+          "baseColorFactor": [
+            96,
+            112,
+            120,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0099_radiator_fin": {
+        "vertices": "ef4d2deb05ecd6288289ff9449a82dedc1b54b8298f8546d7350bc869aa734b8",
+        "faces": "72c989f8b50a561f65bb9119d2c423a3d4d31ce1eea0bbceba90db4f8e93f349",
+        "vertex_normals": "cfa54a43a056681a26b5075f423b78eac62968f115171c0a25ab02088b9ff220",
+        "material": {
+          "name": "radiator_fin_material",
+          "baseColorFactor": [
+            96,
+            112,
+            120,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0098_radiator_fin": {
+        "vertices": "0fd77055d90a81fd8740d548ad56f466b895c606b59d2b4ffd14543be0e83c04",
+        "faces": "72c989f8b50a561f65bb9119d2c423a3d4d31ce1eea0bbceba90db4f8e93f349",
+        "vertex_normals": "8e5b00b7a7cf0fd1932eaa7f98ebb1c81b4dd8b7bdfcd56bdb0a613ea912bbc5",
+        "material": {
+          "name": "radiator_fin_material",
+          "baseColorFactor": [
+            96,
+            112,
+            120,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0097_radiator_fin": {
+        "vertices": "8b830d698e408216cc5820df4c6247cdd4cf59a18da282f7680bd23906c9899c",
+        "faces": "72c989f8b50a561f65bb9119d2c423a3d4d31ce1eea0bbceba90db4f8e93f349",
+        "vertex_normals": "78885e0e3432310842183fb794955f54d09e522d2b3bc0dd8ac855a3c3e152d3",
+        "material": {
+          "name": "radiator_fin_material",
+          "baseColorFactor": [
+            96,
+            112,
+            120,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0096_radiator_fin": {
+        "vertices": "de1881bf0b4cbc1b2e3f48c1723a67d29ce08a38302a0074a73d8435388defec",
+        "faces": "72c989f8b50a561f65bb9119d2c423a3d4d31ce1eea0bbceba90db4f8e93f349",
+        "vertex_normals": "633b9296908129fad82575e13ff3c4db632e3aea8bea73c82ecd50dc16d38670",
+        "material": {
+          "name": "radiator_fin_material",
+          "baseColorFactor": [
+            96,
+            112,
+            120,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0095_radiator_fin": {
+        "vertices": "c9d7e987e6b600fb904ea7b201e8c9ae5eda9e8c29e4e67d41f9bd9daf80eac3",
+        "faces": "72c989f8b50a561f65bb9119d2c423a3d4d31ce1eea0bbceba90db4f8e93f349",
+        "vertex_normals": "001c27190464900efda1cd691a8cfca5cdd836566f9296865c06fad099f53d17",
+        "material": {
+          "name": "radiator_fin_material",
+          "baseColorFactor": [
+            96,
+            112,
+            120,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0094_radiator_fin": {
+        "vertices": "2f461e882e2ddc7bfea79520816905ba43ea5f69ff2409dfa41af94749d7ad2e",
+        "faces": "72c989f8b50a561f65bb9119d2c423a3d4d31ce1eea0bbceba90db4f8e93f349",
+        "vertex_normals": "ff6310981ecb9575baba38b05cd1c2175cb80bab465bdd30a834bba44ba67317",
+        "material": {
+          "name": "radiator_fin_material",
+          "baseColorFactor": [
+            96,
+            112,
+            120,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0093_radiator_fin": {
+        "vertices": "a2f3f5f66a315bbdd4f21df9953f6f04bf340dc55219568883ac562323e688ac",
+        "faces": "72c989f8b50a561f65bb9119d2c423a3d4d31ce1eea0bbceba90db4f8e93f349",
+        "vertex_normals": "52aa9faa03ffbd01115a346bebaeba255fbb3b55c8ed0e8a4c18f16fe4a0840e",
+        "material": {
+          "name": "radiator_fin_material",
+          "baseColorFactor": [
+            96,
+            112,
+            120,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0092_radiator_fin": {
+        "vertices": "34d68e6b4ed2caa5cbde82a5d4dafc4089bb39beb2552baea6cd641e58cddfeb",
+        "faces": "72c989f8b50a561f65bb9119d2c423a3d4d31ce1eea0bbceba90db4f8e93f349",
+        "vertex_normals": "f046bcabf36ebdd5844d99ce215d9578863d1a8483ff1e2606a6fd191608b791",
+        "material": {
+          "name": "radiator_fin_material",
+          "baseColorFactor": [
+            96,
+            112,
+            120,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0091_radiator_fin": {
+        "vertices": "ec740826696ade7f2d5500e3e10c5fc50f02976a1846494add9275d487632720",
+        "faces": "72c989f8b50a561f65bb9119d2c423a3d4d31ce1eea0bbceba90db4f8e93f349",
+        "vertex_normals": "f93098967b42323cab0389df1cd08af53d94af8db0cb06a064fcb78d1e855abe",
+        "material": {
+          "name": "radiator_fin_material",
+          "baseColorFactor": [
+            96,
+            112,
+            120,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0090_radiator_fin": {
+        "vertices": "bb8346a61a025c15b0eb94e77f5e5898a30539074203abf3ff9334592e395c11",
+        "faces": "72c989f8b50a561f65bb9119d2c423a3d4d31ce1eea0bbceba90db4f8e93f349",
+        "vertex_normals": "7e842ad7e2bea3219ccac994b79dd72edf134546bc120ca5c91ded713b085039",
+        "material": {
+          "name": "radiator_fin_material",
+          "baseColorFactor": [
+            96,
+            112,
+            120,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0089_radiator_fin": {
+        "vertices": "f96a009e046913d8b873f92ed2ccdb94e40b2eb4713f035f1243b3121e390a1d",
+        "faces": "72c989f8b50a561f65bb9119d2c423a3d4d31ce1eea0bbceba90db4f8e93f349",
+        "vertex_normals": "a9bd13e8f564403de8b93855a24fc5703a952688d41ad4173909c05ad555719f",
+        "material": {
+          "name": "radiator_fin_material",
+          "baseColorFactor": [
+            96,
+            112,
+            120,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0088_radiator_fin": {
+        "vertices": "79718134c9b44107039720fac31e97b05f8f3b76275f42655be9815b3d6d6ee0",
+        "faces": "72c989f8b50a561f65bb9119d2c423a3d4d31ce1eea0bbceba90db4f8e93f349",
+        "vertex_normals": "88244bbc8f8375bfa7d7d47db81db3e90f24d8fbd403f13c9597e9896af50729",
+        "material": {
+          "name": "radiator_fin_material",
+          "baseColorFactor": [
+            96,
+            112,
+            120,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0087_radiator_fin": {
+        "vertices": "e7a6ef386e6f2dd5b9aaeb9eca56aaf08115b6f24a1437c20a42beac509c21bb",
+        "faces": "72c989f8b50a561f65bb9119d2c423a3d4d31ce1eea0bbceba90db4f8e93f349",
+        "vertex_normals": "53ae93c865e5bab731dc3c22c40e27b4d5060d4556f5757abd5cffa8ece33872",
+        "material": {
+          "name": "radiator_fin_material",
+          "baseColorFactor": [
+            96,
+            112,
+            120,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0086_radiator_fin": {
+        "vertices": "820b3d53b7ee2580cf77d0a9676803ddefccceca32c647daf4d002077d08f47b",
+        "faces": "72c989f8b50a561f65bb9119d2c423a3d4d31ce1eea0bbceba90db4f8e93f349",
+        "vertex_normals": "801757961ab03d02be102782de42d4f442d09985f340129787b7f1ccafbcfd49",
+        "material": {
+          "name": "radiator_fin_material",
+          "baseColorFactor": [
+            96,
+            112,
+            120,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0085_radiator_fin": {
+        "vertices": "da52564606ceead16a8e866cd806e6a6bda1a0f313d14b79fba222888f9daefa",
+        "faces": "72c989f8b50a561f65bb9119d2c423a3d4d31ce1eea0bbceba90db4f8e93f349",
+        "vertex_normals": "3171f50dbdb5bae96cbc037bdfc2efc2f49672f719ca3ae4fbd892d94dc72cbe",
+        "material": {
+          "name": "radiator_fin_material",
+          "baseColorFactor": [
+            96,
+            112,
+            120,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0084_radiator_fin": {
+        "vertices": "10b48935c8db787fc20e5e07ed03c2b038c5e6d20e166a57bebf29d2a735d6ae",
+        "faces": "72c989f8b50a561f65bb9119d2c423a3d4d31ce1eea0bbceba90db4f8e93f349",
+        "vertex_normals": "3ea4478dc78ca78fcb5f196f463cebfd429d34a5777d5e4a95d0bd46e499d0b3",
+        "material": {
+          "name": "radiator_fin_material",
+          "baseColorFactor": [
+            96,
+            112,
+            120,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0083_radiator_fin": {
+        "vertices": "e2de85515c8ada4483692efc0b02e529ed06307cb1e9e5108122edf98ed1e92f",
+        "faces": "72c989f8b50a561f65bb9119d2c423a3d4d31ce1eea0bbceba90db4f8e93f349",
+        "vertex_normals": "56d09d9bd73449cdd4a88d7b49e3ed9ded012baac1c03b4d66fc1b7566608e9e",
+        "material": {
+          "name": "radiator_fin_material",
+          "baseColorFactor": [
+            96,
+            112,
+            120,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0082_radiator_fin": {
+        "vertices": "3faf5b231b64929120ada97c9683e0d01761268c954eeacdc106ed7501e617e5",
+        "faces": "72c989f8b50a561f65bb9119d2c423a3d4d31ce1eea0bbceba90db4f8e93f349",
+        "vertex_normals": "3c5d5f8e9486e9fc4cb49794fd512aec99f610d9a6319919743e85e9d3c7c239",
+        "material": {
+          "name": "radiator_fin_material",
+          "baseColorFactor": [
+            96,
+            112,
+            120,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0081_radiator_fin": {
+        "vertices": "0a5c69c03887ae1e3b8b2638a1e26298bf28f197933084bd7d25e23b86889350",
+        "faces": "72c989f8b50a561f65bb9119d2c423a3d4d31ce1eea0bbceba90db4f8e93f349",
+        "vertex_normals": "0a4141839cfeb380928db7619af34b5d810e4c72ff1b947e8d20611ed76ff41a",
+        "material": {
+          "name": "radiator_fin_material",
+          "baseColorFactor": [
+            96,
+            112,
+            120,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0080_radiator_fin": {
+        "vertices": "b87d5835d704e9fb257ebbc41815139a1e7d150952863c45852067fed6de2b33",
+        "faces": "72c989f8b50a561f65bb9119d2c423a3d4d31ce1eea0bbceba90db4f8e93f349",
+        "vertex_normals": "415a1a9161d8c9b02aaaffbc801345f7bccb8eec1074f1725390a6fbe69a0044",
+        "material": {
+          "name": "radiator_fin_material",
+          "baseColorFactor": [
+            96,
+            112,
+            120,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0079_radiator_fin": {
+        "vertices": "41f0273901f60c19b8d950037f4f711efbe8928fd9e684b0853534d534970a01",
+        "faces": "72c989f8b50a561f65bb9119d2c423a3d4d31ce1eea0bbceba90db4f8e93f349",
+        "vertex_normals": "52f0c4ccd82412f23c53157e2d7d9717ebde6476d027ad15d584a3686fb8f64d",
+        "material": {
+          "name": "radiator_fin_material",
+          "baseColorFactor": [
+            96,
+            112,
+            120,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0078_radiator_fin": {
+        "vertices": "52700b95326f3ff3502f7a2f4058ce709f37b6df308f5f491ce7fbe2b982c96a",
+        "faces": "72c989f8b50a561f65bb9119d2c423a3d4d31ce1eea0bbceba90db4f8e93f349",
+        "vertex_normals": "efdacd2d92521d98ea27f1dd3a86bfbcf973754f79eef2b76073fde5795e29ab",
+        "material": {
+          "name": "radiator_fin_material",
+          "baseColorFactor": [
+            96,
+            112,
+            120,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0077_radiator_fin": {
+        "vertices": "2a89ee4ff6aaa52111739cc26ddf5439d74504c7877f9d96248463bcded4fa87",
+        "faces": "72c989f8b50a561f65bb9119d2c423a3d4d31ce1eea0bbceba90db4f8e93f349",
+        "vertex_normals": "63881f783a688bf2e1f938257b51ed867229811e1ed72a03021863c6d396b983",
+        "material": {
+          "name": "radiator_fin_material",
+          "baseColorFactor": [
+            96,
+            112,
+            120,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0076_radiator_fin": {
+        "vertices": "479c9dc7a58d8d08ffc6fde3474cdd85fbbc396c98ece5aa6cb2ff45baad3f00",
+        "faces": "72c989f8b50a561f65bb9119d2c423a3d4d31ce1eea0bbceba90db4f8e93f349",
+        "vertex_normals": "e76e0bdfe076882917daa58a0a7428673baf3c7330b73aa648e2c0b7ec547444",
+        "material": {
+          "name": "radiator_fin_material",
+          "baseColorFactor": [
+            96,
+            112,
+            120,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/label_75": {
+        "vertices": "b1f2097fadd2d9a7a0a6358493405c3ede921945e22c18043e57f1bb32aeb439",
+        "faces": "588155b6e6708a8cfa760da51896fc20cc2ef0f14ceb2b8e037dac125f2a3f32",
+        "vertex_normals": "7efd6d79b7d3482f83f33aad0c72f9bea5742b1c4eb04a2baa214f1510da5dc4",
+        "material": {
+          "name": null,
+          "baseColorFactor": null,
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.75,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": "a5eb98cdda5e6d706bd920aaa4132910c9c4c9600f062a40af3c4e3eea71b8a0"
+        },
+        "uv": "39b0ce9f8bb751d3cda95dff4ccbd2f76aa8be076e08f92cd3a2ce32d7fd5d9e"
+      },
+      "engine_bay_environment/0074_battery_terminal": {
+        "vertices": "04e4f2c0b686d6d512a35c1fd8bf0066aa10ce16d42214e2536a317e3d651baa",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "496be7f9c1994236b94afcff4bf8c1c18db24c0d958cfab2cd271750b90d7d70",
+        "material": {
+          "name": "battery_terminal_material",
+          "baseColorFactor": [
+            48,
+            52,
+            56,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0073_battery_terminal": {
+        "vertices": "c8fe0ab888507ec2cb2e1a28c76a9aa75a34f723d955063b5c718b93e2e24033",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "e9c7f72c18d93440b515675d25ca570a9eeb9454e0b586fa2139a36aa2e07f41",
+        "material": {
+          "name": "battery_terminal_material",
+          "baseColorFactor": [
+            169,
+            58,
+            45,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0072_battery_lid": {
+        "vertices": "45f56ab4a52e1577b89510ebd49172396d3ff3397cc023e751e5ab68c637ac46",
+        "faces": "2207f066c531d30e9f5bf22692198a22277253bc035f01d54f4228b2b85b5fdf",
+        "vertex_normals": "e9548a14de03147747188223d59543a3b9e5935ccdc2ddb1b07553b4b6280db3",
+        "material": {
+          "name": "battery_lid_material",
+          "baseColorFactor": [
+            69,
+            83,
+            90,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0071_battery_case": {
+        "vertices": "1a65f6cc4908789f936a10773a35b766d077a071923bca596ea81147d0f34698",
+        "faces": "8fc2f95829221c7eb56d3434eeedf6dcde48f28da55dbfd152c9d7b70066340f",
+        "vertex_normals": "bdb8a1c9450bcef641cede53280266021015a9df1ee5cc84d2c661396d34c97b",
+        "material": {
+          "name": "battery_case_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0070_rounded_part": {
+        "vertices": "24658adddd151d90509c38ef161af7fb4ac2220b4e9afe477b51b70b1ef739c2",
+        "faces": "403b6547713865ceebee70103fbf92cbe260808ed33594a12dcc396e3b44a3eb",
+        "vertex_normals": "e274b971c9de51c482d75e469a71dab65fb9932628fc74c5437f02ad7b676add",
+        "material": {
+          "name": "rounded_part_material",
+          "baseColorFactor": [
+            38,
+            44,
+            48,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0069_rounded_part": {
+        "vertices": "db3de5320cb688fa153bc3ff9bf7eaee13c6b0ab9feb5b5e91a3d16ca2fd62db",
+        "faces": "403b6547713865ceebee70103fbf92cbe260808ed33594a12dcc396e3b44a3eb",
+        "vertex_normals": "da60c8a68a001782903af5c5b97293c4e5d467f67efac963dc32334ba443412a",
+        "material": {
+          "name": "rounded_part_material",
+          "baseColorFactor": [
+            38,
+            44,
+            48,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0068_rounded_part": {
+        "vertices": "94423d490cff0bf8c4305c81ea022cfad77c19b7f0f3a7b3c5f4501240fb69f7",
+        "faces": "403b6547713865ceebee70103fbf92cbe260808ed33594a12dcc396e3b44a3eb",
+        "vertex_normals": "583521cab3818556dc44c83d7204053a3a7bb7607a4d21e5502b40db5ce66938",
+        "material": {
+          "name": "rounded_part_material",
+          "baseColorFactor": [
+            38,
+            44,
+            48,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0067_rounded_part": {
+        "vertices": "b96d5cc542ee2da74a56b8d8ccd38bbf949afb3682768047a6aa755e5c8f9dfb",
+        "faces": "403b6547713865ceebee70103fbf92cbe260808ed33594a12dcc396e3b44a3eb",
+        "vertex_normals": "196fa34dce39b6437933f59102eae740e5da1ae083a657f8c28f117ccddb9528",
+        "material": {
+          "name": "rounded_part_material",
+          "baseColorFactor": [
+            38,
+            44,
+            48,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0066_rounded_part": {
+        "vertices": "f6874d074a4055189777bb209873a304b1f3d9b3356e887342034e97510cb06b",
+        "faces": "403b6547713865ceebee70103fbf92cbe260808ed33594a12dcc396e3b44a3eb",
+        "vertex_normals": "a585eab2594410206edaf391932e642264578f4070a91dcc2a5d0764904b3de2",
+        "material": {
+          "name": "rounded_part_material",
+          "baseColorFactor": [
+            38,
+            44,
+            48,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0065_tube": {
+        "vertices": "1ed5068d0743ef8834506d52ad6f5f8193576480ca342b5b09ac2f9c3af2d554",
+        "faces": "7978b61c5bc1ed24800514b4afce47eee9ede9b6a0fea0d45f0b6666f92b756e",
+        "vertex_normals": "de23bb35f6626113e85fb957efbcb2ec7b6a8b7c62f4e30417f69560970f4dbb",
+        "material": {
+          "name": "tube_material",
+          "baseColorFactor": [
+            38,
+            44,
+            48,
+            255
+          ],
+          "metallicFactor": 0.45,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0064_tube": {
+        "vertices": "a40d4f04e186394011339bcc2762b43b9f48c167bbddb8295c5173a8a1bca264",
+        "faces": "7978b61c5bc1ed24800514b4afce47eee9ede9b6a0fea0d45f0b6666f92b756e",
+        "vertex_normals": "c580fec3c162265ed00b01fb0622af234cd9647b6ce3ae899c72f3741e4ddef4",
+        "material": {
+          "name": "tube_material",
+          "baseColorFactor": [
+            38,
+            44,
+            48,
+            255
+          ],
+          "metallicFactor": 0.45,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0063_tube": {
+        "vertices": "b010a115c580357ab2c7714b034e570e95503ea87046f6cc2576fa97961c2bc0",
+        "faces": "7978b61c5bc1ed24800514b4afce47eee9ede9b6a0fea0d45f0b6666f92b756e",
+        "vertex_normals": "8e7abf10ce81f3499b0206e5080054d367eae48c74472fdbfa0d92827de940ca",
+        "material": {
+          "name": "tube_material",
+          "baseColorFactor": [
+            38,
+            44,
+            48,
+            255
+          ],
+          "metallicFactor": 0.45,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0062_tube": {
+        "vertices": "642b1d6f81499f29dd4019f8d91e45518d3b2d9ae17a262d9eb29266fd0fa6bb",
+        "faces": "7978b61c5bc1ed24800514b4afce47eee9ede9b6a0fea0d45f0b6666f92b756e",
+        "vertex_normals": "178e2f138d3cb49fb8b4c528820bcbab2308797594cdd777eacf440b87cdd237",
+        "material": {
+          "name": "tube_material",
+          "baseColorFactor": [
+            38,
+            44,
+            48,
+            255
+          ],
+          "metallicFactor": 0.45,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0061_tube": {
+        "vertices": "eee24a6311567a033e300fcea579b3568267c5b6c4ecea782ab30d7f9793d0bf",
+        "faces": "7978b61c5bc1ed24800514b4afce47eee9ede9b6a0fea0d45f0b6666f92b756e",
+        "vertex_normals": "7eeeae291024fdbb13ad94a5efadcbe1444f6f375883775efea1f738a5751133",
+        "material": {
+          "name": "tube_material",
+          "baseColorFactor": [
+            38,
+            44,
+            48,
+            255
+          ],
+          "metallicFactor": 0.45,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0060_tube": {
+        "vertices": "82829422d87c88bcc28b7ab1d1daee0c92be135e8d8034c7b772a75a4e4c371a",
+        "faces": "7978b61c5bc1ed24800514b4afce47eee9ede9b6a0fea0d45f0b6666f92b756e",
+        "vertex_normals": "8c2699625b1d5ba7d6473e24f7c914cc669c055a1fd56f98ed5a276cb98cb7d8",
+        "material": {
+          "name": "tube_material",
+          "baseColorFactor": [
+            38,
+            44,
+            48,
+            255
+          ],
+          "metallicFactor": 0.45,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0059_belt_pulley": {
+        "vertices": "3255ae9cbd2e7ccee54959bd030cc49591c5bacb0025a7dcb323400b60fe905c",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "ad6d9dee60470df4ff72eaa6962a0e5b31d88ebfcd38fe985abce412f90c47ab",
+        "material": {
+          "name": "belt_pulley_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0058_belt_pulley": {
+        "vertices": "679426db1b4facc6b1778cb0ddc04fa4464d385c298845349218b669c40ef001",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "eaca5a2ce405dfe439bc44665eb6c758da2d3eb34d8cc6ed1449c7d8dab06e92",
+        "material": {
+          "name": "belt_pulley_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0057_connector_rest": {
+        "vertices": "1441bd419ff6f2f4afe6a547681900f6c9ee8b4697a1a09d0d4c0e33c0315716",
+        "faces": "0c622b8c1ae38cddbd933a97e6a91c7aaead41ead1e39432bc9d61e75c0b7fbb",
+        "vertex_normals": "f4a44945937528258469e17007989e811470cb047fd65024fe3154858e38eb74",
+        "material": {
+          "name": "connector_rest_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0056_sparkplug_tray": {
+        "vertices": "7223ae03f77b494909192a0558961bc3d39045aee0e21471945a2c1966cadd71",
+        "faces": "6eb986d2dc58788cb642ea41f38f15ceb0901a154f2fc87ed9e962b1f99b370e",
+        "vertex_normals": "c0a65833fc10af255ff501fbaf62c65193c7e4575bf4d883a260ab2f9c8fd498",
+        "material": {
+          "name": "sparkplug_tray_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0055_clamp_band": {
+        "vertices": "5795a77bf65bfe433c09675356ab12d387bc00066846104806fe9680c7913592",
+        "faces": "64966beebf328538f69513ae058b8ace37a400c95e882ea75b12165e6490d993",
+        "vertex_normals": "5c8e7d545a944342d660005aa77346823aa6a1899d9f910c57ef5f149f9bbc2f",
+        "material": {
+          "name": "clamp_band_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.6,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0054_rounded_part": {
+        "vertices": "0a4959f87e6b154db417eb2cc1f22601cfd8b9fb64291f4195b623796831a337",
+        "faces": "403b6547713865ceebee70103fbf92cbe260808ed33594a12dcc396e3b44a3eb",
+        "vertex_normals": "3a377b0accd6361c83db713f227857efddc78b539dfa5703c2afd197490f8cf6",
+        "material": {
+          "name": "rounded_part_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0053_tube": {
+        "vertices": "14a3cb0ef76f7f42272fe796a02254730db8ebac62080d7fb9ae0713651d63a6",
+        "faces": "7978b61c5bc1ed24800514b4afce47eee9ede9b6a0fea0d45f0b6666f92b756e",
+        "vertex_normals": "b98f962e69c047b93fdada856fd6024f017f62b61220c6301721ed7883605632",
+        "material": {
+          "name": "tube_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.45,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0052_tube": {
+        "vertices": "dbc5fb9a40e5f55d1fb272c0419a8373cf6e19a86318f3dfa8a9fcb4c1b0f245",
+        "faces": "7978b61c5bc1ed24800514b4afce47eee9ede9b6a0fea0d45f0b6666f92b756e",
+        "vertex_normals": "be9ac44f2c3614a5bfb6f26cb3554ccb7cbebbb596df4bb125114068ac150c3d",
+        "material": {
+          "name": "tube_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.45,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0051_rounded_part": {
+        "vertices": "9a27e6b6d4e9a8260769652540737e557ade54243e6db071b18bf755f9afdc9e",
+        "faces": "403b6547713865ceebee70103fbf92cbe260808ed33594a12dcc396e3b44a3eb",
+        "vertex_normals": "e33f0dbce09921d3163fa9c0e16d9a4b4a35684f6ec448851950fe6a863ee77c",
+        "material": {
+          "name": "rounded_part_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0050_tube": {
+        "vertices": "934eba4d99e3c729bde72ed8e562d4fecd6477508997327059897105f2f2e38e",
+        "faces": "7978b61c5bc1ed24800514b4afce47eee9ede9b6a0fea0d45f0b6666f92b756e",
+        "vertex_normals": "e9a74a9747f492a52468a7ec302f4fe5d88623cc0e71ea369d7401d30351d617",
+        "material": {
+          "name": "tube_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.45,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0049_tube": {
+        "vertices": "1feb014f031f89d538fa54a9e4cc23915536f3e78bf627badb50edfb976bf531",
+        "faces": "7978b61c5bc1ed24800514b4afce47eee9ede9b6a0fea0d45f0b6666f92b756e",
+        "vertex_normals": "7131cb7b43bce3121a0dbfc54fa25771443d2c3b71bbb2062a86fc10845d7d02",
+        "material": {
+          "name": "tube_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.45,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0048_rounded_part": {
+        "vertices": "7d4b1e091c1fbb1e0085c88939d25fbbd49d3192f9f8fab7664bda24d5ff0481",
+        "faces": "403b6547713865ceebee70103fbf92cbe260808ed33594a12dcc396e3b44a3eb",
+        "vertex_normals": "49493f4d9da13256416b6048be823ff689f4eaf38f5abf1f73d675ec9364216d",
+        "material": {
+          "name": "rounded_part_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0047_tube": {
+        "vertices": "e122be684378a4c74b1890c67cd469c8d108ffd2e8af674744ff5118bdf2dde7",
+        "faces": "7978b61c5bc1ed24800514b4afce47eee9ede9b6a0fea0d45f0b6666f92b756e",
+        "vertex_normals": "d34104c510965eff5372cd969abe72fad421f7923e689ab61db9ddb874e1f428",
+        "material": {
+          "name": "tube_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.45,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0046_tube": {
+        "vertices": "562fec8faacd003db617c510b9dd8e4b3f3dcd31ddc68ffae1969d6cf2c78b8b",
+        "faces": "7978b61c5bc1ed24800514b4afce47eee9ede9b6a0fea0d45f0b6666f92b756e",
+        "vertex_normals": "772531b4b1575e8a2018e111d294e7013a2c60598344d024e2abb15505715659",
+        "material": {
+          "name": "tube_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.45,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0045_rounded_part": {
+        "vertices": "8d118d3ec8aef0dd44cc573bfca06124f35bd38b6a500c9b1f942687d0a89a12",
+        "faces": "403b6547713865ceebee70103fbf92cbe260808ed33594a12dcc396e3b44a3eb",
+        "vertex_normals": "7fcac0bc53859a93791a490af6c995db3acae5d114453f632f0744850f3e7977",
+        "material": {
+          "name": "rounded_part_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0044_tube": {
+        "vertices": "dd5e1fc6e795a0912a8633660b8a7c802587485abc9d311e01382fbce735e29c",
+        "faces": "7978b61c5bc1ed24800514b4afce47eee9ede9b6a0fea0d45f0b6666f92b756e",
+        "vertex_normals": "79ff448a00d6c0808e452f9b3775a15c99e8dc66fae6532f1a3b8e213f56f231",
+        "material": {
+          "name": "tube_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.45,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0043_tube": {
+        "vertices": "0eda323c107a0410c284531f6c9fce05a30654cb7ec8f1169b51fdd38127a5f3",
+        "faces": "7978b61c5bc1ed24800514b4afce47eee9ede9b6a0fea0d45f0b6666f92b756e",
+        "vertex_normals": "9c05ecea177a3284701319fb5c256ee4a0dac069df4a84c893ab5b1bed9ef2a5",
+        "material": {
+          "name": "tube_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.45,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0042_rounded_part": {
+        "vertices": "ab5cca3fde9c957951f1cd892318a24c6a226d7e11a127b7f4b348f470ce5793",
+        "faces": "403b6547713865ceebee70103fbf92cbe260808ed33594a12dcc396e3b44a3eb",
+        "vertex_normals": "f48d7e37c61000d696276bd725a7f88d9391877ec4cd3442c52718090cc1e94a",
+        "material": {
+          "name": "rounded_part_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0041_tube": {
+        "vertices": "2e14e6514854dcac8a8e59b62b8682602412f4239ccdf4fc9c40e4bb6922bf24",
+        "faces": "7978b61c5bc1ed24800514b4afce47eee9ede9b6a0fea0d45f0b6666f92b756e",
+        "vertex_normals": "fb634855c7b62c84f3153a9ea52b95ebe5b6177aa7f0a8fd378b23ecb9c7a8b7",
+        "material": {
+          "name": "tube_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.45,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0040_tube": {
+        "vertices": "065e0dc2cb0b69c391cf19b4ec9097558a337420d18a6f16d84c3689b9056419",
+        "faces": "7978b61c5bc1ed24800514b4afce47eee9ede9b6a0fea0d45f0b6666f92b756e",
+        "vertex_normals": "1bb28d57c44a10265f74f0e81b1773aa9b56df544138af03cbaaab9e22568947",
+        "material": {
+          "name": "tube_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.45,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0039_core_plug": {
+        "vertices": "48f926cd46cd24e89ff1b0c96a460085955b22e50f606e4464873fe5ebb1c50f",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "3388d1b9efcad75a1b69d5d598ffa3d6dd5e769b4a5e7864c5763f98469749b3",
+        "material": {
+          "name": "core_plug_material",
+          "baseColorFactor": [
+            178,
+            150,
+            82,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0038_core_plug": {
+        "vertices": "d2824bf4b1855008de3711452222ab35e2cf66c8208bc11c7cca89277eaa6ece",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "248937bb1e2ebddfcc5b7a9df292fcc44bc7be14e968d59956de6cd815a82505",
+        "material": {
+          "name": "core_plug_material",
+          "baseColorFactor": [
+            178,
+            150,
+            82,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0037_casting_rib": {
+        "vertices": "06722331221b2fbf0968d0d4e0f3d98d9e8d40ca947ff3c3d3df9e6f7a951694",
+        "faces": "141f83eae9011a0e0139af954141965fec0f16689bcf4e53120bc25e9f311197",
+        "vertex_normals": "9d3b4585528dddd94b5b6318291b66e39eaf1cdc42f0c4b6feae780d8e8f5c86",
+        "material": {
+          "name": "casting_rib_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0036_casting_rib": {
+        "vertices": "3afb2e618242293a1deb7f71754b20845adf059bea8381bf303a24562853cf7c",
+        "faces": "141f83eae9011a0e0139af954141965fec0f16689bcf4e53120bc25e9f311197",
+        "vertex_normals": "8ba634543c3489ff426cf11373666cdb41b1a35a25730efdc18ae90ddcebd3f7",
+        "material": {
+          "name": "casting_rib_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0035_casting_rib": {
+        "vertices": "bc1e01588b77d2c3e3d0c0f9289224a4f1da00279a0aec710ce2f6782769e8f3",
+        "faces": "141f83eae9011a0e0139af954141965fec0f16689bcf4e53120bc25e9f311197",
+        "vertex_normals": "6e65a6a92bf24dc4b2dc1ff67d675bcb26b02af996b17c712982ed949181adc8",
+        "material": {
+          "name": "casting_rib_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0034_casting_rib": {
+        "vertices": "016ce88365903fef075302064dfdd50f3961c65803262ed0f6e5f1479cb08436",
+        "faces": "141f83eae9011a0e0139af954141965fec0f16689bcf4e53120bc25e9f311197",
+        "vertex_normals": "7edc922104d105346df4aa0dffb304015ffe8aa785e33edae6d46516bc54b454",
+        "material": {
+          "name": "casting_rib_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0033_casting_rib": {
+        "vertices": "35d89b57ace981170888d7e81a23785be5132cd67ff67711cf25c3a6e46786ed",
+        "faces": "141f83eae9011a0e0139af954141965fec0f16689bcf4e53120bc25e9f311197",
+        "vertex_normals": "eb394c55929a2f75e753f953c36f7d116ee5cc8f9d8315b457a91797acb9231b",
+        "material": {
+          "name": "casting_rib_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0032_casting_rib": {
+        "vertices": "e8823ebc22c814ef68fe66833eb89eaefcbd555a1bc5f480650cfcf69b985462",
+        "faces": "141f83eae9011a0e0139af954141965fec0f16689bcf4e53120bc25e9f311197",
+        "vertex_normals": "16fc5eef417126085dc11403df45aa5c38d4623b20b528bd8dd91057a0d9de73",
+        "material": {
+          "name": "casting_rib_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0031_cover_fastener": {
+        "vertices": "e94aeaf024f79e93380fc1533fffc7c1c60592707ec3bb98f3233b22c3630500",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "0bc4a18edf47ac2dd0b1510527ed3ed3f83ae1c3710bfcfa60671cc96f559e8b",
+        "material": {
+          "name": "cover_fastener_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.65,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0030_cover_fastener": {
+        "vertices": "3c82fb13344797337cc07f202d7fa18e758e68027a7d16a495d3bd5cba6fc5a0",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "c32aa8be9e301b494f473c75b46a6848461e8b93c40988a540d82a12598e3f1e",
+        "material": {
+          "name": "cover_fastener_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.65,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0029_cover_fastener": {
+        "vertices": "511b7511d930af5d7b94366d9f84fd41f6755928a8fa673fdeb943bf999c5027",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "3c30b9bf83fe42e324c82d27d9ccbf2cfdea7ca413ac011df4fc6f1f6f991e71",
+        "material": {
+          "name": "cover_fastener_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.65,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0028_cover_fastener": {
+        "vertices": "a41fb552edce7cfac9aa5e394d7b1f3dfc8b30c3390441268f0c580fa6a514ed",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "38d02cbcd628efc79cf31ef08c5d7ba02eb260e282cc58aaa6a2f298f7867b6d",
+        "material": {
+          "name": "cover_fastener_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.65,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0027_cover_fastener": {
+        "vertices": "fa8e342bc6d37ff104c7fe412cfe1a3fc51b4c51695290c7dd7d55c539053eb9",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "59242c0655f055b097b3709d4755504bd34282320cfe8d7f729aaca4b7f23b79",
+        "material": {
+          "name": "cover_fastener_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.65,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0026_cover_fastener": {
+        "vertices": "7946b054f1c440d2c803f280c982dbd48b41e2bf096832b9465ee299b0cc713c",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "2b9cef0e99477f645ce8645fe5ce2e386155466aa061807d8f361a9e54b427bc",
+        "material": {
+          "name": "cover_fastener_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.65,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0025_cover_fastener": {
+        "vertices": "76d7324693b742f93ad905d299fc561a63e85f96df84f25f2e021c8674c0fea6",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "3aa344ede4a0ffc2b310669d8771d4b88d3a42a3cb0709bb6a378122771aba43",
+        "material": {
+          "name": "cover_fastener_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.65,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0024_cover_fastener": {
+        "vertices": "895c424eda37effbd3138d74c5290f50bf3e70ef66082e71155d68971453f7be",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "e0fadf8a7f7b05e1fb8c5a878ce4d36d4d2a38fad2d351b582c0031857571fc8",
+        "material": {
+          "name": "cover_fastener_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.65,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0023_cover_rib": {
+        "vertices": "36110860bb970001c8ad0611f803a229906c863554a0cc134e9e8737d1b00917",
+        "faces": "f2aedadfb91fcdb9f3b37c56665a166f78632ef646f8ad7accf7748e56d5d305",
+        "vertex_normals": "de84f3b1e41f8fa072d56ddba3be495e19afb424f141b208a40397f6dc9913b0",
+        "material": {
+          "name": "cover_rib_material",
+          "baseColorFactor": [
+            70,
+            80,
+            89,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0022_cover_rib": {
+        "vertices": "08aad850abd7f3d71c58196452751186446d37a602a4377f48d0e3331596c290",
+        "faces": "f2aedadfb91fcdb9f3b37c56665a166f78632ef646f8ad7accf7748e56d5d305",
+        "vertex_normals": "85a37fd25928de29ee862558dde033e37fd911f4b2e1d37ac745792ae5a67fed",
+        "material": {
+          "name": "cover_rib_material",
+          "baseColorFactor": [
+            70,
+            80,
+            89,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0021_cover_rib": {
+        "vertices": "f3828c93c666a93b830c458876770fbc37460a62182b8417c1edd409fc0b9158",
+        "faces": "f2aedadfb91fcdb9f3b37c56665a166f78632ef646f8ad7accf7748e56d5d305",
+        "vertex_normals": "26c5cc059feb9d43cd5acf030d870eb9f68b68d8720caf19dd8badbe16a1fac7",
+        "material": {
+          "name": "cover_rib_material",
+          "baseColorFactor": [
+            70,
+            80,
+            89,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0020_cover_rib": {
+        "vertices": "89d18371037ba28eccc5b3aa57995a257a54fea7aa416524e1d54fe2c3da116b",
+        "faces": "f2aedadfb91fcdb9f3b37c56665a166f78632ef646f8ad7accf7748e56d5d305",
+        "vertex_normals": "3fbcd2295775592c438cdd9c2a878fe687bb780b89cb95e2d064386f4999b1fc",
+        "material": {
+          "name": "cover_rib_material",
+          "baseColorFactor": [
+            70,
+            80,
+            89,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0019_cover_rib": {
+        "vertices": "e5b6a099d763b696043bda73395533ae5eaa4dd5fbd7c6bf8d8ff95eb33643f8",
+        "faces": "f2aedadfb91fcdb9f3b37c56665a166f78632ef646f8ad7accf7748e56d5d305",
+        "vertex_normals": "08959a7b4768e9fadfe1c5eb3c111f2d4d8de1eecbc6e4533a085ecf0634b3b2",
+        "material": {
+          "name": "cover_rib_material",
+          "baseColorFactor": [
+            70,
+            80,
+            89,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0018_cover_rib": {
+        "vertices": "dbb2047de76e4b19500ad5df5fbb293e755ab171897a841947bb361412645b0d",
+        "faces": "f2aedadfb91fcdb9f3b37c56665a166f78632ef646f8ad7accf7748e56d5d305",
+        "vertex_normals": "c70657d5ccf9dc8b901a2e03c1e913a74b8f48fd0f0652e7e391eae1907c5ecd",
+        "material": {
+          "name": "cover_rib_material",
+          "baseColorFactor": [
+            70,
+            80,
+            89,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0017_cover_rib": {
+        "vertices": "8e2bc5c18a1ee03eb0876cf36a43ff8a31d4730bb30fe11ee16f44abd78ad3ca",
+        "faces": "f2aedadfb91fcdb9f3b37c56665a166f78632ef646f8ad7accf7748e56d5d305",
+        "vertex_normals": "c3d627878984970b214b0fc86619ae279d80c652ae7e08696e4424f4fd7825cf",
+        "material": {
+          "name": "cover_rib_material",
+          "baseColorFactor": [
+            70,
+            80,
+            89,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0016_cover_rib": {
+        "vertices": "664e906ca95e4c65781c8084776b8a7e957e06f7b1ece4759a2862c91ea61b07",
+        "faces": "f2aedadfb91fcdb9f3b37c56665a166f78632ef646f8ad7accf7748e56d5d305",
+        "vertex_normals": "253f701ea0880d830f0af5cc0c2733731ef1ed060d69ed5d4e3c94f0b2c62340",
+        "material": {
+          "name": "cover_rib_material",
+          "baseColorFactor": [
+            70,
+            80,
+            89,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0015_coil_connector": {
+        "vertices": "236b45b3b038da4ca0d366af6f3a64fa09eae5a0cf0856caf0be452cd9cd86da",
+        "faces": "fa1b93380dff786d2708af10f348027b56c75a6a178ce944ca6e3886e28b8f2f",
+        "vertex_normals": "65511bb88c14117a9660d0b5a2f309cec922c29a614dbddc4bb13c2c7a5e0e66",
+        "material": {
+          "name": "coil_connector_material",
+          "baseColorFactor": [
+            74,
+            84,
+            90,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0014_ignition_coil": {
+        "vertices": "275dc6d001546dcff643f41929e0e800f8544e1a740914a48330c36dd7133cec",
+        "faces": "a51472464b908b2f52cb8784a7dae7bec0018038678f638832c565f52e31e9a0",
+        "vertex_normals": "f135939352935668b28e9a7a896c79383a9f2a1ea7537b61c0a90689a90a210f",
+        "material": {
+          "name": "ignition_coil_material",
+          "baseColorFactor": [
+            63,
+            71,
+            75,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0013_coil_base": {
+        "vertices": "664d0c1482d53b781cd7544bdcdf3f51d799fb37b60e0433ccf514ba880a2694",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "49dac67f45af2b8330b2bbe95ea17911dfb7f319bf24126f85ebaa388d8b71c1",
+        "material": {
+          "name": "coil_base_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0012_coil_connector": {
+        "vertices": "59404f78ce633a4ad967452576aa55da2d921064bdaa82f1aee542bff56444e3",
+        "faces": "fa1b93380dff786d2708af10f348027b56c75a6a178ce944ca6e3886e28b8f2f",
+        "vertex_normals": "daef79f45cf68be6e5670ea9cc54c17f24a0c12e18cbd1f825e3e7affeed8ac8",
+        "material": {
+          "name": "coil_connector_material",
+          "baseColorFactor": [
+            74,
+            84,
+            90,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0011_ignition_coil": {
+        "vertices": "7c3d8798d31693727934395679b98c21d925b1f18cc6075590011522ba320378",
+        "faces": "a51472464b908b2f52cb8784a7dae7bec0018038678f638832c565f52e31e9a0",
+        "vertex_normals": "e409766faa25139a0b6bd48992a941069417445e2700d36e930070b8d19284f5",
+        "material": {
+          "name": "ignition_coil_material",
+          "baseColorFactor": [
+            63,
+            71,
+            75,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0010_coil_base": {
+        "vertices": "bf5b89ec862bf457cc17ef2e40a9e421925ba952961789c7613796a708f39843",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "26f3f9d6e50f981148a583b8ef1ae165c7bff14483a9268c68b46cef79f37532",
+        "material": {
+          "name": "coil_base_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0009_coil_connector": {
+        "vertices": "259d944b0069361e40ada181225b0d3c78a499f758632ee83cdbc303c097a14b",
+        "faces": "fa1b93380dff786d2708af10f348027b56c75a6a178ce944ca6e3886e28b8f2f",
+        "vertex_normals": "d868b12231f6f2aea7add0ddf1295cdb86e473f2fa4479eced3d4caa45fe58b0",
+        "material": {
+          "name": "coil_connector_material",
+          "baseColorFactor": [
+            74,
+            84,
+            90,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0008_ignition_coil": {
+        "vertices": "04f8d0d1365e76d1d6affe0312ad2a684b8075a01ac9bb5159b3cbd902ce43b0",
+        "faces": "a51472464b908b2f52cb8784a7dae7bec0018038678f638832c565f52e31e9a0",
+        "vertex_normals": "bb0e6c5f0887457637838b6872ff899fc21b2a7a0ab93f982dd73524d13c7955",
+        "material": {
+          "name": "ignition_coil_material",
+          "baseColorFactor": [
+            63,
+            71,
+            75,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0007_coil_base": {
+        "vertices": "144c91e5735e6059afdc4f7e10e7ddbca41ff3d7f67d3e804397025cc1f9ab41",
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "vertex_normals": "0348230794012c53aec7cbc75ae14cc435488b3bf879ba2aa84d7da235657f2a",
+        "material": {
+          "name": "coil_base_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0006_cam_cover": {
+        "vertices": "64a9db59a4c0d955d3ec1e3d8519650e4d42f01b8f5163075ef192c078c7a425",
+        "faces": "6bbae340f0e47faadeb0739922a9b9076de66808e7d6a6f6465e0570f1b6c7c1",
+        "vertex_normals": "28fa034d381c2ac2d32f1ec081d000de1e222aed72a4cf2e6902e40f7f3f3bb0",
+        "material": {
+          "name": "cam_cover_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.62,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0005_engine_block": {
+        "vertices": "fd4fecfd397d38c52d5621942272311f19df72ca318fa1fbd43f1b7634ccfb5b",
+        "faces": "3d16e9d3068d8ef1c81286a03f5a439523c7e4dcbb58adc7f786814619f32a7b",
+        "vertex_normals": "3f6ba90022a8e9ca2d5834442edaae5d72db4f5b43fe1ffb676d1060eae83d79",
+        "material": {
+          "name": "engine_block_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.45,
+          "roughnessFactor": 0.62,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0004_front_crossmember": {
+        "vertices": "abf3fc01583b1f54869f319eb3f60374e1f1cac0c91ca16c3cd14e7310b4a413",
+        "faces": "8906cc4023d29b3fff89f0198179d121c996f047fce92190e4c942a174a92aab",
+        "vertex_normals": "880c864d2122b99c864599418d73a040f368ab744a560458f268f922031cc583",
+        "material": {
+          "name": "front_crossmember_material",
+          "baseColorFactor": [
+            42,
+            98,
+            136,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0003_fender": {
+        "vertices": "1956c48ed2a7c64a51243057d10ef2b06b902ceed7e49f7eb8c70806ff351cc1",
+        "faces": "72e36d889beb0d817d9cc2bcbbf14bd0b6349fe6af5b0f0773a84df431dd1b65",
+        "vertex_normals": "d3d4b404e900a530c97f4cd0e7208d59757f2eda9c6fe1e121c9373c8f40629b",
+        "material": {
+          "name": "fender_material",
+          "baseColorFactor": [
+            42,
+            98,
+            136,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0002_fender": {
+        "vertices": "1b6cce4f5f3a76eda0972c3c3e411d04392ee601f630364bdb2d278e1888145a",
+        "faces": "72e36d889beb0d817d9cc2bcbbf14bd0b6349fe6af5b0f0773a84df431dd1b65",
+        "vertex_normals": "08b57613dc66176e359ba936b4bd44aace03f37099287c69d8c2fc931e14cf65",
+        "material": {
+          "name": "fender_material",
+          "baseColorFactor": [
+            42,
+            98,
+            136,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0001_engine_cradle": {
+        "vertices": "407db07a90841832b1247883d6e25460d33e467bb6807c0e513b1888300ce5bf",
+        "faces": "5793edd891dec95c631991d4a7c369b38e65c812119fc94ca7e8917353fc8b92",
+        "vertex_normals": "6737267b4c83bc10c710593ad255f0e8e974107da7d6469e6db106a037894e56",
+        "material": {
+          "name": "engine_cradle_material",
+          "baseColorFactor": [
+            51,
+            79,
+            106,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      },
+      "engine_bay_environment/0000_garage_floor": {
+        "vertices": "1fc883215085011ac1b8979f1e3fbe83ba47b92c57dd455ad38326f8210ac9ff",
+        "faces": "2e28afa80c6712970d14a64b03abd333673dba067c01d8845c96ed63a0baa378",
+        "vertex_normals": "6dccc6e33abc3e9102525a52419f3dde07ec6624fcdb4c49254ca04589c6fa7e",
+        "material": {
+          "name": "garage_floor_material",
+          "baseColorFactor": [
+            150,
+            160,
+            165,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "uv": null
+      }
+    }
+  }
+}

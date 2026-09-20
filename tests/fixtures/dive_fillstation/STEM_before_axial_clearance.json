@@ -1,0 +1,45 @@
+{
+  "asset_axes": "gltf_y_up",
+  "source_asset": "scenes/dive_fillstation/meshes/STEM.glb",
+  "source_sha256": "f0166005d4b1e490320957e6e76034f25e32a44546f4419e0ce33f2d61a5edc2",
+  "object": {
+    "object_id": "STEM",
+    "label": "三号训练拨杆",
+    "asset": "scenes/dive_fillstation/meshes/STEM.glb",
+    "recipe": "lever",
+    "size_m": [
+      0.09,
+      0.034,
+      0.12
+    ],
+    "pose": {
+      "position_m": [
+        0.34,
+        0.61,
+        1.25
+      ]
+    },
+    "color": [
+      183,
+      65,
+      52
+    ],
+    "capabilities": [
+      "point",
+      "rotate"
+    ],
+    "description": "无压训练拨杆，角度表达方向操作。",
+    "interaction": {
+      "rotation_axis_local": [
+        0,
+        -1,
+        0
+      ],
+      "cue_offset_local_m": [
+        0,
+        -0.05,
+        0
+      ]
+    }
+  }
+}

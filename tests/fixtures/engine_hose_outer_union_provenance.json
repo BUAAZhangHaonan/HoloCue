@@ -1,0 +1,13 @@
+{
+  "source_sha256": "4bdf94b1ebd81d36a30b7d24dcd801067ecbbc76b4f6190e03e72f616baad4f5",
+  "output_sha256": "11b071bf83a6e13261d590c9ad5c49620c682a26c4787f0a914f2004adb4d377",
+  "axes": "project_z_up",
+  "nodes": [
+    "0052_tube",
+    "0053_tube",
+    "0054_rounded_part"
+  ],
+  "method": "CAD union of planar triangles from immutable original GLB; removes only internal overlaps/endcaps",
+  "volume_m3": 0.0031838117191031415,
+  "watertight": true
+}

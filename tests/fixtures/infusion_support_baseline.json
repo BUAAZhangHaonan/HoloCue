@@ -1,0 +1,733 @@
+{
+  "asset_axes": "gltf_y_up",
+  "mesh_fingerprints": {
+    "STOPCOCK": {
+      "STOPCOCK/0001_handle": {
+        "faces": "c123d33cba4c9f51dfc8513e2792e6844dee1d3d3cb4313ff6e333b22389bce8",
+        "material": "2780cf3eb44db56522f46e9e4e04e451cc864c363f71622a1196c1d446658ab5",
+        "uv": null,
+        "vertex_normals": "5d8ebab096879633c65b0f4d8ec761aa4e97edaa37df502d5adeb77359af6436",
+        "vertices": "179347a63612aba62a0e4a7a858b26935d4ce4033e8bf8ea2923c5182ee2f45c"
+      },
+      "STOPCOCK/0002_pointer": {
+        "faces": "c123d33cba4c9f51dfc8513e2792e6844dee1d3d3cb4313ff6e333b22389bce8",
+        "material": "5d4e76ef64bd551bb2c1a7d3446319509965ee74d133d45a7c5bf9295a5c0073",
+        "uv": null,
+        "vertex_normals": "7ae1ebf84c004b5bb801a66e763915fb8f643041a0352816cb77f4e0939a7c6b",
+        "vertices": "718754cf3271256778dbf415794e19cc25e629d1be931d5d4bf11ad98e5a990f"
+      }
+    },
+    "workstation": {
+      "infusion_ward_environment/0000_training_room_floor": {
+        "faces": "ff81f3b70489972d1866a21797dcda2738ac8266c6851e71dba8452e3934e596",
+        "material": "38d40ff14b197da0e67b3bf607dfe0b0a3a3cd0f2fd08a8f1800b0e2744a6038",
+        "uv": null,
+        "vertex_normals": "dc1a3cfa685bef61f59cb51d4ca97c2671f63dbb819a25b6206e36365cf31aea",
+        "vertices": "fd536da7b944fc73f24037bc902776578df6b4445b3c73d51e0598bedee73555"
+      },
+      "infusion_ward_environment/0001_worktop": {
+        "faces": "45af9f3c5cb2a65f50d8cdbb305e4395265c650cd4eee5b0b6ca4daf81a6511a",
+        "material": "2584423e95e27cd501e385c3a3e651017e809fa0b436a432fa938ebab54629ec",
+        "uv": null,
+        "vertex_normals": "0d5a2679d4ab57937b8809771676a76d3a79d4be7d17a5c66eaab61ebbc5d59d",
+        "vertices": "5ab2e969b9eb54485d6dab929b3046dcb427d4bc034f08a7fefbc14931ec966a"
+      },
+      "infusion_ward_environment/0002_table_leg": {
+        "faces": "4043e2554cdaee43960e6bab970943e763646408637947aa22193fcbf27d3d32",
+        "material": "553ea65a99f17f0272f09b4ea6e8655f7e2a9d82e775c214a7000b8034dcda21",
+        "uv": null,
+        "vertex_normals": "69d6dce50198eeb876be7798b504966138113562b7904d73befdec3dbbeb9883",
+        "vertices": "2e9b587d3a4ce6cddf118682798a9e16226eb4c2f1aefabf8eb7790b0dc837e5"
+      },
+      "infusion_ward_environment/0003_table_leg": {
+        "faces": "4043e2554cdaee43960e6bab970943e763646408637947aa22193fcbf27d3d32",
+        "material": "553ea65a99f17f0272f09b4ea6e8655f7e2a9d82e775c214a7000b8034dcda21",
+        "uv": null,
+        "vertex_normals": "63f4ad1ddc03bc1892aee716d514900752ea512451d6e4d04a12eb1c3d8e803c",
+        "vertices": "5839e708609324085eaba252a8cce714fbff237a8ea430450ad2a787e1e0ad06"
+      },
+      "infusion_ward_environment/0004_table_leg": {
+        "faces": "4043e2554cdaee43960e6bab970943e763646408637947aa22193fcbf27d3d32",
+        "material": "553ea65a99f17f0272f09b4ea6e8655f7e2a9d82e775c214a7000b8034dcda21",
+        "uv": null,
+        "vertex_normals": "36d99679be7866e38d003a0dc4a0ac51aa62bf97b6299bc3e847cfbf92f626cc",
+        "vertices": "fccef85cb4809596a14d5f21bc0be1e9d7dce83abc4caa145cbb5e7e509d8d57"
+      },
+      "infusion_ward_environment/0005_table_leg": {
+        "faces": "4043e2554cdaee43960e6bab970943e763646408637947aa22193fcbf27d3d32",
+        "material": "553ea65a99f17f0272f09b4ea6e8655f7e2a9d82e775c214a7000b8034dcda21",
+        "uv": null,
+        "vertex_normals": "10508870e3a5f42051602e6c70d4b16e38bfb94dea247c96c8128bc83a3d51bc",
+        "vertices": "3a21cd1acef3120f22da13db3fc788895035fbe2a4186c2c103d99e3942b31c3"
+      },
+      "infusion_ward_environment/0006_cross_member": {
+        "faces": "db0fcdd0f35c4efffc2e4e870b7b6ff936ee41ff80a2ffd687e5576e9b0597cf",
+        "material": "0e5854f01dd64895aae2645b3e2726620a7b6638df0cebac7b655858efa5b83a",
+        "uv": null,
+        "vertex_normals": "33b43148e5bbe8284b93fad4c170c3c69eed49488f1d4a3c6138a3c45ef06ad7",
+        "vertices": "929371c986cbc4fe911ee2ae423120e62e5b682b534b2bb1c873a0d7c7ee29bd"
+      },
+      "infusion_ward_environment/0007_iv_pole": {
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "material": "009057fc59cdb912101a1e9ba401369b857dd20b4015739899c8e9276aafe3e6",
+        "uv": null,
+        "vertex_normals": "3ddba6015ace616fea0bf96b655e27c3ccc964e21b3dc77b67bb9c81910ba424",
+        "vertices": "6fbaa64354c897fc4845ddcb21796cdf0dfc17c1e52c473bae34af65682b123c"
+      },
+      "infusion_ward_environment/0008_base_leg": {
+        "faces": "7978b61c5bc1ed24800514b4afce47eee9ede9b6a0fea0d45f0b6666f92b756e",
+        "material": "4983e2df56237b6993d1aee4783203502980ef3f8fca86745a495b8303fca003",
+        "uv": null,
+        "vertex_normals": "0ab329c2803844a21d6ef52ffd890af362373a829cdd00a1d45881318b337990",
+        "vertices": "7f94c2433de2f3beab969c48a2c1e807d96614f5682f361e206efd7a17c1d4ff"
+      },
+      "infusion_ward_environment/0009_caster": {
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "material": "af5bfaa1b65279a0011adf380be522ceb1ff0cc7a4e9268d6860b08fd24308ca",
+        "uv": null,
+        "vertex_normals": "1c657fc40659d3d3faa93fb96f8384657ad4f89b28af5cfd99363f8dcc82def8",
+        "vertices": "b230cfb5a6e9667fe1d85133da904b3d976775bec16a38516586cc14f2171244"
+      },
+      "infusion_ward_environment/0010_base_leg": {
+        "faces": "7978b61c5bc1ed24800514b4afce47eee9ede9b6a0fea0d45f0b6666f92b756e",
+        "material": "4983e2df56237b6993d1aee4783203502980ef3f8fca86745a495b8303fca003",
+        "uv": null,
+        "vertex_normals": "476b103825aeb625d285d34ef28731f9c1d81235cc6cc7d8c460570e7803a12e",
+        "vertices": "b23ce9de5267063dafcae90d10604cb5ce114a572a8fa4e29def3d4d12776716"
+      },
+      "infusion_ward_environment/0011_caster": {
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "material": "af5bfaa1b65279a0011adf380be522ceb1ff0cc7a4e9268d6860b08fd24308ca",
+        "uv": null,
+        "vertex_normals": "a4f95e8ab1f59894bab73464c4c66f5e3686e301a4020d88dbbc290e9ad824cb",
+        "vertices": "04b42f517f2735ac0ae17548d65c370fe56752c3ee19f6ea974b7f88b9e096ca"
+      },
+      "infusion_ward_environment/0012_base_leg": {
+        "faces": "7978b61c5bc1ed24800514b4afce47eee9ede9b6a0fea0d45f0b6666f92b756e",
+        "material": "4983e2df56237b6993d1aee4783203502980ef3f8fca86745a495b8303fca003",
+        "uv": null,
+        "vertex_normals": "960d360e88b0fd8875ef2ea7e435773be06506016dea5e7d0156ac9aed0a7baf",
+        "vertices": "bf8aed2357b8cc1ebb0eefc6f0fcbaa7ccaf981dbb6aa076a67265216f42a4b3"
+      },
+      "infusion_ward_environment/0013_caster": {
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "material": "af5bfaa1b65279a0011adf380be522ceb1ff0cc7a4e9268d6860b08fd24308ca",
+        "uv": null,
+        "vertex_normals": "dfebec8ec42282af661be5fcad6219b6a8283022bdaef5b2b8a706364e1bc4f4",
+        "vertices": "81a3dd7d76e4e8b72edf2757a6ee94f700f5307892d8dea420cad8eccc70ebb6"
+      },
+      "infusion_ward_environment/0014_base_leg": {
+        "faces": "7978b61c5bc1ed24800514b4afce47eee9ede9b6a0fea0d45f0b6666f92b756e",
+        "material": "4983e2df56237b6993d1aee4783203502980ef3f8fca86745a495b8303fca003",
+        "uv": null,
+        "vertex_normals": "73f888660a80d875c2795fab2069b20b061f600a5c63e1efad91233266e098e6",
+        "vertices": "cfbd29eb7deb6c38ac7dada9c5b5efa613778b5abeaf78cdc4d81bc2d59f9697"
+      },
+      "infusion_ward_environment/0015_caster": {
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "material": "af5bfaa1b65279a0011adf380be522ceb1ff0cc7a4e9268d6860b08fd24308ca",
+        "uv": null,
+        "vertex_normals": "f508ad94394da754715be0c9227e7f91fc884aa48b696afbf19c74c77396b2bd",
+        "vertices": "62edf132ccaf5e8fed791f4905d6db6202caebb1bd4d762cee1d6fd887feeb84"
+      },
+      "infusion_ward_environment/0016_base_leg": {
+        "faces": "7978b61c5bc1ed24800514b4afce47eee9ede9b6a0fea0d45f0b6666f92b756e",
+        "material": "4983e2df56237b6993d1aee4783203502980ef3f8fca86745a495b8303fca003",
+        "uv": null,
+        "vertex_normals": "cddc66b6daed359ce7b17bff803579b1055c92636e89e4d7aafc6cf3b1d207d2",
+        "vertices": "d444a59d889a6dbe1a9bcd1543fabb9a8f637b945694139587ab759287f32852"
+      },
+      "infusion_ward_environment/0017_caster": {
+        "faces": "5c93953362a5b441f32060d89025ceb558451e04175946377f7fca5bd9493283",
+        "material": "af5bfaa1b65279a0011adf380be522ceb1ff0cc7a4e9268d6860b08fd24308ca",
+        "uv": null,
+        "vertex_normals": "81486b0cd8e2cead588a09b081437ac81cd9088d35315a1f8c2c2a8905fd9892",
+        "vertices": "b7f475411f16b613d745f9aba67294a13490b50c098df8e371587fa0f4edb9e8"
+      },
+      "infusion_ward_environment/0018_hanger": {
+        "faces": "7978b61c5bc1ed24800514b4afce47eee9ede9b6a0fea0d45f0b6666f92b756e",
+        "material": "a0532c8bc29b052d7b25f00db3206992cfefdb791f5c8485fba126b81d7f2981",
+        "uv": null,
+        "vertex_normals": "7ee0809e5cc7954097097709e727e4a4bb7055a9ecbdb6f54f5d03fcf6192978",
+        "vertices": "0da109690ee9de10704cb8597e8121ebf0ac0282c520f5c297a1e25a4e8cf2eb"
+      },
+      "infusion_ward_environment/0019_tube": {
+        "faces": "7978b61c5bc1ed24800514b4afce47eee9ede9b6a0fea0d45f0b6666f92b756e",
+        "material": "b7d1ec1afe3790ad4902395dcf7fd83f296197600764811545084782a70c9179",
+        "uv": null,
+        "vertex_normals": "5ae70341c72027e050c347b6ae8bd01a8f7cffe45788cb227b5eda2d040e149c",
+        "vertices": "15d00da7f578ad6b6d4050c80e6a6bae96ac870d289de140076c33f20b725380"
+      },
+      "infusion_ward_environment/0020_tube": {
+        "faces": "7978b61c5bc1ed24800514b4afce47eee9ede9b6a0fea0d45f0b6666f92b756e",
+        "material": "b7d1ec1afe3790ad4902395dcf7fd83f296197600764811545084782a70c9179",
+        "uv": null,
+        "vertex_normals": "6e2e476bd818009f4947906d6f0c0dab7a848b8ab18c043dced2747c7abd89ae",
+        "vertices": "6c866f744ce0cfe9ba165dad1f90c6805255c0d8daccaf42c4c98c374718591f"
+      },
+      "infusion_ward_environment/0021_rounded_part": {
+        "faces": "403b6547713865ceebee70103fbf92cbe260808ed33594a12dcc396e3b44a3eb",
+        "material": "8f67abb7c845fb7e84580b6a50ab911332023e90dc2fec3f5a5267413c315107",
+        "uv": null,
+        "vertex_normals": "00fcf56d4e3f510921f1dfb42e567aa3c904d1a7a4aa179052958e25a6a469d7",
+        "vertices": "6d017c1086d2c65a3b21141256d8b04b7026040b6ce3286a3973a32824c01d15"
+      },
+      "infusion_ward_environment/0022_tube": {
+        "faces": "7978b61c5bc1ed24800514b4afce47eee9ede9b6a0fea0d45f0b6666f92b756e",
+        "material": "b7d1ec1afe3790ad4902395dcf7fd83f296197600764811545084782a70c9179",
+        "uv": null,
+        "vertex_normals": "3a97daa9c7f2e03a16a2bd6aa109e6cce665af5c26ca82d3217a26b72b6a7bd6",
+        "vertices": "da0f0f18e06693876af7df09cd336f8c288abdd097e4df8bc34ee6de0096ccbc"
+      },
+      "infusion_ward_environment/0023_tube": {
+        "faces": "7978b61c5bc1ed24800514b4afce47eee9ede9b6a0fea0d45f0b6666f92b756e",
+        "material": "b7d1ec1afe3790ad4902395dcf7fd83f296197600764811545084782a70c9179",
+        "uv": null,
+        "vertex_normals": "764bc8fd7780aabe56df5b4c532adbe399f11b975b73de6dc2257f6955c45865",
+        "vertices": "ee8ad6da0f15be028d205c21342bd884e4393dafeb11c0ab03aa3f71868f8e8a"
+      },
+      "infusion_ward_environment/0024_rounded_part": {
+        "faces": "403b6547713865ceebee70103fbf92cbe260808ed33594a12dcc396e3b44a3eb",
+        "material": "8f67abb7c845fb7e84580b6a50ab911332023e90dc2fec3f5a5267413c315107",
+        "uv": null,
+        "vertex_normals": "5393479875a833e17827033894f2ec96ee1a678f3d30f0f5e385ffb4ca67f9ea",
+        "vertices": "6ca33ccc76f893f8c19e3e2fb9ecbcffea735055d03fbb4926b05a40e87615f0"
+      },
+      "infusion_ward_environment/0025_pump_chassis": {
+        "faces": "9949337acc9813ac65ca200a312b3840b9e88c27a201058eb62b8d64349a46b2",
+        "material": "08c573fe011676d1c65ef257036f512b403d45dccbd24321b8768f0c89600f32",
+        "uv": null,
+        "vertex_normals": "cd552656976c61ab1d746121d2df95c24fddd59d6cf91ce683a5986043ecf744",
+        "vertices": "f2925ffdb70d1b186232eeacba6b38cc8e46de4be6931eb7ebecbfaf405f3ef3"
+      },
+      "infusion_ward_environment/0026_monitor_support": {
+        "faces": "fef249ad22663574e4db085f4c960ee8469359c5caa4ab4aaa2979c980be1bdc",
+        "material": "089556884d6e306e70f4c1da6c4d7ae07f0d58e5bec7801fe7ad0732a530b7f0",
+        "uv": null,
+        "vertex_normals": "14a09d7dfa39e252e0629958ad63cce0017cd7f2829ddc460bf4c3b43cef0a78",
+        "vertices": "7785a98ee3d68338f1ec3fdc05375a572ef18ae0693f083b6549eca30e3e8f93"
+      },
+      "infusion_ward_environment/0027_monitor_stand": {
+        "faces": "7978b61c5bc1ed24800514b4afce47eee9ede9b6a0fea0d45f0b6666f92b756e",
+        "material": "5b6f32a99ef147dc38236634f3aa9bc49a6d7ccc59749b245388011242391dfa",
+        "uv": null,
+        "vertex_normals": "5cf9aed3cfb0db7b5ed674f9ce67d3ea4d8985bea8729ef252311dcc69bea663",
+        "vertices": "409ff7d19c1176d5df2a7977b5bf59d83ebe853b9d4342ced492ee14b5cb3a52"
+      },
+      "infusion_ward_environment/0028_static_stopcock_body": {
+        "faces": "7978b61c5bc1ed24800514b4afce47eee9ede9b6a0fea0d45f0b6666f92b756e",
+        "material": "a6fcfd57add8c76892ff3edd56b72aa47f9026bac15a179ff2d4d503ead16472",
+        "uv": null,
+        "vertex_normals": "9e11eabf4fb573f19024da80f7ba448aa59386dc9cdca4bf9caeb2b62fbeb8a4",
+        "vertices": "48328f9f97bb8e5f5c358cf817f934f0ccb6b5c30f29036c2f55daf9314f6ac9"
+      },
+      "infusion_ward_environment/label_29": {
+        "faces": "588155b6e6708a8cfa760da51896fc20cc2ef0f14ceb2b8e037dac125f2a3f32",
+        "material": "7eb8cce86058f1d04380f879ee101c13ccd0c5869a59e42228b003d8f987829a",
+        "uv": "39b0ce9f8bb751d3cda95dff4ccbd2f76aa8be076e08f92cd3a2ce32d7fd5d9e",
+        "vertex_normals": "642023a065970eff3c7c0d6209d833008306f27a9de8b01861ce266f95422057",
+        "vertices": "7df03f28269e63e10a205c11f316cbb72aa56ba3f0add12e8d053971491453fd"
+      }
+    }
+  },
+  "object_contracts": {
+    "BAG1": {
+      "interaction": {
+        "approach_axis_local": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "approach_distance_m": 0.12,
+        "cue_offset_local_m": [
+          0.0,
+          0.0,
+          0.04
+        ],
+        "departure_axis_local": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "departure_distance_m": 0.08,
+        "detail_direction_local": null,
+        "duration_s": 3.0,
+        "inspect_cue_clearance_m": 0.002,
+        "inspect_extent_m": null,
+        "inspect_normal_local": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "inspect_point_local_m": [
+          0.0,
+          0.02,
+          0.0
+        ],
+        "mating_pose": {
+          "position_m": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "wxyz": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "pivot_local_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation_axis_local": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "transit_height_m": 0.15
+      },
+      "pose": {
+        "position_m": [
+          0.22,
+          0.4,
+          1.78
+        ],
+        "wxyz": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "size_m": [
+        0.14,
+        0.038,
+        0.23
+      ]
+    },
+    "BAG2": {
+      "interaction": {
+        "approach_axis_local": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "approach_distance_m": 0.12,
+        "cue_offset_local_m": [
+          0.0,
+          0.0,
+          0.04
+        ],
+        "departure_axis_local": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "departure_distance_m": 0.08,
+        "detail_direction_local": null,
+        "duration_s": 3.0,
+        "inspect_cue_clearance_m": 0.002,
+        "inspect_extent_m": null,
+        "inspect_normal_local": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "inspect_point_local_m": [
+          0.0,
+          0.02,
+          0.0
+        ],
+        "mating_pose": {
+          "position_m": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "wxyz": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "pivot_local_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation_axis_local": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "transit_height_m": 0.15
+      },
+      "pose": {
+        "position_m": [
+          -0.17,
+          0.4,
+          1.78
+        ],
+        "wxyz": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "size_m": [
+        0.14,
+        0.038,
+        0.23
+      ]
+    },
+    "MONITOR": {
+      "interaction": {
+        "approach_axis_local": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "approach_distance_m": 0.12,
+        "cue_offset_local_m": [
+          0.0,
+          0.0,
+          0.04
+        ],
+        "departure_axis_local": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "departure_distance_m": 0.08,
+        "detail_direction_local": null,
+        "duration_s": 3.0,
+        "inspect_cue_clearance_m": 0.002,
+        "inspect_extent_m": null,
+        "inspect_normal_local": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "inspect_point_local_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "mating_pose": {
+          "position_m": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "wxyz": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "pivot_local_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation_axis_local": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "transit_height_m": 0.15
+      },
+      "pose": {
+        "position_m": [
+          -0.44,
+          0.62,
+          1.43
+        ],
+        "wxyz": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "size_m": [
+        0.3,
+        0.11,
+        0.23
+      ]
+    },
+    "PUMPCASSETTE": {
+      "interaction": {
+        "approach_axis_local": [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        "approach_distance_m": 0.13,
+        "cue_offset_local_m": [
+          0.0,
+          0.0,
+          0.04
+        ],
+        "departure_axis_local": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "departure_distance_m": 0.08,
+        "detail_direction_local": null,
+        "duration_s": 3.0,
+        "inspect_cue_clearance_m": 0.002,
+        "inspect_extent_m": null,
+        "inspect_normal_local": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "inspect_point_local_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "mating_pose": {
+          "position_m": [
+            0.0,
+            0.024,
+            0.0
+          ],
+          "wxyz": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "pivot_local_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation_axis_local": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "transit_height_m": 0.13
+      },
+      "pose": {
+        "position_m": [
+          -0.45,
+          -0.22,
+          0.9975
+        ],
+        "wxyz": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "size_m": [
+        0.085,
+        0.048,
+        0.095
+      ]
+    },
+    "SLOT2": {
+      "interaction": {
+        "approach_axis_local": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "approach_distance_m": 0.12,
+        "cue_offset_local_m": [
+          0.0,
+          0.0,
+          0.04
+        ],
+        "departure_axis_local": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "departure_distance_m": 0.08,
+        "detail_direction_local": null,
+        "duration_s": 3.0,
+        "inspect_cue_clearance_m": 0.002,
+        "inspect_extent_m": null,
+        "inspect_normal_local": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "inspect_point_local_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "mating_pose": {
+          "position_m": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "wxyz": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "pivot_local_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation_axis_local": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "transit_height_m": 0.15
+      },
+      "pose": {
+        "position_m": [
+          0.05,
+          0.21,
+          1.3
+        ],
+        "wxyz": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "size_m": [
+        0.103,
+        0.065,
+        0.116
+      ]
+    },
+    "STOPCOCK": {
+      "interaction": {
+        "approach_axis_local": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "approach_distance_m": 0.12,
+        "cue_offset_local_m": [
+          0.0,
+          -0.045,
+          0.0
+        ],
+        "departure_axis_local": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "departure_distance_m": 0.08,
+        "detail_direction_local": null,
+        "duration_s": 3.0,
+        "inspect_cue_clearance_m": 0.002,
+        "inspect_extent_m": null,
+        "inspect_normal_local": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "inspect_point_local_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "mating_pose": {
+          "position_m": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "wxyz": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "pivot_local_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation_axis_local": [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        "transit_height_m": 0.15
+      },
+      "pose": {
+        "position_m": [
+          0.1,
+          0.15,
+          1.01
+        ],
+        "wxyz": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "size_m": [
+        0.065,
+        0.045,
+        0.06
+      ]
+    }
+  },
+  "purpose": "Immutable pre-repair detail fingerprints; rotor is the sole modified original node",
+  "source_assets_sha256": {
+    "STOPCOCK": "c8cb10d5db7f25d9a77fefab3cdda4254c31b1d81e5d26ab05bd1fc51fc16270",
+    "workstation": "6a7172853b8c84eb28bcac3c2c525de063edd8301e42402358231036e34e61a8"
+  },
+  "task_contract": {
+    "interrupt_instruction": "\u4e34\u65f6\u67e5\u770b BAG2 \u80cc\u9762\u7684\u8bad\u7ec3\u6807\u8bc6\uff0c\u4fdd\u5b58\u539f\u6765\u7684\u88c5\u76d2\u4e0e\u68c0\u67e5\u4efb\u52a1\u3002",
+    "interrupt_target": "BAG2",
+    "ordered_steps": [
+      {
+        "action": "insert",
+        "angle_deg": null,
+        "depth_requirement": "precise",
+        "reference_id": "SLOT2",
+        "target_id": "PUMPCASSETTE"
+      },
+      {
+        "action": "inspect_back",
+        "angle_deg": null,
+        "depth_requirement": "persistent",
+        "reference_id": null,
+        "target_id": "BAG1"
+      },
+      {
+        "action": "rotate",
+        "angle_deg": -90.0,
+        "depth_requirement": "precise",
+        "reference_id": null,
+        "target_id": "STOPCOCK"
+      }
+    ],
+    "persistent_targets": [
+      "MONITOR"
+    ],
+    "setting": "\u4e0e\u60a3\u8005\u65ad\u5f00\u7684\u533b\u7597\u8bbe\u5907\u6559\u5b66\u53f0\uff0c\u4f7f\u7528\u8bad\u7ec3\u888b\u548c\u673a\u68b0\u793a\u6559\u90e8\u4ef6\u3002"
+  }
+}

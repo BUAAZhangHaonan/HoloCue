@@ -1,0 +1,3564 @@
+{
+  "baseline_source_sha256": "adf4321adc0c28c49852a1f9756ea19153ca34494d49bd16f427b12a111e89aa",
+  "scenes": {
+    "control_panel": {
+      "scene_contract": {
+        "schema_version": "1.1",
+        "scene_id": "control_panel",
+        "title": "\u65cb\u94ae\u8bbe\u7f6e\u4e0e\u6a21\u5757\u68c0\u67e5",
+        "units": "m",
+        "axes": "right_handed_z_up",
+        "objects": [
+          {
+            "object_id": "A",
+            "label": "\u91cf\u7a0b\u65cb\u94ae A",
+            "asset": "scenes/control_panel/meshes/A.glb",
+            "pose": {
+              "position_m": [
+                -0.17,
+                -0.04,
+                0.07
+              ],
+              "wxyz": [
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "color": [
+              79,
+              120,
+              151
+            ],
+            "capabilities": [
+              "point",
+              "rotate"
+            ],
+            "anchors": {},
+            "description": "\u72ec\u7acb\u5b89\u88c5\u7684\u91cf\u7a0b\u65cb\u94ae\uff0c\u9876\u90e8\u523b\u7ebf\u4e0e\u5916\u5708\u89d2\u5ea6\u76d8\u53ef\u89c1\u3002",
+            "frames": {},
+            "interaction": {
+              "rotation_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "pivot_local_m": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "mating_pose": {
+                "position_m": [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                "wxyz": [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "departure_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "departure_distance_m": 0.08,
+              "approach_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "approach_distance_m": 0.12,
+              "transit_height_m": 0.15,
+              "inspect_point_local_m": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "inspect_normal_local": [
+                0.0,
+                1.0,
+                0.0
+              ],
+              "inspect_extent_m": null,
+              "inspect_cue_clearance_m": 0.002,
+              "detail_direction_local": null,
+              "cue_offset_local_m": [
+                0.0,
+                0.0,
+                0.038
+              ],
+              "duration_s": 3.0
+            },
+            "recipe": "knob",
+            "size_m": [
+              0.065,
+              0.065,
+              0.055
+            ]
+          },
+          {
+            "object_id": "B",
+            "label": "\u8c03\u8282\u65cb\u94ae B",
+            "asset": "scenes/control_panel/meshes/B.glb",
+            "pose": {
+              "position_m": [
+                0.0,
+                -0.04,
+                0.07
+              ],
+              "wxyz": [
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "color": [
+              38,
+              121,
+              164
+            ],
+            "capabilities": [
+              "point",
+              "rotate"
+            ],
+            "anchors": {},
+            "description": "\u9876\u90e8\u767d\u8272\u6307\u793a\u7ebf\uff0c\u56f4\u7ed5\u7ad6\u76f4\u8f74\u65cb\u8f6c\uff1b\u9006\u65f6\u9488\u89d2\u5ea6\u4e3a\u6b63\u3002",
+            "frames": {},
+            "interaction": {
+              "rotation_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "pivot_local_m": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "mating_pose": {
+                "position_m": [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                "wxyz": [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "departure_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "departure_distance_m": 0.08,
+              "approach_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "approach_distance_m": 0.12,
+              "transit_height_m": 0.15,
+              "inspect_point_local_m": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "inspect_normal_local": [
+                0.0,
+                1.0,
+                0.0
+              ],
+              "inspect_extent_m": null,
+              "inspect_cue_clearance_m": 0.002,
+              "detail_direction_local": null,
+              "cue_offset_local_m": [
+                0.0,
+                0.0,
+                0.038
+              ],
+              "duration_s": 3.0
+            },
+            "recipe": "knob",
+            "size_m": [
+              0.075,
+              0.075,
+              0.055
+            ]
+          },
+          {
+            "object_id": "C",
+            "label": "\u53ef\u62c6\u6a21\u5757 C",
+            "asset": "scenes/control_panel/meshes/C.glb",
+            "pose": {
+              "position_m": [
+                0.18,
+                0.17,
+                0.085
+              ],
+              "wxyz": [
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "color": [
+              57,
+              139,
+              128
+            ],
+            "capabilities": [
+              "point",
+              "inspect_back"
+            ],
+            "anchors": {},
+            "description": "\u72ec\u7acb\u652f\u5ea7\u4e0a\u7684\u6a21\u5757\uff0c\u80cc\u9762\u671d +Y\uff0c\u5177\u6709\u9ec4\u8272\u5b9a\u4f4d\u952e\u4e0e\u56db\u4e2a\u91d1\u5c5e\u7aef\u5b50\u3002",
+            "frames": {},
+            "interaction": {
+              "rotation_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "pivot_local_m": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "mating_pose": {
+                "position_m": [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                "wxyz": [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "departure_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "departure_distance_m": 0.08,
+              "approach_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "approach_distance_m": 0.12,
+              "transit_height_m": 0.15,
+              "inspect_point_local_m": [
+                0.0,
+                0.039,
+                0.0
+              ],
+              "inspect_normal_local": [
+                0.0,
+                1.0,
+                0.0
+              ],
+              "inspect_extent_m": null,
+              "inspect_cue_clearance_m": 0.002,
+              "detail_direction_local": null,
+              "cue_offset_local_m": [
+                0.0,
+                0.0,
+                0.065
+              ],
+              "duration_s": 3.0
+            },
+            "recipe": "module",
+            "size_m": [
+              0.11,
+              0.075,
+              0.085
+            ]
+          }
+        ],
+        "initial_instruction": "\u628a B \u9006\u65f6\u9488\u8f6c 30 \u5ea6\uff0c\u63a5\u7740\u68c0\u67e5 C \u80cc\u9762\u7684\u9ec4\u8272\u5b9a\u4f4d\u7ed3\u6784\u3002",
+        "camera_position_m": [
+          0.65,
+          -0.85,
+          0.67
+        ],
+        "camera_look_at_m": [
+          0.0,
+          0.08,
+          0.11
+        ],
+        "asset_axes": "gltf_y_up",
+        "environment": [
+          {
+            "prop_id": "workstation",
+            "label": "",
+            "asset": "scenes/control_panel/meshes/env/workstation.glb",
+            "pose": {
+              "position_m": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "wxyz": [
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "scale_m": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          }
+        ],
+        "render_hints": {
+          "ortho_scale_m": 0.91,
+          "grid_extent_m": 1.0,
+          "cue_scale": 1.0,
+          "label_offset_m": 0.12,
+          "fit_camera": true,
+          "fill_lights": [],
+          "fov_y_deg": 42.0,
+          "viewport_margin": 0.14,
+          "background_rgb": [
+            233,
+            238,
+            242
+          ],
+          "workspace_bounds_m": [
+            [
+              -0.53,
+              -0.36,
+              0.025
+            ],
+            [
+              0.53,
+              0.6,
+              0.25
+            ]
+          ]
+        },
+        "task_contract": {
+          "setting": "\u65ad\u7535\u6559\u5b66\u63a7\u5236\u53f0\uff0c\u65cb\u94ae\u89d2\u5ea6\u4e0e\u6a21\u5757\u7ed3\u6784\u68c0\u67e5\u3002",
+          "ordered_steps": [
+            {
+              "target_id": "B",
+              "action": "rotate",
+              "reference_id": null,
+              "angle_deg": 30.0,
+              "depth_requirement": "precise"
+            },
+            {
+              "target_id": "C",
+              "action": "inspect_back",
+              "reference_id": null,
+              "angle_deg": null,
+              "depth_requirement": "persistent"
+            }
+          ],
+          "persistent_targets": [],
+          "interrupt_target": "C",
+          "interrupt_instruction": "\u4e34\u65f6\u68c0\u67e5 C \u7684\u80cc\u9762\uff0c\u4fdd\u7559 B \u7684\u4efb\u52a1\u548c\u89d2\u5ea6\uff0c\u5b8c\u6210\u540e\u7ee7\u7eed B\u3002"
+        }
+      },
+      "changed_environment_nodes": [
+        "control_panel_environment/0025_instrument_panel"
+      ],
+      "baseline_environment_sha256": "f7c03e6daae8c360222bec91d3575bada0ccca96605970983900ab671abbf65b",
+      "environment_fingerprints": {
+        "control_panel_environment/0081_table_ground_foot": "5913dd650cd1d85bc9b0311caba617f192b6049d784930e952caf1a7345f3863",
+        "control_panel_environment/0080_table_ground_foot": "a5e9c1bbe2b0c433b2b46f5ecb6988569eedf2426c33fe97971edbabc6cf97e9",
+        "control_panel_environment/0079_table_ground_foot": "2026f430d2e0945c33e0ed5dc3e4fa2d73415624d08c2ffbd9da6cfec0e88b90",
+        "control_panel_environment/0078_table_ground_foot": "fa636cc8c1c036d6d21b03962aad8d38e275204cc43c4a5cdbbf3fa03b611e12",
+        "control_panel_environment/label_77": "a5218fb79b0f2d8925639b62ca7ab47c2d1b20edb49057d80fecf01c526ca6c5",
+        "control_panel_environment/label_76": "1a674b057150cde1269ef2e14ffdb1ba9de375ba7c080836f266b59a252d226d",
+        "control_panel_environment/0075_dial_tick": "64897a4254a2cf230eedd81a79056253bb75418b0bf205781df0329046b8c728",
+        "control_panel_environment/0074_dial_tick": "5897a17aef34b0876ff9f8ce1bf3c1cb60ca124eb3848e9f99edf8bf79541a83",
+        "control_panel_environment/0073_dial_tick": "9cab02f3687cdf49d1d437196548ddc284fab3cea14281e8ecaf4e55170159d2",
+        "control_panel_environment/0072_dial_tick": "5a3cd2bf9a4a0de7312049160a3a2b357c7eb3dac82109b3858f67d7749fd80d",
+        "control_panel_environment/0071_dial_tick": "7c739d095f4660a3e7d510cb2be4c298e9dbf282e8108ca2c379d01476bf62fd",
+        "control_panel_environment/0070_dial_tick": "5a2255d7ca8665ea737302c62f5b15870243aa1946f2c71526a28359e36c39b3",
+        "control_panel_environment/0069_dial_tick": "83051b89fdbbe7d85a14148070b6d9fcc0c39d3263ef82df6e3764a7dc4a276c",
+        "control_panel_environment/0068_dial_tick": "ae6f07f5b3c5aae62c348bc4caf9c6a2e3e6e570d0bc96cf6e153139e9a2b5c3",
+        "control_panel_environment/0067_dial_tick": "d00c1d619e5d4f9e6c31d5d703219600ce43f6f5ccfd28fd25b6b0087c75cc70",
+        "control_panel_environment/0066_dial_tick": "0ebf0158532ee65ff676dddf3c9d10575081f2cd7aa1586c15ff421808c9e1a1",
+        "control_panel_environment/0065_dial_tick": "2ffe09668ed2184c8534e50fa909066eed3223c9fe81d22806f13fdac48362de",
+        "control_panel_environment/0064_dial_tick": "8dc9577bb0c592a319f465d53c5505788ca69f9351c795048f24d3e0f5b16c7d",
+        "control_panel_environment/0063_dial_tick": "2a078724db1e7dd66395be97879e503c88fe9a630f2869d7647d8aa9173e023d",
+        "control_panel_environment/0062_dial_tick": "da3bd40d4e2a67c61a1f8c48ac93473aa9e91cab3d9b72ed387fb09f8d404ee9",
+        "control_panel_environment/0061_dial_tick": "30dc0c10f32bd9f00071cee6dec734527aa7ddb5a2368fa53b235fcce9ce3939",
+        "control_panel_environment/0060_dial_tick": "c892c69754248954432ff397d6c5b377874c07b3b919175e20d91c6c86578153",
+        "control_panel_environment/0059_dial_tick": "00d9f11d83c39d8d8396840a9e2197929f563feac02ffc55c0e6d49330e2ac27",
+        "control_panel_environment/0058_dial_tick": "93f5c0e19de434f540fe560d849d50b9ac6333d1e6c671b1c373c7f8aa72ac60",
+        "control_panel_environment/0057_dial_tick": "9c21e6d55f8cef7e5c4af66e93a08b0e40c9b047c5c80dc29459a07111b6bdcd",
+        "control_panel_environment/0056_dial_tick": "53ae97d3a204e29a4d1f0de48d0d0e290efb86c16d83769c9b40d14c01c83377",
+        "control_panel_environment/0055_dial_tick": "6e91e957d51e41db73cacf1255046dd19f2e85b257f8feedea11499081f8ead0",
+        "control_panel_environment/0054_dial_tick": "03a9a3c1fd19da7bf7361de88c7ac80302ca4a53bdbcce7911eccb9197315445",
+        "control_panel_environment/0053_dial_tick": "504c483b445a97f442387b401659ed0bd88c59deaa15f4073ed3499bb6efc956",
+        "control_panel_environment/0052_dial_tick": "4f3f4128de74952ca6d208c436c2f8ebf33a8638e5a41170df3f7bd320e1f26e",
+        "control_panel_environment/label_51": "25a6d148b3ba37fdc48617ac95c25d25823eea3daeedee2f5072f04a8ecd7064",
+        "control_panel_environment/0050_dial_tick": "ff18f6a9fe0962f7f0278dbb804fd36be9454534033615d0c1a2bd1e8f3162d4",
+        "control_panel_environment/0049_dial_tick": "a92dae07e7688c5601f50e8305040b53520345de303831dc3d4feae0ac9c177a",
+        "control_panel_environment/0048_dial_tick": "279e60624191c7e4380f35a07f51a9b3066330be1fd8acc2910d2c1743c08ab6",
+        "control_panel_environment/0047_dial_tick": "028d66b33585788f0c70d841e211cd22fe5b94d8fb2cf766ece17181e1365860",
+        "control_panel_environment/0046_dial_tick": "0cc7e6e67be36eec5eca3016742c862b069ad5c08270569556724e2b5ab52100",
+        "control_panel_environment/0045_dial_tick": "d8dcba5e1e97ee9e1d5028f8d2a01948bdea5f0a30c1f369bf69ebdee5d3958f",
+        "control_panel_environment/0044_dial_tick": "2260932987097c4533500a3da79d02aa26733047829dcf26bb0e58cc8efc84a8",
+        "control_panel_environment/0043_dial_tick": "ecaa86042128ef440b8eecdf6bf507d942eeda1e063f69004121aa0c4d084b48",
+        "control_panel_environment/0042_dial_tick": "fcbf328c82c6d830eacde7690501efcc991064e9b5c12245f22705e68f68b8c8",
+        "control_panel_environment/0041_dial_tick": "97134e13e33deae2232ec54a9eca149bc6315250a4f9c1c1a00b7d2f75aa8bfc",
+        "control_panel_environment/0040_dial_tick": "f210f6a1f066f94dd8b15ff23e6ca04e25b4474d1c3bac6f378bf9db7cc77548",
+        "control_panel_environment/0039_dial_tick": "b057244f30db56ccbfebd5d819bcee6c7ef96ae450eee3555f978b7bb72a65bb",
+        "control_panel_environment/0038_dial_tick": "2b915ca4fca03ae7a7e85328cdc3b958dde469ea6f1e55b24f55e068c0e8c3c9",
+        "control_panel_environment/0037_dial_tick": "e825dee9d4172096c101a2e576311d901097d3e632d87987222bc7076850e1e2",
+        "control_panel_environment/0036_dial_tick": "abeaf5193475612f3cc369b20c8e35802123e50e2a08f561ca55f50069a91782",
+        "control_panel_environment/0035_dial_tick": "ac0a886ce4cb441b28623ef2530ec2a40174a1929de7e53fce9049c19bb2dd37",
+        "control_panel_environment/0034_dial_tick": "dd7d223a6e3795accb670711695929a46a461cb688d6c220fa88160bfcc29431",
+        "control_panel_environment/0033_dial_tick": "9c8e1b429f7a12c6696d5a1dd50b7445a511f18555eebacccb286731c7575647",
+        "control_panel_environment/0032_dial_tick": "c6bf8f16e022905c480de400697fcbe67f1401af9faec01a1ecd659ec24dbd5c",
+        "control_panel_environment/0031_dial_tick": "3d7e566cb530c4a73d8d512dcb7fec53b2b14d57742b4f17bfdb57c16ac50cb6",
+        "control_panel_environment/0030_dial_tick": "ca78947213669ab9a23ad94649b562277a4574447ea90133c91a65abe89ee1eb",
+        "control_panel_environment/0029_dial_tick": "f838c38fe6f6294215e4dba75965a0d168e91e54a82a65d4c6a9a28d09f99abb",
+        "control_panel_environment/0028_dial_tick": "62ccff9f8d70bbf419ec8098c4fe30a1d165be83cad5bb28150d95404613c04a",
+        "control_panel_environment/0027_dial_tick": "623ae0b4c458bfb97811bb17015c9b8b1ca3eb9627af5173ea9dd57679a455ec",
+        "control_panel_environment/0026_module_support": "64e6e4632012840ef5620e5be5bbd2acb9c6352c79eba2d737514a5658967665",
+        "control_panel_environment/0025_instrument_panel": "52148f45de57ab43d9ccfebdf2c9b49baad4b5a4ad8c0ce66bace3738ec28257",
+        "control_panel_environment/0024_floor": "f5b71891489187f3dcd05c2b84dde8e92b8538e6cfb027fcd5418b81c58341c7",
+        "control_panel_environment/0023_mat_line": "e869a2415df27b86ae91f4ecd2d121ed0dd0006365665acfa60783b6f0d23cf6",
+        "control_panel_environment/0022_mat_line": "c7fdb14500d02b01fb3e9eeaaa530bdf9478e52d33b332502e10c843666fe6aa",
+        "control_panel_environment/0021_mat_line": "6bf12570a26894e1d3ab8b58069eb169bb0d6946b5646e64e17b8e83efd2f8d9",
+        "control_panel_environment/0020_mat_line": "4184d3571ea3ece28b605dee6ba225ac7511c0e91698a527ff40176af5a2cb73",
+        "control_panel_environment/0019_mat_line": "28170bc98d351d96143e6d440208f54fc92d9db099231cefa88274964ba90a49",
+        "control_panel_environment/0018_mat_line": "7e3ce3801fb72e8bbf3681d8f06ea64755204e8a097d8480aeafcd5a9f8be7da",
+        "control_panel_environment/0017_mat_line": "fda029573c02379da706bcc1bf085c857ee7460eb43dec4342ef4c7e4cb93150",
+        "control_panel_environment/0016_mat_line": "f7ea59a521466c7c3e19f2d708d318b9f99a50550499687173d7f65aed055b53",
+        "control_panel_environment/0015_mat_line": "9267a9cf969063cb3133a8b8279188f6fd1adb70996d167a945d0a52e3a09daf",
+        "control_panel_environment/0014_mat_line": "1c049097e910bdb9586dba8f09e3e06b007d713ed8325ea7e3514b43bdff82ef",
+        "control_panel_environment/0013_mat_line": "ad99ac32b8f812c08b5e575588e6e6f4d7256131307788e5d7c68a06c54232f6",
+        "control_panel_environment/0012_mat_line": "aee1a675eaa28b0ab32c04b0a1829f552d3581b2351c4e927704df628dc08a24",
+        "control_panel_environment/0011_mat_line": "9befaaf140ee55fa836646eea1380d4d9084f13dfa74379acc7bca666cd927fc",
+        "control_panel_environment/0010_mat_line": "0d242a763ea0ca1b389e0eed8a6960a56189547a78c7645663c8c43861e148ba",
+        "control_panel_environment/0009_mat_line": "d26566f942bbb698e534a7d797acafb0f506ac4752b9bca5724b5a20848b3c8f",
+        "control_panel_environment/0008_mat_line": "e004a48d3ce43b00399513bb436bdaca3d10805621916180bfefd5a120aa3b75",
+        "control_panel_environment/0007_mat_line": "0973a28939a09751b3806ce9d7756bb99dcf5656f6c80b9de74100b9806df526",
+        "control_panel_environment/0006_work_mat": "377c5b9c4f7b8e98d0455c32f7ea112651d3e57d962b9801be7dc00dcd5c3e9c",
+        "control_panel_environment/0005_cross_member": "0bdfdb01771fa8f75d127d3d665e27833cc5eb82c83968cfdd0adf08736bfda3",
+        "control_panel_environment/0004_table_leg": "92e3260ac53995f1597451ff0e6218ae2278e7f2f4c77ed50158411256431b24",
+        "control_panel_environment/0003_table_leg": "09025954b817390608f47fcbfc41afe310c84b22197a8f9e0742b222b979ac96",
+        "control_panel_environment/0002_table_leg": "12ada566f7d0760c1b0e429499e271ef9226ce1974b8ebdf473768bed2dff67c",
+        "control_panel_environment/0001_table_leg": "9596fb0d174491cf017840f3d35b9e4a96dd616b5fbe12164712c00263ba26b4",
+        "control_panel_environment/0000_worktop": "8386fefe7c50ad99135c49bd1af581461ccf646be435ad9feb96f6033e2617ad"
+      },
+      "environment_materials": {
+        "control_panel_environment/0025_instrument_panel": {
+          "name": "instrument_panel_material",
+          "baseColorFactor": [
+            117,
+            137,
+            153,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        }
+      },
+      "objects": {
+        "A": {
+          "nodes": {
+            "A/0030_index_mark": "f2b79d0221927c8bfd4780b6fd44f70a5d256f78e3fc192ebcceef628ff072f4",
+            "A/0029_knurl": "8f7ebf278b269f4d378f1e1d25302d233c9ae80f3cd7943e1b340e3b8a05ebaf",
+            "A/0028_knurl": "6b04d761a6b99c0940cfee1a22c67820d24ef84d5293f2f709822d189a0f002c",
+            "A/0027_knurl": "aa468fd3203c0231692720057a3c81e8b2816b31b9178ea0491ffe15be5eb04b",
+            "A/0026_knurl": "de159f97c33b55482cb56a586afa5bfcfa13bbf64315349ab43e3b163379973c",
+            "A/0025_knurl": "42efbdd349f5cd8f18c8c140e1622e996b5c9e77d0f9d8126dd7f7968498a748",
+            "A/0024_knurl": "8b481371d2e74625547c640635ea276dc40efca326a3a911208c3a26bd4824ef",
+            "A/0023_knurl": "26e19d1006a491c8b2d2230290b1780bca4c34cfdee1ee1940c1ea9849f61c2c",
+            "A/0022_knurl": "775fa29fc4e3613bc9e89735d0e8e0f17e2677b66b5bc951e6cfbb236c689c27",
+            "A/0021_knurl": "17f5ed6b5d78d6f21a6e92c82b4452c4183fabacf0aa00830e860463aad07648",
+            "A/0020_knurl": "c8d830fbf7a1b36b4578eae08642087ec7c8a7793c095ae98803c1116ee222ec",
+            "A/0019_knurl": "7b1b8da0710d67b65b894f05b5eb34bd375fb4a9c5e89efe8a1644ced19c27aa",
+            "A/0018_knurl": "048fa9f0aa066fa3ab871c9e510ef6d420ca073af7ca8540ada45642799e00fd",
+            "A/0017_knurl": "d32cdcbfed4f5c2b1468e0f2e7403dccf3bc0509a796a32a3abdcce4c6e1e6ce",
+            "A/0016_knurl": "c65684844012d6053a4c1c8505c6ce011a6d281c421b604027164b38fb0188f7",
+            "A/0015_knurl": "1869fdba5edbfe1d5cd68cc3338b1b96a5fa6e6c881869f242ce1cc61d77b5bb",
+            "A/0014_knurl": "12cfa9bcde4bacd15a58f327979b977edd75580feecb11f46fa8cd136f9493eb",
+            "A/0013_knurl": "233efd0a5596a56b1791573cd5a7735318b3720b7f217fd2c5ba5e3f8ffb8f18",
+            "A/0012_knurl": "be2cc8885d20007e6cb1345bd1154ff155cd13f946422d3489aed879fc5db9d6",
+            "A/0011_knurl": "c8f84597e0414e489c631fe6a4886a47fc5e4b0d43b8a07d8a2467e5473ec817",
+            "A/0010_knurl": "94b06fd22072caaa32d89bdc9027dd468b18dd94ca47f96efb3aee4e86fb6811",
+            "A/0009_knurl": "baea79d17d87305e735151d4bb1a0f634b06339bd3393eb39c270bd6e3090751",
+            "A/0008_knurl": "8c76092cc6f13442705b6ffb908f8e82720a82d439aea2eaefd01a5c5eda2a05",
+            "A/0007_knurl": "156961813f8368bf9ea7efa59a6739b765fda247e6220200a6679296d0dd63cf",
+            "A/0006_knurl": "cb87baced271ff77e66f5a9adf91c871ffcb51fe6f586261aa10dfc6f91948e7",
+            "A/0005_knurl": "9407cc7ef7cebcd370a2f77aeea9547b74b7d7895bbe33c6a0d5c4a36be8765a",
+            "A/0004_knurl": "f2b794081c2d8ae17f5121d189c51032d419d9ba5904b47790d497ac754a0b4c",
+            "A/0003_knurl": "0e29f8ba47f1d634b32b4c7aeeea5d07ceff49e3bef77a55775ad62845f8b70e",
+            "A/0002_knurl": "fe87e75e715fab7b25fec6b3b4ace30e997804b1bed1d1e95bab0da928e14653",
+            "A/0001_flange": "d39adef6fadafcd56e867ffe3201d15676ee907bf1bcd645176689200dd37600",
+            "A/0000_grip": "dbb2c139b7b458c9a7a92ac23c51481508f78c006da18afc9141056576efa467"
+          },
+          "allowed_added_nodes": [
+            "A/0031_mount_neck"
+          ]
+        },
+        "B": {
+          "nodes": {
+            "B/0030_index_mark": "e09f8b9c81a2c4666fff74958eac944e40d0f74df6aedfaa237a260e17d180e5",
+            "B/0029_knurl": "3de525e768b8251196568d6c4959c038139da62574501b425b00fc364e2498cf",
+            "B/0028_knurl": "c5c907d8bb29919603324f369737adf627949ab9775ba199828ea5d839a1a3c5",
+            "B/0027_knurl": "15aae6a377c4f3a5067e130e23c1e4ccdd34269d97853c4f0bea9328b3097a28",
+            "B/0026_knurl": "e4023da96ca00e52dfc99f494ca0b5f2cc5856de12cce0e6739547c8f2ddcc48",
+            "B/0025_knurl": "00cd9b2fba5537d3f76821e37b80673f0a39b050ebb52efe3408f0838ac46c89",
+            "B/0024_knurl": "ff6daa1dd2446410c7957223a61445609d2fa987697396778f768074c677ed0a",
+            "B/0023_knurl": "e3b22168386ac33845128c5f9069daf8ffd679613cad86b8114f5f6d6d392380",
+            "B/0022_knurl": "833156fd53610798b38d02b4b3ad3dcf6fe50c110703582acc6d8c69ae7c4e93",
+            "B/0021_knurl": "7c42516289a6b1c2ccea3e957ccb293d2ee43b28806193f622f4a5bf9685ac0d",
+            "B/0020_knurl": "b212800d1b60299b53a005deeb9a0c85ba2abfb96664c30939dd946f3ccf4fd5",
+            "B/0019_knurl": "b9fcec3e9b25e68c1f07fec0fda236dfac3e446cee065df13b0cefc42c08f2fe",
+            "B/0018_knurl": "676feffcd7d5ff611fa0374a3e238b9457b79008e94f3e03459713f1aed0f836",
+            "B/0017_knurl": "5a853b92b11a59911c02e23c4f8d695c6d6f1a2df1c3b2ed3463ff3ad09f914a",
+            "B/0016_knurl": "a37518be8bc594c529f6c39f8792281859cced4d56dc8bf38c4d14a331d2509c",
+            "B/0015_knurl": "7aa5323e964673ce281d84c51267a44ddcaf799c0d59f9468cba24a2b8722325",
+            "B/0014_knurl": "d6a0f0f96c2253671606e863062f08fb2f05df7a4b7f53262bd76dfabc03385b",
+            "B/0013_knurl": "4b96e119f299abe023c739f2473601d1c31bbae5c4137e5bba0fb34151ad51ab",
+            "B/0012_knurl": "9458061eaa436c1252d1b5027bfcb73f7497fff645d9153fc2396ed045b0fbf3",
+            "B/0011_knurl": "24261614d5c388d39f1031c4a43d613725c3bdea3490bec574bdc3b122d38658",
+            "B/0010_knurl": "a9464c14bf2b3c6e4cf40f8bbb8ebc60c9ad219c7841fa0e56a57f761cbd705c",
+            "B/0009_knurl": "5ec9937d6ec316105591cd80f6722772380697fdfca367d62dc5fff62bb84336",
+            "B/0008_knurl": "329eece62ed099236f76fd3f114faea4677ed5f2d7a6d28f683d59ed2d24b27f",
+            "B/0007_knurl": "7acbe8c0e0b05827c2cfc291f8f34702165ecf78aaa2a007357295601edd199e",
+            "B/0006_knurl": "7b793e9410bb67d85c0be6a36cda8e4f5ab9dfd65fcccec480cff29199331df5",
+            "B/0005_knurl": "c8dcec834b61f64334daeb7468e91a9f9816ce6b5a336e33283efde00b7538fe",
+            "B/0004_knurl": "14caae19806a78925ca3b3902496c6a5d26ea9f5410a0b598b04b66d79ff862f",
+            "B/0003_knurl": "488d5c3a0f8f6fab6b941fc0e16494bc08572d041240460eeb4b86c48867553c",
+            "B/0002_knurl": "27e37a691b1c7208e20ef1076151430cd7ea0c62ecce889888b6128ffb7ef590",
+            "B/0001_flange": "201c3777b3340d36cc3216e8c1dd6f4cf2cbfe86074143cb7205b330cae24327",
+            "B/0000_grip": "06fb7f6f468e6eeac273a52cd07ecfec84ed15bb8888579ee8aa5bb95cee9a4f"
+          },
+          "allowed_added_nodes": [
+            "B/0031_mount_neck"
+          ]
+        },
+        "C": {
+          "nodes": {
+            "C/0012_fastener": "894b9ae6322e85b6d0a69eda8327411100cc7dc5485f17e553db80504c3e5dcf",
+            "C/0011_fastener": "2e1d80c31c8fcf0b2f2b5b435eacbcb6339dc6f9ae12bb85a3b492613d3b5501",
+            "C/0010_fastener": "2c7bd15d813a15109087c142fb8223d02e79a6b54a18f13597a82e69b2a7b35f",
+            "C/0009_fastener": "6511cb7b6c60959519147d36481dbfe8f691950aa3d346a6a8d7784841c87995",
+            "C/label_8": "d1170e5d547f13821556c723dc2687dd7ff50bbc3dae3f3b438118ddb267ff62",
+            "C/0007_terminal": "1c1622758a1de976cf140270a288c427c532f563b55aba89f6538b7874c350b5",
+            "C/0006_terminal": "0d7dd0ab8f5cd132cc4212c0985d7bbd81d3d57bb67b8d08c8543f263e760bd8",
+            "C/0005_terminal": "104dc80a5339b75903cad39fce2ba3afa50dd33cbadc609984649b6347960dce",
+            "C/0004_terminal": "a72b01bb447e12b1b61c778a66ae53f7deb8c9bb097e812361917456227d1c23",
+            "C/0003_polarizing_key": "ec099e98c9b5084df57e0e394c37c195b680f5fc0ce35054523f406a42fbe42b",
+            "C/label_2": "7ba3b8823eece21c09799f4db26b7ecb358db1f37dec5e08ae58660b29562cd8",
+            "C/0001_front_panel": "b153dd301f02dd0571fe5308e6de2123570fe95a965168a15e6ce40b83582c9c",
+            "C/0000_housing": "71d523f7c47f188a6ad6f81458bfcd79e4a9193041cd39984f5ae008f7536b89"
+          },
+          "allowed_added_nodes": []
+        }
+      }
+    },
+    "optical_bench": {
+      "scene_contract": {
+        "schema_version": "1.1",
+        "scene_id": "optical_bench",
+        "title": "\u5149\u5b66\u5143\u4ef6\u5b89\u88c5\u4e0e\u955c\u67b6\u68c0\u67e5",
+        "units": "m",
+        "axes": "right_handed_z_up",
+        "objects": [
+          {
+            "object_id": "L1",
+            "label": "\u5f85\u88c5\u955c\u67b6 L1",
+            "asset": "scenes/optical_bench/meshes/L1.glb",
+            "pose": {
+              "position_m": [
+                0.22,
+                -0.12,
+                0.13
+              ],
+              "wxyz": [
+                0.984808,
+                0.0,
+                0.0,
+                0.173648
+              ]
+            },
+            "color": [
+              53,
+              80,
+              95
+            ],
+            "capabilities": [
+              "point",
+              "insert"
+            ],
+            "anchors": {},
+            "description": "\u955c\u67b6\u4e0b\u65b9\u7684\u5706\u67f1\u63d2\u5165\u5957\u7b52\uff0c\u900f\u955c\u8868\u9762\u5177\u6709\u5f27\u5ea6\u3002",
+            "frames": {},
+            "interaction": {
+              "rotation_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "pivot_local_m": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "mating_pose": {
+                "position_m": [
+                  0.0,
+                  0.0,
+                  -0.065
+                ],
+                "wxyz": [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "departure_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "departure_distance_m": 0.08,
+              "approach_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "approach_distance_m": 0.1,
+              "transit_height_m": 0.1,
+              "inspect_point_local_m": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "inspect_normal_local": [
+                0.0,
+                1.0,
+                0.0
+              ],
+              "inspect_extent_m": null,
+              "inspect_cue_clearance_m": 0.002,
+              "detail_direction_local": null,
+              "cue_offset_local_m": [
+                0.0,
+                0.0,
+                0.04
+              ],
+              "duration_s": 3.0
+            },
+            "recipe": "lens",
+            "size_m": [
+              0.1,
+              0.05,
+              0.13
+            ]
+          },
+          {
+            "object_id": "POST2",
+            "label": "\u4e8c\u53f7\u652f\u67f1\u5957\u7b52",
+            "asset": "scenes/optical_bench/meshes/POST2.glb",
+            "pose": {
+              "position_m": [
+                0.0,
+                0.1,
+                0.085
+              ],
+              "wxyz": [
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "color": [
+              123,
+              133,
+              143
+            ],
+            "capabilities": [
+              "point"
+            ],
+            "anchors": {
+              "insertion": [
+                0.0,
+                0.0,
+                0.018
+              ]
+            },
+            "description": "\u4e2d\u7a7a\u5957\u7b52\u627f\u63a5\u955c\u67b6\u652f\u67f1\uff0c\u4fa7\u9762\u9501\u7d27\u87ba\u9489\u53ef\u89c1\u3002",
+            "frames": {},
+            "interaction": {
+              "rotation_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "pivot_local_m": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "mating_pose": {
+                "position_m": [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                "wxyz": [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "departure_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "departure_distance_m": 0.08,
+              "approach_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "approach_distance_m": 0.12,
+              "transit_height_m": 0.15,
+              "inspect_point_local_m": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "inspect_normal_local": [
+                0.0,
+                1.0,
+                0.0
+              ],
+              "inspect_extent_m": null,
+              "inspect_cue_clearance_m": 0.002,
+              "detail_direction_local": null,
+              "cue_offset_local_m": [
+                0.0,
+                0.0,
+                0.04
+              ],
+              "duration_s": 3.0
+            },
+            "recipe": "post",
+            "size_m": [
+              0.09,
+              0.08,
+              0.11
+            ]
+          },
+          {
+            "object_id": "L2",
+            "label": "\u56fa\u5b9a\u955c\u67b6 L2",
+            "asset": "scenes/optical_bench/meshes/L2.glb",
+            "pose": {
+              "position_m": [
+                0.0,
+                0.34,
+                0.168
+              ],
+              "wxyz": [
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "color": [
+              160,
+              175,
+              190
+            ],
+            "capabilities": [
+              "point"
+            ],
+            "anchors": {},
+            "description": "\u5df2\u5b89\u88c5\u7684\u540c\u578b\u955c\u67b6\uff0c\u4f9b\u5bf9\u8c61\u6307\u4ee3\u533a\u5206\u3002",
+            "frames": {},
+            "interaction": {
+              "rotation_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "pivot_local_m": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "mating_pose": {
+                "position_m": [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                "wxyz": [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "departure_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "departure_distance_m": 0.08,
+              "approach_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "approach_distance_m": 0.12,
+              "transit_height_m": 0.15,
+              "inspect_point_local_m": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "inspect_normal_local": [
+                0.0,
+                1.0,
+                0.0
+              ],
+              "inspect_extent_m": null,
+              "inspect_cue_clearance_m": 0.002,
+              "detail_direction_local": null,
+              "cue_offset_local_m": [
+                0.0,
+                0.0,
+                0.04
+              ],
+              "duration_s": 3.0
+            },
+            "recipe": "lens",
+            "size_m": [
+              0.1,
+              0.05,
+              0.13
+            ]
+          },
+          {
+            "object_id": "M",
+            "label": "\u5e26\u523b\u5ea6\u955c\u67b6 M",
+            "asset": "scenes/optical_bench/meshes/M.glb",
+            "pose": {
+              "position_m": [
+                0.0,
+                0.61,
+                0.168
+              ],
+              "wxyz": [
+                0.92388,
+                0.0,
+                0.0,
+                0.382683
+              ]
+            },
+            "color": [
+              70,
+              87,
+              105
+            ],
+            "capabilities": [
+              "point",
+              "rotate",
+              "inspect_back"
+            ],
+            "anchors": {},
+            "description": "\u7ad6\u76f4\u8f74\u65cb\u8f6c\u53f0\uff0c\u80cc\u9762 +Y \u5177\u6709\u955c\u67b6\u7f16\u53f7\u4e0e\u8c03\u8282\u87ba\u9489\u3002",
+            "frames": {},
+            "interaction": {
+              "rotation_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "pivot_local_m": [
+                0.0,
+                0.0,
+                -0.065
+              ],
+              "mating_pose": {
+                "position_m": [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                "wxyz": [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "departure_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "departure_distance_m": 0.08,
+              "approach_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "approach_distance_m": 0.12,
+              "transit_height_m": 0.15,
+              "inspect_point_local_m": [
+                0.0,
+                0.034,
+                0.015
+              ],
+              "inspect_normal_local": [
+                0.0,
+                1.0,
+                0.0
+              ],
+              "inspect_extent_m": null,
+              "inspect_cue_clearance_m": 0.002,
+              "detail_direction_local": null,
+              "cue_offset_local_m": [
+                0.0,
+                0.0,
+                0.04
+              ],
+              "duration_s": 3.0
+            },
+            "recipe": "mirror",
+            "size_m": [
+              0.12,
+              0.065,
+              0.13
+            ]
+          },
+          {
+            "object_id": "TARGET",
+            "label": "\u5341\u5b57\u9776\u5c4f",
+            "asset": "scenes/optical_bench/meshes/TARGET.glb",
+            "pose": {
+              "position_m": [
+                -0.31,
+                0.88,
+                0.17
+              ],
+              "wxyz": [
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "color": [
+              160,
+              175,
+              190
+            ],
+            "capabilities": [
+              "point",
+              "wait"
+            ],
+            "anchors": {},
+            "description": "\u63d0\u4f9b\u51e0\u4f55\u4f4d\u7f6e\u4e0e\u523b\u5ea6\u53c2\u8003\uff0c\u8bad\u7ec3\u65f6\u5149\u6e90\u5173\u95ed\u3002",
+            "frames": {},
+            "interaction": {
+              "rotation_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "pivot_local_m": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "mating_pose": {
+                "position_m": [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                "wxyz": [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "departure_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "departure_distance_m": 0.08,
+              "approach_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "approach_distance_m": 0.12,
+              "transit_height_m": 0.15,
+              "inspect_point_local_m": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "inspect_normal_local": [
+                0.0,
+                1.0,
+                0.0
+              ],
+              "inspect_extent_m": null,
+              "inspect_cue_clearance_m": 0.002,
+              "detail_direction_local": null,
+              "cue_offset_local_m": [
+                0.0,
+                0.0,
+                0.04
+              ],
+              "duration_s": 3.0
+            },
+            "recipe": "target_screen",
+            "size_m": [
+              0.18,
+              0.03,
+              0.2
+            ]
+          }
+        ],
+        "initial_instruction": "\u628a\u955c\u67b6 L1 \u88c5\u5165 POST2\uff0c\u5c06\u65cb\u8f6c\u53f0 M \u987a\u65f6\u9488\u8f6c 15 \u5ea6\uff0c\u968f\u540e\u68c0\u67e5 M \u80cc\u9762\u7684\u7f16\u53f7\uff0c\u4fdd\u7559 TARGET \u63d0\u793a\u3002",
+        "camera_position_m": [
+          1.1,
+          -1.55,
+          1.0
+        ],
+        "camera_look_at_m": [
+          0.0,
+          0.37,
+          0.15
+        ],
+        "asset_axes": "gltf_y_up",
+        "environment": [
+          {
+            "prop_id": "workstation",
+            "label": "",
+            "asset": "scenes/optical_bench/meshes/env/workstation.glb",
+            "pose": {
+              "position_m": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "wxyz": [
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "scale_m": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          }
+        ],
+        "render_hints": {
+          "ortho_scale_m": 0.91,
+          "grid_extent_m": 1.0,
+          "cue_scale": 1.0,
+          "label_offset_m": 0.12,
+          "fit_camera": true,
+          "fill_lights": [],
+          "fov_y_deg": 42.0,
+          "viewport_margin": 0.14,
+          "background_rgb": [
+            233,
+            238,
+            242
+          ],
+          "workspace_bounds_m": [
+            [
+              -0.53,
+              -0.4,
+              0.025
+            ],
+            [
+              0.53,
+              1.13,
+              0.32
+            ]
+          ]
+        },
+        "task_contract": {
+          "setting": "\u5173\u95ed\u5149\u6e90\u7684\u5149\u5b66\u5143\u4ef6\u88c5\u914d\u6559\u5b66\u53f0\uff0c\u68c0\u67e5\u51e0\u4f55\u5b89\u88c5\u548c\u955c\u67b6\u523b\u5ea6\u3002",
+          "ordered_steps": [
+            {
+              "target_id": "L1",
+              "action": "insert",
+              "reference_id": "POST2",
+              "angle_deg": null,
+              "depth_requirement": "precise"
+            },
+            {
+              "target_id": "M",
+              "action": "rotate",
+              "reference_id": null,
+              "angle_deg": -15.0,
+              "depth_requirement": "precise"
+            },
+            {
+              "target_id": "M",
+              "action": "inspect_back",
+              "reference_id": null,
+              "angle_deg": null,
+              "depth_requirement": "persistent"
+            }
+          ],
+          "persistent_targets": [
+            "TARGET"
+          ],
+          "interrupt_target": "M",
+          "interrupt_instruction": "\u5148\u770b\u770b M \u80cc\u9762\u7684\u7f16\u53f7\uff0c\u4fdd\u5b58\u5f53\u524d\u7684\u5b89\u88c5\u4e0e\u89d2\u5ea6\u8bbe\u7f6e\u3002"
+        }
+      },
+      "changed_environment_nodes": [
+        "optical_bench_environment/0587_fixed_post",
+        "optical_bench_environment/0589_fixed_post"
+      ],
+      "baseline_environment_sha256": "12697a6688bf4832a69d9be4bd89729afa4fdf9fba79aa776a74992d1634a375",
+      "environment_fingerprints": {
+        "optical_bench_environment/0597_table_ground_foot": "cd3a932237cad460368c8ccd976b4b1a96c0227b0241152f31aaa9ff0fdbb260",
+        "optical_bench_environment/0596_table_ground_foot": "31db1236ddf8981c86b39e3fadd7a3c22ca00015c54979d8762f0febf9b484ef",
+        "optical_bench_environment/0595_table_ground_foot": "e5e534de965c7cd17465c66f020c367a3182ba7baf144859ee49dcd05e603fb5",
+        "optical_bench_environment/0594_table_ground_foot": "fd86c555d70bf21776fa95eaf23a12347a53010f2abad05a3e8b20a6ffe89f9e",
+        "optical_bench_environment/label_593": "3a486a36ae705d789a2c9b0261fb6933d23299dfbafa680e65ac4a7fbe1a4eef",
+        "optical_bench_environment/0592_screen_post": "350c7dd9e73fd45335280f24ac4f9ae6c070df6d61bec256967edc2c8a167840",
+        "optical_bench_environment/0591_optic_tray": "978781c577076d3c1c400c5b44fd45474fa5bb20095fac2a35adec21b021ad62",
+        "optical_bench_environment/0590_post_base": "9dc11a9c11f54edb2822b132440f43983262b2b2eddc3efd8a4e539a8277cffd",
+        "optical_bench_environment/0589_fixed_post": "f01d644cd2721b338c5d20505d636adb60ee174be7cc8e1794641d64f2a92b00",
+        "optical_bench_environment/0588_post_base": "a949b4fa6a1333d3ecf1422a337bdf14c1656bf66142713e64664781b50a3ee1",
+        "optical_bench_environment/0587_fixed_post": "c537cd448ef3ca2067e8c33cecdf4f96822903db6255feb0f80438bf5839fff0",
+        "optical_bench_environment/0586_threaded_hole": "15ba65663ea6fba9d6a32bbb7f31173ec15edfe9690ecd979ddf920d2d1b5855",
+        "optical_bench_environment/0585_threaded_hole": "2db296635bc676fb0a129b12baa9ce0603a2e25d7c41fe2da329bb9a33c7f13c",
+        "optical_bench_environment/0584_threaded_hole": "959bbf81531c86df8d4c9ba947603c50c4259949288af1b3859b14d0dfe8fb0f",
+        "optical_bench_environment/0583_threaded_hole": "1f9af1552352e310567b10d3d4cf4d3ae79d4f6446393391187d371e3156a2ca",
+        "optical_bench_environment/0582_threaded_hole": "23b8605b85fc9a17ed35435687b3aebb08bd36dce9ac9632d13473a1d320b037",
+        "optical_bench_environment/0581_threaded_hole": "f199ec1ceb8de249d3ee0d2017fa2c734401c164b33351fa96101d8e7a3262e6",
+        "optical_bench_environment/0580_threaded_hole": "6dd45d0c3067bea40faeec6867042602f4fccc6451aa95586e006ca5a013872a",
+        "optical_bench_environment/0579_threaded_hole": "223647491e6f67a1cda91b99004a12152a06248875de4e65aba2c06ec33d9065",
+        "optical_bench_environment/0578_threaded_hole": "4bb171a15dea0ab53b0ecf8aab35b28a623e31c48a128c1987080dfbcf0bd3ae",
+        "optical_bench_environment/0577_threaded_hole": "3ec9dfdc9cc62b70f7dc0353069525c2346e7b319ffb1b822f2f4691a4fbbcf5",
+        "optical_bench_environment/0576_threaded_hole": "0096c9aa85cdcd434a0e3a1afac4c939d32f84afd2a9a4899c476c61d1017345",
+        "optical_bench_environment/0575_threaded_hole": "2281a822387e1f10df31e419dc3c21c19f6000df3fdf186dda4d74daa453e6bc",
+        "optical_bench_environment/0574_threaded_hole": "9fa0f69bb90cde355c469cd253d15574b47e1c9955e00bf5c59e0ba6ea831026",
+        "optical_bench_environment/0573_threaded_hole": "d90545985de5c77d693d135c43dc6b71e7951e313a8a6b972383f9a0cd7fd44b",
+        "optical_bench_environment/0572_threaded_hole": "92304c8baf03a52e0b9d1edaa817869ca3e4c6d1672f60ed362b1cc0fe40ec5a",
+        "optical_bench_environment/0571_threaded_hole": "40cfb6a1db684310572a578390ccf047734f766662903d746b7fa7a20c4d15ec",
+        "optical_bench_environment/0570_threaded_hole": "d3b0846a62abcc45396924f802ac0a90dc857a8057b533e5c5a6e06688b1bd1f",
+        "optical_bench_environment/0569_threaded_hole": "ba80464f2c373251de79b338a46db3359b6bd47f7348e9a4fae4cd12a5761477",
+        "optical_bench_environment/0568_threaded_hole": "faf05c117df733122d0991df3bc317e60cce6b3c7ccd1368ec2b243239559497",
+        "optical_bench_environment/0567_threaded_hole": "c838b1e4ffbaaece16a9abfbaaf63b70df5e0022bca69cab194caf07edcefd71",
+        "optical_bench_environment/0566_threaded_hole": "ff404d6ee22dd9be8be4ac0244f595b3b110e4f652ae488182673f0ddb333f0b",
+        "optical_bench_environment/0565_threaded_hole": "065688fb663ec2e102aa9dbf03e8436bbfa65100fa85526f56d6250ade558807",
+        "optical_bench_environment/0564_threaded_hole": "7582fa1ca1d291d43b849b38460e4f3c342928907a94cee936a33890bc101937",
+        "optical_bench_environment/0563_threaded_hole": "cdcfe11d7551995400524c71cae9861d747dc31f4a829679752ae33e33ffebe1",
+        "optical_bench_environment/0562_threaded_hole": "70ab4f902b65e40c4586cae6b8cbe6109bef550e288f0dba30ba76b639ca111e",
+        "optical_bench_environment/0561_threaded_hole": "d8af5d1a94cc0e6c0b8d960756922361b68a85758cc2b1b49395fbf8b5e608fa",
+        "optical_bench_environment/0560_threaded_hole": "0b95be89e2876e4ea497185171fd099ac6c420ab2bb0a9eaf615ed9fbafd2d5f",
+        "optical_bench_environment/0559_threaded_hole": "d3227b2903885733c13518c547564c70559deb7ef4e17864b5f0050f0a4b73cc",
+        "optical_bench_environment/0558_threaded_hole": "154b0448ef75d8cffe7ba3f8252db8294254608a60beac8c7e3991a61e20de04",
+        "optical_bench_environment/0557_threaded_hole": "9df6d4fcde3da02cb39a831bca00078024d4dfc1d6ba49b3d319c116679a7b71",
+        "optical_bench_environment/0556_threaded_hole": "5ecca7966a88dbce00f0c37b094c40b934b12bcf3bc0ccf53c91d24adfad68a6",
+        "optical_bench_environment/0555_threaded_hole": "edb4617fc7a8629ec9f006ee99716f8dd7711accedd5ab1a5e2a4d484d02e7fa",
+        "optical_bench_environment/0554_threaded_hole": "397baf9b092aa98a7f70fdd92d48ae10a5270726c44a082f5f7e8d117105721f",
+        "optical_bench_environment/0553_threaded_hole": "0685ae5a024912501262d0918f331170f79b2b9a5528e62a3be417d781ee3417",
+        "optical_bench_environment/0552_threaded_hole": "57e1b3d00911abd7ef5b1cb6da9f54590a2563f79824bf181b2ed3d121ce2449",
+        "optical_bench_environment/0551_threaded_hole": "e64a0f40004af9a8dda85a1459915bd3d21c6d65b2353db6060acdc3c2d23318",
+        "optical_bench_environment/0550_threaded_hole": "ff9b5fb4836088a242b56f08d053287dcd21feeb03aad5461bf9637ab41ded0e",
+        "optical_bench_environment/0549_threaded_hole": "8f68bc4e93d7977448e2005bf5c82ca5ad42a5b7f9d52830621a2711723baf6b",
+        "optical_bench_environment/0548_threaded_hole": "7cd71f3fbacdda3cd8b5fb30f39421af47e4bef28b795385cd7c1efa31014996",
+        "optical_bench_environment/0547_threaded_hole": "abcb32ad47f7a1b27a0436fb4ee68ad0a1cdca2f25ebef3978b9b5d7212e9532",
+        "optical_bench_environment/0546_threaded_hole": "c55ba98d5861f9efa6b348c1544b31f2e140c1f84d4f559a7cfce3338dcc38da",
+        "optical_bench_environment/0545_threaded_hole": "304bd658eb72b80313510b44a7a1914a8cbaaf51aa572d00f4b8e4a19380682e",
+        "optical_bench_environment/0544_threaded_hole": "7bbd8e123ed5efb913acdb7a726359e2ec99c3b8e35fddeef26dff0138f0e91b",
+        "optical_bench_environment/0543_threaded_hole": "b553dd7143820d85b40501403c9a7cfd270c687636b1350499c0888160c5fa33",
+        "optical_bench_environment/0542_threaded_hole": "b01927d2e9255fa6b4aa24a02bf5d719dad56bb2e9148f0f97b3c256363d2672",
+        "optical_bench_environment/0541_threaded_hole": "1452df89a25e6664af8317679afc0f0d9992e451f7fa019d421c44d43eff7d8d",
+        "optical_bench_environment/0540_threaded_hole": "fc975a4d5fc930d04ea164d776c0740e4faaaaf0cf3fb94a641270b1f610e617",
+        "optical_bench_environment/0539_threaded_hole": "cba3c262c402943052a19f20acddda9d9389a72d3be47076d40ec1839ef8830e",
+        "optical_bench_environment/0538_threaded_hole": "e9c2c47d319e372ecf7f9c975e83f2ac562c4b95be70eb4fdd87f90dbccc607e",
+        "optical_bench_environment/0537_threaded_hole": "424b77cf83f00866091acc4c6237ab696f3698e5e90fc43ad5f09636ec7e4a76",
+        "optical_bench_environment/0536_threaded_hole": "3c4142de68b0aa46ae583667c9a2799a301dcbd49e7a71af8b3eb6b9539aef70",
+        "optical_bench_environment/0535_threaded_hole": "a962e681e2be1798931b922928b49f431814183cdb81f63b69cc331ba432f66d",
+        "optical_bench_environment/0534_threaded_hole": "ed355eb571494cd40f95f87a81d7f3a9579e8ef84b74fa076ae5bdc911fdcde4",
+        "optical_bench_environment/0533_threaded_hole": "225c6a6be457ad0c53911deeb03fccee8a491281041f0804fce5493097d513b2",
+        "optical_bench_environment/0532_threaded_hole": "4d23582c629b900f676b05ae84b92ef5bd02cbd1759296bf9b94381aa9099949",
+        "optical_bench_environment/0531_threaded_hole": "afdae97ec63eadeacf7d43f4502392651fafd5ad7aade96d20c8895c6dc9883a",
+        "optical_bench_environment/0530_threaded_hole": "de01ae393ab502b8181afa25dfcd670776604973fcb1f4764440e789535014d1",
+        "optical_bench_environment/0529_threaded_hole": "34d4c9d84a39871f8d3ee5d5f46943949b850e1c4f72e704f3b99a010d8b27eb",
+        "optical_bench_environment/0528_threaded_hole": "d7121b91c22263e4ce1231ee7381fbc7e6ad8077d071ed4c0835e40763648afe",
+        "optical_bench_environment/0527_threaded_hole": "a15a6ffabdd16d2acf9dac7ef4dfada300c501d486e3d91f8601df73572e3a5c",
+        "optical_bench_environment/0526_threaded_hole": "ec6873cf0b4a4f550701e772e2156be7d60ef4a556a17a9a8cba41c44f0c9e0a",
+        "optical_bench_environment/0525_threaded_hole": "57d1aa749b891f413b725a9ee1afeee00048dba9355aa2e494a92029a11c7dbd",
+        "optical_bench_environment/0524_threaded_hole": "ae8dc1e9671833dc8e6ae50621f6e153d579239381d8c96baafb6c1a6784e826",
+        "optical_bench_environment/0523_threaded_hole": "65c5fc9b7234449c54e50a8becf650b9f0e6926faed6cb11abaa06ed9896b299",
+        "optical_bench_environment/0522_threaded_hole": "ae1dc1f1c20ede832ced6b26fe3d7f83db1d6492db9e809860f34bee6bc35ad9",
+        "optical_bench_environment/0521_threaded_hole": "92f370dfda8f819f0e76ed47e3dc9107c071c628cbf306535f84b91b1262e2e1",
+        "optical_bench_environment/0520_threaded_hole": "75d04090965339347484015a3918b469d77746ec7d4d2c17119859fb78e8e589",
+        "optical_bench_environment/0519_threaded_hole": "37d0eef9cf1272e319e14954f3ad387d3b6568895332b64339354ba0b0a15a6f",
+        "optical_bench_environment/0518_threaded_hole": "41e38c90a08d186690c5418e1969ecd84b64e50ac4dcb94b6bd43d4ff0466c77",
+        "optical_bench_environment/0517_threaded_hole": "cd5d6aeedc3f9c16160a2abac024a24ec821cee574df5677aeb91eacd3a4aae9",
+        "optical_bench_environment/0516_threaded_hole": "a09d49606491a12d5fa61150c77810f49f51b60926f7b90d5ddf40a4c173bcbb",
+        "optical_bench_environment/0515_threaded_hole": "a7c3226a8d284886c95262ada968565a57359f29418b8dcc37c081f7411876dc",
+        "optical_bench_environment/0514_threaded_hole": "9b82901c05ee0eb99352662668d5ed7487b8d50405a720eae452f73a87edb0af",
+        "optical_bench_environment/0513_threaded_hole": "bfa69c34c9a0943d23e8b3f7c9c5afc36f20de5cf1e30ad28a492115a4d7e5ee",
+        "optical_bench_environment/0512_threaded_hole": "eb327b3ea8065d839e6b91b3b6af514278f023a25b602dac4d15f8208f08456a",
+        "optical_bench_environment/0511_threaded_hole": "f21a819abdf4cfa6825499b7d185043fc9768246cb0f56b684f9564195a1e66b",
+        "optical_bench_environment/0510_threaded_hole": "c262e448c047adfda1e664269949129fcf45a3c02be1f92aba772b188212d7f7",
+        "optical_bench_environment/0509_threaded_hole": "7984a14feb175edd74683aae3dc34c63520ec76b49fb1731c9495e39e1cd2fce",
+        "optical_bench_environment/0508_threaded_hole": "0ed0a0734f09c7bd844c5d122ea4237e300b167d3e44b275805825f8dc12016d",
+        "optical_bench_environment/0507_threaded_hole": "cfab861f97d4e3dc7e205d10a02b32f808314d4d0bc170ab4ad569f3a63e33ed",
+        "optical_bench_environment/0506_threaded_hole": "9e91098b6dfa65da5d227345d36f74eefb0b8163091b2160cad22acc034af1be",
+        "optical_bench_environment/0505_threaded_hole": "03dda983c856ecf3aa106e6b0f74627a8af84fd581e0598d0f497d6400773acd",
+        "optical_bench_environment/0504_threaded_hole": "6bed53072809ebd877e1ab80c74bfec21ac46acae54defcca7ca475a1d63e5f2",
+        "optical_bench_environment/0503_threaded_hole": "d89abb088f22827668a06555f11d42de0c73887a992e142137b274c86b9c2294",
+        "optical_bench_environment/0502_threaded_hole": "e0729629b10c55ccbba7eba58b13cc716afa970e3e19a366d75cacb63b4c9587",
+        "optical_bench_environment/0501_threaded_hole": "13ced9b450fb7618724d0dcb44c2696b21c469213d704e377c31a1ca0f123253",
+        "optical_bench_environment/0500_threaded_hole": "3e7b6a542d1215e8402d306e937795afd07485e415e1a91f9f04e8f93d679aab",
+        "optical_bench_environment/0499_threaded_hole": "7c22a99f4cba7ff9e52c6d386945641d3e26c5aef1b7bcd921f9fbc0204c764c",
+        "optical_bench_environment/0498_threaded_hole": "d9513d5d05653f1b4ac993bc15a31ab22c26c6055f60a6f527e52e6099e706e1",
+        "optical_bench_environment/0497_threaded_hole": "f9dd4c67039ef44bf52e74ae96c56543a326b9adbe7308426b17faf051dce33b",
+        "optical_bench_environment/0496_threaded_hole": "e7c336048299aba927559568fde26afed84c1b5344ccf9acb6fb5a064e18dfb2",
+        "optical_bench_environment/0495_threaded_hole": "990664e68ddb45870e645fc40eee021913fb18298094a95766c81551c7703018",
+        "optical_bench_environment/0494_threaded_hole": "bb6feeec538d8c789cfef83907c89180637173cef7baba278bb6658c220e44d0",
+        "optical_bench_environment/0493_threaded_hole": "0b86d91ec83dba6ef9b6730019c0e38056212b567cccb3064cb138443868ad68",
+        "optical_bench_environment/0492_threaded_hole": "e06e58f5758631fa7cb7ed574fd63ce45b90d10a245ff4cd646239791d1f67cb",
+        "optical_bench_environment/0491_threaded_hole": "e8843d2f8dadb7d1a3e2a2ba3117048e5ffad0c6f42229c82611957a6e50480b",
+        "optical_bench_environment/0490_threaded_hole": "57e4a57cf3cc5a157d5d13e6354094c57501ec0df404dc643c52930e74a1c229",
+        "optical_bench_environment/0489_threaded_hole": "d0ad5e7ee2aa5686e57c3e2171a2025ca005ae4987d2b3cfbb5b65a6f4a29d7c",
+        "optical_bench_environment/0488_threaded_hole": "ac5d6aac8d40dfb96f9851705e3890a55440a3adff682746f42c536d90b4c513",
+        "optical_bench_environment/0487_threaded_hole": "568dd84b984218e9a56ce2756753cf8bbb50d364be7c50bfdab6f0d355074a2d",
+        "optical_bench_environment/0486_threaded_hole": "6252f551ea235cd0506c6ad75f3240092036be28d59affda2b3342762fcf183b",
+        "optical_bench_environment/0485_threaded_hole": "6d8cc5d91512d3fd5c4c7722066e7658643ce554f9f3a8d9e63e85fc97436c66",
+        "optical_bench_environment/0484_threaded_hole": "c1803db7352eb5090bf76925769e9b1efc2436651d6523b508d6fd5e4054167c",
+        "optical_bench_environment/0483_threaded_hole": "a614d82f1abfb3b07b0b29ee025cbc17420184af080430474bf7f902cce90bdd",
+        "optical_bench_environment/0482_threaded_hole": "75e98b6540dc601b43e120cf9252309651245db9a95573dd37375220b19a2c67",
+        "optical_bench_environment/0481_threaded_hole": "4e9d8071ecdcdac299cb0b53abad362f1b48f4340f38f7834093780c25faa9ac",
+        "optical_bench_environment/0480_threaded_hole": "ae87110f38700cc90d2c5e8e7cbc5178cdded5e1389d1fe1f48b28b7ace34e06",
+        "optical_bench_environment/0479_threaded_hole": "e032e05661bb93fb2dc04c6bef4b7580317e36c835db52e45440a1fb6c065f22",
+        "optical_bench_environment/0478_threaded_hole": "a77354c98b4859254603889f8f43779bee21a23dd495a7e433aa4f89fa7a334e",
+        "optical_bench_environment/0477_threaded_hole": "704eb4e063c7bf328473de2a51758bccfd396179314e62fb3e49120a014939c6",
+        "optical_bench_environment/0476_threaded_hole": "f5612266f96a62f65e203cb70e544419eb1cf6f643fb5fffe2da1cef79993e1b",
+        "optical_bench_environment/0475_threaded_hole": "69cd7f66b201b4a2a3d43dcf27a8acd702b57ba34def8c688d771ce1e1bc6af5",
+        "optical_bench_environment/0474_threaded_hole": "e9d28e4ad3cf5883e9724ce8c07e9c4dde82d50fd66b789165e4577e47eddf89",
+        "optical_bench_environment/0473_threaded_hole": "6efcbf7ea25e720db2c6a0bb736ece36353602bc330c3c3c34579995e42927bd",
+        "optical_bench_environment/0472_threaded_hole": "bb7de7f0f97b9f406c063ed3cc630213a4bd72bda3dd6574875118318676eb9b",
+        "optical_bench_environment/0471_threaded_hole": "810419ea47c376304054f40df91920c61bfb543edca8098b6718ae05b41d3032",
+        "optical_bench_environment/0470_threaded_hole": "cd78e5b9452a6ce70fe853f88d98b09d1bd9f0cc7c96165a663ffb43b82ffd90",
+        "optical_bench_environment/0469_threaded_hole": "977a6fa936393809792b9ee90ef39b26ac72a41fbf5a43a5d1ccbbd8e6069eb6",
+        "optical_bench_environment/0468_threaded_hole": "ea333df43ff6885bba91974cea7273a15bf6bc6ef1395c6d8e82341a51a68a75",
+        "optical_bench_environment/0467_threaded_hole": "473aaeef5ed56fc15be2419bf74438f18383edc2e1b1a829fe99fe1f58f5079f",
+        "optical_bench_environment/0466_threaded_hole": "bed6000c5e15bc7f6602e435f341c52ca2a825a2b786a29c9931aa7479cca608",
+        "optical_bench_environment/0465_threaded_hole": "03b340d01a8c53b8024d9eb920c639503b86b946132f3c603cb24cfc2904fa55",
+        "optical_bench_environment/0464_threaded_hole": "7f7d5d8a0a65f5b1b1688a6663a8ba53154fcad457279878cfffd956518a16c2",
+        "optical_bench_environment/0463_threaded_hole": "e4cb9ee821f2e2849c4a125ac6baaf9a99093822e6f1432929b8e5edaeee7a0f",
+        "optical_bench_environment/0462_threaded_hole": "113171a5fc06a26f6ade8be98ec73416dacff15b36d23981a45f672b4e038429",
+        "optical_bench_environment/0461_threaded_hole": "ed159b074d2e836a9810837432f33d5e2b05cabba249aa2f1c73d6c1cf2ed00e",
+        "optical_bench_environment/0460_threaded_hole": "4297fba7662c3cf4ec83f2a3efcb76d6b9ee3808fb1c8adb0145e98d1e1dbbb0",
+        "optical_bench_environment/0459_threaded_hole": "5be752f4f30322af64d37780205c4b58dfd66ae361976497a920745b4fb14f31",
+        "optical_bench_environment/0458_threaded_hole": "a3345debc9231a93a7e551f9f08946112bd566f4659af0eae033a8f722277b5b",
+        "optical_bench_environment/0457_threaded_hole": "bf8d8b67d15623aa1b8e142c77fefdf55128de987a8f1ad3289b165681914147",
+        "optical_bench_environment/0456_threaded_hole": "98a0fc8c6ea71654e16703f3430a33393fdbc5c8411ce30f4373919894d978b3",
+        "optical_bench_environment/0455_threaded_hole": "b163eeee44eeb9421c56eea8a28c0e335d272acdc3d2a01ba6ad0c9185531def",
+        "optical_bench_environment/0454_threaded_hole": "26fa1ba4de570ff6e151827d47335019163e6a3a51c17e6f703814b75e970dfb",
+        "optical_bench_environment/0453_threaded_hole": "c77f64cf348120ac25a976f937f80263346d681a08b3f88184f16fed847bd9da",
+        "optical_bench_environment/0452_threaded_hole": "bd4dbe5501599c7adde4d1365d7dbb9f5eb0b880c6b8f8b539d30755c6a2b7d0",
+        "optical_bench_environment/0451_threaded_hole": "451028c61aab7662345e0b7d60d6c9f32df4b161d4bd73c1b0eecc29cce2ea1c",
+        "optical_bench_environment/0450_threaded_hole": "2400823fd8dd4986e0c6c33d999ecafbf26901f8b69298f76ad4d040e20337d9",
+        "optical_bench_environment/0449_threaded_hole": "55c2e025a861500c3ae5936165838a539f98d621fd510798c6db53791dbccc28",
+        "optical_bench_environment/0448_threaded_hole": "246651e948c8a325dce561ce289399a7e4740125d47454e710d5251ff26a888b",
+        "optical_bench_environment/0447_threaded_hole": "b209edd8dd3da7e5afb72c606cdcc5592978c624f13c56f276de81bfc6c29eac",
+        "optical_bench_environment/0446_threaded_hole": "413609925e1ace5e7346b8af8dfdb475575ac05001dbd1a1aae2bef954d5385f",
+        "optical_bench_environment/0445_threaded_hole": "c286093d53734215f658aea3fe98068609e7dde3368c27b96952425433645b87",
+        "optical_bench_environment/0444_threaded_hole": "327af9017ff8914e8fbc171b2852e59721757cc3b9d87a37137f00ee3eaed8f4",
+        "optical_bench_environment/0443_threaded_hole": "6b469ec3b9b167f2ff0d9b7648ea57babd1cfd8554c4ff8e743ee85e9e35760d",
+        "optical_bench_environment/0442_threaded_hole": "c15b8496f57cf10ca6dd1da812bdae7ac3d7c597dda09cc712739b0a298d3b29",
+        "optical_bench_environment/0441_threaded_hole": "63a9d679c941680b956a85617bfeda2cce13d8313456571477e96345ed434761",
+        "optical_bench_environment/0440_threaded_hole": "25f7cc0c39d74c3ee1e0adf9b4805522aa2f51f56cc962b2fa6db2380c2ce303",
+        "optical_bench_environment/0439_threaded_hole": "3b8c8219b27d0502f2aab86471414adcea82fa75f48224cdcd1df848f647ceed",
+        "optical_bench_environment/0438_threaded_hole": "8830e84ad07786fd2b7d43d94ce767a88d68178ed8a5a2b0332378c65519a646",
+        "optical_bench_environment/0437_threaded_hole": "cbd0bb69fe229e96cd6750c0a76836c622268f00f08b5ca5333c6ab02c14baf6",
+        "optical_bench_environment/0436_threaded_hole": "ebfb598bf0889b9f7df80bf431bd6589e6591b7348cb4da0e5e4fd1385dbb279",
+        "optical_bench_environment/0435_threaded_hole": "8ff966b8a267eb51b00e2d99b2283e33f1781230d07ed2ebab4c64b9c71b8284",
+        "optical_bench_environment/0434_threaded_hole": "8f20646ae05d2bd1f0f7a546789a753a1c2f1ccda2114199492619aa1e098027",
+        "optical_bench_environment/0433_threaded_hole": "01dbfc22119520b75ff0a1b2247adee214d28541d6722d4816239faedc011cb8",
+        "optical_bench_environment/0432_threaded_hole": "b11453993885299d985174bd7b7a85ae327010ac3b2bfeb58e40966374e2b7ad",
+        "optical_bench_environment/0431_threaded_hole": "7073121a2fd75e64739d077bb4280bec9204ae17795c62e6dbf2db1efd907ba0",
+        "optical_bench_environment/0430_threaded_hole": "94fad4c44b67599fbf73f637d347b20066347513480c5d660cd54802b13bf654",
+        "optical_bench_environment/0429_threaded_hole": "fcaf405603f30b6041116052d6ec7e2114cb30a7082fc0db9bf873bed4360dcb",
+        "optical_bench_environment/0428_threaded_hole": "23382f30b787c9714fddb79e14b1d01b09cc5017dd4267ef4ecb2f1b3afe815a",
+        "optical_bench_environment/0427_threaded_hole": "8364d3e756029eac4ee7cf5be6b76c7b1a6932637e8da1007931067ec947644d",
+        "optical_bench_environment/0426_threaded_hole": "002d726537e4991c95a96d0f6225dec2bac8fdc450488398e617cc3a40aa4e2d",
+        "optical_bench_environment/0425_threaded_hole": "f968b74cdaf831dfe1ef9e623d0f74583419562f1c2e53b5cf1bff93c6b6269a",
+        "optical_bench_environment/0424_threaded_hole": "bdfbe4ec585b25596ef4d606cfff048a82b18df7b6653d24619835b935556e38",
+        "optical_bench_environment/0423_threaded_hole": "1bfb3cf5af6b34513e70396093d8e381a95ee7517566fec9e0667254f937d836",
+        "optical_bench_environment/0422_threaded_hole": "c0ebd77267b98f7934a1ed23f6e3718a9832cfff1175df187419c3c1f032066c",
+        "optical_bench_environment/0421_threaded_hole": "003825d03be57a46e6e83bd77c46ee478439127e74603afb6aa223b0afa5c4c2",
+        "optical_bench_environment/0420_threaded_hole": "894b8122289703bf5cfe3e7882b317369b8b0f90b4578f4bc3f52969dcc7ea61",
+        "optical_bench_environment/0419_threaded_hole": "9b2d65f11824a54698ca5cfab8312fbae74b57ab8500e8445746dc9c93172df2",
+        "optical_bench_environment/0418_threaded_hole": "54fd4f3843c0f0664b10c61d8606fefab7b461eb21762ef6f4ed4c9aa2eb472b",
+        "optical_bench_environment/0417_threaded_hole": "b0fd67736f59ee61d9c8dd31190ce8a2bcf964a2cf17e23085166e8ff178a4ca",
+        "optical_bench_environment/0416_threaded_hole": "2e5812322665f2c5d5f53bd224695e2c9a4a1d72d6dbaa1ed785aa3032b93ef6",
+        "optical_bench_environment/0415_threaded_hole": "c28846ca5d0a34908031a644a7feec47ad76c68f4927dc23e3d9682416d8359b",
+        "optical_bench_environment/0414_threaded_hole": "73eb40083dd45f5d32dc817dc7641c8ab806618d3ae30fd82c911a7d6f21d499",
+        "optical_bench_environment/0413_threaded_hole": "37d3e55ea400ecadb3392cbb0e4cd7cab74fcbe310082023f9eceab9455bf6e3",
+        "optical_bench_environment/0412_threaded_hole": "90962acbdc78c339f9d2b3475a4b771bf24d0d0b89cec14bc8838bc1e2065381",
+        "optical_bench_environment/0411_threaded_hole": "0f9d538c25592379df0c9695781e94de355fdccaa0f58c9bc1811939b54947c2",
+        "optical_bench_environment/0410_threaded_hole": "42655b981ea17134edd7a38a14948e01ed8d5a9ff6892af67df3f2a4899aa8ac",
+        "optical_bench_environment/0409_threaded_hole": "4195f78674e020cab5d26beba62d52d3aa22ee6a10f5c077c73f21178a68374b",
+        "optical_bench_environment/0408_threaded_hole": "98484bcfc88036e205a7eb2951b383f4a66d7d94a61985d88d56ebfc53e792b3",
+        "optical_bench_environment/0407_threaded_hole": "13bf27bc3ab1311554fcb82af15c6882fbbfe2a4548236e0c5ef08ef33a15c4e",
+        "optical_bench_environment/0406_threaded_hole": "c70df6323f18db27908654e74776570057ea7c951a756a90d7fb33282efae31d",
+        "optical_bench_environment/0405_threaded_hole": "503794af645da5b8249259ce7ab744f07b9cfc75d6bc9e349edd61fd718c8f08",
+        "optical_bench_environment/0404_threaded_hole": "b02244e380d41535e8eb087991c99dc953d7f1f885b1eb3d53426a7f87c5b96f",
+        "optical_bench_environment/0403_threaded_hole": "bb3fbef591b8e5c1e8cd908a34506e874a64d9c1df4bd926f7937ebaa247d877",
+        "optical_bench_environment/0402_threaded_hole": "663682466b4aecce7661da37d2c3109f3963311d67c4be1ced7a43df35d3af6d",
+        "optical_bench_environment/0401_threaded_hole": "48c7852a2cfa38a3b2f330cc7fc4a01e570cfadada3ecdeaa48dc61302a1fc61",
+        "optical_bench_environment/0400_threaded_hole": "7010c91a9159826af1552fe29da1f330340a5dbcc22971d2e2df13d4594172e0",
+        "optical_bench_environment/0399_threaded_hole": "31be6ebdb040d0f817e551f7fbe3d23276d98c97b1c22942fbc1f6ebe9b1aaac",
+        "optical_bench_environment/0398_threaded_hole": "346a5728e4cad1caa361050e01c0bdbd4892c00ce59d6690daad605aa4706f26",
+        "optical_bench_environment/0397_threaded_hole": "1a7e0f0ac36ed8eaa9aa89368727f018a33c7c7578146b0a912826cc314e5030",
+        "optical_bench_environment/0396_threaded_hole": "b8074328c2c03798b860ec62c52cce948b1cffe363c5063307d6f81c472f099c",
+        "optical_bench_environment/0395_threaded_hole": "cacd7a2aacd7a371adfe566317c768c4594ac11aa75c6703e64baa6d4f8a1315",
+        "optical_bench_environment/0394_threaded_hole": "a5944a502cad880ba0ad8068cec7509adc3d39c5adc50fc3e9aa433e50154c15",
+        "optical_bench_environment/0393_threaded_hole": "af098b25223d55aa90b8ca2f80726a840158c99c369ecd0d6d097d90ac9b3764",
+        "optical_bench_environment/0392_threaded_hole": "fe5ffcf9ed541220fc52895fec47cc1358a01aea6a6b46481747da339062cc32",
+        "optical_bench_environment/0391_threaded_hole": "920d62e6f438f74c5d87288e6f4a6cd9c1b51c004fd2374837912d7ca8508acd",
+        "optical_bench_environment/0390_threaded_hole": "f8e821692e3b48e08c1c36039d9fe03385d280cac6b29c3643c4310790e90e16",
+        "optical_bench_environment/0389_threaded_hole": "932f7e3e7311745a08b1d8d4221e6b57041458a5435d10b325e6d4dda95a22c0",
+        "optical_bench_environment/0388_threaded_hole": "16cdead992efc459cd85b69aa6de0396de098d7e2a886995c5537e2932192c6f",
+        "optical_bench_environment/0387_threaded_hole": "6ca3a725bd00f3211587bc5cc7638a6c9a84a204640c853ec400cae3619310dd",
+        "optical_bench_environment/0386_threaded_hole": "6288be404a0e5df6bcce36e925cd5ef3c8e960d385ef50f73b1af859aef959e5",
+        "optical_bench_environment/0385_threaded_hole": "0dc4754e8653cd6e583bc6ca8e82184ce0c2ed5ca435d067f2a949da8ecde4ea",
+        "optical_bench_environment/0384_threaded_hole": "3e9acc5a97b0a93f4e6d9da6a762881ae573fa2b6c365abd2ff63637fb4c1bc2",
+        "optical_bench_environment/0383_threaded_hole": "2083d06486c238983a8862195a781ce6d67ba683ad80bd2bdf66ecfd9c846550",
+        "optical_bench_environment/0382_threaded_hole": "8ac30936a759366562e5fc8a5fed21ca90fb2bc71b72db85162ed98897e413e9",
+        "optical_bench_environment/0381_threaded_hole": "441ab6b37a88619d2089cd751e55c4f55d8087689f34f9e90100bdd3419e0316",
+        "optical_bench_environment/0380_threaded_hole": "1bcea2e2129ddc45893a03feee66bd920a1549464a822c843a2d24673f615eee",
+        "optical_bench_environment/0379_threaded_hole": "3bafadf15cc064a7fad78939e2243c1407ffe95d6c05acfac5e7398cb20e3da0",
+        "optical_bench_environment/0378_threaded_hole": "0fc213c9825e073f1a22029aeffc357cec3ca96a13297706a66490982b5eda05",
+        "optical_bench_environment/0377_threaded_hole": "3dd028192c540a00cad66bc68969af9f1d66d0486fc1c04d45692765c834eaf7",
+        "optical_bench_environment/0376_threaded_hole": "31c6531537ad961d92b47590da73fc1e6f90f2e501a1582d5ab8ed4ba20aba2f",
+        "optical_bench_environment/0375_threaded_hole": "6713d7211723c1391b632e25b805a783dcb8f8f128913820ac84bf8bc2e04f33",
+        "optical_bench_environment/0374_threaded_hole": "da4020e8a5ef6bcec7f094ca90e433c6745941c3e6c7e64dc1ff749e1a9f5d00",
+        "optical_bench_environment/0373_threaded_hole": "ca358304ed99b507e01b7a0d85b81abed53e6817d65d896b4d06b11df58cf9a6",
+        "optical_bench_environment/0372_threaded_hole": "ba98f0b1f02e300df6c26ab9d7c556ebd4bfb8ad3b7b5e084bcef30a5a2a1be8",
+        "optical_bench_environment/0371_threaded_hole": "033707decb67ce74988a83c0d6a70ed256a6658c2658cbbf541a06bcb28eb980",
+        "optical_bench_environment/0370_threaded_hole": "a4b6a2e78379d7fc8883c248cfc1e68f26e21e9895717f90bcdcac463e2d4ae2",
+        "optical_bench_environment/0369_threaded_hole": "995837e6ff1f6c77978b3061b3a8ebc99fd41820588ccee1a797280911ce2d41",
+        "optical_bench_environment/0368_threaded_hole": "6c618031c8a3e754829d5cf2977189bfb44cbe40c93ee04ba8bd51201af8f7e6",
+        "optical_bench_environment/0367_threaded_hole": "6d566d73d01d506e2368a5fa0fd3da23bd601bc13872aede5d79ebc942381e3e",
+        "optical_bench_environment/0366_threaded_hole": "136adb6426566b9321d14c982d46c3147d0c61896fba00c5ea4fc8b7ec6793d5",
+        "optical_bench_environment/0365_threaded_hole": "225bfb07f6cb17501f0fb099d20adfe8da004c5c6e23d31907a9a860ae915aef",
+        "optical_bench_environment/0364_threaded_hole": "e0d303b0367eef0d97912c12fac12467a9181d050a9562b3dc1fc0ea709684ab",
+        "optical_bench_environment/0363_threaded_hole": "57598d2d11e3b47d8cbadf6bd468426603faeca38c4ca7ffb9a3e25ac7ef6c5b",
+        "optical_bench_environment/0362_threaded_hole": "63b3549333499dceec00b77d7aeb893bc07724dd03961098743f3d299a4776d4",
+        "optical_bench_environment/0361_threaded_hole": "3147a33ec0b69e3970b1b0b62af92836c815494c2f2a3d91c1476f2c1d7535de",
+        "optical_bench_environment/0360_threaded_hole": "2bd82762bfcd3dfe874454e0bc0abb4c5cbca2ccfebb08217fb87db9f1fc35cc",
+        "optical_bench_environment/0359_threaded_hole": "9f451beaf91d2a529593616306d64e3b97cab518097ecfd13c846b62812710af",
+        "optical_bench_environment/0358_threaded_hole": "6decc39fd7dae4aba8460a7eddbd51814eb204afaea76b770be2a5193c4be3b6",
+        "optical_bench_environment/0357_threaded_hole": "2721216c3746cdfd87106dd415112c97ad68f3e1ffab7e7af97a429bd8f52a97",
+        "optical_bench_environment/0356_threaded_hole": "a9d40eda098dd89f25fafb4776ad562439cc917146306f0471fa05547d53af7b",
+        "optical_bench_environment/0355_threaded_hole": "477bb773993059dd4c4c0c27a8a5208a81c6c11a10abae8f21738db4f2ad059f",
+        "optical_bench_environment/0354_threaded_hole": "760e94c2d42c47c3eb053747937f378e8c638002e81f48e488987d1c69db4188",
+        "optical_bench_environment/0353_threaded_hole": "fbb29c8101407c10cce4709737d5457773017778c0bfb6dde94e13c7bffee2fc",
+        "optical_bench_environment/0352_threaded_hole": "671521feec7998afdedd14a4eca366cfbabdab919cafe6649f993e69131b4879",
+        "optical_bench_environment/0351_threaded_hole": "0ec21d3e15eb52c9f8e6488eda9d19fb2289ad7bd22e73f930b2e6e2cdba9813",
+        "optical_bench_environment/0350_threaded_hole": "a63dde757a9752ad96433048ab499a3387df1db5aec3eec2fc1a0f5d0b06ccf8",
+        "optical_bench_environment/0349_threaded_hole": "9630551f0f18894c99f668d4b8cc1d97a2251437f46b966db178a453c29d263a",
+        "optical_bench_environment/0348_threaded_hole": "8acb54772d5150e54d501e33f0138aa9855bfc34692a0fb86372a5b0e6bf6d79",
+        "optical_bench_environment/0347_threaded_hole": "2fde0057ed27f0178e931ce10f29387c8556f7b006b09958da26aaacf6d3e5b4",
+        "optical_bench_environment/0346_threaded_hole": "1129f39752235de71bd9065ccb46b28dd836f6576e06cfb866145cb8b14bab86",
+        "optical_bench_environment/0345_threaded_hole": "4166e0e270ba9321c393e9c0ab7283ac35ef2e7e38596b5356642e51cd25038c",
+        "optical_bench_environment/0344_threaded_hole": "3c9e640acf49a59a8c4e81f5e27976c42103d6e1643cc307817648634f4e45e3",
+        "optical_bench_environment/0343_threaded_hole": "bec6c56b12de7c385989ef97c4c1c1079d7c796a50709bccd7053cd31fd4d203",
+        "optical_bench_environment/0342_threaded_hole": "4a43dc4d1753153d2050a859eb932ad9ba126a3505bffb9726e7ba114b22c4f4",
+        "optical_bench_environment/0341_threaded_hole": "bcb8693c0ceb5ccfd67d5083dc0bc6656862fda8888b4a08dc6179398ef29c8f",
+        "optical_bench_environment/0340_threaded_hole": "1059a95b6026533abe3dbcea30547dd29acb7771f5d275c01914a3a32fa77de8",
+        "optical_bench_environment/0339_threaded_hole": "f087c1fd8cd574e9b0e446bdfb88e70ee2962f40148035a9e13d6e158ce99aca",
+        "optical_bench_environment/0338_threaded_hole": "e727bfbe3ba2dd4db62436e5c10355379dc116de93f4b35f750b9860bdc8a72d",
+        "optical_bench_environment/0337_threaded_hole": "6c77e85d23e72226f7c5c5ac0c154f7c4a1515b15c718fd02cd4880ea53e6119",
+        "optical_bench_environment/0336_threaded_hole": "7c6c9e3c98c785bca36e677737679a8e1582ec57a571aea815d9414bbe7e978b",
+        "optical_bench_environment/0335_threaded_hole": "b4b22f870ea64e8ea8ded54b405de8aaee6656d0ebb511108add210a139188d3",
+        "optical_bench_environment/0334_threaded_hole": "a0b76c260c044d996efbd4d1e34b304cbdb798e1c2afa021105d44dc52cf9889",
+        "optical_bench_environment/0333_threaded_hole": "e953301ba0bc849e0a1020e647e4217064aa3cd082e4584ba1248cfbfcad7ac9",
+        "optical_bench_environment/0332_threaded_hole": "91ee922e02a812a4074bc3eae56bd8a3a0604c77e6dee912d5f0bd2c51f23c77",
+        "optical_bench_environment/0331_threaded_hole": "43064c32388847adb7abe36ca932d9db0430866bc255b83fd076beb0f91be94c",
+        "optical_bench_environment/0330_threaded_hole": "52c91347217fee1afb5629103b97b3afbe6564fe857d9fe0c1cad449f98bfbf3",
+        "optical_bench_environment/0329_threaded_hole": "6f5992465eb950380ddb93982bdb59f688a75c6316839f29e3bb168908913b74",
+        "optical_bench_environment/0328_threaded_hole": "1e5a4268876ea84e5934445eea8fa6d0bc6b2a789bc9860944f8c518b7188fb6",
+        "optical_bench_environment/0327_threaded_hole": "5424463524436a3eac7c4f732d085bb1e1e67513d55f3905b8432eca54b948ba",
+        "optical_bench_environment/0326_threaded_hole": "0febded2a33c84a555869685d4ca08592d856adf2f3abd48499d7e43164338e8",
+        "optical_bench_environment/0325_threaded_hole": "50bcc7f86670d9ea5612a8bcedf52e5a468111766022e0761289c98d5aca4ef9",
+        "optical_bench_environment/0324_threaded_hole": "647c437bf4d70c02a37ac81e2eeaa67279a529e55cc96d6d107c2b0addd75a91",
+        "optical_bench_environment/0323_threaded_hole": "0eea1dce6a06bfa260535892e3bff974d651b9ab9138133254baf3557c7a654b",
+        "optical_bench_environment/0322_threaded_hole": "9a977a82e5b238febb9d260faa16ceb5faeff1da3ffba98593d34409d88cdf98",
+        "optical_bench_environment/0321_threaded_hole": "eeae404d0744276ea726445d51d1362a4a334d1600983dcb926f0d60532c5cf5",
+        "optical_bench_environment/0320_threaded_hole": "1fdb499fa3ceba777f33da09838e2c543d0a2b27654dd0ff3670c375af78963c",
+        "optical_bench_environment/0319_threaded_hole": "a25b00a0c01ec1578156ba260c2e3d94ad64639007d622afdd96fe0db516d7c9",
+        "optical_bench_environment/0318_threaded_hole": "390a32192ef4f31cea6dfc168be86ac127ca8ab5647101b2d61553a578fd14ea",
+        "optical_bench_environment/0317_threaded_hole": "fa341ee96440959691c7c9a711a2762d137e768431f5f409f0b393c802502af1",
+        "optical_bench_environment/0316_threaded_hole": "967f55bc18b4f5ff3b1b736bb4c37abc721294cf9acafed0ade201bd84543787",
+        "optical_bench_environment/0315_threaded_hole": "f508e60b729fa913050e3881e2cfce58dbac22b6f90d548d04a7f6fe433f8b89",
+        "optical_bench_environment/0314_threaded_hole": "1baebb5d6406c22d5bfa033eccde3fd87388025714043fc88a93f23a2f5bca37",
+        "optical_bench_environment/0313_threaded_hole": "79a47543abb3587b35713cddff88ebbf4403fb7f9d2c24f98af0f61e70f321c7",
+        "optical_bench_environment/0312_threaded_hole": "f1853c682c2709474ac6f6f919776a06b9b5544ffd0ac2b358ff0256077be8b7",
+        "optical_bench_environment/0311_threaded_hole": "0a8f1d2958bc924b2fcc5a1d98b73ef29fab3dc4560bae4b8b8769645182959c",
+        "optical_bench_environment/0310_threaded_hole": "c5e990928d991cd05a643f10470f676502e167fdc92c338e48cc4c03b0c6870e",
+        "optical_bench_environment/0309_threaded_hole": "1962438d1e0a450280dd9f0fc0eebe03f88b0a36bad2a1b269428d1e6d8e1ea9",
+        "optical_bench_environment/0308_threaded_hole": "a03aa48fd1114461e66234385d068363ff0034af4a8105f018824e1dd9cd166d",
+        "optical_bench_environment/0307_threaded_hole": "991542e0c09999b83893c0d70f23edb7967319049e9d86f33d5b085d3ba8e23a",
+        "optical_bench_environment/0306_threaded_hole": "905bb1848bf61115786eb9c158b8a28c84ca0f5dbf064fc2fd782298e8858f98",
+        "optical_bench_environment/0305_threaded_hole": "eeb5085913673c86a690870cb2b6061a0b482b99357dd420fa01601063fcff44",
+        "optical_bench_environment/0304_threaded_hole": "3c17f40969c5b63bc26fc8b674701d83a7dac0361d0ae5c2ddb234b9119c6777",
+        "optical_bench_environment/0303_threaded_hole": "7c49248e84d91bdb0c255a332237ac0fccea97e18d7d4bcb8a9ddec2487c0279",
+        "optical_bench_environment/0302_threaded_hole": "1a8b222047faac00c53b3d51663f845cc4b787117dc0be50e4e33f8646ff9150",
+        "optical_bench_environment/0301_threaded_hole": "58f1a747017453b49c14607a13893ab9572d266b05a47fcd43fcceab005ba59a",
+        "optical_bench_environment/0300_threaded_hole": "9f94d00732dcd74967c5d68350f699403352e4ace4bda41769890b0a7eb5f028",
+        "optical_bench_environment/0299_threaded_hole": "97fcf111d43abb752629fffcdd166e3c37f68eca8d9c3998da0bb07088463db3",
+        "optical_bench_environment/0298_threaded_hole": "e18361e23591b1daa1eba4fc3658fa0c452b06db5b32fc27e3f96ab3e59e6d6c",
+        "optical_bench_environment/0297_threaded_hole": "9309270f8e4274c00424a85b2cebad1c1933e4c52527f6e6ee7b772ab97ab707",
+        "optical_bench_environment/0296_threaded_hole": "c9649f0b536983f426df6ca764813e9e821d30ef2d52135e7f6b44621f42fdf4",
+        "optical_bench_environment/0295_threaded_hole": "f219b0af0437cc25704490a5e89f399a0471348a2f2d22ba7d5245edb4f4f093",
+        "optical_bench_environment/0294_threaded_hole": "660e5c6ee049f2e31c861a31791d8647bdc81e4b186fa4d327d89b73392059cb",
+        "optical_bench_environment/0293_threaded_hole": "0604713cf24b961f79f583a17179d38547a58bbb726561be1ae7c6164191be60",
+        "optical_bench_environment/0292_threaded_hole": "a0298497559aad3b15bad0e5180a503d1e6105a6900199541b1f20e151b80bb7",
+        "optical_bench_environment/0291_threaded_hole": "17593a55976be57b7f8b0a2e54b4ffdded12289aff1ee1f1459f33fe6d244e8a",
+        "optical_bench_environment/0290_threaded_hole": "4f9518d860061136a39b462e1e066788879493a30da070e545aba4af334bea17",
+        "optical_bench_environment/0289_threaded_hole": "882f8338d518ead8a8015674d3694969a836ef7e7b89fae0a7557da3186256e7",
+        "optical_bench_environment/0288_threaded_hole": "933fabdd9559682eedd16fe126792b24d21db31dacc31720ce70ce6d45e64cc3",
+        "optical_bench_environment/0287_threaded_hole": "29c54952e049bc25239fca44c2b00c8d4e2228cbb214a8787489e079e852b4a8",
+        "optical_bench_environment/0286_threaded_hole": "4da1f9d3e391c2d19675ea9fd12aec30721e962d2598f64435667d3c3f16024d",
+        "optical_bench_environment/0285_threaded_hole": "937477dd4b05ffbfb0ceac93b4658dc3b0f7d4c063d358093ae489df611e88e2",
+        "optical_bench_environment/0284_threaded_hole": "b6ed4e76e1ddaec3de7a84884d4a702b36b650f49cf6694f8fed7beefcd445e1",
+        "optical_bench_environment/0283_threaded_hole": "f72f19a52f6f592f2fefde17524b61050bbd7adf2b7267a336fbfb2523d14de5",
+        "optical_bench_environment/0282_threaded_hole": "0c1b85193c4e2021ebb496b439e530b9c5ba5c6fd3b6b1e60e357052b9a83421",
+        "optical_bench_environment/0281_threaded_hole": "6e27aeb5fa238442f8df1a304074168257072ba12a0197b42883a22218a49ef4",
+        "optical_bench_environment/0280_threaded_hole": "6622b9b2745ac42622b5f73377fa64fcfcd8349599b624774cc0b13671539646",
+        "optical_bench_environment/0279_threaded_hole": "d0d06f74fd2255d004c984bce3e2e35107fa3eb021857bd2090f83ca19149c4f",
+        "optical_bench_environment/0278_threaded_hole": "5ee218cb4f94d22b7f7abf71be838de5fe426b3f58ecec7999914259412860a7",
+        "optical_bench_environment/0277_threaded_hole": "39ec039c0056e53f0275cfef3ba677cb2944fc687eee44d02b26c8c2184caeb3",
+        "optical_bench_environment/0276_threaded_hole": "1795af902647e9ef960d3281a238aeab6067818607c62a0f0045f11c80415950",
+        "optical_bench_environment/0275_threaded_hole": "336282cac7b008145ccb778c74477ad08fbc5736092d14db38ea27779c51e230",
+        "optical_bench_environment/0274_threaded_hole": "580e4d947cef7ec265393d10ce9c71f7b13a6300161506a37868b4982a850ac0",
+        "optical_bench_environment/0273_threaded_hole": "0cbf94c2b911390c53da46bf219cc1d47bdfd27ea2f8fdfefef445c8c1796671",
+        "optical_bench_environment/0272_threaded_hole": "ef7de09eda1521cbbc52f6c4700612d784cd4fd02eba8f3b9ef82257a7ed7eeb",
+        "optical_bench_environment/0271_threaded_hole": "080ae5af522c942eae22b8eb4fdf4e2919f6d0112def093279d0da5da4936ce4",
+        "optical_bench_environment/0270_threaded_hole": "aeb673352cdad0d8c2c5dfb7505939f2359faf53c9ec15e137d10d574dff9ebc",
+        "optical_bench_environment/0269_threaded_hole": "dcc5c8b143fce1476f71bd8adc8778a0231822edd0d533cd53cbff7059fdad3a",
+        "optical_bench_environment/0268_threaded_hole": "2dae3fdc2962e370d4859ae60f8f41794ffb557ac747650baa3feea561bfa041",
+        "optical_bench_environment/0267_threaded_hole": "33c82556ccf43f0610a56696a28ef06a45e44791d94edc41943ea265a19a50cf",
+        "optical_bench_environment/0266_threaded_hole": "9527b14b94a035dff46e8993a768e8830364330ecfbd35cde8083c667c6ddba0",
+        "optical_bench_environment/0265_threaded_hole": "a83f09543c47629c38d77a14bcbb9486ff94d1509b467d2ddfd5e251a75a2a9d",
+        "optical_bench_environment/0264_threaded_hole": "32a45627d61bd68de88d678e5d78ab768f9d88edf2afa8f462bb63ee77765a17",
+        "optical_bench_environment/0263_threaded_hole": "3f8d819b5f3342403fd191350c52d99f2f7e05a6f6038ceeb4245048749028cf",
+        "optical_bench_environment/0262_threaded_hole": "9de987bbfea598ac1cb741c8d6b5924e40248d8a2b8a631045626ccea7cea54d",
+        "optical_bench_environment/0261_threaded_hole": "89055e35ac59cc5f724b974fcd01f60b6c47b1153c1174388cc6f428070e775e",
+        "optical_bench_environment/0260_threaded_hole": "a9d357854603535e2c35ba6e3a9b65032b955da1d5ddd1ae49daccc0d429d3e5",
+        "optical_bench_environment/0259_threaded_hole": "70e3b700c269eba9054b968ce0e836ac6aa136fbafacdd0a42926bb876fd1047",
+        "optical_bench_environment/0258_threaded_hole": "9af3ec05c4e2186e52960aaf3621e1d55e043723715a84f7b58092b6b26175a4",
+        "optical_bench_environment/0257_threaded_hole": "072b3710de66c608b9099c00e98aa9093698e0539acbcbf05cdd699783ece055",
+        "optical_bench_environment/0256_threaded_hole": "a62235642294e867fa8cefd1ddfd4f99e08dcf4a2558e22aab8530606778365c",
+        "optical_bench_environment/0255_threaded_hole": "11d3edec6dc17792f5fda71704942282abc1fd7546d995080d2f75839c44382b",
+        "optical_bench_environment/0254_threaded_hole": "9f6d2885cab103cc2beed819aa8f2aa1a6292783664e5e13dca8ab0cec44fb34",
+        "optical_bench_environment/0253_threaded_hole": "fcdb798eb32f30638cb8786967809e606abb32b7d2f9bddc0815026a3ce98d81",
+        "optical_bench_environment/0252_threaded_hole": "76b3bb26516fa195df725f889f1f726a35aa316002203ecd788031f8fd92452e",
+        "optical_bench_environment/0251_threaded_hole": "cfe45b6232a7b4bf0675cc1c2d7d167fecd2e04be253df65ab57941a3c2e033f",
+        "optical_bench_environment/0250_threaded_hole": "0f4c6011d808b460dc79e6fa22c877c724fd3fbacadf9c9e44d580d4b2ca8994",
+        "optical_bench_environment/0249_threaded_hole": "e6ead2f12a4dc1c943856b379113976a29a85d1169bb3b3962e046cbaa08a87a",
+        "optical_bench_environment/0248_threaded_hole": "c48657bc3f0fd76eb0130b4ace27571d55a202d491a472ac4a405791211287c5",
+        "optical_bench_environment/0247_threaded_hole": "6a108357f6fed326986f41cc2ef7f27a4f666ddc104903823b3f78693e95c726",
+        "optical_bench_environment/0246_threaded_hole": "6a52d7500f39556c00d1a69373502de68de854c39d33f181c1add1006f540a99",
+        "optical_bench_environment/0245_threaded_hole": "fe53ed2f9957f4934fc0c8cc5f1556a9f4d20d06d77948870259dea88dd69144",
+        "optical_bench_environment/0244_threaded_hole": "7401020a9cee7f89f0fb2fec858b019829d9014366bfe7aeb018827f5dbf6593",
+        "optical_bench_environment/0243_threaded_hole": "fa2796c9c6361a25c39c9d023bbcf4c3a8bea6a63c9f1b1655ce9086e48987e8",
+        "optical_bench_environment/0242_threaded_hole": "3c8354a0fcb553f553f2f1607785756f0aa808c5a832cf735aa8755352a9e72d",
+        "optical_bench_environment/0241_threaded_hole": "ff04e8ccef66d4662bc9e0411a905a5b40776ec3bc154a75df595ff39011c1af",
+        "optical_bench_environment/0240_threaded_hole": "a56f745c9e0f262e77bd8cd1fc72c920e77ab03e347933911f01fc41698f28cd",
+        "optical_bench_environment/0239_threaded_hole": "bb613955a680787eb469efbd5726e809af77b34ca44cd7a4a8b74a79a431bc3a",
+        "optical_bench_environment/0238_threaded_hole": "fa79f3bc31ea5fb2b41606c8cd4603233d176b5322d85ebfa3ddbf12cc1e82a8",
+        "optical_bench_environment/0237_threaded_hole": "9f0438e5e26dbbd74fe34fb8933467ad57d894c54b29b8337ab98c34b9fcb503",
+        "optical_bench_environment/0236_threaded_hole": "56b90319791487eb74f775ffbb7cd5183fc5155f63a8f5f2e6857c5716838b7b",
+        "optical_bench_environment/0235_threaded_hole": "50d00de1e8ee25a1a627b3cd6aa9af1210280c7a31b92a5fc29b624690af7006",
+        "optical_bench_environment/0234_threaded_hole": "d229c16e34a5f7164c3f4ed492140b8d472ef6c0f5cbbb94ab5ecfff89ae88ed",
+        "optical_bench_environment/0233_threaded_hole": "472b6b6d42377ef005a0590d3e2570c4e5d4bdfa8619447bb07bb11dea53cdbc",
+        "optical_bench_environment/0232_threaded_hole": "07b960516f5c0957ad88444b217ad1dc2e03c7d81323e2967576442a47b9049b",
+        "optical_bench_environment/0231_threaded_hole": "4dad1b7462a4348b11217b7f510aeeb4a25d4606c394570509773ccdeabe2a39",
+        "optical_bench_environment/0230_threaded_hole": "9613724b32d313e1a8e63bac54502fa600a2b3b4b819b9ffb0aa26eeb938af66",
+        "optical_bench_environment/0229_threaded_hole": "f3eadfc709a5058ad548fe39b864039e971b773952f062d3b83da3f9788988f3",
+        "optical_bench_environment/0228_threaded_hole": "032d1a0ea63df4650a4c555c08e68e272995f03468c9cc319346b37e518fc0f1",
+        "optical_bench_environment/0227_threaded_hole": "975f54a96751714eb299c870b7f98b91f7e7dc1d4fd9890bce73ef46de05c34d",
+        "optical_bench_environment/0226_threaded_hole": "09be29b0f669265e2980b15b3cd07f7a7ab9d74b39e01039f4fa4ed47cf253a8",
+        "optical_bench_environment/0225_threaded_hole": "4696fa69f34fa44a62a9781ef6cdd8c0979c984f5463c3ba2be9d524a3a79657",
+        "optical_bench_environment/0224_threaded_hole": "1a37b2d88e1cad6118cec9e58e5563449277e157c7fde969a27785671c378240",
+        "optical_bench_environment/0223_threaded_hole": "1ed8232758c13625ea21a60c9d91c69a616973f60b07167a1ad117c7cfe67bfc",
+        "optical_bench_environment/0222_threaded_hole": "b235045607d9fb93b1994b24c34f4b10ee43c0df6c3297fb46b76d985b5a2a50",
+        "optical_bench_environment/0221_threaded_hole": "0243a793507010f9ab3c04dc3473ae3a8bbaac8c4219606d3acf3388ac6e1711",
+        "optical_bench_environment/0220_threaded_hole": "e375fc03e1fd2653cf76888c8b1c377551e859047d76d134fc2d3a6e31f32367",
+        "optical_bench_environment/0219_threaded_hole": "ab2b9802b1266c6ee73fe08fcdd4746a5e5042c4ba86af84ede2bc37cf0f5393",
+        "optical_bench_environment/0218_threaded_hole": "cbbd901d317f4a3189170b882222a22a10d7006905072babfeaa15d8730681c5",
+        "optical_bench_environment/0217_threaded_hole": "a4db82ef7804dff429854ff8dda1b3f9fa7f24c6cea8722542bf0801047484f3",
+        "optical_bench_environment/0216_threaded_hole": "8fae126e4ebc34fca9faa591e90c438ea23820aea3a2ae4763b9a04b0c496d4b",
+        "optical_bench_environment/0215_threaded_hole": "dc71ee7cab58767cdc1468b56a9d8dcfaf6175d1edf6110a1c45f6d024c4dc97",
+        "optical_bench_environment/0214_threaded_hole": "d191ff70388bb037b2fac305955342053b7c3e6517b7b1edb4795a76cadc1855",
+        "optical_bench_environment/0213_threaded_hole": "e334ab1592f39f4c923703412b35c7f1083853517c3241323b992c363fbf21ef",
+        "optical_bench_environment/0212_threaded_hole": "32ef8c1b3d06c173316092a60a9b8eb072b002b8abb9d1319c2c12d82ce6b4f4",
+        "optical_bench_environment/0211_threaded_hole": "3c8c45815eacc1c8d986f7d1e98ed60117a99d1c68690612017742def4966d18",
+        "optical_bench_environment/0210_threaded_hole": "37f6c8e40b0cbda5babb89f678d146fdc04fb2a27a414c42116aeb07c1a23cb1",
+        "optical_bench_environment/0209_threaded_hole": "66e88cf9da50a9ab8ba684d9a5da236e5b229f7eb11eaef5012ef14d59953480",
+        "optical_bench_environment/0208_threaded_hole": "4311312081df656d61962382de05528f9a9d35564d71cc5c5305a5cd8ae753eb",
+        "optical_bench_environment/0207_threaded_hole": "7ffa63c2c123493bf24dc0ab7fe9de484610c4f255471bf4612709652fa1bc9d",
+        "optical_bench_environment/0206_threaded_hole": "e2912e92645490ea37166e2e8f2ed7c8a1235b87463cbb09622139afd965413b",
+        "optical_bench_environment/0205_threaded_hole": "3a14d42b2782b95f6001eaaf63ce2e53c6052ec0a29ea5cd60a45ceab5b86e87",
+        "optical_bench_environment/0204_threaded_hole": "9cc17567983032e2be2647e38565ca30337883a6f46e647934cd8b4d02ce1f25",
+        "optical_bench_environment/0203_threaded_hole": "af9320a09b8af7c5396308bb81e0dfa7c3ad53ca23c4115861567a7101943ed6",
+        "optical_bench_environment/0202_threaded_hole": "67579f05800cf22e8f85b0a6d2939e6dd425602824c4450a0206ba730f84fd76",
+        "optical_bench_environment/0201_threaded_hole": "bad8fe6bbf1571b39738c10ed07649bd23b32c1e6a6c508752afaba06c45a11a",
+        "optical_bench_environment/0200_threaded_hole": "ef1be0f5351f7be47b2ab3395b058c903ed5592724839b1704107a7df37044e1",
+        "optical_bench_environment/0199_threaded_hole": "f54ae16065449a2369de68ee51de24175d3650e62bb36c87f45e95d9a9eabf16",
+        "optical_bench_environment/0198_threaded_hole": "dcfec60b6699c304cd027c3cfb639dbef19a18cf21637e5a6fee4af50f8e6ec8",
+        "optical_bench_environment/0197_threaded_hole": "8d65472efd27eccdfb67e8a16764034d5040fcc5ffbc03c612e0a1ab3cc81f40",
+        "optical_bench_environment/0196_threaded_hole": "7b4f3d59d8d34e81becafdc501b31abda03f74c629d695eee1e803bc755fcccc",
+        "optical_bench_environment/0195_threaded_hole": "13a64794a74db4bfa13f7596d49775806c79dbd161e257a167629ba39f8bc55c",
+        "optical_bench_environment/0194_threaded_hole": "c1877459b77de4ac570c0d5698c3e278a89ee2720eaa07e3b03724c3eb340249",
+        "optical_bench_environment/0193_threaded_hole": "f7ef07d63696c49febd28e46ea208a240e7fd447e8780b69bb26e7fd237b607f",
+        "optical_bench_environment/0192_threaded_hole": "c78605d471912a6dd727d70967e4f9472ec3d0a4d2eadebf5b59f3e7d26dd4a7",
+        "optical_bench_environment/0191_threaded_hole": "39e3dfa6b507d8596ad72d7e3130a9d21461be36c71817d28d020b538e85f9f7",
+        "optical_bench_environment/0190_threaded_hole": "5a2829b0fe8e886919cc2595e4024e75611a364b1242cea2674f8dfa687578e2",
+        "optical_bench_environment/0189_threaded_hole": "d8673b80d49f6493f09a566562769aed18114ded3705f23cc47730106308f086",
+        "optical_bench_environment/0188_threaded_hole": "fb9b2fd163709cab73f1b445578d626856bdb92f04a3299aea798354744f936d",
+        "optical_bench_environment/0187_threaded_hole": "91886a7b1f5f2d062b0a84097edb9d223750898543a2108ff1800162968acfdb",
+        "optical_bench_environment/0186_threaded_hole": "6fcc30e152e31148d0e63fe35fa80fd0e27c5148f7dee5dce7586cbaed037d73",
+        "optical_bench_environment/0185_threaded_hole": "b8c2a1669a1ca473d8fe4fff51cdb1e71f77d5196a60e99de665a5a796115cdc",
+        "optical_bench_environment/0184_threaded_hole": "f21c922758f493745dda1a8099c6b4abe1349b079dfae175439b2b43701be5be",
+        "optical_bench_environment/0183_threaded_hole": "ab0f61e564ae9ad135439117e3d1e9cf3a9d368e88682e404f6db5463998ed4d",
+        "optical_bench_environment/0182_threaded_hole": "d2f65d7248ff3c5340267efe4ba5d929e250c4cb9dd4233ad476a41328630c23",
+        "optical_bench_environment/0181_threaded_hole": "a99be69040651e87c744f7a8588ddb7a428abdaebb050b4e9a0f9a369f127a58",
+        "optical_bench_environment/0180_threaded_hole": "818efac9b4d01b0ee266bc3b893a0619f823f63e338c61a90a87ccdbc4c15c9c",
+        "optical_bench_environment/0179_threaded_hole": "e4d91d358e2b9aeb93fbe3c01240877ec1aeede3a5a73964e4c06619477b089f",
+        "optical_bench_environment/0178_threaded_hole": "56d66089b5d2584356c977e35e13356c550d135ddc3354c18c7fb2aab8da9146",
+        "optical_bench_environment/0177_threaded_hole": "b318844421dcf50cfb60f112b123d1a27f99dd99d36bcc9349d981f540f390f0",
+        "optical_bench_environment/0176_threaded_hole": "b5356e8c57314b4f4966e42df7ee7d892677d998ee7e57abe922a1f54c174ee2",
+        "optical_bench_environment/0175_threaded_hole": "9e9ae9521ccd5e6512561ad6e76b80c10647a5f0f02defe4fea7c965c1254b28",
+        "optical_bench_environment/0174_threaded_hole": "af69b50277080516f35e57f6b7176c7757f30bc9109ce365163e2e409369c5a3",
+        "optical_bench_environment/0173_threaded_hole": "e7ca387a544f85623c0841b3cd99e7e5951a792928678048015184937702b960",
+        "optical_bench_environment/0172_threaded_hole": "1aeff9f6beef0e4588d71bf4ee4eaf0bf79d8bcb828ce74bb04747e7de407e58",
+        "optical_bench_environment/0171_threaded_hole": "a6efbb58e6e148f16dfdf17b069eaad56f502e25947c7267f7a285859fe2848d",
+        "optical_bench_environment/0170_threaded_hole": "2d7023ab17475b4475ac468148302534b82617d6e90990e7fde53b3fc16d1f22",
+        "optical_bench_environment/0169_threaded_hole": "01e136fa9055ad1f141359f4d2c6e4d4cfa992cd0010516f8a88d86387215d23",
+        "optical_bench_environment/0168_threaded_hole": "c399cb4fc49fa06d2260c80ca8f95b9e86578e0aaf5d90e5b51445cfbea7fa38",
+        "optical_bench_environment/0167_threaded_hole": "b24cafe2536993eec8dd9f9b4f875d5b3ce4dce0150ecf1e0374d1a1347a4b02",
+        "optical_bench_environment/0166_threaded_hole": "429baaac7074b9f6d0be7e0589b01baef07c243579d73d2231bbf006ec294d3c",
+        "optical_bench_environment/0165_threaded_hole": "4a4835928db464e00522bacd106e3e7729c83de0f51fea514b9af2d04a94541a",
+        "optical_bench_environment/0164_threaded_hole": "166ff2b9c0d6ebfca53a57b0ab628bcb6b79afaf484ed1d48d26b8e00252df69",
+        "optical_bench_environment/0163_threaded_hole": "ebc4504e8eb237bced37a2b9c06a64cdd56e60ee5a6870a800d9461ae078f941",
+        "optical_bench_environment/0162_threaded_hole": "1e4b11038ec8e1cccd37f119be2187df3594b08d40e6b9fccea109115447c6bd",
+        "optical_bench_environment/0161_threaded_hole": "1fc74fed0d375e2602c7c2b6d9cb35e10bad466b2044ddb7a19ebd12da03adee",
+        "optical_bench_environment/0160_threaded_hole": "eb5b6ea879154328dcd598e94c81b7aee77d71653541464bebdc059f4eb3cc99",
+        "optical_bench_environment/0159_threaded_hole": "0ca3210c6f6e971d58a92100b20cc07e263a36cf8eaec66f76691a37623e6d35",
+        "optical_bench_environment/0158_threaded_hole": "e5ae73c804bc51f264be1d490242d36a4a204809aa723782755aa781d2b0eff4",
+        "optical_bench_environment/0157_threaded_hole": "9380ddb50eede292b4b2238e4a1f3cd339754d559c0ec0fd9e36495b3321cb7f",
+        "optical_bench_environment/0156_threaded_hole": "04a21c7da234cbe25a247f9b1ffce47267ffcbd660e1e466e5dd822617f438e1",
+        "optical_bench_environment/0155_threaded_hole": "656500a4c75381dc715407ecb9328a6d4175ceb55ccce5487f6f6f55c674f423",
+        "optical_bench_environment/0154_threaded_hole": "1682d4d12e2d15e3ce257778f84827235813ee1eb41159de2a5f0953812274bf",
+        "optical_bench_environment/0153_threaded_hole": "f229a5da42ab6864bb3a6e71ac6d0ca3305508762bbbe51c51d677481c10ba26",
+        "optical_bench_environment/0152_threaded_hole": "8da45215e203116a1191b3fe16168eb03d6acf11b2ca16ee97b74a002521eaa4",
+        "optical_bench_environment/0151_threaded_hole": "b3c6ff875fa3775fc2c2fa5caeac4208e720f238a9c85dfdc75c9a503810e90f",
+        "optical_bench_environment/0150_threaded_hole": "d76bf75fa88b08c57032a5103c97681e99a7c55fa79e260e84c1530a2794bb5d",
+        "optical_bench_environment/0149_threaded_hole": "c810c5ec4b164786fd38069760ed7950592a94717b38e286969ee882ba0e82ff",
+        "optical_bench_environment/0148_threaded_hole": "e1b30597a4cbd9703c68b13ae16f23fbc91c14c131adfdee0af11d28a7ca266f",
+        "optical_bench_environment/0147_threaded_hole": "b6f54dd9296e60c64ee78451e0195ffdf8ccf7ca710f7f6a42c3aa96f76e0b97",
+        "optical_bench_environment/0146_threaded_hole": "51f73289f2dc30906bd87c2cae56e4621ba94a89c31a0f49e08a732298e4764f",
+        "optical_bench_environment/0145_threaded_hole": "331db5cc920ce5be7d0a44146de455fdfd2fd873458e1187fd0bf76483cf9ae5",
+        "optical_bench_environment/0144_threaded_hole": "ef524c2855dd2c3ce023cb602327a0334371a92e57a907ed3d46e086952df43d",
+        "optical_bench_environment/0143_threaded_hole": "d46d9d2e18f64b1e001eb1fd9f4d562fe4e5ea2adfb230f657f008753e49c99e",
+        "optical_bench_environment/0142_threaded_hole": "647ac3f02599aa31329b21b5bfa3467778fd6be08b0fd5ae4315c8a4415ab669",
+        "optical_bench_environment/0141_threaded_hole": "20c1fb189e1d7e28097366c1db563ffad71c3b9e82f572f43cedd9638cd44846",
+        "optical_bench_environment/0140_threaded_hole": "2d84863286af10237570674fc9df58a87c5885475109cbb689f3f91d651b5897",
+        "optical_bench_environment/0139_threaded_hole": "e4bccef1590ba6a73118b45530a8df23b162fd1a5685b3a66053a881a18a57dc",
+        "optical_bench_environment/0138_threaded_hole": "7a7d41c4395c2643428c32972c684e285759f747439a8909c6d61932baf6bfa6",
+        "optical_bench_environment/0137_threaded_hole": "1e0ed7dcc951c8d7aeb8ee97355e098f2c5bf53af29085d97c836b786fdaf207",
+        "optical_bench_environment/0136_threaded_hole": "4c85d7903f61532ecb7d9798cd859bb16bdb9650afeec7e531c6ab4098242866",
+        "optical_bench_environment/0135_threaded_hole": "cb8bcb55d4136d809c28220c43452f43cf73a456ff5a5b9c8b1953d9d469c664",
+        "optical_bench_environment/0134_threaded_hole": "ef21b7e043a7c0b51045d973ef9172345b87f6fd53e083ca1f568f8425d34a75",
+        "optical_bench_environment/0133_threaded_hole": "bcbc3f849a3f2a75e7cb3b3fa192fd8168745f717369737c38ebff962784f269",
+        "optical_bench_environment/0132_threaded_hole": "cee2cff11adb37b1cb3f4a7264a9f2ed247029e53745199c8d96d79307a89997",
+        "optical_bench_environment/0131_threaded_hole": "976be050faadde04cbaaf704f6b97ac2b31eaa607590b8e553d5c7394a86f080",
+        "optical_bench_environment/0130_threaded_hole": "ee17916743729475d45cfcdd6c22b1a326e132f3c1389ad49dc02f9d5da53fee",
+        "optical_bench_environment/0129_threaded_hole": "233d153985b72dc9434c88ac59217553a04539ca2d4ef47239d777bb6f31d01b",
+        "optical_bench_environment/0128_threaded_hole": "0f960c72b63358aa14e05698178ff3c29bc2d3c4a3ec568b141894f9aa6af65d",
+        "optical_bench_environment/0127_threaded_hole": "caeab9ebc2aad58f2dd642184504763f18b42fbef33079ac17f819b14128e501",
+        "optical_bench_environment/0126_threaded_hole": "ad2dbd6e3dab4bf713642ff67e2d39c7a6f229410f5c6002f5cc8b7a0d3ea068",
+        "optical_bench_environment/0125_threaded_hole": "7aea26ff003f1f149d28544f2d3978cf9e1d18d99b35a0cb812c83686a2c243e",
+        "optical_bench_environment/0124_threaded_hole": "c05b0aeda28a7bf850c70756250e37c03366be9a96e2c3c95b88f3f75c14b675",
+        "optical_bench_environment/0123_threaded_hole": "7dcf4e8df69bb0a1d64054fe59d342a113c9427ddd9f736da03837a2becb53b5",
+        "optical_bench_environment/0122_threaded_hole": "97cbd96abd3391eb28ccfc3a2955457409c940768da5b478b17bc3f4d119809b",
+        "optical_bench_environment/0121_threaded_hole": "d31b59fdff1c697759b4c16de5e5d280f912bcfd7e3c06e1547d5a08fd69f108",
+        "optical_bench_environment/0120_threaded_hole": "ee029a9c885d30e3297b89503daa8f352b9fa326fb85c0ca45a09108042f8f32",
+        "optical_bench_environment/0119_threaded_hole": "290161fc65762230482854fb54eb71d4878cf80409d311be9062bee5ba47cf92",
+        "optical_bench_environment/0118_threaded_hole": "0a2f9434badf4bc94afb45e6c016d05db61fe1cc664dcabfc761e48fc6e72d14",
+        "optical_bench_environment/0117_threaded_hole": "5de2f6e184a2a5b5ed8aa72182fcddc91ae9245754aca31bc597bb1c08de8ae6",
+        "optical_bench_environment/0116_threaded_hole": "031399f4f0ee23b702c7ccf4cec6a4752096de8fd48cf6940687d0c68469ff09",
+        "optical_bench_environment/0115_threaded_hole": "15f2b0ebccc2b305c570e9edecd0fbc66c850e2ebc0079083037505e5c9f3457",
+        "optical_bench_environment/0114_threaded_hole": "f15061e5c4dfce9bdfb00bc1d42dfbb807a2ec3dcf4e3438e89e5f06a8a0b281",
+        "optical_bench_environment/0113_threaded_hole": "c0d1e5330529653de3585f78b5a1b28f707bbb4bbed47d2c5d6da346f7120994",
+        "optical_bench_environment/0112_threaded_hole": "9c784faeb7b11c37d07d9dd5768f624f7182f4278173a715c46a8dc7e7025bd1",
+        "optical_bench_environment/0111_threaded_hole": "ee1b0c50d0022b5a4fca61c55b9e73bb94b3bb3bfa8ceea9c083eec75fcab5b0",
+        "optical_bench_environment/0110_threaded_hole": "0d0a38dddc7e6f6404a8c5f6af39b6108326293f8898974c030b56596cb76804",
+        "optical_bench_environment/0109_threaded_hole": "1c498f25670eb1499159da7d9db4ee1414b688b36cb96dc7dc792c2094506f15",
+        "optical_bench_environment/0108_threaded_hole": "455e9c3c73cdcd77ec99dd53fed53366d616563f6f18ef21be9479aa851a3da9",
+        "optical_bench_environment/0107_threaded_hole": "290476eefc138530ced0923d7fd78266242cf14f75e6953470fbd3d4e67510e8",
+        "optical_bench_environment/0106_threaded_hole": "88b61d78f0f4f2b087b9d02d2cbe6b817f70b56427b1739a525f2258dc557cc0",
+        "optical_bench_environment/0105_threaded_hole": "33d637cfb10ab0a6209334a19d4199b404a00f23beb25e12cc7acb3d0740c92c",
+        "optical_bench_environment/0104_threaded_hole": "0a9d04915dcdd562c26e40d4c2d6901d19c15cbb289c448656155f6bb35df364",
+        "optical_bench_environment/0103_threaded_hole": "8da412de8b9a61bf05ab145aeb7ff52428c48067ff1976cd7127897e7a0af72c",
+        "optical_bench_environment/0102_threaded_hole": "9ede931cfb4f77b6563ac004f1976a97eee46042a4f509efbd5a8b37a31738a7",
+        "optical_bench_environment/0101_threaded_hole": "893670129d127a1e1ad0ef066ec799320c3abf19c149a973632465f6ecd6eb60",
+        "optical_bench_environment/0100_threaded_hole": "7c1efc4617373923978004335938ff64409d633938673610af69e59a23c572fa",
+        "optical_bench_environment/0099_threaded_hole": "896b7f0340fa41bcd80b2db03bed7b1ad54be81d735fe0a618342654a11c3d50",
+        "optical_bench_environment/0098_threaded_hole": "fa18d93e92b24a72f604f53d2f1f1c543f109ed25ba823a85b252795077eaf2e",
+        "optical_bench_environment/0097_threaded_hole": "789da161fd764083c30386dece528dfbf632d77c3623251b5d70c5185f07977c",
+        "optical_bench_environment/0096_threaded_hole": "b95f0aafecc2b88109bbfaf41674f092e29430751d0a40915361f903c491dfb3",
+        "optical_bench_environment/0095_threaded_hole": "0c40b9428c13723a9ad170dc595aa0532541b2d94b1823d9b845e7b9dc3cb3ac",
+        "optical_bench_environment/0094_threaded_hole": "5ad4270c153d5078be28a84fd5b8de4518b8495b792605598c826f530ea09163",
+        "optical_bench_environment/0093_threaded_hole": "fe622f7cb348b0f11389472886e694b7271ceab46dd9087d6d90bd5053262d97",
+        "optical_bench_environment/0092_threaded_hole": "22f3c7f57e20ef3a395811f0a6083ef46bb4776c4114a112c7697d38bf511810",
+        "optical_bench_environment/0091_threaded_hole": "65e6d301a596beaefe4007fdf82cbc512b1121208cafa69b88e559479fc4fcd2",
+        "optical_bench_environment/0090_threaded_hole": "10f9e40eb9875e030a85abafddda6ed597cf39a8bbfc2f27f74e422786c0ecec",
+        "optical_bench_environment/0089_threaded_hole": "cc8df90e741a81d01011f81f51b51743db2aa39ab11db880a3db43d6b6ab2767",
+        "optical_bench_environment/0088_threaded_hole": "4cb90f5e1698f5ec4eb2fef9f3654d9da38cf5570e0ce2697bd89bba45f1a17f",
+        "optical_bench_environment/0087_threaded_hole": "a1180357ba7fda10b9c4e398b73b68454a7ee3e12b7fcb6b06b59d8feac56c3a",
+        "optical_bench_environment/0086_threaded_hole": "4976a90c6bdf8004001218b7e67db676cf835abf27a1805838bc996e696904dd",
+        "optical_bench_environment/0085_threaded_hole": "71f4caa9736b490d4da053f23b39e451741328affe93dd5f9bc49930ba03541e",
+        "optical_bench_environment/0084_threaded_hole": "11768a4a63501687a5e9de25083cea8a53b2f75616cacdc4be0d0e395ded1e03",
+        "optical_bench_environment/0083_threaded_hole": "e730775a3cb927f8e7dc29a8639195d1709f87f5ab6a0dda19322a75c09ec0e9",
+        "optical_bench_environment/0082_threaded_hole": "04de758f0df4136827efda0b7d3180cb0c4865886e896c6210b1a52018ce65b7",
+        "optical_bench_environment/0081_threaded_hole": "2a735a8a2b6b92241994ca3d9dbaa3abcd7a6203335cdb5b39a0b372d3f41440",
+        "optical_bench_environment/0080_threaded_hole": "92bbce7664d8bc827d6b90357820a17aca105d1dbb7429cc1e1ff9cb9cbefa2a",
+        "optical_bench_environment/0079_threaded_hole": "35fea2d45c4c3098696701e6bd01c9efebe6f8f9587385f10a87c57842f1eaac",
+        "optical_bench_environment/0078_threaded_hole": "e30390d674ccfb3f42439c4a5876b0836b7b4f506af1f5c9528dfab5f2742f5a",
+        "optical_bench_environment/0077_threaded_hole": "d18930750086b4213d11dc44826800c5e26fda52c3414353c64f653e1e4384bf",
+        "optical_bench_environment/0076_threaded_hole": "a253cbf1ea6393e73d9d014cf50313cf9ba42c7ccb1ac559fd16f13cfa928c09",
+        "optical_bench_environment/0075_threaded_hole": "b14bfb0c5f39b1041be28779f0f3aea851f53e67acaa825e3bd49931471d752c",
+        "optical_bench_environment/0074_threaded_hole": "255fa26715ebe8f3acd3d01cac0510164a9c9fa282982e9eae930e58eab6651e",
+        "optical_bench_environment/0073_threaded_hole": "643c41be6064de47abeaff8c2e73df2c6a535360b3c08b455f3526e41c3ce585",
+        "optical_bench_environment/0072_threaded_hole": "1e344d7d194ac9fb3793c90a1f0b5ffd73ea7b451424d3352da65010fc8cc174",
+        "optical_bench_environment/0071_threaded_hole": "bfd1ed00711604c6583d1ec5d1c287beff7b554e7349d37db3455414db6cbcf9",
+        "optical_bench_environment/0070_threaded_hole": "2b70b5599e2cdf4cbfbc8b979165962302d82b64ef6494ca4a790e09a12518cb",
+        "optical_bench_environment/0069_threaded_hole": "2bafb32a94cd3e80e0ae3f459bf5bd5ffff54feb92fda9977494a95bbdd461c4",
+        "optical_bench_environment/0068_threaded_hole": "554147e8e169d7c7dd1fea8888a7332b59edbd97183ea7f4ebab088c7a63df2e",
+        "optical_bench_environment/0067_threaded_hole": "5f3967a3842f583d13ec8d55cac3e02b9dbfcd9bc5f1a53c6bf69c7fee983729",
+        "optical_bench_environment/0066_threaded_hole": "441646a21c11a3c755425e9fd1b3b232793c01a138af38c05b31819362061c06",
+        "optical_bench_environment/0065_threaded_hole": "b1817ad6850614f5c992718aa6c7db68e04d06e662d301c93a5d5b3687932c77",
+        "optical_bench_environment/0064_threaded_hole": "663e47ddfee4d6bffbf407c8d4e79db430f650de1e9a43421d608d2756b4719e",
+        "optical_bench_environment/0063_threaded_hole": "aca8c4bdcbdf876eb3e8bf454ab701ab8f7d294309201908f994cf9df65aa1c0",
+        "optical_bench_environment/0062_threaded_hole": "22af77c8e5bb67daa68ffbdcfc56dd4abb1cb682e2b73aa955571b428221e610",
+        "optical_bench_environment/0061_threaded_hole": "b4195120f2c054517232ec5d1a595433ccc129efb8202157147bd71de7f27ddf",
+        "optical_bench_environment/0060_threaded_hole": "3728de35c96178c49f94fd5cbde7c891487bd9a9d41fb0bed111a5ad33630833",
+        "optical_bench_environment/0059_threaded_hole": "76d4636f479852e7678f6be5e869eab84a434f96960c73dfac4711fbf2d19a3b",
+        "optical_bench_environment/0058_threaded_hole": "358029d6eb52e80129846c8fcd0deb07aa3b5ff8ad880a7f9013890292e97679",
+        "optical_bench_environment/0057_threaded_hole": "3f3cdfdba1c2c704510869ae8998ac859d0ce9d8064e24c0bd83a9ed90d579b9",
+        "optical_bench_environment/0056_threaded_hole": "e0d75aaf772427b12003c9f56591bd3b65ce9e3ef06319a28c971ccdc2cef577",
+        "optical_bench_environment/0055_threaded_hole": "db0b2e25e64ca92484beccd00737b5a3746f83fad1e487ed9cf43cb19bd7cd00",
+        "optical_bench_environment/0054_threaded_hole": "08bb84de3fd634824f54ff9d9b8f51e99125a21377137e84a3a0dfad9ff0008f",
+        "optical_bench_environment/0053_threaded_hole": "f8be4458d4e56c5e59ba8b6c01627100534490c590e06ee467ae58456bf8502e",
+        "optical_bench_environment/0052_threaded_hole": "46545110a226937fdd6be606284725f702f0dd51053be5ed64d7516580862a6f",
+        "optical_bench_environment/0051_threaded_hole": "952d072de8f11e65e2f8dc27cb8205ab89743140452ba3f1bb83180e7c57f8b3",
+        "optical_bench_environment/0050_threaded_hole": "5031d62978c69ad2935c1404577495451c250cebf401e6a0dde3636c72b4e21c",
+        "optical_bench_environment/0049_threaded_hole": "e0abccdbb1ada929e27e1a40151d4e05ac980d7293ff9c7916b471666ef11187",
+        "optical_bench_environment/0048_threaded_hole": "67345b9b3f6dae273e907764a40746f425cea4dcca0c1736a512d09bc0a15ddc",
+        "optical_bench_environment/0047_threaded_hole": "162b7ee0e9149dc710c682be7416ad76d74e8ced1e5d6bb2a1ecae35d8214d4e",
+        "optical_bench_environment/0046_threaded_hole": "bfb7d84a4e2266b2e6fc0132a6f12869d7c3459c7c700c2a1d1bf3f0ca034a17",
+        "optical_bench_environment/0045_threaded_hole": "38755c9cca45eb90ba6b27c9bd2c41195f3ba1acf8e40cbbdf8e2ea82d2495a4",
+        "optical_bench_environment/0044_threaded_hole": "bb4d166f7bd4425ad9c29cd04ad4b97aab6f0ad70fea0411f15048fc02e89476",
+        "optical_bench_environment/0043_threaded_hole": "6ea5f4f1947aeb3363a52b494df7120f04bb44439c4baf95a370c532b45fd115",
+        "optical_bench_environment/0042_threaded_hole": "51628b6ef4e532befb77ef7d61ddce10c31ea616b72c21b7f4a038e1f94c1808",
+        "optical_bench_environment/0041_threaded_hole": "b4c66541936f4d5d02fdabc3949661251d70c55c094f8ab62b9d006167bc41c6",
+        "optical_bench_environment/0040_threaded_hole": "409f691bfcd07cbe5c638a7d593c2d86c7497cc91c7e44fd377c1e45647a42af",
+        "optical_bench_environment/0039_threaded_hole": "be9837208bee2357ee30d12e5190f4c52fa4ed1254f228ee64d3e21943657d80",
+        "optical_bench_environment/0038_threaded_hole": "0877ff9a9778e6c44b5f890b9dbf27619735549608fe4ef9c00b20e1169072be",
+        "optical_bench_environment/0037_threaded_hole": "625a74090e5db9a1b5aef97d94b037f6c38fc9c984b25bd631ee13a310583818",
+        "optical_bench_environment/0036_threaded_hole": "0d9b5bc4ccac067cddbda69e1ff2c3ced53814e598d29964ca9aa02212b9d213",
+        "optical_bench_environment/0035_threaded_hole": "46f703233d3d675a5f09abce233955122be3a3b1be54ac7888774f83b13b89a7",
+        "optical_bench_environment/0034_threaded_hole": "1a2720ba06deced6ea936a352ee1fd0835ad6470bb9759580f13cb3ac67c7fc0",
+        "optical_bench_environment/0033_threaded_hole": "9c68e0d69930f93722e9f430b98f6f42348ce43bab87cb8ac523eb18051c8481",
+        "optical_bench_environment/0032_threaded_hole": "b66eac32c210ea0f8e6ee2b818fce8a267dfca9c49892bca04aa7c8401f28676",
+        "optical_bench_environment/0031_threaded_hole": "c1977f8026256aecac7fa18577e08aa7e1b93464bcbe8a70688372d6f6039158",
+        "optical_bench_environment/0030_threaded_hole": "ddb12a437698691e3fd167744067a56eacba3dcf81f45b9367a9002b02bd2519",
+        "optical_bench_environment/0029_threaded_hole": "541b6761296523a1cea9ee2597fe2940fb84348533c315f7d07e6d9d7e440dbb",
+        "optical_bench_environment/0028_threaded_hole": "c4bae7473d2b07ab5cccd9c867962db4b03a58c566362c02c376b3b741c7a564",
+        "optical_bench_environment/0027_threaded_hole": "a56b2f1852d63aab2ec8b42c91daf264bc021ebe47b9f239096c773a57f6b6d0",
+        "optical_bench_environment/0026_threaded_hole": "2ab5780ee7a8606e839ee26ef8da311ad318b5b1d5498839e5599a945873b862",
+        "optical_bench_environment/0025_breadboard": "0640f4d6df5d1871cc0b18d82c6ae6e89cbad5e7324966032eae390f15225c50",
+        "optical_bench_environment/0024_floor": "f5b71891489187f3dcd05c2b84dde8e92b8538e6cfb027fcd5418b81c58341c7",
+        "optical_bench_environment/0023_mat_line": "9b33bfb08582eae9c6bd7813f346e3aeab01e16006f913306014fb125551df4b",
+        "optical_bench_environment/0022_mat_line": "7b8fbf2479b73eef39603feb34f603f120c7ea8b6b899c7dd9d76bc925d7bdf3",
+        "optical_bench_environment/0021_mat_line": "82f26a45dd0af32fb22fce61aec2fe4f1ed596e8165493b9252b7d8f45be685c",
+        "optical_bench_environment/0020_mat_line": "6e5052d3f5fb2572697ffcbbff23e7f9b935535fc7dd7206ed93387d8f4e5d98",
+        "optical_bench_environment/0019_mat_line": "100f9e6b40b2630f58d5f9be64610f897e6dfb83d5b533b4198a6ff1e4811851",
+        "optical_bench_environment/0018_mat_line": "5b84f2ed75b8936a70ec1b86c52ac751060156bb6adb4fd2a6e9e67246ae3117",
+        "optical_bench_environment/0017_mat_line": "a45ae7d9f66e325fbfadec972219d7185c12c5ff47cc9ca1531966c6149d7bd8",
+        "optical_bench_environment/0016_mat_line": "c519ee27a07383ded9b10e41f16ae6a228a122086fbaa98131597ef0a4226457",
+        "optical_bench_environment/0015_mat_line": "de29b7b1548e1825eb8bf45fad858d5f0381f97ede3696cfbb2fb3f67f006f4d",
+        "optical_bench_environment/0014_mat_line": "9ea462d517bde345a4e8de27bf92c6d7d0b37cba35b7c9e68028eef978c765fd",
+        "optical_bench_environment/0013_mat_line": "166d667a87457c9fd50aabbdf50f704022ba46d5bd1da5475dcad3ee44423394",
+        "optical_bench_environment/0012_mat_line": "a3e1cd8e27e5f82b9d77f541f67aaeb25747339388093ad4ad951e3d97b5f4c3",
+        "optical_bench_environment/0011_mat_line": "d98bbedd6875f313427e46b25768111edf9d65a87d91c2b80b4ced988cba1618",
+        "optical_bench_environment/0010_mat_line": "88896551d2948690703417d82d6f7011573134c57e95f22f7a3a1cc5e20f46f8",
+        "optical_bench_environment/0009_mat_line": "dd9d47c98628e311c42b1caf3fa75c2c7fb33b96f06c88cf3f9e6202b5e4ada5",
+        "optical_bench_environment/0008_mat_line": "7909b55d0745e0818240748a7b7f7647e525728fb07cb8cae130593b73c491f4",
+        "optical_bench_environment/0007_mat_line": "7805f90c4d991b804f201ca44a50d412d42e3188479b8e7d0b86e1729638a527",
+        "optical_bench_environment/0006_work_mat": "73f1a3807ec2696eb2fd98df42741128f177f35f194c734a4d52e782f99f5aba",
+        "optical_bench_environment/0005_cross_member": "eaf131dee1496f34c4e77b4c1bc544f14cc9d850afa3a6dca609d0a02882bcdd",
+        "optical_bench_environment/0004_table_leg": "90c95497b76136e89976f8df53b0a22f759d13ecd1cd62f726c72dcdc98c8f44",
+        "optical_bench_environment/0003_table_leg": "ea1efa005afcb1cf0f5ffdfe7fceec1afda76f0a65230f8b7d9e0481d1082ccb",
+        "optical_bench_environment/0002_table_leg": "3f7196378e44826226aaf289eeaaae12bf2bd81a1387061f5f98163a6a2b8804",
+        "optical_bench_environment/0001_table_leg": "e1eb246e7c940aad350a010470102836e2e9bfec27a60f6f0a57551bd28a3fdd",
+        "optical_bench_environment/0000_worktop": "4e381c69a55d0e81ade93bcc5b6de693b36c34acd95ec758630ca5514247d4e1"
+      },
+      "environment_materials": {
+        "optical_bench_environment/0587_fixed_post": {
+          "name": "fixed_post_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.65,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        },
+        "optical_bench_environment/0589_fixed_post": {
+          "name": "fixed_post_material",
+          "baseColorFactor": [
+            148,
+            163,
+            174,
+            255
+          ],
+          "metallicFactor": 0.65,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        }
+      },
+      "objects": {
+        "L1": {
+          "nodes": {
+            "L1/label_5": "70c88ee7a7ddc82e6fa7d69f0da239ba37874373e6cd6ac04f82fee5130bd672",
+            "L1/0004_adjuster": "7788631e4b054ccefe26e54aa9b56d165664515efba791a1fdf0c61bbed91f6e",
+            "L1/0003_adjuster": "3bf1a5411eb12dd4e18066b2a2831127bae6a9c6d2193406cb9b1db2833c2210",
+            "L1/0002_mounting_post": "2bbf755591932365ff8a0f91a16fa12a7c2f29a23ab907145438fb0e1ebc1ad2",
+            "L1/0001_convex_lens": "4c8b3f8141a07eb2f83f99f12cfd5a62264abaaa55ff02c9553690ddd12a95a1",
+            "L1/0000_optic_retainer": "7581e5f7208e07581b20fafbc7cb82ae756054d7a10606578c3c4cd771b57772"
+          },
+          "allowed_added_nodes": []
+        },
+        "POST2": {
+          "nodes": {
+            "POST2/0006_fastener": "f85264a980980c88fed7b6a54eaefcc2c93336d1e23a14f124bf9b0443095e8b",
+            "POST2/0005_fastener": "02e947980ba1667229bc50af69ade5585bb941bc580dc5939fc54b006be9be91",
+            "POST2/0004_fastener": "6a1a1ae17fe78bb34f60b7759a4665b15412b1bcd581fde471134eff76349e96",
+            "POST2/0003_fastener": "b5bf567713837228de44a6d37a552a1029715aa8f665bfa2be19220dfce4b6d8",
+            "POST2/0002_locking_knob": "510e1680176cf98387c162c096754d261ed22b699c07fb4bb78b85234d20da04",
+            "POST2/0001_post_holder": "d713dd70d8730303fd6e4ffc286ce8d5a9c1e35991a691fbad43deec0cc76018",
+            "POST2/0000_panel": "789597233dedac69444e6064eed4ceda95822020dd09cdffc013250439e44ad1"
+          },
+          "allowed_added_nodes": []
+        },
+        "L2": {
+          "nodes": {
+            "L2/label_5": "4b7ed8940c78dc8901af367f5c74b5c3d4fdc8ff103eb1be9b42cb6652441303",
+            "L2/0004_adjuster": "7788631e4b054ccefe26e54aa9b56d165664515efba791a1fdf0c61bbed91f6e",
+            "L2/0003_adjuster": "3bf1a5411eb12dd4e18066b2a2831127bae6a9c6d2193406cb9b1db2833c2210",
+            "L2/0002_mounting_post": "2bbf755591932365ff8a0f91a16fa12a7c2f29a23ab907145438fb0e1ebc1ad2",
+            "L2/0001_convex_lens": "4c8b3f8141a07eb2f83f99f12cfd5a62264abaaa55ff02c9553690ddd12a95a1",
+            "L2/0000_optic_retainer": "7581e5f7208e07581b20fafbc7cb82ae756054d7a10606578c3c4cd771b57772"
+          },
+          "allowed_added_nodes": []
+        },
+        "M": {
+          "nodes": {
+            "M/0034_rear_index_line": "90682a73f543f913b190f91e32830ce67be086d0a7882c9f7ac1f51d1c362786",
+            "M/label_33": "c5a06599d1ab5242202674642046ac0725e364ef1a5890eb79d68d5291f8a2b8",
+            "M/0032_rear_coating_plate": "e9d0bb6bd54e550698d07c2e3bdba270905e9c2cbeca8f862d9580874586a324",
+            "M/0031_gimbal_pivot": "f9e9b01abaa24be8a93e650ed101ef11ed612e45884d8f6c8ea9d2372ec7f8f2",
+            "M/0030_gimbal_fork": "4c29197a398e0abe227098aa56f04f084bf6e2507b1b8d6e705d5530d2f5392d",
+            "M/0029_gimbal_pivot": "68ee23354bb806ef7f28f29fbaac6f065613cd40b18e5f1977b110328f3c74ca",
+            "M/0028_gimbal_fork": "cc9bc34a8ea16d4b17409cecb3bfc3f1d19990e2a8aa6ceae6bf7c4a4fb72709",
+            "M/0027_gimbal_crossbar": "e7fc6d08f64f19d940efe13f8c156504567ef69771f51b2cac2a5983aca5fe88",
+            "M/0026_degree_pointer": "8dca15ada9f4cd96de9d2f54c1e927b8b0bab5ddb98fff554f817fb594857601",
+            "M/0025_degree_tick": "8b9d52dce10b8c641d854419704d6d93d9cc0274347bbc2082604700006da012",
+            "M/0024_degree_tick": "30a892434038b0ca267f6e44421568dcbbbc534375bd64df6722bf84faa7b3a8",
+            "M/0023_degree_tick": "b501af475cb139b7c8e950fec94ff4df88112c802f5dea7f7030dcbf202e3f9b",
+            "M/0022_degree_tick": "9bdb5d3cc8f1f2497fc63ec71f18d6c06dd46c1320663f412fb0b6ded6c77087",
+            "M/0021_degree_tick": "4e6ceacc80961118761209e1a2beb9dabe9cb99b757053882e56b0b297532620",
+            "M/0020_degree_tick": "a65703be0419f248296ef14b1482dba3e543ec65e72a06d8b169df06c340e74d",
+            "M/0019_degree_tick": "67dce50193a95d83109579015d2868f6832b4e3d7ab808673ca4f0d52125b883",
+            "M/0018_degree_tick": "a2c40e2a547367262a4890caabae4d2cbbba19dcc8ff6c0886bab86130e0fda3",
+            "M/0017_degree_tick": "ea508bd9c1eb08deb9fb60c34d9fded49b91ab0038db7227bc7721fe375e3939",
+            "M/0016_degree_tick": "8fb6678b095510ecd8562c77e312a3b5661abcfb3183bef26e43537bd53fca9a",
+            "M/0015_degree_tick": "cc8c59accf0181ff36b193270768a5bb7ccd31fababeb4c003e2a776fcacdfad",
+            "M/0014_degree_tick": "0a0a2a11c19e1b3fad9a311e12896a5a8f3c9b41929392cfccc3c494f7d3dcd8",
+            "M/0013_degree_tick": "28a7d9aa04e1b39351fd837504223e09043f6716f00a1072ec7572138d1075b8",
+            "M/0012_degree_tick": "4a5b2d191a28e32bae3a25028d7bb0d4d220ed7246a309a72562b17e9ec8682b",
+            "M/0011_degree_tick": "d0646d9e70760cd28ad1cee6b723242b359a25b1d1294290e85ce5bdfab96fbc",
+            "M/0010_degree_tick": "fe767a9ed6e6025328432297c811ae062b3cec544565fb4396ddd8fb63810186",
+            "M/0009_degree_tick": "652e0b6f0af0d4d86fa064ea986c49fe82155b816880a9c4608767b43b77aef7",
+            "M/0008_degree_tick": "c73415744239f88e65ce279e42ab1a4040682edc10a68939108004fe9659420e",
+            "M/0007_degree_tick": "d46878bf3b9ffadaa83c324e3bc98f97471f6fec1e1aa334ea39c08ea73d4f7e",
+            "M/0006_degree_bezel": "55073ae4e50cc28f168b5deda9cba1d2d4713bfb332848e62f5fbfd3db7e8285",
+            "M/0005_rotation_base": "53486b2fc343d6da62d80df4695fb69d493371caa7eaa581128ff3ec8614ab1e",
+            "M/0004_adjuster": "59ecbbb3ff353d71a2e9db66923aae6b8a4c8063067497691c5e6ceaaa3bcf8f",
+            "M/0003_adjuster": "0c68fdd3497f3a8b6032b68e8d108a021598ef3d5fc897cc9ab6eacff5699e1f",
+            "M/0002_mounting_post": "2bbf755591932365ff8a0f91a16fa12a7c2f29a23ab907145438fb0e1ebc1ad2",
+            "M/0001_mirror_face": "fe1cf0a398f1dba47a967bf61dd950468c61016d51832a36dd68fedd0d4f7a46",
+            "M/0000_optic_retainer": "89bcb402b60b8775ea8670f1dcc87dd04f8fbc47b4d956acfd1300d6deddaabe"
+          },
+          "allowed_added_nodes": []
+        },
+        "TARGET": {
+          "nodes": {
+            "TARGET/0006_target_ring": "59166e79ff548038ade8de9ff43c37e3f81b206571f555cdc14092ce3e05b4a2",
+            "TARGET/0005_target_ring": "d525ae01b68e5674e0ab39bfaa8dbec088abd63dec7933b6eaa227c31761bedb",
+            "TARGET/0004_target_ring": "e1996ae1412cdb2e452fe3b8162340e0a7ac27a9e8717bc65121b0d12af634a5",
+            "TARGET/0003_panel": "215e2761f14f77749ccf2a13ae88ddfb44740babed58e4051d4caae2896ec964",
+            "TARGET/0002_panel": "655b61438748ed16306841d3457f77cf9b889c7ad03834be80df9703c9797909",
+            "TARGET/0001_panel": "fe4a003309323a5c5768fc08d2548710728740148aec4476b0af75728a9847a8",
+            "TARGET/0000_panel": "f4582e7371f907c84f5213032971163060176cd8b8e77dfc03271539412ff2de"
+          },
+          "allowed_added_nodes": []
+        }
+      }
+    },
+    "drone_bench": {
+      "scene_contract": {
+        "schema_version": "1.1",
+        "scene_id": "drone_bench",
+        "title": "\u65e0\u4eba\u673a\u68c0\u4fee\u4e0e\u7535\u6c60\u5b89\u88c5",
+        "units": "m",
+        "axes": "right_handed_z_up",
+        "objects": [
+          {
+            "object_id": "BAT",
+            "label": "\u8bad\u7ec3\u7535\u6c60",
+            "asset": "scenes/drone_bench/meshes/BAT.glb",
+            "pose": {
+              "position_m": [
+                0.34,
+                -0.25,
+                0.0535
+              ],
+              "wxyz": [
+                0.984808,
+                0.0,
+                0.0,
+                0.173648
+              ]
+            },
+            "color": [
+              70,
+              80,
+              93
+            ],
+            "capabilities": [
+              "point",
+              "insert"
+            ],
+            "anchors": {},
+            "description": "\u5e95\u90e8\u5177\u6709\u4e24\u6761\u5bfc\u8f68\uff0c\u5bfc\u8f68\u5e95\u9762\u4f5c\u4e3a\u63a5\u89e6\u9762\u88c5\u5165\u5f00\u53e3\u671d\u4e0a\u7684\u7535\u6c60\u4ed3\u3002",
+            "frames": {},
+            "interaction": {
+              "rotation_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "pivot_local_m": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "mating_pose": {
+                "position_m": [
+                  0.0,
+                  0.0,
+                  -0.0255
+                ],
+                "wxyz": [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "departure_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "departure_distance_m": 0.08,
+              "approach_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "approach_distance_m": 0.1,
+              "transit_height_m": 0.1,
+              "inspect_point_local_m": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "inspect_normal_local": [
+                0.0,
+                1.0,
+                0.0
+              ],
+              "inspect_extent_m": null,
+              "inspect_cue_clearance_m": 0.002,
+              "detail_direction_local": null,
+              "cue_offset_local_m": [
+                0.0,
+                0.0,
+                0.04
+              ],
+              "duration_s": 3.0
+            },
+            "recipe": "battery",
+            "size_m": [
+              0.085,
+              0.13,
+              0.047
+            ]
+          },
+          {
+            "object_id": "BAY",
+            "label": "\u7535\u6c60\u4ed3",
+            "asset": "scenes/drone_bench/meshes/BAY.glb",
+            "pose": {
+              "position_m": [
+                0.0,
+                0.025,
+                0.155
+              ],
+              "wxyz": [
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "color": [
+              217,
+              126,
+              36
+            ],
+            "capabilities": [
+              "point"
+            ],
+            "anchors": {
+              "insertion": [
+                0.0,
+                0.0,
+                -0.0255
+              ]
+            },
+            "description": "\u5f00\u53e3\u671d\u4e0a\uff0c\u5e95\u90e8\u6b62\u6321\u9762\u652f\u627f\u7535\u6c60\u5bfc\u8f68\uff0c\u5468\u8fb9\u58c1\u9762\u9650\u5b9a\u88c5\u5165\u4f4d\u7f6e\u3002",
+            "frames": {},
+            "interaction": {
+              "rotation_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "pivot_local_m": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "mating_pose": {
+                "position_m": [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                "wxyz": [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "departure_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "departure_distance_m": 0.08,
+              "approach_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "approach_distance_m": 0.12,
+              "transit_height_m": 0.15,
+              "inspect_point_local_m": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "inspect_normal_local": [
+                0.0,
+                1.0,
+                0.0
+              ],
+              "inspect_extent_m": null,
+              "inspect_cue_clearance_m": 0.002,
+              "detail_direction_local": null,
+              "cue_offset_local_m": [
+                0.0,
+                0.0,
+                0.04
+              ],
+              "duration_s": 3.0
+            },
+            "recipe": "tray",
+            "size_m": [
+              0.1,
+              0.148,
+              0.06
+            ]
+          },
+          {
+            "object_id": "GUARD",
+            "label": "\u62a4\u7f69\u9501\u6263",
+            "asset": "scenes/drone_bench/meshes/GUARD.glb",
+            "pose": {
+              "position_m": [
+                0.072,
+                0.025,
+                0.178
+              ],
+              "wxyz": [
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "color": [
+              115,
+              126,
+              141
+            ],
+            "capabilities": [
+              "point",
+              "rotate"
+            ],
+            "anchors": {},
+            "description": "\u7535\u6c60\u62a4\u7f69\u4fa7\u9762\u7684\u72ec\u7acb\u65cb\u8f6c\u9501\u6263\uff0c\u987a\u65f6\u9488\u89d2\u5ea6\u4e3a\u8d1f\u3002",
+            "frames": {},
+            "interaction": {
+              "rotation_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "pivot_local_m": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "mating_pose": {
+                "position_m": [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                "wxyz": [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "departure_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "departure_distance_m": 0.08,
+              "approach_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "approach_distance_m": 0.12,
+              "transit_height_m": 0.15,
+              "inspect_point_local_m": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "inspect_normal_local": [
+                0.0,
+                1.0,
+                0.0
+              ],
+              "inspect_extent_m": null,
+              "inspect_cue_clearance_m": 0.002,
+              "detail_direction_local": null,
+              "cue_offset_local_m": [
+                0.0,
+                0.0,
+                0.032
+              ],
+              "duration_s": 3.0
+            },
+            "recipe": "knob",
+            "size_m": [
+              0.035,
+              0.035,
+              0.021
+            ]
+          },
+          {
+            "object_id": "M1",
+            "label": "\u524d\u5de6\u7535\u673a",
+            "asset": "scenes/drone_bench/meshes/M1.glb",
+            "pose": {
+              "position_m": [
+                -0.22,
+                -0.22,
+                0.12
+              ],
+              "wxyz": [
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "color": [
+              160,
+              175,
+              190
+            ],
+            "capabilities": [
+              "point"
+            ],
+            "anchors": {},
+            "description": "",
+            "frames": {},
+            "interaction": {
+              "rotation_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "pivot_local_m": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "mating_pose": {
+                "position_m": [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                "wxyz": [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "departure_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "departure_distance_m": 0.08,
+              "approach_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "approach_distance_m": 0.12,
+              "transit_height_m": 0.15,
+              "inspect_point_local_m": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "inspect_normal_local": [
+                0.0,
+                1.0,
+                0.0
+              ],
+              "inspect_extent_m": null,
+              "inspect_cue_clearance_m": 0.002,
+              "detail_direction_local": null,
+              "cue_offset_local_m": [
+                0.0,
+                0.0,
+                0.04
+              ],
+              "duration_s": 3.0
+            },
+            "recipe": "motor",
+            "size_m": [
+              0.07,
+              0.07,
+              0.045
+            ]
+          },
+          {
+            "object_id": "M2",
+            "label": "\u524d\u53f3\u7535\u673a",
+            "asset": "scenes/drone_bench/meshes/M2.glb",
+            "pose": {
+              "position_m": [
+                0.22,
+                -0.22,
+                0.12
+              ],
+              "wxyz": [
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "color": [
+              160,
+              175,
+              190
+            ],
+            "capabilities": [
+              "point"
+            ],
+            "anchors": {},
+            "description": "",
+            "frames": {},
+            "interaction": {
+              "rotation_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "pivot_local_m": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "mating_pose": {
+                "position_m": [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                "wxyz": [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "departure_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "departure_distance_m": 0.08,
+              "approach_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "approach_distance_m": 0.12,
+              "transit_height_m": 0.15,
+              "inspect_point_local_m": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "inspect_normal_local": [
+                0.0,
+                1.0,
+                0.0
+              ],
+              "inspect_extent_m": null,
+              "inspect_cue_clearance_m": 0.002,
+              "detail_direction_local": null,
+              "cue_offset_local_m": [
+                0.0,
+                0.0,
+                0.04
+              ],
+              "duration_s": 3.0
+            },
+            "recipe": "motor",
+            "size_m": [
+              0.07,
+              0.07,
+              0.045
+            ]
+          },
+          {
+            "object_id": "M3",
+            "label": "\u540e\u5de6\u7535\u673a",
+            "asset": "scenes/drone_bench/meshes/M3.glb",
+            "pose": {
+              "position_m": [
+                -0.22,
+                0.22,
+                0.12
+              ],
+              "wxyz": [
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "color": [
+              160,
+              175,
+              190
+            ],
+            "capabilities": [
+              "point",
+              "inspect_back"
+            ],
+            "anchors": {},
+            "description": "\u7535\u673a\u5185\u4fa7\u51cf\u9707\u57ab\u4f4d\u4e8e\u5c40\u90e8 +X \u9762\uff0c\u68c0\u67e5\u89c6\u56fe\u671d\u8be5\u8868\u9762\u3002",
+            "frames": {},
+            "interaction": {
+              "rotation_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "pivot_local_m": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "mating_pose": {
+                "position_m": [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                "wxyz": [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "departure_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "departure_distance_m": 0.08,
+              "approach_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "approach_distance_m": 0.12,
+              "transit_height_m": 0.15,
+              "inspect_point_local_m": [
+                0.036,
+                0.0,
+                -0.005
+              ],
+              "inspect_normal_local": [
+                1.0,
+                0.0,
+                0.0
+              ],
+              "inspect_extent_m": null,
+              "inspect_cue_clearance_m": 0.002,
+              "detail_direction_local": null,
+              "cue_offset_local_m": [
+                0.0,
+                0.0,
+                0.04
+              ],
+              "duration_s": 3.0
+            },
+            "recipe": "motor",
+            "size_m": [
+              0.07,
+              0.07,
+              0.045
+            ]
+          },
+          {
+            "object_id": "M4",
+            "label": "\u540e\u53f3\u7535\u673a",
+            "asset": "scenes/drone_bench/meshes/M4.glb",
+            "pose": {
+              "position_m": [
+                0.22,
+                0.22,
+                0.12
+              ],
+              "wxyz": [
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "color": [
+              160,
+              175,
+              190
+            ],
+            "capabilities": [
+              "point"
+            ],
+            "anchors": {},
+            "description": "",
+            "frames": {},
+            "interaction": {
+              "rotation_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "pivot_local_m": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "mating_pose": {
+                "position_m": [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                "wxyz": [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "departure_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "departure_distance_m": 0.08,
+              "approach_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "approach_distance_m": 0.12,
+              "transit_height_m": 0.15,
+              "inspect_point_local_m": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "inspect_normal_local": [
+                0.0,
+                1.0,
+                0.0
+              ],
+              "inspect_extent_m": null,
+              "inspect_cue_clearance_m": 0.002,
+              "detail_direction_local": null,
+              "cue_offset_local_m": [
+                0.0,
+                0.0,
+                0.04
+              ],
+              "duration_s": 3.0
+            },
+            "recipe": "motor",
+            "size_m": [
+              0.07,
+              0.07,
+              0.045
+            ]
+          },
+          {
+            "object_id": "VOLTMETER",
+            "label": "\u53f0\u5f0f\u663e\u793a\u4eea",
+            "asset": "scenes/drone_bench/meshes/VOLTMETER.glb",
+            "pose": {
+              "position_m": [
+                -0.29,
+                0.4,
+                0.08
+              ],
+              "wxyz": [
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "color": [
+              83,
+              107,
+              125
+            ],
+            "capabilities": [
+              "point",
+              "wait"
+            ],
+            "anchors": {},
+            "description": "\u663e\u793a\u8bad\u7ec3\u7535\u8def\u72b6\u6001\uff0c\u6570\u503c\u6765\u81ea\u4eff\u771f\u72b6\u6001\u3002",
+            "frames": {},
+            "interaction": {
+              "rotation_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "pivot_local_m": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "mating_pose": {
+                "position_m": [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                "wxyz": [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "departure_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "departure_distance_m": 0.08,
+              "approach_axis_local": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "approach_distance_m": 0.12,
+              "transit_height_m": 0.15,
+              "inspect_point_local_m": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "inspect_normal_local": [
+                0.0,
+                1.0,
+                0.0
+              ],
+              "inspect_extent_m": null,
+              "inspect_cue_clearance_m": 0.002,
+              "detail_direction_local": null,
+              "cue_offset_local_m": [
+                0.0,
+                0.0,
+                0.04
+              ],
+              "duration_s": 3.0
+            },
+            "recipe": "instrument",
+            "size_m": [
+              0.17,
+              0.11,
+              0.1
+            ]
+          }
+        ],
+        "initial_instruction": "\u5c06\u8bad\u7ec3\u7535\u6c60 BAT \u88c5\u5165 BAY\uff0c\u518d\u628a\u62a4\u7f69\u9501\u6263 GUARD \u987a\u65f6\u9488\u65cb\u8f6c 30 \u5ea6\uff0c\u968f\u540e\u68c0\u67e5 M3 \u5185\u4fa7\u7684\u6a59\u8272\u51cf\u9707\u57ab\uff0c\u4fdd\u7559 VOLTMETER \u63d0\u793a\u3002",
+        "camera_position_m": [
+          0.95,
+          -1.3,
+          1.1
+        ],
+        "camera_look_at_m": [
+          0.0,
+          0.07,
+          0.14
+        ],
+        "asset_axes": "gltf_y_up",
+        "environment": [
+          {
+            "prop_id": "workstation",
+            "label": "",
+            "asset": "scenes/drone_bench/meshes/env/workstation.glb",
+            "pose": {
+              "position_m": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "wxyz": [
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "scale_m": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          }
+        ],
+        "render_hints": {
+          "ortho_scale_m": 0.91,
+          "grid_extent_m": 1.0,
+          "cue_scale": 1.0,
+          "label_offset_m": 0.12,
+          "fit_camera": true,
+          "fill_lights": [],
+          "fov_y_deg": 42.0,
+          "viewport_margin": 0.14,
+          "background_rgb": [
+            233,
+            238,
+            242
+          ],
+          "workspace_bounds_m": [
+            [
+              -0.53,
+              -0.37,
+              0.025
+            ],
+            [
+              0.53,
+              0.6,
+              0.33
+            ]
+          ]
+        },
+        "task_contract": {
+          "setting": "\u65cb\u7ffc\u62c6\u9664\u4e14\u9a71\u52a8\u65ad\u7535\u7684\u65e0\u4eba\u673a\u6559\u5b66\u53f0\u3002",
+          "ordered_steps": [
+            {
+              "target_id": "BAT",
+              "action": "insert",
+              "reference_id": "BAY",
+              "angle_deg": null,
+              "depth_requirement": "precise"
+            },
+            {
+              "target_id": "GUARD",
+              "action": "rotate",
+              "reference_id": null,
+              "angle_deg": -30.0,
+              "depth_requirement": "precise"
+            },
+            {
+              "target_id": "M3",
+              "action": "inspect_back",
+              "reference_id": null,
+              "angle_deg": null,
+              "depth_requirement": "persistent"
+            }
+          ],
+          "persistent_targets": [
+            "VOLTMETER"
+          ],
+          "interrupt_target": "M3",
+          "interrupt_instruction": "\u6682\u65f6\u68c0\u67e5 M3 \u7684\u5185\u4fa7\u51cf\u9707\u57ab\uff0c\u4e4b\u540e\u6062\u590d\u539f\u4efb\u52a1\u3002"
+        }
+      },
+      "changed_environment_nodes": [
+        "drone_bench_environment/0027_latch_support"
+      ],
+      "baseline_environment_sha256": "87ed3ba08d1eb9ae776f630dd644bc0b371be3dc84e11bb987c646feb9c975c2",
+      "environment_fingerprints": {
+        "drone_bench_environment/label_37": "c62205906492f061a9f6ba0cf65f7c25eb5c38cdda7ea95de8e26a7cab3f487a",
+        "drone_bench_environment/0036_service_cradle": "38bf21445fb6b3ce365aaefc59200e9e7d704adf3387d71e125bf3ca75a3453d",
+        "drone_bench_environment/0035_motor_mount": "854363498af0680d978248e21d15673759cd6dbf1aa5cc9e0d4281a20e4a85c5",
+        "drone_bench_environment/0034_arm": "3e800413dbb6734207687faa3949012d3a7892cb883a1b71806837d134e4a1aa",
+        "drone_bench_environment/0033_motor_mount": "8a8bb520d7b7a85488d288dd49c3ab54bec5287924ce521af0557ef41144f938",
+        "drone_bench_environment/0032_arm": "17efb8ca856ddc53ce433461cb31a42fb6a57095863e26d48866104d126c04c6",
+        "drone_bench_environment/0031_motor_mount": "f077af3b7c9c6f8b02c45322c0bcf38167f70daf6b551ab5a3c39ab474b872bd",
+        "drone_bench_environment/0030_arm": "b96e3cbc3d3c54cf49c8675b5888a7753302ba9f7ea61b6c46002885f1fc3ffe",
+        "drone_bench_environment/0029_motor_mount": "741fa6b6c4199a6d501bf90d2ae50705e93548fb04d6ce3838f12b0bb5c1bbe2",
+        "drone_bench_environment/0028_arm": "57d54786b9e18032cd88e23e155e177cab7e0cad6c227750e5df13fbefd77d76",
+        "drone_bench_environment/0027_latch_support": "914c4d4be82992e34a6d1099438bdde0d8e78b8d655f219223dc68b0d53c4535",
+        "drone_bench_environment/0026_airframe": "ffe59fcb3bf45df0c4ffd049fc60f9798cf0eecfa9f7d7722c04cdb7d0da5dc2",
+        "drone_bench_environment/0025_floor": "f5b71891489187f3dcd05c2b84dde8e92b8538e6cfb027fcd5418b81c58341c7",
+        "drone_bench_environment/0024_mat_line_16": "2e9b7e54d37f863427e31b3f6d8723ef19459a5a1a3a4c616daa9027a192ad75",
+        "drone_bench_environment/0023_mat_line_15": "b3c391f439f7ddd423e956e8626b36a3dc02061ae54099567181f7341a625647",
+        "drone_bench_environment/0022_mat_line_14": "c36f6e7df27b47f34806409566ef40687174dcb8ae6f02c673df0e1076e4dbaf",
+        "drone_bench_environment/0021_mat_line_13": "64780929a2dc7491fd0a802ff6723aa0e08d223bf4c0dfa64d9818da2e8e7a2d",
+        "drone_bench_environment/0020_mat_line_12": "fec16b38c43af77d223be9ac7904aa352fee02b7afe8f9387a5d53d60e4d3297",
+        "drone_bench_environment/0019_mat_line_11": "70f971818cd3075fb0841e0b5e78748159fed67e35368098bfd2bc79529b37c7",
+        "drone_bench_environment/0018_mat_line_10": "2f4741ed3344b1ecf5077c873cdf6644524a30ee591987a2a4be9fcc0b3fc528",
+        "drone_bench_environment/0017_mat_line_09": "a4447e834e66d9a14a02db99c307c9fd8a60db65439b08e086e9e63752b987aa",
+        "drone_bench_environment/0016_mat_line_08": "6397a1a9eb3b34d416e1e363e9a065e120cfa9ef40a145b4461d073166e0eb2d",
+        "drone_bench_environment/0015_mat_line_07": "2a22061b818805d507d7a260ff0562b759e9274f01d8941cf18c191dcb69997b",
+        "drone_bench_environment/0014_mat_line_06": "115e55c6222585e8c2851831845cfe5adfd3938bae98a4c87b04c02f202590d0",
+        "drone_bench_environment/0013_mat_line_05": "f9c5648b2e30cb043820ade70f692094087daa3d8f4ee5968f8795f68568051d",
+        "drone_bench_environment/0012_mat_line_04": "69342671cf33387692094aef83d5496c785d17f99078ee63fe2d07dcc7fd4f3d",
+        "drone_bench_environment/0011_mat_line_03": "bc7977997fb4df847c83b0b3c4f36965823c7772ec094ccfe01b3cb593bfe603",
+        "drone_bench_environment/0010_mat_line_02": "6511ded679ad9e832dd418ba313789a761f3917f01b04c06f61d3af9e3bdfe19",
+        "drone_bench_environment/0009_mat_line_01": "3f291516c82a431182ba082cd2957965a77086f19d2e73d2a5aa586fafb314db",
+        "drone_bench_environment/0008_mat_line_00": "04056f1e0da79211d6e9fbea04854978da5ad5504dd67587c9558b74bf82d152",
+        "drone_bench_environment/0007_battery_pad": "c99aa21fd99fe6b3aea726cdd8b395eb0a7dcbf3cb1f2f0e67f80f3589b3760c",
+        "drone_bench_environment/0006_work_mat": "2aedab691fd85ee3ded861bc65389f9c3baeba9ce97f78bd78af1edc6049fc21",
+        "drone_bench_environment/0005_cross_member": "a4a820a81ebf06885ffba8b43fcfc865105ccb9ca3e94ebb8dfcdf10ed8ceecd",
+        "drone_bench_environment/0004_table_leg": "9991a3f92d9e5cc053a837591f5abbf6671d2f6d141d7d17d487127dce4dcd10",
+        "drone_bench_environment/0003_table_leg": "ffd1d71477e375aecbe8cafe5ba8f79b24f64a194c703154644a6b6eae346a4a",
+        "drone_bench_environment/0002_table_leg": "44440e51a1727b8233ba639c73ace8fa55cd5b4fa077f27a18214c858c0f818b",
+        "drone_bench_environment/0001_table_leg": "e12a0ed8e1229e0eb9397f374a43751e676a90589426ade92f2254fcd870a2ad",
+        "drone_bench_environment/0000_worktop": "d82fa4ba304bfcc6a7eaec608de40b0e00a6b1656ecd99b40fdfbf32b8a2ba07"
+      },
+      "environment_materials": {
+        "drone_bench_environment/0027_latch_support": {
+          "name": "latch_support_material",
+          "baseColorFactor": [
+            45,
+            59,
+            73,
+            255
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.44,
+          "doubleSided": false,
+          "alphaMode": null,
+          "texture_sha256": null
+        }
+      },
+      "objects": {
+        "BAT": {
+          "nodes": {
+            "BAT/label_7": "4eab36359caf227469d21f89be24901fb1d118dd335d37bb401cf7e57bf69aea",
+            "BAT/0006_contact": "637bba8ba7afceca29739ca2742e31d0eae528f9f1176c8f940a756acd81951d",
+            "BAT/0005_contact": "0319310c3282e6784b415971360d9180282bf8f399344398ef4ac2b0500280ff",
+            "BAT/0004_contact": "c986045ff047109d83486cf7f3a0ffe362d5ac263f36352976ba393ea2432aef",
+            "BAT/0003_contact": "4649a617dc932726e7d0cdd8b15f54588390bcffbe99b2cbfd0a0ac09ebb5e25",
+            "BAT/0002_guide_rail": "32be309af3b510b61528289d53c54457789de8f39d13e5487cefe060be6b354c",
+            "BAT/0001_guide_rail": "c7634eed429c9d2f0ba99db94ada36574048f6b39a413d41017392dbdebc9419",
+            "BAT/0000_battery_shell": "3bed8a807ddc39b44cfdf7df8f458b1512c6027fc081d7dbf33c1a09d8cb0a8a"
+          },
+          "allowed_added_nodes": []
+        },
+        "BAY": {
+          "nodes": {
+            "BAY/0004_panel": "aa566cf088fe0f084310f0fcfb1c9ba5ab49b09147a3a5dc940caf9afa1df840",
+            "BAY/0003_panel": "4893c7f200a02cbe413b9f4630d1b89d1eb1820a0751beb9a6a8804519a2ca20",
+            "BAY/0002_panel": "b045d624255c2cd5cbf64adc70788c73fd87b9137ff4fa2ab14015d0f75a9fe2",
+            "BAY/0001_panel": "5f9362863325e1fdaced2903082c33b16a8f28f24d400d10b9dc52da63082b2f",
+            "BAY/0000_panel": "edd9d44252070ee4ea9e8b03ab58447586d7f1f72b84f2df032c81d26abb893d"
+          },
+          "allowed_added_nodes": []
+        },
+        "GUARD": {
+          "nodes": {
+            "GUARD/0030_index_mark": "54cd5860e1c455203b46cd837a8fda5a2dd69f0918eb60d879980fd8569341f3",
+            "GUARD/0029_knurl": "057cf20fb685e2aa6d01107c22aba5f777d762f44980a923ca478fd0b5bdee44",
+            "GUARD/0028_knurl": "4bf08c48e42b2f908d7d659181e61b53087532b1562dd890e36392bfa3bad60d",
+            "GUARD/0027_knurl": "2c9828d35a805795dbbdd6a7fab2315ca3ea3ac21c6f2c5c72286a902380afd8",
+            "GUARD/0026_knurl": "d905d49e415ab16ad1ccd01f14c59fc27e7b9ccf9b999ea80aa0b6c21a2eed27",
+            "GUARD/0025_knurl": "a6968eed9098d0f4bfdb129442c0b56b86f195fe169da3f23ae9c6508f26ae60",
+            "GUARD/0024_knurl": "793d6d7177add690ae5bc9dfa793abf60ee8876aeb7d03997e0c923e072b1377",
+            "GUARD/0023_knurl": "f9ef5ee089334c74d859812bdf764ae5500de8cd296629245dfd25032e8cd279",
+            "GUARD/0022_knurl": "923ceacb4e3fc74ecf2b61b840cd1dad7925ac73a3b8bb02c556e7dffc828b9e",
+            "GUARD/0021_knurl": "85c4c9d57a388241ee4820ac7e396c187d2117dda02e17ff532bbbe8ef6fe58d",
+            "GUARD/0020_knurl": "51bf64919b49b1b0862ecf3acd3500730c74c0865ebb53521ee9eab9801132c0",
+            "GUARD/0019_knurl": "3ff90d3801696b78324f8df577dd511a2bf3887e331cfba1882b54ba98bfe648",
+            "GUARD/0018_knurl": "1d510be71fb6fd3b175181df1691772dbf6051d8fbe57dbf98859b6b07f7a800",
+            "GUARD/0017_knurl": "4a05b0ba0e871de1617f4fb1c89d9435bf466954966b00b14519af8e1f820c48",
+            "GUARD/0016_knurl": "493058619b6898a90acd5baf4a4b87a6ab9a0434879875af493de3cddde0ecc5",
+            "GUARD/0015_knurl": "be81fd572a35c963d9fb1a462bc12258aa4124ff49727a56cb1e93ebec885a6e",
+            "GUARD/0014_knurl": "86be741013e34c0336e0ad02c2134370a27d9d93dd038aab4e3a5bbe0101a6be",
+            "GUARD/0013_knurl": "40559ba9fbe14264f2d2d53fdaba2a6f7917b4c7c66d00050cf4bf2e16ab4dd4",
+            "GUARD/0012_knurl": "8fb612115708db3cc595dc7190c980f0d7e0daeb1908777b771245eea74105bc",
+            "GUARD/0011_knurl": "0dc7246b0f3d1a669e690fa5c1a0a1b14c217a89824c691cc406dbe529d4aabc",
+            "GUARD/0010_knurl": "b36d589187924556ad045fef5b06edc5e737980cd5b7157fe68ea71793934333",
+            "GUARD/0009_knurl": "f3c1873adda0760c53737bd620645f970f112ba18ccc4fbf7fa89e75d0a2fbdf",
+            "GUARD/0008_knurl": "a919ee0d4fc8faa34223424750efedce3ab56fe72949408391874a6c8e893d43",
+            "GUARD/0007_knurl": "6d2c09817971571f9d55e9ea65459c7839047b99ed0e5bbad6bf348244e1e80b",
+            "GUARD/0006_knurl": "53d6774147b42b1b03c98c484c3cf873c8ce8329d264c292b31a3dc8dbe782d5",
+            "GUARD/0005_knurl": "e799fdff95252769b077505a413226cb36e6e1bdf0d75f9f8555abbd8f56dd89",
+            "GUARD/0004_knurl": "f285ab4ac4b590cf32a50e9a5afd6e534bf655f5e7e8577c273202aeed2deffe",
+            "GUARD/0003_knurl": "c56c92c88bd49f03c1a9ede3d97847bef94bf416dcdbd4f7c85a10b333320c21",
+            "GUARD/0002_knurl": "e7c8637fb2a7564b826f4f90c7288c4a305d03dd6556f993c6cf290ae7049edd",
+            "GUARD/0001_flange": "1e1d20fd27d2f0272955ff602e88ef421aa4149d026c9eb2134ed7b7dd00e430",
+            "GUARD/0000_grip": "66ddb3f17c3ea4247bba14faf3ba8946f7911a9907e625931bf402aa9f6fe136"
+          },
+          "allowed_added_nodes": [
+            "GUARD/0031_mount_neck"
+          ]
+        },
+        "M1": {
+          "nodes": {
+            "M1/0023_stator_detail": "b00a19898d8d8d278d4da6a605f94654a72691a5e08bfd0fbc8cffc2c3aea400",
+            "M1/0022_stator_detail": "26e4ea8d745605e49d1d85564a9b3e570b22089047db77a4a80992016812278d",
+            "M1/0021_stator_detail": "7edbb217a0ff9cdcae932107a81496f912a82b2f02f0b66e7b63dbb799699552",
+            "M1/0020_stator_detail": "dbfa6ffb6471e1ca4ff16ff7f8bea89de39e2fda179bbe401810ea1d23c163b6",
+            "M1/0019_stator_detail": "f734ebd07d5b1c206b8ff2b39c706782ab1d3800ceed41cfba0fda702087ba02",
+            "M1/0018_stator_detail": "a7ef73f24871307904d430277558f1b0ccb12457bc8d9280255ec22aa4e2894f",
+            "M1/0017_stator_detail": "21ba5e6eddbf076f9d966d5ef3cf732ec7b8de85962a68bc032ca4efd818bf32",
+            "M1/0016_stator_detail": "f2ab2805b0e2a56fbf59b52ca8c6986222e2d8efdd2130852b2e7e76d7f8dd4c",
+            "M1/0015_stator_detail": "28fc2e84e4f073d87e2b0e66d87d29452dfee0e46063ce9d12d08d59d569a64a",
+            "M1/0014_stator_detail": "3f095287f65ccd8b8608ca781159ed0f454951ff2db9156e33f04cfd45574d43",
+            "M1/0013_stator_detail": "4d96ef94cbdd393dbf23c234b40fa597ff1c906ef40d95a20370270bbce3ba0c",
+            "M1/0012_stator_detail": "b29a7ad09591d75fecc187563b1eac4996ef8406f28ba924e2536840cbb3eb37",
+            "M1/0011_stator_detail": "442a3aeda208f1792c3a8f6434140c45fb5bbdd7fd4b051a625d3157b41249d7",
+            "M1/0010_stator_detail": "7b7e4556c4b72b78e66d3aea32464e0267bce0f55b2b7fcb1a4aa913f4a14cb5",
+            "M1/0009_stator_detail": "1360f0c3b219951584fe5787641959d92a9ed858de2f531b398d58c9f7018556",
+            "M1/0008_stator_detail": "e82ca5ddcc8e7546fd4c4865214a5a36683a6fb8658bf34c7d373a0291176f0f",
+            "M1/0007_stator_detail": "9d134c6a2f3585ba1118a89869de0ca07a6922dfb04d869857d6bdc5dff35465",
+            "M1/0006_stator_detail": "a43caebca6288834cda8fc2fbc49c94d52de1ef31753dcb138ed21ad600b85bb",
+            "M1/0005_stator_detail": "b51e3035fc9f0164f9726a3902ce057db2769eaca9f831c06a3f082eaaecad93",
+            "M1/0004_stator_detail": "a87636ad46e551e5c0194bce333f6fab1394035fecfa64ae646d1aa71fcb023f",
+            "M1/0003_shaft": "fb8744472658635851d0983b592ceb5f2e0c74de2efff385c119ead0479b4eca",
+            "M1/0002_rotor": "631e29227391f0bab3b6c9cd5dc8c2ab7c12e8aaf2883d0db30a9382b136d7f2",
+            "M1/0001_mount": "f1fc0f0c389298efb97f5c058965bf5bf2956e3468ace4c6d0673e4b1743412e",
+            "M1/0000_stator": "065d7586efcdd4add611807d8a45e0a2ed5ae5e0eb5ef7c33317eb2743d897bc"
+          },
+          "allowed_added_nodes": []
+        },
+        "M2": {
+          "nodes": {
+            "M2/0023_stator_detail": "b00a19898d8d8d278d4da6a605f94654a72691a5e08bfd0fbc8cffc2c3aea400",
+            "M2/0022_stator_detail": "26e4ea8d745605e49d1d85564a9b3e570b22089047db77a4a80992016812278d",
+            "M2/0021_stator_detail": "7edbb217a0ff9cdcae932107a81496f912a82b2f02f0b66e7b63dbb799699552",
+            "M2/0020_stator_detail": "dbfa6ffb6471e1ca4ff16ff7f8bea89de39e2fda179bbe401810ea1d23c163b6",
+            "M2/0019_stator_detail": "f734ebd07d5b1c206b8ff2b39c706782ab1d3800ceed41cfba0fda702087ba02",
+            "M2/0018_stator_detail": "a7ef73f24871307904d430277558f1b0ccb12457bc8d9280255ec22aa4e2894f",
+            "M2/0017_stator_detail": "21ba5e6eddbf076f9d966d5ef3cf732ec7b8de85962a68bc032ca4efd818bf32",
+            "M2/0016_stator_detail": "f2ab2805b0e2a56fbf59b52ca8c6986222e2d8efdd2130852b2e7e76d7f8dd4c",
+            "M2/0015_stator_detail": "28fc2e84e4f073d87e2b0e66d87d29452dfee0e46063ce9d12d08d59d569a64a",
+            "M2/0014_stator_detail": "3f095287f65ccd8b8608ca781159ed0f454951ff2db9156e33f04cfd45574d43",
+            "M2/0013_stator_detail": "4d96ef94cbdd393dbf23c234b40fa597ff1c906ef40d95a20370270bbce3ba0c",
+            "M2/0012_stator_detail": "b29a7ad09591d75fecc187563b1eac4996ef8406f28ba924e2536840cbb3eb37",
+            "M2/0011_stator_detail": "442a3aeda208f1792c3a8f6434140c45fb5bbdd7fd4b051a625d3157b41249d7",
+            "M2/0010_stator_detail": "7b7e4556c4b72b78e66d3aea32464e0267bce0f55b2b7fcb1a4aa913f4a14cb5",
+            "M2/0009_stator_detail": "1360f0c3b219951584fe5787641959d92a9ed858de2f531b398d58c9f7018556",
+            "M2/0008_stator_detail": "e82ca5ddcc8e7546fd4c4865214a5a36683a6fb8658bf34c7d373a0291176f0f",
+            "M2/0007_stator_detail": "9d134c6a2f3585ba1118a89869de0ca07a6922dfb04d869857d6bdc5dff35465",
+            "M2/0006_stator_detail": "a43caebca6288834cda8fc2fbc49c94d52de1ef31753dcb138ed21ad600b85bb",
+            "M2/0005_stator_detail": "b51e3035fc9f0164f9726a3902ce057db2769eaca9f831c06a3f082eaaecad93",
+            "M2/0004_stator_detail": "a87636ad46e551e5c0194bce333f6fab1394035fecfa64ae646d1aa71fcb023f",
+            "M2/0003_shaft": "fb8744472658635851d0983b592ceb5f2e0c74de2efff385c119ead0479b4eca",
+            "M2/0002_rotor": "631e29227391f0bab3b6c9cd5dc8c2ab7c12e8aaf2883d0db30a9382b136d7f2",
+            "M2/0001_mount": "f1fc0f0c389298efb97f5c058965bf5bf2956e3468ace4c6d0673e4b1743412e",
+            "M2/0000_stator": "065d7586efcdd4add611807d8a45e0a2ed5ae5e0eb5ef7c33317eb2743d897bc"
+          },
+          "allowed_added_nodes": []
+        },
+        "M3": {
+          "nodes": {
+            "M3/0026_isolator_bolt": "0c60d7f1e27e6eaf5d789a830d149959a16f6a5508a856d9996b3977eac5166b",
+            "M3/0025_isolator_ring": "a4a2bea1331b0b3d6c5a91ad477a9911e0d98cb8540606cd8c544545d986ed7c",
+            "M3/0024_isolator_seat": "b08a06c4816684215c3495e73c7461a2d4d06610b7cf7fdef1422ab91c2cd30c",
+            "M3/0023_stator_detail": "b00a19898d8d8d278d4da6a605f94654a72691a5e08bfd0fbc8cffc2c3aea400",
+            "M3/0022_stator_detail": "26e4ea8d745605e49d1d85564a9b3e570b22089047db77a4a80992016812278d",
+            "M3/0021_stator_detail": "7edbb217a0ff9cdcae932107a81496f912a82b2f02f0b66e7b63dbb799699552",
+            "M3/0020_stator_detail": "dbfa6ffb6471e1ca4ff16ff7f8bea89de39e2fda179bbe401810ea1d23c163b6",
+            "M3/0019_stator_detail": "f734ebd07d5b1c206b8ff2b39c706782ab1d3800ceed41cfba0fda702087ba02",
+            "M3/0018_stator_detail": "a7ef73f24871307904d430277558f1b0ccb12457bc8d9280255ec22aa4e2894f",
+            "M3/0017_stator_detail": "21ba5e6eddbf076f9d966d5ef3cf732ec7b8de85962a68bc032ca4efd818bf32",
+            "M3/0016_stator_detail": "f2ab2805b0e2a56fbf59b52ca8c6986222e2d8efdd2130852b2e7e76d7f8dd4c",
+            "M3/0015_stator_detail": "28fc2e84e4f073d87e2b0e66d87d29452dfee0e46063ce9d12d08d59d569a64a",
+            "M3/0014_stator_detail": "3f095287f65ccd8b8608ca781159ed0f454951ff2db9156e33f04cfd45574d43",
+            "M3/0013_stator_detail": "4d96ef94cbdd393dbf23c234b40fa597ff1c906ef40d95a20370270bbce3ba0c",
+            "M3/0012_stator_detail": "b29a7ad09591d75fecc187563b1eac4996ef8406f28ba924e2536840cbb3eb37",
+            "M3/0011_stator_detail": "442a3aeda208f1792c3a8f6434140c45fb5bbdd7fd4b051a625d3157b41249d7",
+            "M3/0010_stator_detail": "7b7e4556c4b72b78e66d3aea32464e0267bce0f55b2b7fcb1a4aa913f4a14cb5",
+            "M3/0009_stator_detail": "1360f0c3b219951584fe5787641959d92a9ed858de2f531b398d58c9f7018556",
+            "M3/0008_stator_detail": "e82ca5ddcc8e7546fd4c4865214a5a36683a6fb8658bf34c7d373a0291176f0f",
+            "M3/0007_stator_detail": "9d134c6a2f3585ba1118a89869de0ca07a6922dfb04d869857d6bdc5dff35465",
+            "M3/0006_stator_detail": "a43caebca6288834cda8fc2fbc49c94d52de1ef31753dcb138ed21ad600b85bb",
+            "M3/0005_stator_detail": "b51e3035fc9f0164f9726a3902ce057db2769eaca9f831c06a3f082eaaecad93",
+            "M3/0004_stator_detail": "a87636ad46e551e5c0194bce333f6fab1394035fecfa64ae646d1aa71fcb023f",
+            "M3/0003_shaft": "fb8744472658635851d0983b592ceb5f2e0c74de2efff385c119ead0479b4eca",
+            "M3/0002_rotor": "631e29227391f0bab3b6c9cd5dc8c2ab7c12e8aaf2883d0db30a9382b136d7f2",
+            "M3/0001_mount": "f1fc0f0c389298efb97f5c058965bf5bf2956e3468ace4c6d0673e4b1743412e",
+            "M3/0000_stator": "065d7586efcdd4add611807d8a45e0a2ed5ae5e0eb5ef7c33317eb2743d897bc"
+          },
+          "allowed_added_nodes": []
+        },
+        "M4": {
+          "nodes": {
+            "M4/0023_stator_detail": "b00a19898d8d8d278d4da6a605f94654a72691a5e08bfd0fbc8cffc2c3aea400",
+            "M4/0022_stator_detail": "26e4ea8d745605e49d1d85564a9b3e570b22089047db77a4a80992016812278d",
+            "M4/0021_stator_detail": "7edbb217a0ff9cdcae932107a81496f912a82b2f02f0b66e7b63dbb799699552",
+            "M4/0020_stator_detail": "dbfa6ffb6471e1ca4ff16ff7f8bea89de39e2fda179bbe401810ea1d23c163b6",
+            "M4/0019_stator_detail": "f734ebd07d5b1c206b8ff2b39c706782ab1d3800ceed41cfba0fda702087ba02",
+            "M4/0018_stator_detail": "a7ef73f24871307904d430277558f1b0ccb12457bc8d9280255ec22aa4e2894f",
+            "M4/0017_stator_detail": "21ba5e6eddbf076f9d966d5ef3cf732ec7b8de85962a68bc032ca4efd818bf32",
+            "M4/0016_stator_detail": "f2ab2805b0e2a56fbf59b52ca8c6986222e2d8efdd2130852b2e7e76d7f8dd4c",
+            "M4/0015_stator_detail": "28fc2e84e4f073d87e2b0e66d87d29452dfee0e46063ce9d12d08d59d569a64a",
+            "M4/0014_stator_detail": "3f095287f65ccd8b8608ca781159ed0f454951ff2db9156e33f04cfd45574d43",
+            "M4/0013_stator_detail": "4d96ef94cbdd393dbf23c234b40fa597ff1c906ef40d95a20370270bbce3ba0c",
+            "M4/0012_stator_detail": "b29a7ad09591d75fecc187563b1eac4996ef8406f28ba924e2536840cbb3eb37",
+            "M4/0011_stator_detail": "442a3aeda208f1792c3a8f6434140c45fb5bbdd7fd4b051a625d3157b41249d7",
+            "M4/0010_stator_detail": "7b7e4556c4b72b78e66d3aea32464e0267bce0f55b2b7fcb1a4aa913f4a14cb5",
+            "M4/0009_stator_detail": "1360f0c3b219951584fe5787641959d92a9ed858de2f531b398d58c9f7018556",
+            "M4/0008_stator_detail": "e82ca5ddcc8e7546fd4c4865214a5a36683a6fb8658bf34c7d373a0291176f0f",
+            "M4/0007_stator_detail": "9d134c6a2f3585ba1118a89869de0ca07a6922dfb04d869857d6bdc5dff35465",
+            "M4/0006_stator_detail": "a43caebca6288834cda8fc2fbc49c94d52de1ef31753dcb138ed21ad600b85bb",
+            "M4/0005_stator_detail": "b51e3035fc9f0164f9726a3902ce057db2769eaca9f831c06a3f082eaaecad93",
+            "M4/0004_stator_detail": "a87636ad46e551e5c0194bce333f6fab1394035fecfa64ae646d1aa71fcb023f",
+            "M4/0003_shaft": "fb8744472658635851d0983b592ceb5f2e0c74de2efff385c119ead0479b4eca",
+            "M4/0002_rotor": "631e29227391f0bab3b6c9cd5dc8c2ab7c12e8aaf2883d0db30a9382b136d7f2",
+            "M4/0001_mount": "f1fc0f0c389298efb97f5c058965bf5bf2956e3468ace4c6d0673e4b1743412e",
+            "M4/0000_stator": "065d7586efcdd4add611807d8a45e0a2ed5ae5e0eb5ef7c33317eb2743d897bc"
+          },
+          "allowed_added_nodes": []
+        },
+        "VOLTMETER": {
+          "nodes": {
+            "VOLTMETER/0018_rear_vent": "3c5c5909daaf380f6fa4f0198752244d0a63f413eee49baf1dac712964e3702d",
+            "VOLTMETER/0017_rear_vent": "077c952e309aa04ab27559f9c38b1219024a850ad45e6c3bf8d216a16a580e58",
+            "VOLTMETER/0016_rear_vent": "56c835c98e51b5d86ab24e2bd5b541ce56eaace5840dc0b5386c5d67e056b410",
+            "VOLTMETER/0015_rear_vent": "ff80e02a9f537d25a6f90894e8ff5b6d9ef77cbbbb6e871042976481280ccabe",
+            "VOLTMETER/0014_rear_vent": "f2ba82868f194385d0a356d110de694dd2aaa7bae494b7942d2d1d8708bb886c",
+            "VOLTMETER/0013_rear_vent": "0a74e58dcfdc007558550727b080e9a37b02bbb8078223335a6df7efae90e910",
+            "VOLTMETER/0012_rear_vent": "a978982ce5ee82e9f3f6a685aa04176641a308b1f36654242aebe5cd8beb5fc9",
+            "VOLTMETER/0011_rear_vent": "dbd838b8dc70862d3fc79bb4cb76e8e49e2b9fb65de3d669c626142929dcee59",
+            "VOLTMETER/0010_rear_vent": "247b9d33acf0ccd7b62d14390753e2ef84c5dc53d95d9a600ea82b24860dee50",
+            "VOLTMETER/0009_rear_vent": "40e9de6bdbf45cda7f6a8b4da4dfe5b4002f4da3cb15193723799e1e8a714dce",
+            "VOLTMETER/0008_rear_vent": "442c2b4af9d2156fa5d1fedad3885a5b36ec40774be080c80be82d180b9fae59",
+            "VOLTMETER/0007_rear_vent": "743346a1d60d3539cc255b2f9a3b6832221286a1125f27ca99d38fe20188a365",
+            "VOLTMETER/0006_button": "32cd57769a2335376b79c72669be4700b9015a0f002450b25ad2e65b3dca5acd",
+            "VOLTMETER/0005_button": "03f9d0ee4a12b239cec87537f52e836c26a37e785a007529dea4260b0d5c5acb",
+            "VOLTMETER/0004_button": "3093e06fcc6fc3297181e49d7cadf63f9ea2b82cd2f426f784c197a5503d9c90",
+            "VOLTMETER/0003_button": "d093d5f867a7876e90c0d778a7ed18b9a42bbb8771838f57ee2b194abd79e87a",
+            "VOLTMETER/label_2": "b8fbd366a42935c1881b46efac7d4b40c6d53e981bbc558f7a5d1f11e402890c",
+            "VOLTMETER/0001_bezel": "c18c1093a6fc8e04c155b47191cb72109914d2fa82a4f33d281847ab7687d4fd",
+            "VOLTMETER/0000_instrument_case": "c8544a2e39887453d4a414dac96e32c72365c307754af259785a46c476431627"
+          },
+          "allowed_added_nodes": []
+        }
+      }
+    }
+  },
+  "measured_before": [
+    {
+      "scene_id": "control_panel",
+      "object_id": "A",
+      "position": [
+        -0.17,
+        -0.04,
+        0.07
+      ],
+      "flange_node": "A/A/0001_flange",
+      "grip_node": "A/A/0000_grip",
+      "panel_node": "workstation/control_panel_environment/0025_instrument_panel",
+      "flange_radius_max_m": 0.030550000897507815,
+      "grip_radius_max_m": 0.028600000716366186,
+      "flange_bottom": {
+        "z": 0.045800000131130225,
+        "triangle_index": 0,
+        "triangle": [
+          [
+            -0.1394500006735325,
+            -0.04,
+            0.045800000131130225
+          ],
+          [
+            -0.17,
+            -0.04,
+            0.045800000131130225
+          ],
+          [
+            -0.1398261208832264,
+            -0.03522092705592513,
+            0.045800000131130225
+          ]
+        ]
+      },
+      "flange_top": {
+        "z": 0.05240000009536744,
+        "triangle_index": 120,
+        "triangle": [
+          [
+            -0.1916021127998829,
+            -0.018397887200117112,
+            0.05240000009536744
+          ],
+          [
+            -0.19471546828746797,
+            -0.022043160125613213,
+            0.05240000009536744
+          ],
+          [
+            -0.17,
+            -0.04,
+            0.05240000009536744
+          ]
+        ]
+      },
+      "grip_bottom": {
+        "z": 0.053500000089406974,
+        "triangle_index": 0,
+        "triangle": [
+          [
+            -0.1414000001549721,
+            -0.04,
+            0.053500000089406974
+          ],
+          [
+            -0.17,
+            -0.04,
+            0.053500000089406974
+          ],
+          [
+            -0.14175211273133756,
+            -0.035525974314659835,
+            0.053500000089406974
+          ]
+        ]
+      },
+      "neck_gap_m": 0.0010999999940395355,
+      "panel_bottom": {
+        "z": 0.029999999329447746,
+        "triangle_index": 3078,
+        "triangle": [
+          [
+            0.12099999934434891,
+            0.04600000008940697,
+            0.029999999329447746
+          ],
+          [
+            -0.2809999883174896,
+            -0.12600000202655792,
+            0.029999999329447746
+          ],
+          [
+            -0.2809999883174896,
+            0.04600000008940697,
+            0.029999999329447746
+          ]
+        ]
+      },
+      "panel_top": {
+        "z": 0.054999999701976776,
+        "triangle_index": 4525,
+        "triangle": [
+          [
+            0.12099999934434891,
+            0.04600000008940697,
+            0.054999999701976776
+          ],
+          [
+            -0.2809999883174896,
+            0.04600000008940697,
+            0.054999999701976776
+          ],
+          [
+            -0.2809999883174896,
+            -0.12600000202655792,
+            0.054999999701976776
+          ]
+        ]
+      }
+    },
+    {
+      "scene_id": "control_panel",
+      "object_id": "B",
+      "position": [
+        0.0,
+        -0.04,
+        0.07
+      ],
+      "flange_node": "B/B/0001_flange",
+      "grip_node": "B/B/0000_grip",
+      "panel_node": "workstation/control_panel_environment/0025_instrument_panel",
+      "flange_radius_max_m": 0.035250001482722865,
+      "grip_radius_max_m": 0.03300000169607306,
+      "flange_bottom": {
+        "z": 0.045800000131130225,
+        "triangle_index": 0,
+        "triangle": [
+          [
+            0.03525000065565109,
+            -0.04,
+            0.045800000131130225
+          ],
+          [
+            0.0,
+            -0.04,
+            0.045800000131130225
+          ],
+          [
+            0.034816015511751175,
+            -0.034485685136169196,
+            0.045800000131130225
+          ]
+        ]
+      },
+      "flange_top": {
+        "z": 0.05240000009536744,
+        "triangle_index": 120,
+        "triangle": [
+          [
+            -0.024925513193011284,
+            -0.015074486806988717,
+            0.05240000009536744
+          ],
+          [
+            -0.02851784974336624,
+            -0.019280570521950723,
+            0.05240000009536744
+          ],
+          [
+            0.0,
+            -0.04,
+            0.05240000009536744
+          ]
+        ]
+      },
+      "grip_bottom": {
+        "z": 0.053500000089406974,
+        "triangle_index": 0,
+        "triangle": [
+          [
+            0.032999999821186066,
+            -0.04,
+            0.053500000089406974
+          ],
+          [
+            0.0,
+            -0.04,
+            0.053500000089406974
+          ],
+          [
+            0.03259371593594551,
+            -0.03483766267076135,
+            0.053500000089406974
+          ]
+        ]
+      },
+      "neck_gap_m": 0.0010999999940395355,
+      "panel_bottom": {
+        "z": 0.029999999329447746,
+        "triangle_index": 3079,
+        "triangle": [
+          [
+            0.12099999934434891,
+            0.04600000008940697,
+            0.029999999329447746
+          ],
+          [
+            0.12099999934434891,
+            -0.12600000202655792,
+            0.029999999329447746
+          ],
+          [
+            -0.2809999883174896,
+            -0.12600000202655792,
+            0.029999999329447746
+          ]
+        ]
+      },
+      "panel_top": {
+        "z": 0.054999999701976776,
+        "triangle_index": 4526,
+        "triangle": [
+          [
+            0.12099999934434891,
+            0.04600000008940697,
+            0.054999999701976776
+          ],
+          [
+            -0.2809999883174896,
+            -0.12600000202655792,
+            0.054999999701976776
+          ],
+          [
+            0.12099999934434891,
+            -0.12600000202655792,
+            0.054999999701976776
+          ]
+        ]
+      }
+    },
+    {
+      "scene_id": "optical_bench",
+      "object_id": "L2",
+      "position": [
+        0.0,
+        0.34,
+        0.168
+      ],
+      "shaft_node": "L2/L2/0002_mounting_post",
+      "fixed_post_node": "workstation/optical_bench_environment/0587_fixed_post",
+      "shaft_radius_max_m": 0.007000000216066837,
+      "shaft_bottom": {
+        "z": 0.1030000023841858,
+        "triangle_index": 0,
+        "triangle": [
+          [
+            0.007000000216066837,
+            0.34,
+            0.1030000023841858
+          ],
+          [
+            0.0,
+            0.34,
+            0.1030000023841858
+          ],
+          [
+            0.006913818418979645,
+            0.34109504128340634,
+            0.1030000023841858
+          ]
+        ]
+      },
+      "shaft_top": {
+        "z": 0.168,
+        "triangle_index": 120,
+        "triangle": [
+          [
+            -0.004949747584760189,
+            0.3449497475847602,
+            0.168
+          ],
+          [
+            -0.005663118790835142,
+            0.34411449698731306,
+            0.168
+          ],
+          [
+            0.0,
+            0.34,
+            0.168
+          ]
+        ]
+      },
+      "fixed_post_bottom": {
+        "z": 0.05400000140070915,
+        "triangle_index": 20,
+        "triangle": [
+          [
+            -2.571758291167179e-18,
+            0.32600000500679016,
+            0.05400000140070915
+          ],
+          [
+            0.0,
+            0.3400000035762787,
+            0.05400000140070915
+          ],
+          [
+            0.0021900825668126345,
+            0.3261723518371582,
+            0.05400000140070915
+          ]
+        ]
+      },
+      "fixed_post_top": {
+        "z": 0.10400000214576721,
+        "triangle_index": 129,
+        "triangle": [
+          [
+            -2.571758291167179e-18,
+            0.32600000500679016,
+            0.10400000214576721
+          ],
+          [
+            0.0021900825668126345,
+            0.3261723518371582,
+            0.10400000214576721
+          ],
+          [
+            0.0,
+            0.3400000035762787,
+            0.10400000214576721
+          ]
+        ]
+      }
+    },
+    {
+      "scene_id": "optical_bench",
+      "object_id": "M",
+      "position": [
+        0.0,
+        0.61,
+        0.168
+      ],
+      "shaft_node": "M/M/0002_mounting_post",
+      "fixed_post_node": "workstation/optical_bench_environment/0589_fixed_post",
+      "shaft_radius_max_m": 0.00700000021606686,
+      "shaft_bottom": {
+        "z": 0.1030000023841858,
+        "triangle_index": 0,
+        "triangle": [
+          [
+            0.004949753346490474,
+            0.6149497418956792,
+            0.1030000023841858
+          ],
+          [
+            0.0,
+            0.61,
+            0.1030000023841858
+          ],
+          [
+            0.00411450332134138,
+            0.6156631142458595,
+            0.1030000023841858
+          ]
+        ]
+      },
+      "shaft_top": {
+        "z": 0.168,
+        "triangle_index": 120,
+        "triangle": [
+          [
+            -0.007000000164686648,
+            0.6100000080969462,
+            0.168
+          ],
+          [
+            -0.006913819687201633,
+            0.6089049670184962,
+            0.168
+          ],
+          [
+            0.0,
+            0.61,
+            0.168
+          ]
+        ]
+      },
+      "fixed_post_bottom": {
+        "z": 0.05400000140070915,
+        "triangle_index": 20,
+        "triangle": [
+          [
+            -2.571758291167179e-18,
+            0.5960000157356262,
+            0.05400000140070915
+          ],
+          [
+            0.0,
+            0.6100000143051147,
+            0.05400000140070915
+          ],
+          [
+            0.0021900825668126345,
+            0.5961723923683167,
+            0.05400000140070915
+          ]
+        ]
+      },
+      "fixed_post_top": {
+        "z": 0.10400000214576721,
+        "triangle_index": 129,
+        "triangle": [
+          [
+            -2.571758291167179e-18,
+            0.5960000157356262,
+            0.10400000214576721
+          ],
+          [
+            0.0021900825668126345,
+            0.5961723923683167,
+            0.10400000214576721
+          ],
+          [
+            0.0,
+            0.6100000143051147,
+            0.10400000214576721
+          ]
+        ]
+      }
+    },
+    {
+      "scene_id": "drone_bench",
+      "object_id": "GUARD",
+      "position": [
+        0.072,
+        0.025,
+        0.178
+      ],
+      "flange_node": "GUARD/GUARD/0001_flange",
+      "grip_node": "GUARD/GUARD/0000_grip",
+      "panel_node": "workstation/drone_bench_environment/0027_latch_support",
+      "flange_radius_max_m": 0.016450000926852226,
+      "grip_radius_max_m": 0.015400000098903124,
+      "flange_bottom": {
+        "z": 0.16876000042259692,
+        "triangle_index": 0,
+        "triangle": [
+          [
+            0.08845000092685222,
+            0.025,
+            0.16876000042259692
+          ],
+          [
+            0.072,
+            0.025,
+            0.16876000042259692
+          ],
+          [
+            0.08824747365713119,
+            0.02757334695197642,
+            0.16876000042259692
+          ]
+        ]
+      },
+      "flange_top": {
+        "z": 0.17128000005334615,
+        "triangle_index": 120,
+        "triangle": [
+          [
+            0.060368093036115164,
+            0.03663190696388483,
+            0.17128000005334615
+          ],
+          [
+            0.058691670492291445,
+            0.03466906733810902,
+            0.17128000005334615
+          ],
+          [
+            0.072,
+            0.025,
+            0.17128000005334615
+          ]
+        ]
+      },
+      "grip_bottom": {
+        "z": 0.17169999999180435,
+        "triangle_index": 0,
+        "triangle": [
+          [
+            0.08739999991655349,
+            0.025,
+            0.17169999999180435
+          ],
+          [
+            0.072,
+            0.025,
+            0.17169999999180435
+          ],
+          [
+            0.0872104003354907,
+            0.027409090753644706,
+            0.17169999999180435
+          ]
+        ]
+      },
+      "neck_gap_m": 0.00041999993845820427,
+      "panel_bottom": {
+        "z": 0.13199999928474426,
+        "triangle_index": 3079,
+        "triangle": [
+          [
+            0.08151999861001968,
+            0.04052000120282173,
+            0.13199999928474426
+          ],
+          [
+            0.08151999861001968,
+            0.009479999542236328,
+            0.13199999928474426
+          ],
+          [
+            0.06247999891638756,
+            0.009479999542236328,
+            0.13199999928474426
+          ]
+        ]
+      },
+      "panel_top": {
+        "z": 0.17000000178813934,
+        "triangle_index": 4526,
+        "triangle": [
+          [
+            0.08151999861001968,
+            0.04052000120282173,
+            0.17000000178813934
+          ],
+          [
+            0.06247999891638756,
+            0.009479999542236328,
+            0.17000000178813934
+          ],
+          [
+            0.08151999861001968,
+            0.009479999542236328,
+            0.17000000178813934
+          ]
+        ]
+      },
+      "panel_bounds": [
+        [
+          0.057999998331069946,
+          0.004999999888241291,
+          0.13199999928474426
+        ],
+        [
+          0.0860000029206276,
+          0.04500000178813934,
+          0.17000000178813934
+        ]
+      ]
+    }
+  ]
+}

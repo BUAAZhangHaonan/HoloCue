@@ -1,0 +1,15 @@
+{
+  "schema_version":"1.1","scene_id":"optical_bench","title":"光学元件安装与镜架检查","asset_axes":"gltf_y_up",
+  "camera_position_m":[1.1,-1.55,1.0],"camera_look_at_m":[0,0.37,0.15],
+  "initial_instruction":"把镜架 L1 装入 POST2，将旋转台 M 顺时针转 15 度，随后检查 M 背面的编号，保留 TARGET 提示。",
+  "render_hints":{"workspace_bounds_m":[[-0.53,-0.40,0.025],[0.53,1.13,0.32]]},
+  "objects":[
+    {"object_id":"L1","label":"待装镜架 L1","asset":"scenes/optical_bench/meshes/L1.glb","recipe":"lens","size_m":[0.10,0.05,0.13],"pose":{"position_m":[0.22,-0.12,0.13],"wxyz":[0.984808,0,0,0.173648]},"color":[53,80,95],"capabilities":["point","insert"],"description":"镜架下方的圆柱插入套筒，透镜表面具有弧度。","interaction":{"mating_pose":{"position_m":[0,0,-0.065]},"approach_distance_m":0.10,"transit_height_m":0.10}},
+    {"object_id":"POST2","label":"二号支柱套筒","asset":"scenes/optical_bench/meshes/POST2.glb","recipe":"post","size_m":[0.09,0.08,0.11],"pose":{"position_m":[0,0.10,0.085]},"color":[123,133,143],"capabilities":["point"],"anchors":{"insertion":[0,0,0.018]},"description":"中空套筒承接镜架支柱，侧面锁紧螺钉可见。"},
+    {"object_id":"L2","label":"固定镜架 L2","asset":"scenes/optical_bench/meshes/L2.glb","recipe":"lens","size_m":[0.10,0.05,0.13],"pose":{"position_m":[0,0.34,0.168]},"capabilities":["point"],"description":"已安装的同型镜架，供对象指代区分。"},
+    {"object_id":"M","label":"带刻度镜架 M","asset":"scenes/optical_bench/meshes/M.glb","recipe":"mirror","size_m":[0.12,0.065,0.13],"pose":{"position_m":[0,0.61,0.168],"wxyz":[0.92388,0,0,0.382683]},"color":[70,87,105],"capabilities":["point","rotate","inspect_back"],"description":"竖直轴旋转台，背面 +Y 具有镜架编号与调节螺钉。","interaction":{"rotation_axis_local":[0,0,1],"pivot_local_m":[0,0,-0.065],"inspect_point_local_m":[0,0.034,0.015],"inspect_normal_local":[0,1,0]}},
+    {"object_id":"TARGET","label":"十字靶屏","asset":"scenes/optical_bench/meshes/TARGET.glb","recipe":"target_screen","size_m":[0.18,0.03,0.20],"pose":{"position_m":[-0.31,0.88,0.17]},"capabilities":["point","wait"],"description":"提供几何位置与刻度参考，训练时光源关闭。"}
+  ],
+  "environment":[{"prop_id":"workstation","asset":"scenes/optical_bench/meshes/env/workstation.glb"}],
+  "task_contract":{"setting":"关闭光源的光学元件装配教学台，检查几何安装和镜架刻度。","ordered_steps":[{"target_id":"L1","action":"insert","reference_id":"POST2"},{"target_id":"M","action":"rotate","angle_deg":-15},{"target_id":"M","action":"inspect_back","depth_requirement":"persistent"}],"persistent_targets":["TARGET"],"interrupt_target":"M","interrupt_instruction":"先看看 M 背面的编号，保存当前的安装与角度设置。"}
+}
