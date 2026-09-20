@@ -1,195 +1,364 @@
-"""Viser front end. One operator/session at a time, with versioned backend polling."""
+"""Isolated operator sessions, asynchronous snapshots and a continuous display clock."""
 from __future__ import annotations
-import argparse,os,time,threading,uuid
-import httpx,numpy as np,trimesh
+
+import argparse
+from concurrent.futures import ThreadPoolExecutor
+import json
+import os
+import threading
+import time
+import uuid
+
+import httpx
+import numpy as np
+import viser
+
 from .config import root,load_scene,list_scenes
 from .models import DisplayPacket
-from .geometry import primitive_pool,display_pose
-from .preview import response_panel
+from .response import profile
+from .viewer_scene import SceneRenderer
+from .bridge import atomic_json
+from .versioning import VersionGate
 
-class Viewer:
-    def __init__(self,base:str,host:str,port:int):
-        import viser
-        if host not in ('127.0.0.1','localhost','::1'):
-            raise ValueError('Viser is loopback-only in phase 1. Use an SSH tunnel.')
-        self.base=base.rstrip('/');self.headers={}
-        if os.environ.get('HOLOCUE_API_KEY'):self.headers['Authorization']='Bearer '+os.environ['HOLOCUE_API_KEY']
-        self.http=httpx.Client(timeout=5,headers=self.headers)
-        self.server=viser.ViserServer(host=host,port=port)
-        self.server.scene.set_up_direction('+z')
-        self.server.gui.configure_theme(dark_mode=False,control_layout='collapsible')
-        self.lock=threading.RLock();self.sid=None;self.active_scene=None
-        self.world=[];self.cue_handles=[];self.motion=[];self.current_packet=None;self.scene_bounds={}
-        self.packet_key=None;self.phase=0.;self.last_tick=time.perf_counter();self.last_poll=0.
-        items=list_scenes();self.titles={x['title']:x['scene_id'] for x in items}
-        # The control stack is tabbed so long queues/preview imagery never crowd the
-        # task controls; the four operations share one button group row.
-        # viser 1.1.1: tab-group handles are not context managers, tab handles are.
-        tabs=self.server.gui.add_tab_group()
-        # HOLOCUE_INITIAL_SCENE selects the kit the viewer opens with (evidence
-        # captures per scene); default stays the first kit in the sorted list.
-        init_id=os.environ.get('HOLOCUE_INITIAL_SCENE') or items[0]['scene_id']
-        init_title=next((i['title'] for i in items if i['scene_id']==init_id),items[0]['title'])
-        init_instruction=next((i['initial_instruction'] for i in items if i['title']==init_title),'')
+
+class Operator:
+    def __init__(self,client: viser.ClientHandle,base: str):
+        self.client=client
+        self.base=base.rstrip('/')
+        self.http=httpx.Client(timeout=httpx.Timeout(5.,connect=3.),headers={
+            'Authorization':'Bearer '+os.environ['HOLOCUE_API_KEY']} if os.environ.get('HOLOCUE_API_KEY') else {})
+        self.executor=ThreadPoolExecutor(max_workers=1,thread_name_prefix=f'operator-{client.client_id}')
+        self.lock=threading.RLock()
+        self.stop=threading.Event()
+        self.renderer=None
+        self.sid=None
+        self.revision=-1
+        self.epoch=-1
+        self.pending=0
+        self.gate=VersionGate()
+        self.failed=False
+        self.loaded=False
+        self.last_snapshot=0.
+        self.packet=None
+        self.generation=0
+        self.last_view_export=0.
+        self.log_dir=root()/'runs/simulation/viewer'
+        self.log_dir.mkdir(parents=True,exist_ok=True)
+        self.log_file=self.log_dir/f'client_{client.client_id}.jsonl'
+        choices=list_scenes()
+        self.by_title={s['title']:s['scene_id'] for s in choices}
+        initial_id=os.environ.get('HOLOCUE_INITIAL_SCENE',choices[0]['scene_id'])
+        initial=next(s for s in choices if s['scene_id']==initial_id)
+        gui=client.gui
+        self.status=gui.add_markdown('连接场景服务')
+        tabs=gui.add_tab_group()
         with tabs.add_tab('任务'):
-            self.status=self.server.gui.add_markdown('正在连接后端')
-            self.scene_choice=self.server.gui.add_dropdown('场景',options=list(self.titles),initial_value=init_title)
-            self.command=self.server.gui.add_text('输入任务',initial_value=init_instruction)
-            self.actions=self.server.gui.add_button_group('操作',['发送并更新任务','立即暂停','确认完成','继续'])
-            self.detail=self.server.gui.add_markdown('任务尚未开始')
-        with tabs.add_tab('显示'):
-            self.focus=self.server.gui.add_slider('示意焦点',min=-1.5,max=1.5,step=.05,initial_value=0.)
-            self.preview=self.server.gui.add_image(response_panel([],0),label='响应设计示意')
-            self.warning=self.server.gui.add_markdown('几何提示与示意焦点预览;真实波场由后续光学后端接入。')
+            self.scene_choice=gui.add_dropdown('场景',options=list(self.by_title),initial_value=initial['title'],disabled=True)
+            self.command=gui.add_text('任务指令',initial_value=initial['initial_instruction'])
+            self.actions=gui.add_button_group('任务操作',['发送任务','暂停动作','确认完成','恢复任务'],visible=False)
+            self.playback_speed=gui.add_number('动作播放速度',min=.1,max=2.,step=.05,initial_value=1.)
+            self.message=gui.add_markdown('选择任务并提交指令')
+            self.task_list=gui.add_markdown('任务队列为空')
+            self.suspended_list=gui.add_markdown('')
+            self.session_field=gui.add_text('会话标识',initial_value=os.environ.get('HOLOCUE_SESSION_ID',''))
+            self.open_button=gui.add_button('打开已有会话')
+        with tabs.add_tab('观察'):
+            self.follow=gui.add_checkbox('跟随当前步骤',initial_value=True)
+            self.target=gui.add_dropdown('观察对象',options=['等待场景'],initial_value='等待场景',disabled=True)
+            self.view=gui.add_button_group('观察方式',['工作区域','目标特写','结构检查'],visible=False)
+            self.inspect_text=gui.add_markdown('结构检查显示选中对象的真实网格与表面标签')
+            self.focus_button=gui.add_button('聚焦选中对象',disabled=True)
+        with tabs.add_tab('显示响应'):
+            self.focus=gui.add_slider('焦点距离 米',min=.05,max=20.,step=.005,initial_value=1.)
+            self.brightness=gui.add_slider('提示亮度',min=0.,max=4.,step=.05,initial_value=1.)
+            self.focus_number=gui.add_number('焦点数值 米',min=.05,max=20.,step=.005,initial_value=1.)
+            self.brightness_number=gui.add_number('亮度数值',min=0.,max=4.,step=.05,initial_value=1.)
+            self.enabled=gui.add_checkbox('显示任务提示',initial_value=True)
+            self.response_note=gui.add_markdown(
+                '解析 Gaussian 包络仿真\n\n'+profile().profile_id+
+                '\n\n参数来源：configs/preview_response.json；N 与 σ 分配来源：configs/display_policy.json。'+
+                '\n\n焦点距离、Gaussian 宽度与亮度直接改变三维提示。显示放大倍率 '
+                +str(profile().visual_magnification)+'。光学标定由物理后端提供。')
+            self.response_values=gui.add_markdown('等待任务参数')
+
         @self.scene_choice.on_update
-        def scene_changed(_):
-            try:self.load(self.titles[self.scene_choice.value])
-            except Exception as e:self.status.content=f'**场景加载错误**\n\n{e}'
+        def change_scene(event):
+            if event.client_id is not None:
+                self.launch(self.load,self.by_title[self.scene_choice.value],None)
+
         @self.actions.on_click
-        def act(event):
-            # viser 1.1.1 passes a GuiEvent; the clicked label is the group's value.
-            val=event.target.value
-            if val=='发送并更新任务':self.worker(self.submit,self.command.value)
-            elif val=='立即暂停':self.worker(self.control,'pause')
-            elif val=='确认完成':self.worker(self.control,'complete')
-            elif val=='继续':self.worker(self.control,'resume')
-        @self.focus.on_update
-        def focus(_):
-            with self.lock:
-                if self.current_packet:self.preview.image=response_panel(self.current_packet.cues,self.focus.value)
-        @self.server.on_client_connect
-        def connect(client):
-            with self.lock:
-                if self.active_scene:
-                    pos,look=self._camera(self.active_scene,self.scene_bounds.get(self.active_scene.scene_id,[]))
-                    client.camera.position=pos;client.camera.look_at=look
-        try:
-            self.load(init_id)
-        except Exception as e:  # noqa: BLE001 - fall back loudly, never crash the viewer
-            print(f'[viewer] HOLOCUE_INITIAL_SCENE={init_id!r} failed ({e!r}); loading first kit instead')
-            self.load(items[0]['scene_id'])
-    def _camera(self,spec,bounds):
-        """JSON camera by default; with fit_camera, back off along its axis until the
-        scene bbox fills ~70% of a 50 deg perspective view (JSON positions were
-        authored for orthographic framing and read as 'scene too small' in Viser)."""
-        import math
-        pos=np.asarray(spec.camera_position_m,float);look=np.asarray(spec.camera_look_at_m,float)
-        if not spec.render_hints.fit_camera or not bounds:
-            return pos,look
-        lo=np.min([b[0] for b in bounds],axis=0);hi=np.max([b[1] for b in bounds],axis=0)
-        radius=float(np.linalg.norm(hi-lo)/2)
-        direction=pos-look;n=np.linalg.norm(direction)
-        if n<1e-6:return pos,look
-        dist=radius/math.tan(math.radians(25.))/0.7
-        return look+direction/n*dist,look
-    def request(self,method,path,**kwargs):
-        r=self.http.request(method,self.base+path,**kwargs)
-        r.raise_for_status();return r.json()
-    def worker(self,fn,*args):
-        def run():
-            try:fn(*args)
-            except Exception as e:self.status.content=f'**请求未完成**\n\n{e}'
-        threading.Thread(target=run,daemon=True).start()
-    def load(self,scene_id):
-        s=self.request('POST','/api/v1/sessions',json={'scene_id':scene_id})
-        spec=load_scene(scene_id)
-        with self.lock:
-            self.sid=s['session_id'];self.active_scene=spec;self.packet_key=None
-            for h in self.world+self.cue_handles:h.remove()
-            self.world=[];self.cue_handles=[];self.motion=[];self.current_packet=None
-            rh=spec.render_hints
-            bounds=[]
-            self.world.append(self.server.scene.add_grid('/world/grid',width=rh.grid_extent_m,height=rh.grid_extent_m))
-            if spec.environment:
-                # Environment props are scenery only: no labels, never planner objects,
-                # and never part of the fit_camera bbox: a scene shell that encloses the
-                # subject (engine_bay garage, incl. far-away props) pushed the backup to
-                # ~7x the authored distance, shrinking the subject and rendering the
-                # fixed 2.4 mm cue points sub-pixel (invisible). Fit the task subject.
-                for p in spec.environment:
-                    mesh=trimesh.load(root()/p.asset,force='mesh');mesh.apply_scale(p.scale_m)
-                    self.world.append(self.server.scene.add_mesh_trimesh('/world/env/'+p.prop_id,mesh,position=p.pose.position_m,wxyz=p.pose.wxyz))
+        def operation(event):
+            label=event.target.value
+            if label=='发送任务':
+                self.launch(self.submit,self.command.value)
             else:
-                bench=trimesh.creation.box((.65,.58,.018));bench.apply_translation((0,.08,-.009))
-                self.world.append(self.server.scene.add_mesh_simple('/world/bench',bench.vertices,bench.faces,color=(224,231,236)))
-            for o in spec.objects:
-                mesh=trimesh.load(root()/o.asset,force='mesh')
-                self.world.append(self.server.scene.add_mesh_trimesh('/world/'+o.object_id,mesh,position=o.pose.position_m,wxyz=o.pose.wxyz))
-                bounds.append(mesh.bounds+np.asarray(o.pose.position_m))
-                p=np.asarray(o.pose.position_m)+[0,0,rh.label_offset_m]
-                self.world.append(self.server.scene.add_label('/world_labels/'+o.object_id,o.label,position=p))
-            self.command.value=spec.initial_instruction
-            self.scene_bounds[scene_id]=bounds
-            cam_pos,cam_look=self._camera(spec,bounds)
-            for client in self.server.get_clients().values():
-                client.camera.position=cam_pos;client.camera.look_at=cam_look
-            self.status.content=f'**{spec.title}**\n\n会话 {self.sid[:8]}'
-    def submit(self,text):
-        with self.lock:sid=self.sid
-        s=self.request('GET',f'/api/v1/sessions/{sid}')
-        self.request('POST',f'/api/v1/sessions/{sid}/messages',json={'text':text,'request_id':uuid.uuid4().hex,'expected_revision':s['revision']})
-    def control(self,operation):
-        with self.lock:sid=self.sid
-        s=self.request('GET',f'/api/v1/sessions/{sid}')
-        self.request('POST',f'/api/v1/sessions/{sid}/control/{operation}',json={'expected_revision':s['revision']})
-    def refresh(self,p:DisplayPacket,state:dict):
-        with self.lock:
-            if p.session_id!=self.sid:return
-            key=(p.revision,p.epoch)
-            old=self.current_packet
-            self.current_packet=p
-            if key!=self.packet_key:
-                old_ids=[c.task_id for c in old.cues] if old else []
-                new_ids=[c.task_id for c in p.cues]
-                if old_ids!=new_ids:self.phase=0.
-                for h in self.cue_handles:h.remove()
-                self.cue_handles=[];self.motion=[]
-                objects={o.object_id:o for o in self.active_scene.objects}
-                rh=self.active_scene.render_hints
-                for i,c in enumerate(p.cues):
-                    if c.n_gaussians<=0:continue
-                    name=f'/cues/{i}'
-                    kind=c.cue_type if c.cue_type in ('ring_arrow','straight_arrow') else 'highlight'
-                    pts=primitive_pool(kind)[:c.n_gaussians]*rh.cue_scale
-                    rgb=(60,153,144) if c.task_role=='current' else (147,173,190)
-                    h=self.server.scene.add_point_cloud(name+'/points',points=pts,colors=np.tile(np.asarray(rgb,dtype=np.uint8),(len(pts),1)),point_size=.0024,position=c.pose.position_m,wxyz=c.pose.wxyz)
-                    self.cue_handles.append(h)
-                    self.cue_handles.append(self.server.scene.add_label(name+'/text',c.instruction,position=np.asarray(c.pose.position_m)+[0,0,rh.label_offset_m+.05]))
-                    if c.cue_type=='ghost_motion':
-                        mesh=trimesh.load(root()/objects[c.target_id].asset,force='mesh')
-                        ghost=self.server.scene.add_mesh_simple(name+'/ghost',mesh.vertices,mesh.faces,color=(78,181,171),opacity=.5,position=c.pose.position_m,wxyz=c.pose.wxyz)
-                        self.cue_handles.append(ghost)
-                        if c.task_role=='current':self.motion.append((ghost,c))
-                    elif c.action=='rotate' and c.task_role=='current':self.motion.append((h,c))
-                self.packet_key=key
-                self.preview.image=response_panel(p.cues,self.focus.value)
-            error=state.get('last_error')
-            self.status.content=f"**{self.active_scene.title}**\n\n模式 {state['backend_mode']}  ·  状态 {p.execution}  ·  版本 {p.revision}"
-            if error:self.status.content+='\n\n**错误** '+error
-            queue='\n'.join(f"- {c.target_id}  {c.task_role}  N {c.n_gaussians}  σ {c.sigma_value:g}" for c in p.cues)
-            self.detail.content=f"{state['assistant_message']}\n\n{queue}\n\n挂起计划 {len(state['suspended'])}  ·  完成步骤 {len(state['completed'])}"
-    def run(self):
-        while True:
-            now=time.perf_counter();dt=min(now-self.last_tick,.2);self.last_tick=now
+                self.launch(self.control,{'暂停动作':'pause','确认完成':'complete','恢复任务':'resume'}[label])
+
+        @self.open_button.on_click
+        def open_session(_):
+            self.launch(self.load,None,self.session_field.value.strip())
+
+        @self.view.on_click
+        def select_view(event):
+            mode={'工作区域':'workspace','目标特写':'detail','结构检查':'inspection'}[event.target.value]
             with self.lock:
-                if self.current_packet and self.current_packet.execution=='running':self.phase+=dt
-                for handle,cue in self.motion:
-                    pos,q=display_pose(cue,self.phase,True);handle.position=pos;handle.wxyz=q
-                sid=self.sid
-            if now-self.last_poll>.20:
-                self.last_poll=now
-                try:
-                    p=DisplayPacket.model_validate(self.request('GET',f'/api/v1/sessions/{sid}/display'))
-                    state=self.request('GET',f'/api/v1/sessions/{sid}')
-                    self.refresh(p,state)
-                except Exception as e:
-                    # Freeze the visualization when a fresh authoritative state is unavailable.
-                    with self.lock:
-                        if self.current_packet:self.current_packet.execution='paused'
-                    self.status.content=f'**后端连接中断，动作已停住**\n\n{e}'
-            time.sleep(max(0.,1/30-(time.perf_counter()-now)))
+                if self.renderer is None:
+                    raise RuntimeError('scene is loading')
+                self.renderer.select_view(mode,self.target.value)
+                obj=self.renderer.objects[self.target.value]
+                self.inspect_text.content=obj.label+'\n\n'+obj.description
+                self.record('view',{'mode':mode,'target':obj.object_id})
+
+        @self.focus_button.on_click
+        def focus_selected(_):
+            with self.lock:
+                distance=self.renderer.focus_distance(self.target.value)
+                if not .05<=distance<=20:
+                    raise ValueError('focus distance outside the configured viewer range')
+                self.focus.value=distance
+
+        @self.focus.on_update
+        def focus_value(_):
+            self.focus_number.value=self.focus.value
+
+        @self.focus_number.on_update
+        def focus_number(_):
+            self.focus.value=self.focus_number.value
+
+        @self.brightness.on_update
+        def brightness_value(_):
+            self.brightness_number.value=self.brightness.value
+
+        @self.brightness_number.on_update
+        def brightness_number(_):
+            self.brightness.value=self.brightness_number.value
+
+        @client.camera.on_update
+        def resized(_):
+            with self.lock:
+                if self.renderer and self.loaded and getattr(self,'camera_aspect',None)!=client.camera.aspect:
+                    self.camera_aspect=client.camera.aspect
+                    self.renderer.select_view(self.renderer.view_mode,self.target.value)
+
+        self.launch(self.load,initial_id,os.environ.get('HOLOCUE_SESSION_ID'))
+        threading.Thread(target=self.poll,daemon=True,name=f'poll-{client.client_id}').start()
+        threading.Thread(target=self.animate,daemon=True,name=f'animate-{client.client_id}').start()
+
+    def record(self,kind,data):
+        with self.log_file.open('a',encoding='utf-8') as file:
+            file.write(json.dumps({'time':time.time(),'kind':kind,'session_id':self.sid,**data},ensure_ascii=False)+'\n')
+
+    def request(self,method,path,**kwargs):
+        response=self.http.request(method,self.base+path,**kwargs)
+        response.raise_for_status()
+        return response.json()
+
+    def launch(self,fn,*args):
+        with self.lock:
+            self.pending+=1
+        future=self.executor.submit(fn,*args)
+        def finish(result):
+            with self.lock:
+                self.pending-=1
+            if result.cancelled():
+                return
+            error=result.exception()
+            if error is not None:
+                with self.lock:
+                    self.failed=True
+                    self.status.content='**执行错误**\n\n'+str(error)
+                    self.record('error',{'type':type(error).__name__,'message':str(error)})
+                result.result()
+        future.add_done_callback(finish)
+        return future
+
+    def load(self,scene_id,sid):
+        controls=(self.target,self.focus_button)
+        self.scene_choice.disabled=True
+        self.actions.visible=False
+        self.view.visible=False
+        for control in controls:
+            control.disabled=True
+        try:
+            self.load_scene_session(scene_id,sid)
+        finally:
+            # A failed load still allows selecting a scene or opening a session.
+            # Operations on scene nodes wait until the requested load succeeds.
+            self.scene_choice.disabled=False
+            self.actions.visible=self.loaded
+            self.view.visible=self.loaded
+            for control in controls:
+                control.disabled=not self.loaded
+
+    def load_scene_session(self,scene_id,sid):
+        with self.lock:
+            self.loaded=False;self.generation+=1;generation=self.generation
+        if sid:
+            state=self.request('GET',f'/api/v1/sessions/{sid}')
+        else:
+            state=self.request('POST','/api/v1/sessions',json={'scene_id':scene_id})
+        spec=load_scene(state['scene_id'])
+        with self.lock:
+            if generation!=self.generation:
+                return
+            if self.renderer:
+                self.renderer.close()
+            self.renderer=SceneRenderer(self.client,spec)
+            self.sid=state['session_id'];self.session_field.value=self.sid
+            self.scene_choice.value=spec.title
+            self.command.value=spec.initial_instruction
+            self.target.options=[o.object_id for o in spec.objects]
+            self.target.value=spec.objects[0].object_id
+            self.packet=None;self.revision=-1;self.epoch=-1
+            self.gate=VersionGate();self.failed=False;self.loaded=True
+            self.renderer.select_view('workspace')
+            self.focus.value=self.renderer.focus_distance(self.target.value)
+            self.status.content=spec.title+'\n\n会话 '+self.sid
+            self.inspect_text.content=spec.task_contract.setting
+            self.record('scene_loaded',{'scene_id':spec.scene_id})
+
+    def submit(self,text):
+        if not text.strip():
+            raise ValueError('任务指令不能为空')
+        with self.lock:
+            sid,generation=self.sid,self.generation
+        state=self.request('GET',f'/api/v1/sessions/{sid}')
+        receipt=self.request('POST',f'/api/v1/sessions/{sid}/messages',json={
+            'text':text,'request_id':uuid.uuid4().hex,'expected_revision':state['revision']})
+        with self.lock:
+            if generation==self.generation:
+                self.gate.require(state['revision']+1,receipt['epoch'])
+                self.failed=False
+                self.last_snapshot=0.
+
+    def control(self,operation):
+        with self.lock:
+            sid,generation=self.sid,self.generation
+        state=self.request('GET',f'/api/v1/sessions/{sid}')
+        receipt=self.request('POST',f'/api/v1/sessions/{sid}/control/{operation}',json={'expected_revision':state['revision']})
+        with self.lock:
+            if generation==self.generation:
+                self.gate.require(receipt['revision'],receipt['epoch'])
+                self.failed=False
+                self.last_snapshot=0.
+
+    def accept(self,data,sid,generation):
+        state=data['state'];packet=DisplayPacket.model_validate(data['display'])
+        if packet.revision!=state['revision'] or packet.epoch!=state['epoch']:
+            raise ValueError('snapshot state and display versions disagree')
+        with self.lock:
+            if sid!=self.sid or generation!=self.generation:
+                return
+            if not self.gate.admit(packet.revision,packet.epoch):
+                return
+            self.last_snapshot=time.perf_counter()
+            if packet.revision==self.revision and packet.epoch==self.epoch:
+                return
+            old_current=next((c.task_id for c in self.packet.cues if c.task_role=='current'),None) if self.packet else None
+            self.renderer.update_packet(packet)
+            self.packet=packet;self.revision=packet.revision;self.epoch=packet.epoch
+            self.status.content=f'**{self.renderer.spec.title}**\n\n{state["backend_mode"]} · {packet.execution} · {packet.revision}'
+            self.message.content=state['assistant_message'] or ''
+            if state['last_error']:
+                self.message.content+='\n\n**执行错误** '+state['last_error']
+            self.task_list.content='\n\n'.join(
+                f'{i+1}. {task["semantic"]["target_id"]}　{task["semantic"]["instruction"]}'
+                for i,task in enumerate(state['queue'])) or (
+                    '临时任务已完成，原计划等待手动恢复。' if state['suspended'] else '当前没有待执行步骤。')
+            if state['suspended']:
+                saved='\n\n'.join(
+                    f'{i+1}. {task["semantic"]["target_id"]}　{task["semantic"]["instruction"]}'
+                    for i,task in enumerate(state['suspended'][-1]))
+                self.suspended_list.content=(f'**已挂起 {len(state["suspended"])} 组计划，最近一组如下**\n\n'
+                    +saved+'\n\n临时任务完成后，请点击“恢复任务”继续原计划。')
+            else:
+                self.suspended_list.content=''
+            self.response_values.content='\n\n'.join(
+                f'{c.target_id}　{c.task_role}　N {c.n_gaussians}　σ {c.sigma_value:g}' for c in packet.cues)
+            current=next((c for c in packet.cues if c.task_role=='current'),None)
+            if current:
+                self.target.value=current.target_id
+                if self.follow.value and old_current!=current.task_id:
+                    mode='inspection' if current.action=='inspect_back' else 'detail' if current.action=='rotate' else 'workspace'
+                    self.renderer.select_view(mode,current.target_id)
+                    self.focus.value=self.renderer.focus_distance(current.target_id)
+                    self.inspect_text.content=self.renderer.objects[current.target_id].description
+            self.record('snapshot',{'revision':packet.revision,'epoch':packet.epoch,
+                'scene_id':packet.scene_id,'backend_mode':state['backend_mode'],
+                'execution':packet.execution,'tasks':[c.task_id for c in packet.cues]})
+
+    def poll(self):
+        while not self.stop.wait(.2):
+            with self.lock:
+                sid,generation=self.sid,self.generation
+                ready=self.loaded and not self.failed
+            if not ready:
+                continue
+            future=self.executor.submit(self.request,'GET',f'/api/v1/sessions/{sid}/snapshot')
+            error=future.exception()
+            if error is not None:
+                with self.lock:
+                    self.failed=True
+                    self.status.content='**连接错误**\n\n'+str(error)
+                    self.record('connection_error',{'message':str(error)})
+                # Keep this polling thread available for an explicit operator retry.
+                # failed stays set, and animation stays frozen, until load/control/submit succeeds.
+                continue
+            self.accept(future.result(),sid,generation)
+
+    def animate(self):
+        previous=time.perf_counter()
+        while not self.stop.wait(1/30):
+            now=time.perf_counter();dt=now-previous;previous=now
+            with self.lock:
+                if self.renderer is None or not self.loaded:
+                    continue
+                running=(not self.pending and not self.failed and now-self.last_snapshot<.8
+                         and self.packet is not None and self.packet.execution=='running'
+                         and self.gate.current(self.packet.revision,self.packet.epoch))
+                self.renderer.tick(dt*self.playback_speed.value,now,self.focus.value,self.brightness.value,self.enabled.value,running)
+                if now-self.last_view_export>=.2:
+                    cam=self.client.camera
+                    atomic_json(self.log_dir/f'client_{self.client.client_id}_view.json',{
+                        'session_id':self.sid,'scene_id':self.renderer.spec.scene_id,
+                        'revision':self.revision,'epoch':self.epoch,
+                        'execution':self.packet.execution if self.packet else 'loading',
+                        'clock_advancing':running,
+                        'generated_at':time.time(),'position_m':list(cam.position),
+                        'look_at_m':list(cam.look_at),'focus_m':self.focus.value,
+                        'up_direction':list(cam.up_direction),'fov_rad':float(cam.fov),
+                        'aspect':float(cam.aspect),
+                        'brightness':self.brightness.value,'enabled':self.enabled.value,
+                        'playback_speed':self.playback_speed.value,
+                        'view_mode':self.renderer.view_mode,'selected_id':self.renderer.selected_id,
+                        'elapsed_s':dict(self.renderer.clock.elapsed)})
+                    self.last_view_export=now
+
+    def close(self):
+        self.stop.set()
+        self.executor.shutdown(wait=True,cancel_futures=True)
+        self.http.close()
+
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--api',default='http://127.0.0.1:8750');p.add_argument('--host',default='127.0.0.1');p.add_argument('--port',type=int,default=8780)
-    a=p.parse_args();Viewer(a.api,a.host,a.port).run()
-if __name__=='__main__':main()
+    parser=argparse.ArgumentParser()
+    parser.add_argument('--api',default='http://127.0.0.1:8750')
+    parser.add_argument('--host',default='127.0.0.1')
+    parser.add_argument('--port',type=int,default=8780)
+    args=parser.parse_args()
+    if args.host not in ('127.0.0.1','localhost','::1'):
+        raise ValueError('Use a loopback address and an SSH tunnel for the viewer')
+    server=viser.ViserServer(host=args.host,port=args.port)
+    server.gui.configure_theme(dark_mode=False,control_layout='collapsible')
+    operators={}
+    @server.on_client_connect
+    def connect(client):
+        operators[client.client_id]=Operator(client,args.api)
+    @server.on_client_disconnect
+    def disconnect(client):
+        operators.pop(client.client_id).close()
+    threading.Event().wait()
+
+
+if __name__=='__main__':
+    main()
