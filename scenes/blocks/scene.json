@@ -1,120 +1,13 @@
 {
-  "schema_version": "1.0",
-  "scene_id": "blocks",
-  "title": "积木的分步搭建",
-  "units": "m",
-  "axes": "right_handed_z_up",
-  "objects": [
-    {
-      "object_id": "A",
-      "label": "黄色积木",
-      "asset": "assets/meshes/common/brick.glb",
-      "pose": {
-        "position_m": [
-          -0.15,
-          -0.09,
-          0
-        ],
-        "wxyz": [
-          1,
-          0,
-          0,
-          0
-        ]
-      },
-      "color": [
-        209,
-        172,
-        93
-      ],
-      "capabilities": [
-        "point",
-        "assemble",
-        "inspect_back"
-      ],
-      "anchors": {},
-      "description": "黄色积木,叠放任务的当前对象,placement 终点由 BASE 锚点决定"
-    },
-    {
-      "object_id": "B",
-      "label": "蓝色积木",
-      "asset": "assets/meshes/common/brick_blue.glb",
-      "pose": {
-        "position_m": [
-          0.15,
-          -0.03,
-          0
-        ],
-        "wxyz": [
-          1,
-          0,
-          0,
-          0
-        ]
-      },
-      "color": [
-        99,
-        144,
-        174
-      ],
-      "capabilities": [
-        "point",
-        "assemble",
-        "inspect_back"
-      ],
-      "anchors": {
-        "placement": [
-          0,
-          0,
-          0.034
-        ]
-      },
-      "description": "蓝色积木,第二步背面检查对象,与 A 构成颜色消歧组"
-    },
-    {
-      "object_id": "BASE",
-      "label": "绿色底板",
-      "asset": "assets/meshes/common/baseplate.glb",
-      "pose": {
-        "position_m": [
-          0,
-          0.2,
-          0
-        ],
-        "wxyz": [
-          1,
-          0,
-          0,
-          0
-        ]
-      },
-      "color": [
-        111,
-        166,
-        151
-      ],
-      "capabilities": [
-        "point"
-      ],
-      "anchors": {
-        "placement": [
-          0,
-          0,
-          0.011
-        ]
-      },
-      "description": "绿色底板,A 的放置基准面(placement 锚点所在)"
-    }
+  "schema_version":"1.1","scene_id":"blocks","title":"积木搭建与底部结构检查","asset_axes":"gltf_y_up",
+  "camera_position_m":[0.55,-0.68,0.55],"camera_look_at_m":[0,0.07,0.025],
+  "initial_instruction":"把黄色积木 A 放到底板 BASE 的标记位置，再检查蓝色积木 B 的底部套筒。",
+  "render_hints":{"workspace_bounds_m":[[-0.31,-0.24,0.025],[0.31,0.35,0.14]]},
+  "objects":[
+    {"object_id":"A","label":"黄色积木 A","asset":"scenes/blocks/meshes/A.glb","recipe":"brick","size_m":[0.064,0.032,0.020],"pose":{"position_m":[-0.13,-0.07,0.040]},"color":[236,179,44],"capabilities":["point","assemble","inspect_back"],"description":"四列两排凸点，底部具有容纳底板凸点的空腔。","interaction":{"mating_pose":{"position_m":[0,0,-0.01]},"approach_distance_m":0.06,"transit_height_m":0.07,"inspect_point_local_m":[0,0,-0.01],"inspect_normal_local":[0,0,-1],"cue_offset_local_m":[0,0,0.025]}},
+    {"object_id":"B","label":"蓝色积木 B","asset":"scenes/blocks/meshes/B.glb","recipe":"brick","size_m":[0.064,0.032,0.020],"pose":{"position_m":[0.13,-0.07,0.040]},"color":[40,107,173],"capabilities":["point","assemble","inspect_back"],"anchors":{"placement":[0,0,0.01]},"description":"底部三个套筒和开口空腔可从检查视图观察。","interaction":{"mating_pose":{"position_m":[0,0,-0.01]},"inspect_point_local_m":[0,0,-0.011],"inspect_normal_local":[0,0,-1],"cue_offset_local_m":[0,0,0.025]}},
+    {"object_id":"BASE","label":"绿色底板","asset":"scenes/blocks/meshes/BASE.glb","recipe":"baseplate","size_m":[0.224,0.16,0.006],"pose":{"position_m":[0,0.14,0.033]},"color":[66,139,95],"capabilities":["point"],"anchors":{"placement":[-0.032,0,0.003]},"description":"规则 16 毫米凸点间距，目标位置与 A 的底部尺寸相容。"}
   ],
-  "initial_instruction": "先把 A 放到底板 BASE 上,然后检查 B 的背面。",
-  "camera_position_m": [
-    0.68,
-    -0.85,
-    0.72
-  ],
-  "camera_look_at_m": [
-    0,
-    0.1,
-    0.04
-  ]
+  "environment":[{"prop_id":"workstation","asset":"scenes/blocks/meshes/env/workstation.glb"}],
+  "task_contract":{"setting":"构造积木教学台，尺寸和凸点间距在场景中统一。","ordered_steps":[{"target_id":"A","action":"assemble","reference_id":"BASE"},{"target_id":"B","action":"inspect_back","depth_requirement":"persistent"}],"interrupt_target":"B","interrupt_instruction":"先检查 B 的底部套筒，保留 A 的搭建任务。"}
 }

@@ -1,9 +1,30 @@
-# `blocks` 场景设计（初代最小场景）
+# 积木搭建与底部结构检查
 
-初代三场景之一：积木分步搭建的最小世界，用于验证接口闭环（LLM 决策 → 状态机 → 投影 → DisplayPacket）。共同协议见 `docs/05_场景与验收协议.md`；扩展轮判据见 `docs/09_新场景与任务设计.md`。
+构造积木教学台，尺寸和凸点间距在场景中统一。 当前配置为 [scene.json](../scene.json)，初始输入使用其中的 `initial_instruction`。
 
-- 初始指令：先把 A 放到底板 BASE 上，然后检查 B 的背面。
-- 对象（3）：A 黄色积木（point/assemble/inspect_back，placement 锚点在 BASE）、B 蓝色积木（point/assemble/inspect_back）、BASE 绿色底板（point）。
-- 几何：trimesh 基元族，`scripts/assets/generate_assets.py` 生成，共享池 `assets/meshes/common/`。
-- live 绑定：`scripts/live_checks/live_smoke.py` 与 `live_extended.py` G6（replace 新任务）。
-- 现行数值以 `scenes/blocks/scene.json` 为准。
+## 任务与打断
+
+1. A：放置，接收对象 BASE。
+2. B：结构检查。
+
+常驻目标：无单独声明。
+
+临时检查输入：先检查 B 的底部套筒，保留 A 的搭建任务。
+
+检查完成后恢复原任务，核对 task_id、动作参数、接收对象和原步骤顺序。动画终点保持等待确认；明确完成后才更新实体位姿。同一对象出现多个动作时，分别保留步骤。
+
+## 对象与结构
+
+| 对象 | 名称 | 动作能力 | 结构与观察说明 |
+|---|---|---|---|
+| A | 黄色积木 A | point、assemble、inspect_back | 四列两排凸点，底部具有容纳底板凸点的空腔。 |
+| B | 蓝色积木 B | point、assemble、inspect_back | 底部三个套筒和侧壁加强筋可从检查视图观察。 |
+| BASE | 绿色底板 | point | 规则 16 毫米凸点间距，目标位置与 A 的底部尺寸相容。 |
+
+尺寸、位姿、转轴、接合坐标系与检查面以配置为共同来源。资产使用标准 glTF 坐标，运行时使用米制、Z 轴向上的世界坐标。工作区域取景涵盖任务对象，结构检查对准模型中的实际部件。
+
+## 构建和验收
+
+统一资产构建入口为 `scripts/scenes/build_simulation_assets.py`，原生构建入口为 `scripts/scenes/build_all.sh`。生成的 Blender 文件位于本场景目录的 `scene.blend`。调整资产时核对已有有效细节、材质、纹理与许可来源。
+
+按照 [验证标准](../../../docs/VALIDATION.md) 完成自动、几何、真实模型、Viser 和 Blender 检查。原生图像与视频覆盖工作区域、操作特写、检查面、起点、动作过程、终点等待、临时检查与恢复；Viser 同时检查宽屏与较窄窗口。最终报告关联实际代码摘要与证据。历史提案、评审和运行记录保留其原始证据含义，当前版本的完成状态由本次验收记录确定。

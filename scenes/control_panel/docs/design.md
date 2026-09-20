@@ -1,10 +1,30 @@
-# `control_panel` 场景设计（初代主场景）
+# 旋钮设置与模块检查
 
-初代三场景之首：旋钮角度操作与背面检查，是状态机、打断-恢复、改参 replace、能力违规等核心用例的主绑定场景。共同协议见 `docs/05_场景与验收协议.md`。
+断电教学控制台，旋钮角度与模块结构检查。 当前配置为 [scene.json](../scene.json)，初始输入使用其中的 `initial_instruction`。
 
-- 初始指令：把 B 逆时针转 30 度，接着检查 C 的背面。
-- 对象（3）：A 旋钮 A（point/rotate）、B 旋钮 B（point/rotate，顶部白线为角度指示线）、C 模块 C（point/inspect_back，背面有凸出的黄色定位结构）。
-- 几何：trimesh 基元族（`scripts/assets/generate_assets.py`），共享池 `assets/meshes/common/`。
-- 测试与回放：`tests/test_core.py` 约 30 处绑定；`examples/replay.json` 与 `examples/display_packet.preview.json`。
-- live 绑定：`scripts/live_checks/live_smoke.py`、`live_interrupt.py`、`live_extended.py`（G1–G5、G7）。
-- 现行数值以 `scenes/control_panel/scene.json` 为准。
+## 任务与打断
+
+1. B：旋转，角度 30 度。
+2. C：结构检查。
+
+常驻目标：无单独声明。
+
+临时检查输入：临时检查 C 的背面，保留 B 的任务和角度，完成后继续 B。
+
+检查完成后恢复原任务，核对 task_id、动作参数、接收对象和原步骤顺序。动画终点保持等待确认；明确完成后才更新实体位姿。同一对象出现多个动作时，分别保留步骤。
+
+## 对象与结构
+
+| 对象 | 名称 | 动作能力 | 结构与观察说明 |
+|---|---|---|---|
+| A | 量程旋钮 A | point、rotate | 独立安装的量程旋钮，顶部刻线与外圈角度盘可见。 |
+| B | 调节旋钮 B | point、rotate | 顶部白色指示线，围绕竖直轴旋转；逆时针角度为正。 |
+| C | 可拆模块 C | point、inspect_back | 独立支座上的模块，背面朝 +Y，具有黄色定位键与四个金属端子。 |
+
+尺寸、位姿、转轴、接合坐标系与检查面以配置为共同来源。资产使用标准 glTF 坐标，运行时使用米制、Z 轴向上的世界坐标。工作区域取景涵盖任务对象，结构检查对准模型中的实际部件。
+
+## 构建和验收
+
+统一资产构建入口为 `scripts/scenes/build_simulation_assets.py`，原生构建入口为 `scripts/scenes/build_all.sh`。生成的 Blender 文件位于本场景目录的 `scene.blend`。调整资产时核对已有有效细节、材质、纹理与许可来源。
+
+按照 [验证标准](../../../docs/VALIDATION.md) 完成自动、几何、真实模型、Viser 和 Blender 检查。原生图像与视频覆盖工作区域、操作特写、检查面、起点、动作过程、终点等待、临时检查与恢复；Viser 同时检查宽屏与较窄窗口。最终报告关联实际代码摘要与证据。历史提案、评审和运行记录保留其原始证据含义，当前版本的完成状态由本次验收记录确定。

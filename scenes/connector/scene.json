@@ -1,114 +1,13 @@
 {
-  "schema_version": "1.0",
-  "scene_id": "connector",
-  "title": "插头的空间对准",
-  "units": "m",
-  "axes": "right_handed_z_up",
-  "objects": [
-    {
-      "object_id": "P",
-      "label": "蓝色插头",
-      "asset": "assets/meshes/common/plug.glb",
-      "pose": {
-        "position_m": [
-          -0.04,
-          -0.14,
-          0
-        ],
-        "wxyz": [
-          1,
-          0,
-          0,
-          0
-        ]
-      },
-      "color": [
-        99,
-        144,
-        174
-      ],
-      "capabilities": [
-        "point",
-        "insert",
-        "inspect_back"
-      ],
-      "anchors": {},
-      "description": "蓝色插头,插入终点由插座 S 口面锚点唯一决定"
-    },
-    {
-      "object_id": "S",
-      "label": "目标插座",
-      "asset": "assets/meshes/common/socket.glb",
-      "pose": {
-        "position_m": [
-          -0.04,
-          0.13,
-          0
-        ],
-        "wxyz": [
-          1,
-          0,
-          0,
-          0
-        ]
-      },
-      "color": [
-        180,
-        188,
-        194
-      ],
-      "capabilities": [
-        "point",
-        "inspect_back"
-      ],
-      "anchors": {
-        "insertion": [
-          0,
-          -0.027,
-          0
-        ]
-      },
-      "description": "目标插座,口面即 insertion 锚点"
-    },
-    {
-      "object_id": "C",
-      "label": "备用模块",
-      "asset": "assets/meshes/common/module.glb",
-      "pose": {
-        "position_m": [
-          0.16,
-          0.23,
-          0.0
-        ],
-        "wxyz": [
-          1,
-          0,
-          0,
-          0
-        ]
-      },
-      "color": [
-        111,
-        166,
-        151
-      ],
-      "capabilities": [
-        "point",
-        "inspect_back"
-      ],
-      "anchors": {},
-      "description": "备用模块,背面检查对象,混淆项"
-    }
+  "schema_version":"1.1","scene_id":"connector","title":"带定位键的插接演示","asset_axes":"gltf_y_up",
+  "camera_position_m":[0.62,-0.82,0.64],"camera_look_at_m":[0,0.07,0.075],
+  "initial_instruction":"把蓝色插头 P 插入目标插座 S，完成后检查模块 C 的背面。",
+  "render_hints":{"workspace_bounds_m":[[-0.53,-0.36,0.025],[0.53,0.60,0.22]]},
+  "objects":[
+    {"object_id":"P","label":"蓝色插头 P","asset":"scenes/connector/meshes/P.glb","recipe":"plug","size_m":[0.072,0.11,0.042],"pose":{"position_m":[-0.10,-0.17,0.051],"wxyz":[0.984808,0,0,0.173648]},"color":[39,110,165],"capabilities":["point","insert","inspect_back"],"description":"前端朝局部 +Y，四针接口与顶部定位键共同限定插接方向。","interaction":{"mating_pose":{"position_m":[0,0.055,0]},"approach_axis_local":[0,-1,0],"approach_distance_m":0.15,"transit_height_m":0.08,"inspect_point_local_m":[0,-0.056,0],"inspect_normal_local":[0,-1,0]}},
+    {"object_id":"S","label":"固定插座 S","asset":"scenes/connector/meshes/S.glb","recipe":"socket","size_m":[0.082,0.070,0.05],"pose":{"position_m":[-0.10,0.16,0.055]},"color":[159,169,178],"capabilities":["point","inspect_back"],"anchors":{"insertion":[0,-0.002,0]},"description":"开口朝 -Y，内部四个接触孔与顶部定位键槽可见。","interaction":{"inspect_point_local_m":[0,0.036,0],"inspect_normal_local":[0,1,0]}},
+    {"object_id":"C","label":"备用模块 C","asset":"scenes/connector/meshes/C.glb","recipe":"module","size_m":[0.10,0.075,0.075],"pose":{"position_m":[0.18,0.15,0.0675]},"color":[65,141,122],"capabilities":["point","inspect_back"],"description":"背面朝 +Y，黄色定位键与接触端子用于检查。","interaction":{"inspect_point_local_m":[0,0.039,0],"inspect_normal_local":[0,1,0]}}
   ],
-  "initial_instruction": "演示把 P 插进 S,插好后再检查 C。",
-  "camera_position_m": [
-    0.6,
-    -0.78,
-    0.6
-  ],
-  "camera_look_at_m": [
-    0.03,
-    0.03,
-    0.04
-  ]
+  "environment":[{"prop_id":"workstation","asset":"scenes/connector/meshes/env/workstation.glb"}],
+  "task_contract":{"setting":"断电插接教学台，按定位键检查插入方向。","ordered_steps":[{"target_id":"P","action":"insert","reference_id":"S"},{"target_id":"C","action":"inspect_back","depth_requirement":"persistent"}],"interrupt_target":"C","interrupt_instruction":"先暂停插接，临时看看 C 的背面，完成后恢复原来的插接任务。"}
 }

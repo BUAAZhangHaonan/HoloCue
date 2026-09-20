@@ -1,10 +1,30 @@
-# `connector` 场景设计（初代最小场景）
+# 带定位键的插接演示
 
-初代三场景之一：插头空间对准，承载 insertion 锚点与 ghost_motion 演示的最小用例。共同协议见 `docs/05_场景与验收协议.md`。
+断电插接教学台，按定位键检查插入方向。 当前配置为 [scene.json](../scene.json)，初始输入使用其中的 `initial_instruction`。
 
-- 初始指令：演示把 P 插进 S，插好后再检查 C。
-- 对象（3）：P 蓝色插头（point/insert/inspect_back，insertion 锚点在插座 S 口面）、S 目标插座（point/inspect_back）、C 备用模块（point/inspect_back）。
-- 几何：trimesh 基元族（`scripts/assets/generate_assets.py`），共享池 `assets/meshes/common/`；module 与 control_panel 复用。
-- 测试绑定：`tests/test_core.py` 姿态动画不变式；`examples/replay.json` 回放夹具。
-- live 绑定：`scripts/live_checks/live_smoke.py`。
-- 现行数值以 `scenes/connector/scene.json` 为准。
+## 任务与打断
+
+1. P：插入，接收对象 S。
+2. C：结构检查。
+
+常驻目标：无单独声明。
+
+临时检查输入：先暂停插接，临时看看 C 的背面，完成后恢复原来的插接任务。
+
+检查完成后恢复原任务，核对 task_id、动作参数、接收对象和原步骤顺序。动画终点保持等待确认；明确完成后才更新实体位姿。同一对象出现多个动作时，分别保留步骤。
+
+## 对象与结构
+
+| 对象 | 名称 | 动作能力 | 结构与观察说明 |
+|---|---|---|---|
+| P | 蓝色插头 P | point、insert、inspect_back | 前端朝局部 +Y，四针接口与顶部定位键共同限定插接方向。 |
+| S | 固定插座 S | point、inspect_back | 开口朝 -Y，内部四个接触孔与顶部定位键槽可见。 |
+| C | 备用模块 C | point、inspect_back | 背面朝 +Y，黄色定位键与接触端子用于检查。 |
+
+尺寸、位姿、转轴、接合坐标系与检查面以配置为共同来源。资产使用标准 glTF 坐标，运行时使用米制、Z 轴向上的世界坐标。工作区域取景涵盖任务对象，结构检查对准模型中的实际部件。
+
+## 构建和验收
+
+统一资产构建入口为 `scripts/scenes/build_simulation_assets.py`，原生构建入口为 `scripts/scenes/build_all.sh`。生成的 Blender 文件位于本场景目录的 `scene.blend`。调整资产时核对已有有效细节、材质、纹理与许可来源。
+
+按照 [验证标准](../../../docs/VALIDATION.md) 完成自动、几何、真实模型、Viser 和 Blender 检查。原生图像与视频覆盖工作区域、操作特写、检查面、起点、动作过程、终点等待、临时检查与恢复；Viser 同时检查宽屏与较窄窗口。最终报告关联实际代码摘要与证据。历史提案、评审和运行记录保留其原始证据含义，当前版本的完成状态由本次验收记录确定。

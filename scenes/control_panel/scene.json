@@ -1,109 +1,13 @@
 {
-  "schema_version": "1.0",
-  "scene_id": "control_panel",
-  "title": "旋钮与背面检查",
-  "units": "m",
-  "axes": "right_handed_z_up",
-  "objects": [
-    {
-      "object_id": "A",
-      "label": "旋钮 A",
-      "asset": "assets/meshes/common/knob.glb",
-      "pose": {
-        "position_m": [
-          -0.18,
-          -0.04,
-          0
-        ],
-        "wxyz": [
-          1,
-          0,
-          0,
-          0
-        ]
-      },
-      "color": [
-        99,
-        144,
-        174
-      ],
-      "capabilities": [
-        "point",
-        "rotate",
-        "inspect_back"
-      ],
-      "anchors": {},
-      "description": "旋钮 A,角度操作混淆项,顶部无指示线"
-    },
-    {
-      "object_id": "B",
-      "label": "旋钮 B",
-      "asset": "assets/meshes/common/knob.glb",
-      "pose": {
-        "position_m": [
-          0,
-          0.075,
-          0.0
-        ],
-        "wxyz": [
-          1,
-          0,
-          0,
-          0
-        ]
-      },
-      "color": [
-        99,
-        144,
-        174
-      ],
-      "capabilities": [
-        "point",
-        "rotate",
-        "inspect_back"
-      ],
-      "anchors": {},
-      "description": "当前操作对象,顶部白线是角度指示线"
-    },
-    {
-      "object_id": "C",
-      "label": "模块 C",
-      "asset": "assets/meshes/common/module.glb",
-      "pose": {
-        "position_m": [
-          0.18,
-          0.2,
-          0.0
-        ],
-        "wxyz": [
-          1,
-          0,
-          0,
-          0
-        ]
-      },
-      "color": [
-        111,
-        166,
-        151
-      ],
-      "capabilities": [
-        "point",
-        "inspect_back"
-      ],
-      "anchors": {},
-      "description": "背面有凸出的黄色定位结构"
-    }
+  "schema_version":"1.1","scene_id":"control_panel","title":"旋钮设置与模块检查","asset_axes":"gltf_y_up",
+  "camera_position_m":[0.65,-0.85,0.67],"camera_look_at_m":[0,0.08,0.11],
+  "initial_instruction":"把 B 逆时针转 30 度，接着检查 C 背面的黄色定位结构。",
+  "render_hints":{"workspace_bounds_m":[[-0.53,-0.36,0.025],[0.53,0.60,0.25]]},
+  "objects":[
+    {"object_id":"A","label":"量程旋钮 A","asset":"scenes/control_panel/meshes/A.glb","recipe":"knob","size_m":[0.065,0.065,0.055],"pose":{"position_m":[-0.17,-0.04,0.07]},"color":[79,120,151],"capabilities":["point","rotate"],"description":"独立安装的量程旋钮，顶部刻线与外圈角度盘可见。","interaction":{"cue_offset_local_m":[0,0,0.038]}},
+    {"object_id":"B","label":"调节旋钮 B","asset":"scenes/control_panel/meshes/B.glb","recipe":"knob","size_m":[0.075,0.075,0.055],"pose":{"position_m":[0,-0.04,0.07]},"color":[38,121,164],"capabilities":["point","rotate"],"description":"顶部白色指示线，围绕竖直轴旋转；逆时针角度为正。","interaction":{"cue_offset_local_m":[0,0,0.038]}},
+    {"object_id":"C","label":"可拆模块 C","asset":"scenes/control_panel/meshes/C.glb","recipe":"module","size_m":[0.11,0.075,0.085],"pose":{"position_m":[0.18,0.17,0.085]},"color":[57,139,128],"capabilities":["point","inspect_back"],"description":"独立支座上的模块，背面朝 +Y，具有黄色定位键与四个金属端子。","interaction":{"inspect_point_local_m":[0,0.039,0],"inspect_normal_local":[0,1,0],"cue_offset_local_m":[0,0,0.065]}}
   ],
-  "initial_instruction": "把 B 逆时针转 30 度,接着检查 C 的背面。",
-  "camera_position_m": [
-    0.75,
-    -0.83,
-    0.68
-  ],
-  "camera_look_at_m": [
-    0,
-    0.1,
-    0.06
-  ]
+  "environment":[{"prop_id":"workstation","asset":"scenes/control_panel/meshes/env/workstation.glb"}],
+  "task_contract":{"setting":"断电教学控制台，旋钮角度与模块结构检查。","ordered_steps":[{"target_id":"B","action":"rotate","angle_deg":30},{"target_id":"C","action":"inspect_back","depth_requirement":"persistent"}],"interrupt_target":"C","interrupt_instruction":"临时检查 C 的背面，保留 B 的任务和角度，完成后继续 B。"}
 }
