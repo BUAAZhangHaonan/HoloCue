@@ -14,6 +14,8 @@ test -x "$BLENDER_BIN"
 APP_PYTHON="${APP_PYTHON:-$PWD/.venv-simulation/bin/python}"
 test -x "$APP_PYTHON"
 test -f scripts/guard/resource_guard.py
+"$APP_PYTHON" scripts/guard/resource_guard.py --rss-limit-gb 8 --log "${RUN_DIR:-runs/simulation}/assets_resources.jsonl" --execute -- \
+  "$APP_PYTHON" scripts/scenes/build_simulation_assets.py --report "${RUN_DIR:-runs/simulation}/assets.json"
 "$APP_PYTHON" scripts/guard/resource_guard.py --rss-limit-gb 12 --log "${RUN_DIR:-runs/simulation}/payload_resources.jsonl" --execute -- \
   "$APP_PYTHON" scripts/scenes/export_blender_payload.py
 for SCENE_FILE in scenes/*/scene.json; do

@@ -10,6 +10,7 @@ from holocue.assets import load_asset,resource
 from holocue.bridge import atomic_json
 from holocue.config import root,load_scene,list_scenes
 from holocue.spatial import transform_points
+from scripts.scenes.build_provenance import inputs,output_root
 
 
 def main():
@@ -24,8 +25,8 @@ def main():
         direction=np.asarray(spec.camera_position_m)-spec.camera_look_at_m
         pos,look=camera.fit(camera.workspace_points(spec,points),direction,aspect=1280/900)
         payload={'scene':spec.model_dump(),'camera':{'position_m':pos,'look_at_m':look},
-                 'width':1280,'height':900}
-        atomic_json(root()/'runs/simulation/blender_payloads'/f'{sid}.json',payload)
+                 'width':1280,'height':900,'provenance':inputs(spec)}
+        atomic_json(output_root()/'blender_payloads'/f'{sid}.json',payload)
     y,x=np.mgrid[-3:3:128j,-3:3:128j]
     alpha=np.exp(-.5*(x*x+y*y))
     rgba=np.zeros((128,128,4),np.uint8);rgba[:,:,:3]=255;rgba[:,:,3]=np.round(alpha*255).astype(np.uint8)

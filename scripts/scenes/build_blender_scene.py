@@ -12,6 +12,8 @@ import bpy
 from mathutils import Matrix,Quaternion,Vector
 
 ROOT=Path(__file__).resolve().parents[2]
+sys.path.insert(0,str(ROOT))
+from scripts.scenes.build_provenance import file_record,output_root,write_report
 
 
 def transform(data):
@@ -48,7 +50,11 @@ def main():
     temp.mkdir(parents=True,exist_ok=True)
     bpy.context.preferences.filepaths.temporary_directory=str(temp)
     bpy.context.preferences.filepaths.save_version=0
-    payload=json.loads((ROOT/'runs/simulation/blender_payloads'/f'{args.scene}.json').read_text())
+    payload_path=output_root()/'blender_payloads'/f'{args.scene}.json'
+    payload=json.loads(payload_path.read_text())
+    for record in payload['provenance']['source']+payload['provenance']['assets']:
+        if file_record(ROOT/record['path'])!=record:
+            raise ValueError('Build input changed after payload export: '+record['path'])
     spec=payload['scene']
     if spec['asset_axes']!='gltf_y_up':
         raise ValueError('Blender builder requires standard Y-up glTF')
@@ -90,9 +96,16 @@ def main():
     scene['holocue_renderer']='analytic_gaussian_preview'
     output=ROOT/'scenes'/spec['scene_id']/'scene.blend'
     bpy.ops.wm.save_as_mainfile(filepath=str(output))
+    report={'scene_id':spec['scene_id'],'payload':file_record(payload_path),
+            'inputs':payload['provenance'],'blender_version':bpy.app.version_string,
+            'blend':file_record(output),'render':None}
+    report_path=output_root()/'build_provenance'/f'{spec["scene_id"]}.json'
+    write_report(report_path,report)
     if args.render:
-        scene.render.filepath=str(ROOT/'runs/simulation'/f'{spec["scene_id"]}_blender.png')
+        scene.render.filepath=str(output_root()/f'{spec["scene_id"]}_blender.png')
         bpy.ops.render.render(write_still=True)
+        report['render']=file_record(scene.render.filepath)
+        write_report(report_path,report)
 
 
 if __name__=='__main__':
