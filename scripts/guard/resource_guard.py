@@ -2,7 +2,7 @@
 Defaults are conservative project policy, not claimed server administrator thresholds.
 """
 from __future__ import annotations
-import argparse,csv,io,json,os,signal,subprocess,time,sys,fcntl
+import argparse,csv,ctypes,io,json,os,signal,subprocess,time,sys,fcntl
 from pathlib import Path
 import psutil
 GIB=1024**3
@@ -55,16 +55,33 @@ def main():
     if not a.execute:return
     if not command:raise SystemExit('No command supplied')
     env=os.environ.copy();env['CUDA_VISIBLE_DEVICES']=','.join(uuids);env['CUDA_DEVICE_ORDER']='PCI_BUS_ID'
+    env['PYTHONPYCACHEPREFIX']=str(Path(__file__).resolve().parents[2]/'.work/pycache')
+    if not selected:
+        mesa=Path('/usr/share/glvnd/egl_vendor.d/50_mesa.json')
+        if not mesa.is_file():raise SystemExit('CPU rendering requires the existing Mesa EGL vendor')
+        env['LIBGL_ALWAYS_SOFTWARE']='1'
+        env['MESA_LOADER_DRIVER_OVERRIDE']='llvmpipe'
+        env['__EGL_VENDOR_LIBRARY_FILENAMES']=str(mesa)
     env['OMP_NUM_THREADS']='4';env['MKL_NUM_THREADS']='4';env['OPENBLAS_NUM_THREADS']='4'
+    # An intermediate process can exit before the first monitoring sample.
+    # Linux then reparents its descendants here, including separate sessions,
+    # keeping this standalone guard's launched subtree discoverable.
+    libc=ctypes.CDLL(None,use_errno=True)
+    if libc.prctl(36,1,0,0,0)!=0:  # PR_SET_CHILD_SUBREAPER
+        error=ctypes.get_errno()
+        raise OSError(error,os.strerror(error))
+    guard=psutil.Process()
     proc=subprocess.Popen(command,env=env,start_new_session=True)
     log=Path(a.log);log.parent.mkdir(parents=True,exist_ok=True)
-    reason=None
+    reason=None;owned={proc.pid:psutil.Process(proc.pid).create_time()}
     try:
         while proc.poll() is None:
             time.sleep(1)
             vm=psutil.virtual_memory()
             try:
-                parent=psutil.Process(proc.pid);tree=[parent]+parent.children(recursive=True)
+                tree=guard.children(recursive=True)
+                for item in tree:
+                    owned.setdefault(item.pid,item.create_time())
                 rss=sum(x.memory_info().rss for x in tree if x.is_running())
             except psutil.NoSuchProcess:rss=0
             gpus=[d for d in gpu_inventory() if d['uuid'] in uuids] if uuids else []
@@ -76,11 +93,29 @@ def main():
             if reason:break
     except KeyboardInterrupt:reason='user interruption'
     finally:
-        if proc.poll() is None:
-            # Never target names, unrelated PIDs, a whole user, or a GPU reset.
-            os.killpg(proc.pid,signal.SIGTERM)
-            try:proc.wait(timeout=10)
-            except subprocess.TimeoutExpired:os.killpg(proc.pid,signal.SIGKILL);proc.wait()
+        # Children may create their own process groups (browser, exporter,
+        # Blender). Retain creation times so cleanup also covers those groups
+        # after an intermediate parent exits, without ever targeting a reused PID.
+        for item in guard.children(recursive=True):
+            try:owned.setdefault(item.pid,item.create_time())
+            except psutil.NoSuchProcess:continue
+        remaining=[]
+        for pid,created in owned.items():
+            try:
+                item=psutil.Process(pid)
+                if item.create_time()==created and item.status()!=psutil.STATUS_ZOMBIE:
+                    remaining.append(item)
+            except psutil.NoSuchProcess:
+                continue
+        for item in reversed(remaining):
+            try:item.terminate()
+            except psutil.NoSuchProcess:pass
+        _,alive=psutil.wait_procs(remaining,timeout=10)
+        for item in alive:
+            try:item.kill()
+            except psutil.NoSuchProcess:pass
+        psutil.wait_procs(alive,timeout=5)
+        if proc.poll() is None:proc.wait(timeout=5)
     if reason:raise SystemExit('Stopped only owned process group: '+reason)
     raise SystemExit(proc.returncode)
 if __name__=='__main__':main()

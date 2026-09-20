@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 cd "$(dirname "$0")/../.."
+export PYTHONPYCACHEPREFIX="$PWD/.work/pycache"
+mkdir -p "$PYTHONPYCACHEPREFIX"
 ENGINE="${ENGINE:-vllm}"
 SIZE="${MODEL_SIZE:-4B}"
 MODEL_PATH="${MODEL_PATH:-$PWD/models/Qwen3.5-$SIZE}"
@@ -30,5 +32,5 @@ else echo 'Unsupported ENGINE'; exit 5; fi
 # the '--compress-mode=size' flag flashinfer emits, so the sampling op cannot be compiled.
 # Documented adaptation: use vLLM's native sampler instead (VLLM_USE_FLASHINFER_SAMPLER=0).
 export VLLM_USE_FLASHINFER_SAMPLER="${VLLM_USE_FLASHINFER_SAMPLER:-0}"
-.venv/bin/python scripts/guard/resource_guard.py --gpus "$GPUS" --gpu-fraction "$GPU_FRACTION" \
+.venv/bin/python scripts/guard/resource_guard.py --gpus "$GPUS" --gpu-fraction "$GPU_FRACTION" --log "${RUN_DIR:-runs/simulation}/model_resources.jsonl" \
  --host-reserve-gb 32 --rss-limit-gb 32 --min-gpu-free-gb 12 --execute -- "${CMD[@]}"
