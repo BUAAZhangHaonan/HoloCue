@@ -1,27 +1,14 @@
-# 新场景套件检查单（scenes/_template/）
+# 场景模板使用说明
 
-复制本目录为 `scenes/<scene_id>/`（下划线开头目录不进场景清单），按序走完：
+本目录提供当前 1.1 场景契约的编写示例。下划线开头目录不进入运行场景清单。模板资产尚未生成，也没有验收记录。
 
-1. **提案与三轮审查**（scene_agent/ 流程）：`requirements.md` 章程 → `proposals/<id>_vN.md` →
-   research/realism/feasibility 三独立 SubAgent 全 pass 才归档；归档时设计正本移入
-   `scenes/<id>/docs/design.md`，评审报告移入 `scenes/<id>/reviews/`。
-2. **per-scene builder**：`scripts/scenes/build_<id>.py`，模板参照 `build_server_rack.py` /
-   `build_dive_fillstation.py`（LAYOUT 唯一真源 + `from common import *` + kit 校验断言：
-   verify_depths / verify_frame / verify_visibility / verify_back_radial / 插入落位）。
-   产物：`scenes/<id>/meshes/<OID>.glb`（局部原点）与 `scenes/<id>/meshes/env/<id>_<prop>.glb`。
-   经 resource_guard 运行，日志重定向到 `runs/scene_v2/build_<id>.log`。
-3. **origin 守卫**：`.venv/bin/python scripts/scenes/check_origins.py <id>` 全 ok；
-   特殊原点约定登记进其 KNOWN_CONVENTIONS（口面原点类）。
-4. **scene.json 定稿**：builder 的 write_scene_json 产出；相机/深度表 = 评审过的设计值，
-   禁止模板值（ortho/grid 须按实测标定）。
-5. **官方链**：`bash scripts/scenes/build_all.sh <id>` → `scenes/<id>/blend/<id>.blend`、
-   `runs/<id>_blender.png`、`runs/<id>_label_px.json`（resource_guard + Blender 3.1.2 CPU）。
-6. **契约校验**：`.venv/bin/python scripts/scenes/check_scene_kit.py` 全 ok
-   （配置可载、资产在位、blend/docs/reviews/builder 齐、license 已登记）。
-7. **测试**：tests 增补该场景用例（能力表/深度分层/初始指令一致性）；全量 pytest 绿。
-8. **live E2E**（按需）：serve_model.sh（物理 GPU 1/2，vLLM 4B）→ run_api.sh →
-   `scripts/live_checks/` 新增/扩展场景绑定，原始输出留痕 runs/。
-9. **回写**：README 场景清单、`runs/EVIDENCE_INDEX.md` 新章节、
-   `assets/ASSET_LICENSE.md` 新段、`MANIFEST.sha256` 重导出（scripts/release/verify_package.py）。
-10. **收官门禁**：三份独立 SubAgent 审查 JSON（runtime_safety / interaction_visual[视觉实查] /
-    architecture_reproducibility）过 `scripts/release/check_review_gate.py`。
+1. 在获准新增场景时复制为 `scenes/<id>/`，修改 `scene_id`、所有资产路径、标题、对象说明和任务。模板中的 example 必须替换为实际目录名。
+2. 使用统一 `modeling.py` 中已有 recipe；新增几何职责也在统一建模模块实现。填写实际尺寸、位姿、动作轴、源目标接合坐标系、路径间隙和检查面。环境建模同样需要核对场景支持，不可只改标识后认定可运行。
+3. 模型请求使用对象说明和 `initial_instruction`。验收端使用 `task_contract.ordered_steps`、常驻目标和临时检查输入，保留同一对象的重复动作。
+4. 通过 `scripts/scenes/build_simulation_assets.py --scenes <id>` 构建资产，核对网格、比例、接合开口、材质与标签。执行前设置项目内部临时目录与缓存，并采用资源守卫。
+5. 使用 `scripts/scenes/build_all.sh` 构建原生 Blender 场景。当前入口枚举全部配置，输出每个场景目录的 `scene.blend`。
+6. 运行场景检查、全部有效测试、几何与渲染检查。真实模型验收使用 `scripts/tests/live_twelve_scenes.py` 所实现的完整任务检查；新增场景须同时满足实际脚本与验收范围。
+7. 在真实 Viser 与 Blender 中保存工作区域、特写、检查面和运动证据，验证暂停、临时检查、完成、恢复与实体位姿。宽屏和较窄窗口分别检查。
+8. 记录资产来源和许可、实际运行命令、依赖版本、代码与证据摘要。独立审查仅记录实际执行结果，缺项保留为待执行。
+
+详细要求见 [系统架构](../../docs/SIMULATION_ARCHITECTURE.md)、[场景约定](../../docs/SCENE_REVIEW.md) 和 [验证标准](../../docs/VALIDATION.md)。
