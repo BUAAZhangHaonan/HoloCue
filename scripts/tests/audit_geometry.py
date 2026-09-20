@@ -68,6 +68,30 @@ def parts(spec,objects):
     return result,coverage
 
 
+def ordered_steps(spec):
+    """Evaluate authored steps in order, retaining each completed entity pose."""
+    kinds={'rotate':'ring_arrow','insert':'ghost_motion','assemble':'ghost_motion',
+           'inspect_back':'highlight','point':'highlight','wait':'label'}
+    semantics=[CueSemantic(target_id=step.target_id,action=step.action,
+        reference_id=step.reference_id,angle_deg=step.angle_deg,cue_type=kinds[step.action],
+        task_role='current' if index==0 else 'next',priority=5,
+        depth_requirement=step.depth_requirement,instruction='Declared geometry evaluation')
+        for index,step in enumerate(spec.task_contract.ordered_steps)]
+    state=apply_decision(Session(session_id='geometry',scene_id=spec.scene_id,backend_mode='geometry_validation'),
+        Decision(operation='replace',assistant_message='Evaluate ordered trajectories',cues=semantics),spec)
+    task_ids=[task.task_id for task in state.queue]
+    for index,step in enumerate(spec.task_contract.ordered_steps):
+        display=packet(state,spec,load_policy())
+        cue=next(cue for cue in display.cues if cue.task_role=='current')
+        if (cue.task_id,cue.target_id,cue.action,cue.reference_id,cue.angle_deg)!=(
+                task_ids[index],step.target_id,step.action,step.reference_id,step.angle_deg):
+            raise AssertionError('Geometry evaluation changed the declared task identity or order')
+        yield index,step,display,cue,[task.model_dump(mode='json') for task in state.completed]
+        state=apply_decision(state,Decision(operation='complete',assistant_message='Complete evaluated step'),spec)
+    if state.queue or state.suspended:
+        raise AssertionError('Geometry evaluation did not complete all declared steps')
+
+
 def main():
     parser=argparse.ArgumentParser()
     parser.add_argument('--out',type=Path,default=root()/'runs/simulation/geometry_audit.json')
@@ -76,25 +100,24 @@ def main():
     selected=args.scenes or [s['scene_id'] for s in list_scenes()]
     for sid in selected:
         spec=load_scene(sid);objects={o.object_id:o for o in spec.objects}
-        for step in spec.task_contract.ordered_steps:
-            if step.action not in ('insert','assemble'):
+        for step_index,step,display,cue,prior_completed in ordered_steps(spec):
+            if step.action not in ('rotate','insert','assemble'):
                 continue
-            source=objects[step.target_id];receiver=objects[step.reference_id]
-            semantic=CueSemantic(target_id=step.target_id,action=step.action,
-                reference_id=step.reference_id,cue_type='ghost_motion',task_role='current',
-                priority=5,depth_requirement=step.depth_requirement,instruction='Geometric trajectory evaluation')
-            state=apply_decision(Session(session_id='geometry',scene_id=sid,backend_mode='geometry_validation'),
-                Decision(operation='replace',assistant_message='Evaluate declared trajectory',cues=[semantic]),spec)
-            cue=packet(state,spec,load_policy()).cues[0]
-            key='insertion' if step.action=='insert' else 'placement'
-            receiver_frame=receiver.frames[key] if key in receiver.frames else Pose(position_m=receiver.anchors[key])
-            goal=transform(receiver.pose)@transform(receiver_frame)@np.linalg.inv(transform(source.interaction.mating_pose))
-            error=float(np.abs(goal-transform(cue.goal_pose)).max())
-            if error>1e-8:
-                raise AssertionError(f'{sid} mating transform mismatch {error}')
+            source=objects[step.target_id]
+            error=None
+            if step.action in ('insert','assemble'):
+                receiver=objects[step.reference_id]
+                key='insertion' if step.action=='insert' else 'placement'
+                receiver_frame=receiver.frames[key] if key in receiver.frames else Pose(position_m=receiver.anchors[key])
+                goal=transform(display.object_poses[receiver.object_id])@transform(receiver_frame)@np.linalg.inv(transform(source.interaction.mating_pose))
+                error=float(np.abs(goal-transform(cue.goal_pose)).max())
+                if error>1e-8:
+                    raise AssertionError(f'{sid} mating transform mismatch {error}')
             mesh=load_asset(str(resource(root(),source.asset)),spec.asset_axes).to_geometry()
-            sampled,_=trimesh.sample.sample_surface(mesh,1536,seed=4701)
-            obstacle,coverage=parts(spec,[o for o in spec.objects if o.object_id!=source.object_id]+spec.environment)
+            sampled,face_indices=trimesh.sample.sample_surface(mesh,1536,seed=4701)
+            static=[obj.model_copy(update={'pose':display.object_poses[obj.object_id]},deep=True)
+                    for obj in spec.objects if obj.object_id!=source.object_id]
+            obstacle,coverage=parts(spec,static+spec.environment)
             hits=[]
             for index,t in enumerate(np.linspace(0,source.interaction.duration_s,41)):
                 pose=transform(trajectory(cue,float(t)))
@@ -113,8 +136,12 @@ def main():
                     if penetration.any():
                         hits.append({'frame':index,'elapsed_s':float(t),'obstacle':oid,'part':name,
                             'points':int(penetration.sum()),'max_depth_m':float(-distances.min())})
-            rows.append({'scene_id':sid,'source_id':source.object_id,'receiver_id':receiver.object_id,
+            rows.append({'scene_id':sid,'step_index':step_index,'task_id':cue.task_id,
+                         'source_id':source.object_id,'action':step.action,'angle_deg':step.angle_deg,
+                         'receiver_id':step.reference_id,'prior_completed':prior_completed,
+                         'object_poses':{key:pose.model_dump(mode='json') for key,pose in display.object_poses.items()},
                          'independent_mating_error':error,'sampled_surface_points':1536,
+                         'seed':4701,'sample_face_indices':face_indices.tolist(),
                          'trajectory_samples':41,'penetration_threshold_m':.00075,'penetrations':hits,
                          'obstacle_coverage':coverage,
                          'passed':not hits and not any(c['status']=='invalid_solid_topology' for c in coverage)})
@@ -123,7 +150,7 @@ def main():
     passed=all(row['passed'] for row in rows)
     args.out.write_text(json.dumps({'status':'passed' if passed else 'failed',
         'method':'VTK signed distances on validated closed mesh copies; only explicit textured label surfaces are excluded',
-        'coverage':'sampled moving-source surface points; contact between unsampled surfaces remains untested',
+        'coverage':'all declared rotate/insert/assemble steps in order, with prior completed entity poses; finite source surface and time samples do not prove continuous collision freedom',
         'model_backend_exercised':False,'results':rows},ensure_ascii=False,indent=2),encoding='utf-8')
     if not passed:
         raise SystemExit('Geometry audit failed: penetrations or uncovered solid obstacles; inspect the saved report')

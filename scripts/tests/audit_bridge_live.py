@@ -511,7 +511,11 @@ class Audit:
         if resumed['state']['queue']!=saved:
             raise AssertionError('UI resume did not restore the original tasks and parameters')
         self.control('暂停动作','paused')
-        _,restored=self.capture('04_original_restored','detail',first['semantic']['target_id'])
+        first_semantic=first['semantic']
+        first_reference=first_semantic.get('reference_id')
+        restored_mode=('inspection' if first_semantic['action']=='inspect_back' else
+                       'workspace' if first_reference else 'detail')
+        _,restored=self.capture('04_original_restored',restored_mode,first_semantic['target_id'])
         if not saved_clock<=restored['elapsed_s'].get(first['task_id'],0.)<duration:
             raise AssertionError('Resume reset the interrupted clock or skipped its remaining motion')
         self.control('恢复任务','running')
@@ -520,6 +524,10 @@ class Audit:
         end,_=self.capture('05_endpoint_waiting')
         if end['state']['queue']!=initial_tasks or any(t['task_id']==first['task_id'] for t in end['state']['completed']):
             raise AssertionError('Animation endpoint improperly completed or changed a task')
+        if first_reference:
+            receiver,_=self.capture('05_endpoint_receiver','detail',first_reference)
+            if receiver['state']!=end['state']:
+                raise AssertionError('Receiver observation changed the paused task state')
         for index,expected_signature in enumerate(expected):
             snapshot=self.snapshot();current=snapshot['state']['queue'][0]
             if signature(current)!=expected_signature or current['task_id']!=actionable[index]['task_id']:
@@ -527,20 +535,27 @@ class Audit:
             cue=DisplayCue.model_validate(snapshot['display']['cues'][0])
             mode='inspection' if cue.action=='inspect_back' else 'detail'
             if index and cue.action in ('rotate','insert','assemble'):
-                _,start=self.capture(f'step_{index:02d}_start',mode,cue.target_id)
+                # A source-only detail crops distant receivers and transit paths.
+                # Retain the full operation and then inspect its receiving opening.
+                motion_mode='workspace' if cue.reference_id else mode
+                _,start=self.capture(f'step_{index:02d}_start',motion_mode,cue.target_id)
                 started=start['elapsed_s'].get(cue.task_id,0.)
                 if started>=cue.interaction.duration_s*.75:
                     raise AssertionError('Next action was not paused early enough for a distinct middle')
                 self.control('恢复任务','running')
                 self.wait_elapsed(cue.task_id,(started+cue.interaction.duration_s)/2)
                 self.control('暂停动作','paused')
-                _,mid=self.capture(f'step_{index:02d}_middle',mode,cue.target_id)
+                _,mid=self.capture(f'step_{index:02d}_middle',motion_mode,cue.target_id)
                 if not started<mid['elapsed_s'][cue.task_id]<cue.interaction.duration_s:
                     raise AssertionError('Next action middle is outside its time interval')
                 self.control('恢复任务','running')
                 self.wait_elapsed(cue.task_id,cue.interaction.duration_s+.2)
                 self.control('暂停动作','paused')
-                self.capture(f'step_{index:02d}_endpoint',mode,cue.target_id)
+                end,_=self.capture(f'step_{index:02d}_endpoint',motion_mode,cue.target_id)
+                if cue.reference_id:
+                    receiver,_=self.capture(f'step_{index:02d}_endpoint_receiver','detail',cue.reference_id)
+                    if receiver['state']!=end['state']:
+                        raise AssertionError('Receiver observation changed the paused task state')
             elif index:
                 self.capture(f'step_{index:02d}_inspection',mode,cue.target_id)
             goal=trajectory(cue,cue.interaction.duration_s)
