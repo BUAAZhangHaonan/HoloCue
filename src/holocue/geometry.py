@@ -12,18 +12,10 @@ def quaternion_product(a,b):
     return (w*v-x*i-y*j-z*k,w*i+x*v+y*k-z*j,w*j-x*k+y*v+z*i,w*k+x*j-y*i+z*v)
 
 def display_pose(cue,elapsed:float,running:bool):
-    """Preview-only motion; it never changes physical scene state or marks a task complete."""
-    import math
-    t=max(elapsed,0) if running else 0.
-    phase=(1-math.cos(2*math.pi*t/4.))/2
-    xyz=np.asarray(cue.pose.position_m,dtype=float)
-    q=cue.pose.wxyz
-    if cue.action in ('insert','assemble') and cue.goal_pose is not None:
-        xyz=(1-phase)*xyz+phase*np.asarray(cue.goal_pose.position_m)
-    elif cue.action in ('rotate','inspect_back'):
-        angle=(cue.angle_deg if cue.angle_deg is not None else 180.)*phase*math.pi/180.
-        q=quaternion_product(q,(math.cos(angle/2),0.,0.,math.sin(angle/2)))
-    return tuple(float(x) for x in xyz),q
+    """The caller freezes elapsed time whenever execution is paused."""
+    from .spatial import trajectory
+    pose=trajectory(cue,max(elapsed,0.))
+    return pose.position_m,pose.wxyz
 
 def primitive_pool(kind:str,count:int=8192,seed:int=7)->np.ndarray:
     """Fixed-seed, nested sampling of cue geometry, not learned optical Gaussians."""
