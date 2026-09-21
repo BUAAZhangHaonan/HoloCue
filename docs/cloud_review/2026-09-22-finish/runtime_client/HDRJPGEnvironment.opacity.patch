@@ -1,0 +1,10 @@
+--- a/client/src/HDRJPGEnvironment.tsx
++++ b/client/src/HDRJPGEnvironment.tsx
+@@ -104,6 +104,7 @@
+           isFirstLoad.current = false;
+         } else {
+           fadeProgress.current = 1;
++          gl.domElement.style.opacity = "1";
+         }
+         // Scene properties (environment/background + intensity, rotation,
+         // blur) are applied reactively in the effect below, keyed on

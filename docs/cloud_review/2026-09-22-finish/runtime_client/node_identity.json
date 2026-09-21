@@ -1,0 +1,14 @@
+{
+  "node_version": "v24.12.0",
+  "npm_version": "11.6.2",
+  "official_archive": {
+    "path": "/home/hdd3/zhanghaonan/projects/holocue/.work/viser_hdr_opacity_fix/cache/node/node-v24.12.0-linux-x64.tar.xz",
+    "bytes": 30776836,
+    "sha256": "bdebee276e58d0ef5448f3d5ac12c67daa963dd5e0a9bb621a53d1cefbc852fd"
+  },
+  "official_sums": {
+    "path": "/home/hdd3/zhanghaonan/projects/holocue/.work/viser_hdr_opacity_fix/cache/node/SHASUMS256.txt",
+    "bytes": 2967,
+    "sha256": "379ddb0712938bd5f318b3c6235594478e02894f03b0a82343ac9d704e254e57"
+  }
+}

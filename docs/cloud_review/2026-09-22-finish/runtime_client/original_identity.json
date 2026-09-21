@@ -1,0 +1,22 @@
+{
+  "src/HDRJPGEnvironment.tsx": {
+    "path": "/home/hdd3/zhanghaonan/projects/holocue/.venv-simulation/lib/python3.12/site-packages/viser/client/src/HDRJPGEnvironment.tsx",
+    "bytes": 6502,
+    "sha256": "ea854f80e057ccfbba238c645b051b1f0507c89d140e9e1902f0f6a31bf830e1"
+  },
+  "package.json": {
+    "path": "/home/hdd3/zhanghaonan/projects/holocue/.venv-simulation/lib/python3.12/site-packages/viser/client/package.json",
+    "bytes": 2856,
+    "sha256": "085fc9157bbd8f989b259ccce1758a520bbd797c6ae104659bec3edee89c8381"
+  },
+  "package-lock.json": {
+    "path": "/home/hdd3/zhanghaonan/projects/holocue/.venv-simulation/lib/python3.12/site-packages/viser/client/package-lock.json",
+    "bytes": 310427,
+    "sha256": "2df518d57396831ac0bb1bbd736db6905bdbeb1c98f688b93503b856f6cb420e"
+  },
+  "build/index.html": {
+    "path": "/home/hdd3/zhanghaonan/projects/holocue/.venv-simulation/lib/python3.12/site-packages/viser/client/build/index.html",
+    "bytes": 818786,
+    "sha256": "d7a86b58a884879e1e6f09382d405bb69e761afe9fc8c1fdbe5eea6a787230e7"
+  }
+}
