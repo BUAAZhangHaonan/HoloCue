@@ -14,7 +14,8 @@ import numpy as np
 import viser
 
 from .config import root,load_scene,list_scenes
-from .models import DisplayPacket
+from .models import DisplayPacket, Session
+from .presentation import object_summary, session_status, ROLE_TEXT
 from .response import profile
 from .viewer_scene import SceneRenderer
 from .bridge import atomic_json
@@ -40,6 +41,7 @@ class Operator:
         self.loaded=False
         self.last_snapshot=0.
         self.packet=None
+        self.state=None
         self.generation=0
         self.last_view_export=0.
         self.log_dir=root()/'runs/simulation/viewer'
@@ -105,9 +107,17 @@ class Operator:
                 if self.renderer is None:
                     raise RuntimeError('scene is loading')
                 self.renderer.select_view(mode,self.target.value)
-                obj=self.renderer.objects[self.target.value]
-                self.inspect_text.content=obj.label+'\n\n'+obj.description
-                self.record('view',{'mode':mode,'target':obj.object_id})
+                self.refresh_object_summary()
+                self.record('view',{'mode':mode,'target':self.target.value})
+
+        @self.target.on_update
+        def target_changed(event):
+            with self.lock:
+                if not self.loaded or self.renderer is None:
+                    return
+                if event.client_id is not None:
+                    self.renderer.select_view(self.renderer.view_mode,self.target.value)
+                self.refresh_object_summary()
 
         @self.focus_button.on_click
         def focus_selected(_):
@@ -147,6 +157,11 @@ class Operator:
     def record(self,kind,data):
         with self.log_file.open('a',encoding='utf-8') as file:
             file.write(json.dumps({'time':time.time(),'kind':kind,'session_id':self.sid,**data},ensure_ascii=False)+'\n')
+
+    def refresh_object_summary(self):
+        if self.renderer is not None and self.state is not None:
+            self.inspect_text.content=object_summary(
+                self.renderer.spec,self.state,self.target.value).markdown
 
     def request(self,method,path,**kwargs):
         response=self.http.request(method,self.base+path,**kwargs)
@@ -209,12 +224,12 @@ class Operator:
             self.command.value=spec.initial_instruction
             self.target.options=[o.object_id for o in spec.objects]
             self.target.value=spec.objects[0].object_id
-            self.packet=None;self.revision=-1;self.epoch=-1
+            self.packet=None;self.state=Session.model_validate(state);self.revision=-1;self.epoch=-1
             self.gate=VersionGate();self.failed=False;self.loaded=True
             self.renderer.select_view('workspace')
             self.focus.value=self.renderer.focus_distance(self.target.value)
             self.status.content=spec.title+'\n\n会话 '+self.sid
-            self.inspect_text.content=spec.task_contract.setting
+            self.refresh_object_summary()
             self.record('scene_loaded',{'scene_id':spec.scene_id})
 
     def submit(self,text):
@@ -256,8 +271,9 @@ class Operator:
                 return
             old_current=next((c.task_id for c in self.packet.cues if c.task_role=='current'),None) if self.packet else None
             self.renderer.update_packet(packet)
-            self.packet=packet;self.revision=packet.revision;self.epoch=packet.epoch
-            self.status.content=f'**{self.renderer.spec.title}**\n\n{state["backend_mode"]} · {packet.execution} · {packet.revision}'
+            self.packet=packet;self.state=Session.model_validate(state)
+            self.revision=packet.revision;self.epoch=packet.epoch
+            self.status.content=session_status(self.renderer.spec,self.state)
             self.message.content=state['assistant_message'] or ''
             if state['last_error']:
                 self.message.content+='\n\n**执行错误** '+state['last_error']
@@ -274,15 +290,15 @@ class Operator:
             else:
                 self.suspended_list.content=''
             self.response_values.content='\n\n'.join(
-                f'{c.target_id}　{c.task_role}　N {c.n_gaussians}　σ {c.sigma_value:g}' for c in packet.cues)
+                f'{c.target_id}　{ROLE_TEXT[c.task_role]}　N {c.n_gaussians}　σ {c.sigma_value:g}' for c in packet.cues)
             current=next((c for c in packet.cues if c.task_role=='current'),None)
-            if current:
+            if current and self.follow.value:
                 self.target.value=current.target_id
-                if self.follow.value and old_current!=current.task_id:
+                if old_current!=current.task_id or self.renderer.selected_id!=current.target_id:
                     mode='inspection' if current.action=='inspect_back' else 'detail' if current.action=='rotate' else 'workspace'
                     self.renderer.select_view(mode,current.target_id)
                     self.focus.value=self.renderer.focus_distance(current.target_id)
-                    self.inspect_text.content=self.renderer.objects[current.target_id].description
+            self.refresh_object_summary()
             self.record('snapshot',{'revision':packet.revision,'epoch':packet.epoch,
                 'scene_id':packet.scene_id,'backend_mode':state['backend_mode'],
                 'execution':packet.execution,'tasks':[c.task_id for c in packet.cues]})

@@ -11,6 +11,7 @@ from .config import root
 from .models import SceneSpec,DisplayPacket
 from .response import splat_arrays,profile,envelope
 from .spatial import transform_points,trajectory,ActionClock
+from .annotations import annotation_margin,border_annotations
 
 
 def selected_cue_view(spec,packet,current_poses,elapsed,object_id,mode,
@@ -69,6 +70,8 @@ class SceneRenderer:
         self.objects={o.object_id:o for o in spec.objects}
         self.frames={}
         self.labels={}
+        self.label_anchors={}
+        self.annotation_key=None
         self.cues={}
         self.packet=None
         self.clock=ActionClock()
@@ -109,9 +112,47 @@ class SceneRenderer:
             point=np.array([(local.bounds[0,0]+local.bounds[1,0])/2,
                             (local.bounds[0,1]+local.bounds[1,1])/2,local.bounds[1,2]+.018])
             point=np.asarray(obj.anchors.get('label',point),dtype=float)
-            label=scene.add_label(path+'/id',obj.object_id,position=point)
+            label=scene.add_label('/annotations/'+obj.object_id,obj.object_id,
+                visible=False,font_size_mode='scene',font_scene_height=.02,
+                depth_test=False,anchor='center-center')
+            self.label_anchors[obj.object_id]=point
             self.frames[obj.object_id]=parent;self.labels[obj.object_id]=label
             self.handles.extend([parent,child,label])
+        self.leaders=scene.add_line_segments('/annotations/leaders',
+            points=np.empty((0,2,3),dtype=np.float32),colors=(109,126,138),
+            thickness=1.,thickness_units='screen',visible=False)
+        self.handles.append(self.leaders)
+
+    def update_annotations(self):
+        visible=self.view_mode=='workspace'
+        if not visible:
+            for label in self.labels.values():
+                label.visible=False
+            self.leaders.visible=False
+            self.annotation_key=None
+            return
+        cam=self.client.camera
+        key=(tuple(cam.position),tuple(cam.look_at),tuple(cam.up_direction),
+             cam.aspect,cam.fov,tuple((oid,pose.position_m,pose.wxyz)
+                                      for oid,pose in sorted(self.current_poses.items())))
+        if key==self.annotation_key:
+            return
+        anchors={oid:transform_points(self.current_poses[oid],np.asarray([point]))[0]
+                 for oid,point in self.label_anchors.items()}
+        layout=border_annotations(anchors,cam.position,cam.look_at,
+                                  np.rad2deg(cam.fov),cam.aspect,cam.up_direction)
+        for label in self.labels.values():
+            label.visible=False
+        for item in layout:
+            label=self.labels[item.object_id]
+            label.position=item.world_position
+            label.font_scene_height=item.text_height_m
+            label.anchor=item.anchor
+            label.visible=True
+        self.leaders.points=np.asarray([item.leader for item in layout],
+                                       dtype=np.float32).reshape(-1,2,3)
+        self.leaders.visible=bool(layout)
+        self.annotation_key=key
 
     def close(self):
         for handle in self.cues.values():
@@ -139,7 +180,7 @@ class SceneRenderer:
         self.environment.visible=mode!='inspection'
         for oid,handle in self.frames.items():
             handle.visible=mode!='inspection' or oid==self.selected_id
-            self.labels[oid].visible=mode!='inspection'
+            self.labels[oid].visible=False
         targets={c.task_id:c.target_id for c in self.packet.cues} if self.packet else {}
         for tid,handle in self.cues.items():
             handle.visible=mode!='inspection' or targets[tid]==self.selected_id
@@ -161,7 +202,8 @@ class SceneRenderer:
             direction=np.asarray(self.spec.camera_position_m)-self.spec.camera_look_at_m
             points=workspace_points(self.spec,self.points())
             pos,look=fit(points,direction,self.spec.render_hints.fov_y_deg,
-                         cam.aspect,self.spec.render_hints.viewport_margin)
+                         cam.aspect,annotation_margin(list(self.objects),cam.aspect,
+                                                     self.spec.render_hints.viewport_margin))
             up=(0.,0.,1.)
         if self.guidance_enabled:
             pos,look=selected_cue_view(self.spec,self.packet,self.current_poses,self.clock.elapsed,
@@ -169,6 +211,7 @@ class SceneRenderer:
         cam.up_direction=up
         cam.position=pos
         cam.look_at=look
+        self.update_annotations()
 
     def update_packet(self,packet: DisplayPacket):
         if packet.scene_id!=self.spec.scene_id:
@@ -185,6 +228,8 @@ class SceneRenderer:
             if tid not in keep:
                 self.cues.pop(tid).remove()
         self.response_key=None
+        self.annotation_key=None
+        self.update_annotations()
 
     def focus_distance(self,object_id):
         cam=self.client.camera
@@ -200,6 +245,7 @@ class SceneRenderer:
         return depth
 
     def tick(self,dt,now,focus_m,brightness,enabled,running):
+        self.update_annotations()
         self.guidance_enabled=enabled
         self.guidance_brightness=brightness
         if self.packet is None:
