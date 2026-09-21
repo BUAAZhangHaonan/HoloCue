@@ -7,6 +7,14 @@ from pathlib import Path
 import psutil
 GIB=1024**3
 
+def host_memory_reserve(total, minimum_gib, max_used_fraction=None):
+    """An explicit run-scoped percentage replaces the default reserve policy."""
+    if max_used_fraction is not None:
+        if not 0 < max_used_fraction <= .90:
+            raise ValueError('Host maximum used fraction must be in (0,0.90]')
+        return total * (1 - max_used_fraction)
+    return max(minimum_gib * GIB, .20 * total)
+
 def parse_selection(value):
     selected=[int(x.strip()) for x in value.split(',')] if value else []
     if len(selected)!=len(set(selected)) or not set(selected).issubset({1,2}):
@@ -26,12 +34,14 @@ def gpu_jobs():
 
 def main():
     p=argparse.ArgumentParser();p.add_argument('--gpus',default='');p.add_argument('--host-reserve-gb',type=float,default=32)
+    p.add_argument('--host-max-used-fraction',type=float,default=os.environ.get('HOLOCUE_HOST_MAX_USED_FRACTION'),
+                   help='Explicit host policy override, inherited by nested guards through HOLOCUE_HOST_MAX_USED_FRACTION; at most 0.90')
     p.add_argument('--rss-limit-gb',type=float,default=32);p.add_argument('--gpu-fraction',type=float,default=.70)
     p.add_argument('--min-gpu-free-gb',type=float,default=12);p.add_argument('--log',default='runs/resource_guard.jsonl')
     p.add_argument('--execute',action='store_true');p.add_argument('command',nargs=argparse.REMAINDER);a=p.parse_args()
     selected=parse_selection(a.gpus)
     if not 0<a.gpu_fraction<=.80:raise SystemExit('GPU allocation fraction must be in (0,0.80]')
-    vm=psutil.virtual_memory();reserve=max(a.host_reserve_gb*GIB,.20*vm.total)
+    vm=psutil.virtual_memory();reserve=host_memory_reserve(vm.total,a.host_reserve_gb,a.host_max_used_fraction)
     if vm.available<reserve:raise SystemExit('Host available memory is below the reserve')
     if a.rss_limit_gb<=0 or a.rss_limit_gb*GIB>vm.total-reserve:raise SystemExit('Invalid process-tree RSS limit')
     devices=[d for d in gpu_inventory() if d['index'] in selected] if selected else []
@@ -50,11 +60,15 @@ def main():
         lp=Path('runs/locks')/(d['uuid']+'.lock');lp.parent.mkdir(parents=True,exist_ok=True)
         f=lp.open('w');fcntl.flock(f,fcntl.LOCK_EX|fcntl.LOCK_NB);locks.append(f)
     command=a.command[1:] if a.command and a.command[0]=='--' else a.command
-    info={'authorized_physical_gpus':selected,'cuda_visible_devices':uuids,'host_reserve_gib':reserve/GIB,'rss_limit_gib':a.rss_limit_gb,'command':command}
+    info={'authorized_physical_gpus':selected,'cuda_visible_devices':uuids,'host_reserve_gib':reserve/GIB,'rss_limit_gib':a.rss_limit_gb,'command':command,
+          'host_total_gib':vm.total/GIB,'host_max_used_fraction':a.host_max_used_fraction,
+          'host_reserve_policy':'explicit-used-fraction' if a.host_max_used_fraction is not None else 'default-minimum-and-20-percent'}
     print(json.dumps(info,ensure_ascii=False,indent=2))
     if not a.execute:return
     if not command:raise SystemExit('No command supplied')
     env=os.environ.copy();env['CUDA_VISIBLE_DEVICES']=','.join(uuids);env['CUDA_DEVICE_ORDER']='PCI_BUS_ID'
+    if a.host_max_used_fraction is not None:
+        env['HOLOCUE_HOST_MAX_USED_FRACTION']=str(a.host_max_used_fraction)
     env['PYTHONPYCACHEPREFIX']=str(Path(__file__).resolve().parents[2]/'.work/pycache')
     if not selected:
         mesa=Path('/usr/share/glvnd/egl_vendor.d/50_mesa.json')
