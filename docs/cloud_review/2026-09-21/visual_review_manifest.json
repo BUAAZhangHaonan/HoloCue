@@ -1,0 +1,431 @@
+[
+  {
+    "relative_path": "engine_bay_blender.png",
+    "sha256": "11dd9b1cc238f10a13a80f34e77ef1e410ef608425f0f2a2a0aabaa3cc70dad1",
+    "viewed_original": true
+  },
+  {
+    "relative_path": "shelf_picking_blender.png",
+    "sha256": "303cbf2c8081c9c8796ad501dc822aa4494e60164e3a4ac7422bdff137cf001b",
+    "viewed_original": true
+  },
+  {
+    "relative_path": "drone_bench_blender.png",
+    "sha256": "245eefe7309315e400135e961c0da33a3289e08369644f323340e4aec63f9104",
+    "viewed_original": true
+  },
+  {
+    "relative_path": "labels/blocks/wide.png",
+    "sha256": "6fb1d9ed05cc2b31405193aac9deac221d6761cacb962b7bb2261c254f77a88b",
+    "viewed_original": true
+  },
+  {
+    "relative_path": "labels/blocks/narrow.png",
+    "sha256": "4482aecbb0943a138e559e12da3f2f77dd98244dc11889808dae2c90bcd41bd5",
+    "viewed_original": true
+  },
+  {
+    "relative_path": "labels/blocks/wide_restored.png",
+    "sha256": "9bbd9b9f0c55aff08653ead38848c5586d5731a556ffffada2fcd9c366fcd987",
+    "viewed_original": true
+  },
+  {
+    "relative_path": "labels/blocks/detail.png",
+    "sha256": "d04a1e7d10c669195d65eda35b51c829f3cc96866bf663f6f3fb4d72186723a6",
+    "viewed_original": true
+  },
+  {
+    "relative_path": "labels/blocks/inspection.png",
+    "sha256": "0eafbe0f330f8d3d462e97add37d35c6f1d118c3bf41169829e6b380744b02dd",
+    "viewed_original": true
+  },
+  {
+    "relative_path": "labels_r2/cnc_toolchange/wide.png",
+    "sha256": "bdd71e8c7ba34b2ee74c50cbd9f327e8b3b5e007c9417f0062e07af75d886152",
+    "viewed_original": true
+  },
+  {
+    "relative_path": "labels_r2/cnc_toolchange/narrow.png",
+    "sha256": "858dc64de0cf4403c70a4e15a2466257d9464386994ee3a263bcd2291400c0bc",
+    "viewed_original": true
+  },
+  {
+    "relative_path": "labels_r2/cnc_toolchange/wide_restored.png",
+    "sha256": "f1c9b61625438e7977bdfa86b341c893f6e6d6f4360175db88ea6170060c1ae9",
+    "viewed_original": true
+  },
+  {
+    "relative_path": "labels_r2/cnc_toolchange/detail.png",
+    "sha256": "f7f9e4113513f2f48cb66c6c2c98c5db7dcedd222b1db18f96d04a9bef6ae922",
+    "viewed_original": true
+  },
+  {
+    "relative_path": "labels_r2/cnc_toolchange/inspection.png",
+    "sha256": "60695e6ebe3c79e2e0211a0430b1fe0245d22f3e4aab84cb0f386f63a8636ba8",
+    "viewed_original": true
+  },
+  {
+    "relative_path": "labels_r2/connector/wide.png",
+    "sha256": "0e98227e3c577fb678b402c368609c8cd25f04ee179f8967e3dfda9c267f3744",
+    "viewed_original": true
+  },
+  {
+    "relative_path": "labels_r2/connector/narrow.png",
+    "sha256": "c122ee5abb8c7e6634cf1321ab50bd5312411d9f50794b787364aaeb6a600411",
+    "viewed_original": true
+  },
+  {
+    "relative_path": "labels_r2/connector/wide_restored.png",
+    "sha256": "0e98227e3c577fb678b402c368609c8cd25f04ee179f8967e3dfda9c267f3744",
+    "viewed_original": true
+  },
+  {
+    "relative_path": "labels_r2/connector/detail.png",
+    "sha256": "80cf89292cf415059d85682b5b65680b0ab4545f209c6e85b4dee3c0a832ef4d",
+    "viewed_original": true
+  },
+  {
+    "relative_path": "labels_r2/connector/inspection.png",
+    "sha256": "adfcf7c06cd2956439eac3762d2a96f2b97aa3426024af1458da7376db68c2b8",
+    "viewed_original": true
+  },
+  {
+    "relative_path": "labels_r2/control_panel/wide.png",
+    "sha256": "0252ca438fa99e8bdc432b17f51ea0837628bc43292d86eefa6d3e011dde348f",
+    "viewed_original": true
+  },
+  {
+    "relative_path": "labels_r2/control_panel/narrow.png",
+    "sha256": "1038600146167c5b196ad0739eb810da93e8605c29a8fe5089264e78d00582eb",
+    "viewed_original": true
+  },
+  {
+    "relative_path": "labels_r2/control_panel/wide_restored.png",
+    "sha256": "0252ca438fa99e8bdc432b17f51ea0837628bc43292d86eefa6d3e011dde348f",
+    "viewed_original": true
+  },
+  {
+    "relative_path": "labels_r2/control_panel/detail.png",
+    "sha256": "caf2bf3fee2ea403a02e568130c09e9dede267e841054a2abf8cbdcc5056bff2",
+    "viewed_original": true
+  },
+  {
+    "relative_path": "labels_r2/control_panel/inspection.png",
+    "sha256": "839337e3781c17de6176ddd8f1902b8ff14a5505da3200d0d4cac0ac518794a2",
+    "viewed_original": true
+  },
+  {
+    "relative_path": "labels_r2/dig_site/wide.png",
+    "sha256": "ec51a770d5cdb5a33445eaf4a27fece561cfcf76a879a30ca9bfd9fab131a582",
+    "viewed_original": true
+  },
+  {
+    "relative_path": "labels_r2/dig_site/narrow.png",
+    "sha256": "77da842ea0cad179cba42a54438c62a9d336728731d2fb3be0f38aad2b5efc0f",
+    "viewed_original": true
+  },
+  {
+    "relative_path": "labels_r2/dig_site/wide_restored.png",
+    "sha256": "aa68fb48b3b8c04ea0492e2138ceee0a2318282d2015264baf32946b50784ec2",
+    "viewed_original": true
+  },
+  {
+    "relative_path": "labels_r2/dig_site/detail.png",
+    "sha256": "9fe310724d45b31cd2b354ba7504103f66ad5956d43a0544423ccff1acfde2cc",
+    "viewed_original": true
+  },
+  {
+    "relative_path": "labels_r2/dig_site/inspection.png",
+    "sha256": "ea2457967b61cc7c0f8e9a0a73f14fec8c2e00ef5606724458699780355e4903",
+    "viewed_original": true
+  },
+  {
+    "relative_path": "bridge_batches/blocks/blocks/01_start_paused/viser.png",
+    "sha256": "395efb2fc5f9e1eab22b8ec908173c306aab89f2fc519ff756593f0faee956f1",
+    "viewed_original": true
+  },
+  {
+    "relative_path": "bridge_batches/blocks/blocks/01_start_paused/frame_0000.png",
+    "sha256": "f56185a37fb30eda16148301f5f1e158d5a3949dad9700a2231df2f687a55fac",
+    "viewed_original": true
+  },
+  {
+    "relative_path": "bridge_batches/blocks/blocks/02_middle_paused/viser.png",
+    "sha256": "9946397a202082f6057cf708d1442396771c005c9576a3528af02c275461059d",
+    "viewed_original": true
+  },
+  {
+    "relative_path": "bridge_batches/blocks/blocks/02_middle_paused/frame_0000.png",
+    "sha256": "83c4e1d2049d2f78420f42a533416af4aa959bf8663f27e428e25e42aec965e4",
+    "viewed_original": true
+  },
+  {
+    "relative_path": "labels_r2/dive_fillstation/wide.png",
+    "sha256": "744211394d0204c031cb82a67525fc05681b97330c976f6755b1f0fa1e5d91db",
+    "viewed_original": true
+  },
+  {
+    "relative_path": "labels_r2/dive_fillstation/narrow.png",
+    "sha256": "6c56578b64df13966eafac11bb11c0af5c8e0bc4aa01786a14ad3b819c12983a",
+    "viewed_original": true
+  },
+  {
+    "relative_path": "labels_r2/dive_fillstation/wide_restored.png",
+    "sha256": "744211394d0204c031cb82a67525fc05681b97330c976f6755b1f0fa1e5d91db",
+    "viewed_original": true
+  },
+  {
+    "relative_path": "labels_r2/dive_fillstation/detail.png",
+    "sha256": "3c4645796cc914a757b9da60d77fa58d626536b1ba7f1fe144868ba2cab97f55",
+    "viewed_original": true
+  },
+  {
+    "relative_path": "labels_r2/dive_fillstation/inspection.png",
+    "sha256": "af375821de43f8749f98ee0d0b8831de0c5f57967585cce5ecdad252f0cd51d8",
+    "viewed_original": true
+  },
+  {
+    "relative_path": "bridge_batches/blocks/blocks/03_temporary_inspection/viser.png",
+    "sha256": "b1f3ecae26b8c45c1ab225fc7f1937984cac8466530327be96d3d4d1a4ffd055",
+    "viewed_original": true
+  },
+  {
+    "relative_path": "bridge_batches/blocks/blocks/03_temporary_inspection/frame_0000.png",
+    "sha256": "bf057188f7f2009e277fbaca6c12baddb0662885565e6ad357e3e1a0ffbe4b1e",
+    "viewed_original": true
+  },
+  {
+    "relative_path": "labels_final/blocks/wide.png",
+    "sha256": "9bbd9b9f0c55aff08653ead38848c5586d5731a556ffffada2fcd9c366fcd987",
+    "viewed_original": true,
+    "source_sha256": "b2c379ba354ce95e6e48d5a9e73f2ff5bcfecb22acf823b785101b6df5ea2457"
+  },
+  {
+    "relative_path": "labels_final/blocks/wide_repeat.png",
+    "sha256": "9bbd9b9f0c55aff08653ead38848c5586d5731a556ffffada2fcd9c366fcd987",
+    "viewed_original": true,
+    "source_sha256": "b2c379ba354ce95e6e48d5a9e73f2ff5bcfecb22acf823b785101b6df5ea2457"
+  },
+  {
+    "relative_path": "labels_final/blocks/narrow.png",
+    "sha256": "4894b6e568ee4eaec1b3d4cc1d6483b7aa94ca8bfd44175610809f05f9f08b88",
+    "viewed_original": true,
+    "source_sha256": "b2c379ba354ce95e6e48d5a9e73f2ff5bcfecb22acf823b785101b6df5ea2457"
+  },
+  {
+    "relative_path": "labels_final_r2/engine_bay/detail.png",
+    "sha256": "8357c644f1da8c8a20feda94bd106278424f84c7ec185ce1c754ee7b6cf79e16",
+    "viewed_original": true,
+    "source_sha256": "b2c379ba354ce95e6e48d5a9e73f2ff5bcfecb22acf823b785101b6df5ea2457"
+  },
+  {
+    "relative_path": "labels_final_r2/engine_bay/inspection.png",
+    "sha256": "cd628d64fb74c383c8f10a74b573b0538ce729c0b36b491df2e725ff49908a83",
+    "viewed_original": true,
+    "source_sha256": "b2c379ba354ce95e6e48d5a9e73f2ff5bcfecb22acf823b785101b6df5ea2457"
+  },
+  {
+    "relative_path": "bridge_batches/blocks_final/blocks/06_final_workspace/viser.png",
+    "sha256": "b03b093739df1843d4b67bf4fa63ccb02714e3fcf5a615e0ba859b4b30fbb06b",
+    "viewed_original": true,
+    "source_sha256": "b2c379ba354ce95e6e48d5a9e73f2ff5bcfecb22acf823b785101b6df5ea2457"
+  },
+  {
+    "relative_path": "bridge_batches/blocks_final/blocks/06_final_workspace/frame_0000.png",
+    "sha256": "14b2323317eb89b3643297b10ba9caa9086fb4fc809e590886fc750c5e1323d4",
+    "viewed_original": true,
+    "source_sha256": "b2c379ba354ce95e6e48d5a9e73f2ff5bcfecb22acf823b785101b6df5ea2457"
+  },
+  {
+    "relative_path": "labels_final_r2/cnc_toolchange/wide.png",
+    "sha256": "f1c9b61625438e7977bdfa86b341c893f6e6d6f4360175db88ea6170060c1ae9",
+    "viewed_original": true,
+    "source_sha256": "b2c379ba354ce95e6e48d5a9e73f2ff5bcfecb22acf823b785101b6df5ea2457"
+  },
+  {
+    "relative_path": "labels_final_r2/cnc_toolchange/narrow.png",
+    "sha256": "858dc64de0cf4403c70a4e15a2466257d9464386994ee3a263bcd2291400c0bc",
+    "viewed_original": true,
+    "source_sha256": "b2c379ba354ce95e6e48d5a9e73f2ff5bcfecb22acf823b785101b6df5ea2457"
+  },
+  {
+    "relative_path": "labels_final_r2/connector/wide.png",
+    "sha256": "3cb99c82b71d8bbcfa159dd496a41990abb205c2607486c7ad0e5907bc1248c4",
+    "viewed_original": true,
+    "source_sha256": "b2c379ba354ce95e6e48d5a9e73f2ff5bcfecb22acf823b785101b6df5ea2457"
+  },
+  {
+    "relative_path": "labels_final_r2/connector/narrow.png",
+    "sha256": "90319bdf2047aa11cb37277807d8abf279ee0d2c1d879c2cf0f48c149635713d",
+    "viewed_original": true,
+    "source_sha256": "b2c379ba354ce95e6e48d5a9e73f2ff5bcfecb22acf823b785101b6df5ea2457"
+  },
+  {
+    "relative_path": "labels_final_r2/control_panel/wide.png",
+    "sha256": "6bf14618708f02d214179bd6f8825e99499a07492f19021f69ce6825d6e0d525",
+    "viewed_original": true,
+    "source_sha256": "b2c379ba354ce95e6e48d5a9e73f2ff5bcfecb22acf823b785101b6df5ea2457"
+  },
+  {
+    "relative_path": "labels_final_r2/control_panel/narrow.png",
+    "sha256": "1038600146167c5b196ad0739eb810da93e8605c29a8fe5089264e78d00582eb",
+    "viewed_original": true,
+    "source_sha256": "b2c379ba354ce95e6e48d5a9e73f2ff5bcfecb22acf823b785101b6df5ea2457"
+  },
+  {
+    "relative_path": "labels_final_r2/dig_site/wide.png",
+    "sha256": "aa68fb48b3b8c04ea0492e2138ceee0a2318282d2015264baf32946b50784ec2",
+    "viewed_original": true,
+    "source_sha256": "b2c379ba354ce95e6e48d5a9e73f2ff5bcfecb22acf823b785101b6df5ea2457"
+  },
+  {
+    "relative_path": "labels_final_r2/dig_site/narrow.png",
+    "sha256": "69823ed5c45fb6aed34aa774ac94d335d74a88e3e1946a22dd024120ffa602f2",
+    "viewed_original": true,
+    "source_sha256": "b2c379ba354ce95e6e48d5a9e73f2ff5bcfecb22acf823b785101b6df5ea2457"
+  },
+  {
+    "relative_path": "labels_final_r2/dive_fillstation/wide.png",
+    "sha256": "06653c39f6b9234238395b146585c7929f5449d56d4d5e36357c79a0ef64836c",
+    "viewed_original": true,
+    "source_sha256": "b2c379ba354ce95e6e48d5a9e73f2ff5bcfecb22acf823b785101b6df5ea2457"
+  },
+  {
+    "relative_path": "labels_final_r2/dive_fillstation/narrow.png",
+    "sha256": "69a975cb2dabff5244255b2347d5f9c00c086572f90c2fbf7e34624d34435016",
+    "viewed_original": true,
+    "source_sha256": "b2c379ba354ce95e6e48d5a9e73f2ff5bcfecb22acf823b785101b6df5ea2457"
+  },
+  {
+    "relative_path": "labels_final_r2/drone_bench/wide.png",
+    "sha256": "c968bb870b99bc46e1fc20709b77a128df45d82f73ec5d61be748123ae7760ac",
+    "viewed_original": true,
+    "source_sha256": "b2c379ba354ce95e6e48d5a9e73f2ff5bcfecb22acf823b785101b6df5ea2457"
+  },
+  {
+    "relative_path": "labels_final_r2/drone_bench/narrow.png",
+    "sha256": "6a5afd0bc8b3f82896877b6e6c506dc50f9ac86b8a5974a0a018b3c87cb8e678",
+    "viewed_original": true,
+    "source_sha256": "b2c379ba354ce95e6e48d5a9e73f2ff5bcfecb22acf823b785101b6df5ea2457"
+  },
+  {
+    "relative_path": "labels_final_r2/engine_bay/wide.png",
+    "sha256": "4d8bd7026c1d58af575446b90a89076d0c8270179e2f63d1056b125f17e8d71f",
+    "viewed_original": true,
+    "source_sha256": "b2c379ba354ce95e6e48d5a9e73f2ff5bcfecb22acf823b785101b6df5ea2457"
+  },
+  {
+    "relative_path": "labels_final_r2/engine_bay/narrow.png",
+    "sha256": "446ccef30a2463ff88c3f22f2b807754037e3d1883a451a807e205a25df5fc83",
+    "viewed_original": true,
+    "source_sha256": "b2c379ba354ce95e6e48d5a9e73f2ff5bcfecb22acf823b785101b6df5ea2457"
+  },
+  {
+    "relative_path": "labels_final_r2/infusion_ward/wide.png",
+    "sha256": "a6526734d6fc1222a4744c3af6143e874c6a14d3c1983a75ad215df55a76b452",
+    "viewed_original": true,
+    "source_sha256": "b2c379ba354ce95e6e48d5a9e73f2ff5bcfecb22acf823b785101b6df5ea2457"
+  },
+  {
+    "relative_path": "labels_final_r2/infusion_ward/narrow.png",
+    "sha256": "d2ea0a574f1e2236668562b5d272985683f9a588b4bfbae8b4af5b6f03ccba88",
+    "viewed_original": true,
+    "source_sha256": "b2c379ba354ce95e6e48d5a9e73f2ff5bcfecb22acf823b785101b6df5ea2457"
+  },
+  {
+    "relative_path": "labels_final_r2/optical_bench/wide.png",
+    "sha256": "5e430424c35fa5b431afcadf25ea73b04338ea565a949bf53d09d11d4162a945",
+    "viewed_original": true,
+    "source_sha256": "b2c379ba354ce95e6e48d5a9e73f2ff5bcfecb22acf823b785101b6df5ea2457"
+  },
+  {
+    "relative_path": "labels_final_r2/optical_bench/narrow.png",
+    "sha256": "0934cb962b70e3d760536e6ac19d40b271b5928aa0a0079e4254ed7ffdbc6734",
+    "viewed_original": true,
+    "source_sha256": "b2c379ba354ce95e6e48d5a9e73f2ff5bcfecb22acf823b785101b6df5ea2457"
+  },
+  {
+    "relative_path": "labels_final_r2/server_rack/wide.png",
+    "sha256": "4d842a3072f16d6aceba0aae8e7861e73f3ecd7402294ee846ec2268b4522c22",
+    "viewed_original": true,
+    "source_sha256": "b2c379ba354ce95e6e48d5a9e73f2ff5bcfecb22acf823b785101b6df5ea2457"
+  },
+  {
+    "relative_path": "labels_final_r2/server_rack/narrow.png",
+    "sha256": "78d3dbdf046d512488b06df3c915d66e4160025ee9dbef0187012c21350111ad",
+    "viewed_original": true,
+    "source_sha256": "b2c379ba354ce95e6e48d5a9e73f2ff5bcfecb22acf823b785101b6df5ea2457"
+  },
+  {
+    "relative_path": "labels_final_r2/shelf_picking/wide.png",
+    "sha256": "60e47361696087f01e8d31b564f708b78fb3779f39e0166c13232edbbe23128c",
+    "viewed_original": true,
+    "source_sha256": "b2c379ba354ce95e6e48d5a9e73f2ff5bcfecb22acf823b785101b6df5ea2457"
+  },
+  {
+    "relative_path": "labels_final_r2/shelf_picking/narrow.png",
+    "sha256": "1abf28e8a48daf4cef1d749ecb4bbf2cbd329e4f02d4b9b2d3fdf6305adbb2e3",
+    "viewed_original": true,
+    "source_sha256": "b2c379ba354ce95e6e48d5a9e73f2ff5bcfecb22acf823b785101b6df5ea2457"
+  },
+  {
+    "relative_path": "history_repair_review_20260920_25bcc909/optical_bench/06_final_workspace/viser.png",
+    "sha256": "e49c368970c097ade0ade8b4e63c072dd63ff3ff17a6e8d256a8e04c3d4053d3",
+    "viewed_original": true,
+    "provenance": "historical repair_review_20260920_25bcc909/bridge",
+    "source_commit": "c4463b3",
+    "current_batch_run": false
+  },
+  {
+    "relative_path": "history_repair_review_20260920_25bcc909/optical_bench/06_final_workspace/frame_0000.png",
+    "sha256": "3d1278e971590909e7b3db83bf8d8bab75943c6f53f560d1333171cc2a657ce3",
+    "viewed_original": true,
+    "provenance": "historical repair_review_20260920_25bcc909/bridge",
+    "source_commit": "c4463b3",
+    "current_batch_run": false
+  },
+  {
+    "relative_path": "history_repair_review_20260920_25bcc909/server_rack/06_final_workspace/viser.png",
+    "sha256": "4aa138f8e2e0dfb2d7cc8f904ef6d33490894fa1c80ace915ca8c8b0113ac5ab",
+    "viewed_original": true,
+    "provenance": "historical repair_review_20260920_25bcc909/bridge",
+    "source_commit": "c4463b3",
+    "current_batch_run": false
+  },
+  {
+    "relative_path": "history_repair_review_20260920_25bcc909/server_rack/06_final_workspace/frame_0000.png",
+    "sha256": "1a5ae510e84a40b6597ce96779cf22601b272b539d1e157a5d9e7e0e5c6d7f01",
+    "viewed_original": true,
+    "provenance": "historical repair_review_20260920_25bcc909/bridge",
+    "source_commit": "c4463b3",
+    "current_batch_run": false
+  },
+  {
+    "relative_path": "bridge_batches/cnc_toolchange_final/cnc_toolchange/01_start_paused/viser.png",
+    "sha256": "2dd8ab797dcb6fb7b68f8c649ddc5a9dd5fa53185d488b9ae909b456e238d73d",
+    "viewed_original": true,
+    "source_sha256": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+    "current_batch_run": true
+  },
+  {
+    "relative_path": "bridge_batches/cnc_toolchange_final/cnc_toolchange/01_start_paused/frame_0000.png",
+    "sha256": "04827eb2dc4a12a9888ae85f3c287934251f5a628c9e0eedafd20b02174177a2",
+    "viewed_original": true,
+    "source_sha256": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+    "current_batch_run": true
+  },
+  {
+    "relative_path": "bridge_batches/cnc_toolchange_final/cnc_toolchange/step_01_endpoint_receiver/viser.png",
+    "sha256": "007bddb165cc950485b5f8fcef7f3a26996a7030ff8cfd1473ff2d204eb8091d",
+    "viewed_original": true,
+    "source_sha256": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+    "current_batch_run": true
+  },
+  {
+    "relative_path": "bridge_batches/cnc_toolchange_final/cnc_toolchange/step_01_endpoint_receiver/frame_0000.png",
+    "sha256": "865b0ac16f2bc7f4382d26d05f09daf11851b48c059ed6255c2b07467c9a4840",
+    "viewed_original": true,
+    "source_sha256": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+    "current_batch_run": true
+  }
+]

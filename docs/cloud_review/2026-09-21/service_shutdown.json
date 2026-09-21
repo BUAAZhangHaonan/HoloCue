@@ -1,0 +1,82 @@
+[
+  {
+    "name": "model",
+    "owner": {
+      "name": "model_repair",
+      "pid": 1777321,
+      "create_time": 1789974165.57,
+      "command": [
+        "/home/hdd3/zhanghaonan/projects/holocue/.venv-simulation/bin/python",
+        "/home/hdd3/zhanghaonan/projects/holocue/.work/cloud_update_20260921/record.py",
+        "model",
+        "bash",
+        "scripts/ops/serve_model.sh"
+      ],
+      "cwd": "/home/hdd3/zhanghaonan/projects/holocue",
+      "launched_at": 1789974166.1635628
+    },
+    "requested_at": 1789981814.133082,
+    "signals": [
+      {
+        "pid": 1777368,
+        "signal": "SIGINT"
+      }
+    ],
+    "owned_descendants": {
+      "1777324": 1789974165.6,
+      "1777334": 1789974166.31,
+      "1777337": 1789974166.36,
+      "1777354": 1789974166.63,
+      "1777368": 1789974167.0,
+      "1778496": 1789974247.43,
+      "1778497": 1789974247.43
+    },
+    "remaining_owned_processes": [],
+    "finished_at": 1789981826.1415298
+  },
+  {
+    "name": "viewer",
+    "owner": {
+      "pid": 1795511,
+      "create_time": 1789975728.34,
+      "started_at": 1789975728.9304307
+    },
+    "requested_at": 1789981826.1525247,
+    "signals": [
+      {
+        "pid": 1795520,
+        "signal": "SIGINT"
+      }
+    ],
+    "owned_descendants": {
+      "1795512": 1789975728.37,
+      "1795515": 1789975729.05,
+      "1795517": 1789975729.1,
+      "1795520": 1789975729.16
+    },
+    "remaining_owned_processes": [],
+    "finished_at": 1789981828.2468457
+  },
+  {
+    "name": "api",
+    "owner": {
+      "name": "api_repair",
+      "pid": 1777322,
+      "create_time": 1789974165.57,
+      "command": [
+        "/home/hdd3/zhanghaonan/projects/holocue/.venv-simulation/bin/python",
+        "/home/hdd3/zhanghaonan/projects/holocue/.work/cloud_update_20260921/record.py",
+        "api",
+        "bash",
+        "scripts/run_simulation.sh",
+        "api"
+      ],
+      "cwd": "/home/hdd3/zhanghaonan/projects/holocue",
+      "launched_at": 1789974166.164666
+    },
+    "requested_at": 1789981828.2611363,
+    "signals": [],
+    "owner_already_exited": true,
+    "finished_at": 1789981828.2612681
+  }
+]
