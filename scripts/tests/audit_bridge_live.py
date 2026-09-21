@@ -196,17 +196,38 @@ class Audit:
         # actual rendered camera before computing the expected focus depth.
         deadline=time.monotonic()+25
         camera_checks=[]
+        stable_since=None
+        previous_camera=None
+        camera_exports=set()
         while True:
             view=self.view(mode=mode,after=before,selected=target)
             check=client_view_errors(self.page.evaluate(CLIENT_READ),view)
+            camera=np.concatenate([view['position_m'],view['look_at_m'],
+                view['up_direction'],[view['fov_rad'],view['aspect']]])
+            now=time.monotonic()
+            if not check['passed']:
+                stable_since=None
+                camera_exports.clear()
+            elif previous_camera is None or not np.allclose(camera,previous_camera,rtol=0,atol=1e-7):
+                stable_since=now
+                camera_exports={view['generated_at']}
+            elif stable_since is None:
+                stable_since=now
+                camera_exports={view['generated_at']}
+            else:
+                camera_exports.add(view['generated_at'])
+            check['stable_camera_seconds']=0. if stable_since is None else now-stable_since
+            check['view_generated_at']=view['generated_at']
+            check['distinct_camera_exports']=len(camera_exports)
             camera_checks.append(check)
-            if check['passed'] or time.monotonic()>deadline:
+            previous_camera=camera
+            if (check['passed'] and check['stable_camera_seconds']>=.75 and len(camera_exports)>=3) or now>deadline:
                 break
             self.page.wait_for_timeout(100)
         with (self.out/'view_camera_checks.jsonl').open('a',encoding='utf-8') as stream:
             stream.write(json.dumps({'requested_at':before,'mode':mode,'target':target,
                 'finished_at':time.time(),'checks':camera_checks})+'\n')
-        if not check['passed']:
+        if not check['passed'] or check['stable_camera_seconds']<.75 or len(camera_exports)<3:
             raise AssertionError('Visible camera did not settle before focusing: '+json.dumps(check))
         if target is not None and view['selected_id']!=target:
             raise AssertionError('Observation dropdown selected another object')
@@ -235,6 +256,10 @@ class Audit:
                 break
             self.page.wait_for_timeout(100)
         else:
+            save(self.out/'focus_failure.json',{'expected_depth_m':expected_focus,
+                'before_focus_m':before_focus,'observed_view':view,
+                'focus_point_m':point.tolist(),'camera_before_focus':camera.tolist(),
+                'snapshot':snapshot})
             raise AssertionError('Visible focus control did not focus the contracted target plane')
         self.focus_actions.append({'time':time.time(),'mode':mode,'target':obj.object_id,
             'previous_focus_m':before_focus,'expected_depth_m':expected_focus,
