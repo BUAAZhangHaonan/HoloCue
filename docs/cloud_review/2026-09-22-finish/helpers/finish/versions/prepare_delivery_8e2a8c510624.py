@@ -1031,30 +1031,6 @@ def main():
             add(path, 'delivery', 'Independent visual-review extracted frame, not an original native image. '
                 f"Source {relative(video)}, requested time {frame['requested_time_s']} s; "
                 f"extraction provenance in {relative(review_manifest)}. Historical review evidence only.")
-        # These five byte-identical original PNG copies predate frame extraction.
-        # Bind them to the sealed original-image inventory, without counting them
-        # as extracted video frames or accepting arbitrary additional files.
-        originals = {entry['relative_path']: entry for entry in
-                     read(review_directory / 'final_review_inventory.json')['source_originals']}
-        original_copies = {
-            'connector_attempt01/connector/produced/intro_00_source.png':
-                'videos/connector_attempt01/connector/intro_00/viser.png',
-            **{f'connector_attempt02/connector/intro_{i:02d}/viser.png':
-               f'videos/connector_attempt02/connector/intro_{i:02d}/viser.png'
-               for i in range(4)},
-        }
-        for copy_name, original_name in original_copies.items():
-            path = frame_directory / copy_name
-            original = absolute(original_name, run)
-            entry = originals[original_name]
-            verify_file(original, entry['sha256'])
-            verify_file(path, entry['sha256'])
-            if relative(original) not in rows:
-                raise RuntimeError('Diagnostic original PNG is not selected')
-            add(path, 'delivery', 'Byte-identical diagnostic original PNG copy; '
-                f'source {relative(original)}, bound to final_review_inventory.json. '
-                'Not an extracted video frame or an additional native capture.')
-            expected_frames.add(path)
         if set(frame_directory.rglob('*.png')) != expected_frames:
             raise RuntimeError('Visual review PNG set differs from its explicit manifest')
         rows[relative(review_manifest)]['note'] = (
