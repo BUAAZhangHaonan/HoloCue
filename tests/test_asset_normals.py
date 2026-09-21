@@ -6,11 +6,14 @@ from pygltflib import GLTF2
 from trimesh.exchange.gltf import load_glb
 
 from holocue.modeling import Assembly
+from holocue.gltf_validation import validate_glb,require_dense_accessors
 
 
 def glb_contents(path):
+    validate_glb(path)
     document = GLTF2().load(str(path))
     assert document.asset.version == '2.0'
+    require_dense_accessors(document)
     with path.open('rb') as stream:
         decoded = load_glb(stream, ignore_broken=False, merge_primitives=False)
     return document, decoded

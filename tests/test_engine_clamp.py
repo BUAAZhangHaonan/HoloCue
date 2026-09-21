@@ -9,7 +9,7 @@ from vtk.util.numpy_support import numpy_to_vtk,vtk_to_numpy
 from holocue.assets import load_asset
 from holocue.config import load_scene
 from holocue.glb_attributes import exported_normals
-from holocue.modeling import make_environment,make_object
+from holocue.modeling import make_environment,make_object,engine_hose_solids,cad_mesh
 from holocue.models import SceneSpec
 from holocue.spatial import matrix,trajectory
 from holocue.render_validation import polydata
@@ -91,7 +91,13 @@ def engine(tmp_path_factory):
         local[identifier]=meshes(loaded)
     old=meshes(load_asset(str(fixtures/'engine_hose_before.glb'),spec.asset_axes),spec.environment[0].pose)
     old.update(meshes(load_asset(str(fixtures/'engine_clamp_before.glb'),spec.asset_axes),spec.objects[0].pose))
-    return dict(spec=spec,directory=directory,baseline=baseline,old=old,generated=generated,roundtrip=roundtrip,local=local,paths=paths,fixtures=fixtures)
+    hose_solids=engine_hose_solids()
+    hose_union=hose_solids[0]
+    for solid in hose_solids[1:]:hose_union=hose_union.union(solid)
+    assert hose_union.val().isValid() and len(hose_union.solids().vals())==1
+    union_mesh=cad_mesh(hose_union)
+    union_mesh.apply_transform(matrix(spec.environment[0].pose))
+    return dict(spec=spec,directory=directory,baseline=baseline,old=old,generated=generated,roundtrip=roundtrip,local=local,paths=paths,fixtures=fixtures,hose_union=union_mesh)
 
 
 def test_engine_contract_unchanged(engine):
@@ -112,13 +118,16 @@ def test_only_authorized_nodes_change_and_materials_stay(engine):
 
 
 @pytest.mark.parametrize('version',['generated','roundtrip'])
-def test_molded_hose_and_metal_seat_are_closed_connected_solids(engine,version):
+def test_material_regions_are_closed_and_physical_hose_is_connected(engine,version):
     records=[]
     for suffix in ('0052_tube','0053_tube','0054_rounded_part','0055_clamp_band'):
         mesh=part(engine[version],suffix).copy();mesh.process(validate=True)
         records.append({'node':suffix,'watertight':bool(mesh.is_watertight),'volume_m3':float(mesh.volume),'components':len(mesh.split())})
         assert mesh.is_watertight and mesh.is_winding_consistent and mesh.volume>0
-        assert len(mesh.split())==1
+        assert all(piece.volume>0 and piece.is_watertight for piece in mesh.split())
+        if suffix=='0055_clamp_band':assert len(mesh.split())==1
+    union=engine['hose_union']
+    assert union.is_watertight and union.is_winding_consistent and len(union.split())==1
     (engine['directory']/f'topology_{version}.json').write_text(json.dumps(records,indent=2))
 
 
@@ -226,6 +235,7 @@ def test_actual_flow_sections_and_wall_measurements(engine,version):
     for mesh in hose:
         tree=vtk.vtkOBBTree();tree.SetDataSet(polydata(mesh));tree.BuildLocator();trees.append(tree)
     hose_fields=[field(mesh) for mesh in hose]
+    boundary_field=field(engine['hose_union'])
     path=np.array([[-.46,-.25,1.04],[-.32,-.12,1.06],[-.27,.06,1.03]])
     rows=[]
     for segment,(aa,bb) in enumerate(zip(path,path[1:])):
@@ -261,7 +271,7 @@ def test_actual_flow_sections_and_wall_measurements(engine,version):
         choose=np.linalg.norm(radial,axis=2).argmin(axis=0)
         radial=radial[choose,np.arange(len(centers))]
         sign=np.einsum('ij,ij->i',mesh.face_normals,radial)
-        exposed=np.min([distances(f,centers) for f in hose_fields],axis=0)>-2e-5
+        exposed=np.abs(distances(boundary_field,centers))<2e-5
         is_roof=(np.abs(centers[:,2]-roof(centers[:,1]))<.0007)&(mesh.face_normals[:,2]>.3)
         outer_roof.extend(mesh.triangles[is_roof])
         selected=exposed&(sign<-.001)&(centers[:,1]>-.15)&(centers[:,1]<-.05)
@@ -273,7 +283,7 @@ def test_actual_flow_sections_and_wall_measurements(engine,version):
     # Classify each sample, not only its triangle center: old overlapping tube
     # triangles span internal seam vertices and cannot all be treated as the
     # outside boundary of the combined hose. No motion obstacle is excluded.
-    exposed=np.min([distances(f,samples) for f in hose_fields],axis=0)>-2e-6
+    exposed=np.abs(distances(boundary_field,samples))<2e-6
     original_union=load_asset(str(engine['fixtures']/'engine_hose_outer_union_before.glb'),'project_z_up').to_geometry()
     original_union.apply_transform(matrix(engine['spec'].environment[0].pose))
     old_depth=-distances(field(original_union),samples)
