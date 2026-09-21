@@ -209,9 +209,10 @@ class SceneRenderer:
         if self.guidance_enabled:
             pos,look=selected_cue_view(self.spec,self.packet,self.current_poses,self.clock.elapsed,
                 self.selected_id,mode,pos,look,up,cam.aspect,self.guidance_brightness)
-        cam.up_direction=up
-        cam.position=pos
-        cam.look_at=look
+        with self.client.atomic():
+            cam.up_direction=up
+            cam.position=pos
+            cam.look_at=look
         self.update_annotations()
 
     def update_packet(self,packet: DisplayPacket):
