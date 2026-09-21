@@ -1,0 +1,72 @@
+{
+  "reason": "The actual host-memory guard stopped the model service. CNC completed using its existing plan; connector then failed its initial real model request with ConnectError. Experiments stopped under the package resource rule.",
+  "host_reserve_gib": 50.30907897949219,
+  "observed_breaches": [
+    {
+      "time": 1789993727.6362495,
+      "pid": 1877630,
+      "rss_gib": 5.033863067626953,
+      "host_available_gib": 50.28264236450195,
+      "gpus": [
+        {
+          "index": 1,
+          "uuid": "GPU-7ba69fc7-12ac-3dfb-8265-3476ce2504b6",
+          "name": "NVIDIA GeForce RTX 3090",
+          "total_mib": 24576.0,
+          "used_mib": 15672.0
+        }
+      ]
+    }
+  ],
+  "first_breach_utc": "2026-09-21T12:28:47.636250+00:00",
+  "restart_after_breach_performed": false,
+  "threshold_changed": false,
+  "native_full_passed_this_run": [
+    "cnc_toolchange"
+  ],
+  "native_failed_before_capture": [
+    "connector"
+  ],
+  "native_not_run": [
+    "control_panel",
+    "dig_site",
+    "dive_fillstation",
+    "drone_bench",
+    "infusion_ward"
+  ],
+  "targeted_pairs_not_run": [
+    "engine_bay",
+    "shelf_picking",
+    "dig_site"
+  ],
+  "evidence": [
+    {
+      "path": "runs/simulation/cloud_resume_20260921_ea8c2f7/model_command/execution.json",
+      "sha256": "3ef897fe1ecb8fb6cc653c771afe066a100f15f31df3db2675a8136ae56cc33a"
+    },
+    {
+      "path": "runs/simulation/cloud_resume_20260921_ea8c2f7/model_command/stderr.log",
+      "sha256": "6c78492239f10c6878fbb883efc84ad20e717e81772adc3b4d625bc4318442b9"
+    },
+    {
+      "path": "runs/simulation/cloud_resume_20260921_ea8c2f7/model_resources.jsonl",
+      "sha256": "41b2ea6ff35b019764e348a5ed8ee1bb170d542097145ca428316befea828ac5"
+    },
+    {
+      "path": "runs/simulation/cloud_resume_20260921_ea8c2f7/bridge_cnc_toolchange_command/execution.json",
+      "sha256": "d2042bb9e7318c210924ac08a412ce8060908c66eb6fb55e23938013dcd7698a"
+    },
+    {
+      "path": "runs/simulation/cloud_resume_20260921_ea8c2f7/bridge_batches/cnc_toolchange/report.json",
+      "sha256": "4dc1c59df20e1d5fd158b91c01aaacdf62c20c4d2f22977533d5cf7f83ccd8bf"
+    },
+    {
+      "path": "runs/simulation/cloud_resume_20260921_ea8c2f7/bridge_connector_command/execution.json",
+      "sha256": "122e568e66b484bf0e99b2358ddbfc8fd02768152d7b096c32d716f46895cd62"
+    },
+    {
+      "path": "runs/simulation/cloud_resume_20260921_ea8c2f7/bridge_batches/connector/report.json",
+      "sha256": "5267f51df6b677551247a09535e3b8b2e8c7bcd9d4c71aa420989e33f96a53f6"
+    }
+  ]
+}

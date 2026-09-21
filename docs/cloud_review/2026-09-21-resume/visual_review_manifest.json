@@ -1,0 +1,326 @@
+[
+  {
+    "relative_path": "bridge_batches/cnc_toolchange/cnc_toolchange/01_start_paused/viser.png",
+    "sha256": "b9adb2dbb33ea316860fc880a84dc2cbaa27c36121c8e78d46e29336d9f44beb",
+    "viewed_original": true,
+    "run": "cloud_resume_20260921_ea8c2f7",
+    "source_head": "ea8c2f7",
+    "source_sha256": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+    "reviewer": "/root/cloud_visual_review"
+  },
+  {
+    "relative_path": "bridge_batches/cnc_toolchange/cnc_toolchange/01_start_paused/frame_0000.png",
+    "sha256": "0026f558a6ca317713f7cfad86a18f15a63ae4aca8e778dea1fc33f1e860d357",
+    "viewed_original": true,
+    "run": "cloud_resume_20260921_ea8c2f7",
+    "source_head": "ea8c2f7",
+    "source_sha256": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+    "reviewer": "/root/cloud_visual_review"
+  },
+  {
+    "relative_path": "bridge_batches/cnc_toolchange/cnc_toolchange/02_middle_paused/viser.png",
+    "sha256": "81a63a85c531c8d83162fcd8d64d1b24b231f4fd86879addaf3d797cf6294dce",
+    "viewed_original": true,
+    "run": "cloud_resume_20260921_ea8c2f7",
+    "source_head": "ea8c2f7",
+    "source_sha256": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+    "reviewer": "/root/cloud_visual_review"
+  },
+  {
+    "relative_path": "bridge_batches/cnc_toolchange/cnc_toolchange/02_middle_paused/frame_0000.png",
+    "sha256": "b114165e980f5b6759ea4a1c369a602d71d048793d61d6b5a16065d318b3f1ac",
+    "viewed_original": true,
+    "run": "cloud_resume_20260921_ea8c2f7",
+    "source_head": "ea8c2f7",
+    "source_sha256": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+    "reviewer": "/root/cloud_visual_review"
+  },
+  {
+    "relative_path": "bridge_batches/cnc_toolchange/cnc_toolchange/03_temporary_inspection/viser.png",
+    "sha256": "724f4a8d728cd266229e4ef73d0037ea773fb23feef74fca182a43c009831394",
+    "viewed_original": true,
+    "run": "cloud_resume_20260921_ea8c2f7",
+    "source_head": "ea8c2f7",
+    "source_sha256": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+    "reviewer": "/root/cloud_visual_review"
+  },
+  {
+    "relative_path": "bridge_batches/cnc_toolchange/cnc_toolchange/03_temporary_inspection/frame_0000.png",
+    "sha256": "d367a64139126f5bbec509caa6dd32feed3e688cf1b137577f1eb3faa6942081",
+    "viewed_original": true,
+    "run": "cloud_resume_20260921_ea8c2f7",
+    "source_head": "ea8c2f7",
+    "source_sha256": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+    "reviewer": "/root/cloud_visual_review"
+  },
+  {
+    "relative_path": "bridge_batches/cnc_toolchange/cnc_toolchange/04_original_restored/viser.png",
+    "sha256": "f2109a072a4fd7018583d9aee14b4ce66901da492fb7c3c1178327fd3644520d",
+    "viewed_original": true,
+    "run": "cloud_resume_20260921_ea8c2f7",
+    "source_head": "ea8c2f7",
+    "source_sha256": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+    "reviewer": "/root/cloud_visual_review"
+  },
+  {
+    "relative_path": "bridge_batches/cnc_toolchange/cnc_toolchange/04_original_restored/frame_0000.png",
+    "sha256": "249f36904513dc1fcf693e7af07e2e2929acf09534c579a7d8554922090721e2",
+    "viewed_original": true,
+    "run": "cloud_resume_20260921_ea8c2f7",
+    "source_head": "ea8c2f7",
+    "source_sha256": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+    "reviewer": "/root/cloud_visual_review"
+  },
+  {
+    "relative_path": "bridge_batches/cnc_toolchange/cnc_toolchange/05_endpoint_waiting/viser.png",
+    "sha256": "0394bdb2b8bb92d2967241c75bb8a7436e07488eb0d26e521076a7e0306568af",
+    "viewed_original": true,
+    "run": "cloud_resume_20260921_ea8c2f7",
+    "source_head": "ea8c2f7",
+    "source_sha256": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+    "reviewer": "/root/cloud_visual_review"
+  },
+  {
+    "relative_path": "bridge_batches/cnc_toolchange/cnc_toolchange/05_endpoint_waiting/frame_0000.png",
+    "sha256": "df093cdd577e6f3e7f7b7ff94ae8d92edcffd78894efa9447aae8f3f5b59e716",
+    "viewed_original": true,
+    "run": "cloud_resume_20260921_ea8c2f7",
+    "source_head": "ea8c2f7",
+    "source_sha256": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+    "reviewer": "/root/cloud_visual_review"
+  },
+  {
+    "relative_path": "bridge_batches/cnc_toolchange/cnc_toolchange/06_final_workspace/viser.png",
+    "sha256": "a92d0a6aa4b06d62f4c0b356dc71859f3f6fa42e41753522276f3013aff974a1",
+    "viewed_original": true,
+    "run": "cloud_resume_20260921_ea8c2f7",
+    "source_head": "ea8c2f7",
+    "source_sha256": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+    "reviewer": "/root/cloud_visual_review"
+  },
+  {
+    "relative_path": "bridge_batches/cnc_toolchange/cnc_toolchange/06_final_workspace/frame_0000.png",
+    "sha256": "f5285cd4a320f81824be2837b5ae0f940b41c9748f50e59a846de5e8ea867329",
+    "viewed_original": true,
+    "run": "cloud_resume_20260921_ea8c2f7",
+    "source_head": "ea8c2f7",
+    "source_sha256": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+    "reviewer": "/root/cloud_visual_review"
+  },
+  {
+    "relative_path": "bridge_batches/cnc_toolchange/cnc_toolchange/step_01_start/viser.png",
+    "sha256": "4b38b213f3fdbbe2fbb579ebe80d46e61fcdb312f207aff119c16cb49c67063a",
+    "viewed_original": true,
+    "run": "cloud_resume_20260921_ea8c2f7",
+    "source_head": "ea8c2f7",
+    "source_sha256": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+    "reviewer": "/root/cloud_visual_review"
+  },
+  {
+    "relative_path": "bridge_batches/cnc_toolchange/cnc_toolchange/step_01_start/frame_0000.png",
+    "sha256": "1a7447b4a3757944076c355502d7442f231f02eae6b37ed9ebfb636fd7882078",
+    "viewed_original": true,
+    "run": "cloud_resume_20260921_ea8c2f7",
+    "source_head": "ea8c2f7",
+    "source_sha256": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+    "reviewer": "/root/cloud_visual_review"
+  },
+  {
+    "relative_path": "bridge_batches/cnc_toolchange/cnc_toolchange/step_01_middle/viser.png",
+    "sha256": "454a62e9f1221e46d95c9464ecb79bd057ab2340615d0b49818cda47623d939f",
+    "viewed_original": true,
+    "run": "cloud_resume_20260921_ea8c2f7",
+    "source_head": "ea8c2f7",
+    "source_sha256": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+    "reviewer": "/root/cloud_visual_review"
+  },
+  {
+    "relative_path": "bridge_batches/cnc_toolchange/cnc_toolchange/step_01_middle/frame_0000.png",
+    "sha256": "9f779e17373e7b2f5df4b4614330602df2bcba75820e3bccc2b04070d8beb799",
+    "viewed_original": true,
+    "run": "cloud_resume_20260921_ea8c2f7",
+    "source_head": "ea8c2f7",
+    "source_sha256": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+    "reviewer": "/root/cloud_visual_review"
+  },
+  {
+    "relative_path": "bridge_batches/cnc_toolchange/cnc_toolchange/step_01_endpoint/viser.png",
+    "sha256": "95d41dd14f45396b8eef17d5354145836e9a125da94c3c28f8461e75c062d6f4",
+    "viewed_original": true,
+    "run": "cloud_resume_20260921_ea8c2f7",
+    "source_head": "ea8c2f7",
+    "source_sha256": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+    "reviewer": "/root/cloud_visual_review"
+  },
+  {
+    "relative_path": "bridge_batches/cnc_toolchange/cnc_toolchange/step_01_endpoint/frame_0000.png",
+    "sha256": "e429f81a269035dd90964db364321c7562e458dce5309a0b87892ae4ddbe4ecd",
+    "viewed_original": true,
+    "run": "cloud_resume_20260921_ea8c2f7",
+    "source_head": "ea8c2f7",
+    "source_sha256": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+    "reviewer": "/root/cloud_visual_review"
+  },
+  {
+    "relative_path": "bridge_batches/cnc_toolchange/cnc_toolchange/step_01_endpoint_receiver/viser.png",
+    "sha256": "b4958296025d0312a7d439d7c2dc77ff33871e6969268f52989ee253a5aff107",
+    "viewed_original": true,
+    "run": "cloud_resume_20260921_ea8c2f7",
+    "source_head": "ea8c2f7",
+    "source_sha256": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+    "reviewer": "/root/cloud_visual_review"
+  },
+  {
+    "relative_path": "bridge_batches/cnc_toolchange/cnc_toolchange/step_01_endpoint_receiver/frame_0000.png",
+    "sha256": "8bc9a09c570f6586fefa982910f00d0bc253618e7160e8b0f93ca24cf5d255bb",
+    "viewed_original": true,
+    "run": "cloud_resume_20260921_ea8c2f7",
+    "source_head": "ea8c2f7",
+    "source_sha256": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+    "reviewer": "/root/cloud_visual_review"
+  },
+  {
+    "relative_path": "bridge_batches/cnc_toolchange/cnc_toolchange/step_02_inspection/viser.png",
+    "sha256": "2ef1f3ddb74eca8aa435433a5bbcdf92895d22615efadbef381de0a841183e58",
+    "viewed_original": true,
+    "run": "cloud_resume_20260921_ea8c2f7",
+    "source_head": "ea8c2f7",
+    "source_sha256": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+    "reviewer": "/root/cloud_visual_review"
+  },
+  {
+    "relative_path": "bridge_batches/cnc_toolchange/cnc_toolchange/step_02_inspection/frame_0000.png",
+    "sha256": "a1bbdbeb6a214619eaf032076e97bd9f3391aa568ce565d098845151b9351ec9",
+    "viewed_original": true,
+    "run": "cloud_resume_20260921_ea8c2f7",
+    "source_head": "ea8c2f7",
+    "source_sha256": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+    "reviewer": "/root/cloud_visual_review"
+  },
+  {
+    "relative_path": "bridge_batches/cnc_toolchange/cnc_toolchange/object_MODESWITCH_detail/viser.png",
+    "sha256": "b913c7bc8f76fe3bf3f207b435bc5121ffe19767280eb1a23ac83ad2c077cc1e",
+    "viewed_original": true,
+    "run": "cloud_resume_20260921_ea8c2f7",
+    "source_head": "ea8c2f7",
+    "source_sha256": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+    "reviewer": "/root/cloud_visual_review"
+  },
+  {
+    "relative_path": "bridge_batches/cnc_toolchange/cnc_toolchange/object_MODESWITCH_detail/frame_0000.png",
+    "sha256": "81c15de80fe06acfee329c300e058a9c811de33533ac8d7fc974dad85d37ed70",
+    "viewed_original": true,
+    "run": "cloud_resume_20260921_ea8c2f7",
+    "source_head": "ea8c2f7",
+    "source_sha256": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+    "reviewer": "/root/cloud_visual_review"
+  },
+  {
+    "relative_path": "bridge_batches/cnc_toolchange/cnc_toolchange/object_PANEL_detail/viser.png",
+    "sha256": "4953d4f36e9ba816d371f5058639703cb793697005530065ff4d453a5e0f0604",
+    "viewed_original": true,
+    "run": "cloud_resume_20260921_ea8c2f7",
+    "source_head": "ea8c2f7",
+    "source_sha256": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+    "reviewer": "/root/cloud_visual_review"
+  },
+  {
+    "relative_path": "bridge_batches/cnc_toolchange/cnc_toolchange/object_PANEL_detail/frame_0000.png",
+    "sha256": "10164adeb9bd1784e41ba802daba753cb581f85f5e473f37b0d810915615084a",
+    "viewed_original": true,
+    "run": "cloud_resume_20260921_ea8c2f7",
+    "source_head": "ea8c2f7",
+    "source_sha256": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+    "reviewer": "/root/cloud_visual_review"
+  },
+  {
+    "relative_path": "bridge_batches/cnc_toolchange/cnc_toolchange/object_MAG_detail/viser.png",
+    "sha256": "cf75ebb3683fcf54d4cf50a300e186d056d68b16c41145a149b2ce2fbab970ce",
+    "viewed_original": true,
+    "run": "cloud_resume_20260921_ea8c2f7",
+    "source_head": "ea8c2f7",
+    "source_sha256": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+    "reviewer": "/root/cloud_visual_review"
+  },
+  {
+    "relative_path": "bridge_batches/cnc_toolchange/cnc_toolchange/object_MAG_detail/frame_0000.png",
+    "sha256": "9c7d4c76b4346bf7586256cf40d2766e3b714db5306fda69acc1e3c1b63fdf54",
+    "viewed_original": true,
+    "run": "cloud_resume_20260921_ea8c2f7",
+    "source_head": "ea8c2f7",
+    "source_sha256": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+    "reviewer": "/root/cloud_visual_review"
+  },
+  {
+    "relative_path": "bridge_batches/cnc_toolchange/cnc_toolchange/object_POCKET9_detail/viser.png",
+    "sha256": "1286a3dc70c9f2b497cb4d9bb361806189ec586000fc5b33b69d84e32bf624ab",
+    "viewed_original": true,
+    "run": "cloud_resume_20260921_ea8c2f7",
+    "source_head": "ea8c2f7",
+    "source_sha256": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+    "reviewer": "/root/cloud_visual_review"
+  },
+  {
+    "relative_path": "bridge_batches/cnc_toolchange/cnc_toolchange/object_POCKET9_detail/frame_0000.png",
+    "sha256": "5e061a7652bb1322fef830f2c19efd2a2851258f1cf797f513c8ed1cd1503866",
+    "viewed_original": true,
+    "run": "cloud_resume_20260921_ea8c2f7",
+    "source_head": "ea8c2f7",
+    "source_sha256": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+    "reviewer": "/root/cloud_visual_review"
+  },
+  {
+    "relative_path": "bridge_batches/cnc_toolchange/cnc_toolchange/object_T09_detail/viser.png",
+    "sha256": "0e2c1e5f4cff12fdd64d0a1af0432ae556442408b8056b72f7c43be1652fc8f3",
+    "viewed_original": true,
+    "run": "cloud_resume_20260921_ea8c2f7",
+    "source_head": "ea8c2f7",
+    "source_sha256": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+    "reviewer": "/root/cloud_visual_review"
+  },
+  {
+    "relative_path": "bridge_batches/cnc_toolchange/cnc_toolchange/object_T09_detail/frame_0000.png",
+    "sha256": "e62b2e47b0bbe6e628731057d45d9fa00128b2e26bf212f2766caae7d214a7dc",
+    "viewed_original": true,
+    "run": "cloud_resume_20260921_ea8c2f7",
+    "source_head": "ea8c2f7",
+    "source_sha256": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+    "reviewer": "/root/cloud_visual_review"
+  },
+  {
+    "relative_path": "bridge_batches/cnc_toolchange/cnc_toolchange/object_T03_detail/viser.png",
+    "sha256": "9d2b0c8bb3e1d3869d1706f09766f7fa22ab43b0ce4ab7ddd274aed460dd3ffe",
+    "viewed_original": true,
+    "run": "cloud_resume_20260921_ea8c2f7",
+    "source_head": "ea8c2f7",
+    "source_sha256": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+    "reviewer": "/root/cloud_visual_review"
+  },
+  {
+    "relative_path": "bridge_batches/cnc_toolchange/cnc_toolchange/object_T03_detail/frame_0000.png",
+    "sha256": "de70860416f4e481460af13fe2e3f2e0a4f83a7c5d3a602a744ae54b110ce2aa",
+    "viewed_original": true,
+    "run": "cloud_resume_20260921_ea8c2f7",
+    "source_head": "ea8c2f7",
+    "source_sha256": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+    "reviewer": "/root/cloud_visual_review"
+  },
+  {
+    "relative_path": "bridge_batches/cnc_toolchange/cnc_toolchange/object_T03_inspection/viser.png",
+    "sha256": "dad4f47a98754a97a0860ca2851f9031a02080a8929ec029302546b394dfce79",
+    "viewed_original": true,
+    "run": "cloud_resume_20260921_ea8c2f7",
+    "source_head": "ea8c2f7",
+    "source_sha256": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+    "reviewer": "/root/cloud_visual_review"
+  },
+  {
+    "relative_path": "bridge_batches/cnc_toolchange/cnc_toolchange/object_T03_inspection/frame_0000.png",
+    "sha256": "476ad88ef68b2c591b2aeb894832e241b4602a8ce72d8bc26b5501bcc3e51972",
+    "viewed_original": true,
+    "run": "cloud_resume_20260921_ea8c2f7",
+    "source_head": "ea8c2f7",
+    "source_sha256": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+    "reviewer": "/root/cloud_visual_review"
+  }
+]

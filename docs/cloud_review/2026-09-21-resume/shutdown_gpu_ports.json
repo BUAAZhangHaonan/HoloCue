@@ -1,0 +1,9 @@
+{
+  "closed_ports": [
+    8000,
+    8750,
+    8780
+  ],
+  "gpu_memory": "0, GPU-dcfe1145-f48a-1f05-fb20-67179c5306b5, 4 MiB\n1, GPU-7ba69fc7-12ac-3dfb-8265-3476ce2504b6, 4 MiB\n2, GPU-dfaeaa7c-32c8-ebb4-aa59-ab7f829805f1, 4 MiB\n3, GPU-e27fe71d-eaf7-3eb5-d0ff-c1c63b4f6b02, 4 MiB\n4, GPU-61ea2925-9905-7f56-cd64-7a792a32efef, 266 MiB\n5, GPU-9b75e96c-6e9c-a160-def5-b2d5dd70bdc4, 266 MiB\n6, GPU-29f1d73d-b468-c7bc-3bcf-50be58b67d33, 263 MiB\n7, GPU-56668d27-36e1-c40a-c1c2-272ef76b13a1, 266 MiB\n",
+  "checked_at": 1789994037.5470037
+}

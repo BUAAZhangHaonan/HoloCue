@@ -1,0 +1,11 @@
+# 网页端审阅提示词
+
+请审阅 HoloCue_Cloud_Resume_20260921 全部独立 ZIP。安全解压并按 UPLOAD_INDEX.json、SHA256SUMS 和每包 MANIFEST 校验后，优先阅读新 RUN runs/simulation/cloud_resume_20260921_ea8c2f7 的 FINAL_SUMMARY.md、COVERAGE.json、RESOURCE_STOP.json，以及三个独立审阅报告。
+
+本次应用源码摘要37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe、资产摘要36866cf33627a522897a66a3e1247587608d72959dc792d029de0136a0b78af8保持不变。新增CNC十八阶段通过；connector因模型被内存守卫停止而连接失败。请用原始截图、模型回复、状态、录像和实际GLB核查其结论。
+
+此前封存batch的材料单独标记previous/historical，保留原摘要与返回码。本批要求八场完整原生流程，当前blocks和CNC完成，另六场未完成；三组定向配对均未运行。519项pytest、18条几何检查、三份新blend和十二场景标签结果属于此前各自源码身份，不能写成当前完整重跑。
+
+重点检查CNC接收孔内部不可见、ghost裁切、已占用POCKET9视角，以及旧blocks标签连接线限制；区分运行完成、渲染一致性和视觉验收。检查原始队列在模型守卫退出后仍启动connector的时序，并核对后续边界检查修复与预期拒绝记录。
+
+请给出由实际证据支持的具体问题和必要修改。没有查看的文件、没有运行的场景、无法访问的服务器状态应明确标记。不要要求覆盖旧资产或重跑已完成CNC，不增加本包以外任务，不改变模型和几何采样参数，不把解析光学预览写成物理标定或论文实验结论。
