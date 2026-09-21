@@ -16,7 +16,6 @@ from pathlib import Path
 from urllib.parse import quote
 
 REMOTE_RUN = '/home/hdd3/zhanghaonan/projects/holocue/runs/simulation/cloud_finish90_20260921_e67b574'
-REMOTE_PYTHON = '/home/hdd3/zhanghaonan/projects/holocue/.venv-simulation/bin/python'
 DESTINATION = Path('C:/Users/zhn19/Downloads/2/HoloCue_Final_20260921/videos')
 
 # Sent to remote python over stdin; it only opens/stats/hashes existing files.
@@ -380,7 +379,7 @@ def sha256(path):
 
 def fetch_inventory(host, acceptance_manifest):
     result = subprocess.run(['ssh', '-o', 'BatchMode=yes', host,
-                             shlex.quote(REMOTE_PYTHON) + ' - ' + shlex.quote(REMOTE_RUN) + ' ' + shlex.quote(acceptance_manifest)],
+                             'python3 - ' + shlex.quote(REMOTE_RUN) + ' ' + shlex.quote(acceptance_manifest)],
                             input=REMOTE_PROGRAM, text=True, encoding='utf-8',
                             capture_output=True, check=True)
     return json.loads(result.stdout)
