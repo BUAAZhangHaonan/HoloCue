@@ -50,10 +50,15 @@ def test_only_exact_whitelist_changes_geometry_and_all_contracts_survive(pack):
             for name in lens_nodes:assert fingerprint(original_lens[name])==expected['nodes'][name]
         for actual in (pack['loaded'][obj.object_id],mesh_map(load_asset(str(root()/obj.asset),spec.asset_axes))):
             assert set(actual)==set(expected['nodes'])|set(expected['allowed_added_nodes'])
+            if sid=='drone_bench' and obj.object_id=='BAY':
+                from test_material_regions import assert_container_partition
+                assert_container_partition(spec,obj,actual)
             for name,digest in expected['nodes'].items():
                 if name in lens_nodes:
                     assert fingerprint(actual[name])!=digest,name
                     assert material(actual[name])==material(original_lens[name]),name
+                elif sid=='drone_bench' and obj.object_id=='BAY':
+                    assert name in {f'BAY/{i:04d}_panel' for i in range(5)}
                 else:assert fingerprint(actual[name])==digest,name
 
 @pytest.mark.parametrize('flavor',['raw_world','world'])

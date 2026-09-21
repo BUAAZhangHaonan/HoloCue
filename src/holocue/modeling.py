@@ -23,10 +23,11 @@ RUBBER=(38,44,48)
 LIGHT=(207,215,221)
 BRASS=(178,150,82)
 ORANGE=(219,132,47)
+CAD_TESSELLATION_M=.0006
 
 
 def cad_mesh(shape: cq.Workplane) -> trimesh.Trimesh:
-    vertices, faces = shape.val().tessellate(.0006, .16)
+    vertices, faces = shape.val().tessellate(CAD_TESSELLATION_M, .16)
     # CAD fillet poles can emit zero-area triangles with repeated vertices.
     # Remove those during validation so closed solids retain closed topology.
     return trimesh.Trimesh(vertices=[v.toTuple() for v in vertices], faces=faces,
@@ -127,13 +128,29 @@ class Assembly:
         exported.export(str(path),file_type='glb',include_normals=True)
 
 
+def partition_cad_parts(shapes):
+    """Partition a CSG union into material regions with disjoint interiors."""
+    occupied = None
+    for shape in shapes:
+        region = shape if occupied is None else shape.cut(occupied)
+        if not region.val().isValid() or region.val().Volume() <= 0:
+            raise ValueError('CAD material partition must contain a valid positive-volume region')
+        yield region
+        occupied = shape if occupied is None else occupied.union(shape)
+
+
 def box_frame(a: Assembly,size,thickness,color=LIGHT):
     x,y,z=size;t=thickness
-    a.box((x,y,t),(0,0,-z/2+t/2),color)
-    a.box((t,y,z),(-x/2+t/2,0,0),color)
-    a.box((t,y,z),(x/2-t/2,0,0),color)
-    a.box((x-2*t,t,z),(0,-y/2+t/2,0),color)
-    a.box((x-2*t,t,z),(0,y/2-t/2,0),color)
+    panels = [((x,y,t),(0,0,-z/2+t/2)),
+              ((t,y,z),(-x/2+t/2,0,0)),
+              ((t,y,z),(x/2-t/2,0,0)),
+              ((x-2*t,t,z),(0,-y/2+t/2,0)),
+              ((x-2*t,t,z),(0,y/2-t/2,0))]
+    shapes = [cq.Workplane('XY').box(*extent).edges()
+              .fillet(min(min(extent)*.16,.006)).translate(position)
+              for extent,position in panels]
+    for region in partition_cad_parts(shapes):
+        a.add(cad_mesh(region),color,name='panel')
 
 
 def hollow_front(a,size,wall,color,top_inlay: cq.Workplane | None=None):
@@ -526,12 +543,8 @@ def tube_path(a,points,radius,color=RUBBER):
     for point in points[1:-1]:a.sphere((radius,)*3,point,color)
 
 
-def engine_clamp_hose(a):
-    """Molded hose shoulder and band-mounted seat, on the original path.
-
-    The nine existing screw teeth are annular teaching geometry, not a helix.
-    Matching internal grooves let that unchanged geometry turn in a metal seat.
-    """
+def engine_hose_solids():
+    """Dimensioned inlet, outlet and elbow walls with one continuous lumen."""
     points=np.asarray([(-.46,-.25,1.04),(-.32,-.12,1.06),(-.27,.06,1.03)])
 
     def faceted_solid(mesh):
@@ -560,16 +573,18 @@ def engine_clamp_hose(a):
     elbow.apply_translation(points[1]);originals.append(elbow)
     lumen=lumen.cut(roof_cutter(.010))
     outer_cut=roof_cutter()
-    for index,mesh in enumerate(originals):
-        # Keep each original node/material, including the existing overlaps at
-        # the elbow, but subtract the same continuous lumen from all three.
-        wall=faceted_solid(mesh).cut(outer_cut).cut(lumen)
+    return [faceted_solid(mesh).cut(outer_cut).cut(lumen) for mesh in originals]
+
+
+def engine_clamp_hose(a):
+    """Closed material regions and a band-mounted annular teaching screw seat."""
+    for index,wall in enumerate(partition_cad_parts(engine_hose_solids())):
         a.add(cad_mesh(wall),DARK,metal=.45 if index<2 else 0.,
               name='tube' if index<2 else 'rounded_part')
 
     band=trimesh.creation.annulus(.051,.055,.023,sections=48)
     band.apply_transform(trimesh.geometry.align_vectors([0,0,1],[0,1,0]))
-    band.apply_translation(points[1])
+    band.apply_translation((-.32,-.12,1.06))
     axis=cq.Vector(1,0,0)
     seat=cq.Workplane(obj=cq.Solid.makeCylinder(.011,.051905,cq.Vector(-.32421,-.10,1.10),axis))
     shoe=cq.Workplane('XY').box(.032,.028,.0025).translate((-.306,-.10,1.08825))
@@ -579,7 +594,10 @@ def engine_clamp_hose(a):
     for xx in np.linspace(-.3188,-.29154,9):
         groove=cq.Solid.makeCylinder(.0066,.0012,cq.Vector(float(xx)-.0006,-.10,1.10),axis)
         seat=seat.cut(groove)
-    a.add(cad_mesh(faceted_solid(band).union(seat)),STEEL,metal=.6,name='clamp_band')
+    faces=[cq.Face.makeFromWires(cq.Wire.makePolygon(
+        [cq.Vector(*v) for v in triangle],close=True)) for triangle in band.triangles]
+    band_solid=cq.Workplane(obj=cq.Solid.makeSolid(cq.Shell.makeShell(faces)))
+    a.add(cad_mesh(band_solid.union(seat)),STEEL,metal=.6,name='clamp_band')
 
 
 def inlaid_work_surface(a,spec):
