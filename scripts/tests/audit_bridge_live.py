@@ -24,7 +24,7 @@ from playwright.sync_api import sync_playwright
 from holocue.config import root, load_scene, list_scenes
 from holocue.models import DisplayCue, Pose
 from holocue.spatial import matrix, trajectory, transform_points
-from scripts.tests.audit_viewer_live import ui_input
+from scripts.tests.audit_viewer_live import ui_input,CLIENT_READ,client_view_errors
 from scripts.tests.live_twelve_scenes import signature
 
 
@@ -191,6 +191,23 @@ class Audit:
         before=time.time()
         self.page.get_by_role('button',name={'workspace':'工作区域','detail':'目标特写','inspection':'结构检查'}[mode],exact=True).click()
         view=self.view(mode=mode,after=before,selected=target)
+        # A viewport resize can publish its view-mode before the browser has
+        # sent the new aspect and the server has refitted the camera. Use the
+        # actual rendered camera before computing the expected focus depth.
+        deadline=time.monotonic()+25
+        camera_checks=[]
+        while True:
+            view=self.view(mode=mode,after=before,selected=target)
+            check=client_view_errors(self.page.evaluate(CLIENT_READ),view)
+            camera_checks.append(check)
+            if check['passed'] or time.monotonic()>deadline:
+                break
+            self.page.wait_for_timeout(100)
+        with (self.out/'view_camera_checks.jsonl').open('a',encoding='utf-8') as stream:
+            stream.write(json.dumps({'requested_at':before,'mode':mode,'target':target,
+                'finished_at':time.time(),'checks':camera_checks})+'\n')
+        if not check['passed']:
+            raise AssertionError('Visible camera did not settle before focusing: '+json.dumps(check))
         if target is not None and view['selected_id']!=target:
             raise AssertionError('Observation dropdown selected another object')
         # Manual camera changes deliberately preserve the user's focal setting.
