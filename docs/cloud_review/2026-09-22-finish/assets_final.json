@@ -1,0 +1,521 @@
+{
+  "algorithm": "sha256-path-size-content-v1",
+  "digest": "36866cf33627a522897a66a3e1247587608d72959dc792d029de0136a0b78af8",
+  "files": [
+    {
+      "path": "scenes/blocks/meshes/A.glb",
+      "sha256": "682b1984204c1b8c5748893d2d4e38f40bbf01a6342266a0f8f7934059467652",
+      "bytes": 129164
+    },
+    {
+      "path": "scenes/blocks/meshes/B.glb",
+      "sha256": "4ea6f4b3021423a306c6f03635a4c6f8dc6fcab2ebc77f4ec600d167b8bfd46d",
+      "bytes": 129164
+    },
+    {
+      "path": "scenes/blocks/meshes/BASE.glb",
+      "sha256": "d18a71e2ccbe558b8737cc212d3ee05df97977a1f56454eb8afbcd44302f6c82",
+      "bytes": 827048
+    },
+    {
+      "path": "scenes/blocks/meshes/env/workstation.glb",
+      "sha256": "2a466ff0be22304bcefeeb614b72b89ba9ed572772fe84c2990aeec02331d38d",
+      "bytes": 1865704
+    },
+    {
+      "path": "scenes/cnc_toolchange/meshes/MAG.glb",
+      "sha256": "eaf12369750a2ece95d7b07ed61f7caf802e34894ea522a1c95b7f90479d8390",
+      "bytes": 157376
+    },
+    {
+      "path": "scenes/cnc_toolchange/meshes/MODESWITCH.glb",
+      "sha256": "a9a18c97a0a6040b401d613ab681b455da526618035f7bae941738962463cd44",
+      "bytes": 138436
+    },
+    {
+      "path": "scenes/cnc_toolchange/meshes/PANEL.glb",
+      "sha256": "9d5425a451a8ecfc6b3a5b09439a3c78e49bdfb00d7415dc50fd4a6a490e2652",
+      "bytes": 808936
+    },
+    {
+      "path": "scenes/cnc_toolchange/meshes/POCKET9.glb",
+      "sha256": "858f7b702e817522a7d9c7efe1a6b9d9cf9f8cec11373cbfb72b5171226b022a",
+      "bytes": 28388
+    },
+    {
+      "path": "scenes/cnc_toolchange/meshes/T03.glb",
+      "sha256": "186b745aa3d0c7458af61d74a579eb21f245ee218316db518a0cb4c4f15733ef",
+      "bytes": 252820
+    },
+    {
+      "path": "scenes/cnc_toolchange/meshes/T09.glb",
+      "sha256": "f4369195afd1dece784df627eb8bf462732170431f38a687eda933ee95d0aaf7",
+      "bytes": 252820
+    },
+    {
+      "path": "scenes/cnc_toolchange/meshes/env/workstation.glb",
+      "sha256": "d2561404d6f7d22a09d2cbdb038803d1d4d219e55f405c0d7630025145f3261a",
+      "bytes": 8353236
+    },
+    {
+      "path": "scenes/connector/meshes/C.glb",
+      "sha256": "8d155079545feb3ccc396f263ab9884990b6eb0f21dec825f95814cf41d88335",
+      "bytes": 843376
+    },
+    {
+      "path": "scenes/connector/meshes/P.glb",
+      "sha256": "2de294257dabf0e3212841bab5381a62143e3b55d461f18e1e6878bd8c369834",
+      "bytes": 1398624
+    },
+    {
+      "path": "scenes/connector/meshes/S.glb",
+      "sha256": "6c0ad6b38641d902a4f95470e387676a63321b4ff357aa61ef90f83d4f5ede38",
+      "bytes": 1718844
+    },
+    {
+      "path": "scenes/connector/meshes/env/workstation.glb",
+      "sha256": "067f537c09ba5c05d9519df868b51e116d4a0da99d32de822cdc5077e282dfa2",
+      "bytes": 1866304
+    },
+    {
+      "path": "scenes/control_panel/meshes/A.glb",
+      "sha256": "86e3be25dba00323cf044f767b31c02f1f77e6d9747bddef3c0c02097f290c5f",
+      "bytes": 163164
+    },
+    {
+      "path": "scenes/control_panel/meshes/B.glb",
+      "sha256": "b2bf2d9c04276ef907141a5800aaccecf5eee420c0d37a79cc2965ca3d81f914",
+      "bytes": 167772
+    },
+    {
+      "path": "scenes/control_panel/meshes/C.glb",
+      "sha256": "3deea914eb75527db2d54b83609437686545621968e858db663eb31edd3ef318",
+      "bytes": 843668
+    },
+    {
+      "path": "scenes/control_panel/meshes/env/workstation.glb",
+      "sha256": "3b0ae4b4f280abd4c681c045908154352f77a51cfdf9e2c33f4f1f78424f6e78",
+      "bytes": 2893548
+    },
+    {
+      "path": "scenes/dig_site/meshes/BONE.glb",
+      "sha256": "0957210f46b6b7bbd48b6ada5d9f1ef9eb87504e732dd517a1464d06bf9a1df4",
+      "bytes": 38152
+    },
+    {
+      "path": "scenes/dig_site/meshes/FLAG.glb",
+      "sha256": "05cdb44318a0369b8add16f4b1a9ed14d66625afc206bf0b358974f428944bbf",
+      "bytes": 89236
+    },
+    {
+      "path": "scenes/dig_site/meshes/POT1.glb",
+      "sha256": "9eb0417c6ebcbd9af8ac77f34109c9ab0ab59dc09b4f3b6df97698beacdae42c",
+      "bytes": 149416
+    },
+    {
+      "path": "scenes/dig_site/meshes/POT2.glb",
+      "sha256": "7b210d134a015352c6172fa5d15ff7c3e389df77be801f5c0df8657969680b60",
+      "bytes": 149420
+    },
+    {
+      "path": "scenes/dig_site/meshes/POT3.glb",
+      "sha256": "863d56356b082650db2b9b067659da8dca712222baa0467790a53245a7dbbf33",
+      "bytes": 574604
+    },
+    {
+      "path": "scenes/dig_site/meshes/STAY.glb",
+      "sha256": "6711095a38762b8b19307536d5510a6a087b17a108c9358a5d8e5d0c8ba64873",
+      "bytes": 387368
+    },
+    {
+      "path": "scenes/dig_site/meshes/TROWEL.glb",
+      "sha256": "fe0e36a058df5b86323d35d5e49ff77a060a0f0e847310b4df122f03ff52d5a9",
+      "bytes": 14864
+    },
+    {
+      "path": "scenes/dig_site/meshes/env/workstation.glb",
+      "sha256": "f0d9d84a5b8ca604e8ef7bcd297ec9bebe5c311a2ecb71fcc3f6a507fce7ce83",
+      "bytes": 2896920
+    },
+    {
+      "path": "scenes/dive_fillstation/meshes/BOTTLE1.glb",
+      "sha256": "cc14cad9b8ee26973640a690b35763eb1879968284fb75c7f4685a460e33a75c",
+      "bytes": 67516
+    },
+    {
+      "path": "scenes/dive_fillstation/meshes/BOTTLE2.glb",
+      "sha256": "8c69113397fcaf796ccc14ea302a2ca9a60fbbe5330b2852eb43b2175722964f",
+      "bytes": 70144
+    },
+    {
+      "path": "scenes/dive_fillstation/meshes/BOTTLE3.glb",
+      "sha256": "b34103a7fdc5e33ce7739a745e74e548202cdf1360b12e203a71227feec55d76",
+      "bytes": 70784
+    },
+    {
+      "path": "scenes/dive_fillstation/meshes/GAUGES.glb",
+      "sha256": "847b596f76a2c5f8ab146d2e4cbe81a26dfd457f6c6447a78f1ee97dbf84e308",
+      "bytes": 538744
+    },
+    {
+      "path": "scenes/dive_fillstation/meshes/QRC.glb",
+      "sha256": "ebc4827893f74d6d46bffe1d1c0007cef18992792a54f585947643eab29fed89",
+      "bytes": 186104
+    },
+    {
+      "path": "scenes/dive_fillstation/meshes/STEM.glb",
+      "sha256": "00535b46361aa3f10a5392e5b2e4adc54f3c9277fe458026f7029201a61dd29f",
+      "bytes": 367048
+    },
+    {
+      "path": "scenes/dive_fillstation/meshes/VALVE.glb",
+      "sha256": "8b09c69dab386e41016df505455f2833398ffb3994516c523f46e40a0fed6497",
+      "bytes": 398868
+    },
+    {
+      "path": "scenes/dive_fillstation/meshes/env/workstation.glb",
+      "sha256": "7aa59a3221f503eba794579bf4d03b43b738d078c6f5e78b03c1deba920c71fc",
+      "bytes": 3512496
+    },
+    {
+      "path": "scenes/drone_bench/meshes/BAT.glb",
+      "sha256": "a81e3562cee185590b98d9649b060088fc6e5037fe9b7e30c040374b448cd0aa",
+      "bytes": 789884
+    },
+    {
+      "path": "scenes/drone_bench/meshes/BAY.glb",
+      "sha256": "2707641880232d971fed46353a4ce9fa0042220b37645e641061ed61b2226d2d",
+      "bytes": 1240028
+    },
+    {
+      "path": "scenes/drone_bench/meshes/GUARD.glb",
+      "sha256": "3c9614fdc94c704df11b319549afb51b78cefc644c6e59bf9c2066ab8c441c26",
+      "bytes": 143528
+    },
+    {
+      "path": "scenes/drone_bench/meshes/M1.glb",
+      "sha256": "17e7a7e5689f227a06b8e3855102e4d25be06d416500d2b3cd73b0faae775648",
+      "bytes": 114336
+    },
+    {
+      "path": "scenes/drone_bench/meshes/M2.glb",
+      "sha256": "ae0ef7e52b2e73590c1000d0c7e7b2941b18e8179413988a739a6d6869699042",
+      "bytes": 114336
+    },
+    {
+      "path": "scenes/drone_bench/meshes/M3.glb",
+      "sha256": "ee17559df2dad0dbaa6a0ab437a76c84d0b94fb4903786b5cfbcf5826812b58d",
+      "bytes": 146852
+    },
+    {
+      "path": "scenes/drone_bench/meshes/M4.glb",
+      "sha256": "eeb6fab79fda1ef3ef9415cc69b0a87cdeb7f6a1c9270b0b8b3c02fe2ad7219c",
+      "bytes": 114336
+    },
+    {
+      "path": "scenes/drone_bench/meshes/VOLTMETER.glb",
+      "sha256": "633f7f0d9a1da0da35fe297749d88de4d6a297f012e6241216e092bb0c30eff2",
+      "bytes": 805600
+    },
+    {
+      "path": "scenes/drone_bench/meshes/env/workstation.glb",
+      "sha256": "205e50e03cf85352743f1f6c91b17952cf98ffc3d82b99ba6738fa1ea5f3d3de",
+      "bytes": 3541816
+    },
+    {
+      "path": "scenes/engine_bay/meshes/CLAMP.glb",
+      "sha256": "4c0b76465b4c99883011d0ec8d40ba6a1267ca8de0c1142b90a59e9c4ab558e6",
+      "bytes": 105336
+    },
+    {
+      "path": "scenes/engine_bay/meshes/CONN.glb",
+      "sha256": "1de00b8f4bad09966dcb654e1ed5cc5bd4e386d49fcc2d8e7a7f179bde173fdf",
+      "bytes": 848640
+    },
+    {
+      "path": "scenes/engine_bay/meshes/OILCAP.glb",
+      "sha256": "fc8844f759e30845b4e0241199422aa5c557a206b5b3f8c26758f5f6d3afcb86",
+      "bytes": 144500
+    },
+    {
+      "path": "scenes/engine_bay/meshes/PLUG.glb",
+      "sha256": "c2a6c12c0e5449f27141b5bde61d8c45fd76e1b21178cce795d4e97344149219",
+      "bytes": 125184
+    },
+    {
+      "path": "scenes/engine_bay/meshes/PLUGPORT.glb",
+      "sha256": "16fef03068662787b95a9d4a254ed72fcd3fdabb755ff120e23c1a200e9a1570",
+      "bytes": 28388
+    },
+    {
+      "path": "scenes/engine_bay/meshes/TENSIONER.glb",
+      "sha256": "8731f27cab4c7069a65aee8917c9d7d28729a201974708900441bea701375fbc",
+      "bytes": 110216
+    },
+    {
+      "path": "scenes/engine_bay/meshes/env/workstation.glb",
+      "sha256": "fb4e006bcae621ae4562321b6119a6029e4082b5c6568baddafa61b2c0244b2d",
+      "bytes": 14348816
+    },
+    {
+      "path": "scenes/infusion_ward/meshes/BAG1.glb",
+      "sha256": "9a7aacd0f3c637c601e6af633e6cce465a6e90123d38d0a9326109786cb147a2",
+      "bytes": 690652
+    },
+    {
+      "path": "scenes/infusion_ward/meshes/BAG2.glb",
+      "sha256": "1e72760a7fb7df971d4c8b76af6f7ea3d782fa5da5a9effa8741f1cd7e7fb527",
+      "bytes": 693472
+    },
+    {
+      "path": "scenes/infusion_ward/meshes/MONITOR.glb",
+      "sha256": "b14cec95a954a37b512a1ead5f974803b6c133012c9ec17ca5eab45d8fe4f885",
+      "bytes": 806664
+    },
+    {
+      "path": "scenes/infusion_ward/meshes/PUMPCASSETTE.glb",
+      "sha256": "178b8fe7bb7baca2a3094a1df58b683cf452efd86cb3346d803ce4399d118c9a",
+      "bytes": 629460
+    },
+    {
+      "path": "scenes/infusion_ward/meshes/SLOT2.glb",
+      "sha256": "394fccac6065d57d02659e7b9b2b166871adc1b5771ab921b46478414792b29a",
+      "bytes": 1565732
+    },
+    {
+      "path": "scenes/infusion_ward/meshes/STOPCOCK.glb",
+      "sha256": "76ffc1f6b44abf6ec43b3b6aa84bbd2711792a3b9bf9adc9a31923a3dc845d2f",
+      "bytes": 550160
+    },
+    {
+      "path": "scenes/infusion_ward/meshes/env/workstation.glb",
+      "sha256": "99b6bb1ce110ca4499c7a595c140a04693fa10fc74bb9d897e3ae8abb7f1d0b8",
+      "bytes": 3405800
+    },
+    {
+      "path": "scenes/optical_bench/meshes/L1.glb",
+      "sha256": "e1c8a876cc0504056d76cab3d7838c29af2a201776a2aadab09020e190d7086d",
+      "bytes": 69016
+    },
+    {
+      "path": "scenes/optical_bench/meshes/L2.glb",
+      "sha256": "43ee2f0088a52565ee0cc261f028ff9e101f6d23902fb38b28f8c0c944e35a71",
+      "bytes": 69836
+    },
+    {
+      "path": "scenes/optical_bench/meshes/M.glb",
+      "sha256": "eaec11075faa4d129325f7dbb0cf4beaf9c3d89792179d13b5b86c3747bc3ddf",
+      "bytes": 964992
+    },
+    {
+      "path": "scenes/optical_bench/meshes/POST2.glb",
+      "sha256": "0eca4454884ba73c319cf7dba3ff55c7c28244f5ecc5c79fac4ebff58162f394",
+      "bytes": 394980
+    },
+    {
+      "path": "scenes/optical_bench/meshes/TARGET.glb",
+      "sha256": "4f4478367b591be5d4955d04d863fa1784dd2d60af1169c0a7e36aa43fccb266",
+      "bytes": 492440
+    },
+    {
+      "path": "scenes/optical_bench/meshes/env/workstation.glb",
+      "sha256": "090ef5206ec507b8ea4ebaa5ef6182c5a1488b37cf25a55dd41ff0a6433a72e3",
+      "bytes": 4966232
+    },
+    {
+      "path": "scenes/server_rack/meshes/ALARM.glb",
+      "sha256": "7fd2df6925ee8ff432f9af5095c792d2eb665df6ef40dbc17a5b129b331a2e7d",
+      "bytes": 56576
+    },
+    {
+      "path": "scenes/server_rack/meshes/FAN.glb",
+      "sha256": "769341aed9414542d1dba5a4537f7bd8f8d55bba180d4bbe4dfe85fb8c5de37c",
+      "bytes": 135384
+    },
+    {
+      "path": "scenes/server_rack/meshes/NODE3.glb",
+      "sha256": "5be8636f72aaed71b180253967f7e9b3acbaf9f3dddeed9fc4dcff03f4d2a2e9",
+      "bytes": 1131732
+    },
+    {
+      "path": "scenes/server_rack/meshes/SLOT4.glb",
+      "sha256": "7ad93fd06dec90c597077f0ecebc1336597e67442e4bfe2619526aa9dd38bd65",
+      "bytes": 1254764
+    },
+    {
+      "path": "scenes/server_rack/meshes/SPARE.glb",
+      "sha256": "74a16f1bdd24becfb9afaaa5f051b02067d2a1478d785f7c05b8f227f3d83fba",
+      "bytes": 1746732
+    },
+    {
+      "path": "scenes/server_rack/meshes/env/workstation.glb",
+      "sha256": "f3e6a2c11af98a50aa771bec88220ebe86a02b4d4d136256e8ac32fde7a324d0",
+      "bytes": 15052448
+    },
+    {
+      "path": "scenes/shelf_picking/meshes/BASKET.glb",
+      "sha256": "decfbe0d77060de2516aeeed30fca21e6ac760e6b61d997962d715a039acb96c",
+      "bytes": 1262852
+    },
+    {
+      "path": "scenes/shelf_picking/meshes/BLUE.glb",
+      "sha256": "8f49be37dc197db03187d8cecb7594bc09354ac03dda78c16d28a1e28fa2ec6a",
+      "bytes": 2383920
+    },
+    {
+      "path": "scenes/shelf_picking/meshes/CONV.glb",
+      "sha256": "e6247528f865b22968653f702eb822c9cf1112a23d7244b99494cb3396a03a9d",
+      "bytes": 806420
+    },
+    {
+      "path": "scenes/shelf_picking/meshes/GREEN.glb",
+      "sha256": "30143c8ead6e8664c83c6f826496718e6ae01a4cc464f793b83c873dcb6d373c",
+      "bytes": 397612
+    },
+    {
+      "path": "scenes/shelf_picking/meshes/RED.glb",
+      "sha256": "7aac728e274c8e7fc7a8812af02355d594dfac170b1996e88ceea5ab8b5cabaa",
+      "bytes": 393244
+    },
+    {
+      "path": "scenes/shelf_picking/meshes/env/workstation.glb",
+      "sha256": "18ddd8968bbeb01ac5b365bee36a5b33ffb8d35804798de9ba7a4fc9dd96933f",
+      "bytes": 7461828
+    },
+    {
+      "path": "tests/fixtures/dive_fillstation/STEM_before_axial_clearance.glb",
+      "sha256": "f0166005d4b1e490320957e6e76034f25e32a44546f4419e0ce33f2d61a5edc2",
+      "bytes": 367052
+    },
+    {
+      "path": "tests/fixtures/dive_fillstation/STEM_before_axial_clearance.json",
+      "sha256": "4ad01850c4e4cf35472d425bf9143bbffad4ed004be38d5977e6dadc8f0c19a0",
+      "bytes": 845
+    },
+    {
+      "path": "tests/fixtures/dive_fillstation/environment_before_valve_seat.glb",
+      "sha256": "c230c299a439556c8015dc3094b0abf2d336d37dcf6ba4e21da883bada297b48",
+      "bytes": 3460580
+    },
+    {
+      "path": "tests/fixtures/engine_clamp_baseline.json",
+      "sha256": "f73034eade49825acf3d7c0deaede23df611432957ed14917e0158e76b8ad3ca",
+      "bytes": 162882
+    },
+    {
+      "path": "tests/fixtures/engine_clamp_before.glb",
+      "sha256": "8ea8fc9ddb56f8232786e07f35d913c1c454686aedfe091419d8fa7d35c1de54",
+      "bytes": 105324
+    },
+    {
+      "path": "tests/fixtures/engine_hose_before.glb",
+      "sha256": "4bdf94b1ebd81d36a30b7d24dcd801067ecbbc76b4f6190e03e72f616baad4f5",
+      "bytes": 13799972
+    },
+    {
+      "path": "tests/fixtures/engine_hose_outer_union_before.glb",
+      "sha256": "11b071bf83a6e13261d590c9ad5c49620c682a26c4787f0a914f2004adb4d377",
+      "bytes": 11192
+    },
+    {
+      "path": "tests/fixtures/engine_hose_outer_union_provenance.json",
+      "sha256": "d195564defc02923273db27724dad47bb9c954e2d881decd6aa864c7f1cf0098",
+      "bytes": 452
+    },
+    {
+      "path": "tests/fixtures/engine_mount_objects_baseline.json",
+      "sha256": "286c2b2f9b2f39e675337d10b227a943ed08b2266f442811e48d02988d6305f0",
+      "bytes": 3095
+    },
+    {
+      "path": "tests/fixtures/floor_grounding_baseline.json",
+      "sha256": "c04a7c919c4387dea71b3866b40fba480bacebe0531d34aa547307793737b4ea",
+      "bytes": 221305
+    },
+    {
+      "path": "tests/fixtures/infusion_stopcock_before_union.glb",
+      "sha256": "c8cb10d5db7f25d9a77fefab3cdda4254c31b1d81e5d26ab05bd1fc51fc16270",
+      "bytes": 496824
+    },
+    {
+      "path": "tests/fixtures/infusion_support_baseline.json",
+      "sha256": "53de7f5a1bbeaeffd1991ef19ad2cc1e599f3ff3cd97eb3f1cf792cfc8aa12de",
+      "bytes": 23870
+    },
+    {
+      "path": "tests/fixtures/material_regions/BASKET.glb",
+      "sha256": "d6b363965c8457c69e37b6ca3d3411a246b4454986f29c2c87dda21f439b0b61",
+      "bytes": 1185348
+    },
+    {
+      "path": "tests/fixtures/material_regions/BAY.glb",
+      "sha256": "95e64ef776d73c71c5b976295dc5ac198abdb8b1b9c8ff58ebbfc87923527209",
+      "bytes": 1169368
+    },
+    {
+      "path": "tests/fixtures/material_regions/BLUE.glb",
+      "sha256": "450752216abac2a7d39d1ea006b139b358541c483821fbeebfb0b5bbefa073fa",
+      "bytes": 2306732
+    },
+    {
+      "path": "tests/fixtures/material_regions/manifest.json",
+      "sha256": "a09fdf6b52b6eb5e224bd604bd30eb26de0e2c3241cdbbb5b4a887a7f30aa35d",
+      "bytes": 1005
+    },
+    {
+      "path": "tests/fixtures/material_regions/workstation.glb",
+      "sha256": "97a90be4711af3718ae68e5fe88482248c5f94719d075329c01676d53488b5e1",
+      "bytes": 14496228
+    },
+    {
+      "path": "tests/fixtures/optical_lens_before_seat/L1.glb",
+      "sha256": "dd4236403f6b3cf62516d168f858b544fe7d32fd93d17f08eac6dd09b977230b",
+      "bytes": 53792
+    },
+    {
+      "path": "tests/fixtures/optical_lens_before_seat/L1_view.json",
+      "sha256": "73652ad7e339a8f77952cbbc59fe21080f1b2ac441f114051a04c95cb35cda35",
+      "bytes": 1373
+    },
+    {
+      "path": "tests/fixtures/optical_lens_before_seat/L2.glb",
+      "sha256": "34ff1c0a6f67d13ed34cdc7bb97e533902c8a0375489b304852c63b63aa8f108",
+      "bytes": 54612
+    },
+    {
+      "path": "tests/fixtures/optical_lens_before_seat/L2_view.json",
+      "sha256": "1f2664935285153004f470b64df6e8a26b667780cf77fa95df5ad0834c802c3b",
+      "bytes": 1372
+    },
+    {
+      "path": "tests/fixtures/optical_lens_before_seat/scene.json",
+      "sha256": "1936c299bf9b2411772b50012882012c9845bcfdfcdf43d9387977039943c4b7",
+      "bytes": 2884
+    },
+    {
+      "path": "tests/fixtures/optical_lens_before_seat/visible_rays.json",
+      "sha256": "fe56fdb48cc685085a04579e5b0d5742111bc07e8a5cbb9d01fa8f98fde57df8",
+      "bytes": 23945
+    },
+    {
+      "path": "tests/fixtures/panel_optical_mounts/baseline.json",
+      "sha256": "3244fe87c98831c950258eccb2c6320aa10dcc3f16dfd91c3fefa5271b91e3a2",
+      "bytes": 183749
+    },
+    {
+      "path": "tests/fixtures/panel_optical_mounts/control_panel/environment_before.glb",
+      "sha256": "f7c03e6daae8c360222bec91d3575bada0ccca96605970983900ab671abbf65b",
+      "bytes": 2793988
+    },
+    {
+      "path": "tests/fixtures/panel_optical_mounts/drone_bench/environment_before.glb",
+      "sha256": "87ed3ba08d1eb9ae776f630dd644bc0b371be3dc84e11bb987c646feb9c975c2",
+      "bytes": 3452564
+    },
+    {
+      "path": "tests/fixtures/panel_optical_mounts/optical_bench/environment_before.glb",
+      "sha256": "12697a6688bf4832a69d9be4bd89729afa4fdf9fba79aa776a74992d1634a375",
+      "bytes": 4937136
+    }
+  ]
+}

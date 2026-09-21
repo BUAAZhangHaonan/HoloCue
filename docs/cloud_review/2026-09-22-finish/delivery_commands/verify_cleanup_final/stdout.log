@@ -1,0 +1,16 @@
+{"passed": true, "recorded_identities_checked": 94}
+{
+  "authorized_physical_gpus": [],
+  "cuda_visible_devices": [],
+  "host_reserve_gib": 25.15453948974609,
+  "rss_limit_gib": 8.0,
+  "command": [
+    ".venv-simulation/bin/python",
+    ".work/cloud_finish90_20260921/verify_owned_cleanup.py",
+    "--output",
+    "/home/hdd3/zhanghaonan/projects/holocue/runs/simulation/cloud_finish90_20260921_e67b574/owned_process_verification_final.json"
+  ],
+  "host_total_gib": 251.54539489746094,
+  "host_max_used_fraction": 0.9,
+  "host_reserve_policy": "explicit-used-fraction"
+}

@@ -1,0 +1,41 @@
+........................................................................ [ 13%]
+........................................................................ [ 27%]
+........................................................................ [ 40%]
+........................................................................ [ 54%]
+........................................................................ [ 68%]
+........................................................................ [ 81%]
+........................................................................ [ 95%]
+.........................                                                [100%]
+=============================== warnings summary ===============================
+.venv-simulation/lib/python3.12/site-packages/starlette/testclient.py:53
+  /home/hdd3/zhanghaonan/projects/holocue/.venv-simulation/lib/python3.12/site-packages/starlette/testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+tests/test_engine_clamp.py: 514 warnings
+tests/test_infusion_support.py: 145 warnings
+tests/test_panel_optical_mounts.py: 137 warnings
+  /home/hdd3/zhanghaonan/projects/holocue/.venv-simulation/lib/python3.12/site-packages/vtkmodules/util/numpy_support.py:244: DeprecationWarning: Setting the shape on a NumPy array has been deprecated in NumPy 2.5.
+  As an alternative, you can create a new view using np.reshape (with copy=False if needed).
+    result.shape = shape
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+529 passed, 797 warnings in 242.40s (0:04:02)
+{
+  "authorized_physical_gpus": [],
+  "cuda_visible_devices": [],
+  "host_reserve_gib": 25.15453948974609,
+  "rss_limit_gib": 8.0,
+  "command": [
+    ".venv-simulation/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "--basetemp",
+    ".work/pytest_cloud_camera_final",
+    "--junitxml",
+    "runs/simulation/cloud_finish90_20260921_e67b574/pytest_camera_final.xml"
+  ],
+  "host_total_gib": 251.54539489746094,
+  "host_max_used_fraction": 0.9,
+  "host_reserve_policy": "explicit-used-fraction"
+}

@@ -1,0 +1,25 @@
+shelf_picking BASKET_empty_guidance_off capture started
+shelf_picking BASKET_empty_guidance_off native capture verified
+shelf_picking BLUE_inspection_guidance_off capture started
+shelf_picking BLUE_inspection_guidance_off native capture verified
+shelf_picking BASKET_endpoint_waiting_confirmation capture started
+shelf_picking BASKET_endpoint_waiting_confirmation native capture verified
+shelf_picking BASKET_confirmed_guidance_off capture started
+shelf_picking BASKET_confirmed_guidance_off native capture verified
+{
+  "authorized_physical_gpus": [],
+  "cuda_visible_devices": [],
+  "host_reserve_gib": 25.15453948974609,
+  "rss_limit_gib": 8.0,
+  "command": [
+    ".venv-simulation/bin/python",
+    ".work/cloud_finish90_20260921/camera_fix/capture_changed_pairs_attempt.py",
+    "--scene",
+    "shelf_picking",
+    "--out",
+    "/home/hdd3/zhanghaonan/projects/holocue/runs/simulation/cloud_finish90_20260921_e67b574/changed_pairs/shelf_picking_attempt03"
+  ],
+  "host_total_gib": 251.54539489746094,
+  "host_max_used_fraction": 0.9,
+  "host_reserve_policy": "explicit-used-fraction"
+}

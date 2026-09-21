@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "accepted": [
+    {
+      "scene_id": "blocks",
+      "production_manifest": "runs/simulation/cloud_finish90_20260921_e67b574/videos/blocks_attempt01/blocks/produced/manifest.json",
+      "production_manifest_sha256": "14960cbc4d0f18615fb4d4b3a9362b5405efbc7602475d5dccd6c9214adc013c",
+      "session_id": "4d43c190d4b54583b9b14808d71a6728",
+      "decision": "accepted",
+      "reason": "Root accepted the independent representative-frame review; detailed viewing and geometry limits remain in visual_review.md."
+    },
+    {
+      "scene_id": "cnc_toolchange",
+      "production_manifest": "runs/simulation/cloud_finish90_20260921_e67b574/videos/cnc_toolchange_attempt01/cnc_toolchange/produced_attempt02/manifest.json",
+      "production_manifest_sha256": "ea4a9a4569b38a0b4b94e648f05c47381e93e0d67bc83d8158e97a9200e18a5b",
+      "session_id": "b25f0b9ee42842279957a9c79fec94fe",
+      "decision": "accepted",
+      "reason": "Root accepted the independent representative-frame review; detailed viewing and geometry limits remain in visual_review.md."
+    },
+    {
+      "scene_id": "connector",
+      "production_manifest": "runs/simulation/cloud_finish90_20260921_e67b574/videos/connector_attempt02/connector/produced/manifest.json",
+      "production_manifest_sha256": "77067727153972513b69a3c2273990323405eacc90faa5fa57f0561affd90840",
+      "session_id": "404acb58573a47d5adde618f148c8e86",
+      "decision": "accepted",
+      "reason": "Root accepted the independent representative-frame review; detailed viewing and geometry limits remain in visual_review.md."
+    },
+    {
+      "scene_id": "control_panel",
+      "production_manifest": "runs/simulation/cloud_finish90_20260921_e67b574/videos/control_panel_attempt01/control_panel/produced/manifest.json",
+      "production_manifest_sha256": "392f1a9b9732a9c9e6ba50ac4c609d1ae023f6023cfa6c91d2f337a7f7f2f31d",
+      "session_id": "0314d58af0ca4fc9aef3a29bc7e9461c",
+      "decision": "accepted",
+      "reason": "Root accepted the independent representative-frame review; detailed viewing and geometry limits remain in visual_review.md."
+    },
+    {
+      "scene_id": "dig_site",
+      "production_manifest": "runs/simulation/cloud_finish90_20260921_e67b574/videos/dig_site_attempt01/dig_site/produced/manifest.json",
+      "production_manifest_sha256": "61a2f60ee45caff5d5c8d619a4f7e9d25603495fc5701ed7b71d85d18220d549",
+      "session_id": "0bd3ae1f251c4665a6d7edd8c7a05aa9",
+      "decision": "accepted",
+      "reason": "Root accepted the independent representative-frame review; detailed viewing and geometry limits remain in visual_review.md."
+    },
+    {
+      "scene_id": "dive_fillstation",
+      "production_manifest": "runs/simulation/cloud_finish90_20260921_e67b574/videos/dive_fillstation_attempt01/dive_fillstation/produced/manifest.json",
+      "production_manifest_sha256": "d4b26deaabfcfaeabda80984441aa7f42ad04dde7cdc5b92ac1a37ebaa2aeea9",
+      "session_id": "046dbc5bbebf445ea479ba7953125201",
+      "decision": "accepted",
+      "reason": "Root accepted the independent representative-frame review; detailed viewing and geometry limits remain in visual_review.md."
+    },
+    {
+      "scene_id": "drone_bench",
+      "production_manifest": "runs/simulation/cloud_finish90_20260921_e67b574/videos/drone_bench_attempt01/drone_bench/produced/manifest.json",
+      "production_manifest_sha256": "ebffbcad2db67eb9fd84dcc816e239b0bbed70187b58ee1d50cf3357ba490d38",
+      "session_id": "11daa80061d245a48d9ed66db1100e5a",
+      "decision": "accepted",
+      "reason": "Root accepted the independent representative-frame review; detailed viewing and geometry limits remain in visual_review.md."
+    },
+    {
+      "scene_id": "engine_bay",
+      "production_manifest": "runs/simulation/cloud_finish90_20260921_e67b574/videos/engine_bay_attempt02/engine_bay/produced/manifest.json",
+      "production_manifest_sha256": "c1fd8fdb708db86963e0a28dca0a979269a69d4e9898a99e34841afce75c941c",
+      "session_id": "6e74c9e94d2c4c1cab20e6e6b26a3060",
+      "decision": "accepted",
+      "reason": "Root accepted the independent representative-frame review; detailed viewing and geometry limits remain in visual_review.md."
+    },
+    {
+      "scene_id": "infusion_ward",
+      "production_manifest": "runs/simulation/cloud_finish90_20260921_e67b574/videos/infusion_ward_attempt01/infusion_ward/produced/manifest.json",
+      "production_manifest_sha256": "c9bc7f8b4ce221c31f0b7e53971900fd80e5b1af94ce9739db0a82d9d434f3bf",
+      "session_id": "6b5b8ef7dc924049808bb4106c0e67a5",
+      "decision": "accepted",
+      "reason": "Root accepted the independent representative-frame review; detailed viewing and geometry limits remain in visual_review.md."
+    },
+    {
+      "scene_id": "optical_bench",
+      "production_manifest": "runs/simulation/cloud_finish90_20260921_e67b574/videos/optical_bench_attempt01/optical_bench/produced/manifest.json",
+      "production_manifest_sha256": "f181dea6c1c52f6768df35f66fae32830ed1e7eb149d2eed0a9a5b1ba3713beb",
+      "session_id": "6238ae8297ea44a79f6436dde48c1b63",
+      "decision": "accepted",
+      "reason": "Root accepted the independent representative-frame review; detailed viewing and geometry limits remain in visual_review.md."
+    },
+    {
+      "scene_id": "server_rack",
+      "production_manifest": "runs/simulation/cloud_finish90_20260921_e67b574/videos/server_rack_attempt01/server_rack/produced/manifest.json",
+      "production_manifest_sha256": "02a0334f9a224a895ae584bfa0b7db14257d8d920934d0d8ba9c7ddbc2bc26d3",
+      "session_id": "6a1b96c548494c0c8d96199346652a79",
+      "decision": "accepted",
+      "reason": "Root accepted the independent representative-frame review; detailed viewing and geometry limits remain in visual_review.md."
+    },
+    {
+      "scene_id": "shelf_picking",
+      "production_manifest": "runs/simulation/cloud_finish90_20260921_e67b574/videos/shelf_picking_attempt01/shelf_picking/produced/manifest.json",
+      "production_manifest_sha256": "c2df872212aa3c8dbc6823ebaaeb0636e562bb7bfb12e7d6d8bb0742b998c7d0",
+      "session_id": "c2bf1e7aee224802ad9173d453a1b288",
+      "decision": "accepted",
+      "reason": "Root accepted the independent representative-frame review; detailed viewing and geometry limits remain in visual_review.md."
+    }
+  ],
+  "rejected": [
+    {
+      "scene_id": "connector",
+      "production_manifest": "runs/simulation/cloud_finish90_20260921_e67b574/videos/connector_attempt01/connector/produced/manifest.json",
+      "production_manifest_sha256": "5a068ba4cf49217879ba9022131ce9933c5543d2aeb7931638f777a7b9f0a48f",
+      "session_id": "03c4e01220234c6d8c82d775b7fb7b6b",
+      "decision": "rejected",
+      "reason": "Functional workflow passed, but original page images and movie show persistent washed-out canvas; retain original evidence and use explicitly reviewed attempt02."
+    }
+  ],
+  "decision_scope": "Video presentation only; functional assertions and native Blender coverage are reported separately.",
+  "review_manifest": {
+    "path": ".work/cloud_finish90_20260921/video_review_manifest.json",
+    "sha256": "f8b733534cb90456302a5e5326649f47ddb1327e823a9587d858fa8626934ae3"
+  },
+  "review_notes": {
+    "path": ".work/cloud_finish90_20260921/visual_review.md",
+    "sha256": "798269c2e7720a5431ce951933c63361bcc59de2f691b40250865315c1eaa2b6"
+  }
+}

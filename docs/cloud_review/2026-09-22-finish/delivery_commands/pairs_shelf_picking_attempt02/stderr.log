@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/home/hdd3/zhanghaonan/projects/holocue/.work/cloud_finish90_20260921/camera_fix/capture_changed_pairs_attempt.py", line 14, in <module>
+    out=args.out or Path(os.environ['RUN_DIR'])/'changed_pairs'/args.scene;environment,blender=check_environment(out);out.mkdir(parents=True,exist_ok=False)
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hdd3/zhanghaonan/projects/holocue/scripts/tests/audit_bridge_live.py", line 47, in check_environment
+    raise ValueError('--out must be inside the project .work or runs/simulation')
+ValueError: --out must be inside the project .work or runs/simulation

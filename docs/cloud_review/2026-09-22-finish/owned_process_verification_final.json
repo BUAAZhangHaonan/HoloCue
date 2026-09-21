@@ -1,0 +1,572 @@
+{
+  "checked_at": 1790016117.0435488,
+  "passed": true,
+  "recorded_identities": [
+    {
+      "record": "api_repair_process.json",
+      "pid": 1970294,
+      "create_time": 1790002394.37,
+      "status": "exited"
+    },
+    {
+      "record": "api_resume01_repair_process.json",
+      "pid": 2000640,
+      "create_time": 1790006840.2,
+      "status": "exited"
+    },
+    {
+      "record": "api_resume02_repair_process.json",
+      "pid": 2037110,
+      "create_time": 1790009830.29,
+      "status": "exited"
+    },
+    {
+      "record": "api_resume03_repair_process.json",
+      "pid": 2225436,
+      "create_time": 1790014834.97,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/dive_fillstation/dive_fillstation/01_start_paused/blender_process.json",
+      "pid": 1971606,
+      "create_time": 1790002608.14,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/dive_fillstation/dive_fillstation/02_middle_paused/blender_process.json",
+      "pid": 1972408,
+      "create_time": 1790002663.77,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/dive_fillstation/dive_fillstation/03_temporary_inspection/blender_process.json",
+      "pid": 1972858,
+      "create_time": 1790002710.13,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/dive_fillstation/dive_fillstation/04_original_restored/blender_process.json",
+      "pid": 1973720,
+      "create_time": 1790002781.61,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/dive_fillstation/dive_fillstation/05_endpoint_waiting/blender_process.json",
+      "pid": 1973981,
+      "create_time": 1790002823.51,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/dive_fillstation/dive_fillstation/06_final_workspace/blender_process.json",
+      "pid": 1991907,
+      "create_time": 1790004174.65,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/dive_fillstation/dive_fillstation/exporter_process.json",
+      "pid": 1971575,
+      "create_time": 1790002595.71,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/dive_fillstation/dive_fillstation/object_BOTTLE1_detail/blender_process.json",
+      "pid": 1992369,
+      "create_time": 1790004259.35,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/dive_fillstation/dive_fillstation/object_BOTTLE1_inspection/blender_process.json",
+      "pid": 1992444,
+      "create_time": 1790004271.95,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/dive_fillstation/dive_fillstation/object_BOTTLE2_detail/blender_process.json",
+      "pid": 1992776,
+      "create_time": 1790004291.6,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/dive_fillstation/dive_fillstation/object_BOTTLE2_inspection/blender_process.json",
+      "pid": 1992868,
+      "create_time": 1790004305.49,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/dive_fillstation/dive_fillstation/object_BOTTLE3_detail/blender_process.json",
+      "pid": 1992210,
+      "create_time": 1790004229.93,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/dive_fillstation/dive_fillstation/object_BOTTLE3_inspection/blender_process.json",
+      "pid": 1992299,
+      "create_time": 1790004244.16,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/dive_fillstation/dive_fillstation/object_GAUGES_detail/blender_process.json",
+      "pid": 1993014,
+      "create_time": 1790004336.78,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/dive_fillstation/dive_fillstation/object_QRC_detail/blender_process.json",
+      "pid": 1992004,
+      "create_time": 1790004191.6,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/dive_fillstation/dive_fillstation/object_STEM_detail/blender_process.json",
+      "pid": 1992939,
+      "create_time": 1790004320.51,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/dive_fillstation/dive_fillstation/object_VALVE_detail/blender_process.json",
+      "pid": 1992130,
+      "create_time": 1790004210.78,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/dive_fillstation/dive_fillstation/step_01_endpoint/blender_process.json",
+      "pid": 1975779,
+      "create_time": 1790002982.09,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/dive_fillstation/dive_fillstation/step_01_endpoint_receiver/blender_process.json",
+      "pid": 1976381,
+      "create_time": 1790003023.86,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/dive_fillstation/dive_fillstation/step_01_middle/blender_process.json",
+      "pid": 1974838,
+      "create_time": 1790002922.06,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/dive_fillstation/dive_fillstation/step_01_start/blender_process.json",
+      "pid": 1974269,
+      "create_time": 1790002860.33,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/dive_fillstation/dive_fillstation/step_02_endpoint/blender_process.json",
+      "pid": 1987320,
+      "create_time": 1790003808.96,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/dive_fillstation/dive_fillstation/step_02_middle/blender_process.json",
+      "pid": 1982388,
+      "create_time": 1790003437.78,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/dive_fillstation/dive_fillstation/step_02_start/blender_process.json",
+      "pid": 1976767,
+      "create_time": 1790003060.72,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/drone_bench/drone_bench/01_start_paused/blender_process.json",
+      "pid": 1993382,
+      "create_time": 1790004410.78,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/drone_bench/drone_bench/02_middle_paused/blender_process.json",
+      "pid": 1993764,
+      "create_time": 1790004484.93,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/drone_bench/drone_bench/03_temporary_inspection/blender_process.json",
+      "pid": 1995115,
+      "create_time": 1790004584.71,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/drone_bench/drone_bench/exporter_process.json",
+      "pid": 1993316,
+      "create_time": 1790004382.59,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/drone_bench_attempt02/drone_bench/01_start_paused/blender_process.json",
+      "pid": 2005546,
+      "create_time": 1790007231.76,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/drone_bench_attempt02/drone_bench/02_middle_paused/blender_process.json",
+      "pid": 2006299,
+      "create_time": 1790007313.79,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/drone_bench_attempt02/drone_bench/03_temporary_inspection/blender_process.json",
+      "pid": 2007141,
+      "create_time": 1790007401.73,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/drone_bench_attempt02/drone_bench/04_original_restored/blender_process.json",
+      "pid": 2010061,
+      "create_time": 1790007616.29,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/drone_bench_attempt02/drone_bench/05_endpoint_receiver/blender_process.json",
+      "pid": 2011110,
+      "create_time": 1790007751.1,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/drone_bench_attempt02/drone_bench/05_endpoint_waiting/blender_process.json",
+      "pid": 2010504,
+      "create_time": 1790007682.94,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/drone_bench_attempt02/drone_bench/06_final_workspace/blender_process.json",
+      "pid": 2030511,
+      "create_time": 1790009345.09,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/drone_bench_attempt02/drone_bench/exporter_process.json",
+      "pid": 2005382,
+      "create_time": 1790007208.26,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/drone_bench_attempt02/drone_bench/object_BAT_detail/blender_process.json",
+      "pid": 2030671,
+      "create_time": 1790009375.05,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/drone_bench_attempt02/drone_bench/object_BAY_detail/blender_process.json",
+      "pid": 2031636,
+      "create_time": 1790009442.42,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/drone_bench_attempt02/drone_bench/object_GUARD_detail/blender_process.json",
+      "pid": 2032408,
+      "create_time": 1790009514.9,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/drone_bench_attempt02/drone_bench/object_M1_detail/blender_process.json",
+      "pid": 2032966,
+      "create_time": 1790009583.11,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/drone_bench_attempt02/drone_bench/object_M2_detail/blender_process.json",
+      "pid": 2033257,
+      "create_time": 1790009606.02,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/drone_bench_attempt02/drone_bench/object_M3_detail/blender_process.json",
+      "pid": 2033406,
+      "create_time": 1790009631.04,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/drone_bench_attempt02/drone_bench/object_M3_inspection/blender_process.json",
+      "pid": 2033475,
+      "create_time": 1790009641.71,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/drone_bench_attempt02/drone_bench/object_M4_detail/blender_process.json",
+      "pid": 2033580,
+      "create_time": 1790009657.93,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/drone_bench_attempt02/drone_bench/object_VOLTMETER_detail/blender_process.json",
+      "pid": 2033791,
+      "create_time": 1790009674.23,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/drone_bench_attempt02/drone_bench/step_01_endpoint/blender_process.json",
+      "pid": 2022425,
+      "create_time": 1790008790.99,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/drone_bench_attempt02/drone_bench/step_01_middle/blender_process.json",
+      "pid": 2017113,
+      "create_time": 1790008347.88,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/drone_bench_attempt02/drone_bench/step_01_start/blender_process.json",
+      "pid": 2011618,
+      "create_time": 1790007860.49,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/drone_bench_attempt02/drone_bench/step_02_inspection/blender_process.json",
+      "pid": 2027323,
+      "create_time": 1790009175.47,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/infusion_ward/infusion_ward/01_start_paused/blender_process.json",
+      "pid": 2050330,
+      "create_time": 1790010160.68,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/infusion_ward/infusion_ward/02_middle_paused/blender_process.json",
+      "pid": 2050848,
+      "create_time": 1790010215.08,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/infusion_ward/infusion_ward/03_temporary_inspection/blender_process.json",
+      "pid": 2051572,
+      "create_time": 1790010266.45,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/infusion_ward/infusion_ward/04_original_restored/blender_process.json",
+      "pid": 2095518,
+      "create_time": 1790010921.32,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/infusion_ward/infusion_ward/05_endpoint_receiver/blender_process.json",
+      "pid": 2108199,
+      "create_time": 1790011047.97,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/infusion_ward/infusion_ward/05_endpoint_waiting/blender_process.json",
+      "pid": 2100533,
+      "create_time": 1790010990.31,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/infusion_ward/infusion_ward/06_final_workspace/blender_process.json",
+      "pid": 2185864,
+      "create_time": 1790013514.47,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/infusion_ward/infusion_ward/exporter_process.json",
+      "pid": 2050131,
+      "create_time": 1790010142.19,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/infusion_ward/infusion_ward/object_BAG1_detail/blender_process.json",
+      "pid": 2186471,
+      "create_time": 1790013583.12,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/infusion_ward/infusion_ward/object_BAG1_inspection/blender_process.json",
+      "pid": 2187667,
+      "create_time": 1790013593.99,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/infusion_ward/infusion_ward/object_BAG2_detail/blender_process.json",
+      "pid": 2188708,
+      "create_time": 1790013606.7,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/infusion_ward/infusion_ward/object_BAG2_inspection/blender_process.json",
+      "pid": 2189155,
+      "create_time": 1790013617.17,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/infusion_ward/infusion_ward/object_MONITOR_detail/blender_process.json",
+      "pid": 2190461,
+      "create_time": 1790013628.66,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/infusion_ward/infusion_ward/object_PUMPCASSETTE_detail/blender_process.json",
+      "pid": 2186078,
+      "create_time": 1790013535.58,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/infusion_ward/infusion_ward/object_SLOT2_detail/blender_process.json",
+      "pid": 2186283,
+      "create_time": 1790013557.42,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/infusion_ward/infusion_ward/object_STOPCOCK_detail/blender_process.json",
+      "pid": 2186401,
+      "create_time": 1790013571.04,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/infusion_ward/infusion_ward/step_01_inspection/blender_process.json",
+      "pid": 2113530,
+      "create_time": 1790011093.46,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/infusion_ward/infusion_ward/step_02_endpoint/blender_process.json",
+      "pid": 2172923,
+      "create_time": 1790012811.59,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/infusion_ward/infusion_ward/step_02_middle/blender_process.json",
+      "pid": 2147230,
+      "create_time": 1790012072.88,
+      "status": "exited"
+    },
+    {
+      "record": "bridge_batches/infusion_ward/infusion_ward/step_02_start/blender_process.json",
+      "pid": 2138172,
+      "create_time": 1790011354.2,
+      "status": "exited"
+    },
+    {
+      "record": "changed_pairs/dig_site/FLAG_contact_side_guidance_off/blender_process.json",
+      "pid": 2222173,
+      "create_time": 1790014455.9,
+      "status": "exited"
+    },
+    {
+      "record": "changed_pairs/dig_site/exporter_process.json",
+      "pid": 2219493,
+      "create_time": 1790014422.77,
+      "status": "exited"
+    },
+    {
+      "record": "changed_pairs/engine_bay/CLAMP_completed_guidance_off/blender_process.json",
+      "pid": 2193679,
+      "create_time": 1790013745.91,
+      "status": "exited"
+    },
+    {
+      "record": "changed_pairs/engine_bay/empty_PLUGPORT_guidance_off/blender_process.json",
+      "pid": 2192088,
+      "create_time": 1790013689.54,
+      "status": "exited"
+    },
+    {
+      "record": "changed_pairs/engine_bay/exporter_process.json",
+      "pid": 2191005,
+      "create_time": 1790013646.64,
+      "status": "exited"
+    },
+    {
+      "record": "changed_pairs/shelf_picking/BASKET_empty_guidance_off/blender_process.json",
+      "pid": 2196816,
+      "create_time": 1790013797.12,
+      "status": "exited"
+    },
+    {
+      "record": "changed_pairs/shelf_picking/BLUE_inspection_guidance_off/blender_process.json",
+      "pid": 2197881,
+      "create_time": 1790013838.23,
+      "status": "exited"
+    },
+    {
+      "record": "changed_pairs/shelf_picking/exporter_process.json",
+      "pid": 2196664,
+      "create_time": 1790013773.63,
+      "status": "exited"
+    },
+    {
+      "record": "changed_pairs/shelf_picking_attempt03/BASKET_confirmed_guidance_off/blender_process.json",
+      "pid": 2265759,
+      "create_time": 1790016016.68,
+      "status": "exited"
+    },
+    {
+      "record": "changed_pairs/shelf_picking_attempt03/BASKET_empty_guidance_off/blender_process.json",
+      "pid": 2248942,
+      "create_time": 1790015826.45,
+      "status": "exited"
+    },
+    {
+      "record": "changed_pairs/shelf_picking_attempt03/BASKET_endpoint_waiting_confirmation/blender_process.json",
+      "pid": 2250561,
+      "create_time": 1790015919.41,
+      "status": "exited"
+    },
+    {
+      "record": "changed_pairs/shelf_picking_attempt03/BLUE_inspection_guidance_off/blender_process.json",
+      "pid": 2249655,
+      "create_time": 1790015871.46,
+      "status": "exited"
+    },
+    {
+      "record": "changed_pairs/shelf_picking_attempt03/exporter_process.json",
+      "pid": 2248589,
+      "create_time": 1790015800.99,
+      "status": "exited"
+    },
+    {
+      "record": "model_repair_process.json",
+      "pid": 1970293,
+      "create_time": 1790002394.37,
+      "status": "exited"
+    },
+    {
+      "record": "model_resume01_repair_process.json",
+      "pid": 2000639,
+      "create_time": 1790006840.2,
+      "status": "exited"
+    },
+    {
+      "record": "model_resume02_repair_process.json",
+      "pid": 2037109,
+      "create_time": 1790009830.29,
+      "status": "exited"
+    },
+    {
+      "record": "model_resume03_repair_process.json",
+      "pid": 2225435,
+      "create_time": 1790014834.97,
+      "status": "exited"
+    },
+    {
+      "record": "viewer_repair_process.json",
+      "pid": 1970295,
+      "create_time": 1790002394.37,
+      "status": "exited"
+    },
+    {
+      "record": "viewer_resume01_repair_process.json",
+      "pid": 2000641,
+      "create_time": 1790006840.2,
+      "status": "exited"
+    },
+    {
+      "record": "viewer_resume02_repair_process.json",
+      "pid": 2037111,
+      "create_time": 1790009830.29,
+      "status": "exited"
+    },
+    {
+      "record": "viewer_resume03_repair_process.json",
+      "pid": 2225437,
+      "create_time": 1790014834.97,
+      "status": "exited"
+    }
+  ],
+  "live_owned_identities": [],
+  "scope": "Read-only PID and creation-time verification; unrelated processes untouched."
+}

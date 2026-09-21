@@ -1,0 +1,33 @@
+{
+  "status": "sealed",
+  "reviewer": "/root/cloud_visual_review",
+  "files": {
+    "visual_review.md": "798269c2e7720a5431ce951933c63361bcc59de2f691b40250865315c1eaa2b6",
+    "visual_review_manifest.json": "215396334b3edd8a69170a7f372c92505c5cb47496bac6afb18e45ddf5dc540b",
+    "video_review_manifest.json": "f8b733534cb90456302a5e5326649f47ddb1327e823a9587d858fa8626934ae3",
+    "pair_review_manifest.json": "37d0f43a32869011741662e2968665ac9760e463c249d0391ec89f598f12e93e",
+    "camera_review_manifest.json": "f8c128b3bafecec228e5bfacba781e6af64e7a0975d89618c4facf9bb9ff345d",
+    "response_visual_manifest.json": "dd031b8e90f8e7b9e08622a05cf0eae79de747f734eb671e8aa9b12bf0a6dfc5",
+    "display_triage_manifest.json": "d99f025dad7bb13bc556f1ddd2d784d8868b1076bb419c32da1dbe169f92f63f",
+    "clientfix_visual_manifest.json": "fcfdd66338e4e22f3c47fe226d632f93c45cb613e19bb0987ef1fc853f10ceb6",
+    "review_copy_visual_manifest.json": "8b0bd02144931085447fa30d40ebe3440ebd7e42b9b5c27caa859b4e404d96b9",
+    "final_review_inventory.json": "58a65edd176bf3f33a620feb49ab150ab0d3cf75d72608bece30d8c5b30ae4da"
+  },
+  "counts": {
+    "native_originals": 124,
+    "targeted_pair_originals_successful": 14,
+    "targeted_pair_originals_failed_historical_attempt": 4,
+    "camera_ui_originals": 21,
+    "response_originals": 7,
+    "additional_display_comparison_source_originals_unique": 9,
+    "source_originals_unique_total": 179,
+    "video_representative_frames": 251,
+    "review_copy_extracted_frames": 8,
+    "actual_viewed_png_unique_paths_total": 438,
+    "reviewed_video_files_including_rejected": 26,
+    "accepted_with_limits_video_files": 24,
+    "rejected_video_files": 2,
+    "accepted_video_representative_frames": 234,
+    "rejected_video_representative_frames": 17
+  }
+}
