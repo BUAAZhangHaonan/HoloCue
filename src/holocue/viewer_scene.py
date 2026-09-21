@@ -177,6 +177,7 @@ class SceneRenderer:
         if mode not in ('workspace','detail','inspection'):
             raise ValueError(mode)
         self.view_mode=mode
+        self.annotation_key=None
         self.environment.visible=mode!='inspection'
         for oid,handle in self.frames.items():
             handle.visible=mode!='inspection' or oid==self.selected_id
