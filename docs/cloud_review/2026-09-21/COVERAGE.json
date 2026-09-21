@@ -63,6 +63,11 @@
       "source_before": "bd938aafb0b6e056bfecb53aa88ca189ae43d3724489194e34bfe53bffc3be24",
       "source_after": "bd938aafb0b6e056bfecb53aa88ca189ae43d3724489194e34bfe53bffc3be24"
     },
+    "commit_closeout": {
+      "returncode": 0,
+      "source_before": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+      "source_after": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe"
+    },
     "commit_focus_settling": {
       "returncode": 0,
       "source_before": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
@@ -192,6 +197,11 @@
       "returncode": 1,
       "source_before": "bd938aafb0b6e056bfecb53aa88ca189ae43d3724489194e34bfe53bffc3be24",
       "source_after": "bd938aafb0b6e056bfecb53aa88ca189ae43d3724489194e34bfe53bffc3be24"
+    },
+    "verify_cleanup": {
+      "returncode": 0,
+      "source_before": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe",
+      "source_after": "37b81f92c4bb91b5ca68180be99b1f1810b40657842cf2d3145bd1eeb8d3f0fe"
     },
     "viewer": {
       "returncode": 254,
