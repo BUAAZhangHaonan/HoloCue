@@ -1,96 +1,127 @@
 # HoloCue
 
-**交付状态：** 十二场景介绍及 Viser 完整流程视频已交付。相机修复阶段 529 项测试通过；199 个原生阶段来自不同源码版本，不能视为当前版本一次全量原生验收。本次服务已停止。历史报告和调试资料保留在本地忽略目录，完整交付包保存在 `C:/Users/zhn19/Downloads/2/HoloCue_Final_20260921`。原生 `.blend` 使用 Git LFS，克隆后需执行 `git lfs pull`。后续格式化会改变源码摘要，历史报告保持原有版本身份。
+**面向实体操作任务的全息焦深提示与交互仿真系统。**
 
-HoloCue 将真实本地模型的任务解释、持久任务状态与十二场景三维提示连接起来。模型输出对象、动作、任务角色、优先级和深度需求；确定性模块计算显示预算、对象位姿与解析 Gaussian 响应。
+HoloCue 将自然语言指令转化为有序操作步骤，并在三维场景中显示目标、动作轨迹与检查位置。项目结合本地大语言模型、Viser 交互页面和 Blender 场景，用于研究空间提示如何辅助装配、检修、搬运与结构检查，以及调试能够暂停、接受临时任务并恢复原流程的 Agent 系统。
 
-当前设计见 [系统架构](docs/SIMULATION_ARCHITECTURE.md)、[场景约定](docs/SCENE_REVIEW.md)、[接口说明](docs/API.md) 和 [验证标准](docs/VALIDATION.md)。既有研究资料保留原文。实际完成状态以本次验收目录中的原始记录与最终报告为准。
+## 主要功能
 
-## 源码格式化
+- **自然语言任务规划**：结合场景对象与当前状态理解指令，生成包含操作对象、接收对象、动作参数和顺序的结构化计划。
+- **三维操作提示**：使用 Gaussian 提示表达目标、运动与深度需求，支持焦点、亮度、数量和宽度参数的解析响应。
+- **持续任务状态**：保存步骤、实体位姿和执行进度，支持暂停、临时检查、恢复与明确完成确认。
+- **交互观察**：在 Viser 中切换工作区域、目标特写和结构检查视角，每个浏览器连接拥有独立会话。
+- **统一场景数据**：场景配置共同定义模型尺寸、坐标、接合位置、动作路径和观察面；Viser 与 Blender 可读取同一会话的对象、相机和提示数据。
 
-安装开发依赖后执行 `npm ci --prefix tools/formatting --cache .work/cache/npm-formatting`。
-所有源码修改均需运行 `python scripts/format_code.py`，提交前运行
-`python scripts/format_code.py --check`；CI 使用相同入口检查 Python、前端补丁和 Shell。
-格式化工具采用固定版本。历史报告、校验清单、`scene_agent/` 与一次性调试文件
-通过 `.gitignore` 隐藏；正式回归测试、固定 fixture 和运行所需补丁继续追踪。
+当前显示响应采用解析 Gaussian 模型，用于任务与交互仿真。真实光学系统的标定和显示响应通过预留接口接入。
 
-## 运行环境与启动
+## 工作流程
 
-服务器项目目录为 `/home/hdd3/zhanghaonan/projects/holocue`。只允许物理 GPU 1、2；复用已有 Qwen3.5-4B 模型环境与 Blender。应用使用独立的 `.venv-simulation`，Viser 版本固定为 1.1.1。启动前读取现场资源规则与 `scripts/guard/resource_guard.py`，采用更严格的限制。
+```mermaid
+flowchart LR
+    U[自然语言指令] --> M[本地模型与结构化校验]
+    S[场景对象和任务状态] --> M
+    M --> T[有序任务与持久状态]
+    T --> D[几何计算与显示参数]
+    D --> V[Viser 交互页面]
+    D --> B[Blender 场景]
+    V --> C[用户确认完成]
+    C --> T
+```
 
-任何安装器、浏览器、Blender 或测试程序启动前，先设置项目内部临时目录与缓存：
+模型负责解释任务语义，确定性模块负责几何计算和显示预算。动画到达终点后保持提示，用户确认完成后才推进任务并更新实体位姿。临时检查保留原步骤的身份、参数和进度。
+
+## 场景
+
+项目包含十二个仿真场景，覆盖旋转、插入、放置、多步骤操作和局部结构检查。
+
+| 场景 | 任务示例 |
+| --- | --- |
+| 控制面板 `control_panel` | 旋转旋钮、检查端子背面 |
+| 接插件 `connector` | 插头接合、定位键与端子检查 |
+| 积木装配 `blocks` | 放置积木、观察底部结构 |
+| 服务器机架 `server_rack` | 节点安装、后方接口检查 |
+| 无人机工作台 `drone_bench` | 电池安装、防护件旋转、电机检查 |
+| 货架拣选 `shelf_picking` | 物品搬运、筐体放置、标签检查 |
+| 光学平台 `optical_bench` | 镜片安装、镜面旋转与检查 |
+| 考古探方 `dig_site` | 对象指认、记录检查、标记放置 |
+| 发动机舱 `engine_bay` | 卡箍操作、火花塞安装、连接器检查 |
+| CNC 换刀 `cnc_toolchange` | 模式旋转、刀具安装、拉钉检查 |
+| 充气训练站 `dive_fillstation` | 气瓶标识检查、接头接合、阀杆旋转 |
+| 输液训练区 `infusion_ward` | 泵盒安装、袋体标识检查、旋塞操作 |
+
+详细任务和几何定义见 [场景说明](docs/SCENE_REVIEW.md)。
+
+## 使用
+
+### 环境准备
+
+需要 Python 3.11 或更新版本，以及提供 OpenAI 兼容接口的本地模型服务；默认模型配置为 Qwen3.5-4B。原生场景构建和渲染需要 Blender，场景 `.blend` 文件通过 Git LFS 管理。
+
+在项目根目录准备应用环境：
 
 ```bash
-cd /home/hdd3/zhanghaonan/projects/holocue
+git lfs pull
 export TMPDIR="$PWD/.work/tmp"
-export TMP="$TMPDIR"
-export TEMP="$TMPDIR"
+export TMP="$TMPDIR" TEMP="$TMPDIR"
 export XDG_CACHE_HOME="$PWD/.work/cache"
 export PIP_CACHE_DIR="$PWD/.work/cache/pip"
-export PLAYWRIGHT_BROWSERS_PATH="$PWD/.work/browsers"
 export PYTHONPYCACHEPREFIX="$PWD/.work/pycache"
-export HOLOCUE_ROOT="$PWD"
-export PYTHONPATH="$PWD/src:$PWD"
-mkdir -p "$TMPDIR" "$XDG_CACHE_HOME" "$PIP_CACHE_DIR" "$PLAYWRIGHT_BROWSERS_PATH" "$PYTHONPYCACHEPREFIX" runs/simulation
-```
-
-Python 字节码写入 `.work/pycache`，pytest 的运行缓存由 `pyproject.toml` 定位到 `.work/pytest-cache`。应用与模型入口在启动 Python 前设置字节码缓存目录，资源守卫也将该目录传给执行子进程。
-
-使用已核验的 Python 3.11 或更新版本创建应用环境并安装项目依赖；已有环境先检查再使用：
-
-```bash
+mkdir -p "$TMPDIR" "$XDG_CACHE_HOME" "$PIP_CACHE_DIR"
 python3 -m venv .venv-simulation
-export APP_PYTHON="$PWD/.venv-simulation/bin/python"
-"$APP_PYTHON" -m pip install -e '.[dev,simulation]'
-"$APP_PYTHON" -m pip freeze > runs/simulation/app_requirements.txt
+source .venv-simulation/bin/activate
+python -m pip install -e '.[dev,simulation]'
 ```
 
-设置 `HOLOCUE_MODEL_URL` 与 `HOLOCUE_MODEL_NAME` 为已经验证的本地模型服务配置。模型名称、端点、权重目录和引擎版本记录在验收目录。模型启动脚本位于 `scripts/ops/`，已有模型服务优先复用。应用仅支持 live 模型。
+Viser 固定为 1.1.1，使用项目提供的绘制、相机协议和 HDR 透明度补丁。新环境按 [Viser 补丁说明](scripts/patches/viser_1_1_1/README.md) 和 [HDR 修复说明](scripts/patches/viser_1_1_1/HDR_OPACITY.md) 准备客户端。
 
-分别在受管理终端启动两个服务并记录进程归属：
+### 启动交互页面
+
+先启动本地模型服务，再在项目根目录配置模型端点并启动 API：
 
 ```bash
+export HOLOCUE_MODEL_URL=http://127.0.0.1:8000/v1
+export HOLOCUE_MODEL_NAME=Qwen/Qwen3.5-4B
 bash scripts/run_simulation.sh api
+```
+
+在另一个终端的项目根目录启动页面：
+
+```bash
 bash scripts/run_simulation.sh viewer
 ```
 
-API 默认监听 `127.0.0.1:8750`，Viser 默认监听 `127.0.0.1:8780`。启动前核对端口归属。客户端使用 SSH 隧道：
+浏览器访问 `http://127.0.0.1:8780`，选择场景并输入任务。API 默认地址为 `http://127.0.0.1:8750`；远程使用时可通过 SSH 转发端口。认证及其他环境变量见 [.env.example](.env.example)。
+
+### 构建场景
+
+`scenes/<id>/scene.json` 定义场景对象与任务，`meshes/` 保存实际网格。需要重新生成资产时，设置已有 Blender 的路径后运行：
 
 ```bash
-ssh -N -L 8750:127.0.0.1:8750 -L 8780:127.0.0.1:8780 4029
-```
-
-浏览器打开 `http://127.0.0.1:8780`。只停止本次启动并记录的进程。
-
-## 场景与资产
-
-`scenes/<id>/scene.json` 是对象、尺寸、位姿、动作轴、接合终点、检查面和任务验收的共同契约。交互对象与环境资产位于各场景的 `meshes/`。资产采用标准 glTF 坐标，运行时转换为米制、Z 轴向上的世界坐标。已有有效资产及其许可、来源和实验记录保留。
-
-对象可通过 `interaction.detail_direction_local` 指定目标特写的观察方向。该方向是对象局部坐标中的单位向量，指向相机，并随对象位姿旋转；未指定时使用场景观察方向。旋转任务沿动作轴取景，结构检查使用既有检查面，两者优先于这个普通特写方向。发动机舱插孔沿局部正 Z 方向观察，使安装后的内圈避开前方支撑筋的遮挡。
-
-`scripts/scenes/build_simulation_assets.py` 根据场景契约与 `modeling.py` 生成资产。该命令会更新场景网格，执行前核对本次修改范围与已有细节。
-
-设置 `BLENDER_BIN` 为已存在的 Blender 可执行文件后，统一构建全部场景：
-
-```bash
+export BLENDER_BIN=/path/to/blender
 bash scripts/scenes/build_all.sh
-"$APP_PYTHON" scripts/scenes/check_scene_kit.py --require-blender
 ```
 
-构建链使用 `export_blender_payload.py` 和 `build_blender_scene.py`，产物为每个场景的 `scene.blend` 与原生图像。场景列表由配置目录枚举。
+构建流程依次生成 GLB、Blender 数据和原生场景。资源守卫随启动与构建脚本执行，临时文件及运行输出保存在项目内部。
 
-## 交互与同会话桥接
+## 项目结构
 
-每个浏览器连接拥有独立的会话、场景、相机和任务时间。动画到达终点后等待明确完成；确认后更新实体位姿。临时检查保留原任务标识、参数和进度。同一对象的连续动作保留为独立有序步骤。
+| 目录 | 内容 |
+| --- | --- |
+| `src/holocue/` | 任务规划、状态管理、几何计算、API 与 Viser 页面 |
+| `scenes/` | 场景配置、网格和 Blender 场景 |
+| `configs/`、`prompts/`、`schemas/` | 显示配置、模型提示词与数据协议 |
+| `scripts/` | 启动、资产构建、桥接、资源守卫与检查工具 |
+| `tests/` | 正式回归测试与固定几何输入 |
+| `docs/` | 架构、接口、场景和研究资料 |
+| `assets/` | 共用资产与来源、许可说明 |
 
-`configs/preview_response.json` 提供解析响应参数。焦点、亮度、Gaussian 数量和 sigma 参与实际三维提示生成。该响应的标识为 `analytic_gaussian_preview`，物理光学标定由保留的适配器接口提供。
+源码修改使用 `python scripts/format_code.py` 格式化，并通过 `python scripts/format_code.py --check` 检查。前端及 Shell 格式化依赖通过 `npm ci --prefix tools/formatting --cache .work/cache/npm-formatting` 安装。
 
-Viser 使用方向光、强度为 0.1 的 studio 环境补光和资产原有材质。默认级联投影阴影关闭，近距离检查依靠实体几何、表面明暗和材质反射显示结构与文字。Blender 保留原生场景照明和投影阴影。两端照明效果分别验收，三维提示继续使用共同的解析响应参数。
+## 文档与许可
 
-Blender 桥接使用 `scripts/scenes/export_live_frames.py` 导出当前会话与对应连接的视图状态，再由 `scripts/capture/blender_simulation_bridge.py` 读取。两端共享对象位姿、相机、提示中心、半径、颜色、不透明度与任务时间。导出器要求 `--session` 和 `--view-state` 属于同一连接，过期或版本不一致的数据应明确报错。
+- [系统架构](docs/SIMULATION_ARCHITECTURE.md)
+- [API 接口](docs/API.md)
+- [场景与建模约定](docs/SCENE_REVIEW.md)
+- [验证方法](docs/VALIDATION.md)
 
-## 验收与证据
-
-按照 [验证标准](docs/VALIDATION.md) 执行全部有效测试、几何检查、十二场景真实模型流程、原生 Viser 浏览器操作与 Blender 同会话桥接。必须覆盖宽屏与较窄窗口、两客户端隔离、显示响应、状态恢复和错误处理。
-
-三份独立审查分别覆盖场景视觉、状态任务、架构与运行安全，并对应同一份最终代码。新的验收目录保存代码摘要、依赖与模型版本、资源记录、真实请求、图像和视频、执行命令、审查原始输出与未解决问题。历史 `runs/` 中的证据保持原样；它们不自动代表当前版本已通过验收。
+代码采用 [MIT License](LICENSE)。原创几何资产及第三方资产的授权范围见 [资产许可](assets/ASSET_LICENSE.md) 与 [资源来源](assets/downloads/SOURCES.md)；第三方依赖和模型权重遵循各自许可。

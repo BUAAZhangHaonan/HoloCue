@@ -14,16 +14,11 @@ SOURCE_DIRECTORIES = (
     "assets",
     "docs",
     "schemas",
-    "scene_agent",
-    ".claude",
 )
 SOURCE_FILES = (
     "pyproject.toml",
     "requirements-simulation.txt",
     "README.md",
-    "AGENTS.md",
-    "GOAL_EXECUTION_PROMPT.md",
-    "CLAUDE.md",
     ".env.example",
     ".gitignore",
 )

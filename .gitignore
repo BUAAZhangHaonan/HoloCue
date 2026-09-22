@@ -44,3 +44,10 @@ checksums.json
 # Project-local formatting tools and caches.
 /tools/formatting/node_modules/
 .ruff_cache/
+
+# Local coding-agent instructions and repository automation.
+/.claude/
+/.github/
+/AGENTS.md
+/CLAUDE.md
+/GOAL_EXECUTION_PROMPT.md
