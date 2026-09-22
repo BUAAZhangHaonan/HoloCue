@@ -20,11 +20,15 @@ const harness = vi.hoisted(() => ({
 }));
 vi.mock("@react-three/fiber", () => ({
   useThree: (selector: (state: any) => any) => selector(harness.state),
-  useFrame: (callback: () => void) => { harness.frame = callback; },
+  useFrame: (callback: () => void) => {
+    harness.frame = callback;
+  },
 }));
 vi.mock("@monogrid/gainmap-js", () => ({
   HDRJPGLoader: class {
-    load(_url: string, onLoad: (result: any) => void) { harness.loads.push(onLoad); }
+    load(_url: string, onLoad: (result: any) => void) {
+      harness.loads.push(onLoad);
+    }
   },
 }));
 
@@ -34,8 +38,13 @@ describe("HDR environment canvas opacity", () => {
   let viewer: any;
   const render = async (source: string) => {
     await act(async () => {
-      root.render(React.createElement(ViewerContext.Provider, { value: viewer },
-        React.createElement(HDRJPGEnvironment, { source })));
+      root.render(
+        React.createElement(
+          ViewerContext.Provider,
+          { value: viewer },
+          React.createElement(HDRJPGEnvironment, { source }),
+        ),
+      );
     });
   };
   const finishLoad = async (index: number) => {
@@ -51,7 +60,9 @@ describe("HDR environment canvas opacity", () => {
     viewer = { mutable: { current: { requestRender: vi.fn() } } };
     root = createRoot(document.createElement("div"));
   });
-  afterEach(async () => { await act(async () => root.unmount()); });
+  afterEach(async () => {
+    await act(async () => root.unmount());
+  });
 
   it("preserves first-load fade from 0.05 through 0.24 to fully opaque", async () => {
     await render("default-city.jpg");

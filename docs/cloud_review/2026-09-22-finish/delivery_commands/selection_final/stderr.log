@@ -1,6 +1,0 @@
-Traceback (most recent call last):
-  File "/home/hdd3/zhanghaonan/projects/holocue/.work/cloud_finish90_20260921/prepare_delivery.py", line 1253, in <module>
-    main()
-  File "/home/hdd3/zhanghaonan/projects/holocue/.work/cloud_finish90_20260921/prepare_delivery.py", line 1035, in main
-    raise RuntimeError('Visual review PNG set differs from its explicit manifest')
-RuntimeError: Visual review PNG set differs from its explicit manifest

@@ -1,12 +1,20 @@
 # HoloCue
 
-**2026-09-20 提前收尾：** 最新源码已保存开发修复，但尚未统一重建场景资产或完成最终验收；当前提交中的 GLB/Blender 资产来自此前运行版本。319项测试及既有 live/UI 结果不能替代最新源码回归。本次服务已停止，完整结果、三个开发子任务和未完成清单见[收尾总结](docs/closeout/2026-09-20/FINAL_SUMMARY.md)。原生 `.blend` 使用 Git LFS，克隆后需执行 `git lfs pull`。
+**交付状态：** 十二场景介绍及 Viser 完整流程视频已交付。相机修复阶段 529 项测试通过；199 个原生阶段来自不同源码版本，不能视为当前版本一次全量原生验收。本次服务已停止。历史报告和调试资料保留在本地忽略目录，完整交付包保存在 `C:/Users/zhn19/Downloads/2/HoloCue_Final_20260921`。原生 `.blend` 使用 Git LFS，克隆后需执行 `git lfs pull`。后续格式化会改变源码摘要，历史报告保持原有版本身份。
 
 HoloCue 将真实本地模型的任务解释、持久任务状态与十二场景三维提示连接起来。模型输出对象、动作、任务角色、优先级和深度需求；确定性模块计算显示预算、对象位姿与解析 Gaussian 响应。
 
 当前设计见 [系统架构](docs/SIMULATION_ARCHITECTURE.md)、[场景约定](docs/SCENE_REVIEW.md)、[接口说明](docs/API.md) 和 [验证标准](docs/VALIDATION.md)。既有研究资料保留原文。实际完成状态以本次验收目录中的原始记录与最终报告为准。
 
-## 运行环境
+## 源码格式化
+
+安装开发依赖后执行 `npm ci --prefix tools/formatting --cache .work/cache/npm-formatting`。
+所有源码修改均需运行 `python scripts/format_code.py`，提交前运行
+`python scripts/format_code.py --check`；CI 使用相同入口检查 Python、前端补丁和 Shell。
+格式化工具采用固定版本。历史报告、校验清单、`scene_agent/` 与一次性调试文件
+通过 `.gitignore` 隐藏；正式回归测试、固定 fixture 和运行所需补丁继续追踪。
+
+## 运行环境与启动
 
 服务器项目目录为 `/home/hdd3/zhanghaonan/projects/holocue`。只允许物理 GPU 1、2；复用已有 Qwen3.5-4B 模型环境与 Blender。应用使用独立的 `.venv-simulation`，Viser 版本固定为 1.1.1。启动前读取现场资源规则与 `scripts/guard/resource_guard.py`，采用更严格的限制。
 

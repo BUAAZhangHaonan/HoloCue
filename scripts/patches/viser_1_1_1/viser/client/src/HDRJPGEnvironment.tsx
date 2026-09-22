@@ -36,10 +36,7 @@ const LOADING_OPACITY = 0.05;
  * intensity re-sends the same preset), and msgpack decodes a fresh
  * Uint8Array each time. Comparing contents lets the decode effect below
  * skip identical images, keeping scalar-parameter updates cheap. */
-function sourcesEqual(
-  a: string | Uint8Array<ArrayBuffer>,
-  b: string | Uint8Array<ArrayBuffer>,
-): boolean {
+function sourcesEqual(a: string | Uint8Array<ArrayBuffer>, b: string | Uint8Array<ArrayBuffer>): boolean {
   if (a === b) return true;
   if (typeof a === "string" || typeof b === "string") return a === b;
   if (a.length !== b.length) return false;
@@ -104,6 +101,7 @@ export function HDRJPGEnvironment({
           isFirstLoad.current = false;
         } else {
           fadeProgress.current = 1;
+          gl.domElement.style.opacity = "1";
         }
         // Scene properties (environment/background + intensity, rotation,
         // blur) are applied reactively in the effect below, keyed on

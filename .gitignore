@@ -11,3 +11,36 @@ runs/
 scenes/*/blend/*.blend1
 verification/server_*/
 tools/gltf_validation/node_modules/
+
+# Generated checksum inventories (validation code remains tracked).
+*.[sS][hH][aA][0-9]*
+*.[mM][dD]5
+*.[hH][aA][sS][hH]
+[sS][hH][aA]*[sS][uU][mM][sS]*
+[mM][dD]5[sS][uU][mM][sS]*
+[cC][hH][eE][cC][kK][sS][uU][mM][sS]*
+hashes.json
+checksums.json
+/tests/fixtures/material_regions/manifest.json
+
+# Local proposals and archived delivery/debug evidence; retain local bytes.
+/scene_agent/
+/docs/cloud_review/
+/docs/closeout/
+/docs/repair_review/
+/docs/*.docx
+/verification/document_review.json
+/verification/local_pytest.*
+/scripts/tests/build_surface_review.py
+/scripts/tests/compile_provider_schema.py
+/scripts/tests/render_cloud_review.py
+/scripts/tests/review_uploaded_evidence.py
+/scripts/tests/run_cloud_suite.py
+/tests/debug/
+/tests/scratch/
+/tests/test_debug_*.py
+/tests/debug_*.py
+
+# Project-local formatting tools and caches.
+/tools/formatting/node_modules/
+.ruff_cache/
