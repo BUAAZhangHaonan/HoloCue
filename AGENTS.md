@@ -18,6 +18,15 @@
 
 ## 工程约束
 
+所有新增或修改的源码必须运行统一格式化入口并通过检查后提交：
+`python scripts/format_code.py`，随后 `python scripts/format_code.py --check`。
+Python 使用项目固定版本的 Ruff；JavaScript/TypeScript 与 Shell 使用
+`tools/formatting/package-lock.json` 固定的 Prettier 和 Shell 插件。
+首次准备运行 `python -m pip install -e '.[dev]'` 与
+`npm ci --prefix tools/formatting --cache .work/cache/npm-formatting`。
+格式化范围由 Git 可见源码确定；忽略目录中的历史证据、原始 fixture 字节和生成产物保持原样。
+格式检查失败时必须修正，不能跳过检查或手动修改封存材料满足格式要求。
+
 所有模型提示词保存在 Markdown，数据协议经过 Pydantic 校验。模型输出错误须保留原始结果并可见报错，禁止自动用固定脚本补上正确答案。重规划先停止旧动作，再提交新版本。过期响应无法覆盖现行计划。用户点击确认完成才推进任务，动画播放结束不等于真实操作完成。
 
 API 默认环回，远程访问用 SSH。后续内网模式需要配置认证和明确网络策略。密钥不得写入 Git、截图或报告。工具执行不接收任意 Python 或 shell 字符串。

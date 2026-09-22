@@ -1,4 +1,5 @@
 """Read stored glTF vertex attributes through Trimesh's public GLB loader."""
+
 from __future__ import annotations
 
 from pathlib import Path

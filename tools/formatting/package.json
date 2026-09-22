@@ -1,0 +1,9 @@
+{
+  "name": "holocue-formatting",
+  "private": true,
+  "version": "1.0.0",
+  "devDependencies": {
+    "prettier": "3.9.8",
+    "prettier-plugin-sh": "0.19.0"
+  }
+}

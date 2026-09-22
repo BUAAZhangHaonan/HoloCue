@@ -81,13 +81,9 @@ class InitialCameraConfig:
         return self._position
 
     @position.setter
-    def position(
-        self, value: tuple[float, float, float] | npt.NDArray[np.floating]
-    ) -> None:
+    def position(self, value: tuple[float, float, float] | npt.NDArray[np.floating]) -> None:
         self._position = np.asarray(value, dtype=np.float64)
-        self._broadcast(
-            _messages.SetCameraPositionMessage(cast_vector(value, 3), initial=True)
-        )
+        self._broadcast(_messages.SetCameraPositionMessage(cast_vector(value, 3), initial=True))
 
     @property
     def look_at(self) -> npt.NDArray[np.float64]:
@@ -95,13 +91,9 @@ class InitialCameraConfig:
         return self._look_at
 
     @look_at.setter
-    def look_at(
-        self, value: tuple[float, float, float] | npt.NDArray[np.floating]
-    ) -> None:
+    def look_at(self, value: tuple[float, float, float] | npt.NDArray[np.floating]) -> None:
         self._look_at = np.asarray(value, dtype=np.float64)
-        self._broadcast(
-            _messages.SetCameraLookAtMessage(cast_vector(value, 3), initial=True)
-        )
+        self._broadcast(_messages.SetCameraLookAtMessage(cast_vector(value, 3), initial=True))
 
     @property
     def up(self) -> npt.NDArray[np.float64] | None:
@@ -111,9 +103,7 @@ class InitialCameraConfig:
     @up.setter
     def up(self, value: tuple[float, float, float] | npt.NDArray[np.floating]) -> None:
         self._up = np.asarray(value, dtype=np.float64)
-        self._broadcast(
-            _messages.SetCameraUpDirectionMessage(cast_vector(value, 3), initial=True)
-        )
+        self._broadcast(_messages.SetCameraUpDirectionMessage(cast_vector(value, 3), initial=True))
 
     @property
     def fov(self) -> float:
@@ -223,8 +213,7 @@ class CameraHandle:
         # Minimize our impact on the orbit controls by keeping the new up direction as
         # close to the old one as possible.
         projected_up_direction = (
-            self.up_direction
-            - float(self.up_direction @ right_direction) * right_direction
+            self.up_direction - float(self.up_direction @ right_direction) * right_direction
         )
         up_cosine = float(up_direction @ projected_up_direction)
         if abs(up_cosine) < 0.05:
@@ -297,9 +286,7 @@ class CameraHandle:
             # look_at == position: the view direction is undefined. Reject
             # rather than store a NaN quaternion (which every later camera
             # read and on_update callback would then see, silently).
-            raise ValueError(
-                "Camera look_at cannot equal position (zero look distance)."
-            )
+            raise ValueError("Camera look_at cannot equal position (zero look distance).")
         z /= z_norm
 
         def perpendicular_part(up_candidate: np.ndarray) -> tuple[np.ndarray, float]:
@@ -349,9 +336,7 @@ class CameraHandle:
             return
         self._state.fov = fov
         self._state.update_timestamp = time.time()
-        self._state.client._websock_connection.queue_message(
-            _messages.SetCameraFovMessage(fov)
-        )
+        self._state.client._websock_connection.queue_message(_messages.SetCameraFovMessage(fov))
 
     @property
     def near(self) -> float:
@@ -366,9 +351,7 @@ class CameraHandle:
             return
         self._state.near = near
         self._state.update_timestamp = time.time()
-        self._state.client._websock_connection.queue_message(
-            _messages.SetCameraNearMessage(near)
-        )
+        self._state.client._websock_connection.queue_message(_messages.SetCameraNearMessage(near))
 
     @property
     def far(self) -> float:
@@ -383,9 +366,7 @@ class CameraHandle:
             return
         self._state.far = far
         self._state.update_timestamp = time.time()
-        self._state.client._websock_connection.queue_message(
-            _messages.SetCameraFarMessage(far)
-        )
+        self._state.client._websock_connection.queue_message(_messages.SetCameraFarMessage(far))
 
     @property
     def min_orbit_distance(self) -> float:
@@ -401,10 +382,7 @@ class CameraHandle:
         # when it happens to be "close" to the stored one (e.g. re-assigning
         # the same bad value after a raise).
         if not np.isfinite(min_orbit_distance) or min_orbit_distance <= 0.0:
-            raise ValueError(
-                f"min_orbit_distance ({min_orbit_distance}) must be a "
-                "positive, finite number."
-            )
+            raise ValueError(f"min_orbit_distance ({min_orbit_distance}) must be a positive, finite number.")
         if min_orbit_distance > self._state.max_orbit_distance:
             raise ValueError(
                 f"min_orbit_distance ({min_orbit_distance}) must be <= "
@@ -512,9 +490,7 @@ class CameraHandle:
         return self._state.up_direction
 
     @up_direction.setter
-    def up_direction(
-        self, up_direction: tuple[float, float, float] | np.ndarray
-    ) -> None:
+    def up_direction(self, up_direction: tuple[float, float, float] | np.ndarray) -> None:
         up_direction_array = np.asarray(up_direction)
         if np.allclose(self._state.up_direction, up_direction_array):
             return
@@ -595,16 +571,12 @@ class LocalStorageHandle:
 
     def remove_item(self, key: str) -> None:
         """Remove a key."""
-        self._client._websock_connection.queue_message(
-            _messages.LocalStorageRemoveItemMessage(key=key)
-        )
+        self._client._websock_connection.queue_message(_messages.LocalStorageRemoveItemMessage(key=key))
 
     def clear(self) -> None:
         """Clear all keys that were written through this API. Other
         localStorage state on the client's origin is left untouched."""
-        self._client._websock_connection.queue_message(
-            _messages.LocalStorageClearMessage()
-        )
+        self._client._websock_connection.queue_message(_messages.LocalStorageClearMessage())
 
     def get_item(self, key: str, timeout: float | None = None) -> str | None:
         """Return a value, or ``None`` if the key is absent.
@@ -628,9 +600,7 @@ class LocalStorageHandle:
         response: dict[str, str | None] = {"value": None, "error": None}
         ready_event = threading.Event()
 
-        def got_response(
-            client_id: int, message: _messages.LocalStorageGetItemResponseMessage
-        ) -> None:
+        def got_response(client_id: int, message: _messages.LocalStorageGetItemResponseMessage) -> None:
             del client_id
             if message.request_uuid != request_uuid:
                 return
@@ -643,9 +613,7 @@ class LocalStorageHandle:
         )
         try:
             self._client._websock_connection.queue_message(
-                _messages.LocalStorageGetItemRequestMessage(
-                    key=key, request_uuid=request_uuid
-                )
+                _messages.LocalStorageGetItemRequestMessage(key=key, request_uuid=request_uuid)
             )
             self._client.flush()
             # Poll rather than wait unbounded: a client that DISCONNECTS (tab
@@ -654,13 +622,9 @@ class LocalStorageHandle:
             # caller (same rationale as get_render()).
             deadline = None if timeout is None else time.time() + timeout
             while not ready_event.wait(timeout=0.1):
-                if (
-                    self._client.client_id
-                    not in self._client._viser_server._connected_clients
-                ):
+                if self._client.client_id not in self._client._viser_server._connected_clients:
                     raise RuntimeError(
-                        "localStorage request failed: the client disconnected "
-                        "before returning a response."
+                        "localStorage request failed: the client disconnected before returning a response."
                     )
                 if deadline is not None and time.time() > deadline:
                     raise TimeoutError(
@@ -721,9 +685,7 @@ class ClientHandle(DeprecatedAttributeShim if not TYPE_CHECKING else object):
     container.
     """
 
-    def __init__(
-        self, conn: infra.WebsockClientConnection, server: ViserServer
-    ) -> None:
+    def __init__(self, conn: infra.WebsockClientConnection, server: ViserServer) -> None:
         # Private attributes.
         self._websock_connection = conn
         self._viser_server = server
@@ -828,9 +790,7 @@ class ClientHandle(DeprecatedAttributeShim if not TYPE_CHECKING else object):
     ) -> NotificationHandle: ...
 
     @overload
-    @deprecated(
-        "The `auto_close` argument has been deprecated. Use `auto_close_seconds` instead."
-    )
+    @deprecated("The `auto_close` argument has been deprecated. Use `auto_close_seconds` instead.")
     def add_notification(
         self,
         title: str,
@@ -989,14 +949,10 @@ class ClientHandle(DeprecatedAttributeShim if not TYPE_CHECKING else object):
                 if unregistered:
                     return False
                 unregistered = True
-            connection.unregister_handler(
-                _messages.GetRenderResponseMessage, got_render_cb
-            )
+            connection.unregister_handler(_messages.GetRenderResponseMessage, got_render_cb)
             return True
 
-        def got_render_cb(
-            client_id: int, message: _messages.GetRenderResponseMessage
-        ) -> None:
+        def got_render_cb(client_id: int, message: _messages.GetRenderResponseMessage) -> None:
             del client_id
             # Ignore responses for other concurrent get_render() calls on this
             # client; only ours matches our request's uuid.
@@ -1037,9 +993,7 @@ class ClientHandle(DeprecatedAttributeShim if not TYPE_CHECKING else object):
                 # the speed plateau while staying fidelity-safe. Chrome's
                 # 0.92 toBlob default is strictly slower and larger.
                 quality=80,
-                position=cast_vector(
-                    position if position is not None else self.camera.position, 3
-                ),
+                position=cast_vector(position if position is not None else self.camera.position, 3),
                 wxyz=cast_vector(wxyz if wxyz is not None else self.camera.wxyz, 4),
                 fov=fov if fov is not None else self.camera.fov,
                 render_uuid=render_uuid,
@@ -1071,10 +1025,7 @@ class ClientHandle(DeprecatedAttributeShim if not TYPE_CHECKING else object):
                     # completed.
                     render_ready_event.wait()
                     break
-                raise RuntimeError(
-                    "Render request failed: the client disconnected before "
-                    "returning a frame."
-                )
+                raise RuntimeError("Render request failed: the client disconnected before returning a frame.")
             if deadline is not None and time.time() > deadline:
                 if not unregister_once():
                     # Same race as above: the frame beat the deadline's
@@ -1082,24 +1033,19 @@ class ClientHandle(DeprecatedAttributeShim if not TYPE_CHECKING else object):
                     render_ready_event.wait()
                     break
                 raise TimeoutError(
-                    f"Render request timed out after {timeout}s: the client "
-                    "did not return a frame."
+                    f"Render request timed out after {timeout}s: the client did not return a frame."
                 )
         # An empty payload is the client's failure sentinel (capture threw, or
         # toBlob() returned null).
         if payload is None or len(payload) == 0:
-            raise RuntimeError(
-                "Render request failed: the client could not capture a frame."
-            )
+            raise RuntimeError("Render request failed: the client could not capture a frame.")
         try:
             return iio.imread(
                 io.BytesIO(payload),
                 extension=f".{transport_format}",
             )
         except Exception as e:
-            raise RuntimeError(
-                "Render request failed: the client could not capture a frame."
-            ) from e
+            raise RuntimeError("Render request failed: the client could not capture a frame.") from e
 
 
 class ViserServer(DeprecatedAttributeShim if not TYPE_CHECKING else object):
@@ -1170,9 +1116,7 @@ class ViserServer(DeprecatedAttributeShim if not TYPE_CHECKING else object):
         # runs, which may be before `self.scene` exists below.
         self._scene_lifecycle_lock = threading.RLock()
         self._client_connect_cb: list[Callable[[ClientHandle], None | Coroutine]] = []
-        self._client_disconnect_cb: list[
-            Callable[[ClientHandle], None | Coroutine]
-        ] = []
+        self._client_disconnect_cb: list[Callable[[ClientHandle], None | Coroutine]] = []
 
         self._thread_executor = ThreadPoolExecutor(max_workers=32)
 
@@ -1242,9 +1186,9 @@ class ViserServer(DeprecatedAttributeShim if not TYPE_CHECKING else object):
                     if inspect.iscoroutinefunction(camera_cb):
                         await camera_cb(client.camera)
                     else:
-                        self._thread_executor.submit(
-                            camera_cb, client.camera
-                        ).add_done_callback(print_threadpool_errors)
+                        self._thread_executor.submit(camera_cb, client.camera).add_done_callback(
+                            print_threadpool_errors
+                        )
 
             conn.register_handler(_messages.ViewerCameraMessage, handle_camera_message)
 
@@ -1325,9 +1269,7 @@ class ViserServer(DeprecatedAttributeShim if not TYPE_CHECKING else object):
         )
         """Handle for interacting with the 3D scene."""
 
-        self.gui: GuiApi = GuiApi(
-            self, thread_executor=self._thread_executor, event_loop=self._event_loop
-        )
+        self.gui: GuiApi = GuiApi(self, thread_executor=self._thread_executor, event_loop=self._event_loop)
         """Handle for interacting with the GUI."""
 
         # Dispatch the share-tunnel handlers to the thread pool, NOT inline on
@@ -1339,15 +1281,15 @@ class ViserServer(DeprecatedAttributeShim if not TYPE_CHECKING else object):
         # confined to that worker.
         server.register_handler(
             _messages.ShareUrlDisconnect,
-            lambda client_id, msg: self._thread_executor.submit(
-                self.disconnect_share_url
-            ).add_done_callback(print_threadpool_errors),
+            lambda client_id, msg: self._thread_executor.submit(self.disconnect_share_url).add_done_callback(
+                print_threadpool_errors
+            ),
         )
         server.register_handler(
             _messages.ShareUrlRequest,
-            lambda client_id, msg: self._thread_executor.submit(
-                self.request_share_url
-            ).add_done_callback(print_threadpool_errors),
+            lambda client_id, msg: self._thread_executor.submit(self.request_share_url).add_done_callback(
+                print_threadpool_errors
+            ),
         )
 
         # Form status print.
@@ -1455,10 +1397,7 @@ class ViserServer(DeprecatedAttributeShim if not TYPE_CHECKING else object):
             removed_ids_by_type: dict[str, set[str]] = {}
             for msg_id, message in buffer.message_from_id.items():
                 if message.lifecycle_phase == "remove":
-                    assert (
-                        message.entity_type is not None
-                        and message.entity_id_field is not None
-                    )
+                    assert message.entity_type is not None and message.entity_id_field is not None
                     if deletable(msg_id):
                         remove_message_ids.append(msg_id)
                     removed_ids_by_type.setdefault(message.entity_type, set()).add(
@@ -1487,9 +1426,7 @@ class ViserServer(DeprecatedAttributeShim if not TYPE_CHECKING else object):
             for entity_type, entity_ids in removed_ids_by_type.items():
                 for entity_id in entity_ids:
                     remove_message_ids.extend(
-                        buffer.ids_from_entity_state_key.get(
-                            (entity_type, entity_id), ()
-                        )
+                        buffer.ids_from_entity_state_key.get((entity_type, entity_id), ())
                     )
 
             for msg_id in remove_message_ids:
@@ -1545,9 +1482,7 @@ class ViserServer(DeprecatedAttributeShim if not TYPE_CHECKING else object):
                     import rich
 
                     rich.print("[bold](viser)[/bold] Share URL requested!")
-                tunnel = self._share_tunnel = ViserTunnel(
-                    "share.viser.studio", self._websock_server._port
-                )
+                tunnel = self._share_tunnel = ViserTunnel("share.viser.studio", self._websock_server._port)
 
         if not we_created:
             # Another request created (or is creating) the tunnel.
@@ -1609,9 +1544,7 @@ class ViserServer(DeprecatedAttributeShim if not TYPE_CHECKING else object):
         else:
             import rich
 
-            rich.print(
-                "[bold](viser)[/bold] Tried to disconnect from share URL, but already disconnected"
-            )
+            rich.print("[bold](viser)[/bold] Tried to disconnect from share URL, but already disconnected")
 
     def stop(self) -> None:
         """Stop the Viser server and associated threads and tunnels."""
@@ -1652,9 +1585,7 @@ class ViserServer(DeprecatedAttributeShim if not TYPE_CHECKING else object):
                 except Exception as exc:
                     print_awaited_callback_error(exc)
             else:
-                self._thread_executor.submit(cb, client).add_done_callback(
-                    print_threadpool_errors
-                )
+                self._thread_executor.submit(cb, client).add_done_callback(print_threadpool_errors)
 
     def get_clients(self) -> dict[int, ClientHandle]:
         """Creates and returns a copy of the mapping from connected client IDs to
@@ -1701,9 +1632,7 @@ class ViserServer(DeprecatedAttributeShim if not TYPE_CHECKING else object):
                 future = asyncio.run_coroutine_threadsafe(cb(client), self._event_loop)
                 future.add_done_callback(print_task_error)
             else:
-                self._thread_executor.submit(cb, client).add_done_callback(
-                    print_threadpool_errors
-                )
+                self._thread_executor.submit(cb, client).add_done_callback(print_threadpool_errors)
 
         return cb  # type: ignore
 

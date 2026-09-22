@@ -200,22 +200,14 @@ export function createGaussianMeshProps(
   // Create instanced geometry.
   const geometry = new THREE.InstancedBufferGeometry();
   geometry.instanceCount = numGaussians;
-  geometry.setIndex(
-    new THREE.BufferAttribute(new Uint32Array([0, 2, 1, 0, 3, 2]), 1),
-  );
+  geometry.setIndex(new THREE.BufferAttribute(new Uint32Array([0, 2, 1, 0, 3, 2]), 1));
   geometry.setAttribute(
     "position",
-    new THREE.BufferAttribute(
-      new Float32Array([-2, -2, 0, 2, -2, 0, 2, 2, 0, -2, 2, 0]),
-      3,
-    ),
+    new THREE.BufferAttribute(new Float32Array([-2, -2, 0, 2, -2, 0, 2, 2, 0, -2, 2, 0]), 3),
   );
 
   // Rendering order for Gaussians.
-  const sortedIndexAttribute = new THREE.InstancedBufferAttribute(
-    new Uint32Array(numGaussians),
-    1,
-  );
+  const sortedIndexAttribute = new THREE.InstancedBufferAttribute(new Uint32Array(numGaussians), 1);
   sortedIndexAttribute.setUsage(THREE.DynamicDrawUsage);
   geometry.setAttribute("sortedIndex", sortedIndexAttribute);
 
@@ -266,12 +258,8 @@ export function createGaussianMeshProps(
 }
 
 /**Hook to generate properties for rendering Gaussians via a three.js mesh.*/
-export function useGaussianMeshProps(
-  gaussianBuffer: Uint32Array,
-  numGroups: number,
-) {
-  const maxTextureSize = useThree((state) => state.gl).capabilities
-    .maxTextureSize;
+export function useGaussianMeshProps(gaussianBuffer: Uint32Array, numGroups: number) {
+  const maxTextureSize = useThree((state) => state.gl).capabilities.maxTextureSize;
   return createGaussianMeshProps(gaussianBuffer, numGroups, maxTextureSize);
 }
 /**Global splat state.*/
@@ -323,15 +311,7 @@ export function useGaussianSplatStore() {
 export const GaussianSplatsContext = React.createContext<{
   gaussianSplatState: ReturnType<typeof useGaussianSplatStore>;
   updateCamera: React.MutableRefObject<
-    | null
-    | ((
-        camera: THREE.PerspectiveCamera,
-        width: number,
-        height: number,
-        blockingSort: boolean,
-      ) => void)
+    null | ((camera: THREE.PerspectiveCamera, width: number, height: number, blockingSort: boolean) => void)
   >;
-  meshPropsRef: React.MutableRefObject<ReturnType<
-    typeof useGaussianMeshProps
-  > | null>;
+  meshPropsRef: React.MutableRefObject<ReturnType<typeof useGaussianMeshProps> | null>;
 } | null>(null);

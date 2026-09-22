@@ -1,4 +1,5 @@
 """Inspect Qwen model metadata with the official lazy safetensors reader."""
+
 from __future__ import annotations
 
 import argparse
@@ -48,10 +49,16 @@ def validate(path):
         total_bytes += shard.stat().st_size
     if weight_map is not None and weight_map != tensor_shards:
         raise ValueError("Model index and actual tensor-to-shard mapping disagree")
-    return {"path": str(path), "model_type": config["model_type"],
-            "architectures": config.get("architectures"), "shards": len(names),
-            "total_bytes": total_bytes, "tensor_count": tensor_count,
-            "validation": "metadata_and_lengths", "content_hash_verified": False}
+    return {
+        "path": str(path),
+        "model_type": config["model_type"],
+        "architectures": config.get("architectures"),
+        "shards": len(names),
+        "total_bytes": total_bytes,
+        "tensor_count": tensor_count,
+        "validation": "metadata_and_lengths",
+        "content_hash_verified": False,
+    }
 
 
 if __name__ == "__main__":

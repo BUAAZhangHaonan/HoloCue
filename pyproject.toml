@@ -12,7 +12,7 @@ dependencies = [
  "psutil>=5.9,<8", "langgraph>=1.0,<2", "viser==1.1.1", "scipy>=1.14,<2", "safetensors>=0.4,<1"
 ]
 [project.optional-dependencies]
-dev = ["pytest>=8,<10", "pytest-asyncio>=0.24,<2", "ruff>=0.9"]
+dev = ["pytest>=8,<10", "pytest-asyncio>=0.24,<2", "ruff==0.16.8"]
 simulation = ["cadquery>=2.8,<3", "vtk>=9.6,<10", "playwright>=1.45,<2", "networkx>=3,<4", "pygltflib>=1.16,<2"]
 [project.scripts]
 holocue-api = "holocue.api:main"
@@ -26,3 +26,5 @@ cache_dir = ".work/pytest-cache"
 markers = ["integration: requires installed LangGraph, Viser or a live model"]
 [tool.ruff]
 line-length = 110
+target-version = "py311"
+cache-dir = ".work/ruff-cache"

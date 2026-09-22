@@ -773,11 +773,7 @@ export interface GuiUplotMessage {
           incrs?: number[] | never;
           splits?: number[] | never;
           filter?: never;
-          values?:
-            | (string | number | null)[]
-            | never
-            | string
-            | (string | number | null)[][];
+          values?: (string | number | null)[] | never | string | (string | number | null)[][];
           rotate?: number | never;
           align?: 1 | 2;
           alignTo?: 1 | 2;
@@ -1881,20 +1877,7 @@ export interface ThemeConfigurationMessage {
   show_logo: boolean;
   show_share_button: boolean;
   dark_mode: boolean;
-  colors:
-    | [
-        string,
-        string,
-        string,
-        string,
-        string,
-        string,
-        string,
-        string,
-        string,
-        string,
-      ]
-    | null;
+  colors: [string, string, string, string, string, string, string, string, string, string] | null;
 }
 /** Message from server->client requesting a render from a specified camera
  * pose.
@@ -2365,9 +2348,7 @@ const typeSetSceneNodeMessage = new Set([
   "CubicBezierSplineMessage",
   "GaussianSplatsMessage",
 ]);
-export function isSceneNodeMessage(
-  message: Message,
-): message is SceneNodeMessage {
+export function isSceneNodeMessage(message: Message): message is SceneNodeMessage {
   return typeSetSceneNodeMessage.has(message.type);
 }
 const typeSetGuiComponentMessage = new Set([
@@ -2395,9 +2376,7 @@ const typeSetGuiComponentMessage = new Set([
   "GuiDropdownMessage",
   "GuiButtonGroupMessage",
 ]);
-export function isGuiComponentMessage(
-  message: Message,
-): message is GuiComponentMessage {
+export function isGuiComponentMessage(message: Message): message is GuiComponentMessage {
   return typeSetGuiComponentMessage.has(message.type);
 }
 

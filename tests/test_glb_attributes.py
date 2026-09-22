@@ -1,4 +1,5 @@
 """Functional checks using actual GLB exports and authored normal arrays."""
+
 from pathlib import Path
 
 import numpy as np
@@ -14,8 +15,12 @@ def write_asset(directory: Path, include_normals: bool = True):
     normals = np.tile(np.array([0.6, 0.8, 0.0], dtype=np.float32), (len(mesh.vertices), 1))
     mesh.vertex_normals = normals
     scene = trimesh.Scene()
-    scene.add_geometry(mesh, geom_name="mesh_payload", node_name="CLAMP/component",
-                       transform=trimesh.transformations.rotation_matrix(0.7, [1, 0, 0]))
+    scene.add_geometry(
+        mesh,
+        geom_name="mesh_payload",
+        node_name="CLAMP/component",
+        transform=trimesh.transformations.rotation_matrix(0.7, [1, 0, 0]),
+    )
     path = directory / "component.glb"
     path.write_bytes(export_glb(scene, include_normals=include_normals, unitize_normals=False))
     return path, normals
@@ -73,7 +78,7 @@ def test_missing_file_fails(tmp_path):
 def test_multiple_named_meshes_are_resolved_separately(tmp_path):
     scene = trimesh.Scene()
     expected = {}
-    for index, direction in enumerate(((1., 0., 0.), (0., 1., 0.))):
+    for index, direction in enumerate(((1.0, 0.0, 0.0), (0.0, 1.0, 0.0))):
         mesh = trimesh.creation.icosphere(subdivisions=1, radius=0.01)
         values = np.tile(np.asarray(direction, dtype=np.float32), (len(mesh.vertices), 1))
         mesh.vertex_normals = values

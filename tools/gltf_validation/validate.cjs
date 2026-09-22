@@ -14,12 +14,12 @@ async function main() {
     format: "glb",
     writeTimestamp: false,
     maxIssues: 0,
-    severityOverrides: {GLB_EXTRA_DATA: 0},
+    severityOverrides: { GLB_EXTRA_DATA: 0 },
     externalResourceFunction: async (uri) => {
       throw new Error("HoloCue validation requires embedded resources: " + uri);
     },
   });
-  process.stdout.write(JSON.stringify({validator_version: validator.version(), report}) + "\n");
+  process.stdout.write(JSON.stringify({ validator_version: validator.version(), report }) + "\n");
 }
 
 void main();

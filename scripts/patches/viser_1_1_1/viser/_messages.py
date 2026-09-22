@@ -52,14 +52,11 @@ def _normalize_key_modifier(modifier: Optional[str]) -> Optional[KeyModifier]:
     unknown = modifier_set - valid
     if unknown:
         raise ValueError(
-            f"Unknown modifier(s) in {modifier!r}: {sorted(unknown)!r}. "
-            f"Valid modifiers: {sorted(valid)!r}."
+            f"Unknown modifier(s) in {modifier!r}: {sorted(unknown)!r}. Valid modifiers: {sorted(valid)!r}."
         )
     if len(parts) != len(modifier_set):
         duplicates = [p for p in parts if parts.count(p) > 1]
-        raise ValueError(
-            f"Duplicate modifier(s) in {modifier!r}: {sorted(set(duplicates))!r}."
-        )
+        raise ValueError(f"Duplicate modifier(s) in {modifier!r}: {sorted(set(duplicates))!r}.")
     return cast(
         KeyModifier,
         "+".join(m for m in _KEY_MODIFIER_CANONICAL_ORDER if m in modifier_set),
@@ -1089,11 +1086,7 @@ class SkinnedMeshProps(MeshProps):
         assert self.vertices.shape[-1] == 3
         assert self.faces.shape[-1] == 3
         assert self.skin_weights is not None
-        assert (
-            self.skin_indices.shape
-            == self.skin_weights.shape
-            == (self.vertices.shape[0], 4)
-        )
+        assert self.skin_indices.shape == self.skin_weights.shape == (self.vertices.shape[0], 4)
 
 
 @dataclasses.dataclass
@@ -1247,13 +1240,9 @@ class TransformControlsProps:
     disable_rotations: bool
     """Tuple of booleans indicating if rotations are disabled. These are used
     for rotation around the X, Y, or Z axes. """
-    translation_limits: Tuple[
-        Tuple[float, float], Tuple[float, float], Tuple[float, float]
-    ]
+    translation_limits: Tuple[Tuple[float, float], Tuple[float, float], Tuple[float, float]]
     """Limits for translation."""
-    rotation_limits: Tuple[
-        Tuple[float, float], Tuple[float, float], Tuple[float, float]
-    ]
+    rotation_limits: Tuple[Tuple[float, float], Tuple[float, float], Tuple[float, float]]
     """Limits for rotation."""
     depth_test: bool
     """Boolean indicating if depth testing should be used when rendering.
@@ -2468,9 +2457,7 @@ class FileTransferPart(Message, include_in_scene_serialization=False):
 
     @override
     def redundancy_key(self) -> str:
-        return (
-            type(self).__name__ + "-" + self.transfer_uuid + "-" + str(self.part_index)
-        )
+        return type(self).__name__ + "-" + self.transfer_uuid + "-" + str(self.part_index)
 
 
 @dataclasses.dataclass
@@ -2484,13 +2471,7 @@ class FileTransferPartAck(Message, include_in_scene_serialization=False):
 
     @override
     def redundancy_key(self) -> str:
-        return (
-            type(self).__name__
-            + "-"
-            + self.transfer_uuid
-            + "-"
-            + str(self.transferred_bytes)
-        )
+        return type(self).__name__ + "-" + self.transfer_uuid + "-" + str(self.transferred_bytes)
 
 
 @dataclasses.dataclass

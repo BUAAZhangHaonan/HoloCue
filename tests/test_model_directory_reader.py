@@ -1,4 +1,5 @@
 """Read actual tiny safetensors files through the production metadata validator."""
+
 import importlib.util
 import json
 from pathlib import Path
@@ -19,8 +20,11 @@ SPEC.loader.exec_module(READER)
 def model_directory(tmp_path):
     directory = tmp_path / "model_directory_input"
     directory.mkdir()
-    for name, content in (("config.json", {"model_type": "qwen3_5"}),
-                          ("tokenizer_config.json", {}), ("tokenizer.json", {})):
+    for name, content in (
+        ("config.json", {"model_type": "qwen3_5"}),
+        ("tokenizer_config.json", {}),
+        ("tokenizer.json", {}),
+    ):
         (directory / name).write_text(json.dumps(content), encoding="utf-8")
     save_file({"weight": np.arange(16, dtype=np.float32).reshape(4, 4)}, directory / "model.safetensors")
     return directory
