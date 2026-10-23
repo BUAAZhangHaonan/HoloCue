@@ -213,7 +213,7 @@ def wait_scene_session(
             stream.write(json.dumps(trace, ensure_ascii=False) + "\n")
 
 
-def select_scene_session(page, read_state, output, scene, previous):
+def select_scene_session(page, read_state, output, scene, previous, *, timeout=30):
     selection = {"started_at": time.time(), "previous_scene_id": previous["scene_id"]}
 
     def choose(remaining):
@@ -231,6 +231,7 @@ def select_scene_session(page, read_state, output, scene, previous):
         client_view_path=previous["client_view_path"],
         selection=selection,
         selection_action=choose,
+        timeout=timeout,
     )
 
 
@@ -685,7 +686,14 @@ def wait_view(session_id, after, mode=None, revision=None, timeout=25):
     raise TimeoutError(f"Viser did not publish session {session_id} in view {mode}")
 
 
-def main():
+def scene_ready_timeout(value):
+    seconds = float(value)
+    if not np.isfinite(seconds) or seconds <= 0:
+        raise argparse.ArgumentTypeError("scene-ready-timeout must be positive and finite")
+    return seconds
+
+
+def argument_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument("--api", default="http://127.0.0.1:8750")
     parser.add_argument("--viewer", default="http://127.0.0.1:8780")
@@ -697,7 +705,17 @@ def main():
         choices=[entry["scene_id"] for entry in list_scenes()],
         help="Explicit scene subset for a targeted rerun; omitted means all twelve scenes.",
     )
-    args = parser.parse_args()
+    parser.add_argument(
+        "--scene-ready-timeout",
+        type=scene_ready_timeout,
+        default=30.0,
+        help="Seconds for capture startup identity/transport validation, including selection clicks.",
+    )
+    return parser
+
+
+def main():
+    args = argument_parser().parse_args()
     args.out.mkdir(parents=True, exist_ok=True)
     entries = list_scenes()
     if args.scenes is not None:
@@ -745,11 +763,13 @@ def main():
                     read_scene = lambda sid, timeout: run.read.request(
                         "GET", f"/api/v1/sessions/{sid}", timeout=timeout
                     )
-                    initial = wait_scene_session(page, read_scene, out)
+                    initial = wait_scene_session(page, read_scene, out, timeout=args.scene_ready_timeout)
                     run.record(
                         "select_scene", scene_id=spec.scene_id, initial_session_id=initial["session_id"]
                     )
-                    selected = select_scene_session(page, read_scene, out, entry, initial)
+                    selected = select_scene_session(
+                        page, read_scene, out, entry, initial, timeout=args.scene_ready_timeout
+                    )
                     sid = selected["session_id"]
                     (out / "initial_dom.yaml").write_text(page.locator("body").aria_snapshot())
                     state = run.message(sid, spec.initial_instruction)

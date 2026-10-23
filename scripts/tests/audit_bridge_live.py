@@ -31,6 +31,7 @@ from scripts.tests.audit_viewer_live import (
     client_view_errors,
     wait_scene_session,
     select_scene_session,
+    scene_ready_timeout,
 )
 from scripts.tests.live_twelve_scenes import signature
 
@@ -408,16 +409,19 @@ class Audit:
             software_notice.get_by_role("button").click()
         self.tab("任务")
         read_scene = lambda sid, timeout: self.read(f"/api/v1/sessions/{sid}", timeout=timeout)
-        initial = wait_scene_session(self.page, read_scene, self.out)
+        initial = wait_scene_session(self.page, read_scene, self.out, timeout=self.args.scene_ready_timeout)
         # Force an explicit new session even if the initial scene already matches.
         other = next(row for row in list_scenes() if row["scene_id"] != self.spec.scene_id)
-        intermediate = select_scene_session(self.page, read_scene, self.out, other, initial)
+        intermediate = select_scene_session(
+            self.page, read_scene, self.out, other, initial, timeout=self.args.scene_ready_timeout
+        )
         selected = select_scene_session(
             self.page,
             read_scene,
             self.out,
             {"scene_id": self.spec.scene_id, "title": self.spec.title},
             intermediate,
+            timeout=self.args.scene_ready_timeout,
         )
         self.sid = selected["session_id"]
         self.view_path = selected["client_view_path"]
@@ -891,6 +895,12 @@ def argument_parser():
     parser.add_argument("--scenes", nargs="+")
     parser.add_argument("--render-gpu", type=render_gpu_index, default=2)
     parser.add_argument("--render-device", choices=("CPU", "CUDA"), default="CUDA")
+    parser.add_argument(
+        "--scene-ready-timeout",
+        type=scene_ready_timeout,
+        default=30.0,
+        help="Seconds for capture startup identity/transport validation, including selection clicks.",
+    )
     return parser
 
 

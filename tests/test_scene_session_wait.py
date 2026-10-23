@@ -7,6 +7,7 @@ import pytest
 from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeoutError
 
 from scripts.tests import audit_viewer_live as audit
+from scripts.tests import audit_bridge_live as bridge
 
 
 SCENE = {"scene_id": "shelf_picking", "title": "货架拣选与包裹核验"}
@@ -18,6 +19,19 @@ STATE = {
     "epoch": 0,
     "backend_mode": "live",
 }
+
+
+@pytest.mark.parametrize("parser", [audit.argument_parser, bridge.argument_parser])
+def test_capture_startup_window_is_explicit_and_defaults_to_30_seconds(parser):
+    assert parser().parse_args([]).scene_ready_timeout == 30
+    assert parser().parse_args(["--scene-ready-timeout", "180"]).scene_ready_timeout == 180
+
+
+@pytest.mark.parametrize("parser", [audit.argument_parser, bridge.argument_parser])
+@pytest.mark.parametrize("value", ["0", "-1", "nan", "inf"])
+def test_capture_startup_window_rejects_nonpositive_or_unbounded_values(parser, value):
+    with pytest.raises(SystemExit):
+        parser().parse_args(["--scene-ready-timeout", value])
 
 
 @pytest.fixture(scope="module")
