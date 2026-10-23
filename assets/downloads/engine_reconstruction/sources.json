@@ -1,0 +1,54 @@
+[
+  {
+    "file": "triple_engine.glb",
+    "title": "Three Cylinder Motorcycle Engine",
+    "author": "Jamie Hamel-Smith",
+    "author_url": "https://sketchfab.com/jamie3d",
+    "source_page": "https://sketchfab.com/3d-models/three-cylinder-motorcycle-engine-ad2416e341cb4beca3f86b0b00e84749",
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "uid": "ad2416e341cb4beca3f86b0b00e84749",
+    "retrieved": "2026-10-23",
+    "archive_url": "https://huggingface.co/datasets/allenai/objaverse/resolve/main/glbs/000-071/ad2416e341cb4beca3f86b0b00e84749.glb",
+    "archive_revision": "main at retrieval; retained original file is content-pinned by SHA256",
+    "sha256": "a5a3ce9dc2d9bbe845ce64bb9dd96a999949c92d520560b18f43ae11bad73210"
+  },
+  {
+    "file": "plug_barbados.glb",
+    "title": "Spark Plug",
+    "author": "mr.barbados",
+    "author_url": "https://sketchfab.com/Barbados",
+    "source_page": "https://sketchfab.com/3d-models/spark-plug-049df1e62c064b31ba6df5a0b8c6a562",
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "uid": "049df1e62c064b31ba6df5a0b8c6a562",
+    "retrieved": "2026-10-23",
+    "archive_url": "https://huggingface.co/datasets/allenai/objaverse/resolve/main/glbs/000-053/049df1e62c064b31ba6df5a0b8c6a562.glb",
+    "archive_revision": "main at retrieval; retained original file is content-pinned by SHA256",
+    "sha256": "ec7eb8b2b6f60ecf85fb4cb04851c003fcf554fb25c1abdccd83b6a7bb706cf7"
+  },
+  {
+    "file": "socket_screw.glb",
+    "title": "Inbus Screw, bolt. imbus",
+    "author": "YouniqueĪdeaStudio",
+    "author_url": "https://sketchfab.com/sinnervoncrawsz",
+    "source_page": "https://sketchfab.com/3d-models/inbus-screw-bolt-imbus-d4b2881cd9ef489f99df36fc88640397",
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "uid": "d4b2881cd9ef489f99df36fc88640397",
+    "retrieved": "2026-10-23",
+    "archive_url": "https://huggingface.co/datasets/allenai/objaverse/resolve/main/glbs/000-120/d4b2881cd9ef489f99df36fc88640397.glb",
+    "archive_revision": "main at retrieval; retained original file is content-pinned by SHA256",
+    "sha256": "09c47acd63ffd469a204e51e4f1c584dac5981d8292fb5b4d33582c1adc0123d"
+  },
+  {
+    "file": "threaded_connector.glb",
+    "title": "Threaded Connector 001",
+    "author": "Arrel",
+    "author_url": "https://sketchfab.com/rlneumiller",
+    "source_page": "https://sketchfab.com/3d-models/threaded-connector-001-758d28644a504285918302acb85323ca",
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "uid": "758d28644a504285918302acb85323ca",
+    "retrieved": "2026-10-23",
+    "archive_url": "https://huggingface.co/datasets/allenai/objaverse/resolve/main/glbs/000-099/758d28644a504285918302acb85323ca.glb",
+    "archive_revision": "main at retrieval; retained original file is content-pinned by SHA256",
+    "sha256": "d303d60137ee4dfb7473156ddefb2e77c96c8ce4fab2b6d83444bb1b5f3c2bbf"
+  }
+]

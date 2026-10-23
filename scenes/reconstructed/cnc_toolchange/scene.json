@@ -1,0 +1,281 @@
+{
+  "schema_version": "1.1",
+  "scene_id": "cnc_toolchange",
+  "title": "刀柄教学台装入与拉钉检查",
+  "asset_axes": "gltf_y_up",
+  "camera_position_m": [
+    -1.8,
+    -2.55,
+    2.0
+  ],
+  "camera_look_at_m": [
+    0,
+    0.3,
+    1.17
+  ],
+  "initial_instruction": "把训练面板 MODESWITCH 顺时针转 90 度，再把 T09 沿轴线装入 POCKET9，随后检查 T03 的柄尾拉钉，保留 PANEL 提示。",
+  "render_hints": {
+    "workspace_bounds_m": [
+      [
+        -0.77,
+        -0.45,
+        0.9
+      ],
+      [
+        0.74,
+        1.13,
+        1.94
+      ]
+    ]
+  },
+  "objects": [
+    {
+      "object_id": "MODESWITCH",
+      "label": "教学模式旋钮",
+      "asset": "scenes/reconstructed/cnc_toolchange/meshes/MODESWITCH.glb",
+      "recipe": "knob",
+      "size_m": [
+        0.055,
+        0.055,
+        0.04
+      ],
+      "pose": {
+        "position_m": [
+          -0.56,
+          0.3974,
+          1.34
+        ],
+        "wxyz": [
+          0.7071067812,
+          0.7071067812,
+          0,
+          0
+        ]
+      },
+      "color": [
+        192,
+        196,
+        203
+      ],
+      "capabilities": [
+        "point",
+        "rotate"
+      ],
+      "interaction": {
+        "rotation_axis_local": [
+          0,
+          0,
+          1
+        ],
+        "cue_offset_local_m": [
+          0,
+          0,
+          0.045
+        ]
+      },
+      "description": "朝向操作者的三档示教旋钮，旋钮局部 +Z 与面板法线一致。"
+    },
+    {
+      "object_id": "T09",
+      "label": "九号刀柄",
+      "asset": "scenes/reconstructed/cnc_toolchange/meshes/T09.glb",
+      "recipe": "toolholder",
+      "size_m": [
+        0.075,
+        0.075,
+        0.21
+      ],
+      "pose": {
+        "position_m": [
+          -0.28,
+          -0.22,
+          1.1
+        ]
+      },
+      "color": [
+        166,
+        166,
+        156
+      ],
+      "capabilities": [
+        "point",
+        "insert"
+      ],
+      "description": "竖直支承的锥柄，刀具向下，定位法兰与刀套承接面配合。",
+      "interaction": {
+        "mating_pose": {
+          "position_m": [
+            0,
+            0,
+            -0.015
+          ]
+        },
+        "approach_distance_m": 0.2,
+        "transit_height_m": 0.15
+      }
+    },
+    {
+      "object_id": "POCKET9",
+      "label": "九号教学刀套",
+      "asset": "scenes/reconstructed/cnc_toolchange/meshes/POCKET9.glb",
+      "recipe": "tool_socket",
+      "size_m": [
+        0.1,
+        0.1,
+        0.16
+      ],
+      "pose": {
+        "position_m": [
+          0.2,
+          0.25,
+          1.16
+        ]
+      },
+      "color": [
+        83,
+        104,
+        118
+      ],
+      "capabilities": [
+        "point"
+      ],
+      "anchors": {
+        "insertion": [
+          0,
+          0,
+          0.08
+        ]
+      },
+      "description": "开口朝上，法兰承接面限定轴向终点。"
+    },
+    {
+      "object_id": "T03",
+      "label": "三号待检刀柄",
+      "asset": "scenes/reconstructed/cnc_toolchange/meshes/T03.glb",
+      "recipe": "toolholder",
+      "size_m": [
+        0.075,
+        0.075,
+        0.21
+      ],
+      "pose": {
+        "position_m": [
+          0.48,
+          -0.2,
+          1.1
+        ]
+      },
+      "color": [
+        155,
+        157,
+        156
+      ],
+      "capabilities": [
+        "point",
+        "inspect_back"
+      ],
+      "description": "拉钉位于刀柄顶部，斜向检查视图显示颈部和端部轮廓。",
+      "interaction": {
+        "inspect_point_local_m": [
+          0,
+          0,
+          0.091
+        ],
+        "inspect_normal_local": [
+          0.5997301821,
+          -0.7196762185,
+          0.3498426062
+        ],
+        "inspect_extent_m": [
+          0.058,
+          0.058
+        ]
+      }
+    },
+    {
+      "object_id": "MAG",
+      "label": "隔离刀库示教盘",
+      "asset": "scenes/reconstructed/cnc_toolchange/meshes/MAG.glb",
+      "recipe": "magazine",
+      "size_m": [
+        0.44,
+        0.11,
+        0.44
+      ],
+      "pose": {
+        "position_m": [
+          0.55,
+          0.5785,
+          1.47
+        ]
+      },
+      "color": [
+        99,
+        115,
+        129
+      ],
+      "capabilities": [
+        "point"
+      ],
+      "description": "隔离状态下的刀库模型，仅用于识别。"
+    },
+    {
+      "object_id": "PANEL",
+      "label": "教学状态屏",
+      "asset": "scenes/reconstructed/cnc_toolchange/meshes/PANEL.glb",
+      "recipe": "instrument",
+      "size_m": [
+        0.25,
+        0.09,
+        0.2
+      ],
+      "pose": {
+        "position_m": [
+          -0.62,
+          0.368,
+          1.65
+        ]
+      },
+      "color": [
+        69,
+        88,
+        104
+      ],
+      "capabilities": [
+        "point",
+        "wait"
+      ]
+    }
+  ],
+  "environment": [
+    {
+      "prop_id": "workstation",
+      "asset": "scenes/reconstructed/cnc_toolchange/meshes/env/workstation.glb"
+    }
+  ],
+  "task_contract": {
+    "setting": "主轴与刀库驱动隔离的教学装置，刀柄在开放式夹具上操作。",
+    "ordered_steps": [
+      {
+        "target_id": "MODESWITCH",
+        "action": "rotate",
+        "angle_deg": -90
+      },
+      {
+        "target_id": "T09",
+        "action": "insert",
+        "reference_id": "POCKET9"
+      },
+      {
+        "target_id": "T03",
+        "action": "inspect_back",
+        "depth_requirement": "persistent"
+      }
+    ],
+    "persistent_targets": [
+      "PANEL"
+    ],
+    "interrupt_target": "T03",
+    "interrupt_instruction": "临时查看 T03 的拉钉，保留原来的模式与装刀任务。"
+  }
+}

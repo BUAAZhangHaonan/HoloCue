@@ -1,0 +1,72 @@
+{
+  "source_sha256": "3fa07fdfd20dc3dfddd84846b6f0a8503b45900cec894ce02e5aee0d72e5a970",
+  "frame": 1,
+  "blender": "3.1.2",
+  "parts": [
+    {
+      "name": "ER_locknut",
+      "source_prefix": "rim_",
+      "source_chunks": 43,
+      "faces_before": 971602,
+      "faces_after": 18000,
+      "bounds_baked_frame1": [
+        [
+          -0.34285295009613037,
+          -0.8260816931724548,
+          0.44228002429008484
+        ],
+        [
+          0.9275044202804565,
+          0.5279744863510132,
+          0.8142796158790588
+        ]
+      ],
+      "topology": "complete source component; no geometric crop"
+    },
+    {
+      "name": "ER_collet",
+      "source_prefix": "vl002_innershell_",
+      "source_chunks": 41,
+      "faces_before": 933822,
+      "faces_after": 24000,
+      "bounds_baked_frame1": [
+        [
+          -0.11882144212722778,
+          -0.5636438727378845,
+          -0.22765155136585236
+        ],
+        [
+          0.7240476012229919,
+          0.30531933903694153,
+          0.8509107232093811
+        ]
+      ],
+      "topology": "complete source component; no geometric crop"
+    },
+    {
+      "name": "carbide_endmill",
+      "source_prefix": "vl002b_",
+      "source_chunks": 7,
+      "faces_before": 145906,
+      "faces_after": 14000,
+      "bounds_baked_frame1": [
+        [
+          0.14544452726840973,
+          -0.2959405481815338,
+          -0.25770559906959534
+        ],
+        [
+          0.46753737330436707,
+          0.03381849452853203,
+          1.9337472915649414
+        ]
+      ],
+      "topology": "complete source component; no geometric crop"
+    }
+  ],
+  "excluded": [
+    "complete HSK chuck body"
+  ],
+  "texture_max_edge": 1024,
+  "uniform_scale_applied": 1
+}

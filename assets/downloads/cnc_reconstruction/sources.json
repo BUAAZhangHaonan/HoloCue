@@ -1,0 +1,131 @@
+{
+  "scene": "cnc_toolchange",
+  "review_date": "2026-10-23",
+  "scope": "only source assets for this batch; task scene.json unchanged",
+  "sources": [
+    {
+      "title": "CNC Tool Holder Assembly",
+      "author": "vincent.leung",
+      "display_association": "UBC-3D-Resources",
+      "description": "HSK Chuck with Tapered Collet & Locknut",
+      "uid": "a0475decb5f34656a51aa8140825f1a7",
+      "original_url": "https://sketchfab.com/3d-models/cnc-tool-holder-assembly-a0475decb5f34656a51aa8140825f1a7",
+      "metadata_url": "https://api.sketchfab.com/v3/models/a0475decb5f34656a51aa8140825f1a7",
+      "download_url": "https://huggingface.co/datasets/allenai/objaverse/resolve/main/glbs/000-031/a0475decb5f34656a51aa8140825f1a7.glb",
+      "source_sha256": "3fa07fdfd20dc3dfddd84846b6f0a8503b45900cec894ce02e5aee0d72e5a970",
+      "source_bytes": 234970276,
+      "license": "CC-BY-4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "metadata_file": "ubc_holder_metadata.json",
+      "raw_original_retained_in_formal_tree": false,
+      "retained_parts": [
+        "complete ER locknut",
+        "complete ER collet",
+        "complete carbide cutter"
+      ],
+      "excluded": [
+        "HSK chuck body"
+      ],
+      "derived_files": [
+        "ubc_er_components.glb"
+      ],
+      "adaptation_receipts": [
+        "ubc_preparation.json",
+        "ubc_lod_check.json"
+      ],
+      "preparation_scripts": [
+        "prepare_ubc.py",
+        "check_ubc_lod.py"
+      ],
+      "actual_download_verified": true,
+      "real_blender_inspected": true
+    },
+    {
+      "title": "Toolrack",
+      "author": "Shinya.Araki",
+      "description": "BT30 tool rack",
+      "uid": "882a0f9e78d84853b02d48b1068ad086",
+      "original_url": "https://sketchfab.com/3d-models/toolrack-882a0f9e78d84853b02d48b1068ad086",
+      "metadata_url": "https://api.sketchfab.com/v3/models/882a0f9e78d84853b02d48b1068ad086",
+      "download_url": "https://huggingface.co/datasets/allenai/objaverse/resolve/main/glbs/000-059/882a0f9e78d84853b02d48b1068ad086.glb",
+      "source_sha256": "7497c17544f56ad143bd3757454e9bb71b073fc12dad8ebc37d2e7f5a799670d",
+      "source_bytes": 9910792,
+      "license": "CC-BY-4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "metadata_file": "toolrack_metadata.json",
+      "raw_file": "toolrack.glb",
+      "raw_original_retained_in_formal_tree": true,
+      "retained_parts": [
+        "complete cart",
+        "source V-groove flange",
+        "source 3030 upright"
+      ],
+      "derived_files": [
+        "araki_bt_flange.glb",
+        "araki_3030_post.glb"
+      ],
+      "adaptation_receipts": [
+        "toolrack_preparation.json"
+      ],
+      "preparation_scripts": [
+        "prepare_toolrack.py"
+      ],
+      "actual_download_verified": true,
+      "real_blender_inspected": true
+    }
+  ],
+  "existing_shared_assets": {
+    "adafruit_2230": "assets/downloads/control_panel_reconstruction/adafruit_2230.step",
+    "emaitee_knob": "assets/downloads/control_panel_reconstruction/emaitee_knob.glb",
+    "license_record": "assets/downloads/control_panel_reconstruction/LICENSE.md",
+    "poly_haven": [
+      "WoodenTable_03",
+      "metal_toolbox",
+      "ratchet_wrench",
+      "lubricant_spray",
+      "concrete_floor_worn_001"
+    ]
+  },
+  "dimension_reference": {
+    "url": "https://www.falcontoolings.com/bt-din-iso-7388-2-shank-detail.php",
+    "usage": "factual 7/24 taper / BT40 reference proportions only; no manufacturer model or drawing redistributed"
+  },
+  "files": {
+    "toolrack.glb": {
+      "sha256": "7497c17544f56ad143bd3757454e9bb71b073fc12dad8ebc37d2e7f5a799670d",
+      "bytes": 9910792
+    },
+    "toolrack_metadata.json": {
+      "sha256": "46b3b65bc4a8d6f7863247f4cb087e9fb381604c66802f99a71907849cbcb903",
+      "bytes": 4795
+    },
+    "ubc_holder_metadata.json": {
+      "sha256": "cbc6b31bb43fe8bfbd2b01d4c5481b1f3019ad5b0a4aae4727e3969b0763108e",
+      "bytes": 4867
+    },
+    "ubc_er_components.glb": {
+      "sha256": "3ab9a3aa36123181a0f6fec3f7c81b3138d1b30e5516d23da59fe4f3602dd02d",
+      "bytes": 9084372
+    },
+    "araki_bt_flange.glb": {
+      "sha256": "f79de5db5a982b2cf5ea6960df027e9c1031f9e4efab5826d7f5d36c96fb3509",
+      "bytes": 16864
+    },
+    "araki_3030_post.glb": {
+      "sha256": "5a3f7054d28ba114aaa788d671b782a3f9d7c4959641246543d1489a9453ae27",
+      "bytes": 82764
+    },
+    "ubc_preparation.json": {
+      "sha256": "dbb3da8ac70a62cc63d6d4ea9c8ff7b99a41636bfc7583502c94f3b84b6f1712",
+      "bytes": 1730
+    },
+    "ubc_lod_check.json": {
+      "sha256": "d3d78c4b75c6f24e1565860fd98a0ab2745b3253da42ba2c2630cc9ecdd0a2fe",
+      "bytes": 1947
+    },
+    "toolrack_preparation.json": {
+      "sha256": "0b4c2534d2b88aac78b74b1e491960a64f2820bcbcee139a54bf079a4145c6be",
+      "bytes": 981
+    }
+  }
+}

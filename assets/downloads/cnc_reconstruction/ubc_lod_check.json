@@ -1,0 +1,61 @@
+{
+  "source_sha256": "3fa07fdfd20dc3dfddd84846b6f0a8503b45900cec894ce02e5aee0d72e5a970",
+  "prepared_sha256": "3ab9a3aa36123181a0f6fec3f7c81b3138d1b30e5516d23da59fe4f3602dd02d",
+  "blender": "3.1.2",
+  "source_frame": 1,
+  "scene_scale_m_per_source_unit": 0.03,
+  "method": "12000 deterministic area-weighted samples in each direction, nearest triangle distance; sample maxima are not a global Hausdorff guarantee",
+  "parts": [
+    {
+      "name": "ER_locknut",
+      "source_triangles": 971602,
+      "prepared_triangles": 18000,
+      "source_to_lod_millimetres": {
+        "p50": 0.00966164778219536,
+        "p95": 0.038754942419473075,
+        "p99": 0.05970120148267597,
+        "sample_max": 0.13691837433725595
+      },
+      "lod_to_source_millimetres": {
+        "p50": 0.009223423548974097,
+        "p95": 0.03802084852941334,
+        "p99": 0.05785748921334744,
+        "sample_max": 0.17120510805398226
+      }
+    },
+    {
+      "name": "ER_collet",
+      "source_triangles": 933822,
+      "prepared_triangles": 24000,
+      "source_to_lod_millimetres": {
+        "p50": 0.008255079737864435,
+        "p95": 0.03572843450820067,
+        "p99": 0.07734583995770669,
+        "sample_max": 0.30297528952360153
+      },
+      "lod_to_source_millimetres": {
+        "p50": 0.00817278036265634,
+        "p95": 0.035545455291867256,
+        "p99": 0.0772433462552727,
+        "sample_max": 0.2444912027567625
+      }
+    },
+    {
+      "name": "carbide_endmill",
+      "source_triangles": 145906,
+      "prepared_triangles": 13998,
+      "source_to_lod_millimetres": {
+        "p50": 0.006978631572565064,
+        "p95": 0.022399810259230428,
+        "p99": 0.03233388299122455,
+        "sample_max": 0.2364727947860956
+      },
+      "lod_to_source_millimetres": {
+        "p50": 0.006749606764060445,
+        "p95": 0.02199022096465341,
+        "p99": 0.030824301531538364,
+        "sample_max": 0.053554350743070245
+      }
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "source_sha256": "7497c17544f56ad143bd3757454e9bb71b073fc12dad8ebc37d2e7f5a799670d",
+  "source_raw_axes": "Z points down for the cart; wheel extrema +93 mm, cart top -1530 mm",
+  "parts": [
+    {
+      "name": "araki_bt_flange",
+      "faces": 591,
+      "bounds_m": [
+        [
+          -0.023,
+          -0.022999999999999944,
+          -0.02
+        ],
+        [
+          0.023,
+          0.02300000000000006,
+          2.842170943040401e-17
+        ]
+      ],
+      "watertight": false,
+      "adaptation": "complete original component selection; no cross-section deformation"
+    },
+    {
+      "name": "araki_3030_post",
+      "faces": 2910,
+      "bounds_m": [
+        [
+          -0.014999999999999502,
+          -0.015,
+          0.0
+        ],
+        [
+          0.015,
+          0.015000000000000341,
+          1.5
+        ]
+      ],
+      "watertight": false,
+      "adaptation": "complete original component selection; no cross-section deformation"
+    }
+  ]
+}
