@@ -58,7 +58,7 @@ def native_capture_command(args, blender, scene_id, frame_path, directory):
     """Build the native capture invocation without starting a renderer."""
     return [
         sys.executable,
-        "scripts/guard/resource_guard.py",
+        str(root() / "scripts/guard/resource_guard.py"),
         "--gpus",
         str(args.render_gpu) if args.render_device == "CUDA" else "",
         "--rss-limit-gb",
@@ -75,7 +75,7 @@ def native_capture_command(args, blender, scene_id, frame_path, directory):
         "--python-exit-code",
         "1",
         "--python",
-        "scripts/capture/blender_simulation_bridge.py",
+        str(root() / "scripts/capture/blender_simulation_bridge.py"),
         "--",
         "--frame-file",
         str(frame_path),
@@ -445,7 +445,7 @@ class Audit:
     def start_exporter(self):
         command = [
             sys.executable,
-            "scripts/scenes/export_live_frames.py",
+            str(root() / "scripts/scenes/export_live_frames.py"),
             "--session",
             self.sid,
             "--api",

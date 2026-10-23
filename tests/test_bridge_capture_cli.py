@@ -1,6 +1,11 @@
 """Native bridge command selection; tests never start Blender, a browser or a model."""
 
 from pathlib import Path
+from types import SimpleNamespace
+import json
+import os
+import subprocess
+import sys
 
 import pytest
 
@@ -75,3 +80,100 @@ def test_bridge_validates_active_environment_without_historical_env_file(
         settings, executable = bridge.check_environment(output)
         assert executable == blender
         assert settings == {name: str(task / name.lower()) for name in names}
+
+
+@pytest.mark.parametrize("external_launch", [False, True])
+def test_native_command_resolves_entries_when_cwd_changes(monkeypatch, tmp_path, external_launch):
+    """Execute the generated argv; the renderer probe changes cwd before loading Python."""
+    project = tmp_path / "project"
+    external = tmp_path / "external_launch"
+    renderer_cwd = tmp_path / "renderer_changed_cwd"
+    capture = project / "capture"
+    for directory in (
+        project / "scripts/guard",
+        project / "scripts/capture",
+        external,
+        renderer_cwd,
+        capture,
+    ):
+        directory.mkdir(parents=True)
+    guard = project / "scripts/guard/resource_guard.py"
+    guard.write_text(
+        "import subprocess,sys\nraise SystemExit(subprocess.call(sys.argv[sys.argv.index('--')+1:]))\n"
+    )
+    bridge_script = project / "scripts/capture/blender_simulation_bridge.py"
+    bridge_script.write_text(
+        "import json,os\nfrom pathlib import Path\n"
+        "Path(os.environ['BRIDGE_PATH_PROBE']).write_text(json.dumps({'script':str(Path(__file__).resolve()),'cwd':str(Path.cwd())}))\n"
+    )
+    renderer = project / "renderer_probe"
+    renderer.write_text(
+        f"#!{sys.executable}\n"
+        "import os,runpy,sys\n"
+        "os.chdir(os.environ['BRIDGE_PROBE_RENDERER_CWD'])\n"
+        "runpy.run_path(sys.argv[sys.argv.index('--python')+1],run_name='__main__')\n"
+    )
+    renderer.chmod(0o755)
+    monkeypatch.setattr(bridge, "root", lambda: project)
+    monkeypatch.setattr(bridge, "scene_dir", lambda scene_id: project / "scenes" / scene_id)
+    args = bridge.argument_parser().parse_args(["--render-device", "CPU"])
+    command = bridge.native_capture_command(args, renderer, "blocks", project / "frame.json", capture)
+    receipt = capture / "resolved_paths.json"
+    environment = dict(
+        os.environ, BRIDGE_PATH_PROBE=str(receipt), BRIDGE_PROBE_RENDERER_CWD=str(renderer_cwd)
+    )
+    result = subprocess.run(
+        command,
+        cwd=external if external_launch else project,
+        env=environment,
+        capture_output=True,
+        text=True,
+        timeout=20,
+    )
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert json.loads(receipt.read_text()) == {"script": str(bridge_script), "cwd": str(renderer_cwd)}
+    assert Path(command[1]).is_absolute()
+    assert Path(option(command, "--python")).is_absolute()
+
+
+def test_exporter_owned_process_uses_project_absolute_entry(monkeypatch, tmp_path):
+    project = tmp_path / "project"
+    external = tmp_path / "external_launch"
+    output = project / "capture"
+    for directory in (project / "scripts/scenes", external, output):
+        directory.mkdir(parents=True)
+    exporter = project / "scripts/scenes/export_live_frames.py"
+    exporter.write_text(
+        "import json,os,sys\nfrom pathlib import Path\n"
+        "Path(os.environ['BRIDGE_PATH_PROBE']).write_text(json.dumps({'script':sys.argv[0],'cwd':str(Path.cwd()),'arguments':sys.argv[1:]}))\n"
+    )
+    receipt = output / "exporter_probe.json"
+    monkeypatch.setattr(bridge, "root", lambda: project)
+    monkeypatch.setenv("BRIDGE_PATH_PROBE", str(receipt))
+    monkeypatch.chdir(external)
+    audit = SimpleNamespace(
+        sid="probe-session",
+        args=SimpleNamespace(api="http://unused.invalid"),
+        view_path=project / "view.json",
+        out=output,
+    )
+    bridge.Audit.start_exporter(audit)
+    try:
+        assert audit.exporter.process.wait(timeout=20) == 0
+    finally:
+        audit.exporter.close()
+    observed = json.loads(receipt.read_text())
+    assert observed["script"] == str(exporter)
+    assert observed["cwd"] == str(project)
+    assert observed["arguments"] == [
+        "--session",
+        "probe-session",
+        "--api",
+        "http://unused.invalid",
+        "--view-state",
+        str(project / "view.json"),
+        "--seconds",
+        "21600",
+        "--hz",
+        "10",
+    ]
