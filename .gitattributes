@@ -1,3 +1,6 @@
 scenes/**/scene.blend filter=lfs diff=lfs merge=lfs -text
 tests/fixtures/** -text
 tests/fixtures/optical_lens_before_seat/visible_rays.json whitespace=cr-at-eol
+
+# Preserve licensed source snapshots and their receipts byte-for-byte.
+assets/downloads/*_reconstruction/** -text -whitespace

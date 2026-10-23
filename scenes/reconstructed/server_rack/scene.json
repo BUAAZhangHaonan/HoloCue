@@ -1,0 +1,251 @@
+{
+  "schema_version": "1.1",
+  "scene_id": "server_rack",
+  "title": "机柜维护与备用节点安装",
+  "asset_axes": "gltf_y_up",
+  "camera_position_m": [
+    1.65,
+    -2.45,
+    1.8
+  ],
+  "camera_look_at_m": [
+    0,
+    0.2,
+    1.02
+  ],
+  "initial_instruction": "把 SPARE 沿导轨装入 SLOT4，随后检查检修车上 NODE3 的背面接口，保留 ALARM 状态提示。",
+  "render_hints": {
+    "workspace_bounds_m": [
+      [
+        -1.02,
+        -0.56,
+        0.65
+      ],
+      [
+        1.02,
+        0.66,
+        2.1
+      ]
+    ]
+  },
+  "objects": [
+    {
+      "object_id": "SPARE",
+      "label": "备用计算节点",
+      "asset": "scenes/reconstructed/server_rack/meshes/SPARE.glb",
+      "recipe": "server",
+      "size_m": [
+        0.432,
+        0.46,
+        0.044
+      ],
+      "pose": {
+        "position_m": [
+          -0.72,
+          -0.22,
+          0.902
+        ]
+      },
+      "color": [
+        155,
+        169,
+        184
+      ],
+      "capabilities": [
+        "point",
+        "insert"
+      ],
+      "description": "已断电的 1U 节点，后端朝 +Y，在机架前方完成横向对齐，再沿两侧导轨装入槽位。",
+      "interaction": {
+        "mating_pose": {
+          "position_m": [
+            0,
+            0.23,
+            0
+          ]
+        },
+        "approach_axis_local": [
+          0,
+          -1,
+          0
+        ],
+        "approach_distance_m": 0.8,
+        "transit_height_m": 0.14
+      }
+    },
+    {
+      "object_id": "SLOT4",
+      "label": "四号空槽位",
+      "asset": "scenes/reconstructed/server_rack/meshes/SLOT4.glb",
+      "recipe": "rack_slot",
+      "size_m": [
+        0.464,
+        0.52,
+        0.064
+      ],
+      "pose": {
+        "position_m": [
+          0,
+          0.26,
+          1.13
+        ]
+      },
+      "color": [
+        109,
+        145,
+        150
+      ],
+      "capabilities": [
+        "point"
+      ],
+      "anchors": {
+        "insertion": [
+          0,
+          0.23,
+          0
+        ]
+      },
+      "description": "导轨净宽大于节点宽度，后部止挡限定最终位置。"
+    },
+    {
+      "object_id": "NODE3",
+      "label": "待检三号节点",
+      "asset": "scenes/reconstructed/server_rack/meshes/NODE3.glb",
+      "recipe": "server",
+      "size_m": [
+        0.432,
+        0.46,
+        0.044
+      ],
+      "pose": {
+        "position_m": [
+          0.72,
+          -0.22,
+          0.902
+        ]
+      },
+      "color": [
+        169,
+        151,
+        111
+      ],
+      "capabilities": [
+        "point",
+        "inspect_back"
+      ],
+      "description": "已取出并置于检修车，背面光纤口位于 +Y。",
+      "interaction": {
+        "inspect_cue_clearance_m": 0.015,
+        "inspect_point_local_m": [
+          0,
+          0.232,
+          0
+        ],
+        "inspect_normal_local": [
+          0,
+          1,
+          0
+        ],
+        "cue_offset_local_m": [
+          0,
+          0,
+          0.075
+        ]
+      }
+    },
+    {
+      "object_id": "ALARM",
+      "label": "柜顶状态灯",
+      "asset": "scenes/reconstructed/server_rack/meshes/ALARM.glb",
+      "recipe": "beacon",
+      "size_m": [
+        0.08,
+        0.08,
+        0.16
+      ],
+      "pose": {
+        "position_m": [
+          0,
+          0.27,
+          1.98
+        ]
+      },
+      "color": [
+        203,
+        72,
+        58
+      ],
+      "capabilities": [
+        "point",
+        "wait"
+      ],
+      "description": "由仿真事件控制的状态指示器。"
+    },
+    {
+      "object_id": "FAN",
+      "label": "风扇盖锁扣",
+      "asset": "scenes/reconstructed/server_rack/meshes/FAN.glb",
+      "recipe": "knob",
+      "size_m": [
+        0.055,
+        0.055,
+        0.035
+      ],
+      "pose": {
+        "position_m": [
+          0.17,
+          -0.01,
+          1.57
+        ]
+      },
+      "color": [
+        75,
+        98,
+        125
+      ],
+      "capabilities": [
+        "point",
+        "rotate"
+      ],
+      "description": "风扇盖上的四分之一圈锁扣，转轴朝 -Y。",
+      "interaction": {
+        "rotation_axis_local": [
+          0,
+          -1,
+          0
+        ],
+        "cue_offset_local_m": [
+          0,
+          -0.05,
+          0
+        ]
+      }
+    }
+  ],
+  "environment": [
+    {
+      "prop_id": "workstation",
+      "asset": "scenes/reconstructed/server_rack/meshes/env/workstation.glb"
+    }
+  ],
+  "task_contract": {
+    "setting": "断电机柜维护训练，两台检修车提供独立的支承和观察空间。",
+    "ordered_steps": [
+      {
+        "target_id": "SPARE",
+        "action": "insert",
+        "reference_id": "SLOT4"
+      },
+      {
+        "target_id": "NODE3",
+        "action": "inspect_back",
+        "depth_requirement": "persistent"
+      }
+    ],
+    "persistent_targets": [
+      "ALARM"
+    ],
+    "interrupt_target": "NODE3",
+    "interrupt_instruction": "临时检查 NODE3 的背面端口，保存当前安装任务。"
+  }
+}
