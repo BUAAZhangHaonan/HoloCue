@@ -1,0 +1,20 @@
+{
+  "title": "Tripod",
+  "creator": "Artec 3D",
+  "source_url": "https://www.artec3d.com/3d-models/tripod",
+  "download_url": "https://cdn.artec3d.com/content-hub-3dmodels/tripod-obj.zip?VersionId=qyrZ4DQxRvjbMskjvSAMYabN0Cx6vLYt",
+  "verified_on": "2026-10-22",
+  "official_page_license": "CC BY 4.0",
+  "official_page_license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "archive_license": "CC BY 3.0 Unported",
+  "archive_license_url": "https://creativecommons.org/licenses/by/3.0/",
+  "license_note": "Current asset page and original archive differ in CC BY version; preserve both statements and attribute the retained OBJ and derivative under the archive CC BY 3.0 notice. Both permit attributed adaptation.",
+  "source_faces": 2972238,
+  "source_vertices": 1485993,
+  "source_files": [
+    "license.txt",
+    "Tripod.obj"
+  ],
+  "source_textures": [],
+  "geometry_note": "Artec Eva HD scan. Source is geometric only; no original texture/PBR set is supplied."
+}

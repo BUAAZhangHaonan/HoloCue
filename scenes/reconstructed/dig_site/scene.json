@@ -1,0 +1,280 @@
+{
+  "schema_version": "1.1",
+  "scene_id": "dig_site",
+  "title": "探方记录与陶片检查",
+  "asset_axes": "gltf_y_up",
+  "camera_position_m": [
+    2.2,
+    -2.8,
+    2.45
+  ],
+  "camera_look_at_m": [
+    0,
+    0.2,
+    -0.04
+  ],
+  "initial_instruction": "检查登记托盘中 POT3 内壁的纹理，再将 FLAG 放到 BONE 旁边的标记位置，保留测站 STAY 提示。",
+  "render_hints": {
+    "workspace_bounds_m": [
+      [
+        -1.06,
+        -0.72,
+        -0.42
+      ],
+      [
+        1.09,
+        1.27,
+        0.86
+      ]
+    ]
+  },
+  "objects": [
+    {
+      "object_id": "POT3",
+      "label": "已登记陶片三号",
+      "asset": "scenes/reconstructed/dig_site/meshes/POT3.glb",
+      "recipe": "potsherd",
+      "size_m": [
+        0.17,
+        0.035,
+        0.13
+      ],
+      "pose": {
+        "position_m": [
+          0.85,
+          -0.46,
+          0.22
+        ]
+      },
+      "color": [
+        169,
+        94,
+        58
+      ],
+      "capabilities": [
+        "point",
+        "inspect_back"
+      ],
+      "description": "已登记扫描陶片，+Y 内壁可观察真实表面纹理与断口。",
+      "interaction": {
+        "inspect_point_local_m": [
+          0,
+          0.022,
+          0
+        ],
+        "inspect_normal_local": [
+          0,
+          1,
+          0
+        ]
+      }
+    },
+    {
+      "object_id": "FLAG",
+      "label": "红色标记旗",
+      "asset": "scenes/reconstructed/dig_site/meshes/FLAG.glb",
+      "recipe": "flag",
+      "size_m": [
+        0.16,
+        0.012,
+        0.3
+      ],
+      "pose": {
+        "position_m": [
+          -0.85,
+          -0.48,
+          0.18
+        ]
+      },
+      "color": [
+        204,
+        64,
+        50
+      ],
+      "capabilities": [
+        "point",
+        "assemble"
+      ],
+      "description": "旗杆尖端为接合点，标记位置位于遗存之外。",
+      "interaction": {
+        "mating_pose": {
+          "position_m": [
+            0,
+            0,
+            -0.15
+          ]
+        },
+        "approach_distance_m": 0.2,
+        "transit_height_m": 0.25
+      }
+    },
+    {
+      "object_id": "BONE",
+      "label": "已记录骨状遗存",
+      "asset": "scenes/reconstructed/dig_site/meshes/BONE.glb",
+      "recipe": "bone",
+      "size_m": [
+        0.28,
+        0.07,
+        0.045
+      ],
+      "pose": {
+        "position_m": [
+          0.1,
+          0.1,
+          -0.3275
+        ]
+      },
+      "color": [
+        206,
+        192,
+        151
+      ],
+      "capabilities": [
+        "point"
+      ],
+      "anchors": {
+        "placement": [
+          0.22,
+          -0.08,
+          -0.0225
+        ]
+      },
+      "description": "遗存保持原位，标记点位于东侧独立土面。"
+    },
+    {
+      "object_id": "STAY",
+      "label": "固定测站",
+      "asset": "scenes/reconstructed/dig_site/meshes/STAY.glb",
+      "recipe": "total_station",
+      "size_m": [
+        0.2,
+        0.17,
+        0.24
+      ],
+      "pose": {
+        "position_m": [
+          0.68,
+          0.98,
+          0.8
+        ]
+      },
+      "color": [
+        197,
+        154,
+        41
+      ],
+      "capabilities": [
+        "point",
+        "wait"
+      ],
+      "description": "三脚架固定测站，朝向探方中心。"
+    },
+    {
+      "object_id": "POT1",
+      "label": "一号陶片",
+      "asset": "scenes/reconstructed/dig_site/meshes/POT1.glb",
+      "recipe": "potsherd",
+      "size_m": [
+        0.13,
+        0.025,
+        0.09
+      ],
+      "pose": {
+        "position_m": [
+          -0.42,
+          0.1,
+          -0.3
+        ]
+      },
+      "color": [
+        138,
+        89,
+        60
+      ],
+      "capabilities": [
+        "point"
+      ]
+    },
+    {
+      "object_id": "POT2",
+      "label": "二号陶片",
+      "asset": "scenes/reconstructed/dig_site/meshes/POT2.glb",
+      "recipe": "potsherd",
+      "size_m": [
+        0.12,
+        0.025,
+        0.11
+      ],
+      "pose": {
+        "position_m": [
+          0.35,
+          0.45,
+          -0.29
+        ]
+      },
+      "color": [
+        167,
+        100,
+        61
+      ],
+      "capabilities": [
+        "point"
+      ]
+    },
+    {
+      "object_id": "TROWEL",
+      "label": "记录手铲",
+      "asset": "scenes/reconstructed/dig_site/meshes/TROWEL.glb",
+      "recipe": "trowel",
+      "size_m": [
+        0.09,
+        0.26,
+        0.025
+      ],
+      "pose": {
+        "position_m": [
+          -0.86,
+          -0.08,
+          0.0425
+        ]
+      },
+      "color": [
+        143,
+        152,
+        158
+      ],
+      "capabilities": [
+        "point",
+        "rotate"
+      ],
+      "description": "工具托盘上的手铲，可演示方位。"
+    }
+  ],
+  "environment": [
+    {
+      "prop_id": "workstation",
+      "asset": "scenes/reconstructed/dig_site/meshes/env/workstation.glb"
+    }
+  ],
+  "task_contract": {
+    "setting": "考古教学探方，已登记陶片供结构检查，遗存保持原位。",
+    "ordered_steps": [
+      {
+        "target_id": "POT3",
+        "action": "inspect_back",
+        "depth_requirement": "persistent"
+      },
+      {
+        "target_id": "FLAG",
+        "action": "assemble",
+        "reference_id": "BONE"
+      }
+    ],
+    "persistent_targets": [
+      "STAY"
+    ],
+    "interrupt_target": "POT3",
+    "interrupt_instruction": "临时重新观察 POT3 内壁纹理，保留当前步骤。"
+  }
+}

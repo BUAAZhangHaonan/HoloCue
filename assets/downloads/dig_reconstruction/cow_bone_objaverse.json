@@ -1,0 +1,170 @@
+{
+  "uri": "https://api.sketchfab.com/v3/models/675694971dcb44e09f32353604a7a01d",
+  "uid": "675694971dcb44e09f32353604a7a01d",
+  "name": "Cow Bone .::RAWscan::.",
+  "staffpickedAt": null,
+  "viewCount": 603,
+  "likeCount": 21,
+  "animationCount": 0,
+  "viewerUrl": "https://sketchfab.com/3d-models/675694971dcb44e09f32353604a7a01d",
+  "embedUrl": "https://sketchfab.com/models/675694971dcb44e09f32353604a7a01d/embed",
+  "commentCount": 0,
+  "isDownloadable": true,
+  "publishedAt": "2020-08-28T16:09:46.813190",
+  "tags": [
+    {
+      "name": "cow",
+      "slug": "cow",
+      "uri": "https://api.sketchfab.com/v3/tags/cow"
+    },
+    {
+      "name": "bone",
+      "slug": "bone",
+      "uri": "https://api.sketchfab.com/v3/tags/bone"
+    },
+    {
+      "name": "photogrammetry",
+      "slug": "photogrammetry",
+      "uri": "https://api.sketchfab.com/v3/tags/photogrammetry"
+    },
+    {
+      "name": "low",
+      "slug": "low",
+      "uri": "https://api.sketchfab.com/v3/tags/low"
+    },
+    {
+      "name": "poly",
+      "slug": "poly",
+      "uri": "https://api.sketchfab.com/v3/tags/poly"
+    },
+    {
+      "name": "3dscan",
+      "slug": "3dscan",
+      "uri": "https://api.sketchfab.com/v3/tags/3dscan"
+    }
+  ],
+  "categories": [
+    {
+      "name": "animals-pets"
+    },
+    {
+      "name": "art-abstract"
+    }
+  ],
+  "thumbnails": {
+    "images": [
+      {
+        "uid": "bdcebcc6f8e94366b4c1591906e372da",
+        "size": 79461,
+        "width": 1920,
+        "url": "https://media.sketchfab.com/models/675694971dcb44e09f32353604a7a01d/thumbnails/286f47b3de144242afcf2c7f9774a91b/958030f8d9bb4694ad03e746e15707ab.jpeg",
+        "height": 1080
+      },
+      {
+        "uid": "dd3f1dfbf858423ebf461fe9c89419d5",
+        "size": 24037,
+        "width": 1024,
+        "url": "https://media.sketchfab.com/models/675694971dcb44e09f32353604a7a01d/thumbnails/286f47b3de144242afcf2c7f9774a91b/6dd9893b5c1f47039defd6562805bab6.jpeg",
+        "height": 576
+      },
+      {
+        "uid": "7a2cb4abc64f453792ffbb39af90f1a7",
+        "size": 13214,
+        "width": 720,
+        "url": "https://media.sketchfab.com/models/675694971dcb44e09f32353604a7a01d/thumbnails/286f47b3de144242afcf2c7f9774a91b/ba4a37b0593a4821a22779359d86bb35.jpeg",
+        "height": 405
+      },
+      {
+        "uid": "06735d9b51e24ba6baf19c1ff518de95",
+        "size": 2714,
+        "width": 256,
+        "url": "https://media.sketchfab.com/models/675694971dcb44e09f32353604a7a01d/thumbnails/286f47b3de144242afcf2c7f9774a91b/bf4daaefe46040ac90a718612e010999.jpeg",
+        "height": 144
+      },
+      {
+        "uid": "95a94f3d881547588748ddd6e1c7e091",
+        "size": 666,
+        "width": 64,
+        "url": "https://media.sketchfab.com/models/675694971dcb44e09f32353604a7a01d/thumbnails/286f47b3de144242afcf2c7f9774a91b/07e8f50277e144578e86c77a212c870c.jpeg",
+        "height": 36
+      }
+    ]
+  },
+  "user": {
+    "uid": "31356005ae604b7594b7f7d6ffb620d4",
+    "username": "spogna",
+    "displayName": "Andrea Spognetta (Spogna)",
+    "profileUrl": "https://sketchfab.com/spogna",
+    "account": "basic",
+    "avatar": {
+      "uri": "https://api.sketchfab.com/v3/avatars/4878eb622af9437196e0db819da1d522",
+      "images": [
+        {
+          "size": 781,
+          "width": 32,
+          "url": "https://media.sketchfab.com/avatars/4878eb622af9437196e0db819da1d522/e983bf9b8a514bb9ae7a338d42ed70eb.jpeg",
+          "height": 32
+        },
+        {
+          "size": 1259,
+          "width": 48,
+          "url": "https://media.sketchfab.com/avatars/4878eb622af9437196e0db819da1d522/e27db1126a374dbc8e29944332fb42a3.jpeg",
+          "height": 48
+        },
+        {
+          "size": 3235,
+          "width": 90,
+          "url": "https://media.sketchfab.com/avatars/4878eb622af9437196e0db819da1d522/0559ec81fdbb468aa8b644b6c44d6ac9.jpeg",
+          "height": 90
+        },
+        {
+          "size": 3791,
+          "width": 100,
+          "url": "https://media.sketchfab.com/avatars/4878eb622af9437196e0db819da1d522/65d0b988b7b54567860d6cdd10c1c623.jpeg",
+          "height": 100
+        }
+      ]
+    },
+    "uri": "https://api.sketchfab.com/v3/users/31356005ae604b7594b7f7d6ffb620d4"
+  },
+  "description": "Cow Bone .::RAWscan::.\n\n3Dscan by photogrammetry",
+  "faceCount": 439222,
+  "createdAt": "2020-08-28T15:47:38.598038",
+  "vertexCount": 219613,
+  "isAgeRestricted": false,
+  "archives": {
+    "glb": {
+      "textureCount": 1,
+      "size": 29469256,
+      "type": "glb",
+      "textureMaxResolution": 8192,
+      "faceCount": 439222,
+      "vertexCount": 266336
+    },
+    "gltf": {
+      "textureCount": 1,
+      "size": 24484741,
+      "type": "gltf",
+      "textureMaxResolution": 8192,
+      "faceCount": 439222,
+      "vertexCount": 266336
+    },
+    "source": {
+      "textureCount": null,
+      "size": 27849268,
+      "type": "source",
+      "textureMaxResolution": null,
+      "faceCount": null,
+      "vertexCount": null
+    },
+    "usdz": {
+      "textureCount": null,
+      "size": 12447711,
+      "type": "usdz",
+      "textureMaxResolution": null,
+      "faceCount": null,
+      "vertexCount": null
+    }
+  },
+  "license": "by"
+}

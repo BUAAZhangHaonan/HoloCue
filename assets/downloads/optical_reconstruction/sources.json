@@ -1,0 +1,91 @@
+{
+  "author": "Brandon J. Winters and David Shepler",
+  "repository": "https://osf.io/9kt52/",
+  "hardware_doi": "https://doi.org/10.1016/j.ohx.2017.12.001",
+  "downloaded": "2026-10-22",
+  "hardware_adaptation_license": "CC-BY-SA-4.0",
+  "osf_node_license": "CC-BY-4.0",
+  "files": [
+    {
+      "file": "B01_base.step",
+      "original_name": "B01 Center Mount  Base.step",
+      "size": 172526,
+      "sha256": "6d881b2c58daa75d728d8723f93e4502d86fd14d36f325554698e6f8c794f709",
+      "source": "https://osf.io/9kt52/files/osfstorage/597176e59ad5a1023955f61f",
+      "download": "https://osf.io/download/qguct/",
+      "osf_id": "597176e59ad5a1023955f61f"
+    },
+    {
+      "file": "C02_fixed_lens.step",
+      "original_name": "C02 Cage Stationary Mount.step",
+      "size": 140640,
+      "sha256": "d22c80a46ed321a92485158f43749cb2b13d6dafecde3b5c2fa10c27bbbe3337",
+      "source": "https://osf.io/9kt52/files/osfstorage/597176ebb83f69022a2fa140",
+      "download": "https://osf.io/download/8n7ky/",
+      "osf_id": "597176ebb83f69022a2fa140"
+    },
+    {
+      "file": "C04_adjustable_lens.step",
+      "original_name": "C04 Cage Adjustable Lens Mount.step",
+      "size": 1248073,
+      "sha256": "4946a0a96485017d919ecfc7dd4f7b9ef27e280e45aab2dee66d449c0ba8a4d0",
+      "source": "https://osf.io/9kt52/files/osfstorage/5971774c9ad5a10238558d5b",
+      "download": "https://osf.io/download/cmtzs/",
+      "osf_id": "5971774c9ad5a10238558d5b"
+    },
+    {
+      "file": "C13_mirror_base.step",
+      "original_name": "C13 Cage Kinematic Mirror Base.step",
+      "size": 275520,
+      "sha256": "0bd32aba5854dc3bf572621a8ee70ec1939b90f86108fd5f1b8adbde16dd3afa",
+      "source": "https://osf.io/9kt52/files/osfstorage/59717711594d900229807c4a",
+      "download": "https://osf.io/download/7h46j/",
+      "osf_id": "59717711594d900229807c4a"
+    },
+    {
+      "file": "C15_mirror_mount.step",
+      "original_name": "C15 Cage Kinematic Mirror Mount.step",
+      "size": 154083,
+      "sha256": "1dfdac1b28d33e607f87953c525edd46ecf9e171a69fd3911fd3bc2f22c1ccd4",
+      "source": "https://osf.io/9kt52/files/osfstorage/597177186c613b022a36a732",
+      "download": "https://osf.io/download/evft2/",
+      "osf_id": "597177186c613b022a36a732"
+    },
+    {
+      "file": "M02_thumb_knob.step",
+      "original_name": "M02 Thumb Knob.step",
+      "size": 42939,
+      "sha256": "37db16caa54d4f67eed75a14fc0b60cfc4037f286808f579e7e9f83e6dcb139f",
+      "source": "https://osf.io/9kt52/files/osfstorage/5971773d594d90022a80ab40",
+      "download": "https://osf.io/download/n4ec9/",
+      "osf_id": "5971773d594d90022a80ab40"
+    },
+    {
+      "file": "P01_adjustable_post.step",
+      "original_name": "P01 Adjustable Post.step",
+      "size": 26869,
+      "sha256": "6520345f2079545a3c06d62ea970535bf8fe04af0ad03dfc014fd05d87c27efb",
+      "source": "https://osf.io/9kt52/files/osfstorage/597177406c613b022a36a744",
+      "download": "https://osf.io/download/fbq64/",
+      "osf_id": "597177406c613b022a36a744"
+    }
+  ],
+  "opticore": {
+    "author": "Johannes Hinrichs",
+    "commit": "f9b0029009846abbf34a0947971dc4c6ba1a21f6",
+    "source": "https://github.com/CodeFHD/OptiCore/blob/f9b0029009846abbf34a0947971dc4c6ba1a21f6/bl_optomech/table.py",
+    "license": "GPL-3.0-or-later",
+    "source_sha256": "06e9f85b3c77798d821188083d3a15bd990e55a8025378966f25b66725dfe8c9",
+    "generated_plate_license": "GPL-3.0-or-later",
+    "length_mm": 900,
+    "width_mm": 1400,
+    "thickness_mm": 25,
+    "hole_radius_mm": 3,
+    "hole_pitch_mm": 25,
+    "vertices_per_hole": 16,
+    "source_file": "opticore_table.py.txt",
+    "reproduction": "prepare_opticore.py",
+    "generated_plate": "opticore_breadboard.glb"
+  },
+  "source_duplicate_note": "OSF C13 and C14 STEP exports contain the same two solids; C13_mirror_base.step is retained once, with solid 1 used as the base and solid 0 as the joint cap. The C14 duplicate is not shipped."
+}
