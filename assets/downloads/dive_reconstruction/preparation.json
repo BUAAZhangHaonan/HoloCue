@@ -1,0 +1,28 @@
+{
+  "cylinder_body": {
+    "source_node": "Oxygen_Cylinder_SM_M_Oxygen_Cylinder_0",
+    "source_connected_component_faces": 840,
+    "source_center_translation_m": [
+      2.3155449699885366e-06,
+      0.04014040446712472,
+      0.1074233446755457
+    ],
+    "source_extents_m": [
+      0.2760122559054743,
+      0.27601224709622424,
+      1.3578672016721924
+    ],
+    "operation": "Select one complete connected cylinder body; preserve faces, UVs, embedded textures and source proportions. Omit original trolley, straps, regulator and gauge."
+  },
+  "gauge": {
+    "operation": "Preserve both full source meshes and embedded textures; remove only archive presentation rotation and rigidly align author +Z face normal to target -Y.",
+    "faces": {
+      "defaultMaterial": 60,
+      "defaultMaterial_1": 5560
+    }
+  },
+  "derived_files": {
+    "cylinder_body.glb": "77faad3e2f07d88a7fbb6449b07ee0d30680d6e48b7784199c1006ca726a19f0",
+    "pressure_gauge_aligned.glb": "96a97d02bf0b4971ba2f0cd28edafedbdf77e21ca41dcca46294041e2358d9a7"
+  }
+}

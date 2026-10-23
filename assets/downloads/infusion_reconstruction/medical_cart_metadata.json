@@ -1,0 +1,152 @@
+{
+  "animationCount": 0,
+  "categories": [
+    {
+      "uid": "606f202e5a3c4e62bf9aab1cd9f63e1b",
+      "name": "Furniture & Home",
+      "slug": "furniture-home",
+      "uri": "https://api.sketchfab.com/v3/categories/606f202e5a3c4e62bf9aab1cd9f63e1b",
+      "icon": "https://static.sketchfab.com/static/builds/web/dist/static/assets/images/icons/categories/c999ae9e0525ccfb8fd8953190d5307d-v2.svg",
+      "thumbnails": [
+        {
+          "width": "512",
+          "height": "288",
+          "url": "https://static.sketchfab.com/categories/606f202e5a3c4e62bf9aab1cd9f63e1b/512x288.png"
+        },
+        {
+          "width": "800",
+          "height": "450",
+          "url": "https://static.sketchfab.com/categories/606f202e5a3c4e62bf9aab1cd9f63e1b/800x450.png"
+        }
+      ]
+    }
+  ],
+  "commentCount": 6,
+  "createdAt": "2021-06-29T12:46:57.291971",
+  "embedUrl": "https://sketchfab.com/models/2a0a574f9e374702af8c415fce296f45/embed",
+  "faceCount": 17780,
+  "isAgeRestricted": false,
+  "license": {
+    "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+    "label": "CC Attribution",
+    "fullName": "Creative Commons Attribution",
+    "requirements": "Author must be credited. Commercial use is allowed.",
+    "url": "http://creativecommons.org/licenses/by/4.0/",
+    "slug": "by"
+  },
+  "likeCount": 198,
+  "name": "Medical Cart",
+  "publishedAt": "2021-06-29T12:58:55.837696",
+  "soundCount": 0,
+  "staffpickedAt": null,
+  "tags": [
+    {
+      "name": "hospital",
+      "slug": "hospital",
+      "uri": "https://api.sketchfab.com/v3/tags/hospital"
+    },
+    {
+      "name": "hospital-props",
+      "slug": "hospital-props",
+      "uri": "https://api.sketchfab.com/v3/tags/hospital-props"
+    }
+  ],
+  "thumbnails": {
+    "images": [
+      {
+        "uid": "6204ab06c8c24d20a66b9ad625f58273",
+        "width": 1920,
+        "height": 1080,
+        "size": 316092,
+        "url": "https://media.sketchfab.com/models/2a0a574f9e374702af8c415fce296f45/thumbnails/274b7a461ecc4fea9922dec9c4e4351e/b166aa8fd781423496eabf66deaa3806.jpeg"
+      },
+      {
+        "uid": "30589d33ebea48729cd6e232a67b71a8",
+        "width": 1024,
+        "height": 576,
+        "size": 36188,
+        "url": "https://media.sketchfab.com/models/2a0a574f9e374702af8c415fce296f45/thumbnails/274b7a461ecc4fea9922dec9c4e4351e/4083cbe9cafb43bf85d4c3dc3cd222b3.jpeg"
+      },
+      {
+        "uid": "60f2a79fcec64302b0f391cbd7ad537c",
+        "width": 720,
+        "height": 405,
+        "size": 20422,
+        "url": "https://media.sketchfab.com/models/2a0a574f9e374702af8c415fce296f45/thumbnails/274b7a461ecc4fea9922dec9c4e4351e/4355f3e814334ff398609123ed687df4.jpeg"
+      },
+      {
+        "uid": "5b36dd5954734fa098b029215ab6868c",
+        "width": 256,
+        "height": 144,
+        "size": 4437,
+        "url": "https://media.sketchfab.com/models/2a0a574f9e374702af8c415fce296f45/thumbnails/274b7a461ecc4fea9922dec9c4e4351e/964ad525cfb440569ac5b28c846be820.jpeg"
+      },
+      {
+        "uid": "f0a468fa18dc4b92aeb9d3f0d010a956",
+        "width": 64,
+        "height": 36,
+        "size": 1076,
+        "url": "https://media.sketchfab.com/models/2a0a574f9e374702af8c415fce296f45/thumbnails/274b7a461ecc4fea9922dec9c4e4351e/c7a92ae0a6f946fe9b5874dc6a7fd1e4.jpeg"
+      }
+    ]
+  },
+  "uid": "2a0a574f9e374702af8c415fce296f45",
+  "uri": "https://api.sketchfab.com/v3/models/2a0a574f9e374702af8c415fce296f45",
+  "user": {
+    "uid": "e24bb59bcf39497ead9871d2d5972f74",
+    "username": "NicolasVB",
+    "displayName": "NicolasVB",
+    "account": "basic",
+    "profileUrl": "https://sketchfab.com/NicolasVB",
+    "avatar": {
+      "uid": "51af6a870cce449eb75b0345feebaebb",
+      "uri": "https://api.sketchfab.com/v3/avatars/51af6a870cce449eb75b0345feebaebb",
+      "images": [
+        {
+          "width": 90,
+          "height": 90,
+          "size": 5719,
+          "url": "https://media.sketchfab.com/avatars/51af6a870cce449eb75b0345feebaebb/2ef0f894055b4bb69123b2a27fa2d379.jpeg"
+        },
+        {
+          "width": 100,
+          "height": 100,
+          "size": 6496,
+          "url": "https://media.sketchfab.com/avatars/51af6a870cce449eb75b0345feebaebb/ab11eedf96374486acb544f71a23b165.jpeg"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "size": 1359,
+          "url": "https://media.sketchfab.com/avatars/51af6a870cce449eb75b0345feebaebb/35f6f9b6c9a14a548ce472582d8a9bb5.jpeg"
+        },
+        {
+          "width": 48,
+          "height": 48,
+          "size": 2584,
+          "url": "https://media.sketchfab.com/avatars/51af6a870cce449eb75b0345feebaebb/a8072a51447c4d41ab177b357111b420.jpeg"
+        }
+      ]
+    },
+    "uri": "https://api.sketchfab.com/v3/users/e24bb59bcf39497ead9871d2d5972f74"
+  },
+  "vertexCount": 9336,
+  "viewCount": 7517,
+  "viewerUrl": "https://sketchfab.com/3d-models/medical-cart-2a0a574f9e374702af8c415fce296f45",
+  "isDownloadable": true,
+  "isProtected": false,
+  "description": "Medical Cart I made for a school project",
+  "price": null,
+  "downloadCount": 3199,
+  "editorUrl": "https://sketchfab.com/models/2a0a574f9e374702af8c415fce296f45/edit",
+  "status": {
+    "warning": {},
+    "processing": "SUCCEEDED"
+  },
+  "source": "website",
+  "hasCommentsDisabled": false,
+  "updatedAt": "2022-07-20T09:16:54.114103",
+  "pbrType": "metalness",
+  "textureCount": 4,
+  "materialCount": 1
+}

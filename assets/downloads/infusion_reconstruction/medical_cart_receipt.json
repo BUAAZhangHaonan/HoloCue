@@ -1,0 +1,18 @@
+{
+  "name": "medical_cart",
+  "uid": "2a0a574f9e374702af8c415fce296f45",
+  "original_name": "Medical Cart",
+  "author": "NicolasVB",
+  "license": {
+    "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+    "label": "CC Attribution",
+    "fullName": "Creative Commons Attribution",
+    "requirements": "Author must be credited. Commercial use is allowed.",
+    "url": "http://creativecommons.org/licenses/by/4.0/",
+    "slug": "by"
+  },
+  "api_url": "https://api.sketchfab.com/v3/models/2a0a574f9e374702af8c415fce296f45",
+  "download_url": "https://huggingface.co/datasets/allenai/objaverse/resolve/main/glbs/000-091/2a0a574f9e374702af8c415fce296f45.glb",
+  "size_bytes": 3149636,
+  "sha256": "2eb86c522554f75eb97db149b0936112dcc0911677c6905af73cdbd6ac343d48"
+}

@@ -1,0 +1,206 @@
+{
+  "animationCount": 0,
+  "categories": [
+    {
+      "uid": "d7cebaeca8604ebab1480e413404b679",
+      "name": "Electronics & Gadgets",
+      "slug": "electronics-gadgets",
+      "uri": "https://api.sketchfab.com/v3/categories/d7cebaeca8604ebab1480e413404b679",
+      "icon": "https://static.sketchfab.com/static/builds/web/dist/static/assets/images/icons/categories/336c224334b7e53e277d236a8355e90a-v2.svg",
+      "thumbnails": [
+        {
+          "width": "512",
+          "height": "288",
+          "url": "https://static.sketchfab.com/categories/d7cebaeca8604ebab1480e413404b679/512x288.png"
+        },
+        {
+          "width": "800",
+          "height": "450",
+          "url": "https://static.sketchfab.com/categories/d7cebaeca8604ebab1480e413404b679/800x450.png"
+        }
+      ]
+    },
+    {
+      "uid": "17d20ca7b35243d4a45171838b50704c",
+      "name": "Science & Technology",
+      "slug": "science-technology",
+      "uri": "https://api.sketchfab.com/v3/categories/17d20ca7b35243d4a45171838b50704c",
+      "icon": "https://static.sketchfab.com/static/builds/web/dist/static/assets/images/icons/categories/86b1bae49e0ed3f43b2d59b26700234e-v2.svg",
+      "thumbnails": [
+        {
+          "width": "512",
+          "height": "288",
+          "url": "https://static.sketchfab.com/categories/17d20ca7b35243d4a45171838b50704c/512x288.png"
+        },
+        {
+          "width": "800",
+          "height": "450",
+          "url": "https://static.sketchfab.com/categories/17d20ca7b35243d4a45171838b50704c/800x450.png"
+        }
+      ]
+    }
+  ],
+  "commentCount": 5,
+  "createdAt": "2019-10-03T21:40:16.577419",
+  "embedUrl": "https://sketchfab.com/models/577ee63d736a44cca98497ed60f8a3c1/embed",
+  "faceCount": 11532,
+  "isAgeRestricted": false,
+  "license": {
+    "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+    "label": "CC Attribution",
+    "fullName": "Creative Commons Attribution",
+    "requirements": "Author must be credited. Commercial use is allowed.",
+    "url": "http://creativecommons.org/licenses/by/4.0/",
+    "slug": "by"
+  },
+  "likeCount": 553,
+  "name": "IV Supplies",
+  "publishedAt": "2019-10-03T21:48:24.891062",
+  "soundCount": 0,
+  "staffpickedAt": null,
+  "tags": [
+    {
+      "name": "iv",
+      "slug": "iv",
+      "uri": "https://api.sketchfab.com/v3/tags/iv"
+    },
+    {
+      "name": "blood",
+      "slug": "blood",
+      "uri": "https://api.sketchfab.com/v3/tags/blood"
+    },
+    {
+      "name": "bag",
+      "slug": "bag",
+      "uri": "https://api.sketchfab.com/v3/tags/bag"
+    },
+    {
+      "name": "tubes",
+      "slug": "tubes",
+      "uri": "https://api.sketchfab.com/v3/tags/tubes"
+    },
+    {
+      "name": "hospital",
+      "slug": "hospital",
+      "uri": "https://api.sketchfab.com/v3/tags/hospital"
+    },
+    {
+      "name": "needles",
+      "slug": "needles",
+      "uri": "https://api.sketchfab.com/v3/tags/needles"
+    },
+    {
+      "name": "substancepainter",
+      "slug": "substancepainter",
+      "uri": "https://api.sketchfab.com/v3/tags/substancepainter"
+    },
+    {
+      "name": "substance",
+      "slug": "substance",
+      "uri": "https://api.sketchfab.com/v3/tags/substance"
+    },
+    {
+      "name": "medical",
+      "slug": "medical",
+      "uri": "https://api.sketchfab.com/v3/tags/medical"
+    }
+  ],
+  "thumbnails": {
+    "images": [
+      {
+        "uid": "7fbca5431ea648c0bfe9d8e9607233b7",
+        "width": 1920,
+        "height": 1080,
+        "size": 191682,
+        "url": "https://media.sketchfab.com/models/577ee63d736a44cca98497ed60f8a3c1/thumbnails/9ad62315631e49e7b4e0e9c07901107b/d369f0df864b41ed8eb3cd17348d0df4.jpeg"
+      },
+      {
+        "uid": "571ca7ad204542b49a213655b3ee6d4c",
+        "width": 1024,
+        "height": 576,
+        "size": 47643,
+        "url": "https://media.sketchfab.com/models/577ee63d736a44cca98497ed60f8a3c1/thumbnails/9ad62315631e49e7b4e0e9c07901107b/659d434eee2f4b93b03c37bbf0a127f6.jpeg"
+      },
+      {
+        "uid": "ead6962150e54a3580aee1b24562d7e1",
+        "width": 720,
+        "height": 405,
+        "size": 23923,
+        "url": "https://media.sketchfab.com/models/577ee63d736a44cca98497ed60f8a3c1/thumbnails/9ad62315631e49e7b4e0e9c07901107b/05287178e7a74894b06ce7b9295f2eb5.jpeg"
+      },
+      {
+        "uid": "3e7f10715c394007861d0499308aa05b",
+        "width": 256,
+        "height": 144,
+        "size": 4538,
+        "url": "https://media.sketchfab.com/models/577ee63d736a44cca98497ed60f8a3c1/thumbnails/9ad62315631e49e7b4e0e9c07901107b/5045e6aec80d4525830b944c7c02f562.jpeg"
+      },
+      {
+        "uid": "f6f40c43889c45108f88ffa98d5ba3bb",
+        "width": 64,
+        "height": 36,
+        "size": 847,
+        "url": "https://media.sketchfab.com/models/577ee63d736a44cca98497ed60f8a3c1/thumbnails/9ad62315631e49e7b4e0e9c07901107b/282dea730ad84b608373c91b91172422.jpeg"
+      }
+    ]
+  },
+  "uid": "577ee63d736a44cca98497ed60f8a3c1",
+  "uri": "https://api.sketchfab.com/v3/models/577ee63d736a44cca98497ed60f8a3c1",
+  "user": {
+    "uid": "6d8e2bc733db40cdad06a0874a87aa2f",
+    "username": "EDIIIC",
+    "displayName": "Ethan Cragun",
+    "account": "basic",
+    "profileUrl": "https://sketchfab.com/EDIIIC",
+    "avatar": {
+      "uid": "fa76b928768546b39536e828ceb676fd",
+      "uri": "https://api.sketchfab.com/v3/avatars/fa76b928768546b39536e828ceb676fd",
+      "images": [
+        {
+          "width": 32,
+          "height": 32,
+          "size": 5833,
+          "url": "https://media.sketchfab.com/avatars/fa76b928768546b39536e828ceb676fd/b336473fc511440caea38d2b2eba527c.png"
+        },
+        {
+          "width": 48,
+          "height": 48,
+          "size": 8672,
+          "url": "https://media.sketchfab.com/avatars/fa76b928768546b39536e828ceb676fd/b694d10adee745fc871e1fefb5a4d8ef.png"
+        },
+        {
+          "width": 90,
+          "height": 90,
+          "size": 20410,
+          "url": "https://media.sketchfab.com/avatars/fa76b928768546b39536e828ceb676fd/85fc40d459654c30a1228f2cb6909127.png"
+        },
+        {
+          "width": 100,
+          "height": 100,
+          "size": 24214,
+          "url": "https://media.sketchfab.com/avatars/fa76b928768546b39536e828ceb676fd/2e29d16b61094f2d8765987cf6c6b176.png"
+        }
+      ]
+    },
+    "uri": "https://api.sketchfab.com/v3/users/6d8e2bc733db40cdad06a0874a87aa2f"
+  },
+  "vertexCount": 5875,
+  "viewCount": 16256,
+  "viewerUrl": "https://sketchfab.com/3d-models/iv-supplies-577ee63d736a44cca98497ed60f8a3c1",
+  "isDownloadable": true,
+  "isProtected": false,
+  "description": "IV tubing and needles for a VR medical simulation.",
+  "price": null,
+  "downloadCount": 5348,
+  "editorUrl": "https://sketchfab.com/models/577ee63d736a44cca98497ed60f8a3c1/edit",
+  "status": {
+    "warning": {},
+    "processing": "SUCCEEDED"
+  },
+  "source": "SubstancePainter",
+  "hasCommentsDisabled": false,
+  "updatedAt": "2022-07-20T18:29:51.847322",
+  "pbrType": "metalness",
+  "textureCount": 6,
+  "materialCount": 1
+}

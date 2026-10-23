@@ -1,0 +1,18 @@
+{
+  "name": "contec_pump",
+  "uid": "d5e1af47d4e84960b96d50b2994062c2",
+  "original_name": "Bomba de Infusi\u00f3n contec 750",
+  "author": "Nataliatorres777",
+  "license": {
+    "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+    "label": "CC Attribution",
+    "fullName": "Creative Commons Attribution",
+    "requirements": "Author must be credited. Commercial use is allowed.",
+    "url": "http://creativecommons.org/licenses/by/4.0/",
+    "slug": "by"
+  },
+  "api_url": "https://api.sketchfab.com/v3/models/d5e1af47d4e84960b96d50b2994062c2",
+  "download_url": "https://huggingface.co/datasets/allenai/objaverse/resolve/main/glbs/000-159/d5e1af47d4e84960b96d50b2994062c2.glb",
+  "size_bytes": 1434652,
+  "sha256": "5d9651a405c00168c12b820e3eb7fe52e4153e55d10a60dabfb0e7a25eaf524a"
+}

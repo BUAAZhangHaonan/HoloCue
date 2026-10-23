@@ -1,0 +1,177 @@
+{
+  "animationCount": 0,
+  "categories": [
+    {
+      "uid": "d7cebaeca8604ebab1480e413404b679",
+      "name": "Electronics & Gadgets",
+      "slug": "electronics-gadgets",
+      "uri": "https://api.sketchfab.com/v3/categories/d7cebaeca8604ebab1480e413404b679",
+      "icon": "https://static.sketchfab.com/static/builds/web/dist/static/assets/images/icons/categories/336c224334b7e53e277d236a8355e90a-v2.svg",
+      "thumbnails": [
+        {
+          "width": "512",
+          "height": "288",
+          "url": "https://static.sketchfab.com/categories/d7cebaeca8604ebab1480e413404b679/512x288.png"
+        },
+        {
+          "width": "800",
+          "height": "450",
+          "url": "https://static.sketchfab.com/categories/d7cebaeca8604ebab1480e413404b679/800x450.png"
+        }
+      ]
+    }
+  ],
+  "commentCount": 1,
+  "createdAt": "2018-11-09T15:13:23.776131",
+  "embedUrl": "https://sketchfab.com/models/84aa2c97829b4557bc077e8006d97e58/embed",
+  "faceCount": 4924,
+  "isAgeRestricted": false,
+  "license": {
+    "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+    "label": "CC Attribution",
+    "fullName": "Creative Commons Attribution",
+    "requirements": "Author must be credited. Commercial use is allowed.",
+    "url": "http://creativecommons.org/licenses/by/4.0/",
+    "slug": "by"
+  },
+  "likeCount": 122,
+  "name": "medical monitor",
+  "publishedAt": "2018-11-09T15:20:36.932439",
+  "soundCount": 0,
+  "staffpickedAt": null,
+  "tags": [
+    {
+      "name": "electronics",
+      "slug": "electronics",
+      "uri": "https://api.sketchfab.com/v3/tags/electronics"
+    },
+    {
+      "name": "ready",
+      "slug": "ready",
+      "uri": "https://api.sketchfab.com/v3/tags/ready"
+    },
+    {
+      "name": "medicine",
+      "slug": "medicine",
+      "uri": "https://api.sketchfab.com/v3/tags/medicine"
+    },
+    {
+      "name": "optimized",
+      "slug": "optimized",
+      "uri": "https://api.sketchfab.com/v3/tags/optimized"
+    },
+    {
+      "name": "game",
+      "slug": "game",
+      "uri": "https://api.sketchfab.com/v3/tags/game"
+    },
+    {
+      "name": "lowpoly",
+      "slug": "lowpoly",
+      "uri": "https://api.sketchfab.com/v3/tags/lowpoly"
+    },
+    {
+      "name": "gameready",
+      "slug": "gameready",
+      "uri": "https://api.sketchfab.com/v3/tags/gameready"
+    }
+  ],
+  "thumbnails": {
+    "images": [
+      {
+        "uid": "cd8f60e5c5d244148308f4e0ee1c499e",
+        "width": 64,
+        "height": 36,
+        "size": 596,
+        "url": "https://media.sketchfab.com/models/84aa2c97829b4557bc077e8006d97e58/thumbnails/483590a5a99c447facbd2a25f5072632/41cc9c27ba2d42548f70d778b1c1eb1c.jpeg"
+      },
+      {
+        "uid": "aa64b2097cb54099940992dba47e6037",
+        "width": 256,
+        "height": 144,
+        "size": 2589,
+        "url": "https://media.sketchfab.com/models/84aa2c97829b4557bc077e8006d97e58/thumbnails/483590a5a99c447facbd2a25f5072632/585803c4b0354e55aa43b046e299a8c8.jpeg"
+      },
+      {
+        "uid": "f28b09ccb1a74b36940e9ad13ee98210",
+        "width": 1920,
+        "height": 1080,
+        "size": 55495,
+        "url": "https://media.sketchfab.com/models/84aa2c97829b4557bc077e8006d97e58/thumbnails/483590a5a99c447facbd2a25f5072632/fb7fb0159b9d4633b28c37a9118a9e62.jpeg"
+      },
+      {
+        "uid": "e38b157275844e16bc3dcb18aaabd4d6",
+        "width": 1024,
+        "height": 576,
+        "size": 18526,
+        "url": "https://media.sketchfab.com/models/84aa2c97829b4557bc077e8006d97e58/thumbnails/483590a5a99c447facbd2a25f5072632/3e44953b7a2c452598d7fc955100c1a6.jpeg"
+      },
+      {
+        "uid": "7de6dff8c28341c9ace27181cf02a4c1",
+        "width": 720,
+        "height": 405,
+        "size": 10755,
+        "url": "https://media.sketchfab.com/models/84aa2c97829b4557bc077e8006d97e58/thumbnails/483590a5a99c447facbd2a25f5072632/da772ae6727a451aa7544ac924d83d76.jpeg"
+      }
+    ]
+  },
+  "uid": "84aa2c97829b4557bc077e8006d97e58",
+  "uri": "https://api.sketchfab.com/v3/models/84aa2c97829b4557bc077e8006d97e58",
+  "user": {
+    "uid": "b8c421577bb248d6ac790b5b10b5a48f",
+    "username": "golem.troll228",
+    "displayName": "brodys_arts",
+    "account": "basic",
+    "profileUrl": "https://sketchfab.com/golem.troll228",
+    "avatar": {
+      "uid": "3ef1bd11d3eb4b57a0b353e8f2e5fc3e",
+      "uri": "https://api.sketchfab.com/v3/avatars/3ef1bd11d3eb4b57a0b353e8f2e5fc3e",
+      "images": [
+        {
+          "width": 32,
+          "height": 32,
+          "size": 680,
+          "url": "https://media.sketchfab.com/avatars/3ef1bd11d3eb4b57a0b353e8f2e5fc3e/116042a0854e40538adab302b593683d.jpeg"
+        },
+        {
+          "width": 48,
+          "height": 48,
+          "size": 1253,
+          "url": "https://media.sketchfab.com/avatars/3ef1bd11d3eb4b57a0b353e8f2e5fc3e/efea16be51d04eb7a00cb9ea0b43b87f.jpeg"
+        },
+        {
+          "width": 90,
+          "height": 90,
+          "size": 2797,
+          "url": "https://media.sketchfab.com/avatars/3ef1bd11d3eb4b57a0b353e8f2e5fc3e/ac9b469ccec74caf923a81fb2f0be3ed.jpeg"
+        },
+        {
+          "width": 100,
+          "height": 100,
+          "size": 3215,
+          "url": "https://media.sketchfab.com/avatars/3ef1bd11d3eb4b57a0b353e8f2e5fc3e/a075e1d43d2f446c949b5967b470c757.jpeg"
+        }
+      ]
+    },
+    "uri": "https://api.sketchfab.com/v3/users/b8c421577bb248d6ac790b5b10b5a48f"
+  },
+  "vertexCount": 2750,
+  "viewCount": 4851,
+  "viewerUrl": "https://sketchfab.com/3d-models/medical-monitor-84aa2c97829b4557bc077e8006d97e58",
+  "isDownloadable": true,
+  "isProtected": false,
+  "description": "medical monitor \u043a\u0443\u0444\u0432\u043d \u0430\u0449\u043a \u043f\u0444\u044c\u0443",
+  "price": null,
+  "downloadCount": 1970,
+  "editorUrl": "https://sketchfab.com/models/84aa2c97829b4557bc077e8006d97e58/edit",
+  "status": {
+    "warning": {},
+    "processing": "SUCCEEDED"
+  },
+  "source": "website",
+  "hasCommentsDisabled": false,
+  "updatedAt": "2022-07-20T16:15:29.282416",
+  "pbrType": "metalness",
+  "textureCount": 5,
+  "materialCount": 1
+}

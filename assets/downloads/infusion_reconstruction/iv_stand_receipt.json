@@ -1,0 +1,18 @@
+{
+  "name": "iv_stand",
+  "uid": "dd3115aafb0e4a628f261d0de7a787b9",
+  "original_name": "IV Stand",
+  "author": "teeart",
+  "license": {
+    "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+    "label": "CC Attribution",
+    "fullName": "Creative Commons Attribution",
+    "requirements": "Author must be credited. Commercial use is allowed.",
+    "url": "http://creativecommons.org/licenses/by/4.0/",
+    "slug": "by"
+  },
+  "api_url": "https://api.sketchfab.com/v3/models/dd3115aafb0e4a628f261d0de7a787b9",
+  "download_url": "https://huggingface.co/datasets/allenai/objaverse/resolve/main/glbs/000-040/dd3115aafb0e4a628f261d0de7a787b9.glb",
+  "size_bytes": 710348,
+  "sha256": "eee4b0a2c7a5278a5352700bf226a872bded62b0807670124f0e69305b248b46"
+}

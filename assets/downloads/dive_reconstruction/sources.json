@@ -1,0 +1,65 @@
+[
+  {
+    "key": "alex_oxygen",
+    "uid": "e7419671f8124cab870d7a1a4d68b180",
+    "name": "Oxygen Cylinder",
+    "author": "Alexander Troianovskyi",
+    "source_url": "https://sketchfab.com/3d-models/oxygen-cylinder-e7419671f8124cab870d7a1a4d68b180",
+    "download_url": "https://huggingface.co/datasets/allenai/objaverse/resolve/main/glbs/000-041/e7419671f8124cab870d7a1a4d68b180.glb",
+    "bytes": 3343608,
+    "sha256": "dc304e8093814809fde1724cd475ec66ea12cb58ed9d667d9e70f741a5482107",
+    "license": {
+      "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+      "label": "CC Attribution",
+      "fullName": "Creative Commons Attribution",
+      "requirements": "Author must be credited. Commercial use is allowed.",
+      "url": "http://creativecommons.org/licenses/by/4.0/",
+      "slug": "by"
+    },
+    "file": "oxygen_cylinder_original.glb",
+    "metadata_file": "alex_oxygen_metadata.json",
+    "retrieved_on": "2026-10-23"
+  },
+  {
+    "key": "freek_ball",
+    "uid": "b0773be701fc4c6ba7fc0c3389bd5c79",
+    "name": "2Piece-ball-valve-BSP-female",
+    "author": "Freek de With",
+    "source_url": "https://sketchfab.com/3d-models/2piece-ball-valve-bsp-female-b0773be701fc4c6ba7fc0c3389bd5c79",
+    "download_url": "https://huggingface.co/datasets/allenai/objaverse/resolve/main/glbs/000-093/b0773be701fc4c6ba7fc0c3389bd5c79.glb",
+    "bytes": 1955476,
+    "sha256": "574a4d82b549e7986a2fad4b88398f9be7a5899eac3dc047aca68f70ade91027",
+    "license": {
+      "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+      "label": "CC Attribution",
+      "fullName": "Creative Commons Attribution",
+      "requirements": "Author must be credited. Commercial use is allowed.",
+      "url": "http://creativecommons.org/licenses/by/4.0/",
+      "slug": "by"
+    },
+    "file": "bsp_ball_valve_original.glb",
+    "metadata_file": "freek_ball_metadata.json",
+    "retrieved_on": "2026-10-23"
+  },
+  {
+    "key": "takebon_pressure",
+    "uid": "95cf5b63b15549a2a173bb480577b6a9",
+    "name": "Pressure gauge",
+    "author": "takeboncog",
+    "source_url": "https://sketchfab.com/3d-models/pressure-gauge-95cf5b63b15549a2a173bb480577b6a9",
+    "download_url": "https://huggingface.co/datasets/allenai/objaverse/resolve/main/glbs/000-120/95cf5b63b15549a2a173bb480577b6a9.glb",
+    "bytes": 3088128,
+    "sha256": "78ff9073b45b14bd78679092ff86da96dd46febfca270b3faed9e659ecc438cc",
+    "license": {
+      "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+      "label": "CC Attribution",
+      "fullName": "Creative Commons Attribution",
+      "requirements": "Author must be credited. Commercial use is allowed.",
+      "url": "http://creativecommons.org/licenses/by/4.0/",
+      "slug": "by"
+    },
+    "file": "pressure_gauge_original.glb",
+    "metadata_file": "takebon_pressure_metadata.json",
+    "retrieved_on": "2026-10-23"
+  }
+]

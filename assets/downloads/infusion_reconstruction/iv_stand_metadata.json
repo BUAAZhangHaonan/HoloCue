@@ -1,0 +1,135 @@
+{
+  "animationCount": 0,
+  "categories": [],
+  "commentCount": 1,
+  "createdAt": "2016-12-16T15:17:05.299637",
+  "embedUrl": "https://sketchfab.com/models/dd3115aafb0e4a628f261d0de7a787b9/embed",
+  "faceCount": 5084,
+  "isAgeRestricted": false,
+  "license": {
+    "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+    "label": "CC Attribution",
+    "fullName": "Creative Commons Attribution",
+    "requirements": "Author must be credited. Commercial use is allowed.",
+    "url": "http://creativecommons.org/licenses/by/4.0/",
+    "slug": "by"
+  },
+  "likeCount": 19,
+  "name": "IV Stand",
+  "publishedAt": "2016-12-16T15:27:02.906081",
+  "soundCount": 0,
+  "staffpickedAt": null,
+  "tags": [],
+  "thumbnails": {
+    "images": [
+      {
+        "uid": "7279104c3d7d49fd94b4aaf24d9be082",
+        "width": 50,
+        "height": 50,
+        "size": 951,
+        "url": "https://media.sketchfab.com/models/dd3115aafb0e4a628f261d0de7a787b9/thumbnails/b0cbda5827744bcf9bc4e4fa3f82f47c/50x50.jpeg"
+      },
+      {
+        "uid": "313a16fbbf0e4f0a9e56d40a406d2d02",
+        "width": 100,
+        "height": 100,
+        "size": 1861,
+        "url": "https://media.sketchfab.com/models/dd3115aafb0e4a628f261d0de7a787b9/thumbnails/b0cbda5827744bcf9bc4e4fa3f82f47c/100x100.jpeg"
+      },
+      {
+        "uid": "6ab0f9c2d3f94fa0930b9c30bf9947e0",
+        "width": 200,
+        "height": 200,
+        "size": 4109,
+        "url": "https://media.sketchfab.com/models/dd3115aafb0e4a628f261d0de7a787b9/thumbnails/b0cbda5827744bcf9bc4e4fa3f82f47c/200x200.jpeg"
+      },
+      {
+        "uid": "35f2495fcb4042e9a0c20a8f5235db68",
+        "width": 448,
+        "height": 252,
+        "size": 8893,
+        "url": "https://media.sketchfab.com/models/dd3115aafb0e4a628f261d0de7a787b9/thumbnails/b0cbda5827744bcf9bc4e4fa3f82f47c/448x252.jpeg"
+      },
+      {
+        "uid": "8b1fbf1e753e4d56a977796a641998f7",
+        "width": 640,
+        "height": 360,
+        "size": 14467,
+        "url": "https://media.sketchfab.com/models/dd3115aafb0e4a628f261d0de7a787b9/thumbnails/b0cbda5827744bcf9bc4e4fa3f82f47c/640x360.jpeg"
+      },
+      {
+        "uid": "e60ad8f6fede4341b6271b0866c0ae11",
+        "width": 864,
+        "height": 486,
+        "size": 21837,
+        "url": "https://media.sketchfab.com/models/dd3115aafb0e4a628f261d0de7a787b9/thumbnails/b0cbda5827744bcf9bc4e4fa3f82f47c/864x486.jpeg"
+      },
+      {
+        "uid": "d81bc634a607464587136aee54988abd",
+        "width": 1024,
+        "height": 576,
+        "size": 28512,
+        "url": "https://media.sketchfab.com/models/dd3115aafb0e4a628f261d0de7a787b9/thumbnails/b0cbda5827744bcf9bc4e4fa3f82f47c/1024x576.jpeg"
+      }
+    ]
+  },
+  "uid": "dd3115aafb0e4a628f261d0de7a787b9",
+  "uri": "https://api.sketchfab.com/v3/models/dd3115aafb0e4a628f261d0de7a787b9",
+  "user": {
+    "uid": "f3cf468fb2154f33999c62d499d3f95e",
+    "username": "teeart",
+    "displayName": "teeart",
+    "account": "basic",
+    "profileUrl": "https://sketchfab.com/teeart",
+    "avatar": {
+      "uid": "51af6a870cce449eb75b0345feebaebb",
+      "uri": "https://api.sketchfab.com/v3/avatars/51af6a870cce449eb75b0345feebaebb",
+      "images": [
+        {
+          "width": 90,
+          "height": 90,
+          "size": 5719,
+          "url": "https://media.sketchfab.com/avatars/51af6a870cce449eb75b0345feebaebb/2ef0f894055b4bb69123b2a27fa2d379.jpeg"
+        },
+        {
+          "width": 100,
+          "height": 100,
+          "size": 6496,
+          "url": "https://media.sketchfab.com/avatars/51af6a870cce449eb75b0345feebaebb/ab11eedf96374486acb544f71a23b165.jpeg"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "size": 1359,
+          "url": "https://media.sketchfab.com/avatars/51af6a870cce449eb75b0345feebaebb/35f6f9b6c9a14a548ce472582d8a9bb5.jpeg"
+        },
+        {
+          "width": 48,
+          "height": 48,
+          "size": 2584,
+          "url": "https://media.sketchfab.com/avatars/51af6a870cce449eb75b0345feebaebb/a8072a51447c4d41ab177b357111b420.jpeg"
+        }
+      ]
+    },
+    "uri": "https://api.sketchfab.com/v3/users/f3cf468fb2154f33999c62d499d3f95e"
+  },
+  "vertexCount": 1940,
+  "viewCount": 1005,
+  "viewerUrl": "https://sketchfab.com/3d-models/iv-stand-dd3115aafb0e4a628f261d0de7a787b9",
+  "isDownloadable": true,
+  "isProtected": false,
+  "description": "",
+  "price": null,
+  "downloadCount": 403,
+  "editorUrl": "https://sketchfab.com/models/dd3115aafb0e4a628f261d0de7a787b9/edit",
+  "status": {
+    "warning": {},
+    "processing": "SUCCEEDED"
+  },
+  "source": "website",
+  "hasCommentsDisabled": false,
+  "updatedAt": "2022-07-15T11:45:02.895581",
+  "pbrType": null,
+  "textureCount": 3,
+  "materialCount": 2
+}
