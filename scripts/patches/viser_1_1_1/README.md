@@ -30,18 +30,40 @@ viser/ 子目录按安装包相对路径保存另外四个文件。CameraControl
 
 Blender 消费端使用固定整数输出尺寸及像素宽高比补偿，保持相同投影。verify_consumed 读取实际 calc_matrix_camera 的横纵系数并与 live 相机比较，误差上限仍为 2e-5。深度约定依引擎而异，横纵系数一致不宣称全部矩阵或像素完全相同。
 
-在项目根目录执行，选择未使用的新目录并保留历史证据。task_env 设置项目 Python、输出目录及项目内临时目录、缓存、浏览器和 Python bytecode 路径。必须保留 viser/{client,_assets} 相对布局。当前安装源已经修复，应记录为修复后的输入，不能标为原始上游。
+在项目根目录执行，选择未使用的新目录并保留历史证据。下列命令显式设置项目 Python、输出目录及项目内临时目录、缓存、浏览器和 Python bytecode 路径，不依赖未跟踪的历史 task_env 文件。相对路径先转为绝对路径，RUN_DIR 必须位于项目内；Python 虚拟环境入口不解引用符号链接。Viser 安装目录由所选 Python 查询，适用于该环境实际使用的 Python 版本。必须保留 viser/{client,_assets} 相对布局。当前安装源已经修复，应记录为修复后的输入，不能标为原始上游。
 
 ~~~bash
 set -euo pipefail
-source .work/task_env.sh
-test -z "$CUDA_VISIBLE_DEVICES"
+export HOLOCUE_ROOT="$PWD"
+APP_PYTHON="${APP_PYTHON:-$HOLOCUE_ROOT/.venv-simulation/bin/python}"
+case "$APP_PYTHON" in
+  /*) ;;
+  *) APP_PYTHON="$HOLOCUE_ROOT/$APP_PYTHON" ;;
+esac
+export APP_PYTHON
+test -x "$APP_PYTHON"
+RUN_DIR="${RUN_DIR:-$HOLOCUE_ROOT/runs/simulation/reconstructed}"
+RUN_DIR="$("$APP_PYTHON" -B -c 'from pathlib import Path; import sys; project = Path(sys.argv[1]).resolve(); output = Path(sys.argv[2]).resolve(); assert output.is_relative_to(project), "RUN_DIR must remain inside the project"; print(output)' "$HOLOCUE_ROOT" "$RUN_DIR")"
+export RUN_DIR
+export CUDA_VISIBLE_DEVICES=""
 export VISER_WORK="$HOLOCUE_ROOT/.work/viser-rebuild-next"
 export VISER_LOG="$RUN_DIR/viser_rebuild_next"
-export VISER_SOURCE="$HOLOCUE_ROOT/.venv-simulation/lib/python3.12/site-packages/viser"
 test ! -e "$VISER_WORK"
 test ! -e "$VISER_LOG"
-mkdir -p "$VISER_WORK/viser" "$VISER_WORK/downloads" "$VISER_LOG"
+export TMPDIR="$VISER_WORK/tmp"
+export TMP="$TMPDIR" TEMP="$TMPDIR"
+export XDG_CACHE_HOME="$VISER_WORK/cache"
+export XDG_CONFIG_HOME="$VISER_WORK/config"
+export XDG_DATA_HOME="$VISER_WORK/data"
+export PYTHONDONTWRITEBYTECODE=1
+export PYTHONPYCACHEPREFIX="$VISER_WORK/cache/pycache"
+export NODE_COMPILE_CACHE="$VISER_WORK/cache/node"
+export PLAYWRIGHT_BROWSERS_PATH="$HOLOCUE_ROOT/.work/browsers"
+VISER_SOURCE="$("$APP_PYTHON" -B -c 'import importlib.util; from pathlib import Path; print(Path(importlib.util.find_spec("viser").origin).parent)')"
+export VISER_SOURCE
+test -d "$VISER_SOURCE"
+mkdir -p "$VISER_WORK/viser" "$VISER_WORK/downloads" "$VISER_LOG" \
+  "$TMPDIR" "$XDG_CACHE_HOME" "$XDG_CONFIG_HOME" "$XDG_DATA_HOME"
 find "$VISER_SOURCE" -type f -print0 \
   | sort -z | xargs -0 sha256sum > "$VISER_LOG/installed_sources.sha256"
 cp -a "$VISER_SOURCE/." "$VISER_WORK/viser/"
@@ -61,7 +83,7 @@ export PATH="$VISER_WORK/node-v24.12.0-linux-x64/bin:$PATH"
 export NODE_OPTIONS=--max-old-space-size=4096
 export UV_THREADPOOL_SIZE=4 RAYON_NUM_THREADS=4 OMP_NUM_THREADS=4
 export OPENBLAS_NUM_THREADS=4 MKL_NUM_THREADS=4
-export npm_config_cache="$HOLOCUE_ROOT/.work/cache/npm-viser-client"
+export npm_config_cache="$VISER_WORK/cache/npm"
 export npm_config_update_notifier=false
 test "$(node --version)" = v24.12.0
 test "$(npm --version)" = 11.6.2

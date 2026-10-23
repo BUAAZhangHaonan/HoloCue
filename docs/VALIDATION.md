@@ -21,7 +21,7 @@
 
 ## 4029 运行环境
 
-先设置 README 中的项目内部临时目录与缓存，并加载本次保存的任务环境。resource_guard 默认仅允许物理 GPU 1、2；本次用户授权通过 HOLOCUE_AUTHORIZED_GPUS=1,2,4,5,6,7 显式传入，不改变其他部署默认。当前模型使用物理 GPU 1，同会话原生桥接显式使用 --render-gpu 4（默认仍为 2），静态图像采集使用物理 GPU 7；其结束后，后续批次的两个场景分别在 GPU 4、7 上运行独立桥接客户端，渲染采样和核对标准一致。资源守卫将授权物理编号映射为 UUID。应用、Chromium 与 VTK 使用软件渲染。Blender 保留 48 个采样，桥接透明反弹上限为 1024，Gaussian 透明度使用浮点属性。
+常规运行按 README 设置项目 Python、模型端点、临时目录与缓存，并选择新的独立 RUN_DIR。下文中的服务器配置记录本次实际选择。resource_guard 默认仅允许物理 GPU 1、2；本次用户授权通过 HOLOCUE_AUTHORIZED_GPUS=1,2,4,5,6,7 显式传入，不改变其他部署默认。当前模型使用物理 GPU 1，同会话原生桥接显式使用 --render-gpu 4（默认仍为 2），静态图像采集使用物理 GPU 7；其结束后，后续批次的两个场景分别在 GPU 4、7 上运行独立桥接客户端，渲染采样和核对标准一致。资源守卫将授权物理编号映射为 UUID。应用、Chromium 与 VTK 使用软件渲染。Blender 保留 48 个采样，桥接透明反弹上限为 1024，Gaussian 透明度使用浮点属性。
 
 桥接使用原生 Cycles 渲染与原生合成器。每个提示层最多包含 768 个完整 Gaussian 平面，保留全部点和原始顶点、半径、浮点透明度及颜色；实际场景以 holdout 保留遮挡。同色段中，共面且屏幕矩形重叠的平面分配到不同原生渲染层；没有共面冲突的段采用深度交错分组。分组只改变渲染批次，不改变几何。同色透明层的 AlphaOver 可交换，不同颜色段仍保持从远到近的顺序。提示层最少透明反弹为 768，关闭仅作用于颜色的去噪，基础场景保持原有设置。每次保存各层线性 32 位 EXR、成员清单与摘要。合成器每批最多加载 16 个提示层与 1 个累积图层，保存线性中间结果并释放图像，再继续下一批；最终 PNG 仅应用一次显示变换。不能使用曾出现黑块或灰边界的诊断图像作为通过证据。
 
@@ -36,7 +36,7 @@ SHA256 d961bee304d032b7a3f626239366bbe36c4481adb5699813389cdbd08d682269
 
 ## 执行命令
 
-以下命令在项目根目录执行，先 source .work/two_scene_rebuild/task_env.sh 加载本次任务环境，设置 HOLOCUE_SCENE_SET=reconstructed 和独立 RUN_DIR；本次过程环境与缓存位于 .work/two_scene_rebuild/，启动脚本保留调用方设置。所有长进程由 `scripts/guard/resource_guard.py` 包裹；应用与测试上限 8 GiB，原生渲染进程树上限 12 GiB，模型上限 32 GiB，主机预留至少 32 GiB 和总内存 20% 中的较大值。
+以下命令在项目根目录执行，设置 HOLOCUE_SCENE_SET=reconstructed、APP_PYTHON 和独立 RUN_DIR，临时目录与缓存使用本次工作目录。Live、Viser 和原生桥接工具均接受 `--scenes <id1> <id2>`；本轮分批传入两个场景，配合各批独立 `--out` 目录，完整顺序见运行目录的 `experiment_plan.json`。此次运行的原始环境、启动器及阶段监督脚本保存在 runs/simulation/reconstructed_qwen35_4b/execution/；它们保留历史绝对路径，用于追溯本次执行，不能清理过程目录后直接作为通用启动命令。新的运行按 README 初始化自己的目录和环境；正式 API、Viser、场景构建入口不依赖本轮 .work/two_scene_rebuild。所有长进程由 `scripts/guard/resource_guard.py` 包裹；应用与测试上限 8 GiB，原生渲染进程树上限 12 GiB，模型上限 32 GiB，主机预留至少 32 GiB 和总内存 20% 中的较大值。
 
 ```bash
 "$APP_PYTHON" -m pytest --basetemp=.work/pytest --junitxml="$RUN_DIR/domain_tests.xml"
@@ -52,9 +52,9 @@ LD_PRELOAD=/lib/x86_64-linux-gnu/libstdc++.so.6 "$APP_PYTHON" scripts/scenes/run
 "$APP_PYTHON" -m scripts.tests.audit_resilience_live --out "$RUN_DIR/resilience"
 ```
 
-故障验收需要其他会话、导出器与桥接停止使用 API 后单独执行。先加载 `.work/two_scene_rebuild/task_env.sh`，在独立资源守卫下运行 `"$APP_PYTHON" -m scripts.tests.audit_resilience_live --faults --task-env .work/two_scene_rebuild/task_env.sh --stop-helper .work/two_scene_rebuild/stop_owned.py --launch-helper .work/two_scene_rebuild/launch_owned.py --api-service <当前本次记录的API服务名> --out "$RUN_DIR/resilience_faults_<新的目录名>"`。模型连接失败使用本机绑定但未监听的独占端口产生真实连接拒绝；必须同时记录页面错误、任务错误与停止的动作时钟。恢复真实模型连接后仍须由页面显式发送指令，真实模型成功回复才算恢复验证通过。
+故障验收需要其他会话、导出器与桥接停止使用 API 后单独执行。下面记录本轮使用的历史命令；原始环境与两个拥有进程辅助脚本已归档到 `runs/simulation/reconstructed_qwen35_4b/execution/`。未来运行应在新的 `.work/<task>/` 内准备对应环境和辅助脚本，并把命令参数换为新路径，使用新的 RUN_DIR 与服务名。审计程序有意仅接受 `.work` 内的辅助文件，不能直接将参数指向归档目录。本轮加载 `.work/two_scene_rebuild/task_env.sh` 后，在独立资源守卫下运行 `"$APP_PYTHON" -m scripts.tests.audit_resilience_live --faults --task-env .work/two_scene_rebuild/task_env.sh --stop-helper .work/two_scene_rebuild/stop_owned.py --launch-helper .work/two_scene_rebuild/launch_owned.py --api-service <当前本次记录的API服务名> --out "$RUN_DIR/resilience_faults_<新的目录名>"`。模型连接失败使用本机绑定但未监听的独占端口产生真实连接拒绝；必须同时记录页面错误、任务错误与停止的动作时钟。恢复真实模型连接后仍须由页面显式发送指令，真实模型成功回复才算恢复验证通过。
 
-脚本在 `finally` 中按拥有记录停止自己新建的全部 API，报告 `test_owned_api_stopped=true`、`current_owned_api_service=null` 和 `external_api_restart_required=true`。这些 API 属于审计资源守卫的后代，不能在守卫结束后继续保留。主线程须等审计进程及其外层守卫退出，检查报告，再从该守卫之外执行 `"$APP_PYTHON" .work/two_scene_rebuild/launch_owned.py <新的独立API服务名> -- bash scripts/run_simulation.sh api`，保存新的进程记录并检查 `/health`。所有服务名称必须唯一；停止服务必须核对记录中的 PID、创建时间、项目目录和 API 启动命令，只清理本任务拥有的进程树。脚本不会停止真实模型服务或其他项目服务。
+脚本在 `finally` 中按拥有记录停止自己新建的全部 API，报告 `test_owned_api_stopped=true`、`current_owned_api_service=null` 和 `external_api_restart_required=true`。这些 API 属于审计资源守卫的后代，不能在守卫结束后继续保留。若后续仍需 API，须等审计进程及其外层守卫退出、检查报告，再从该守卫之外按本轮历史方式执行 `"$APP_PYTHON" .work/two_scene_rebuild/launch_owned.py <新的独立API服务名> -- bash scripts/run_simulation.sh api`，保存新的进程记录并检查 `/health`。所有服务名称必须唯一；停止服务必须核对记录中的 PID、创建时间、项目目录和 API 启动命令，只清理本任务拥有的进程树。脚本不会停止真实模型服务或其他项目服务。
 
 同会话逐阶段验收通过界面中“动作播放速度”设置为 0.1 倍速，为软件渲染下真实暂停按钮的响应留出时间，记录动作中间状态；不修改动作角度、路径或约定时长。N 与 σ 的响应验收由真实模型解释优先级与显示需求，在相同暂停状态、相机、焦点与亮度下比较实际三维画布，不将参数面板文字计入像素差。
 
