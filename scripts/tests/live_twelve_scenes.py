@@ -1,4 +1,4 @@
-"""Exercise all authored workflows against a real local-model API."""
+"""Exercise selected authored workflows against a real local-model API."""
 
 from __future__ import annotations
 
@@ -12,7 +12,7 @@ import uuid
 import httpx
 import numpy as np
 
-from holocue.config import root, list_scenes, load_scene
+from holocue.config import list_scenes, load_scene, runtime_dir, scene_set
 from holocue.models import DisplayCue, Pose
 from holocue.spatial import matrix, trajectory
 
@@ -45,6 +45,7 @@ class LiveRun:
         state = self.request("GET", f"/api/v1/sessions/{sid}")
         if state["backend_mode"] != "live":
             raise ValueError("live model execution is required")
+        require_scene_set(state)
         return state
 
     def message(self, sid, text):
@@ -95,6 +96,11 @@ def signature(task):
     return cue["target_id"], cue["action"], cue.get("reference_id"), cue.get("angle_deg")
 
 
+def require_scene_set(payload):
+    if payload.get("scene_set") != scene_set():
+        raise ValueError(f"API scene_set {payload.get('scene_set')!r} differs from {scene_set()!r}")
+
+
 def require_persistent_visible(snapshot, targets):
     displayed = {cue["target_id"]: cue for cue in snapshot["display"]["cues"]}
     for target in targets:
@@ -103,11 +109,55 @@ def require_persistent_visible(snapshot, targets):
             raise AssertionError(f"Persistent background {target} is not visibly allocated")
 
 
+def write_reports(output, selection, rows):
+    """Keep the existing row report and make subset/completion scope explicit."""
+    completed_ids = [row["scene_id"] for row in rows]
+    complete = completed_ids == selection["selected_scene_ids"] and all(
+        row["passed"] and row["steps"] == selection["expected_steps_by_scene"][row["scene_id"]]
+        for row in rows
+    )
+    progress = {
+        **selection,
+        "completed_scene_ids": completed_ids,
+        "completed_scene_count": len(rows),
+        "completed_step_count": sum(row["steps"] for row in rows),
+        "complete": complete,
+    }
+    (output / "report.json").write_text(json.dumps(rows, ensure_ascii=False, indent=2), encoding="utf-8")
+    (output / "selection.json").write_text(
+        json.dumps(progress, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+    return progress
+
+
 def main():
+    available = [item["scene_id"] for item in list_scenes()]
     parser = argparse.ArgumentParser()
     parser.add_argument("--api", default="http://127.0.0.1:8750")
-    parser.add_argument("--out", type=Path, default=root() / "runs/simulation/live")
+    parser.add_argument("--out", type=Path, default=runtime_dir() / "live")
+    parser.add_argument(
+        "--scenes",
+        nargs="+",
+        choices=available,
+        help="Explicit scene IDs in execution order; omitted means all scenes in the selected scene set.",
+    )
     args = parser.parse_args()
+    if args.scenes is not None and len(set(args.scenes)) != len(args.scenes):
+        parser.error("--scenes must not contain duplicate scene IDs")
+    if args.scenes is None and len(available) != 12:
+        parser.error("default execution requires all twelve scenes in the selected scene set")
+    selected = args.scenes if args.scenes is not None else available
+    specs = [load_scene(sid) for sid in selected]
+    selection = {
+        "scene_set": scene_set(),
+        "requested_scene_ids": args.scenes,
+        "available_scene_ids": available,
+        "selected_scene_ids": selected,
+        "all_available_scenes_selected": set(selected) == set(available),
+        "expected_scene_count": len(specs),
+        "expected_steps_by_scene": {spec.scene_id: len(spec.task_contract.ordered_steps) for spec in specs},
+        "expected_step_count": sum(len(spec.task_contract.ordered_steps) for spec in specs),
+    }
     args.out.mkdir(parents=True, exist_ok=True)
     headers = (
         {"Authorization": "Bearer " + os.environ["HOLOCUE_API_KEY"]}
@@ -115,17 +165,19 @@ def main():
         else {}
     )
     rows = []
+    progress = write_reports(args.out, selection, rows)
     with httpx.Client(base_url=args.api, timeout=10, headers=headers) as client:
         health = client.get("/health")
         health.raise_for_status()
         if health.json()["backend_mode"] != "live":
             raise ValueError("API must use the live model")
-        for item in list_scenes():
-            spec = load_scene(item["scene_id"])
+        require_scene_set(health.json())
+        for spec in specs:
             directory = args.out / spec.scene_id
             directory.mkdir(exist_ok=True)
             run = LiveRun(client, directory)
             initial = run.request("POST", "/api/v1/sessions", json={"scene_id": spec.scene_id})
+            require_scene_set(initial)
             sid = initial["session_id"]
             state = run.message(sid, spec.initial_instruction)
             initial_tasks = [t for t in state["queue"] if t["semantic"]["task_role"] != "background"]
@@ -223,12 +275,10 @@ def main():
                     "backend_mode": "live",
                 }
             )
-            (args.out / "report.json").write_text(
-                json.dumps(rows, ensure_ascii=False, indent=2), encoding="utf-8"
-            )
+            progress = write_reports(args.out, selection, rows)
             print(spec.scene_id, "live workflow passed", flush=True)
-    if len(rows) != 12:
-        raise AssertionError("all twelve scenes must run")
+    if not progress["complete"]:
+        raise AssertionError("not all selected scene contracts completed")
 
 
 if __name__ == "__main__":
