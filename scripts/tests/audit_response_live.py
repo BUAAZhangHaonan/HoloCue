@@ -14,7 +14,14 @@ from PIL import Image
 from playwright.sync_api import sync_playwright
 
 from holocue.config import root, load_scene
-from scripts.tests.audit_viewer_live import BrowserRun, ui_input, wait_view, assert_comparable_captures
+from scripts.tests.audit_viewer_live import (
+    BrowserRun,
+    ui_input,
+    wait_view,
+    assert_comparable_captures,
+    wait_scene_session,
+    select_scene_session,
+)
 
 
 def main():
@@ -62,25 +69,18 @@ def main():
                 software_notice.get_by_role("button").click()
             page.get_by_role("tab", name="任务", exact=True).wait_for(timeout=60000)
             page.get_by_role("tab", name="任务", exact=True).click()
-            deadline = time.monotonic() + 60
-            while True:
-                initial_sid = ui_input(page, "会话标识").input_value()
-                if initial_sid:
-                    wait_view(initial_sid, 0, revision=0)
-                    break
-                if time.monotonic() > deadline:
-                    raise TimeoutError("Initial scene did not become ready")
-                page.wait_for_timeout(100)
-            page.get_by_role("combobox", name="场景", exact=True).click()
-            page.get_by_role("option", name=spec.title, exact=True).click()
-            deadline = time.monotonic() + 30
-            while True:
-                sid = ui_input(page, "会话标识").input_value()
-                if sid and run.state(sid)["scene_id"] == spec.scene_id:
-                    break
-                if time.monotonic() > deadline:
-                    raise TimeoutError("Scene selection did not create a session")
-                page.wait_for_timeout(100)
+            read_scene = lambda sid, timeout: run.read.request(
+                "GET", f"/api/v1/sessions/{sid}", timeout=timeout
+            )
+            initial = wait_scene_session(page, read_scene, args.out, timeout=60)
+            selected = select_scene_session(
+                page,
+                read_scene,
+                args.out,
+                {"scene_id": spec.scene_id, "title": spec.title},
+                initial,
+            )
+            sid = selected["session_id"]
             focus = None
             for name, instruction, count, sigma in instructions:
                 planned = run.message(sid, instruction)

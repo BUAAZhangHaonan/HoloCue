@@ -25,7 +25,13 @@ from playwright.sync_api import sync_playwright
 from holocue.config import root, load_scene, list_scenes, scene_dir, runtime_dir
 from holocue.models import DisplayCue, Pose
 from holocue.spatial import matrix, trajectory, transform_points
-from scripts.tests.audit_viewer_live import ui_input, CLIENT_READ, client_view_errors
+from scripts.tests.audit_viewer_live import (
+    ui_input,
+    CLIENT_READ,
+    client_view_errors,
+    wait_scene_session,
+    select_scene_session,
+)
 from scripts.tests.live_twelve_scenes import signature
 
 
@@ -164,8 +170,8 @@ class Audit:
         self.page.set_default_timeout(60000)
         self.page.on("pageerror", lambda error: self.errors.append(str(error)))
 
-    def read(self, path):
-        response = self.http.get(path)
+    def read(self, path, *, timeout=None):
+        response = self.http.get(path, **({"timeout": timeout} if timeout is not None else {}))
         with (self.out / "api_reads.jsonl").open("a", encoding="utf-8") as stream:
             stream.write(
                 json.dumps(
@@ -401,36 +407,20 @@ class Audit:
         if software_notice.count():
             software_notice.get_by_role("button").click()
         self.tab("任务")
-        deadline = time.monotonic() + 30
-        while not ui_input(self.page, "会话标识").input_value():
-            if time.monotonic() > deadline:
-                raise TimeoutError("Initial Viser session did not finish loading")
-            self.page.wait_for_timeout(100)
-        # Force an explicit new-session scene transition, even when the server's
-        # initial scene matches the requested scene or carries an existing ID.
+        read_scene = lambda sid, timeout: self.read(f"/api/v1/sessions/{sid}", timeout=timeout)
+        initial = wait_scene_session(self.page, read_scene, self.out)
+        # Force an explicit new session even if the initial scene already matches.
         other = next(row for row in list_scenes() if row["scene_id"] != self.spec.scene_id)
-        self.dropdown("场景", other["title"])
-        deadline = time.monotonic() + 30
-        while time.monotonic() < deadline:
-            sid = ui_input(self.page, "会话标识").input_value()
-            if sid and self.read(f"/api/v1/sessions/{sid}")["scene_id"] == other["scene_id"]:
-                break
-            self.page.wait_for_timeout(100)
-        else:
-            raise TimeoutError("Scene switch did not create a session")
-        previous = sid
-        self.dropdown("场景", self.spec.title)
-        deadline = time.monotonic() + 30
-        while time.monotonic() < deadline:
-            sid = ui_input(self.page, "会话标识").input_value()
-            if sid and sid != previous:
-                state = self.read(f"/api/v1/sessions/{sid}")
-                if state["scene_id"] == self.spec.scene_id:
-                    self.sid = sid
-                    break
-            self.page.wait_for_timeout(100)
-        if self.sid is None:
-            raise TimeoutError("Requested scene did not create a fresh UI session")
+        intermediate = select_scene_session(self.page, read_scene, self.out, other, initial)
+        selected = select_scene_session(
+            self.page,
+            read_scene,
+            self.out,
+            {"scene_id": self.spec.scene_id, "title": self.spec.title},
+            intermediate,
+        )
+        self.sid = selected["session_id"]
+        self.view_path = selected["client_view_path"]
         self.view()
         save(
             self.out / "session.json",

@@ -17,7 +17,7 @@ from PIL import Image
 from playwright.sync_api import sync_playwright
 from scipy.spatial.transform import Rotation
 
-from holocue.config import root, list_scenes, load_scene, runtime_dir
+from holocue.config import root, list_scenes, load_scene, runtime_dir, scene_set
 from holocue.spatial import transform_points, rotation
 from scripts.tests.live_twelve_scenes import LiveRun, signature
 
@@ -26,6 +26,163 @@ def ui_input(page, label):
     # Viser 1.1.1 renders the visible label separately from the input ID.
     # This selects the actual input in the observed control row.
     return page.get_by_text(label, exact=True).locator("xpath=ancestor::*[.//input][1]").locator("input")
+
+
+SCENE_SESSION_READY = r"""({expectedTitle, previousSid}) => {
+  const control = (label, selector) => {
+    const labels = document.evaluate(
+      `//*[normalize-space(text())='${label}']`, document, null,
+      XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+    if (labels.snapshotLength !== 1) return null;
+    for (let row=labels.snapshotItem(0).parentElement; row; row=row.parentElement) {
+      const controls=row.querySelectorAll(selector);
+      if (controls.length) return controls.length===1 ? controls[0] : null;
+    }
+    return null;
+  };
+  const input=control('会话标识', 'input');
+  const choice=control('场景', '[role="combobox"]');
+  if (!input || !choice) return false;
+  const sid=input.value.trim();
+  const title=(choice.value ?? choice.textContent).trim();
+  if (!sid || !title || (expectedTitle && title!==expectedTitle)
+      || (previousSid && sid===previousSid)) return false;
+  return {session_id:sid, scene_title:title,
+    browser_wall_time_ms:Date.now(), browser_performance_ms:performance.now()};
+}"""
+
+
+def wait_scene_session(
+    page,
+    read_state,
+    output,
+    *,
+    expected_scene=None,
+    previous_session_id=None,
+    client_view_path=None,
+    timeout=30,
+    selection=None,
+):
+    """Observe one atomic UI identity, then validate it within the same wait budget."""
+    started = time.monotonic()
+    deadline = started + timeout
+    trace = {
+        "status": "waiting",
+        "started_at": time.time(),
+        "timeout_s": timeout,
+        "expected_scene": expected_scene,
+        "previous_session_id": previous_session_id,
+        "selection": selection,
+    }
+
+    def remaining():
+        value = deadline - time.monotonic()
+        if value <= 0:
+            raise TimeoutError("Scene/session validation exceeded its wait budget")
+        return value
+
+    try:
+        trace["browser_wait_started_at"] = time.time()
+        handle = page.wait_for_function(
+            SCENE_SESSION_READY,
+            arg={
+                "expectedTitle": expected_scene["title"] if expected_scene else None,
+                "previousSid": previous_session_id,
+            },
+            polling=100,
+            timeout=remaining() * 1000,
+        )
+        ui = handle.json_value()
+        handle.dispose()
+        trace.update(ui=ui, browser_read_completed_at=time.time())
+        remaining()
+        trace["api_read_started_at"] = time.time()
+        state = read_state(ui["session_id"], min(10.0, remaining()))
+        trace["api_read_completed_at"] = time.time()
+        remaining()
+        wanted = expected_scene or next(
+            entry for entry in list_scenes() if entry["scene_id"] == state["scene_id"]
+        )
+        if (
+            state["session_id"] != ui["session_id"]
+            or state["scene_id"] != wanted["scene_id"]
+            or state["scene_set"] != scene_set()
+            or state["backend_mode"] != "live"
+            or ui["scene_title"] != wanted["title"]
+        ):
+            raise AssertionError("Atomic UI identity does not match the active API scene/version")
+        while True:
+            remaining()
+            paths = (
+                [Path(client_view_path)]
+                if client_view_path
+                else list((runtime_dir() / "viewer").glob("client_*_view.json"))
+            )
+            matches = []
+            observed_records = []
+            for path in paths:
+                try:
+                    view = json.loads(path.read_text())
+                except (FileNotFoundError, json.JSONDecodeError):
+                    continue
+                observed_records.append(
+                    {
+                        "path": str(path),
+                        "read_at": time.time(),
+                        "session_id": view.get("session_id"),
+                        "generated_at": view.get("generated_at"),
+                    }
+                )
+                if (
+                    all(
+                        view.get(key) == state[key]
+                        for key in ("session_id", "scene_id", "scene_set", "revision", "epoch")
+                    )
+                    and view.get("generated_at", 0) >= trace["started_at"]
+                ):
+                    matches.append((path, view))
+            trace["last_client_records"] = observed_records
+            if len(matches) > 1:
+                raise AssertionError("UI session matches multiple client records")
+            if matches:
+                path, view = matches[0]
+                remaining()
+                trace.update(
+                    status="passed",
+                    client_view_path=str(path),
+                    client_view_generated_at=view["generated_at"],
+                    validation_completed_at=time.time(),
+                )
+                return {
+                    "session_id": state["session_id"],
+                    "scene_id": state["scene_id"],
+                    "client_view_path": path,
+                    "ui": ui,
+                }
+            time.sleep(min(0.1, remaining()))
+    except Exception as error:
+        trace.update(status="failed", error=repr(error))
+        raise
+    finally:
+        trace.update(ended_at=time.time(), elapsed_s=time.monotonic() - started)
+        with (output / "scene_selection.jsonl").open("a", encoding="utf-8") as stream:
+            stream.write(json.dumps(trace, ensure_ascii=False) + "\n")
+
+
+def select_scene_session(page, read_state, output, scene, previous):
+    selection = {"started_at": time.time(), "previous_scene_id": previous["scene_id"]}
+    page.get_by_role("combobox", name="场景", exact=True).click()
+    page.get_by_role("option", name=scene["title"], exact=True).click()
+    selection["click_completed_at"] = time.time()
+    return wait_scene_session(
+        page,
+        read_state,
+        output,
+        expected_scene=scene,
+        previous_session_id=(previous["session_id"] if previous["scene_id"] != scene["scene_id"] else None),
+        client_view_path=previous["client_view_path"],
+        selection=selection,
+    )
 
 
 VIEW_IDENTITY = (
@@ -536,34 +693,15 @@ def main():
                         software_notice.get_by_role("button").click()
                     page.get_by_role("tab", name="任务", exact=True).click()
                     run = BrowserRun(page, http, out)
-                    deadline = time.monotonic() + 30
-                    while not ui_input(page, "会话标识").input_value():
-                        if page.get_by_text("执行错误", exact=True).count():
-                            (out / "initial_failure_dom.yaml").write_text(
-                                page.locator("body").aria_snapshot()
-                            )
-                            run.capture("initial_error.png")
-                            raise RuntimeError(page.locator("body").inner_text())
-                        if time.monotonic() > deadline:
-                            raise TimeoutError("initial viewer session did not load")
-                        page.wait_for_timeout(200)
-                    initial_sid = ui_input(page, "会话标识").input_value()
-                    wait_view(initial_sid, time.time() - 1, revision=0)
-                    run.record("select_scene", scene_id=spec.scene_id, initial_session_id=initial_sid)
-                    page.get_by_role("combobox", name="场景", exact=True).click()
-                    page.get_by_role("option", name=spec.title, exact=True).click()
-                    deadline = time.monotonic() + 30
-                    while True:
-                        sid = ui_input(page, "会话标识").input_value()
-                        if sid and run.state(sid)["scene_id"] == spec.scene_id:
-                            break
-                        if time.monotonic() > deadline:
-                            (out / "scene_switch_failure_dom.yaml").write_text(
-                                page.locator("body").aria_snapshot()
-                            )
-                            run.capture("scene_switch_failure.png")
-                            raise TimeoutError("scene dropdown did not create the requested session")
-                        page.wait_for_timeout(200)
+                    read_scene = lambda sid, timeout: run.read.request(
+                        "GET", f"/api/v1/sessions/{sid}", timeout=timeout
+                    )
+                    initial = wait_scene_session(page, read_scene, out)
+                    run.record(
+                        "select_scene", scene_id=spec.scene_id, initial_session_id=initial["session_id"]
+                    )
+                    selected = select_scene_session(page, read_scene, out, entry, initial)
+                    sid = selected["session_id"]
                     (out / "initial_dom.yaml").write_text(page.locator("body").aria_snapshot())
                     state = run.message(sid, spec.initial_instruction)
                     expected = [
