@@ -22,7 +22,7 @@ import trimesh
 import viser
 import zstandard
 
-from holocue.config import load_scene, root
+from holocue.config import load_scene, root, scene_dir
 from holocue.models import DisplayPacket
 from holocue.viewer_scene import SceneRenderer
 
@@ -154,7 +154,7 @@ def main():
                         and runtime["meshes"][0]["roughness"] == 0.08
                     )
                     runtime["configured_environment_wxyz"] = q
-                    runtime["reflection"] = reflection(runtime, root() / "scenes/optical_bench/meshes/M.glb")
+                    runtime["reflection"] = reflection(runtime, scene_dir("optical_bench") / "meshes/M.glb")
                     save(args.out / f"{state}_{label}.json", runtime)
                     page.screenshot(path=str(args.out / f"{state}_{label}.png"))
                     pair.append(runtime)

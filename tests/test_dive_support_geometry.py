@@ -1,4 +1,9 @@
-"""Actual dive meshes: flat boot seats, grounded frame, and unobstructed labels."""
+"""Generic dive CAD fixtures: boot seats, grounded frame and unobstructed labels.
+
+Every candidate object is generated with the original library recipe, so a
+mature production asset is never mixed into the historical fixture. Actual
+reconstructed exports are evaluated in test_dive_infusion_assets.
+"""
 
 import json
 import hashlib
@@ -60,18 +65,18 @@ def inside(mesh, point):
 @pytest.fixture(scope="module")
 def candidate(tmp_path_factory):
     directory = tmp_path_factory.mktemp("dive_support")
-    # Use the configured deployed root; immutable historical geometry lives in
-    # the explicit SHA-checked fixture, not in this mutable resource mapping.
+    # The explicit SHA-checked fixture owns immutable historical geometry.
+    # Keep this library regression separate from deployed reconstructed assets.
     spec = load_scene("dive_fillstation")
     assembly = make_environment(spec)
     path = directory / "workstation.glb"
     assembly.save(path)
     exported = load_asset(str(path), spec.asset_axes)
     spec.environment[0].asset = str(path.relative_to(root()))
-    stem = next(obj for obj in spec.objects if obj.object_id == "STEM")
-    stem_path = directory / "STEM.glb"
-    make_object(stem).save(stem_path)
-    stem.asset = str(stem_path.relative_to(root()))
+    for obj in spec.objects:
+        object_path = directory / f"{obj.object_id}.glb"
+        make_object(obj).save(object_path)
+        obj.asset = str(object_path.relative_to(root()))
     return spec, assembly.scene, exported
 
 
@@ -211,7 +216,12 @@ def test_bottle3_front_label_and_body_have_clear_detail_sightlines(candidate, as
 def test_original_environment_meshes_and_task_contract_are_unchanged(candidate):
     spec, _, env = candidate
     original = load_scene("dive_fillstation")
-    original_env = load_asset(str(root() / original.environment[0].asset), original.asset_axes)
+    fixture = Path(__file__).parent / "fixtures/dive_fillstation/environment_before_valve_seat.glb"
+    assert (
+        hashlib.sha256(fixture.read_bytes()).hexdigest()
+        == "c230c299a439556c8015dc3094b0abf2d336d37dcf6ba4e21da883bada297b48"
+    )
+    original_env = load_asset(str(fixture), original.asset_axes)
     for node in original_env.graph.nodes_geometry:
         old_transform, old_name = original_env.graph[node]
         transform, name = env.graph[node]
@@ -234,11 +244,10 @@ def test_original_environment_meshes_and_task_contract_are_unchanged(candidate):
     assert spec.task_contract == original.task_contract
     for obj, before in zip(spec.objects, original.objects):
         after_data, before_data = obj.model_dump(), before.model_dump()
-        if obj.object_id == "STEM":
-            # Only the private test asset path differs; deployment keeps the
-            # declared STEM resource path while replacing its generated GLB.
-            assert Path(obj.asset).name == "STEM.glb"
-            after_data["asset"] = before_data["asset"]
+        # Only each private generated fixture path differs. Production asset
+        # identity and the complete scene JSON have their own export regression.
+        assert Path(obj.asset).name == f"{obj.object_id}.glb"
+        after_data["asset"] = before_data["asset"]
         after_data["interaction"].pop("detail_direction_local")
         before_data["interaction"].pop("detail_direction_local")
         assert after_data == before_data

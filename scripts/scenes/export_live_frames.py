@@ -12,7 +12,7 @@ import httpx
 import numpy as np
 
 from holocue.bridge import frame, atomic_json
-from holocue.config import root, load_scene
+from holocue.config import root, load_scene, runtime_dir, scene_set, SCENE_SETS
 from holocue.models import DisplayPacket
 from holocue.spatial import ActionClock
 
@@ -24,7 +24,9 @@ def main():
     parser.add_argument("--view-state", type=Path, required=True)
     parser.add_argument("--seconds", type=float, default=120.0)
     parser.add_argument("--hz", type=float, default=10.0)
+    parser.add_argument("--scene-set", choices=SCENE_SETS, default=scene_set())
     args = parser.parse_args()
+    os.environ["HOLOCUE_SCENE_SET"] = args.scene_set
     if not 1 <= args.hz <= 30 or args.seconds <= 0:
         raise ValueError("invalid export duration or rate")
     headers = (
@@ -35,7 +37,7 @@ def main():
     clock = ActionClock()
     started = time.perf_counter()
     unmatched_since = None
-    output = root() / "runs/simulation/bridge" / f"{args.session}.json"
+    output = runtime_dir() / "bridge" / f"{args.session}.json"
     with httpx.Client(timeout=5.0, headers=headers) as client:
         while time.perf_counter() - started < args.seconds:
             response = client.get(args.api + f"/api/v1/sessions/{args.session}/snapshot")
@@ -46,7 +48,9 @@ def main():
             packet = DisplayPacket.model_validate(snapshot["display"])
             if packet.revision != snapshot["state"]["revision"]:
                 raise ValueError("snapshot revision mismatch")
-            spec = load_scene(packet.scene_id)
+            if packet.scene_set != scene_set():
+                raise ValueError("Live frame exporter and session use different scene sets")
+            spec = load_scene(packet.scene_id, packet.scene_set)
             view = json.loads(args.view_state.read_text())
             if view["session_id"] != args.session:
                 raise ValueError("view state belongs to another session")

@@ -17,7 +17,7 @@ from PIL import Image
 from playwright.sync_api import sync_playwright
 from scipy.spatial.transform import Rotation
 
-from holocue.config import root, list_scenes, load_scene
+from holocue.config import root, list_scenes, load_scene, runtime_dir
 from holocue.spatial import transform_points, rotation
 from scripts.tests.live_twelve_scenes import LiveRun, signature
 
@@ -284,7 +284,7 @@ class BrowserRun:
         except Exception as error:
             self.record("capture_failed", file=name, elapsed_s=time.monotonic() - started, error=str(error))
             views = []
-            for path in (root() / "runs/simulation/viewer").glob("client_*_view.json"):
+            for path in (runtime_dir() / "viewer").glob("client_*_view.json"):
                 data = json.loads(path.read_text())
                 if data.get("session_id") == getattr(self, "session_id", None):
                     views.append({"path": str(path), "view": data})
@@ -466,7 +466,7 @@ def wait_view(session_id, after, mode=None, revision=None, timeout=25):
     deadline = time.monotonic() + timeout
     while time.monotonic() < deadline:
         candidates = []
-        for path in (root() / "runs/simulation/viewer").glob("client_*_view.json"):
+        for path in (runtime_dir() / "viewer").glob("client_*_view.json"):
             data = json.loads(path.read_text())
             if data["session_id"] == session_id and data["generated_at"] > after:
                 if revision is not None and data["revision"] < revision:
@@ -484,7 +484,7 @@ def main():
     parser.add_argument("--api", default="http://127.0.0.1:8750")
     parser.add_argument("--viewer", default="http://127.0.0.1:8780")
     parser.add_argument("--browser", type=Path)
-    parser.add_argument("--out", type=Path, default=root() / "runs/simulation/browser_live")
+    parser.add_argument("--out", type=Path, default=runtime_dir() / "browser_live")
     parser.add_argument(
         "--scenes",
         nargs="+",

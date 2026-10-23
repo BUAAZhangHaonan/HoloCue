@@ -4,8 +4,9 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 
-from holocue.config import root, list_scenes, load_scene, scene_fingerprint
+from holocue.config import root, list_scenes, load_scene, scene_fingerprint, scene_dir, scene_set, SCENE_SETS
 
 
 def check(scene_id, require_blender=False):
@@ -20,10 +21,11 @@ def check(scene_id, require_blender=False):
             raise ValueError("task action is absent from target capabilities")
         if step.reference_id is not None and step.reference_id not in objects:
             raise ValueError("task receiver is absent from scene")
-    if require_blender and not (root() / "scenes" / scene_id / "scene.blend").is_file():
+    if require_blender and not (scene_dir(scene_id) / "scene.blend").is_file():
         raise FileNotFoundError(f"{scene_id}/scene.blend")
     return {
         "scene_id": scene_id,
+        "scene_set": scene.scene_set,
         "fingerprint": scene_fingerprint(scene),
         "objects": len(scene.objects),
         "native_blender_required": require_blender,
@@ -34,7 +36,9 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("scenes", nargs="*")
     parser.add_argument("--require-blender", action="store_true")
+    parser.add_argument("--scene-set", choices=SCENE_SETS, default=scene_set())
     args = parser.parse_args()
+    os.environ["HOLOCUE_SCENE_SET"] = args.scene_set
     rows = [check(sid, args.require_blender) for sid in args.scenes or [x["scene_id"] for x in list_scenes()]]
     print(json.dumps(rows, ensure_ascii=False, indent=2))
 

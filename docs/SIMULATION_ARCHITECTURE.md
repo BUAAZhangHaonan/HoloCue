@@ -2,7 +2,7 @@
 
 ## 场景与执行
 
-每个场景使用 `scenes/<scene_id>/scene.json` 保存对象、尺寸、位姿、动作能力、接合坐标系、检查面和观察范围。场景模型采用标准 glTF 坐标，运行时统一使用米制、Z 轴向上的世界坐标。
+每个场景使用 `scenes/<scene-set>/<scene_id>/scene.json` 保存对象、尺寸、位姿、动作能力、接合坐标系、检查面和观察范围。scene-set 明确选择 legacy 或 reconstructed，默认 reconstructed；两套均含 scene.json、scene.blend 和 meshes，保留相同交互合同。配置入口 `scene_set()`、`scene_dir()` 和 `runtime_dir()` 统一供服务、构建与采集使用。场景模型采用标准 glTF 坐标，运行时统一使用米制、Z 轴向上的世界坐标。
 
 ```mermaid
 flowchart LR
@@ -35,7 +35,7 @@ SQLite 保存任务队列、挂起计划、完成记录、revision 和 epoch。�
 
 页面展示模型原始步骤 instruction 与真实任务状态、挂起计划和错误。按钮操作与服务恢复可以显示应用产生的事实状态文本。取消额外说明通道不保证每步 instruction 永远正确；真实模型验收仍须审核步骤文字、顺序、参数和状态。
 
-场景指纹包含场景配置和实际资产摘要。几何变更后使用新会话，已有持久记录保持原有含义。运行时只有 live 模型入口。输入校验失败、模型异常和资源异常均产生明确错误。
+会话、显示包和桥接帧包含 scene_set，API 与 Viser 必须使用同一版本，跨版本的已有会话不能继续任务。默认 SQLite 和输出位于 runs/simulation/<scene-set>/，显式 RUN_DIR 则隔离一次运行；提示点池的缓存键同样包含版本和几何摘要。场景指纹包含场景配置和实际资产摘要。几何变更后使用新会话，已有持久记录保持原有含义。运行时只有 live 模型入口。输入校验失败、模型异常和资源异常均产生明确错误。
 
 ## 用户页面
 

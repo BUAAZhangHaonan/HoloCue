@@ -4,7 +4,7 @@ from pathlib import Path
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, Depends, HTTPException, Header
 from fastapi.responses import JSONResponse
-from .config import root, list_scenes, load_scene
+from .config import root, list_scenes, load_scene, runtime_dir, scene_set, SCENE_SETS
 from .models import UserMessage, RevisionRequest, Strict
 from .state import DomainError, ConflictError
 from .store import Store
@@ -24,9 +24,7 @@ def create_app(service=None) -> FastAPI:
         if mode != "live":
             raise ValueError("HOLOCUE_MODE must be live")
         provider = OpenAICompatiblePlanner()
-        state_path = Path(
-            os.environ.get("HOLOCUE_STATE_PATH", str(root() / "runs/simulation/state.sqlite"))
-        ).resolve()
+        state_path = Path(os.environ.get("HOLOCUE_STATE_PATH", str(runtime_dir() / "state.sqlite"))).resolve()
         if not state_path.is_relative_to(root().resolve()):
             raise ValueError("HOLOCUE_STATE_PATH must be inside the project")
         service = Service(Store(state_path), GraphPlanner(provider))
@@ -38,7 +36,7 @@ def create_app(service=None) -> FastAPI:
 
     @asynccontextmanager
     async def lifespan(app):
-        service.store.recover()
+        service.store.recover(scene_set())
         yield
         await service.close()
 
@@ -65,6 +63,7 @@ def create_app(service=None) -> FastAPI:
     def health():
         return {
             "status": "ok",
+            "scene_set": scene_set(),
             "backend_mode": service.planner.mode,
             "renderer_kind": "semantic_preview",
             "schema_version": "1.1",
@@ -119,7 +118,9 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument("--host", default="127.0.0.1")
     p.add_argument("--port", type=int, default=8750)
+    p.add_argument("--scene-set", choices=SCENE_SETS, default=scene_set())
     a = p.parse_args()
+    os.environ["HOLOCUE_SCENE_SET"] = a.scene_set
     if a.host not in ("127.0.0.1", "localhost", "::1") and not os.environ.get("HOLOCUE_API_KEY"):
         raise SystemExit("Non-loopback binding requires HOLOCUE_API_KEY. Use SSH tunnels for phase 1.")
     import uvicorn

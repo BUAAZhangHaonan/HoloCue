@@ -129,8 +129,15 @@ def ray_hits(mesh, origin, direction):
 
 def distances(target, points):
     target = target.copy()
-    target.process(validate=True)
+    # A verified closed source may contain extremely thin but topologically
+    # necessary faces. Reprocessing it can delete those faces and open holes.
+    # Keep all its coordinates/faces; only unverified export seams need the
+    # existing cleanup path, followed by the same closed/winding assertions.
+    if not (target.is_watertight and target.is_winding_consistent):
+        target.process(validate=True)
     assert target.is_watertight and target.is_winding_consistent
+    if target.volume < 0:
+        target.invert()
     field = vtk.vtkImplicitPolyDataDistance()
     field.SetInput(polydata(target))
     values = vtk.vtkDoubleArray()

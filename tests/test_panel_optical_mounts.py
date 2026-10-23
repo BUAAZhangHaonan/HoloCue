@@ -6,6 +6,7 @@ import numpy as np
 import pytest
 from holocue import modeling
 from holocue.config import root, load_scene
+from scene_contract_paths import fixture_scene_paths
 from holocue.assets import load_asset
 from holocue.models import SceneSpec
 from panel_optical_geometry import (
@@ -83,11 +84,15 @@ def test_only_exact_whitelist_changes_geometry_and_all_contracts_survive(pack):
     original = SceneSpec.model_validate(old["scene_contract"])
     # Only the explicitly tested optical environment orientation is new.
     original.render_hints.environment_wxyz = spec.render_hints.environment_wxyz
-    assert spec == original
-    for env in (
-        pack["loaded"]["workstation"],
-        mesh_map(load_asset(str(root() / spec.environment[0].asset), spec.asset_axes)),
-    ):
+    # Selection metadata did not exist in the immutable fixture.
+    original.scene_set = spec.scene_set
+    assert fixture_scene_paths(spec) == original
+    # All three production scenes now use licensed reconstructions. Keep the
+    # exact generic CAD-library fixtures here; deployed contacts, bores, anchors
+    # and materials are checked in test_optical_dig_assets,
+    # test_panel_connector_assets and test_blocks_drone_assets.
+    environments = [pack["loaded"]["workstation"]]
+    for env in environments:
         assert set(env) == set(old["environment_fingerprints"])
         for name, digest in old["environment_fingerprints"].items():
             if name in old["changed_environment_nodes"]:
@@ -112,10 +117,8 @@ def test_only_exact_whitelist_changes_geometry_and_all_contracts_survive(pack):
             lens_nodes = {obj.object_id + "/0000_optic_retainer", obj.object_id + "/0002_mounting_post"}
             for name in lens_nodes:
                 assert fingerprint(original_lens[name]) == expected["nodes"][name]
-        for actual in (
-            pack["loaded"][obj.object_id],
-            mesh_map(load_asset(str(root() / obj.asset), spec.asset_axes)),
-        ):
+        assets = [pack["loaded"][obj.object_id]]
+        for actual in assets:
             assert set(actual) == set(expected["nodes"]) | set(expected["allowed_added_nodes"])
             if sid == "drone_bench" and obj.object_id == "BAY":
                 from test_material_regions import assert_container_partition

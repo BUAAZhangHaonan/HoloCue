@@ -49,6 +49,10 @@ flowchart LR
 | 充气训练站 `dive_fillstation` | 气瓶标识检查、接头接合、阀杆旋转 |
 | 输液训练区 `infusion_ward` | 泵盒安装、袋体标识检查、旋塞操作 |
 
+两套场景使用一致结构：`scenes/reconstructed/<id>/` 是成熟素材重构版，`scenes/legacy/<id>/` 是原版。每个目录均含 `scene.json`、`scene.blend` 和 `meshes/`，场景 ID、对象 ID 与交互定义保持对应。原版来自提交 `aaf59d571d1cfda3038a004324356da136f2892f` 的 Git/LFS 实体；迁移仅调整 JSON 资产路径前缀和文档相对链接；旧网格与 Blender 文件保持原字节，未用新版构建器替代。
+
+运行入口默认选择 `reconstructed`。设置 `HOLOCUE_SCENE_SET=legacy`，或给 API、Viser、构建命令传 `--scene-set legacy`，即可明确选择原版。每个服务进程只使用一套场景；API 与 Viser 必须选择同一套。默认会话库及运行记录分别写入 `runs/simulation/<scene-set>/`；指定 `RUN_DIR` 可为一次运行选择独立项目内目录。新旧使用各自目录进行查看与迁移，不自动发起两套场景的对照实验。
+
 详细任务和几何定义见 [场景说明](docs/SCENE_REVIEW.md)。
 
 ## 使用
@@ -81,34 +85,34 @@ Viser 固定为 1.1.1，使用项目提供的绘制、相机协议和 HDR 透明
 ```bash
 export HOLOCUE_MODEL_URL=http://127.0.0.1:8000/v1
 export HOLOCUE_MODEL_NAME=Qwen/Qwen3.5-4B
-bash scripts/run_simulation.sh api
+bash scripts/run_simulation.sh api --scene-set reconstructed
 ```
 
 在另一个终端的项目根目录启动页面：
 
 ```bash
-bash scripts/run_simulation.sh viewer
+bash scripts/run_simulation.sh viewer --scene-set reconstructed
 ```
 
 浏览器访问 `http://127.0.0.1:8780`，选择场景并输入任务。API 默认地址为 `http://127.0.0.1:8750`；远程使用时可通过 SSH 转发端口。认证及其他环境变量见 [.env.example](.env.example)。
 
 ### 构建场景
 
-`scenes/<id>/scene.json` 定义场景对象与任务，`meshes/` 保存实际网格。需要重新生成资产时，设置已有 Blender 的路径后运行：
+`scenes/<scene-set>/<id>/scene.json` 定义场景对象与任务，同目录的 `meshes/` 保存实际网格。需要重新生成资产时，设置已有 Blender 的路径后运行：
 
 ```bash
 export BLENDER_BIN=/path/to/blender
-bash scripts/scenes/build_all.sh
+bash scripts/scenes/build_all.sh --scene-set reconstructed
 ```
 
-构建流程依次生成 GLB、Blender 数据和原生场景。资源守卫随启动与构建脚本执行，临时文件及运行输出保存在项目内部。
+构建流程依次生成 GLB、Blender 数据和原生场景。`legacy` 必须显式选择，使用保留的原始程序化建模函数；`reconstructed` 使用逐场景素材构建器。构建会更新所选目录的资产，查看已经保存的旧版无需重新构建。资源守卫默认允许物理 GPU 1、2；本次新版十二场景验收显式设置 `HOLOCUE_AUTHORIZED_GPUS=1,2,4,5,6,7`，模型选 GPU 1，首批原生桥接传 `--render-gpu 4`（默认仍为 2），静态采集选 GPU 7；静态采集结束后，后续批次的两个场景分别在 GPU 4、7 上运行独立桥接客户端。这些是本次运行的选择，不是所有部署的硬默认，具体命令见 [验证方法](docs/VALIDATION.md)。资源守卫随启动与构建脚本执行；调用方指定的缓存环境与 `RUN_DIR` 会保留，默认临时文件及运行输出保存在项目内部。
 
 ## 项目结构
 
 | 目录 | 内容 |
 | --- | --- |
 | `src/holocue/` | 任务规划、状态管理、几何计算、API 与 Viser 页面 |
-| `scenes/` | 场景配置、网格和 Blender 场景 |
+| `scenes/legacy/`、`scenes/reconstructed/` | 相同布局的旧版与重构版场景配置、网格和 Blender 场景 |
 | `configs/`、`prompts/`、`schemas/` | 显示配置、模型提示词与数据协议 |
 | `scripts/` | 启动、资产构建、桥接、资源守卫与检查工具 |
 | `tests/` | 正式回归测试与固定几何输入 |

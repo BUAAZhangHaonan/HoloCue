@@ -26,7 +26,7 @@ import httpx
 import psutil
 from playwright.sync_api import sync_playwright
 
-from holocue.config import load_scene, root
+from holocue.config import load_scene, root, runtime_dir
 from holocue.versioning import VersionGate
 from scripts.tests.live_twelve_scenes import LiveRun, signature
 
@@ -109,7 +109,7 @@ class Audit:
     def view(self, sid, after=0, predicate=lambda data: True):
         def read():
             matches = []
-            for path in (root() / "runs/simulation/viewer").glob("client_*_view.json"):
+            for path in (runtime_dir() / "viewer").glob("client_*_view.json"):
                 data = json.loads(path.read_text(encoding="utf-8"))
                 if data["session_id"] == sid and data["generated_at"] > after:
                     data["evidence_file"] = str(path)

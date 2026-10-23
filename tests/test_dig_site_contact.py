@@ -2,11 +2,9 @@
 
 import numpy as np
 import pytest
-import trimesh
-
-from holocue.assets import world_scene
-from holocue.config import load_scene, root
-from holocue.spatial import mating_goal
+from holocue.config import load_scene
+from holocue.spatial import mating_goal, transform_points
+from test_asset_reconstruction import meshes, triangles, vertical_hits
 
 
 def test_completed_flag_contacts_exported_pit_floor_away_from_bone():
@@ -14,24 +12,18 @@ def test_completed_flag_contacts_exported_pit_floor_away_from_bone():
     flag = next(obj for obj in spec.objects if obj.object_id == "FLAG")
     bone = next(obj for obj in spec.objects if obj.object_id == "BONE")
     goal = mating_goal(flag, bone, bone.pose, "assemble")
-    world = world_scene(root(), spec, {"FLAG": goal})
-    pole_bounds = None
-    floor_bounds = None
-    bone_bounds = []
-    for node in world.graph.nodes_geometry:
-        transform, name = world.graph[node]
-        vertices = trimesh.transform_points(world.geometry[name].vertices, transform)
-        bounds = np.array([vertices.min(axis=0), vertices.max(axis=0)])
-        if node.startswith("FLAG/") and node.endswith("_flagpole"):
-            pole_bounds = bounds
-        elif node.endswith("_pit_floor"):
-            floor_bounds = bounds
-        elif node.startswith("BONE/"):
-            bone_bounds.append(bounds)
-    assert pole_bounds is not None and floor_bounds is not None and bone_bounds
-    # Keep the pole within the flat interior, beyond the rounded floor edges.
-    assert np.all(pole_bounds[0, :2] > floor_bounds[0, :2] + 0.01)
-    assert np.all(pole_bounds[1, :2] < floor_bounds[1, :2] - 0.01)
-    assert pole_bounds[0, 2] == pytest.approx(floor_bounds[1, 2], abs=0.00075)
-    bone_upper_x = max(bounds[1, 0] for bounds in bone_bounds)
-    assert pole_bounds[0, 0] > bone_upper_x, "Marker overlaps the recorded remains"
+    flag_triangles = triangles(meshes(spec, flag, goal))
+    bone_triangles = triangles(meshes(spec, bone))
+    soil = np.concatenate([triangles(meshes(spec, prop)) for prop in spec.environment])
+    tip = transform_points(goal, np.asarray([flag.interaction.mating_pose.position_m]))[0]
+    np.testing.assert_allclose(tip, [0.32, 0.02, -0.35], atol=1e-8)
+    assert flag_triangles[:, :, 2].min() == pytest.approx(tip[2], abs=0.00075)
+    # Sample real soil triangles at and around the tip. A global floor AABB
+    # cannot establish contact once excavation terrain has surface relief.
+    for dx, dy in ((0, 0), (-0.001, 0), (0.001, 0), (0, -0.001), (0, 0.001)):
+        heights = vertical_hits(soil, tip[:2] + [dx, dy])
+        assert len(heights), "Marker tip has no actual soil below it"
+        assert heights.max() == pytest.approx(tip[2], abs=0.00075)
+    assert flag_triangles[:, :, 0].min() > bone_triangles[:, :, 0].max(), (
+        "Marker overlaps the recorded remains"
+    )

@@ -9,9 +9,18 @@ from holocue.config import load_scene
 from scripts.tests.audit_geometry import ordered_steps, parts, transform
 
 
-def test_blocks_support_surfaces_are_collision_obstacles():
+def test_generic_blocks_support_surfaces_are_collision_obstacles(tmp_path, monkeypatch):
+    from holocue.modeling import make_environment
+
     spec = load_scene("blocks")
-    obstacles, coverage = parts(spec, spec.environment)
+    # Retain the closed-solid audit contract for the generic CAD environment.
+    # Production blocks uses mature surface meshes; its complete triangle
+    # coverage and real support contacts are checked in test_blocks_drone_assets.
+    path = tmp_path / "generic-blocks-environment.glb"
+    make_environment(spec).save(path)
+    monkeypatch.setenv("HOLOCUE_ROOT", str(tmp_path))
+    environment = spec.environment[0].model_copy(update={"asset": str(path)})
+    obstacles, coverage = parts(spec, [environment])
     included = {name for _, name, _, _ in obstacles}
     for suffix in ("_worktop", "_work_mat", "_left_parts_tray", "_right_parts_tray"):
         records = [row for row in coverage if row["part"].endswith(suffix)]

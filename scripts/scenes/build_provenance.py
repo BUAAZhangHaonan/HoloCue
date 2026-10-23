@@ -8,6 +8,8 @@ import json
 import os
 from pathlib import Path
 
+from holocue.config import runtime_dir, scene_dir
+
 ROOT = Path(__file__).resolve().parents[2]
 
 
@@ -27,7 +29,7 @@ def file_record(path):
 
 
 def inputs(spec):
-    names = [ROOT / "src/holocue/modeling.py", ROOT / "scenes" / spec.scene_id / "scene.json"]
+    names = [ROOT / "src/holocue/modeling.py", scene_dir(spec.scene_id, spec.scene_set) / "scene.json"]
     names.extend(sorted((ROOT / "scripts/scenes").glob("*.py")))
     return {
         "source": [file_record(p) for p in names],
@@ -40,7 +42,7 @@ def inputs(spec):
 
 
 def output_root():
-    path = Path(os.environ.get("RUN_DIR", ROOT / "runs/simulation")).resolve()
+    path = runtime_dir()
     if not path.is_relative_to(ROOT / "runs") and not path.is_relative_to(ROOT / ".work"):
         raise ValueError("Build reports must stay inside project runs or .work")
     return path

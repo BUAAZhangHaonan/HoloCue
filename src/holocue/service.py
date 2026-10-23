@@ -1,6 +1,6 @@
 from __future__ import annotations
 import asyncio
-from .config import load_scene, load_policy, scene_fingerprint
+from .config import load_scene, load_policy, scene_fingerprint, scene_set
 from .models import UserMessage, Decision
 from .store import Store
 from .projection import packet
@@ -8,7 +8,9 @@ from .state import DomainError
 
 
 def session_scene(session):
-    scene = load_scene(session.scene_id)
+    if session.scene_set != scene_set():
+        raise DomainError("Session belongs to another scene set. Select its matching API service.")
+    scene = load_scene(session.scene_id, session.scene_set)
     if session.scene_fingerprint != scene_fingerprint(scene):
         raise DomainError("Scene geometry has changed. Create a new session for the current scene.")
     return scene
@@ -23,7 +25,9 @@ class Service:
 
     def create(self, scene_id):
         scene = load_scene(scene_id)
-        return self.store.create(scene_id, self.planner.mode, scene_fingerprint(scene))
+        return self.store.create(
+            scene_id, self.planner.mode, scene_fingerprint(scene), selected_set=scene.scene_set
+        )
 
     async def submit(self, sid, msg: UserMessage):
         session_scene(self.store.get(sid))

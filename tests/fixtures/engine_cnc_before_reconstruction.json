@@ -1,0 +1,726 @@
+{
+  "scenes": {
+    "engine_bay": {
+      "scene_json": {
+        "schema_version": "1.1",
+        "scene_id": "engine_bay",
+        "title": "发动机教学台结构检查",
+        "asset_axes": "gltf_y_up",
+        "camera_position_m": [
+          1.6,
+          -2.3,
+          2.15
+        ],
+        "camera_look_at_m": [
+          0,
+          0.18,
+          0.99
+        ],
+        "initial_instruction": "将 CLAMP 的调节螺钉逆时针转 90 度，演示 PLUG 沿 PLUGPORT 轴线进入定位位置，再检查 CONN 背面的端子。",
+        "render_hints": {
+          "workspace_bounds_m": [
+            [
+              -0.71,
+              -0.49,
+              0.67
+            ],
+            [
+              0.71,
+              0.97,
+              1.98
+            ]
+          ]
+        },
+        "objects": [
+          {
+            "object_id": "CLAMP",
+            "label": "卡箍调节螺钉",
+            "asset": "scenes/engine_bay/meshes/CLAMP.glb",
+            "recipe": "screw",
+            "size_m": [
+              0.047,
+              0.018,
+              0.018
+            ],
+            "pose": {
+              "position_m": [
+                -0.3,
+                -0.1,
+                1.1
+              ]
+            },
+            "color": [
+              186,
+              170,
+              115
+            ],
+            "capabilities": [
+              "point",
+              "rotate"
+            ],
+            "description": "固定卡箍带上的调节螺钉，局部 +X 为转轴。",
+            "interaction": {
+              "rotation_axis_local": [
+                1,
+                0,
+                0
+              ],
+              "cue_offset_local_m": [
+                0.04,
+                0,
+                0
+              ]
+            }
+          },
+          {
+            "object_id": "PLUG",
+            "label": "教学火花塞",
+            "asset": "scenes/engine_bay/meshes/PLUG.glb",
+            "recipe": "sparkplug",
+            "size_m": [
+              0.021,
+              0.021,
+              0.09
+            ],
+            "pose": {
+              "position_m": [
+                0.27,
+                -0.27,
+                1.065
+              ]
+            },
+            "color": [
+              220,
+              222,
+              217
+            ],
+            "capabilities": [
+              "point",
+              "insert"
+            ],
+            "description": "陶瓷绝缘体朝上，螺纹端朝下；本动作演示轴向定位。",
+            "interaction": {
+              "mating_pose": {
+                "position_m": [
+                  0,
+                  0,
+                  -0.045
+                ]
+              },
+              "approach_distance_m": 0.12,
+              "transit_height_m": 0.12
+            }
+          },
+          {
+            "object_id": "PLUGPORT",
+            "label": "火花塞定位孔",
+            "asset": "scenes/engine_bay/meshes/PLUGPORT.glb",
+            "recipe": "bore",
+            "size_m": [
+              0.052,
+              0.052,
+              0.064
+            ],
+            "pose": {
+              "position_m": [
+                0.16,
+                0.26,
+                1.055
+              ]
+            },
+            "color": [
+              95,
+              109,
+              117
+            ],
+            "capabilities": [
+              "point"
+            ],
+            "anchors": {
+              "insertion": [
+                0,
+                0,
+                -0.024
+              ]
+            },
+            "description": "中空井口露出，轴向定位终点位于孔内。",
+            "interaction": {
+              "detail_direction_local": [
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "object_id": "OILCAP",
+            "label": "机油口教学旋盖",
+            "asset": "scenes/engine_bay/meshes/OILCAP.glb",
+            "recipe": "knob",
+            "size_m": [
+              0.075,
+              0.075,
+              0.032
+            ],
+            "pose": {
+              "position_m": [
+                -0.13,
+                0.16,
+                1.105
+              ]
+            },
+            "color": [
+              51,
+              61,
+              66
+            ],
+            "capabilities": [
+              "point",
+              "rotate"
+            ]
+          },
+          {
+            "object_id": "TENSIONER",
+            "label": "张紧机构六角位",
+            "asset": "scenes/engine_bay/meshes/TENSIONER.glb",
+            "recipe": "screw",
+            "size_m": [
+              0.035,
+              0.022,
+              0.022
+            ],
+            "pose": {
+              "position_m": [
+                0.38,
+                0.16,
+                0.91
+              ]
+            },
+            "color": [
+              164,
+              171,
+              175
+            ],
+            "capabilities": [
+              "point",
+              "rotate"
+            ],
+            "interaction": {
+              "rotation_axis_local": [
+                1,
+                0,
+                0
+              ]
+            }
+          },
+          {
+            "object_id": "CONN",
+            "label": "已断开的侧连接器",
+            "asset": "scenes/engine_bay/meshes/CONN.glb",
+            "recipe": "module",
+            "size_m": [
+              0.08,
+              0.07,
+              0.07
+            ],
+            "pose": {
+              "position_m": [
+                0.44,
+                -0.15,
+                1.045
+              ]
+            },
+            "color": [
+              195,
+              118,
+              51
+            ],
+            "capabilities": [
+              "point",
+              "inspect_back"
+            ],
+            "anchors": {
+              "label": [
+                -0.04,
+                0,
+                0.025
+              ]
+            },
+            "description": "拆离线束并置于检修支座，背面 +Y 端子可观察。",
+            "interaction": {
+              "inspect_point_local_m": [
+                0,
+                0.036,
+                0
+              ],
+              "inspect_normal_local": [
+                0,
+                1,
+                0
+              ]
+            }
+          }
+        ],
+        "environment": [
+          {
+            "prop_id": "workstation",
+            "asset": "scenes/engine_bay/meshes/env/workstation.glb"
+          }
+        ],
+        "task_contract": {
+          "setting": "冷态、断电发动机教学台，提示演示零件位置和运动方向。",
+          "ordered_steps": [
+            {
+              "target_id": "CLAMP",
+              "action": "rotate",
+              "angle_deg": 90
+            },
+            {
+              "target_id": "PLUG",
+              "action": "insert",
+              "reference_id": "PLUGPORT"
+            },
+            {
+              "target_id": "CONN",
+              "action": "inspect_back",
+              "depth_requirement": "persistent"
+            }
+          ],
+          "interrupt_target": "CONN",
+          "interrupt_instruction": "临时检查 CONN 端子，保留卡箍角度和原来的任务顺序。"
+        }
+      },
+      "exported_object_bounds": {
+        "CLAMP": [
+          [
+            -0.02020999975502491,
+            -0.008261882700026035,
+            -0.00953999999910593
+          ],
+          [
+            0.0393810011446476,
+            0.008261882700026035,
+            0.00953999999910593
+          ]
+        ],
+        "PLUG": [
+          [
+            -0.010499999858438969,
+            -0.009093266911804676,
+            -0.04230000078678131
+          ],
+          [
+            0.010499999858438969,
+            0.009093266911804676,
+            0.046799998730421066
+          ]
+        ],
+        "PLUGPORT": [
+          [
+            -0.028599999845027924,
+            -0.028599999845027924,
+            -0.03200000151991844
+          ],
+          [
+            0.028599999845027924,
+            0.028599999845027924,
+            0.03200000151991844
+          ]
+        ],
+        "OILCAP": [
+          [
+            -0.03525000065565109,
+            -0.03525000065565109,
+            -0.01408000010997057
+          ],
+          [
+            0.03525000065565109,
+            0.03525000065565109,
+            0.013584000058472157
+          ]
+        ],
+        "TENSIONER": [
+          [
+            -0.015049999579787254,
+            -0.010097856633365154,
+            -0.011660000309348106
+          ],
+          [
+            0.015305000357329845,
+            0.010097856633365154,
+            0.011660000309348106
+          ]
+        ],
+        "CONN": [
+          [
+            -0.03999999910593033,
+            -0.03799999877810478,
+            -0.03500000014901161
+          ],
+          [
+            0.03999999910593033,
+            0.0430000014603138,
+            0.03700000047683716
+          ]
+        ]
+      }
+    },
+    "cnc_toolchange": {
+      "scene_json": {
+        "schema_version": "1.1",
+        "scene_id": "cnc_toolchange",
+        "title": "刀柄教学台装入与拉钉检查",
+        "asset_axes": "gltf_y_up",
+        "camera_position_m": [
+          -1.8,
+          -2.55,
+          2.0
+        ],
+        "camera_look_at_m": [
+          0,
+          0.3,
+          1.17
+        ],
+        "initial_instruction": "把训练面板 MODESWITCH 顺时针转 90 度，再把 T09 沿轴线装入 POCKET9，随后检查 T03 的柄尾拉钉，保留 PANEL 提示。",
+        "render_hints": {
+          "workspace_bounds_m": [
+            [
+              -0.77,
+              -0.45,
+              0.9
+            ],
+            [
+              0.74,
+              1.13,
+              1.94
+            ]
+          ]
+        },
+        "objects": [
+          {
+            "object_id": "MODESWITCH",
+            "label": "教学模式旋钮",
+            "asset": "scenes/cnc_toolchange/meshes/MODESWITCH.glb",
+            "recipe": "knob",
+            "size_m": [
+              0.055,
+              0.055,
+              0.04
+            ],
+            "pose": {
+              "position_m": [
+                -0.56,
+                0.3974,
+                1.34
+              ],
+              "wxyz": [
+                0.7071067812,
+                0.7071067812,
+                0,
+                0
+              ]
+            },
+            "color": [
+              192,
+              196,
+              203
+            ],
+            "capabilities": [
+              "point",
+              "rotate"
+            ],
+            "interaction": {
+              "rotation_axis_local": [
+                0,
+                0,
+                1
+              ],
+              "cue_offset_local_m": [
+                0,
+                0,
+                0.045
+              ]
+            },
+            "description": "朝向操作者的三档示教旋钮，旋钮局部 +Z 与面板法线一致。"
+          },
+          {
+            "object_id": "T09",
+            "label": "九号刀柄",
+            "asset": "scenes/cnc_toolchange/meshes/T09.glb",
+            "recipe": "toolholder",
+            "size_m": [
+              0.075,
+              0.075,
+              0.21
+            ],
+            "pose": {
+              "position_m": [
+                -0.28,
+                -0.22,
+                1.1
+              ]
+            },
+            "color": [
+              166,
+              166,
+              156
+            ],
+            "capabilities": [
+              "point",
+              "insert"
+            ],
+            "description": "竖直支承的锥柄，刀具向下，定位法兰与刀套承接面配合。",
+            "interaction": {
+              "mating_pose": {
+                "position_m": [
+                  0,
+                  0,
+                  -0.015
+                ]
+              },
+              "approach_distance_m": 0.2,
+              "transit_height_m": 0.15
+            }
+          },
+          {
+            "object_id": "POCKET9",
+            "label": "九号教学刀套",
+            "asset": "scenes/cnc_toolchange/meshes/POCKET9.glb",
+            "recipe": "tool_socket",
+            "size_m": [
+              0.1,
+              0.1,
+              0.16
+            ],
+            "pose": {
+              "position_m": [
+                0.2,
+                0.25,
+                1.16
+              ]
+            },
+            "color": [
+              83,
+              104,
+              118
+            ],
+            "capabilities": [
+              "point"
+            ],
+            "anchors": {
+              "insertion": [
+                0,
+                0,
+                0.08
+              ]
+            },
+            "description": "开口朝上，法兰承接面限定轴向终点。"
+          },
+          {
+            "object_id": "T03",
+            "label": "三号待检刀柄",
+            "asset": "scenes/cnc_toolchange/meshes/T03.glb",
+            "recipe": "toolholder",
+            "size_m": [
+              0.075,
+              0.075,
+              0.21
+            ],
+            "pose": {
+              "position_m": [
+                0.48,
+                -0.2,
+                1.1
+              ]
+            },
+            "color": [
+              155,
+              157,
+              156
+            ],
+            "capabilities": [
+              "point",
+              "inspect_back"
+            ],
+            "description": "拉钉位于刀柄顶部，斜向检查视图显示颈部和端部轮廓。",
+            "interaction": {
+              "inspect_point_local_m": [
+                0,
+                0,
+                0.091
+              ],
+              "inspect_normal_local": [
+                0.5997301821,
+                -0.7196762185,
+                0.3498426062
+              ],
+              "inspect_extent_m": [
+                0.058,
+                0.058
+              ]
+            }
+          },
+          {
+            "object_id": "MAG",
+            "label": "隔离刀库示教盘",
+            "asset": "scenes/cnc_toolchange/meshes/MAG.glb",
+            "recipe": "magazine",
+            "size_m": [
+              0.44,
+              0.11,
+              0.44
+            ],
+            "pose": {
+              "position_m": [
+                0.55,
+                0.5785,
+                1.47
+              ]
+            },
+            "color": [
+              99,
+              115,
+              129
+            ],
+            "capabilities": [
+              "point"
+            ],
+            "description": "隔离状态下的刀库模型，仅用于识别。"
+          },
+          {
+            "object_id": "PANEL",
+            "label": "教学状态屏",
+            "asset": "scenes/cnc_toolchange/meshes/PANEL.glb",
+            "recipe": "instrument",
+            "size_m": [
+              0.25,
+              0.09,
+              0.2
+            ],
+            "pose": {
+              "position_m": [
+                -0.62,
+                0.368,
+                1.65
+              ]
+            },
+            "color": [
+              69,
+              88,
+              104
+            ],
+            "capabilities": [
+              "point",
+              "wait"
+            ]
+          }
+        ],
+        "environment": [
+          {
+            "prop_id": "workstation",
+            "asset": "scenes/cnc_toolchange/meshes/env/workstation.glb"
+          }
+        ],
+        "task_contract": {
+          "setting": "主轴与刀库驱动隔离的教学装置，刀柄在开放式夹具上操作。",
+          "ordered_steps": [
+            {
+              "target_id": "MODESWITCH",
+              "action": "rotate",
+              "angle_deg": -90
+            },
+            {
+              "target_id": "T09",
+              "action": "insert",
+              "reference_id": "POCKET9"
+            },
+            {
+              "target_id": "T03",
+              "action": "inspect_back",
+              "depth_requirement": "persistent"
+            }
+          ],
+          "persistent_targets": [
+            "PANEL"
+          ],
+          "interrupt_target": "T03",
+          "interrupt_instruction": "临时查看 T03 的拉钉，保留原来的模式与装刀任务。"
+        }
+      },
+      "exported_object_bounds": {
+        "MODESWITCH": [
+          [
+            -0.025849999859929085,
+            -0.025849999859929085,
+            -0.01759999990463257
+          ],
+          [
+            0.025849999859929085,
+            0.025849999859929085,
+            0.016979999840259552
+          ]
+        ],
+        "T09": [
+          [
+            -0.03674999997019768,
+            -0.03674999997019768,
+            -0.10395000129938126
+          ],
+          [
+            0.03674999997019768,
+            0.03674999997019768,
+            0.10657499730587006
+          ]
+        ],
+        "POCKET9": [
+          [
+            -0.054999999701976776,
+            -0.054999999701976776,
+            -0.07999999821186066
+          ],
+          [
+            0.054999999701976776,
+            0.054999999701976776,
+            0.07999999821186066
+          ]
+        ],
+        "T03": [
+          [
+            -0.03674999997019768,
+            -0.03674999997019768,
+            -0.10395000129938126
+          ],
+          [
+            0.03674999997019768,
+            0.03674999997019768,
+            0.10657499730587006
+          ]
+        ],
+        "MAG": [
+          [
+            -0.21119999885559082,
+            -0.04125000163912773,
+            -0.21119999885559082
+          ],
+          [
+            0.21119999885559082,
+            0.027499999850988388,
+            0.21119999885559082
+          ]
+        ],
+        "PANEL": [
+          [
+            -0.125,
+            -0.051500000059604645,
+            -0.10000000149011612
+          ],
+          [
+            0.125,
+            0.04699999839067459,
+            0.10000000149011612
+          ]
+        ]
+      }
+    }
+  }
+}

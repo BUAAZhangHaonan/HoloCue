@@ -56,14 +56,19 @@ def basis_from_normal(normal):
     return np.column_stack([x, y, n])
 
 
-def local_cue_pool(scene_id: str, target_id: str, kind: str, count: int = 8192) -> np.ndarray:
-    fingerprint = scene_fingerprint(load_scene(scene_id))
-    return _local_cue_pool(scene_id, target_id, kind, fingerprint, count)
+def local_cue_pool(
+    scene_id: str, target_id: str, kind: str, count: int = 8192, selected_set: str | None = None
+) -> np.ndarray:
+    scene = load_scene(scene_id, selected_set)
+    fingerprint = scene_fingerprint(scene)
+    return _local_cue_pool(scene_id, target_id, kind, scene.scene_set, fingerprint, count)
 
 
 @lru_cache(maxsize=256)
-def _local_cue_pool(scene_id: str, target_id: str, kind: str, fingerprint: str, count: int) -> np.ndarray:
-    scene = load_scene(scene_id)
+def _local_cue_pool(
+    scene_id: str, target_id: str, kind: str, selected_set: str, fingerprint: str, count: int
+) -> np.ndarray:
+    scene = load_scene(scene_id, selected_set)
     obj = next(o for o in scene.objects if o.object_id == target_id)
     if kind == "ghost_motion":
         mesh = load_asset(str(resource(root(), obj.asset)), scene.asset_axes).to_geometry()
@@ -118,7 +123,9 @@ def splat_arrays(
     if cue.n_gaussians > 8192:
         raise ValueError("cue budget exceeds the declared nested pool capacity")
     cal = profile() if calibration is None else calibration
-    centers = local_cue_pool(scene.scene_id, cue.target_id, cue.cue_type)[: cue.n_gaussians].copy()
+    centers = local_cue_pool(scene.scene_id, cue.target_id, cue.cue_type, selected_set=scene.scene_set)[
+        : cue.n_gaussians
+    ].copy()
     if cue.action == "inspect_back":
         # The cached highlight pool defines the ring shape. Translate only this
         # private copy to the contracted inspection surface, leaving point cues

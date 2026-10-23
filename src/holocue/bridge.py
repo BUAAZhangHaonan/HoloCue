@@ -33,7 +33,7 @@ def frame(
     focus_m: float,
     brightness=1.0,
 ) -> dict:
-    if packet.scene_id != spec.scene_id:
+    if packet.scene_id != spec.scene_id or packet.scene_set != spec.scene_set:
         raise ValueError("frame scene mismatch")
     cues = []
     for cue in packet.cues:
@@ -60,6 +60,7 @@ def frame(
     return {
         "schema_version": "1.1",
         "scene_id": spec.scene_id,
+        "scene_set": spec.scene_set,
         "session_id": packet.session_id,
         "revision": packet.revision,
         "epoch": packet.epoch,

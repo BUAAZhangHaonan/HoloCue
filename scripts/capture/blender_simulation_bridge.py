@@ -66,12 +66,15 @@ class Consumer:
         self.cues = {}
         self.last_stamp = -1.0
         self.scene_id = bpy.context.scene["holocue_scene_id"]
+        self.scene_set = Path(bpy.data.filepath).parent.parent.name
+        if self.scene_set not in ("legacy", "reconstructed"):
+            raise ValueError("Native scene must be opened from its selected scene-set directory")
         self.session_id = None
         self.gate = VersionGate()
 
     def update(self):
         data = json.loads(self.path.read_text(encoding="utf-8"))
-        if data["scene_id"] != self.scene_id:
+        if data["scene_id"] != self.scene_id or data["scene_set"] != self.scene_set:
             raise ValueError("Blender scene and live frame disagree")
         if data["rgb_encoding"] != "linear_0_1":
             raise ValueError("unsupported live-frame color encoding")

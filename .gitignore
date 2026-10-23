@@ -8,7 +8,7 @@ __pycache__/
 models/
 runs/
 !runs/.gitkeep
-scenes/*/blend/*.blend1
+scenes/**/*.blend1
 verification/server_*/
 tools/gltf_validation/node_modules/
 

@@ -13,7 +13,7 @@ from scipy.spatial.transform import Rotation
 from vtk.util.numpy_support import numpy_to_vtk, vtk_to_numpy
 
 from holocue.assets import load_asset, resource
-from holocue.config import root, list_scenes, load_scene, load_policy
+from holocue.config import root, list_scenes, load_scene, load_policy, runtime_dir
 from holocue.models import CueSemantic, Decision, Session, Pose
 from holocue.projection import packet
 from holocue.render_validation import polydata
@@ -131,7 +131,7 @@ def ordered_steps(spec):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--out", type=Path, default=root() / "runs/simulation/geometry_audit.json")
+    parser.add_argument("--out", type=Path, default=runtime_dir() / "geometry_audit.json")
     parser.add_argument("--scenes", nargs="*")
     args = parser.parse_args()
     rows = []

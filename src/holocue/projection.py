@@ -83,6 +83,7 @@ def packet(s: Session, scene: SceneSpec, policy: dict) -> DisplayPacket:
     return DisplayPacket(
         session_id=s.session_id,
         scene_id=s.scene_id,
+        scene_set=scene.scene_set,
         revision=s.revision,
         epoch=s.epoch,
         execution=s.execution,

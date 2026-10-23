@@ -1,0 +1,803 @@
+{
+  "scenes": {
+    "dive_fillstation": {
+      "scene_json": {
+        "schema_version": "1.1",
+        "scene_id": "dive_fillstation",
+        "title": "无压充装装置识别与连接训练",
+        "asset_axes": "gltf_y_up",
+        "camera_position_m": [
+          1.9,
+          -2.6,
+          1.8
+        ],
+        "camera_look_at_m": [
+          0,
+          0.2,
+          0.95
+        ],
+        "initial_instruction": "核对 BOTTLE3 的训练编号，再演示接头 QRC 沿轴线移到 VALVE 对接位置，然后将训练拨杆 STEM 逆时针旋转 90 度，保留 GAUGES 提示。",
+        "render_hints": {
+          "workspace_bounds_m": [
+            [
+              -0.6,
+              -0.48,
+              0.05
+            ],
+            [
+              0.73,
+              0.83,
+              1.58
+            ]
+          ]
+        },
+        "objects": [
+          {
+            "object_id": "QRC",
+            "label": "无压训练接头",
+            "asset": "scenes/dive_fillstation/meshes/QRC.glb",
+            "recipe": "din_connector",
+            "size_m": [
+              0.058,
+              0.09,
+              0.058
+            ],
+            "pose": {
+              "position_m": [
+                0.55,
+                -0.3,
+                0.89
+              ]
+            },
+            "color": [
+              166,
+              179,
+              187
+            ],
+            "capabilities": [
+              "point",
+              "insert"
+            ],
+            "description": "训练接头前端朝 +Y，动作表示轴向接近。",
+            "interaction": {
+              "mating_pose": {
+                "position_m": [
+                  0,
+                  0.045,
+                  0
+                ]
+              },
+              "approach_axis_local": [
+                0,
+                -1,
+                0
+              ],
+              "approach_distance_m": 0.15,
+              "transit_height_m": 0.1
+            }
+          },
+          {
+            "object_id": "VALVE",
+            "label": "三号瓶阀训练接口",
+            "asset": "scenes/dive_fillstation/meshes/VALVE.glb",
+            "recipe": "valve",
+            "size_m": [
+              0.09,
+              0.075,
+              0.095
+            ],
+            "pose": {
+              "position_m": [
+                0.35,
+                0.06,
+                1.0
+              ]
+            },
+            "color": [
+              175,
+              156,
+              104
+            ],
+            "capabilities": [
+              "point"
+            ],
+            "anchors": {
+              "insertion": [
+                0,
+                -0.024,
+                0
+              ]
+            },
+            "description": "连接口朝 -Y，装置内部无压力。"
+          },
+          {
+            "object_id": "BOTTLE3",
+            "label": "三号训练瓶",
+            "asset": "scenes/dive_fillstation/meshes/BOTTLE3.glb",
+            "recipe": "cylinder",
+            "size_m": [
+              0.19,
+              0.19,
+              0.74
+            ],
+            "pose": {
+              "position_m": [
+                0.35,
+                0.06,
+                0.56
+              ]
+            },
+            "color": [
+              217,
+              176,
+              57
+            ],
+            "capabilities": [
+              "point",
+              "inspect_back"
+            ],
+            "description": "瓶体 +Y 面有 TRAINING BOTTLE3 编号，固定环保持瓶体稳定。",
+            "interaction": {
+              "detail_direction_local": [
+                -0.23892015112877915,
+                -0.9556806045151166,
+                0.17202250881272096
+              ],
+              "inspect_point_local_m": [
+                0,
+                0.094,
+                0.1628
+              ],
+              "inspect_normal_local": [
+                0,
+                1,
+                0
+              ],
+              "inspect_extent_m": [
+                0.19,
+                0.17
+              ]
+            }
+          },
+          {
+            "object_id": "BOTTLE1",
+            "label": "一号训练瓶",
+            "asset": "scenes/dive_fillstation/meshes/BOTTLE1.glb",
+            "recipe": "cylinder",
+            "size_m": [
+              0.19,
+              0.19,
+              0.74
+            ],
+            "pose": {
+              "position_m": [
+                -0.35,
+                0.06,
+                0.56
+              ]
+            },
+            "color": [
+              217,
+              176,
+              57
+            ],
+            "capabilities": [
+              "point",
+              "inspect_back"
+            ],
+            "interaction": {
+              "inspect_point_local_m": [
+                0,
+                0.094,
+                0.1628
+              ],
+              "inspect_normal_local": [
+                0,
+                1,
+                0
+              ],
+              "inspect_extent_m": [
+                0.19,
+                0.17
+              ]
+            }
+          },
+          {
+            "object_id": "BOTTLE2",
+            "label": "二号训练瓶",
+            "asset": "scenes/dive_fillstation/meshes/BOTTLE2.glb",
+            "recipe": "cylinder",
+            "size_m": [
+              0.19,
+              0.19,
+              0.74
+            ],
+            "pose": {
+              "position_m": [
+                0,
+                0.06,
+                0.56
+              ]
+            },
+            "color": [
+              217,
+              176,
+              57
+            ],
+            "capabilities": [
+              "point",
+              "inspect_back"
+            ],
+            "interaction": {
+              "inspect_point_local_m": [
+                0,
+                0.094,
+                0.1628
+              ],
+              "inspect_normal_local": [
+                0,
+                1,
+                0
+              ],
+              "inspect_extent_m": [
+                0.19,
+                0.17
+              ]
+            }
+          },
+          {
+            "object_id": "STEM",
+            "label": "三号训练拨杆",
+            "asset": "scenes/dive_fillstation/meshes/STEM.glb",
+            "recipe": "lever",
+            "size_m": [
+              0.09,
+              0.034,
+              0.12
+            ],
+            "pose": {
+              "position_m": [
+                0.34,
+                0.61,
+                1.25
+              ]
+            },
+            "color": [
+              183,
+              65,
+              52
+            ],
+            "capabilities": [
+              "point",
+              "rotate"
+            ],
+            "description": "无压训练拨杆，角度表达方向操作。",
+            "interaction": {
+              "rotation_axis_local": [
+                0,
+                -1,
+                0
+              ],
+              "cue_offset_local_m": [
+                0,
+                -0.05,
+                0
+              ]
+            }
+          },
+          {
+            "object_id": "GAUGES",
+            "label": "训练仪表组",
+            "asset": "scenes/dive_fillstation/meshes/GAUGES.glb",
+            "recipe": "gauges",
+            "size_m": [
+              0.4,
+              0.08,
+              0.16
+            ],
+            "pose": {
+              "position_m": [
+                0,
+                0.66,
+                1.55
+              ]
+            },
+            "color": [
+              172,
+              187,
+              197
+            ],
+            "capabilities": [
+              "point",
+              "wait"
+            ],
+            "description": "仪表显示教学状态，不驱动压力设备。"
+          }
+        ],
+        "environment": [
+          {
+            "prop_id": "workstation",
+            "asset": "scenes/dive_fillstation/meshes/env/workstation.glb"
+          }
+        ],
+        "task_contract": {
+          "setting": "与压力源断开的教学装置，进行标识检查与接头运动演示。",
+          "ordered_steps": [
+            {
+              "target_id": "BOTTLE3",
+              "action": "inspect_back",
+              "depth_requirement": "persistent"
+            },
+            {
+              "target_id": "QRC",
+              "action": "insert",
+              "reference_id": "VALVE"
+            },
+            {
+              "target_id": "STEM",
+              "action": "rotate",
+              "angle_deg": 90
+            }
+          ],
+          "persistent_targets": [
+            "GAUGES"
+          ],
+          "interrupt_target": "BOTTLE2",
+          "interrupt_instruction": "临时核对 BOTTLE2 的背面训练编号，保持原任务顺序。"
+        }
+      },
+      "exported_object_bounds": {
+        "QRC": [
+          [
+            -0.028535999357700348,
+            -0.03420000150799751,
+            -0.028535999357700348
+          ],
+          [
+            0.028535999357700348,
+            0.04455000162124634,
+            0.028535999357700348
+          ]
+        ],
+        "VALVE": [
+          [
+            -0.03150000050663948,
+            -0.03999999910593033,
+            -0.05652499943971634
+          ],
+          [
+            0.042500000447034836,
+            0.026249999180436134,
+            0.033250000327825546
+          ]
+        ],
+        "BOTTLE3": [
+          [
+            -0.09880000352859497,
+            -0.09880000352859497,
+            -0.3625999987125397
+          ],
+          [
+            0.09880000352859497,
+            0.09880000352859497,
+            0.3921999931335449
+          ]
+        ],
+        "BOTTLE1": [
+          [
+            -0.09880000352859497,
+            -0.09880000352859497,
+            -0.3625999987125397
+          ],
+          [
+            0.09880000352859497,
+            0.09880000352859497,
+            0.3921999931335449
+          ]
+        ],
+        "BOTTLE2": [
+          [
+            -0.09880000352859497,
+            -0.09880000352859497,
+            -0.3625999987125397
+          ],
+          [
+            0.09880000352859497,
+            0.09880000352859497,
+            0.3921999931335449
+          ]
+        ],
+        "STEM": [
+          [
+            -0.01600000075995922,
+            -0.07779999822378159,
+            -0.020400000736117363
+          ],
+          [
+            0.01600000075995922,
+            0.01600000075995922,
+            0.07559999823570251
+          ]
+        ],
+        "GAUGES": [
+          [
+            -0.20000000298023224,
+            -0.05180000141263008,
+            -0.07999999821186066
+          ],
+          [
+            0.20000000298023224,
+            0.03999999910593033,
+            0.07999999821186066
+          ]
+        ]
+      }
+    },
+    "infusion_ward": {
+      "scene_json": {
+        "schema_version": "1.1",
+        "scene_id": "infusion_ward",
+        "title": "输液设备训练台的装盒与标识检查",
+        "asset_axes": "gltf_y_up",
+        "camera_position_m": [
+          1.8,
+          -2.7,
+          1.9
+        ],
+        "camera_look_at_m": [
+          0,
+          0.23,
+          1.3
+        ],
+        "initial_instruction": "将训练泵盒 PUMPCASSETTE 装入 SLOT2，检查 BAG1 背面的 TRAINING A 标识，再把示教旋塞 STOPCOCK 顺时针转 90 度，保留 MONITOR 提示。",
+        "render_hints": {
+          "workspace_bounds_m": [
+            [
+              -0.74,
+              -0.45,
+              0.68
+            ],
+            [
+              0.4,
+              0.78,
+              2.04
+            ]
+          ]
+        },
+        "objects": [
+          {
+            "object_id": "PUMPCASSETTE",
+            "label": "训练泵盒",
+            "asset": "scenes/infusion_ward/meshes/PUMPCASSETTE.glb",
+            "recipe": "cassette",
+            "size_m": [
+              0.085,
+              0.048,
+              0.095
+            ],
+            "pose": {
+              "position_m": [
+                -0.45,
+                -0.22,
+                0.9975
+              ]
+            },
+            "color": [
+              114,
+              166,
+              152
+            ],
+            "capabilities": [
+              "point",
+              "insert"
+            ],
+            "description": "刚性训练泵盒，背面导向柱沿 +Y 进入槽位。",
+            "interaction": {
+              "mating_pose": {
+                "position_m": [
+                  0,
+                  0.024,
+                  0
+                ]
+              },
+              "approach_axis_local": [
+                0,
+                -1,
+                0
+              ],
+              "approach_distance_m": 0.13,
+              "transit_height_m": 0.13
+            }
+          },
+          {
+            "object_id": "SLOT2",
+            "label": "二号教学泵槽",
+            "asset": "scenes/infusion_ward/meshes/SLOT2.glb",
+            "recipe": "cassette_slot",
+            "size_m": [
+              0.103,
+              0.065,
+              0.116
+            ],
+            "pose": {
+              "position_m": [
+                0.05,
+                0.21,
+                1.3
+              ]
+            },
+            "color": [
+              144,
+              160,
+              172
+            ],
+            "capabilities": [
+              "point"
+            ],
+            "anchors": {
+              "insertion": [
+                0,
+                0.012,
+                0
+              ]
+            },
+            "description": "前方开口朝 -Y，导向柱与空腔尺寸配合。"
+          },
+          {
+            "object_id": "STOPCOCK",
+            "label": "教学三通旋塞",
+            "asset": "scenes/infusion_ward/meshes/STOPCOCK.glb",
+            "recipe": "stopcock",
+            "size_m": [
+              0.065,
+              0.045,
+              0.06
+            ],
+            "pose": {
+              "position_m": [
+                0.1,
+                0.15,
+                1.01
+              ]
+            },
+            "color": [
+              54,
+              119,
+              175
+            ],
+            "capabilities": [
+              "point",
+              "rotate"
+            ],
+            "description": "脱离临床管路的方向演示件，局部 -Y 为手柄转轴。",
+            "interaction": {
+              "rotation_axis_local": [
+                0,
+                -1,
+                0
+              ],
+              "cue_offset_local_m": [
+                0,
+                -0.045,
+                0
+              ]
+            }
+          },
+          {
+            "object_id": "BAG1",
+            "label": "训练袋 A",
+            "asset": "scenes/infusion_ward/meshes/BAG1.glb",
+            "recipe": "training_bag",
+            "size_m": [
+              0.14,
+              0.038,
+              0.23
+            ],
+            "pose": {
+              "position_m": [
+                0.22,
+                0.4,
+                1.78
+              ]
+            },
+            "color": [
+              185,
+              211,
+              216
+            ],
+            "capabilities": [
+              "point",
+              "inspect_back"
+            ],
+            "description": "背面 +Y 标注 TRAINING A，用于对象识别。",
+            "interaction": {
+              "inspect_point_local_m": [
+                0,
+                0.02,
+                0
+              ],
+              "inspect_normal_local": [
+                0,
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "object_id": "BAG2",
+            "label": "训练袋 B",
+            "asset": "scenes/infusion_ward/meshes/BAG2.glb",
+            "recipe": "training_bag",
+            "size_m": [
+              0.14,
+              0.038,
+              0.23
+            ],
+            "pose": {
+              "position_m": [
+                -0.17,
+                0.4,
+                1.78
+              ]
+            },
+            "color": [
+              191,
+              204,
+              221
+            ],
+            "capabilities": [
+              "point",
+              "inspect_back"
+            ],
+            "description": "背面 +Y 标注 TRAINING B，用于区分相似物体。",
+            "interaction": {
+              "inspect_point_local_m": [
+                0,
+                0.02,
+                0
+              ],
+              "inspect_normal_local": [
+                0,
+                1,
+                0
+              ]
+            }
+          },
+          {
+            "object_id": "MONITOR",
+            "label": "教学监视器",
+            "asset": "scenes/infusion_ward/meshes/MONITOR.glb",
+            "recipe": "instrument",
+            "size_m": [
+              0.3,
+              0.11,
+              0.23
+            ],
+            "pose": {
+              "position_m": [
+                -0.44,
+                0.62,
+                1.43
+              ]
+            },
+            "color": [
+              77,
+              99,
+              117
+            ],
+            "capabilities": [
+              "point",
+              "wait"
+            ],
+            "description": "显示训练步骤状态，场景内没有患者或药物决策。"
+          }
+        ],
+        "environment": [
+          {
+            "prop_id": "workstation",
+            "asset": "scenes/infusion_ward/meshes/env/workstation.glb"
+          }
+        ],
+        "task_contract": {
+          "setting": "与患者断开的医疗设备教学台，使用训练袋和机械示教部件。",
+          "ordered_steps": [
+            {
+              "target_id": "PUMPCASSETTE",
+              "action": "insert",
+              "reference_id": "SLOT2"
+            },
+            {
+              "target_id": "BAG1",
+              "action": "inspect_back",
+              "depth_requirement": "persistent"
+            },
+            {
+              "target_id": "STOPCOCK",
+              "action": "rotate",
+              "angle_deg": -90
+            }
+          ],
+          "persistent_targets": [
+            "MONITOR"
+          ],
+          "interrupt_target": "BAG2",
+          "interrupt_instruction": "临时查看 BAG2 背面的训练标识，保存原来的装盒与检查任务。"
+        }
+      },
+      "exported_object_bounds": {
+        "PUMPCASSETTE": [
+          [
+            -0.04399999976158142,
+            -0.02687999978661537,
+            -0.04749999940395355
+          ],
+          [
+            0.04399999976158142,
+            0.027499999850988388,
+            0.04749999940395355
+          ]
+        ],
+        "SLOT2": [
+          [
+            -0.051500000059604645,
+            -0.032499998807907104,
+            -0.057999998331069946
+          ],
+          [
+            0.051500000059604645,
+            0.032499998807907104,
+            0.057999998331069946
+          ]
+        ],
+        "STOPCOCK": [
+          [
+            -0.032499998807907104,
+            -0.02474999986588955,
+            -0.008999999612569809
+          ],
+          [
+            0.032499998807907104,
+            0.012500000186264515,
+            0.026399999856948853
+          ]
+        ],
+        "BAG1": [
+          [
+            -0.07000000029802322,
+            -0.019999999552965164,
+            -0.12520000338554382
+          ],
+          [
+            0.07000000029802322,
+            0.019999999552965164,
+            0.12929999828338623
+          ]
+        ],
+        "BAG2": [
+          [
+            -0.07000000029802322,
+            -0.019999999552965164,
+            -0.12520000338554382
+          ],
+          [
+            0.07000000029802322,
+            0.019999999552965164,
+            0.12929999828338623
+          ]
+        ],
+        "MONITOR": [
+          [
+            -0.15000000596046448,
+            -0.061500001698732376,
+            -0.11500000208616257
+          ],
+          [
+            0.15000000596046448,
+            0.05700000002980232,
+            0.11500000208616257
+          ]
+        ]
+      }
+    }
+  }
+}

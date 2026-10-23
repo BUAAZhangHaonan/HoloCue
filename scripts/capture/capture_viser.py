@@ -3,10 +3,11 @@
 import argparse, os
 from pathlib import Path
 from playwright.sync_api import sync_playwright
+from holocue.config import runtime_dir
 
 p = argparse.ArgumentParser()
 p.add_argument("--url", default="http://127.0.0.1:8780")
-p.add_argument("--out", default="runs/viser_actual.png")
+p.add_argument("--out", default=str(runtime_dir() / "viser_actual.png"))
 a = p.parse_args()
 os.environ["CUDA_VISIBLE_DEVICES"] = ""
 Path(a.out).parent.mkdir(parents=True, exist_ok=True)

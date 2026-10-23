@@ -11,7 +11,7 @@ import sys
 
 from PIL import Image
 
-from holocue.config import root, list_scenes
+from holocue.config import root, list_scenes, runtime_dir
 
 
 def main():
@@ -21,7 +21,7 @@ def main():
     args = parser.parse_args()
     if not 1 <= args.workers <= 2:
         raise ValueError("use one or two CPU render workers")
-    output = root() / "runs/simulation/rendered"
+    output = runtime_dir() / "rendered"
     output.mkdir(parents=True, exist_ok=True)
     available = [entry["scene_id"] for entry in list_scenes()]
     scenes = args.scenes or available

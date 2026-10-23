@@ -14,24 +14,24 @@ import numpy as np
 from PIL import Image
 import trimesh
 
-ROOT = Path(__file__).resolve().parents[2]
+from holocue.config import root, list_scenes, scene_dir, runtime_dir
+
+ROOT = root()
 
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--rendered", type=Path, default=ROOT / "runs/simulation/rendered")
+    parser.add_argument("--rendered", type=Path, default=runtime_dir() / "rendered")
     parser.add_argument(
         "--flat-rendered",
         action="store_true",
         help="Read validate_renderings.py output directly, without scene subdirectories",
     )
-    parser.add_argument("--geometry", type=Path, default=ROOT / "runs/simulation/geometry_audit.json")
-    parser.add_argument("--junit", type=Path, default=ROOT / "runs/simulation/domain_tests.xml")
-    parser.add_argument("--out", type=Path, default=ROOT / "runs/simulation/independent_check.json")
+    parser.add_argument("--geometry", type=Path, default=runtime_dir() / "geometry_audit.json")
+    parser.add_argument("--junit", type=Path, default=runtime_dir() / "domain_tests.xml")
+    parser.add_argument("--out", type=Path, default=runtime_dir() / "independent_check.json")
     args = parser.parse_args()
-    manifests = [
-        p for p in sorted((ROOT / "scenes").glob("*/scene.json")) if not p.parent.name.startswith("_")
-    ]
+    manifests = [scene_dir(item["scene_id"]) / "scene.json" for item in list_scenes()]
     if len(manifests) != 12:
         raise AssertionError("expected twelve scene manifests")
     files = []

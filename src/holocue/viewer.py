@@ -14,7 +14,7 @@ import httpx
 import numpy as np
 import viser
 
-from .config import root, load_scene, list_scenes
+from .config import root, load_scene, list_scenes, runtime_dir, scene_set, SCENE_SETS
 from .models import DisplayPacket, Session
 from .presentation import object_summary, session_status, ROLE_TEXT
 from .response import profile
@@ -49,7 +49,7 @@ class Operator:
         self.state = None
         self.generation = 0
         self.last_view_export = 0.0
-        self.log_dir = root() / "runs/simulation/viewer"
+        self.log_dir = runtime_dir() / "viewer"
         self.log_dir.mkdir(parents=True, exist_ok=True)
         self.log_file = self.log_dir / f"client_{client.client_id}.jsonl"
         choices = list_scenes()
@@ -57,6 +57,7 @@ class Operator:
         initial_id = os.environ.get("HOLOCUE_INITIAL_SCENE", choices[0]["scene_id"])
         initial = next(s for s in choices if s["scene_id"] == initial_id)
         gui = client.gui
+        gui.add_markdown(f"场景版本：**{scene_set()}**")
         self.status = gui.add_markdown("连接场景服务")
         tabs = gui.add_tab_group()
         with tabs.add_tab("任务"):
@@ -248,11 +249,16 @@ class Operator:
             self.loaded = False
             self.generation += 1
             generation = self.generation
+        health = self.request("GET", "/health")
+        if health["scene_set"] != scene_set():
+            raise ValueError("Viser and API must select the same scene set")
         if sid:
             state = self.request("GET", f"/api/v1/sessions/{sid}")
         else:
             state = self.request("POST", "/api/v1/sessions", json={"scene_id": scene_id})
-        spec = load_scene(state["scene_id"])
+        if state["scene_set"] != scene_set():
+            raise ValueError("Session belongs to another scene set")
+        spec = load_scene(state["scene_id"], state["scene_set"])
         with self.lock:
             if generation != self.generation:
                 return
@@ -276,7 +282,7 @@ class Operator:
             self.focus.value = self.renderer.focus_distance(self.target.value)
             self.status.content = spec.title + "\n\n会话 " + self.sid
             self.refresh_object_summary()
-            self.record("scene_loaded", {"scene_id": spec.scene_id})
+            self.record("scene_loaded", {"scene_id": spec.scene_id, "scene_set": spec.scene_set})
 
     def submit(self, text):
         if not text.strip():
@@ -434,6 +440,7 @@ class Operator:
                         {
                             "session_id": self.sid,
                             "scene_id": self.renderer.spec.scene_id,
+                            "scene_set": self.renderer.spec.scene_set,
                             "revision": self.revision,
                             "epoch": self.epoch,
                             "execution": self.packet.execution if self.packet else "loading",
@@ -466,7 +473,9 @@ def main():
     parser.add_argument("--api", default="http://127.0.0.1:8750")
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=8780)
+    parser.add_argument("--scene-set", choices=SCENE_SETS, default=scene_set())
     args = parser.parse_args()
+    os.environ["HOLOCUE_SCENE_SET"] = args.scene_set
     if args.host not in ("127.0.0.1", "localhost", "::1"):
         raise ValueError("Use a loopback address and an SSH tunnel for the viewer")
     server = viser.ViserServer(host=args.host, port=args.port)

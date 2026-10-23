@@ -6,6 +6,7 @@ import argparse
 import json
 import math
 import os
+import struct
 from pathlib import Path
 import sys
 
@@ -14,6 +15,8 @@ from mathutils import Matrix, Quaternion, Vector
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "src"))
+from holocue.config import scene_dir, scene_set, SCENE_SETS
 from scripts.scenes.build_provenance import file_record, output_root, write_report
 
 
@@ -41,11 +44,51 @@ def import_asset(label, asset, pose, scale=(1, 1, 1)):
     return parent
 
 
+def restore_optical_glass(parent, asset):
+    """Read the optical GLB extensions omitted by Blender 3.1's importer."""
+    data = (ROOT / asset).read_bytes()
+    if data[:4] != b"glTF":
+        raise ValueError("Optical glass must be imported from its source GLB")
+    size, kind = struct.unpack_from("<II", data, 12)
+    if kind != 0x4E4F534A:
+        raise ValueError("Optical GLB is missing its JSON chunk")
+    source = json.loads(data[20 : 20 + size])
+    optical = [
+        material
+        for material in source["materials"]
+        if "KHR_materials_transmission" in material.get("extensions", {})
+    ]
+    if len(optical) != 1:
+        raise ValueError("Expected one physical glass material in " + asset)
+    source_material = optical[0]
+    name = source_material["name"]
+    materials = {
+        slot.material
+        for obj in parent.children_recursive
+        for slot in obj.material_slots
+        if slot.material and (slot.material.name == name or slot.material.name.startswith(name + "."))
+    }
+    if len(materials) != 1:
+        raise ValueError("Imported optical material is missing or ambiguous: " + name)
+    material = materials.pop()
+    shaders = [node for node in material.node_tree.nodes if node.type == "BSDF_PRINCIPLED"]
+    if len(shaders) != 1:
+        raise ValueError("Expected one imported Principled shader for " + name)
+    extensions = source_material["extensions"]
+    shader = shaders[0]
+    shader.inputs["Transmission"].default_value = extensions["KHR_materials_transmission"][
+        "transmissionFactor"
+    ]
+    shader.inputs["IOR"].default_value = extensions["KHR_materials_ior"]["ior"]
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--scene", required=True)
     parser.add_argument("--render", action="store_true")
+    parser.add_argument("--scene-set", choices=SCENE_SETS, default=scene_set())
     args = parser.parse_args(sys.argv[sys.argv.index("--") + 1 :])
+    os.environ["HOLOCUE_SCENE_SET"] = args.scene_set
     temp = Path(os.environ["TMPDIR"]).resolve()
     if not temp.is_relative_to(ROOT):
         raise ValueError("TMPDIR must be inside the project directory")
@@ -58,12 +101,20 @@ def main():
         if file_record(ROOT / record["path"]) != record:
             raise ValueError("Build input changed after payload export: " + record["path"])
     spec = payload["scene"]
+    if spec["scene_set"] != scene_set():
+        raise ValueError("Blender payload belongs to another scene set")
     if spec["asset_axes"] != "gltf_y_up":
         raise ValueError("Blender builder requires standard Y-up glTF")
     bpy.ops.object.select_all(action="SELECT")
     bpy.ops.object.delete(use_global=False)
     for obj in spec["objects"]:
-        import_asset("HC_OBJECT_" + obj["object_id"], obj["asset"], obj["pose"])
+        parent = import_asset("HC_OBJECT_" + obj["object_id"], obj["asset"], obj["pose"])
+        if (
+            spec["scene_set"] == "reconstructed"
+            and spec["scene_id"] == "optical_bench"
+            and obj["object_id"] in {"L1", "L2"}
+        ):
+            restore_optical_glass(parent, obj["asset"])
     for env in spec["environment"]:
         import_asset("HC_ENV_" + env["prop_id"], env["asset"], env["pose"], env["scale_m"])
     camera_data = bpy.data.cameras.new("HoloCueCamera")
@@ -112,9 +163,10 @@ def main():
     scene.view_settings.view_transform = "Filmic"
     scene.view_settings.look = "Medium High Contrast"
     scene["holocue_scene_id"] = spec["scene_id"]
+    scene["holocue_scene_set"] = spec["scene_set"]
     scene["holocue_asset_axes"] = "gltf_y_up"
     scene["holocue_renderer"] = "analytic_gaussian_preview"
-    output = ROOT / "scenes" / spec["scene_id"] / "scene.blend"
+    output = scene_dir(spec["scene_id"], spec["scene_set"]) / "scene.blend"
     bpy.ops.wm.save_as_mainfile(filepath=str(output))
     report = {
         "scene_id": spec["scene_id"],

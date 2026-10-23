@@ -120,6 +120,7 @@ class TaskContract(Strict):
 
 
 class SceneSpec(Strict):
+    scene_set: Literal["legacy", "reconstructed"] = "reconstructed"
     schema_version: Literal["1.0", "1.1"] = "1.1"
     scene_id: str
     title: str
@@ -208,6 +209,7 @@ class Task(Strict):
 
 
 class Session(Strict):
+    scene_set: Literal["legacy", "reconstructed"] = "reconstructed"
     session_id: str
     scene_id: str
     scene_fingerprint: str = ""
@@ -258,6 +260,7 @@ class DisplayCue(Strict):
 
 
 class DisplayPacket(Strict):
+    scene_set: Literal["legacy", "reconstructed"] = "reconstructed"
     schema_version: Literal["1.0", "1.1"] = "1.1"
     session_id: str
     scene_id: str

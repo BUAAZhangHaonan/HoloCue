@@ -9,7 +9,7 @@ from pathlib import Path
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
-from holocue.config import root, list_scenes, load_scene, load_policy
+from holocue.config import root, list_scenes, load_scene, load_policy, runtime_dir
 from holocue.models import CueSemantic, Decision, Session
 from holocue.projection import packet
 from holocue.response import splat_arrays, camera_aligned_rgba, profile, envelope
@@ -116,7 +116,7 @@ def response_evidence(output):
 
 
 def main():
-    output = root() / "runs/simulation/rendered"
+    output = runtime_dir() / "rendered"
     output.mkdir(parents=True, exist_ok=True)
     response_evidence(output)
     ids = [s["scene_id"] for s in list_scenes()]

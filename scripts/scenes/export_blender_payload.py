@@ -3,13 +3,14 @@
 from __future__ import annotations
 
 import argparse
+import os
 import numpy as np
 from PIL import Image
 
 from holocue import camera
 from holocue.assets import load_asset, resource
 from holocue.bridge import atomic_json
-from holocue.config import root, load_scene, list_scenes
+from holocue.config import root, load_scene, list_scenes, scene_set, SCENE_SETS
 from holocue.spatial import transform_points
 from scripts.scenes.build_provenance import inputs, output_root
 
@@ -17,7 +18,9 @@ from scripts.scenes.build_provenance import inputs, output_root
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--scenes", nargs="*")
+    parser.add_argument("--scene-set", choices=SCENE_SETS, default=scene_set())
     args = parser.parse_args()
+    os.environ["HOLOCUE_SCENE_SET"] = args.scene_set
     for sid in args.scenes or [x["scene_id"] for x in list_scenes()]:
         spec = load_scene(sid)
         points = []

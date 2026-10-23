@@ -6,12 +6,14 @@ from pathlib import Path
 from contextlib import contextmanager
 from uuid import uuid4
 from .models import Session, UserMessage, Decision, SceneSpec
-from .state import ConflictError, apply_decision
+from .state import ConflictError, DomainError, apply_decision
+from .config import scene_set
 
 
 class Store:
     def __init__(self, path: Path):
         self.path = Path(path)
+        self._scene_set = None
         self.path.parent.mkdir(parents=True, exist_ok=True)
         with self.connection() as c:
             c.executescript("""
@@ -34,13 +36,50 @@ class Store:
         finally:
             c.close()
 
+    def _stored_scene_set(self, c):
+        table = c.execute(
+            "SELECT 1 FROM sqlite_master WHERE type='table' AND name='store_metadata'"
+        ).fetchone()
+        if table is None:
+            return None
+        row = c.execute("SELECT value FROM store_metadata WHERE key='scene_set'").fetchone()
+        return row["value"] if row else None
+
+    def _check_session_scene_set(self, c, value):
+        stored = self._stored_scene_set(c)
+        if self._scene_set is not None and stored != self._scene_set:
+            raise DomainError("State database scene set binding has changed")
+        expected = self._scene_set or stored
+        if expected is not None and value != expected:
+            raise DomainError("Session belongs to another scene set than this state database")
+
+    def _bind_scene_set(self, c, selected):
+        stored = self._stored_scene_set(c)
+        if stored is not None and stored != selected:
+            raise DomainError(f"State database belongs to scene set {stored!r}, not {selected!r}")
+        # Inspect raw records: a missing tag must not silently take the model default.
+        for row in c.execute("SELECT data FROM sessions"):
+            if json.loads(row["data"]).get("scene_set") != selected:
+                raise DomainError("State database has another, mixed, or missing session scene set")
+        for table in ("jobs", "events"):
+            orphan = c.execute(
+                f"SELECT 1 FROM {table} r LEFT JOIN sessions s ON s.id=r.session_id WHERE s.id IS NULL LIMIT 1"
+            ).fetchone()
+            if orphan is not None:
+                raise DomainError("State database has records without a versioned session")
+        c.execute("CREATE TABLE IF NOT EXISTS store_metadata(key TEXT PRIMARY KEY, value TEXT NOT NULL)")
+        c.execute("INSERT OR IGNORE INTO store_metadata(key,value) VALUES('scene_set',?)", (selected,))
+
     def _read(self, c, sid):
         r = c.execute("SELECT data FROM sessions WHERE id=?", (sid,)).fetchone()
         if r is None:
             raise KeyError(sid)
-        return Session.model_validate_json(r["data"])
+        data = json.loads(r["data"])
+        self._check_session_scene_set(c, data.get("scene_set"))
+        return Session.model_validate(data)
 
     def _save(self, c, s):
+        self._check_session_scene_set(c, s.scene_set)
         c.execute("INSERT OR REPLACE INTO sessions(id,data) VALUES(?,?)", (s.session_id, s.model_dump_json()))
 
     def _event(self, c, sid, kind, data):
@@ -49,10 +88,11 @@ class Store:
             (sid, time.time(), kind, json.dumps(data, ensure_ascii=False)),
         )
 
-    def create(self, scene_id, backend_mode, scene_fingerprint=""):
+    def create(self, scene_id, backend_mode, scene_fingerprint="", selected_set="reconstructed"):
         s = Session(
             session_id=uuid4().hex,
             scene_id=scene_id,
+            scene_set=selected_set,
             backend_mode=backend_mode,
             scene_fingerprint=scene_fingerprint,
         )
@@ -162,6 +202,7 @@ class Store:
             r = c.execute("SELECT * FROM jobs WHERE id=?", (jid,)).fetchone()
             if r is None:
                 raise KeyError(jid)
+            self._read(c, r["session_id"])
             x = dict(r)
             x["data"] = json.loads(x["data"])
             x.pop("fingerprint")
@@ -180,10 +221,12 @@ class Store:
                 for r in c.execute("SELECT * FROM events WHERE session_id=? ORDER BY seq", (sid,))
             ]
 
-    def recover(self):
-        """Restart is visible; persisted actions are paused, never silently replayed."""
+    def recover(self, selected_set=None):
+        """Bind one scene set before atomically pausing interrupted persisted actions."""
+        selected = scene_set(selected_set)
         with self.connection() as c:
             c.execute("BEGIN IMMEDIATE")
+            self._bind_scene_set(c, selected)
             for r in list(c.execute("SELECT data FROM sessions")):
                 s = Session.model_validate_json(r["data"])
                 if s.execution in ("running", "planning"):
@@ -193,3 +236,4 @@ class Store:
                     s.assistant_message = "服务已重启，任务已保留。请确认继续。"
                     self._save(c, s)
             c.execute("UPDATE jobs SET status='interrupted' WHERE status='planning'")
+        self._scene_set = selected

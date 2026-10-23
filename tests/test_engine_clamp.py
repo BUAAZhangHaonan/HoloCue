@@ -9,6 +9,7 @@ import vtk
 from vtk.util.numpy_support import numpy_to_vtk, vtk_to_numpy
 from holocue.assets import load_asset
 from holocue.config import load_scene
+from scene_contract_paths import fixture_scene_paths
 from holocue.glb_attributes import exported_normals
 from holocue.modeling import make_environment, make_object, engine_hose_solids, cad_mesh
 from holocue.models import SceneSpec
@@ -159,7 +160,11 @@ def engine(tmp_path_factory):
 
 
 def test_engine_contract_unchanged(engine):
-    assert engine["spec"] == SceneSpec.model_validate(engine["baseline"]["scene"])
+    spec = engine["spec"]
+    original = SceneSpec.model_validate(engine["baseline"]["scene"])
+    # Selection metadata did not exist in the immutable fixture.
+    original.scene_set = spec.scene_set
+    assert fixture_scene_paths(spec) == original
 
 
 def test_only_authorized_nodes_change_and_materials_stay(engine):

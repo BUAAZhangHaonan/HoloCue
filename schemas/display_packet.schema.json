@@ -307,6 +307,31 @@
           "title": "Inspect Cue Clearance M",
           "type": "number"
         },
+        "detail_direction_local": {
+          "anyOf": [
+            {
+              "maxItems": 3,
+              "minItems": 3,
+              "prefixItems": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                }
+              ],
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Detail Direction Local"
+        },
         "cue_offset_local_m": {
           "default": [
             0.0,
@@ -397,6 +422,15 @@
   },
   "additionalProperties": false,
   "properties": {
+    "scene_set": {
+      "default": "reconstructed",
+      "enum": [
+        "legacy",
+        "reconstructed"
+      ],
+      "title": "Scene Set",
+      "type": "string"
+    },
     "schema_version": {
       "default": "1.1",
       "enum": [

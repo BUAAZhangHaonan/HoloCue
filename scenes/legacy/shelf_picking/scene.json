@@ -1,0 +1,237 @@
+{
+  "schema_version": "1.1",
+  "scene_id": "shelf_picking",
+  "title": "货架拣选与包裹核验",
+  "asset_axes": "gltf_y_up",
+  "camera_position_m": [
+    2.5,
+    -3.4,
+    2.35
+  ],
+  "camera_look_at_m": [
+    0.42,
+    0.45,
+    0.94
+  ],
+  "initial_instruction": "将第二层的 RED 放入 BASKET，随后检查已放在检验台上的 BLUE 背面面单，并保留 CONV 与 GREEN 的状态提示。",
+  "render_hints": {
+    "workspace_bounds_m": [
+      [
+        -0.74,
+        -0.85,
+        0.25
+      ],
+      [
+        1.33,
+        1.23,
+        1.98
+      ]
+    ]
+  },
+  "objects": [
+    {
+      "object_id": "RED",
+      "label": "红色包裹",
+      "asset": "scenes/legacy/shelf_picking/meshes/RED.glb",
+      "recipe": "parcel",
+      "size_m": [
+        0.25,
+        0.2,
+        0.16
+      ],
+      "pose": {
+        "position_m": [
+          -0.34,
+          0.26,
+          1.11
+        ]
+      },
+      "color": [
+        183,
+        65,
+        49
+      ],
+      "capabilities": [
+        "point",
+        "assemble"
+      ],
+      "description": "包裹沿货架前方退出，离开层板后抬升并移向拣选篮。",
+      "interaction": {
+        "mating_pose": {
+          "position_m": [
+            0,
+            0,
+            -0.08
+          ]
+        },
+        "departure_axis_local": [
+          0,
+          -1,
+          0
+        ],
+        "departure_distance_m": 0.43,
+        "approach_distance_m": 0.24,
+        "transit_height_m": 0.11
+      }
+    },
+    {
+      "object_id": "BLUE",
+      "label": "蓝色周转箱",
+      "asset": "scenes/legacy/shelf_picking/meshes/BLUE.glb",
+      "recipe": "crate",
+      "size_m": [
+        0.28,
+        0.22,
+        0.18
+      ],
+      "pose": {
+        "position_m": [
+          0.64,
+          -0.14,
+          0.93
+        ]
+      },
+      "color": [
+        45,
+        109,
+        160
+      ],
+      "capabilities": [
+        "point",
+        "rotate",
+        "inspect_back"
+      ],
+      "description": "独立检验台上的周转箱，+Y 面具有大尺寸面单。",
+      "interaction": {
+        "inspect_cue_clearance_m": 0.005,
+        "inspect_point_local_m": [
+          0,
+          0.112,
+          0
+        ],
+        "inspect_normal_local": [
+          0,
+          1,
+          0
+        ]
+      }
+    },
+    {
+      "object_id": "BASKET",
+      "label": "拣选篮",
+      "asset": "scenes/legacy/shelf_picking/meshes/BASKET.glb",
+      "recipe": "tray",
+      "size_m": [
+        0.38,
+        0.3,
+        0.2
+      ],
+      "pose": {
+        "position_m": [
+          -0.25,
+          -0.62,
+          0.91
+        ]
+      },
+      "color": [
+        68,
+        119,
+        128
+      ],
+      "capabilities": [
+        "point"
+      ],
+      "anchors": {
+        "placement": [
+          0,
+          0,
+          -0.085
+        ]
+      },
+      "description": "带推车支承，内腔尺寸能够容纳 RED，放置接触面对应篮内底板的上表面。"
+    },
+    {
+      "object_id": "CONV",
+      "label": "输送带状态面板",
+      "asset": "scenes/legacy/shelf_picking/meshes/CONV.glb",
+      "recipe": "instrument",
+      "size_m": [
+        0.17,
+        0.1,
+        0.12
+      ],
+      "pose": {
+        "position_m": [
+          1.12,
+          0.02,
+          1.02
+        ]
+      },
+      "color": [
+        109,
+        126,
+        133
+      ],
+      "capabilities": [
+        "point",
+        "wait"
+      ],
+      "description": "输送带旁的训练状态面板。"
+    },
+    {
+      "object_id": "GREEN",
+      "label": "绿色到位箱",
+      "asset": "scenes/legacy/shelf_picking/meshes/GREEN.glb",
+      "recipe": "parcel",
+      "size_m": [
+        0.23,
+        0.23,
+        0.2
+      ],
+      "pose": {
+        "position_m": [
+          1.08,
+          0.6,
+          0.96
+        ]
+      },
+      "color": [
+        59,
+        143,
+        85
+      ],
+      "capabilities": [
+        "point",
+        "wait"
+      ],
+      "description": "已静止在输送带端部，可进行到位确认。"
+    }
+  ],
+  "environment": [
+    {
+      "prop_id": "workstation",
+      "asset": "scenes/legacy/shelf_picking/meshes/env/workstation.glb"
+    }
+  ],
+  "task_contract": {
+    "setting": "静止输送设备与人工拣选教学区。",
+    "ordered_steps": [
+      {
+        "target_id": "RED",
+        "action": "assemble",
+        "reference_id": "BASKET"
+      },
+      {
+        "target_id": "BLUE",
+        "action": "inspect_back",
+        "depth_requirement": "persistent"
+      }
+    ],
+    "persistent_targets": [
+      "CONV",
+      "GREEN"
+    ],
+    "interrupt_target": "BLUE",
+    "interrupt_instruction": "临时查看 BLUE 的面单，保持 RED 的拣选计划。"
+  }
+}

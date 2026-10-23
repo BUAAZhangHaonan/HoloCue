@@ -7,6 +7,7 @@ import pytest
 import trimesh
 from holocue.assets import load_asset
 from holocue.config import root, load_scene
+from scene_contract_paths import fixture_scene_paths
 from holocue.modeling import make_object
 from holocue.models import Pose, SceneSpec
 from holocue.spatial import matrix
@@ -91,7 +92,9 @@ def test_original_optical_task_camera_and_object_contracts_are_unchanged(lenses)
     spec, _, _ = lenses
     original = SceneSpec.model_validate(json.loads((FIXTURE / "scene.json").read_text()))
     original.render_hints.environment_wxyz = spec.render_hints.environment_wxyz
-    assert spec == original
+    # Selection metadata did not exist in the immutable fixture.
+    original.scene_set = spec.scene_set
+    assert fixture_scene_paths(spec) == original
 
 
 @pytest.mark.parametrize("oid", ["L1", "L2"])

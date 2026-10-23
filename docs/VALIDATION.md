@@ -1,6 +1,6 @@
 # 验证标准
 
-所有验收使用当前服务器代码和本次新建的运行目录。压缩包中的沙箱证据作为迁移参考，原生验收结果保存到 `runs/simulation/acceptance_*`。每次失败保留原始日志与模型回复，修复后另建目录重跑。
+所有验收使用当前服务器代码和本次新建的运行目录。默认选 reconstructed，旧版 legacy 保留独立入口和一致目录结构。本次只分批运行新版十二场景 E2E，不进行新旧 E2E 对照。压缩包中的沙箱证据作为迁移参考；当前 RUN_DIR 为 runs/simulation/reconstructed_qwen35_4b，服务、Viser、桥接及报告共同使用该目录。失败保留原始日志与模型回复，修复后的尝试使用新的证据子目录。
 
 ## 验收内容
 
@@ -17,9 +17,11 @@
 
 碰撞检查对实际 glTF 网格的独立副本合并重复顶点并清除退化三角面，随后检查闭合性与面方向；不填补孔洞，也不改写资产。报告逐个列出障碍部件的原始拓扑、规范化后的拓扑和覆盖状态。只有明确的文字标签平面排除在实体障碍之外；任何其他未闭合实体或穿透采样都会使检查失败，不能把未检查的障碍计入零穿透结论。
 
+重构素材包含开放曲面；上述 audit_geometry.py 的闭合实体标准和采样方法保持不变，开放障碍会被如实记为覆盖失败。本次另以实际任务快照生成真实三角表面与闭体包含报告，记录其采样、容差和未覆盖范围；它不能将原闭体检查的失败改写为通过，也不能替代真实任务、Viser 与原生渲染验收。
+
 ## 4029 运行环境
 
-先设置 README 中的项目内部临时目录与缓存，加载本次保存的 `.work/task_env.sh`。模型使用物理 GPU 1；同会话 Blender Cycles 使用物理 GPU 2，资源守卫将物理编号映射为 UUID。应用、Chromium 与 VTK 使用软件渲染。Blender 保留 48 个采样，桥接透明反弹上限为 1024，Gaussian 透明度使用浮点属性。
+先设置 README 中的项目内部临时目录与缓存，并加载本次保存的任务环境。resource_guard 默认仅允许物理 GPU 1、2；本次用户授权通过 HOLOCUE_AUTHORIZED_GPUS=1,2,4,5,6,7 显式传入，不改变其他部署默认。当前模型使用物理 GPU 1，同会话原生桥接显式使用 --render-gpu 4（默认仍为 2），静态图像采集使用物理 GPU 7；其结束后，后续批次的两个场景分别在 GPU 4、7 上运行独立桥接客户端，渲染采样和核对标准一致。资源守卫将授权物理编号映射为 UUID。应用、Chromium 与 VTK 使用软件渲染。Blender 保留 48 个采样，桥接透明反弹上限为 1024，Gaussian 透明度使用浮点属性。
 
 桥接使用原生 Cycles 渲染与原生合成器。每个提示层最多包含 768 个完整 Gaussian 平面，保留全部点和原始顶点、半径、浮点透明度及颜色；实际场景以 holdout 保留遮挡。同色段中，共面且屏幕矩形重叠的平面分配到不同原生渲染层；没有共面冲突的段采用深度交错分组。分组只改变渲染批次，不改变几何。同色透明层的 AlphaOver 可交换，不同颜色段仍保持从远到近的顺序。提示层最少透明反弹为 768，关闭仅作用于颜色的去噪，基础场景保持原有设置。每次保存各层线性 32 位 EXR、成员清单与摘要。合成器每批最多加载 16 个提示层与 1 个累积图层，保存线性中间结果并释放图像，再继续下一批；最终 PNG 仅应用一次显示变换。不能使用曾出现黑块或灰边界的诊断图像作为通过证据。
 
@@ -34,10 +36,10 @@ SHA256 d961bee304d032b7a3f626239366bbe36c4481adb5699813389cdbd08d682269
 
 ## 执行命令
 
-以下命令在项目根目录执行，先 `source .work/task_env.sh`。所有长进程由 `scripts/guard/resource_guard.py` 包裹；应用与测试上限 8 GiB，原生渲染进程树上限 12 GiB，模型上限 32 GiB，主机预留至少 32 GiB 和总内存 20% 中的较大值。
+以下命令在项目根目录执行，先 source .work/two_scene_rebuild/task_env.sh 加载本次任务环境，设置 HOLOCUE_SCENE_SET=reconstructed 和独立 RUN_DIR；本次过程环境与缓存位于 .work/two_scene_rebuild/，启动脚本保留调用方设置。所有长进程由 `scripts/guard/resource_guard.py` 包裹；应用与测试上限 8 GiB，原生渲染进程树上限 12 GiB，模型上限 32 GiB，主机预留至少 32 GiB 和总内存 20% 中的较大值。
 
 ```bash
-"$APP_PYTHON" -m pytest --basetemp=.work/pytest --junitxml=runs/simulation/domain_tests.xml
+"$APP_PYTHON" -m pytest --basetemp=.work/pytest --junitxml="$RUN_DIR/domain_tests.xml"
 "$APP_PYTHON" scripts/scenes/check_scene_kit.py --require-blender
 "$APP_PYTHON" scripts/tests/audit_geometry.py
 LD_PRELOAD=/lib/x86_64-linux-gnu/libstdc++.so.6 "$APP_PYTHON" scripts/scenes/run_visual_batch.py
@@ -46,13 +48,13 @@ LD_PRELOAD=/lib/x86_64-linux-gnu/libstdc++.so.6 "$APP_PYTHON" scripts/scenes/run
 "$APP_PYTHON" scripts/tests/live_twelve_scenes.py --out "$RUN_DIR/live"
 "$APP_PYTHON" -m scripts.tests.audit_viewer_live --out "$RUN_DIR/browser"
 "$APP_PYTHON" -m scripts.tests.audit_response_live --out "$RUN_DIR/response"
-"$APP_PYTHON" -m scripts.tests.audit_bridge_live --out "$RUN_DIR/bridge"
+"$APP_PYTHON" -m scripts.tests.audit_bridge_live --render-gpu 4 --out "$RUN_DIR/bridge"
 "$APP_PYTHON" -m scripts.tests.audit_resilience_live --out "$RUN_DIR/resilience"
 ```
 
-故障验收需要其他会话、导出器与桥接停止使用 API 后单独执行。先加载 `.work/task_env.sh`，在独立资源守卫下运行 `"$APP_PYTHON" -m scripts.tests.audit_resilience_live --faults --api-service <当前本次记录的API服务名> --out "$RUN_DIR/resilience_faults_<新的目录名>"`。模型连接失败使用本机绑定但未监听的独占端口产生真实连接拒绝；必须同时记录页面错误、任务错误与停止的动作时钟。恢复真实模型连接后仍须由页面显式发送指令，真实模型成功回复才算恢复验证通过。
+故障验收需要其他会话、导出器与桥接停止使用 API 后单独执行。先加载 `.work/two_scene_rebuild/task_env.sh`，在独立资源守卫下运行 `"$APP_PYTHON" -m scripts.tests.audit_resilience_live --faults --task-env .work/two_scene_rebuild/task_env.sh --stop-helper .work/two_scene_rebuild/stop_owned.py --launch-helper .work/two_scene_rebuild/launch_owned.py --api-service <当前本次记录的API服务名> --out "$RUN_DIR/resilience_faults_<新的目录名>"`。模型连接失败使用本机绑定但未监听的独占端口产生真实连接拒绝；必须同时记录页面错误、任务错误与停止的动作时钟。恢复真实模型连接后仍须由页面显式发送指令，真实模型成功回复才算恢复验证通过。
 
-脚本在 `finally` 中按拥有记录停止自己新建的全部 API，报告 `test_owned_api_stopped=true`、`current_owned_api_service=null` 和 `external_api_restart_required=true`。这些 API 属于审计资源守卫的后代，不能在守卫结束后继续保留。主线程须等审计进程及其外层守卫退出，检查报告，再从该守卫之外执行 `"$APP_PYTHON" .work/launch_owned.py <新的独立API服务名> -- bash scripts/run_simulation.sh api`，保存新的进程记录并检查 `/health`。所有服务名称必须唯一；停止服务必须核对记录中的 PID、创建时间、项目目录和 API 启动命令，只清理本任务拥有的进程树。脚本不会停止真实模型服务或其他项目服务。
+脚本在 `finally` 中按拥有记录停止自己新建的全部 API，报告 `test_owned_api_stopped=true`、`current_owned_api_service=null` 和 `external_api_restart_required=true`。这些 API 属于审计资源守卫的后代，不能在守卫结束后继续保留。主线程须等审计进程及其外层守卫退出，检查报告，再从该守卫之外执行 `"$APP_PYTHON" .work/two_scene_rebuild/launch_owned.py <新的独立API服务名> -- bash scripts/run_simulation.sh api`，保存新的进程记录并检查 `/health`。所有服务名称必须唯一；停止服务必须核对记录中的 PID、创建时间、项目目录和 API 启动命令，只清理本任务拥有的进程树。脚本不会停止真实模型服务或其他项目服务。
 
 同会话逐阶段验收通过界面中“动作播放速度”设置为 0.1 倍速，为软件渲染下真实暂停按钮的响应留出时间，记录动作中间状态；不修改动作角度、路径或约定时长。N 与 σ 的响应验收由真实模型解释优先级与显示需求，在相同暂停状态、相机、焦点与亮度下比较实际三维画布，不将参数面板文字计入像素差。
 

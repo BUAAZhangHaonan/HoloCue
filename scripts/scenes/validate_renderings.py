@@ -11,7 +11,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 from holocue import camera
 from holocue.assets import load_asset, world_scene, resource
-from holocue.config import root, list_scenes, load_scene
+from holocue.config import root, list_scenes, load_scene, runtime_dir
 from holocue.render_validation import render
 from holocue.spatial import transform_points
 
@@ -28,7 +28,7 @@ def caption(image, text):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--scenes", nargs="*")
-    parser.add_argument("--out", default="runs/simulation/visual")
+    parser.add_argument("--out", default=str(runtime_dir() / "visual"))
     args = parser.parse_args()
     output = root() / args.out
     output.mkdir(parents=True, exist_ok=True)

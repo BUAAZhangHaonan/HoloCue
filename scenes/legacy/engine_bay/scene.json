@@ -1,0 +1,289 @@
+{
+  "schema_version": "1.1",
+  "scene_id": "engine_bay",
+  "title": "发动机教学台结构检查",
+  "asset_axes": "gltf_y_up",
+  "camera_position_m": [
+    1.6,
+    -2.3,
+    2.15
+  ],
+  "camera_look_at_m": [
+    0,
+    0.18,
+    0.99
+  ],
+  "initial_instruction": "将 CLAMP 的调节螺钉逆时针转 90 度，演示 PLUG 沿 PLUGPORT 轴线进入定位位置，再检查 CONN 背面的端子。",
+  "render_hints": {
+    "workspace_bounds_m": [
+      [
+        -0.71,
+        -0.49,
+        0.67
+      ],
+      [
+        0.71,
+        0.97,
+        1.98
+      ]
+    ]
+  },
+  "objects": [
+    {
+      "object_id": "CLAMP",
+      "label": "卡箍调节螺钉",
+      "asset": "scenes/legacy/engine_bay/meshes/CLAMP.glb",
+      "recipe": "screw",
+      "size_m": [
+        0.047,
+        0.018,
+        0.018
+      ],
+      "pose": {
+        "position_m": [
+          -0.3,
+          -0.1,
+          1.1
+        ]
+      },
+      "color": [
+        186,
+        170,
+        115
+      ],
+      "capabilities": [
+        "point",
+        "rotate"
+      ],
+      "description": "固定卡箍带上的调节螺钉，局部 +X 为转轴。",
+      "interaction": {
+        "rotation_axis_local": [
+          1,
+          0,
+          0
+        ],
+        "cue_offset_local_m": [
+          0.04,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "object_id": "PLUG",
+      "label": "教学火花塞",
+      "asset": "scenes/legacy/engine_bay/meshes/PLUG.glb",
+      "recipe": "sparkplug",
+      "size_m": [
+        0.021,
+        0.021,
+        0.09
+      ],
+      "pose": {
+        "position_m": [
+          0.27,
+          -0.27,
+          1.065
+        ]
+      },
+      "color": [
+        220,
+        222,
+        217
+      ],
+      "capabilities": [
+        "point",
+        "insert"
+      ],
+      "description": "陶瓷绝缘体朝上，螺纹端朝下；本动作演示轴向定位。",
+      "interaction": {
+        "mating_pose": {
+          "position_m": [
+            0,
+            0,
+            -0.045
+          ]
+        },
+        "approach_distance_m": 0.12,
+        "transit_height_m": 0.12
+      }
+    },
+    {
+      "object_id": "PLUGPORT",
+      "label": "火花塞定位孔",
+      "asset": "scenes/legacy/engine_bay/meshes/PLUGPORT.glb",
+      "recipe": "bore",
+      "size_m": [
+        0.052,
+        0.052,
+        0.064
+      ],
+      "pose": {
+        "position_m": [
+          0.16,
+          0.26,
+          1.055
+        ]
+      },
+      "color": [
+        95,
+        109,
+        117
+      ],
+      "capabilities": [
+        "point"
+      ],
+      "anchors": {
+        "insertion": [
+          0,
+          0,
+          -0.024
+        ]
+      },
+      "description": "中空井口露出，轴向定位终点位于孔内。",
+      "interaction": {
+        "detail_direction_local": [
+          0,
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "object_id": "OILCAP",
+      "label": "机油口教学旋盖",
+      "asset": "scenes/legacy/engine_bay/meshes/OILCAP.glb",
+      "recipe": "knob",
+      "size_m": [
+        0.075,
+        0.075,
+        0.032
+      ],
+      "pose": {
+        "position_m": [
+          -0.13,
+          0.16,
+          1.105
+        ]
+      },
+      "color": [
+        51,
+        61,
+        66
+      ],
+      "capabilities": [
+        "point",
+        "rotate"
+      ]
+    },
+    {
+      "object_id": "TENSIONER",
+      "label": "张紧机构六角位",
+      "asset": "scenes/legacy/engine_bay/meshes/TENSIONER.glb",
+      "recipe": "screw",
+      "size_m": [
+        0.035,
+        0.022,
+        0.022
+      ],
+      "pose": {
+        "position_m": [
+          0.38,
+          0.16,
+          0.91
+        ]
+      },
+      "color": [
+        164,
+        171,
+        175
+      ],
+      "capabilities": [
+        "point",
+        "rotate"
+      ],
+      "interaction": {
+        "rotation_axis_local": [
+          1,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "object_id": "CONN",
+      "label": "已断开的侧连接器",
+      "asset": "scenes/legacy/engine_bay/meshes/CONN.glb",
+      "recipe": "module",
+      "size_m": [
+        0.08,
+        0.07,
+        0.07
+      ],
+      "pose": {
+        "position_m": [
+          0.44,
+          -0.15,
+          1.045
+        ]
+      },
+      "color": [
+        195,
+        118,
+        51
+      ],
+      "capabilities": [
+        "point",
+        "inspect_back"
+      ],
+      "anchors": {
+        "label": [
+          -0.04,
+          0,
+          0.025
+        ]
+      },
+      "description": "拆离线束并置于检修支座，背面 +Y 端子可观察。",
+      "interaction": {
+        "inspect_point_local_m": [
+          0,
+          0.036,
+          0
+        ],
+        "inspect_normal_local": [
+          0,
+          1,
+          0
+        ]
+      }
+    }
+  ],
+  "environment": [
+    {
+      "prop_id": "workstation",
+      "asset": "scenes/legacy/engine_bay/meshes/env/workstation.glb"
+    }
+  ],
+  "task_contract": {
+    "setting": "冷态、断电发动机教学台，提示演示零件位置和运动方向。",
+    "ordered_steps": [
+      {
+        "target_id": "CLAMP",
+        "action": "rotate",
+        "angle_deg": 90
+      },
+      {
+        "target_id": "PLUG",
+        "action": "insert",
+        "reference_id": "PLUGPORT"
+      },
+      {
+        "target_id": "CONN",
+        "action": "inspect_back",
+        "depth_requirement": "persistent"
+      }
+    ],
+    "interrupt_target": "CONN",
+    "interrupt_instruction": "临时检查 CONN 端子，保留卡箍角度和原来的任务顺序。"
+  }
+}

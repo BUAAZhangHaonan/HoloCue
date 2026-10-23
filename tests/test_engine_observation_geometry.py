@@ -58,6 +58,61 @@ def first_hit_distance(triangles, origin, direction):
     return float(distance[hits].min()) if hits.any() else float("inf")
 
 
+def actual_annular_rim_points(mesh):
+    """Sixteen inner-lip witnesses from actual upward annular triangles.
+
+    Do not reuse the old hand-authored radius/height or infer a rim from an AABB.
+    Candidate points are required to lie on the exported triangles. The highest
+    complete annular plane supplies the lip, rather than a single convenient
+    visible triangle or a lower internal seat.
+    """
+    triangles = mesh.triangles
+    horizontal = (mesh.face_normals[:, 2] > 0.99) & (np.ptp(triangles[:, :, 2], axis=1) < 1e-7)
+    heights = np.unique(np.round(triangles[horizontal, :, 2].mean(axis=1), 7))[::-1]
+    angles = np.linspace(0, 2 * np.pi, 16, endpoint=False)
+    down = np.array([0.0, 0.0, -1.0])
+    for height in heights:
+        planar = triangles[horizontal & (np.abs(triangles[:, :, 2].mean(axis=1) - height) < 1e-7)]
+        # A solid cap is not an annular opening.
+        if np.isfinite(first_hit_distance(planar, np.array([0.0, 0.0, height + 0.001]), down)):
+            continue
+        starts = planar[:, :, :2].reshape(-1, 2)
+        edges = (np.roll(planar[:, :, :2], -1, axis=1) - planar[:, :, :2]).reshape(-1, 2)
+        points = []
+        for angle in angles:
+            before = len(points)
+            direction = np.array([np.cos(angle), np.sin(angle)])
+            determinant = edges[:, 0] * direction[1] - edges[:, 1] * direction[0]
+            valid = np.abs(determinant) > 1e-12
+            t = np.divide(
+                -starts[:, 0] * direction[1] + starts[:, 1] * direction[0],
+                determinant,
+                out=np.zeros_like(determinant),
+                where=valid,
+            )
+            radial = np.divide(
+                -starts[:, 0] * edges[:, 1] + starts[:, 1] * edges[:, 0],
+                determinant,
+                out=np.zeros_like(determinant),
+                where=valid,
+            )
+            cuts = np.unique(np.round(radial[valid & (t >= -1e-7) & (t <= 1 + 1e-7) & (radial > 0)], 8))
+            for inner, outer in zip(cuts[:-1], cuts[1:]):
+                if inner <= 0.002 or outer - inner <= 1e-7:
+                    continue
+                radius = inner + min(0.0005, (outer - inner) / 2)
+                point = np.array([*(radius * direction), height])
+                hit = first_hit_distance(planar, point + [0, 0, 0.001], down)
+                if abs(hit - 0.001) < 1e-7:
+                    points.append(point)
+                    break
+            if len(points) == before:
+                break
+        if len(points) == 16:
+            return np.asarray(points)
+    raise AssertionError("No complete actual annular opening with sixteen lip witnesses")
+
+
 @pytest.mark.parametrize("aspect", [0.72, 0.97, 1.276, 16 / 9])
 def test_installed_port_inner_rim_is_in_frame_and_not_hidden_by_real_environment(aspect):
     spec = load_scene("engine_bay")
@@ -74,12 +129,9 @@ def test_installed_port_inner_rim_is_in_frame_and_not_hidden_by_real_environment
     points = transform_points(port.pose, camera.corners(local.bounds))
     projected, _ = camera.project(points, position, look, aspect=aspect, up=up)
     assert np.abs(projected).max() <= 0.860001
-    # The deployed ribs partly cover the outer flange. Test the actual inner rim,
-    # including the installed plug, without claiming visibility of that whole flange.
-    angles = np.linspace(0, 2 * np.pi, 16, endpoint=False)
-    rim = transform_points(
-        port.pose, np.column_stack([0.0125 * np.cos(angles), 0.0125 * np.sin(angles), np.full(16, 0.032)])
-    )
+    # Test the real opening around all sixteen azimuths, including the installed
+    # plug. A rebuilt shoulder/receiver need not retain the old procedural rim.
+    rim = transform_points(port.pose, actual_annular_rim_points(local.to_geometry()))
     installed = mating_goal(plug, port, port.pose, "insert")
     world = world_scene(root(), spec, {"PLUG": installed}).to_geometry()
     for point in rim:

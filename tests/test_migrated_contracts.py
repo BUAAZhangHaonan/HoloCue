@@ -439,16 +439,51 @@ def named_parts(scene, suffix):
 
 
 def test_node3_has_open_fiber_ports_and_supported_cable_tails():
-    obj, scene = authored_object("server_rack", "NODE3")
+    from holocue.assets import load_asset
+    from holocue.config import root
+
+    spec = load_scene("server_rack")
+    obj = next(obj for obj in spec.objects if obj.object_id == "NODE3")
+    deployed = load_asset(str(root() / obj.asset), spec.asset_axes)
+    scene = trimesh.Scene()
+    for node in deployed.graph.nodes_geometry:
+        transform, geometry = deployed.graph[node]
+        mesh = deployed.geometry[geometry].copy()
+        mesh.apply_transform(transform)
+        scene.add_geometry(mesh, node_name=str(node), geom_name=str(node))
     ports = named_parts(scene, "fiber_socket")
     assert len(ports) == 4
     for mesh in ports:
-        centered = mesh.vertices - mesh.bounds.mean(axis=0)
-        # Annular ports have a real aperture, not a dark solid painted disk.
-        radial = np.linalg.norm(centered[:, [0, 2]], axis=1)
-        assert radial.min() > 0.004
-        assert radial.max() - radial.min() > 0.002
-        assert mesh.bounds[0, 1] >= obj.size_m[1] / 2
+        center = mesh.bounds.mean(axis=0)
+        np.testing.assert_allclose(mesh.extents, [0.018, 0.014, 0.010], atol=1e-7)
+        # The exported rectangular LC socket has a 13 x 6 mm aperture through
+        # its full 14 mm depth. This concerns the interface, not the whole chassis.
+        vertices, inverse = np.unique(mesh.vertices, axis=0, return_inverse=True)
+        solid = trimesh.Trimesh(vertices=vertices, faces=inverse[mesh.faces], process=False)
+        assert solid.is_watertight and solid.is_winding_consistent
+        assert solid.volume == pytest.approx(0.018 * 0.014 * 0.010 - 0.013 * 0.014 * 0.006, abs=1e-11)
+        assert mesh.bounds[1, 1] > obj.size_m[1] / 2
+        projected = mesh.triangles[:, :, [0, 2]]
+        a = projected[:, 0]
+        u, v = projected[:, 1] - a, projected[:, 2] - a
+        determinant = u[:, 0] * v[:, 1] - u[:, 1] * v[:, 0]
+        valid = np.abs(determinant) > 1e-14
+        for x in (-0.006, 0, 0.006):
+            for z in (-0.0025, 0, 0.0025):
+                w = center[[0, 2]] + [x, z] - a
+                s = np.divide(
+                    w[:, 0] * v[:, 1] - w[:, 1] * v[:, 0],
+                    determinant,
+                    out=np.zeros_like(determinant),
+                    where=valid,
+                )
+                t = np.divide(
+                    u[:, 0] * w[:, 1] - u[:, 1] * w[:, 0],
+                    determinant,
+                    out=np.zeros_like(determinant),
+                    where=valid,
+                )
+                assert not np.any(valid & (s >= -1e-8) & (t >= -1e-8) & (s + t <= 1 + 1e-8))
     live = named_parts(scene, "fiber_live_collar")
     assert len(live) == 1
     assert live[0].visual.material.baseColorFactor[1] > live[0].visual.material.baseColorFactor[0]
@@ -458,7 +493,18 @@ def test_node3_has_open_fiber_ports_and_supported_cable_tails():
 
 
 def test_motor_isolator_has_an_open_center_on_actual_inspection_face():
-    obj, scene = authored_object("drone_bench", "M3")
+    from holocue.assets import load_asset
+    from holocue.config import root
+
+    spec = load_scene("drone_bench")
+    obj = next(obj for obj in spec.objects if obj.object_id == "M3")
+    deployed = load_asset(str(root() / obj.asset), spec.asset_axes)
+    scene = trimesh.Scene()
+    for node in deployed.graph.nodes_geometry:
+        transform, geometry = deployed.graph[node]
+        mesh = deployed.geometry[geometry].copy()
+        mesh.apply_transform(transform)
+        scene.add_geometry(mesh, node_name=str(node), geom_name=str(node))
     rings = named_parts(scene, "isolator_ring")
     assert len(rings) == 1
     ring = rings[0]
