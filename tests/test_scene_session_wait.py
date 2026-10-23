@@ -192,19 +192,10 @@ def test_ready_identity_read_does_not_wait_for_busy_renderer(context, tmp_path, 
           if(value) setTimeout(() => {
             const until=performance.now()+800;
             while(performance.now()<until) {}
-          }, 50);
+          }, 0);
           return value;
         }""",
     )
-    wait = page.wait_for_function
-
-    def after_renderer_becomes_busy(*args, **kwargs):
-        handle = wait(*args, **kwargs)
-        # Let the real renderer begin its busy interval after identity is ready.
-        time.sleep(0.075)
-        return handle
-
-    monkeypatch.setattr(page, "wait_for_function", after_renderer_becomes_busy)
     result = audit.wait_scene_session(
         page, read, tmp_path, expected_scene=SCENE, client_view_path=view, timeout=0.4
     )
@@ -212,29 +203,72 @@ def test_ready_identity_read_does_not_wait_for_busy_renderer(context, tmp_path, 
     assert result["session_id"] == STATE["session_id"] and len(calls) == 1
     assert trace["status"] == "passed" and trace["elapsed_s"] < 0.4
     assert (
-        trace["browser_wait_started_at"]
-        <= trace["browser_wait_returned_at"]
-        <= trace["browser_value_read_started_at"]
-        <= trace["browser_value_read_completed_at"]
-        <= trace["browser_dispose_started_at"]
-        <= trace["browser_dispose_completed_at"]
+        trace["observer_install_started_at"]
+        <= trace["observer_install_completed_at"]
+        <= trace["browser_event_received_at"]
+        <= trace["browser_read_completed_at"]
         <= trace["api_read_started_at"]
     )
 
 
-def test_browser_identity_returned_after_budget_is_rejected(context, tmp_path, monkeypatch):
+def test_selection_action_consumes_the_same_total_budget(context, tmp_path):
     page, view, calls, read = context
     ready(page)
-    wait = page.wait_for_function
 
-    def delayed_return(*args, **kwargs):
-        handle = wait(*args, **kwargs)
+    def delayed_action(remaining):
         time.sleep(0.3)
-        return handle
 
-    monkeypatch.setattr(page, "wait_for_function", delayed_return)
     with pytest.raises(TimeoutError, match="wait budget"):
-        audit.wait_scene_session(page, read, tmp_path, expected_scene=SCENE, timeout=0.2)
+        audit.wait_scene_session(
+            page, read, tmp_path, expected_scene=SCENE, timeout=0.2, selection_action=delayed_action
+        )
     assert calls == []
     trace = receipt(tmp_path)
     assert trace["status"] == "failed" and trace["elapsed_s"] > trace["timeout_s"]
+
+
+def test_observer_is_installed_before_actual_selection_click(context, tmp_path):
+    page, view, calls, read = context
+    page.evaluate(
+        """title => {
+          const button=document.createElement('button');button.id='choose';
+          button.textContent='Choose scene';
+          button.onclick=() => {scene.value=title;session.value='new-session'};
+          document.body.appendChild(button);
+        }""",
+        SCENE["title"],
+    )
+    result = audit.wait_scene_session(
+        page,
+        read,
+        tmp_path,
+        expected_scene=SCENE,
+        previous_session_id="old-session",
+        client_view_path=view,
+        timeout=2,
+        selection_action=lambda remaining: page.locator("#choose").click(timeout=remaining() * 1000),
+    )
+    trace = receipt(tmp_path)
+    assert result["session_id"] == STATE["session_id"]
+    assert trace["observer_install_completed_at"] <= trace["selection_action_started_at"]
+    assert trace["selection_action_started_at"] <= trace["selection_action_completed_at"]
+    assert trace["ui"]["nonce"] == trace["nonce"]
+
+
+def test_expired_observer_does_not_emit_when_identity_arrives_late(context, tmp_path):
+    page, view, calls, read = context
+    messages = []
+    page.on("console", lambda message: messages.append(message.text))
+    page.evaluate(
+        "title => setTimeout(() => {scene.value=title;session.value='new-session'}, 400)", SCENE["title"]
+    )
+    with pytest.raises(PlaywrightTimeoutError, match="Timeout"):
+        audit.wait_scene_session(
+            page, read, tmp_path, expected_scene=SCENE, previous_session_id="old-session", timeout=0.2
+        )
+    expired = receipt(tmp_path)["nonce"]
+    page.wait_for_timeout(400)
+    assert not any(expired in message for message in messages)
+    assert calls == []
+    result = audit.wait_scene_session(page, read, tmp_path, expected_scene=SCENE, timeout=1)
+    assert result["ui"]["nonce"] != expired

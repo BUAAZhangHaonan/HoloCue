@@ -10,6 +10,7 @@ from pathlib import Path
 import time
 import traceback
 import shutil
+from uuid import uuid4
 
 import httpx
 import numpy as np
@@ -47,9 +48,27 @@ SCENE_SESSION_READY = r"""({expectedTitle, previousSid}) => {
   const title=(choice.value ?? choice.textContent).trim();
   if (!sid || !title || (expectedTitle && title!==expectedTitle)
       || (previousSid && sid===previousSid)) return false;
-  // A primitive handle carries its value without another renderer round trip.
+  // Serialize the atomic identity before publishing its console event.
   return JSON.stringify({session_id:sid, scene_title:title,
     browser_wall_time_ms:Date.now(), browser_performance_ms:performance.now()});
+}"""
+
+
+SCENE_SESSION_OBSERVER = r"""({expectedTitle, previousSid, nonce, prefix, deadlineMs}) => {
+  const read = __READ_SCENE_SESSION__;
+  const observe = () => {
+    const remaining = deadlineMs - Date.now();
+    if (remaining <= 0) return;
+    const value = read({expectedTitle, previousSid});
+    if (value) {
+      console.debug(prefix + JSON.stringify({nonce, ...JSON.parse(value)}));
+      return;
+    }
+    // No global state or persistent listener remains after success or expiry.
+    setTimeout(observe, Math.min(100, remaining));
+  };
+  setTimeout(observe, 0);
+  return {nonce, installed_browser_wall_time_ms:Date.now(), deadline_ms:deadlineMs};
 }"""
 
 
@@ -63,10 +82,13 @@ def wait_scene_session(
     client_view_path=None,
     timeout=30,
     selection=None,
+    selection_action=None,
 ):
     """Observe one atomic UI identity, then validate it within the same wait budget."""
     started = time.monotonic()
     deadline = started + timeout
+    nonce = uuid4().hex
+    prefix = f"holocue-scene-session:{nonce}:"
     trace = {
         "status": "waiting",
         "started_at": time.time(),
@@ -74,7 +96,10 @@ def wait_scene_session(
         "expected_scene": expected_scene,
         "previous_session_id": previous_session_id,
         "selection": selection,
+        "nonce": nonce,
+        "budget_scope": "observer installation, optional selection clicks, event delivery, API and fresh client validation",
     }
+    trace["deadline_at"] = trace["started_at"] + timeout
 
     def remaining():
         value = deadline - time.monotonic()
@@ -83,24 +108,36 @@ def wait_scene_session(
         return value
 
     try:
+
+        def matches(message):
+            if message.type == "debug" and message.text.startswith(prefix):
+                trace["browser_event_received_at"] = time.time()
+                return True
+            return False
+
         trace["browser_wait_started_at"] = time.time()
-        handle = page.wait_for_function(
-            SCENE_SESSION_READY,
-            arg={
-                "expectedTitle": expected_scene["title"] if expected_scene else None,
-                "previousSid": previous_session_id,
-            },
-            polling=100,
-            timeout=remaining() * 1000,
-        )
-        trace["browser_wait_returned_at"] = time.time()
-        trace["browser_value_read_started_at"] = time.time()
-        value = handle.json_value()
-        trace["browser_value_read_completed_at"] = time.time()
-        trace["browser_dispose_started_at"] = time.time()
-        handle.dispose()
-        trace["browser_dispose_completed_at"] = time.time()
-        ui = json.loads(value)
+        with page.expect_console_message(predicate=matches, timeout=remaining() * 1000) as ready:
+            trace["observer_install_started_at"] = time.time()
+            installed = page.evaluate(
+                SCENE_SESSION_OBSERVER.replace("__READ_SCENE_SESSION__", SCENE_SESSION_READY),
+                {
+                    "expectedTitle": expected_scene["title"] if expected_scene else None,
+                    "previousSid": previous_session_id,
+                    "nonce": nonce,
+                    "prefix": prefix,
+                    "deadlineMs": trace["deadline_at"] * 1000,
+                },
+            )
+            trace.update(observer=installed, observer_install_completed_at=time.time())
+            remaining()
+            if selection_action is not None:
+                trace["selection_action_started_at"] = time.time()
+                selection_action(remaining)
+                trace["selection_action_completed_at"] = time.time()
+                remaining()
+        # ConsoleMessage.text is already in the event; no args/JSHandle read is made.
+        ui = json.loads(ready.value.text[len(prefix) :])
+        assert ui["nonce"] == nonce
         trace.update(ui=ui, browser_read_completed_at=time.time())
         remaining()
         trace["api_read_started_at"] = time.time()
@@ -178,9 +215,13 @@ def wait_scene_session(
 
 def select_scene_session(page, read_state, output, scene, previous):
     selection = {"started_at": time.time(), "previous_scene_id": previous["scene_id"]}
-    page.get_by_role("combobox", name="场景", exact=True).click()
-    page.get_by_role("option", name=scene["title"], exact=True).click()
-    selection["click_completed_at"] = time.time()
+
+    def choose(remaining):
+        selection["click_started_at"] = time.time()
+        page.get_by_role("combobox", name="场景", exact=True).click(timeout=remaining() * 1000)
+        page.get_by_role("option", name=scene["title"], exact=True).click(timeout=remaining() * 1000)
+        selection["click_completed_at"] = time.time()
+
     return wait_scene_session(
         page,
         read_state,
@@ -189,6 +230,7 @@ def select_scene_session(page, read_state, output, scene, previous):
         previous_session_id=(previous["session_id"] if previous["scene_id"] != scene["scene_id"] else None),
         client_view_path=previous["client_view_path"],
         selection=selection,
+        selection_action=choose,
     )
 
 
