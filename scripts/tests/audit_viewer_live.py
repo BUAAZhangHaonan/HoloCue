@@ -47,8 +47,9 @@ SCENE_SESSION_READY = r"""({expectedTitle, previousSid}) => {
   const title=(choice.value ?? choice.textContent).trim();
   if (!sid || !title || (expectedTitle && title!==expectedTitle)
       || (previousSid && sid===previousSid)) return false;
-  return {session_id:sid, scene_title:title,
-    browser_wall_time_ms:Date.now(), browser_performance_ms:performance.now()};
+  // A primitive handle carries its value without another renderer round trip.
+  return JSON.stringify({session_id:sid, scene_title:title,
+    browser_wall_time_ms:Date.now(), browser_performance_ms:performance.now()});
 }"""
 
 
@@ -92,8 +93,14 @@ def wait_scene_session(
             polling=100,
             timeout=remaining() * 1000,
         )
-        ui = handle.json_value()
+        trace["browser_wait_returned_at"] = time.time()
+        trace["browser_value_read_started_at"] = time.time()
+        value = handle.json_value()
+        trace["browser_value_read_completed_at"] = time.time()
+        trace["browser_dispose_started_at"] = time.time()
         handle.dispose()
+        trace["browser_dispose_completed_at"] = time.time()
+        ui = json.loads(value)
         trace.update(ui=ui, browser_read_completed_at=time.time())
         remaining()
         trace["api_read_started_at"] = time.time()

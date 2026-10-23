@@ -176,3 +176,65 @@ def test_switch_to_same_scene_does_not_require_a_new_sid(context, tmp_path):
         page, read, tmp_path, expected_scene=SCENE, previous_session_id=None, client_view_path=view, timeout=2
     )
     assert result["session_id"] == STATE["session_id"] and len(calls) == 1
+
+
+def test_ready_identity_read_does_not_wait_for_busy_renderer(context, tmp_path, monkeypatch):
+    page, view, calls, read = context
+    ready(page)
+    predicate = audit.SCENE_SESSION_READY
+    monkeypatch.setattr(
+        audit,
+        "SCENE_SESSION_READY",
+        """args => {
+          const value=("""
+        + predicate
+        + """)(args);
+          if(value) setTimeout(() => {
+            const until=performance.now()+800;
+            while(performance.now()<until) {}
+          }, 50);
+          return value;
+        }""",
+    )
+    wait = page.wait_for_function
+
+    def after_renderer_becomes_busy(*args, **kwargs):
+        handle = wait(*args, **kwargs)
+        # Let the real renderer begin its busy interval after identity is ready.
+        time.sleep(0.075)
+        return handle
+
+    monkeypatch.setattr(page, "wait_for_function", after_renderer_becomes_busy)
+    result = audit.wait_scene_session(
+        page, read, tmp_path, expected_scene=SCENE, client_view_path=view, timeout=0.4
+    )
+    trace = receipt(tmp_path)
+    assert result["session_id"] == STATE["session_id"] and len(calls) == 1
+    assert trace["status"] == "passed" and trace["elapsed_s"] < 0.4
+    assert (
+        trace["browser_wait_started_at"]
+        <= trace["browser_wait_returned_at"]
+        <= trace["browser_value_read_started_at"]
+        <= trace["browser_value_read_completed_at"]
+        <= trace["browser_dispose_started_at"]
+        <= trace["browser_dispose_completed_at"]
+        <= trace["api_read_started_at"]
+    )
+
+
+def test_browser_identity_returned_after_budget_is_rejected(context, tmp_path, monkeypatch):
+    page, view, calls, read = context
+    ready(page)
+    wait = page.wait_for_function
+
+    def delayed_return(*args, **kwargs):
+        handle = wait(*args, **kwargs)
+        time.sleep(0.3)
+        return handle
+
+    monkeypatch.setattr(page, "wait_for_function", delayed_return)
+    with pytest.raises(TimeoutError, match="wait budget"):
+        audit.wait_scene_session(page, read, tmp_path, expected_scene=SCENE, timeout=0.2)
+    assert calls == []
+    trace = receipt(tmp_path)
+    assert trace["status"] == "failed" and trace["elapsed_s"] > trace["timeout_s"]
