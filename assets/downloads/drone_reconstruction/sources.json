@@ -1,0 +1,157 @@
+{
+  "checked_at_utc": "2026-10-23",
+  "sources": [
+    {
+      "id": "px4_x500",
+      "title": "NXP HoverGames X500 base / 5010 motor parts",
+      "author": "Benjamin Perseghetti; Rudis Laboratories",
+      "license": "BSD-3-Clause",
+      "license_evidence": "px4/LICENSE",
+      "source_revision": "e5997f455e33ec071c7c677fc59a65781de496a4",
+      "source_url": "https://github.com/PX4/PX4-gazebo-models/tree/e5997f455e33ec071c7c677fc59a65781de496a4/models/x500_base",
+      "originals": [
+        {
+          "file": "px4/LICENSE",
+          "url": "https://raw.githubusercontent.com/PX4/PX4-gazebo-models/e5997f455e33ec071c7c677fc59a65781de496a4/models/x500_base/LICENSE",
+          "sha256": "cee4ef94e73cd38fb2886f5d7e7a04d6488f54b1e70cd8b1b29d74f38bfdba5b",
+          "bytes": 1526
+        },
+        {
+          "file": "px4/model.config",
+          "url": "https://raw.githubusercontent.com/PX4/PX4-gazebo-models/e5997f455e33ec071c7c677fc59a65781de496a4/models/x500_base/model.config",
+          "sha256": "4856afbdeb52f19468f56ddaf4be57c04688f347b8cef2f609daacd2d014d437",
+          "bytes": 773
+        },
+        {
+          "file": "px4/model.sdf",
+          "url": "https://raw.githubusercontent.com/PX4/PX4-gazebo-models/e5997f455e33ec071c7c677fc59a65781de496a4/models/x500_base/model.sdf",
+          "sha256": "6eccbff824a0e1ceaaf3bc12fe18cd0eb3ece890bf995a2607b477c3d2ae5772",
+          "bytes": 17726
+        },
+        {
+          "file": "px4/meshes/NXP-HGD-CF.dae",
+          "url": "https://raw.githubusercontent.com/PX4/PX4-gazebo-models/e5997f455e33ec071c7c677fc59a65781de496a4/models/x500_base/meshes/NXP-HGD-CF.dae",
+          "sha256": "7321861b113866996dfa79b403def5666d4b796810840d2c057c7b51fc315b0a",
+          "bytes": 22399616
+        },
+        {
+          "file": "px4/meshes/5010Base.dae",
+          "url": "https://raw.githubusercontent.com/PX4/PX4-gazebo-models/e5997f455e33ec071c7c677fc59a65781de496a4/models/x500_base/meshes/5010Base.dae",
+          "sha256": "798396a1945c7ff55a0840b77869e27affdd35fed0d784fff96b68f50f160ea0",
+          "bytes": 369574
+        },
+        {
+          "file": "px4/meshes/5010Bell.dae",
+          "url": "https://raw.githubusercontent.com/PX4/PX4-gazebo-models/e5997f455e33ec071c7c677fc59a65781de496a4/models/x500_base/meshes/5010Bell.dae",
+          "sha256": "b90a1b2dd63a8ebbe1f3339ed18cef23673e0d8f03314fd9b9533a68b6b66668",
+          "bytes": 393792
+        },
+        {
+          "file": "px4/meshes/CF.png",
+          "url": "https://raw.githubusercontent.com/PX4/PX4-gazebo-models/e5997f455e33ec071c7c677fc59a65781de496a4/models/x500_base/meshes/CF.png",
+          "sha256": "3a56ec48eeaaf7774e8d3e8e5e88f6973bfa5652c610974c3eb2dbec6ec85944",
+          "bytes": 1567802
+        }
+      ],
+      "derived": [
+        "px4_frame.glb",
+        "px4_5010_stator.glb",
+        "px4_5010_bell.glb"
+      ],
+      "format": "Collada metre Z-up -> real Blender -> standard Y-up GLB",
+      "textures": "Original CF.png retained for carbon UVs; scalar PBR for metal",
+      "modifications": "Complete structural component selection, uniform frame scale 0.22/0.174, original motor scale with the published bell/base relative offset, material adaptation. No source cross-section deformation."
+    },
+    {
+      "id": "517d88706c494d2a9e67dd3e2c2c4baf",
+      "title": "Tattu Battery Pack",
+      "author": "bhaktaj",
+      "license": "CC-BY-4.0",
+      "source_url": "https://sketchfab.com/3d-models/tattu-battery-pack-517d88706c494d2a9e67dd3e2c2c4baf",
+      "license_url": "http://creativecommons.org/licenses/by/4.0/",
+      "license_evidence": "tattu_metadata.json",
+      "api_url": "https://api.sketchfab.com/v3/models/517d88706c494d2a9e67dd3e2c2c4baf",
+      "originals": [
+        {
+          "file": "tattu_battery.glb",
+          "url": "https://huggingface.co/datasets/allenai/objaverse/resolve/main/glbs/000-047/517d88706c494d2a9e67dd3e2c2c4baf.glb",
+          "sha256": "0f1773b01ecd2a53e4c03af0e444d379da395dbb81cc69eabc916b349529ca70",
+          "bytes": 1718972
+        }
+      ],
+      "format": "Original standard glTF binary with baked source CAD coordinates",
+      "download_status": "Downloaded through public Objaverse URL without account; original author license separately verified from the public Sketchfab API.",
+      "textures": "No image textures in original; material/vertex-color regions preserved or explicitly remapped.",
+      "modifications": "See LICENSE.md and README.md for complete component selection, material changes and strictly uniform scaling."
+    },
+    {
+      "id": "b53f8463a15148ceb81779b8059d881f",
+      "title": "Battery Replacement - LIPO",
+      "author": "Jayden Downes",
+      "license": "CC-BY-4.0",
+      "source_url": "https://sketchfab.com/3d-models/battery-replacement-lipo-b53f8463a15148ceb81779b8059d881f",
+      "license_url": "http://creativecommons.org/licenses/by/4.0/",
+      "license_evidence": "jayden_converter_metadata.json",
+      "api_url": "https://api.sketchfab.com/v3/models/b53f8463a15148ceb81779b8059d881f",
+      "originals": [
+        {
+          "file": "jayden_lipo_converter.glb",
+          "url": "https://huggingface.co/datasets/allenai/objaverse/resolve/main/glbs/000-032/b53f8463a15148ceb81779b8059d881f.glb",
+          "sha256": "6a89fa9b31effba1f8c4c55bb4ded136d8797acb64c164ea602767888c744bbe",
+          "bytes": 248928
+        }
+      ],
+      "format": "Original standard glTF binary with baked source CAD coordinates",
+      "download_status": "Downloaded through public Objaverse URL without account; original author license separately verified from the public Sketchfab API.",
+      "textures": "No image textures in original; material/vertex-color regions preserved or explicitly remapped.",
+      "modifications": "See LICENSE.md and README.md for complete component selection, material changes and strictly uniform scaling."
+    }
+  ],
+  "reused_originals": [
+    {
+      "file": "assets/downloads/control_panel_reconstruction/emaitee_knob.glb",
+      "attribution": "emaitee, knob, CC BY 4.0; see that directory LICENSE.md and API receipt."
+    },
+    {
+      "pool": "assets/meshes/env",
+      "ids": [
+        "WoodenTable_03",
+        "retro_multimeter",
+        "flathead_screwdriver",
+        "screwdrivers_02"
+      ],
+      "attribution": "Poly Haven CC0; existing original receipts in assets/downloads/polyhaven."
+    },
+    {
+      "texture": "concrete_floor_worn_001",
+      "attribution": "Poly Haven CC0, existing texture receipt."
+    }
+  ],
+  "derived_model_licenses": "Source licenses remain attached to respective source-derived geometry; teaching adapters do not change upstream license terms.",
+  "preparation_code": [
+    "convert_px4.py",
+    "prepare_sources.py"
+  ],
+  "derived_files": {
+    "px4_5010_stator.glb": "bcb8a7c9be88abdaaaafd3cb5d3c80ae79534ccd909562b9915437d6201411f2",
+    "tattu_battery.glb": "0f1773b01ecd2a53e4c03af0e444d379da395dbb81cc69eabc916b349529ca70",
+    "px4_5010_bell.glb": "650176d7a8a44335de33761761015772e28661a0ef09e63b7c2eb2f56888c977",
+    "px4_frame.glb": "7f5c6b4ba02c51fc256b0490e9742d85362c03fc1a47ca516c52e9d682f28153",
+    "jayden_lipo_converter.glb": "6a89fa9b31effba1f8c4c55bb4ded136d8797acb64c164ea602767888c744bbe",
+    "tattu_battery_pbr.glb": "6e63c860e9a593edbd64675b4507c5f395adbf19cd11bf16440366518927fbab",
+    "tattu_pack_body.glb": "e36dd752d03dc6fcff96d704e3d3b00cb40997032dc3ea6c60c9304c30bb3954"
+  },
+  "scene_material_assignments": {
+    "M3/isolator_ring": {
+      "base_color_srgb_u8": [
+        235,
+        82,
+        9,
+        255
+      ],
+      "metallic": 0,
+      "roughness": 0.92,
+      "scope": "Teaching adapter material only; original sourced meshes and all geometry are unchanged."
+    }
+  }
+}

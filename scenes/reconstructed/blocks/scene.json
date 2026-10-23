@@ -1,0 +1,205 @@
+{
+  "schema_version": "1.1",
+  "scene_id": "blocks",
+  "title": "积木搭建与底部结构检查",
+  "asset_axes": "gltf_y_up",
+  "camera_position_m": [
+    0.55,
+    -0.68,
+    0.55
+  ],
+  "camera_look_at_m": [
+    0,
+    0.07,
+    0.025
+  ],
+  "initial_instruction": "把黄色积木 A 放到底板 BASE 的标记位置，再检查蓝色积木 B 的底部套筒。",
+  "render_hints": {
+    "workspace_bounds_m": [
+      [
+        -0.31,
+        -0.24,
+        0.025
+      ],
+      [
+        0.31,
+        0.35,
+        0.14
+      ]
+    ]
+  },
+  "objects": [
+    {
+      "object_id": "A",
+      "label": "黄色积木 A",
+      "asset": "scenes/reconstructed/blocks/meshes/A.glb",
+      "recipe": "brick",
+      "size_m": [
+        0.064,
+        0.032,
+        0.02
+      ],
+      "pose": {
+        "position_m": [
+          -0.13,
+          -0.07,
+          0.04
+        ]
+      },
+      "color": [
+        236,
+        179,
+        44
+      ],
+      "capabilities": [
+        "point",
+        "assemble",
+        "inspect_back"
+      ],
+      "description": "四列两排凸点，底部具有容纳底板凸点的空腔。",
+      "interaction": {
+        "mating_pose": {
+          "position_m": [
+            0,
+            0,
+            -0.01
+          ]
+        },
+        "approach_distance_m": 0.06,
+        "transit_height_m": 0.07,
+        "inspect_point_local_m": [
+          0,
+          0,
+          -0.01
+        ],
+        "inspect_normal_local": [
+          0,
+          0,
+          -1
+        ],
+        "cue_offset_local_m": [
+          0,
+          0,
+          0.025
+        ]
+      }
+    },
+    {
+      "object_id": "B",
+      "label": "蓝色积木 B",
+      "asset": "scenes/reconstructed/blocks/meshes/B.glb",
+      "recipe": "brick",
+      "size_m": [
+        0.064,
+        0.032,
+        0.02
+      ],
+      "pose": {
+        "position_m": [
+          0.13,
+          -0.07,
+          0.04
+        ]
+      },
+      "color": [
+        40,
+        107,
+        173
+      ],
+      "capabilities": [
+        "point",
+        "assemble",
+        "inspect_back"
+      ],
+      "anchors": {
+        "placement": [
+          0,
+          0,
+          0.01
+        ]
+      },
+      "description": "底部三个套筒和开口空腔可从检查视图观察。",
+      "interaction": {
+        "mating_pose": {
+          "position_m": [
+            0,
+            0,
+            -0.01
+          ]
+        },
+        "inspect_point_local_m": [
+          0,
+          0,
+          -0.011
+        ],
+        "inspect_normal_local": [
+          0,
+          0,
+          -1
+        ],
+        "cue_offset_local_m": [
+          0,
+          0,
+          0.025
+        ]
+      }
+    },
+    {
+      "object_id": "BASE",
+      "label": "绿色底板",
+      "asset": "scenes/reconstructed/blocks/meshes/BASE.glb",
+      "recipe": "baseplate",
+      "size_m": [
+        0.224,
+        0.16,
+        0.006
+      ],
+      "pose": {
+        "position_m": [
+          0,
+          0.14,
+          0.033
+        ]
+      },
+      "color": [
+        66,
+        139,
+        95
+      ],
+      "capabilities": [
+        "point"
+      ],
+      "anchors": {
+        "placement": [
+          -0.032,
+          0,
+          0.003
+        ]
+      },
+      "description": "规则 16 毫米凸点间距，目标位置与 A 的底部尺寸相容。"
+    }
+  ],
+  "environment": [
+    {
+      "prop_id": "workstation",
+      "asset": "scenes/reconstructed/blocks/meshes/env/workstation.glb"
+    }
+  ],
+  "task_contract": {
+    "setting": "构造积木教学台，尺寸和凸点间距在场景中统一。",
+    "ordered_steps": [
+      {
+        "target_id": "A",
+        "action": "assemble",
+        "reference_id": "BASE"
+      },
+      {
+        "target_id": "B",
+        "action": "inspect_back",
+        "depth_requirement": "persistent"
+      }
+    ],
+    "interrupt_target": "B",
+    "interrupt_instruction": "先检查 B 的底部套筒，保留 A 的搭建任务。"
+  }
+}
