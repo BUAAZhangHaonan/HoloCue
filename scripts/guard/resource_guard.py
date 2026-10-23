@@ -19,10 +19,24 @@ def host_memory_reserve(total, minimum_gib, max_used_fraction=None):
     return max(minimum_gib * GIB, 0.20 * total)
 
 
-def parse_selection(value):
-    selected = [int(x.strip()) for x in value.split(",")] if value else []
-    if len(selected) != len(set(selected)) or not set(selected).issubset({1, 2}):
-        raise ValueError("Only physical GPUs 1 and 2 are authorized")
+def parse_gpu_indices(value, name="GPU indices"):
+    """Parse physical indices without accepting signs, fractions or duplicate IDs."""
+    if value == "":
+        return []
+    fields = [field.strip() for field in value.split(",")]
+    if any(not field or not field.isascii() or not field.isdigit() for field in fields):
+        raise ValueError(f"{name} must be comma-separated nonnegative integers")
+    indices = [int(field) for field in fields]
+    if len(indices) != len(set(indices)):
+        raise ValueError(f"{name} must contain unique physical indices")
+    return indices
+
+
+def parse_selection(value, authorized="1,2"):
+    allowed = parse_gpu_indices(authorized, "Authorized GPUs")
+    selected = parse_gpu_indices(value, "Selected GPUs")
+    if not set(selected).issubset(allowed):
+        raise ValueError(f"Selected physical GPUs must be a subset of authorized GPUs {allowed}")
     return selected
 
 
@@ -66,6 +80,11 @@ def gpu_jobs():
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--gpus", default="")
+    p.add_argument(
+        "--authorized-gpus",
+        default=os.environ.get("HOLOCUE_AUTHORIZED_GPUS", "1,2"),
+        help="Run-scoped physical GPU allowlist; inherited by nested guards through HOLOCUE_AUTHORIZED_GPUS (default: 1,2)",
+    )
     p.add_argument("--host-reserve-gb", type=float, default=32)
     p.add_argument(
         "--host-max-used-fraction",
@@ -80,7 +99,11 @@ def main():
     p.add_argument("--execute", action="store_true")
     p.add_argument("command", nargs=argparse.REMAINDER)
     a = p.parse_args()
-    selected = parse_selection(a.gpus)
+    try:
+        authorized = parse_gpu_indices(a.authorized_gpus, "Authorized GPUs")
+        selected = parse_selection(a.gpus, a.authorized_gpus)
+    except ValueError as error:
+        p.error(str(error))
     if not 0 < a.gpu_fraction <= 0.80:
         raise SystemExit("GPU allocation fraction must be in (0,0.80]")
     vm = psutil.virtual_memory()
@@ -114,7 +137,8 @@ def main():
         locks.append(f)
     command = a.command[1:] if a.command and a.command[0] == "--" else a.command
     info = {
-        "authorized_physical_gpus": selected,
+        "authorized_physical_gpus": authorized,
+        "selected_physical_gpus": selected,
         "cuda_visible_devices": uuids,
         "host_reserve_gib": reserve / GIB,
         "rss_limit_gib": a.rss_limit_gb,
@@ -135,7 +159,8 @@ def main():
     env["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
     if a.host_max_used_fraction is not None:
         env["HOLOCUE_HOST_MAX_USED_FRACTION"] = str(a.host_max_used_fraction)
-    env["PYTHONPYCACHEPREFIX"] = str(Path(__file__).resolve().parents[2] / ".work/pycache")
+    env["HOLOCUE_AUTHORIZED_GPUS"] = ",".join(str(index) for index in authorized)
+    env.setdefault("PYTHONPYCACHEPREFIX", str(Path(__file__).resolve().parents[2] / ".work/pycache"))
     if not selected:
         mesa = Path("/usr/share/glvnd/egl_vendor.d/50_mesa.json")
         if not mesa.is_file():

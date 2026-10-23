@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 cd "$(dirname "$0")/../.."
-export PYTHONPYCACHEPREFIX="$PWD/.work/pycache"
+export PYTHONPYCACHEPREFIX="${PYTHONPYCACHEPREFIX:-$PWD/.work/pycache}"
 mkdir -p "$PYTHONPYCACHEPREFIX"
 ENGINE="${ENGINE:-vllm}"
 SIZE="${MODEL_SIZE:-4B}"

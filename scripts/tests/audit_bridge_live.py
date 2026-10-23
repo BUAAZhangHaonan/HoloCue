@@ -1,6 +1,6 @@
 """Real UI-driven twelve-scene, same-client native Blender bridge evidence.
 
-Run with the project's .work/task_env.sh environment already sourced.
+Run with the explicit task-scoped environment already sourced.
 No model response or application state is supplied by this audit.
 """
 
@@ -22,7 +22,7 @@ import psutil
 from PIL import Image
 from playwright.sync_api import sync_playwright
 
-from holocue.config import root, load_scene, list_scenes
+from holocue.config import root, load_scene, list_scenes, scene_dir, runtime_dir
 from holocue.models import DisplayCue, Pose
 from holocue.spatial import matrix, trajectory, transform_points
 from scripts.tests.audit_viewer_live import ui_input, CLIENT_READ, client_view_errors
@@ -36,8 +36,6 @@ def save(path, value):
 
 def check_environment(output):
     project = root().resolve()
-    if not (project / ".work/task_env.sh").is_file():
-        raise FileNotFoundError("Source the project .work/task_env.sh before this audit")
     settings = {}
     for name in ("TMPDIR", "TMP", "TEMP", "XDG_CACHE_HOME", "PIP_CACHE_DIR", "PLAYWRIGHT_BROWSERS_PATH"):
         value = Path(os.environ[name]).resolve()
@@ -54,6 +52,40 @@ def check_environment(output):
     if not blender.is_file():
         raise FileNotFoundError(blender)
     return settings, blender
+
+
+def native_capture_command(args, blender, scene_id, frame_path, directory):
+    """Build the native capture invocation without starting a renderer."""
+    return [
+        sys.executable,
+        "scripts/guard/resource_guard.py",
+        "--gpus",
+        str(args.render_gpu) if args.render_device == "CUDA" else "",
+        "--rss-limit-gb",
+        "12",
+        "--log",
+        str(directory / "resource_guard.jsonl"),
+        "--execute",
+        "--",
+        str(blender),
+        "-b",
+        str(scene_dir(scene_id) / "scene.blend"),
+        "-t",
+        "4",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "scripts/capture/blender_simulation_bridge.py",
+        "--",
+        "--frame-file",
+        str(frame_path),
+        "--capture",
+        str(directory),
+        "--frames",
+        "1",
+        "--device",
+        args.render_device,
+    ]
 
 
 class OwnedProcess:
@@ -178,7 +210,7 @@ class Audit:
             paths = (
                 [self.view_path]
                 if self.view_path
-                else list((root() / "runs/simulation/viewer").glob("client_*_view.json"))
+                else list((runtime_dir() / "viewer").glob("client_*_view.json"))
             )
             for path in paths:
                 if not path.is_file():
@@ -428,7 +460,7 @@ class Audit:
         self.exporter = OwnedProcess(command, self.out, "exporter")
 
     def wait_frame(self, snapshot, view):
-        path = root() / "runs/simulation/bridge" / f"{self.sid}.json"
+        path = runtime_dir() / "bridge" / f"{self.sid}.json"
         deadline = time.monotonic() + 25
         while time.monotonic() < deadline:
             if self.exporter.process.poll() is not None:
@@ -565,36 +597,7 @@ class Audit:
                 "scope": "Awaiting native render and a subsequent matching real canvas capture",
             },
         )
-        command = [
-            sys.executable,
-            "scripts/guard/resource_guard.py",
-            "--gpus",
-            "2",
-            "--rss-limit-gb",
-            "12",
-            "--log",
-            str(directory / "resource_guard.jsonl"),
-            "--execute",
-            "--",
-            str(self.blender),
-            "-b",
-            str(root() / "scenes" / self.spec.scene_id / "scene.blend"),
-            "-t",
-            "4",
-            "--python-exit-code",
-            "1",
-            "--python",
-            "scripts/capture/blender_simulation_bridge.py",
-            "--",
-            "--frame-file",
-            str(frame_path),
-            "--capture",
-            str(directory),
-            "--frames",
-            "1",
-            "--device",
-            "CUDA",
-        ]
+        command = native_capture_command(self.args, self.blender, self.spec.scene_id, frame_path, directory)
         owned = OwnedProcess(command, directory, "blender")
         wait_started = time.monotonic()
         last_activity = wait_started
@@ -883,14 +886,26 @@ class Audit:
         }
 
 
-def main():
+def render_gpu_index(value):
+    if not value.isascii() or not value.isdigit():
+        raise argparse.ArgumentTypeError("render GPU must be a nonnegative physical index")
+    return int(value)
+
+
+def argument_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument("--api", default="http://127.0.0.1:8750")
     parser.add_argument("--viewer", default="http://127.0.0.1:8780")
     parser.add_argument("--browser", type=Path)
-    parser.add_argument("--out", type=Path, default=root() / "runs/simulation/bridge_live")
+    parser.add_argument("--out", type=Path, default=runtime_dir() / "bridge_live")
     parser.add_argument("--scenes", nargs="+")
-    args = parser.parse_args()
+    parser.add_argument("--render-gpu", type=render_gpu_index, default=2)
+    parser.add_argument("--render-device", choices=("CPU", "CUDA"), default="CUDA")
+    return parser
+
+
+def main():
+    args = argument_parser().parse_args()
     args.out = args.out.resolve()
     environment, blender = check_environment(args.out)
     args.out.mkdir(parents=True, exist_ok=False)
