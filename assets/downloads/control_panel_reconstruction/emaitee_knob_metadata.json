@@ -1,0 +1,121 @@
+{
+  "animationCount": 0,
+  "categories": [],
+  "commentCount": 0,
+  "createdAt": "2021-07-19T18:25:55.52247",
+  "embedUrl": "https://sketchfab.com/models/84d5f9911fdd4ada838a230d931926ee/embed",
+  "faceCount": 19100,
+  "isAgeRestricted": false,
+  "license": {
+    "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+    "label": "CC Attribution",
+    "fullName": "Creative Commons Attribution",
+    "requirements": "Author must be credited. Commercial use is allowed.",
+    "url": "http://creativecommons.org/licenses/by/4.0/",
+    "slug": "by"
+  },
+  "likeCount": 1,
+  "name": "Knob",
+  "publishedAt": "2021-07-19T18:27:15.894213",
+  "soundCount": 0,
+  "staffpickedAt": null,
+  "tags": [],
+  "thumbnails": {
+    "images": [
+      {
+        "uid": "0d3f436385d04f509306ff306e4b2534",
+        "width": 1920,
+        "height": 1080,
+        "size": 65148,
+        "url": "https://media.sketchfab.com/models/84d5f9911fdd4ada838a230d931926ee/thumbnails/4ff024e607d84e0da630d95ea8c0f032/d9ca00209fd841e1bc64af710a268187.jpeg"
+      },
+      {
+        "uid": "2d6596611856454fb16f54d616b8d5e0",
+        "width": 1024,
+        "height": 576,
+        "size": 23623,
+        "url": "https://media.sketchfab.com/models/84d5f9911fdd4ada838a230d931926ee/thumbnails/4ff024e607d84e0da630d95ea8c0f032/a718238cf7794f37a4adbdd27405fe54.jpeg"
+      },
+      {
+        "uid": "df497b8cf73c4fb8a077a42cecac0d13",
+        "width": 720,
+        "height": 405,
+        "size": 13726,
+        "url": "https://media.sketchfab.com/models/84d5f9911fdd4ada838a230d931926ee/thumbnails/4ff024e607d84e0da630d95ea8c0f032/36961cebc7944c988ad97c5c94c869b9.jpeg"
+      },
+      {
+        "uid": "b0a8cf0c617b4e4b91cce9176b71d001",
+        "width": 256,
+        "height": 144,
+        "size": 2916,
+        "url": "https://media.sketchfab.com/models/84d5f9911fdd4ada838a230d931926ee/thumbnails/4ff024e607d84e0da630d95ea8c0f032/bb5cfe0b71c64f2a94a4f2a5fd17e2be.jpeg"
+      },
+      {
+        "uid": "90c5e19cc74d40578af513e3b6f1a728",
+        "width": 64,
+        "height": 36,
+        "size": 830,
+        "url": "https://media.sketchfab.com/models/84d5f9911fdd4ada838a230d931926ee/thumbnails/4ff024e607d84e0da630d95ea8c0f032/ef27d270546145e4b27be2d846d1a8c9.jpeg"
+      }
+    ]
+  },
+  "uid": "84d5f9911fdd4ada838a230d931926ee",
+  "uri": "https://api.sketchfab.com/v3/models/84d5f9911fdd4ada838a230d931926ee",
+  "user": {
+    "uid": "e29a89446d224122bce808d468caa90c",
+    "username": "emaitee",
+    "displayName": "emaitee",
+    "account": "basic",
+    "profileUrl": "https://sketchfab.com/emaitee",
+    "avatar": {
+      "uid": "d9f54dc915134ea0a1b5ce1202ee9c97",
+      "uri": "https://api.sketchfab.com/v3/avatars/d9f54dc915134ea0a1b5ce1202ee9c97",
+      "images": [
+        {
+          "width": 32,
+          "height": 32,
+          "size": 762,
+          "url": "https://media.sketchfab.com/avatars/d9f54dc915134ea0a1b5ce1202ee9c97/1baf4dbecd3d4805acea075a83b9fb59.png"
+        },
+        {
+          "width": 48,
+          "height": 48,
+          "size": 1051,
+          "url": "https://media.sketchfab.com/avatars/d9f54dc915134ea0a1b5ce1202ee9c97/7ed2a3329ded4028abb26acb8c84da1c.png"
+        },
+        {
+          "width": 90,
+          "height": 90,
+          "size": 1301,
+          "url": "https://media.sketchfab.com/avatars/d9f54dc915134ea0a1b5ce1202ee9c97/db9ac634c7ba402b9da2fa37eaeff4cd.png"
+        },
+        {
+          "width": 100,
+          "height": 100,
+          "size": 1372,
+          "url": "https://media.sketchfab.com/avatars/d9f54dc915134ea0a1b5ce1202ee9c97/504b96bf65f646ddb5c5d5bd4046d686.png"
+        }
+      ]
+    },
+    "uri": "https://api.sketchfab.com/v3/users/e29a89446d224122bce808d468caa90c"
+  },
+  "vertexCount": 9552,
+  "viewCount": 192,
+  "viewerUrl": "https://sketchfab.com/3d-models/knob-84d5f9911fdd4ada838a230d931926ee",
+  "isDownloadable": true,
+  "isProtected": false,
+  "description": "A knob for a 100k potentiometer/variable resistance",
+  "price": null,
+  "downloadCount": 41,
+  "editorUrl": "https://sketchfab.com/models/84d5f9911fdd4ada838a230d931926ee/edit",
+  "status": {
+    "warning": {},
+    "processing": "SUCCEEDED"
+  },
+  "source": "website",
+  "hasCommentsDisabled": false,
+  "updatedAt": "2022-04-06T02:45:26.497072",
+  "pbrType": null,
+  "textureCount": 0,
+  "materialCount": 1
+}

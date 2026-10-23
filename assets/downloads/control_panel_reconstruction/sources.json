@@ -1,0 +1,76 @@
+{
+  "retrieved_at": "2026-10-22",
+  "sources": [
+    {
+      "id": "adafruit_2230",
+      "author": "Adafruit Industries",
+      "license": "MIT",
+      "revision": "c128bceb1f96b6ea8b68f250bda986ba85da24ea",
+      "source_url": "https://github.com/adafruit/Adafruit_CAD_Parts/blob/c128bceb1f96b6ea8b68f250bda986ba85da24ea/2230%20Extruded%20aluminum%20box%2094mm/2230%20Extruded%20aluminum%20box%2094mm.step",
+      "raw_file": "adafruit_2230.step",
+      "derived_file": "adafruit_2230_zup.glb",
+      "uses": [
+        "control_panel.C",
+        "shared connector teaching housing"
+      ]
+    },
+    {
+      "id": "adafruit_562",
+      "author": "Adafruit Industries",
+      "license": "MIT",
+      "revision": "c128bceb1f96b6ea8b68f250bda986ba85da24ea",
+      "source_url": "https://github.com/adafruit/Adafruit_CAD_Parts/blob/c128bceb1f96b6ea8b68f250bda986ba85da24ea/562%2010K%20Potentiometer/562%2010K%20Potentiometer.step",
+      "raw_file": "adafruit_562.step",
+      "uses": [
+        "control_panel.A rotating shaft",
+        "control_panel.B rotating shaft",
+        "control_panel fixed stators"
+      ]
+    },
+    {
+      "id": "84d5f9911fdd4ada838a230d931926ee",
+      "title": "Knob",
+      "author": "emaitee",
+      "license": "CC-BY-4.0",
+      "source_url": "https://sketchfab.com/3d-models/knob-84d5f9911fdd4ada838a230d931926ee",
+      "download_url": "https://huggingface.co/datasets/allenai/objaverse/resolve/main/glbs/000-086/84d5f9911fdd4ada838a230d931926ee.glb",
+      "raw_file": "emaitee_knob.glb",
+      "metadata_file": "emaitee_knob_metadata.json",
+      "uses": [
+        "control_panel.A cap",
+        "control_panel.B cap"
+      ]
+    }
+  ],
+  "files": {
+    "Adafruit_MIT_LICENSE.txt": {
+      "sha256": "f60436644e066301d4c2e8f1f0674a157b1f60e4fd5586717b99dde255cc18cd",
+      "bytes": 1076
+    },
+    "CC-BY-4.0.txt": {
+      "sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411",
+      "bytes": 18657
+    },
+    "adafruit_2230.step": {
+      "sha256": "0fddb71df6f7b0177d918a08dbc9c3b5f71492aac90749d4b5cb454d16aa7a52",
+      "bytes": 73474
+    },
+    "adafruit_2230_zup.glb": {
+      "sha256": "7feb19b4ad467f19058109add73490f7126b46b76d76180641b82d236029cef9",
+      "bytes": 209968
+    },
+    "adafruit_562.step": {
+      "sha256": "38824c650c0cd53b3847c05e055ef209bbf4932c255e95424a3ac4dde7b9feff",
+      "bytes": 393858
+    },
+    "emaitee_knob.glb": {
+      "sha256": "fbab677315b7c8ba9ed52723f7d4e34c78b213d62c8cb91f9fd27d2aae084ed5",
+      "bytes": 507344
+    },
+    "emaitee_knob_metadata.json": {
+      "sha256": "aa097f111325fbf143344ccc7cc8cc46186aa68ee93af7e18b4ae00ca99c773b",
+      "bytes": 4462
+    }
+  },
+  "scope": "Only these imported assets and their explicitly described derivatives; does not change project-wide licenses."
+}
