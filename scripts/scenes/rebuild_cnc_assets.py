@@ -10,8 +10,9 @@ import cadquery as cq
 import numpy as np
 import trimesh
 from holocue.config import root
-from holocue.modeling import Assembly, STEEL
+from holocue.modeling import STEEL
 from scripts.scenes.asset_composition import mature_asset, textured_box
+from scripts.scenes.cnc_topology import CNCAssembly as Assembly
 from scripts.scenes.cnc_topology import copy_mesh, repair_er, repair_flange, repair_mature_scene, repair_post
 
 SOURCE = "assets/downloads/cnc_reconstruction"
@@ -454,13 +455,13 @@ def environment(spec):
         "MODESWITCH_mount_arm",
     )
     # Keep the two physical detent directions. Move only the fixed legends
-    # outside the unchanged Gaussian arc; fine leaders connect each legend
-    # to its original 12/3-o'clock index without changing the task or cue.
-    a.label("MANUAL", (-0.624, 0.4367, 1.402), 0.042, 0.012)
-    a.label("ATC", (-0.490, 0.4367, 1.280), 0.028, 0.013)
+    # above the unchanged Gaussian arc and inside the narrow viewport;
+    # leaders retain the original 12/3-o'clock indices and task meaning.
+    a.label("MANUAL", (-0.578, 0.4367, 1.4085), 0.032, 0.006)
+    a.label("ATC", (-0.537, 0.4367, 1.4085), 0.018, 0.006)
     for name, points in (
-        ("manual", [(-0.602, 1.402), (-0.56, 1.402), (-0.56, 1.382)]),
-        ("atc", [(-0.490, 1.288), (-0.476, 1.288), (-0.476, 1.34), (-0.518, 1.34)]),
+        ("manual", [(-0.578, 1.4053), (-0.56, 1.4053), (-0.56, 1.382)]),
+        ("atc", [(-0.5275, 1.4085), (-0.494, 1.4085), (-0.494, 1.34), (-0.518, 1.34)]),
     ):
         for index, (start, end) in enumerate(zip(points, points[1:])):
             a.rod(

@@ -12,9 +12,26 @@ import numpy as np
 import trimesh
 import vtk
 
+from holocue.modeling import Assembly
+
+
+class CNCAssembly(Assembly):
+    """Keep authored glTF NORMAL data through this scene's export copy."""
+
+    def save(self, path):
+        path.parent.mkdir(parents=True, exist_ok=True)
+        exported = self.scene.copy()
+        # Trimesh stores imported normals in its cache, while Scene.copy()
+        # deliberately drops mesh caches. Restore these authored attributes
+        # before the existing coordinate conversion and standard glTF export.
+        for key, mesh in self.scene.geometry.items():
+            exported.geometry[key].vertex_normals = mesh.vertex_normals.copy()
+        exported.apply_transform(trimesh.transformations.rotation_matrix(-np.pi / 2, [1, 0, 0]))
+        exported.export(str(path), file_type="glb", include_normals=True)
+
 
 def copy_mesh(mesh, face_indices=None):
-    """Copy geometry/UV data while sharing the immutable licensed textures."""
+    """Copy source corner attributes while sharing immutable licensed textures."""
     source_faces = mesh.faces if face_indices is None else mesh.faces[face_indices]
     if face_indices is None:
         selected = np.arange(len(mesh.vertices))
@@ -33,22 +50,62 @@ def copy_mesh(mesh, face_indices=None):
     return trimesh.Trimesh(
         vertices=mesh.vertices[selected],
         faces=faces,
+        vertex_normals=mesh.vertex_normals[selected].copy(),
         visual=visual,
         process=False,
         metadata=mesh.metadata.copy(),
+        face_attributes={
+            name: values.copy() if face_indices is None else values[face_indices].copy()
+            for name, values in mesh.face_attributes.items()
+        },
+    )
+
+
+def _source_faces(mesh):
+    return mesh.face_attributes.get("cnc_source_surface", np.ones(len(mesh.faces), dtype=bool))
+
+
+def _corner_mesh(template, faces, corner_normals, source_faces):
+    """Keep separate corner normals at every authored hard edge and UV seam."""
+    corners = np.asarray(faces).reshape(-1)
+    visual = template.visual
+    if visual.kind == "texture":
+        uv = None if visual.uv is None else visual.uv[corners]
+        visual = trimesh.visual.TextureVisuals(uv=uv, material=visual.material)
+    elif visual.kind == "vertex":
+        visual = trimesh.visual.ColorVisuals(vertex_colors=visual.vertex_colors[corners])
+    else:
+        visual = visual.copy()
+    return trimesh.Trimesh(
+        vertices=template.vertices[corners],
+        faces=np.arange(len(corners)).reshape(-1, 3),
+        vertex_normals=np.asarray(corner_normals).reshape(-1, 3),
+        visual=visual,
+        process=False,
+        metadata=template.metadata.copy(),
+        face_attributes={"cnc_source_surface": np.asarray(source_faces, dtype=bool)},
     )
 
 
 def _combine(meshes):
-    vertices, faces, uv = [], [], []
+    vertices, faces, uv, normals, source_faces = [], [], [], [], []
     count = 0
     for mesh in meshes:
         vertices.append(mesh.vertices)
         faces.append(mesh.faces + count)
         uv.append(mesh.visual.uv)
+        normals.append(mesh.vertex_normals)
+        source_faces.append(_source_faces(mesh))
         count += len(mesh.vertices)
     visual = trimesh.visual.TextureVisuals(uv=np.vstack(uv), material=meshes[0].visual.material)
-    return trimesh.Trimesh(np.vstack(vertices), np.vstack(faces), visual=visual, process=False)
+    return trimesh.Trimesh(
+        np.vstack(vertices),
+        np.vstack(faces),
+        vertex_normals=np.vstack(normals),
+        visual=visual,
+        process=False,
+        face_attributes={"cnc_source_surface": np.concatenate(source_faces)},
+    )
 
 
 def _pack_solids(meshes):
@@ -105,10 +162,15 @@ def _orient(mesh):
     check.fix_normals(multibody=True)
     # The geometry arrays have identical face order; only winding may change.
     flipped = np.any(check.faces != topology(mesh)[0].faces, axis=1)
-    result = copy_mesh(mesh)
-    result.faces[flipped] = result.faces[flipped, ::-1]
-    result._cache.clear()
-    return result
+    faces = mesh.faces.copy()
+    normals = mesh.vertex_normals[faces].copy()
+    source_faces = _source_faces(mesh)
+    faces[flipped] = faces[flipped, ::-1]
+    normals[flipped] = normals[flipped, ::-1]
+    # Source shading normals are authored data, independent of the repaired
+    # surface winding. Only newly generated surfaces need their normals flipped.
+    normals[flipped & ~source_faces] *= -1
+    return _corner_mesh(mesh, faces, normals, source_faces)
 
 
 def boundary_cycles(mesh):
@@ -163,12 +225,18 @@ def _triangulate(vertices, cycles, normal=None):
 
 
 def _with_extra_faces(mesh, faces):
-    """Map cap corners to existing source corners without rewriting source UVs."""
+    """Add cap corners with independent normals, retaining all source normals."""
     _, first, _ = topology(mesh)
-    result = copy_mesh(mesh)
-    result.faces = np.vstack([result.faces, first[np.asarray(faces)]])
-    result._cache.clear()
-    return result
+    added = first[np.asarray(faces)]
+    triangles = mesh.vertices[added]
+    normals = np.cross(triangles[:, 1] - triangles[:, 0], triangles[:, 2] - triangles[:, 0])
+    normals /= np.linalg.norm(normals, axis=1, keepdims=True)
+    return _corner_mesh(
+        mesh,
+        np.vstack([mesh.faces, added]),
+        np.concatenate([mesh.vertex_normals[mesh.faces], np.repeat(normals[:, None, :], 3, axis=1)]),
+        np.r_[_source_faces(mesh), np.zeros(len(added), dtype=bool)],
+    )
 
 
 def _small_spatial_patch(vertices, cycle, existing_edges):
@@ -273,7 +341,30 @@ def finite_wall(mesh, thickness, label, smooth=False):
         visual = trimesh.visual.ColorVisuals(
             vertex_colors=np.vstack([visual.vertex_colors, visual.vertex_colors])
         )
-    result = trimesh.Trimesh(vertices, np.vstack(faces), visual=visual, process=False)
+    all_faces = np.vstack(faces)
+    # Recompute the new inner surface using the source's smoothing groups.
+    # Equal positions with different authored normals remain separate groups;
+    # this does not smooth across the hard edges of folded hardware.
+    inner_vertices = vertices[n:]
+    _, first, groups = np.unique(
+        np.c_[inner_vertices, mesh.vertex_normals], axis=0, return_index=True, return_inverse=True
+    )
+    inner = trimesh.Trimesh(inner_vertices[first], groups[mesh.faces[:, ::-1]], process=False)
+    inner_normals = inner.vertex_normals[groups][mesh.faces[:, ::-1]]
+    wall_triangles = vertices[np.asarray(walls)]
+    wall_normals = np.cross(
+        wall_triangles[:, 1] - wall_triangles[:, 0], wall_triangles[:, 2] - wall_triangles[:, 0]
+    )
+    wall_normals /= np.linalg.norm(wall_normals, axis=1, keepdims=True)
+    template = trimesh.Trimesh(vertices, all_faces, visual=visual, process=False)
+    result = _corner_mesh(
+        template,
+        all_faces,
+        np.concatenate(
+            [mesh.vertex_normals[mesh.faces], inner_normals, np.repeat(wall_normals[:, None, :], 3, axis=1)]
+        ),
+        np.r_[_source_faces(mesh), np.zeros(len(mesh.faces) + len(walls), dtype=bool)],
+    )
     result = _orient(result)
     return _check(result, label)
 
@@ -354,9 +445,8 @@ def repair_mature_scene(source, asset_id):
 
 def replace_planar_faces(mesh, axis, value, label, tolerance=1e-9):
     """Retessellate a defective CAD plane against the unchanged side contours."""
-    result = copy_mesh(mesh)
-    on_plane = np.abs(result.triangles[:, :, axis] - value) <= tolerance
-    result.update_faces(~on_plane.all(axis=1))
+    on_plane = np.abs(mesh.triangles[:, :, axis] - value) <= tolerance
+    result = copy_mesh(mesh, np.flatnonzero(~on_plane.all(axis=1)))
     check, _, _ = topology(result)
     cycles = boundary_cycles(result)
     selected = [c for c in cycles if np.max(np.abs(check.vertices[c, axis] - value)) <= tolerance]
@@ -378,7 +468,7 @@ def repair_post(mesh):
     check, _, _ = topology(result)
     # The CAD export repeats sixteen exact end triangles.
     _, first = np.unique(np.sort(check.faces, axis=1), axis=0, return_index=True)
-    result.update_faces(np.sort(first))
+    result = copy_mesh(result, np.sort(first))
     for z in (0.0, 1.5):
         result = replace_planar_faces(result, 2, z, "Araki 3030 end profile")
     return _check(_orient(result), "Araki 3030 extrusion")
@@ -386,20 +476,21 @@ def repair_post(mesh):
 
 def repair_flange(mesh):
     """Complete the cropped flange's bore and CAD planes from source contours."""
-    result = topology(mesh)[0]
-    bottom = float(result.bounds[0, 2])
-    radius = np.linalg.norm(result.vertices[:, :2], axis=1)
-    lower = np.flatnonzero((np.abs(result.vertices[:, 2] - bottom) < 1e-9) & (np.abs(radius - 0.015) < 1e-7))
-    upper = np.flatnonzero((np.abs(result.vertices[:, 2]) < 1e-9) & (np.abs(radius - 0.015875) < 1e-7))
+    result = copy_mesh(mesh)
+    surface, _, _ = topology(result)
+    bottom = float(surface.bounds[0, 2])
+    radius = np.linalg.norm(surface.vertices[:, :2], axis=1)
+    lower = np.flatnonzero((np.abs(surface.vertices[:, 2] - bottom) < 1e-9) & (np.abs(radius - 0.015) < 1e-7))
+    upper = np.flatnonzero((np.abs(surface.vertices[:, 2]) < 1e-9) & (np.abs(radius - 0.015875) < 1e-7))
     if len(lower) != 64 or len(upper) != 64:
         raise ValueError("The source flange's two bore contours changed")
-    lower = lower[np.argsort(np.arctan2(result.vertices[lower, 1], result.vertices[lower, 0]))]
-    upper = upper[np.argsort(np.arctan2(result.vertices[upper, 1], result.vertices[upper, 0]))]
+    lower = lower[np.argsort(np.arctan2(surface.vertices[lower, 1], surface.vertices[lower, 0]))]
+    upper = upper[np.argsort(np.arctan2(surface.vertices[upper, 1], surface.vertices[upper, 0]))]
     faces = []
     for i in range(64):
         j = (i + 1) % 64
         faces.extend([[lower[i], lower[j], upper[j]], [lower[i], upper[j], upper[i]]])
-    result.faces = np.vstack([result.faces, faces])
+    result = _with_extra_faces(result, faces)
     # The old underside has a 64-segment outer ring but the retained side wall
     # has a different tessellation. Rebuild that plane against the actual wall.
     result = replace_planar_faces(result, 2, bottom, "flange underside")
