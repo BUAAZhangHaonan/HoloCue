@@ -221,6 +221,15 @@ class SceneRenderer:
         for handle in reversed(self.handles):
             handle.remove()
 
+    def visible_asset_paths(self):
+        """Names whose current GLB data must be mounted before a camera observation."""
+        if self.view_mode == "inspection":
+            return (f"/workspace/objects/{self.selected_id}/asset",)
+        return tuple(
+            [f"/workspace/environment/{prop.prop_id}/asset" for prop in self.spec.environment]
+            + [f"/workspace/objects/{obj.object_id}/asset" for obj in self.spec.objects]
+        )
+
     def points(self, object_ids=None):
         ids = list(self.objects) if object_ids is None else object_ids
         result = []

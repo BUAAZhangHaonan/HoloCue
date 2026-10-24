@@ -21,10 +21,16 @@ from .response import profile
 from .viewer_scene import SceneRenderer
 from .bridge import atomic_json
 from .versioning import VersionGate
+from .observation import capture_camera, camera_spec
 
 
 class Operator:
-    def __init__(self, client: viser.ClientHandle, base: str):
+    def __init__(self, client: viser.ClientHandle, base: str, observation_mode="camera_rgb"):
+        if observation_mode not in ("camera_rgb", "text_state"):
+            raise ValueError("Unknown observation mode")
+        self.observation_mode = observation_mode
+        self.capture_active = False
+        self.camera_ready = False
         self.client = client
         self.base = base.rstrip("/")
         self.http = httpx.Client(
@@ -86,6 +92,7 @@ class Operator:
             self.view = gui.add_button_group("观察方式", ["工作区域", "目标特写", "结构检查"], visible=False)
             self.inspect_text = gui.add_markdown("结构检查显示选中对象的真实网格与表面标签")
             self.focus_button = gui.add_button("聚焦选中对象", disabled=True)
+            self.camera_button = gui.add_button("采集相机图像", disabled=True)
         with tabs.add_tab("显示响应"):
             self.focus = gui.add_slider("焦点距离 米", min=0.05, max=20.0, step=0.005, initial_value=1.0)
             self.brightness = gui.add_slider("提示亮度", min=0.0, max=4.0, step=0.05, initial_value=1.0)
@@ -130,12 +137,7 @@ class Operator:
             mode = {"工作区域": "workspace", "目标特写": "detail", "结构检查": "inspection"}[
                 event.target.value
             ]
-            with self.lock:
-                if self.renderer is None:
-                    raise RuntimeError("scene is loading")
-                self.renderer.select_view(mode, self.target.value)
-                self.refresh_object_summary()
-                self.record("view", {"mode": mode, "target": self.target.value})
+            self.launch(self.select_view, mode, self.target.value)
 
         @self.target.on_update
         def target_changed(event):
@@ -143,7 +145,7 @@ class Operator:
                 if not self.loaded or self.renderer is None:
                     return
                 if event.client_id is not None:
-                    self.renderer.select_view(self.renderer.view_mode, self.target.value)
+                    self.launch(self.select_view, self.renderer.view_mode, self.target.value)
                 self.refresh_object_summary()
 
         @self.focus_button.on_click
@@ -153,6 +155,10 @@ class Operator:
                 if not 0.05 <= distance <= 20:
                     raise ValueError("focus distance outside the configured viewer range")
                 self.focus.value = distance
+
+        @self.camera_button.on_click
+        def capture_view(_):
+            self.launch(self.capture_observation, "view_" + uuid.uuid4().hex, "camera_export")
 
         @self.focus.on_update
         def focus_value(_):
@@ -176,6 +182,7 @@ class Operator:
                 if (
                     self.renderer
                     and self.loaded
+                    and not self.capture_active
                     and getattr(self, "camera_aspect", None) != client.camera.aspect
                 ):
                     self.camera_aspect = client.camera.aspect
@@ -184,6 +191,14 @@ class Operator:
         self.launch(self.load, initial_id, os.environ.get("HOLOCUE_SESSION_ID"))
         threading.Thread(target=self.poll, daemon=True, name=f"poll-{client.client_id}").start()
         threading.Thread(target=self.animate, daemon=True, name=f"animate-{client.client_id}").start()
+
+    def select_view(self, mode, target):
+        with self.lock:
+            if self.renderer is None:
+                raise RuntimeError("scene is loading")
+            self.renderer.select_view(mode, target)
+            self.refresh_object_summary()
+            self.record("view", {"mode": mode, "target": target})
 
     def record(self, kind, data):
         with self.log_file.open("a", encoding="utf-8") as file:
@@ -227,7 +242,8 @@ class Operator:
         return future
 
     def load(self, scene_id, sid):
-        controls = (self.target, self.focus_button)
+        load_started = time.perf_counter()
+        controls = (self.target, self.focus_button, self.camera_button)
         self.scene_choice.disabled = True
         self.actions.visible = False
         self.view.visible = False
@@ -235,6 +251,22 @@ class Operator:
             control.disabled = True
         try:
             self.load_scene_session(scene_id, sid)
+            if self.observation_mode == "camera_rgb":
+                self.capture_observation("ready_" + uuid.uuid4().hex, "initialization", timeout=60.0)
+                with self.lock:
+                    self.camera_ready = True
+            self.record(
+                "runtime_ready",
+                {
+                    "initialization_s": time.perf_counter() - load_started,
+                    "observation_mode": self.observation_mode,
+                },
+            )
+        except Exception:
+            with self.lock:
+                self.loaded = False
+                self.camera_ready = False
+            raise
         finally:
             # A failed load still allows selecting a scene or opening a session.
             # Operations on scene nodes wait until the requested load succeeds.
@@ -247,6 +279,7 @@ class Operator:
     def load_scene_session(self, scene_id, sid):
         with self.lock:
             self.loaded = False
+            self.camera_ready = False
             self.generation += 1
             generation = self.generation
         health = self.request("GET", "/health")
@@ -284,22 +317,109 @@ class Operator:
             self.refresh_object_summary()
             self.record("scene_loaded", {"scene_id": spec.scene_id, "scene_set": spec.scene_set})
 
+    def capture_observation(self, request_id, purpose, *, timeout=20.0):
+        with self.lock:
+            sid, generation = self.sid, self.generation
+        snapshot = self.request("GET", f"/api/v1/sessions/{sid}/snapshot")
+        self.accept(snapshot, sid, generation)
+        with self.lock:
+            if generation != self.generation or sid != self.sid or not self.loaded:
+                raise RuntimeError("Scene changed before camera observation")
+            if self.capture_active:
+                raise RuntimeError("A camera observation is already in progress")
+            if (self.revision, self.epoch) != (snapshot["state"]["revision"], snapshot["state"]["epoch"]):
+                raise RuntimeError("Camera scene has not accepted the requested state version")
+            camera_timestamp = self.client.camera.update_timestamp
+            frozen_camera = camera_spec(self.client.camera)
+            focus, brightness, enabled = self.focus.value, self.brightness.value, self.enabled.value
+            self.renderer.tick(0.0, time.perf_counter(), focus, brightness, enabled, False)
+            if self.client.camera.update_timestamp != camera_timestamp:
+                raise RuntimeError("Camera moved while preparing the observation; submit again")
+            identity = {
+                "request_id": request_id,
+                "purpose": purpose,
+                "session_id": sid,
+                "client_id": self.client.client_id,
+                "scene_id": self.renderer.spec.scene_id,
+                "scene_set": self.renderer.spec.scene_set,
+                "revision": self.revision,
+                "epoch": self.epoch,
+                "generation": generation,
+                "execution": self.packet.execution,
+                "elapsed_s": dict(self.renderer.clock.elapsed),
+                "view_mode": self.renderer.view_mode,
+                "selected_id": self.renderer.selected_id,
+                "focus_m": focus,
+                "brightness": brightness,
+                "guidance_enabled": enabled,
+                "object_poses": {
+                    k: p.model_dump(mode="json") for k, p in self.renderer.current_poses.items()
+                },
+            }
+            expected = self.renderer.visible_asset_paths()
+            self.capture_active = True
+        try:
+            # Rendering needs WebSocket/camera callbacks; never wait with self.lock held.
+            metadata, encoded = capture_camera(
+                self.client,
+                self.log_dir / "observations" / sid,
+                identity,
+                expected,
+                timeout=timeout,
+                frozen_camera=frozen_camera,
+            )
+            with self.lock:
+                if (sid, generation, identity["revision"], identity["epoch"]) != (
+                    self.sid,
+                    self.generation,
+                    self.revision,
+                    self.epoch,
+                ):
+                    raise RuntimeError("Scene changed during camera observation")
+            self.record("camera_observation", metadata)
+            return snapshot["state"], metadata, encoded
+        finally:
+            with self.lock:
+                self.capture_active = False
+                # Resize callbacks cannot mutate the scene during a frozen capture.
+                # Apply the deferred layout only after its pixels have been returned.
+                if getattr(self, "camera_aspect", None) != self.client.camera.aspect:
+                    self.camera_aspect = self.client.camera.aspect
+                    self.renderer.select_view(self.renderer.view_mode, self.target.value)
+
     def submit(self, text):
         if not text.strip():
             raise ValueError("任务指令不能为空")
         with self.lock:
             sid, generation = self.sid, self.generation
-        state = self.request("GET", f"/api/v1/sessions/{sid}")
+        request_id = uuid.uuid4().hex
+        if self.observation_mode == "camera_rgb":
+            state, observation, encoded = self.capture_observation(request_id, "model_input")
+            message = {"image_base64": encoded, "image_mime": "image/png"}
+        else:
+            state = self.request("GET", f"/api/v1/sessions/{sid}")
+            observation = None
+            message = {}
+        message.update(text=text, request_id=request_id, expected_revision=state["revision"])
         receipt = self.request(
             "POST",
             f"/api/v1/sessions/{sid}/messages",
-            json={"text": text, "request_id": uuid.uuid4().hex, "expected_revision": state["revision"]},
+            json=message,
         )
         with self.lock:
             if generation == self.generation:
                 self.gate.require(state["revision"] + 1, receipt["epoch"])
                 self.failed = False
                 self.last_snapshot = 0.0
+                self.record(
+                    "message_submitted",
+                    {
+                        "request_id": request_id,
+                        "job_id": receipt["id"],
+                        "observation_mode": self.observation_mode,
+                        "image_sha256": observation["image_sha256"] if observation else None,
+                    },
+                )
 
     def control(self, operation):
         with self.lock:
@@ -323,6 +443,8 @@ class Operator:
             raise ValueError("snapshot state and display versions disagree")
         with self.lock:
             if sid != self.sid or generation != self.generation:
+                return
+            if self.capture_active:
                 return
             if not self.gate.admit(packet.revision, packet.epoch):
                 return
@@ -384,6 +506,7 @@ class Operator:
                     "epoch": packet.epoch,
                     "scene_id": packet.scene_id,
                     "backend_mode": state["backend_mode"],
+                    "elapsed_s": dict(self.renderer.clock.elapsed),
                     "execution": packet.execution,
                     "tasks": [c.task_id for c in packet.cues],
                 },
@@ -419,20 +542,22 @@ class Operator:
                     continue
                 running = (
                     not self.pending
+                    and not self.capture_active
                     and not self.failed
                     and now - self.last_snapshot < 0.8
                     and self.packet is not None
                     and self.packet.execution == "running"
                     and self.gate.current(self.packet.revision, self.packet.epoch)
                 )
-                self.renderer.tick(
-                    dt * self.playback_speed.value,
-                    now,
-                    self.focus.value,
-                    self.brightness.value,
-                    self.enabled.value,
-                    running,
-                )
+                if not self.capture_active:
+                    self.renderer.tick(
+                        dt * self.playback_speed.value,
+                        now,
+                        self.focus.value,
+                        self.brightness.value,
+                        self.enabled.value,
+                        running,
+                    )
                 if now - self.last_view_export >= 0.2:
                     cam = self.client.camera
                     atomic_json(
@@ -455,6 +580,10 @@ class Operator:
                             "brightness": self.brightness.value,
                             "enabled": self.enabled.value,
                             "playback_speed": self.playback_speed.value,
+                            "observation_mode": self.observation_mode,
+                            "camera_ready": self.camera_ready,
+                            "camera_capture_active": self.capture_active,
+                            "pending_commands": self.pending,
                             "view_mode": self.renderer.view_mode,
                             "selected_id": self.renderer.selected_id,
                             "elapsed_s": dict(self.renderer.clock.elapsed),
@@ -474,6 +603,11 @@ def main():
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=8780)
     parser.add_argument("--scene-set", choices=SCENE_SETS, default=scene_set())
+    parser.add_argument(
+        "--observation-mode",
+        choices=("camera_rgb", "text_state"),
+        default=os.environ.get("HOLOCUE_OBSERVATION_MODE", "camera_rgb"),
+    )
     args = parser.parse_args()
     os.environ["HOLOCUE_SCENE_SET"] = args.scene_set
     if args.host not in ("127.0.0.1", "localhost", "::1"):
@@ -484,7 +618,7 @@ def main():
 
     @server.on_client_connect
     def connect(client):
-        operators[client.client_id] = Operator(client, args.api)
+        operators[client.client_id] = Operator(client, args.api, args.observation_mode)
 
     @server.on_client_disconnect
     def disconnect(client):
