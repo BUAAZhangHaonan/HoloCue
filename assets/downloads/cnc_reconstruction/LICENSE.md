@@ -18,8 +18,8 @@
 - Author profile: https://sketchfab.com/Shinya.Araki
 - License: **Creative Commons Attribution 4.0 International (CC BY 4.0)**, https://creativecommons.org/licenses/by/4.0/ ; legal terms https://creativecommons.org/licenses/by/4.0/legalcode
 - License evidence: `toolrack_metadata.json` is the public model API response identifying the author, UID, download availability and license.
-- Redistribution here: the unchanged `toolrack.glb` and derived `araki_bt_flange.glb` / `araki_3030_post.glb`. Changes to derivatives: complete component selection, rigid recentering, mm-to-m conversion and normal/axis handling. Scene composition additionally rotates the full cart wheel-down, assigns grey metal and nonmetal tyre materials, uniformly enlarges the flange by 63/46 and the extracted upright by 1.11. All source geometry derivatives remain CC BY 4.0. The author does not endorse this adaptation.
-- A later actual-face check found inward winding in the open extracted flange. The scene builder reverses the complete flange's winding/normals without changing source positions, scale, contact planes or the retained source files.
+- Redistribution here: the unchanged `toolrack.glb` and derived `araki_bt_flange.glb` / `araki_3030_post.glb`. Changes to derivatives: complete component selection, rigid recentering, mm-to-m conversion and normal/axis handling. The initial scene composition rotated the full cart wheel-down and assigned grey metal and nonmetal tyre materials. The current scene replaces that cart with Poly Haven tool_cart, and continues to use the flange enlarged by 63/46 and upright by 1.11 with the source-surface repairs documented in [CNC_TOPOLOGY_REPAIR.md](../../../docs/CNC_TOPOLOGY_REPAIR.md). All source geometry derivatives remain CC BY 4.0. The author does not endorse this adaptation.
+- The initial actual-face correction reversed inward winding in the open extracted flange without changing source positions, scale, contact planes or retained source files. The subsequent repair retessellates its end surfaces as documented above; this later change is distinct from that orientation-only correction.
 
 The public Objaverse/Hugging Face files are the delivery mirrors. The permissions above come from the **individual source model licenses**, not from Objaverse code or dataset packaging. Actual files were downloaded and opened in real Blender. Download URLs and source hashes are preserved in `sources.json`.
 
@@ -27,7 +27,7 @@ The public Objaverse/Hugging Face files are the delivery mirrors. The permission
 
 - Adafruit aluminum enclosure **2230**: MIT, with original copyright and license text retained at `../control_panel_reconstruction/LICENSE.md` and its linked source records. This directory does not duplicate the original STEP.
 - **EMAITEE** knob: CC BY 4.0, with source title, original URL and attribution in `../control_panel_reconstruction/LICENSE.md` and `../control_panel_reconstruction/sources.json`. It is reused read-only here with a rigid transformation and uniform scale.
-- Poly Haven **WoodenTable_03, metal_toolbox, ratchet_wrench, lubricant_spray, concrete_floor_worn_001**: CC0, https://polyhaven.com/license ; existing project asset-pool provenance is retained. The source pool is referenced, not re-downloaded or relicensed.
+- Poly Haven **WoodenTable_03, metal_toolbox, ratchet_wrench, lubricant_spray, tool_cart, concrete_floor_worn_001**: CC0, https://polyhaven.com/license ; existing project asset-pool provenance is retained. The source pool is referenced, not re-downloaded or relicensed.
 
 ## Authored adapters and scripts
 
