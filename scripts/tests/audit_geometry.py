@@ -28,6 +28,18 @@ def transform(pose):
     return result
 
 
+def geometry_copy(mesh):
+    """Join identical positions without deleting source faces or moving vertices.
+
+    UV seams and split shading normals are render attributes, not geometric
+    holes. In particular, validate=True can remove thin CAD triangles that
+    are necessary to close a solid. Neither that cleanup nor hole filling
+    belongs in this coverage check.
+    """
+    vertices, inverse = np.unique(mesh.vertices, axis=0, return_inverse=True)
+    return trimesh.Trimesh(vertices=vertices, faces=inverse[mesh.faces], process=False)
+
+
 def parts(spec, objects):
     result = []
     coverage = []
@@ -47,21 +59,19 @@ def parts(spec, objects):
                 "raw_faces": len(mesh.faces),
                 "raw_watertight": bool(mesh.is_watertight),
             }
-            # glTF can retain zero-area CAD tessellation faces and split
-            # vertices. Normalize only the private collision copy; never fill
-            # holes or silently exclude a solid obstacle on that account.
-            mesh.process(validate=True)
-            record.update(
-                vertices=len(mesh.vertices),
-                faces=len(mesh.faces),
-                watertight=bool(mesh.is_watertight),
-                winding_consistent=bool(mesh.is_winding_consistent),
-            )
             label_surface = (
                 str(node).split("/")[-1].startswith("label_")
                 and isinstance(mesh.visual, trimesh.visual.TextureVisuals)
                 and getattr(mesh.visual.material, "baseColorTexture", None) is not None
                 and np.linalg.matrix_rank(mesh.vertices - mesh.vertices.mean(axis=0), tol=1e-8) <= 2
+            )
+            mesh = geometry_copy(mesh)
+            record.update(
+                vertices=len(mesh.vertices),
+                faces=len(mesh.faces),
+                watertight=bool(mesh.is_watertight),
+                winding_consistent=bool(mesh.is_winding_consistent),
+                normalization="exact_position_weld_no_face_deletion",
             )
             if label_surface:
                 record["status"] = "excluded_textured_label_surface"
@@ -73,6 +83,9 @@ def parts(spec, objects):
                 continue
             record["status"] = "included_closed_solid"
             coverage.append(record)
+            # Signed distances require outward orientation for each closed
+            # component. This changes only the private distance-field copy.
+            trimesh.repair.fix_inversion(mesh, multibody=True)
             mesh.apply_transform(pose @ local)
             field = vtk.vtkImplicitPolyDataDistance()
             field.SetInput(polydata(mesh))

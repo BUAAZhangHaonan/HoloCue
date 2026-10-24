@@ -6,7 +6,7 @@ import numpy as np
 from scipy.spatial.transform import Rotation
 
 from holocue.config import load_scene
-from scripts.tests.audit_geometry import ordered_steps, parts, transform
+from scripts.tests.audit_geometry import geometry_copy, ordered_steps, parts, transform
 
 
 def test_generic_blocks_support_surfaces_are_collision_obstacles(tmp_path, monkeypatch):
@@ -81,3 +81,67 @@ def test_open_solid_is_reported_as_uncovered_not_silently_ignored(tmp_path, monk
     assert not obstacles
     assert len(coverage) == 1
     assert coverage[0]["status"] == "invalid_solid_topology"
+
+
+def test_geometry_copy_joins_attribute_seams_without_changing_render_asset():
+    box = trimesh.creation.box([0.02, 0.02, 0.02])
+    vertices = box.triangles.reshape(-1, 3)
+    faces = np.arange(len(vertices)).reshape(-1, 3)
+    uv = np.arange(len(vertices) * 2).reshape(-1, 2) / 100
+    mesh = trimesh.Trimesh(
+        vertices,
+        faces,
+        process=False,
+        vertex_normals=np.repeat(box.face_normals, 3, axis=0),
+        visual=trimesh.visual.TextureVisuals(uv=uv),
+    )
+    solid = geometry_copy(mesh)
+    assert solid.is_watertight and solid.is_winding_consistent
+    np.testing.assert_array_equal(solid.triangles, mesh.triangles)
+    np.testing.assert_array_equal(mesh.visual.uv, uv)
+    np.testing.assert_array_equal(mesh.vertices, vertices)
+    assert not mesh.is_watertight
+
+
+def test_geometry_copy_preserves_thin_topologically_required_faces():
+    box = trimesh.creation.box([0.02, 0.02, 0.02])
+    a, b, c = box.faces[0]
+    midpoint = (box.vertices[a] + box.vertices[b]) / 2
+    point = midpoint + 1e-7 * (box.vertices[c] - midpoint)
+    vertices = np.vstack([box.vertices, point])
+    p = len(vertices) - 1
+    faces = np.vstack([box.faces[1:], [a, b, p], [b, c, p], [c, a, p]])
+    mesh = trimesh.Trimesh(vertices, faces, process=False)
+    assert mesh.is_watertight and mesh.is_winding_consistent
+    solid = geometry_copy(mesh)
+    assert solid.is_watertight and solid.is_winding_consistent
+    np.testing.assert_array_equal(solid.triangles, mesh.triangles)
+
+
+def test_geometry_copy_does_not_close_a_real_subnanometre_gap():
+    box = trimesh.creation.box([0.02, 0.02, 0.02])
+    vertices = box.triangles.reshape(-1, 3).copy()
+    vertices[0] += [1e-10, 0, 0]
+    mesh = trimesh.Trimesh(vertices, np.arange(len(vertices)).reshape(-1, 3), process=False)
+    solid = geometry_copy(mesh)
+    assert not solid.is_watertight
+    np.testing.assert_array_equal(solid.triangles, mesh.triangles)
+
+
+def test_closed_components_each_have_outward_signed_distance(monkeypatch):
+    spec = load_scene("blocks")
+    obj = spec.objects[0]
+    first = trimesh.creation.box([0.02, 0.02, 0.02])
+    first.invert()
+    second = trimesh.creation.box([0.03, 0.03, 0.03])
+    second.apply_translation([0.06, 0, 0])
+    mesh = trimesh.util.concatenate([first, second])
+    source_faces = mesh.faces.copy()
+    monkeypatch.setattr("scripts.tests.audit_geometry.load_asset", lambda *args: trimesh.Scene(mesh))
+    obstacles, coverage = parts(spec, [obj])
+    assert coverage[0]["status"] == "included_closed_solid"
+    field = obstacles[0][3]
+    for local in ([0, 0, 0], [0.06, 0, 0]):
+        point = trimesh.transform_points([local], transform(obj.pose))[0]
+        assert field.EvaluateFunction(point) < -0.009
+    np.testing.assert_array_equal(mesh.faces, source_faces)
