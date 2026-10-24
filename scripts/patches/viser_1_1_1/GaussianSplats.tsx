@@ -55,6 +55,7 @@ export function SplatRenderContext({ children }: { children: React.ReactNode }) 
       value={{
         gaussianSplatState: splatState,
         updateCamera: React.useRef(null),
+        captureStatus: React.useRef(null),
         meshPropsRef: React.useRef(null),
       }}
     >
@@ -298,6 +299,11 @@ function SplatRendererImpl() {
       }
       // Free the main-thread WASM Sorter (embind object; not GC'd).
       sorterDisposedRef.current = true;
+      if (splatContext.meshPropsRef.current === meshPropsRef.current) {
+        splatContext.captureStatus.current = null;
+        splatContext.updateCamera.current = null;
+        splatContext.meshPropsRef.current = null;
+      }
       if (SorterRef.current) {
         SorterRef.current.delete();
         SorterRef.current = null;
@@ -341,6 +347,17 @@ function SplatRendererImpl() {
   const sorterDisposedRef = React.useRef(false);
   const sorterBufferVersionRef = React.useRef<number>(0);
   const currentBufferVersionRef = React.useRef<number>(0);
+  const readySorterVersionRef = React.useRef<number>(-1);
+  const sorterErrorRef = React.useRef<string | undefined>(undefined);
+  splatContext.captureStatus.current = () => ({
+    ready:
+      splatContext.gaussianSplatState.store.get().groupBufferFromId === groupBufferFromId &&
+      (merged.numGaussians === 0 ||
+        (SorterRef.current !== null &&
+          readySorterVersionRef.current === currentBufferVersionRef.current &&
+          meshPropsRef.current?.material.uniforms.transitionInState.value === 1.0)),
+    error: sorterErrorRef.current,
+  });
 
   // Update buffer version when buffer changes.
   if (bufferChanged) {
@@ -351,9 +368,16 @@ function SplatRendererImpl() {
   React.useEffect(() => {
     if (sorterBufferVersionRef.current !== currentBufferVersionRef.current) {
       sorterBufferVersionRef.current = currentBufferVersionRef.current;
+      const version = currentBufferVersionRef.current;
+      sorterErrorRef.current = undefined;
+      const ready = () => {
+        readySorterVersionRef.current = version;
+        viewer.mutable.current.requestRender();
+      };
       (async () => {
         if (SorterRef.current) {
           SorterRef.current.setBuffer(merged.gaussianBuffer, merged.groupIndices);
+          ready();
           return;
         }
         // Await the module BEFORE constructing, so bailing out below never
@@ -369,10 +393,15 @@ function SplatRendererImpl() {
           // buffer version: push our data into the live instance instead of
           // constructing (and leaking) a second one.
           SorterRef.current.setBuffer(merged.gaussianBuffer, merged.groupIndices);
+          ready();
           return;
         }
         SorterRef.current = new module.Sorter(merged.gaussianBuffer, merged.groupIndices);
-      })();
+        ready();
+      })().catch((error: unknown) => {
+        sorterErrorRef.current = String(error);
+        viewer.mutable.current.requestRender();
+      });
     }
   }, [merged.gaussianBuffer, merged.groupIndices]);
 
@@ -451,7 +480,7 @@ function SplatRendererImpl() {
       // stationary camera.
       if (groupsMovedWrtCam) prevRowMajorT_camera_groups.set(meshProps.rowMajorT_camera_groups);
 
-      if (groupsMovedWrtCam) {
+      if (groupsMovedWrtCam || blockingSort) {
         // Gaussians need to be re-sorted.
         if (blockingSort && SorterRef.current !== null) {
           const sortedIndices = SorterRef.current.sort(Tz_camera_groups) as Uint32Array;

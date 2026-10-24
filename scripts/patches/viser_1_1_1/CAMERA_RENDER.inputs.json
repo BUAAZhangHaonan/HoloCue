@@ -1,0 +1,31 @@
+{
+  "baseline": "Two installed Viser 1.1.1 wheel members matching the installed dist-info/RECORD SHA-256 and size; no official Git source comparison.",
+  "sha256": {
+    "src/MessageHandler.tsx": "b0b96c2275b1b6f1caf9b26d773fc171e9f4dafc0bcde5726d3a6a37c9b75403",
+    "src/mesh/GlbLoaderUtils.ts": "b59b55a71c59f1280d9b642c981eb92df5553c30084ca9125c75e764446af5ce"
+  },
+  "patched_sha256": {
+    "src/MessageHandler.tsx": "fd12fe25f74849c387ed5d5a51c4bd135c91878402f705ac39425ed5fdb3cc13",
+    "src/mesh/GlbLoaderUtils.ts": "e30dfda88a66a9a53aaac4f494b3cd2b1a3304bcbf95fea239ac37fe100bba6d"
+  },
+  "baseline_distribution": {
+    "name": "viser",
+    "version": "1.1.1",
+    "installer": "pip",
+    "direct_url_present": false,
+    "wheel_tag": "py3-none-any",
+    "record_entries": [
+      [
+        "viser/client/src/MessageHandler.tsx",
+        "sha256=sLlsInWxtvHK-bJtdz_Bcen02vwLzeVybTpqN8m3VAM",
+        "54912"
+      ],
+      [
+        "viser/client/src/mesh/GlbLoaderUtils.ts",
+        "sha256=tZtVpxxZ8SgNm2QsmB65LfVVPDAITKkSXHXnZERq9c4",
+        "5278"
+      ]
+    ],
+    "source_boundary": "The original package index and wheel archive URL are not recorded. Other installed files include HoloCue patches; that history does not apply to these two verified baseline members."
+  }
+}

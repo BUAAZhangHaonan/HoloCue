@@ -9,6 +9,7 @@ import { ViewerContext } from "./ViewerContext";
 import { useThree, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { HDRJPGLoader } from "@monogrid/gainmap-js";
+import { beginEnvironmentLoad } from "./cameraCapture";
 
 interface HDRJPGEnvironmentProps {
   /** HDR JPEG image: either a URL (built-in default asset) or raw bytes
@@ -56,6 +57,7 @@ export function HDRJPGEnvironment({
   const gl = useThree((state) => state.gl);
   const scene = useThree((state) => state.scene);
   const [texture, setTexture] = useState<THREE.Texture | null>(null);
+  const captureLoad = useRef<ReturnType<typeof beginEnvironmentLoad> | null>(null);
 
   // Keep the previous source reference while the bytes are unchanged, so the
   // load effect's dependency doesn't churn on every message.
@@ -76,6 +78,8 @@ export function HDRJPGEnvironment({
 
   // Load the HDR JPEG file.
   useEffect(() => {
+    const ticket = beginEnvironmentLoad(scene, stableSource);
+    captureLoad.current = ticket;
     const loader = new HDRJPGLoader(gl);
     let disposed = false;
 
@@ -106,19 +110,23 @@ export function HDRJPGEnvironment({
         // Scene properties (environment/background + intensity, rotation,
         // blur) are applied reactively in the effect below, keyed on
         // `texture`, so prop changes take effect without a reload.
+        ticket.loaded(tex);
         setTexture(tex);
       },
       undefined,
       (error) => {
+        ticket.fail(error);
         console.error("Failed to load HDR JPEG:", error);
       },
     );
 
     return () => {
       disposed = true;
+      ticket.dispose();
+      if (captureLoad.current === ticket) captureLoad.current = null;
       if (typeof stableSource !== "string") URL.revokeObjectURL(url);
     };
-  }, [stableSource, gl]);
+  }, [stableSource, gl, scene]);
 
   // Dispose of previous texture when changed.
   useEffect(() => {
@@ -151,6 +159,7 @@ export function HDRJPGEnvironment({
     } else {
       scene.background = null;
     }
+    captureLoad.current?.applied(texture);
     viewerMutable.requestRender();
   }, [
     viewerMutable,

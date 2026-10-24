@@ -22,15 +22,29 @@ GaussianSplats.tsx 有三项相机绘制修改：
 - projection 在同次调用计算并写入当前 material，缓存包含 renderer 的实际 reversed-depth 模式；Gaussian 数量变化重建 material 时也写入缓存矩阵。投影宽高比使用 camera.aspect，与实体相机一致；viewport uniform 使用 getCurrentViewport 的整数物理像素宽高。DPR 舍入可能改变物理宽高比，不能用它重造相机投影。shader 用投影定位中心，再以物理 viewport 换算像素焦距和椭圆范围。
 - 设置 frustumCulled=false。池化 quad 的 CPU 包围球不表示 shader 中全部 Gaussian 中心，不能用它提前跳过绘制及相机更新；实际提示仍由既有 shader 裁剪，不改提示数组或响应参数。
 
-虚拟截图保留 render 前的显式 blockingSort：Three 的几何 attribute 上传早于 onBeforeRender，不能把阻塞排序移入该回调。普通绘制沿用异步排序，worker 结果仅按数量检查的既有边界未扩改，不能宣称首帧透明合成顺序完全同步。产品本轮未触发虚拟 get_render；对该路径仅完成源码时序兼容分析，不属于运行验证。
+虚拟截图保留 render 前的显式 blockingSort：Three 的几何 attribute 上传早于 onBeforeRender，不能把阻塞排序移入该回调。普通绘制沿用异步排序，worker 结果仅按数量检查的既有边界未扩改，不能宣称首帧透明合成顺序完全同步。alpha/aspect 历史阶段未触发虚拟 get_render，仅完成源码时序兼容分析。下述 runtime camera 补丁增加当前缓冲的就绪检查及每次取图的同步排序；真实浏览器取图需独立验收。
+
+## runtime camera 取图接口
+
+`ClientHandle.get_render()` 调用连接客户端的 Three/WebGL 场景相机，返回 numpy 图像，不读取网页 DOM。`near`、`far`、`projection_aspect` 默认取当前会话相机；显式传入这些字段及 `wxyz`、`position`、`fov` 可绑定应用已冻结的观测。输出整数尺寸不反推相机投影。`timeout` 必须为正有限秒数，默认 30 秒，Python 等待和客户端等待均有限；请求 UUID 保持并发响应关联。
+
+应用必须在 worker 中、锁和 `client.atomic()` 之外调用，并传入本次观测需要的全部 GLB 绝对节点路径 `expected_node_names=("/scene/model", ...)`。每个路径检查当前消息的 GLB byte 对象、实际挂载节点及其 LoadingManager 的纹理错误；旧加载结果不能满足新资源。环境图同时检查当前源、加载成功及实际安装到 scene；Gaussian 同步排序器须安装当前缓冲并完成既有渐入。就绪等待不依赖固定 sleep，也不修改点数、协方差、透明度、支持域或排序算法。这个屏障不覆盖未声明的 GLB、ImageMessage 或独立 background-image 解码；跨 broadcast/client 两个发送缓冲的原有顺序边界仍在，应用当前会话资产应通过对应 client 的同一消息链更新。
+
+`transport_format="png", transparent_background=False` 直接在不透明白底绘制，PNG 解码仍返回 `(H,W,4)` RGBA；应用可验证 alpha 全为 255 后取得 RGB。`transparent_background=None` 保留 PNG 透明及 JPEG 白底旧语义，True 只适用于 PNG。没有自动改画质、尺寸或截图回退；资源错误、空编码、超时和断连均抛出异常。捕获参数/会话版本和图像提交由应用层记录，此 SDK 不伪装成服务器无浏览器渲染。
+
+`CAMERA_RENDER.patch` 仅保存 MessageHandler.tsx 与 GlbLoaderUtils.ts 的增量。这两个基线文件的 SHA-256 和字节数均与已安装 Viser 1.1.1 分发包的 `dist-info/RECORD` 一致；没有与官方 Git 源码对照。`CAMERA_RENDER.inputs.json` 保存两个输入及补丁结果摘要和对应 RECORD 条目。安装元数据记录 `INSTALLER=pip`、wheel tag 为 `py3-none-any`，但没有 `direct_url.json`，因此未确定原安装索引或 wheel 下载地址。可从内容匹配的 Viser 1.1.1 分发包成员或已归档的精确输入恢复这两个基线，必须通过摘要检查；版本号本身不替代校验。安装包其他文件所含的历史 HoloCue 修复仍按各自来源记录。新的小型 cameraCapture 模块和测试跟随 `viser/` overlay，已有 Python/TypeScript 快照继续由项目统一格式化入口处理。
+
+取图沿用同一 WebGL renderer，临时改变绘图缓冲尺寸但不改 CSS 布局；在实际 canvas 上发出冒泡事件 `viser:camera-capture-active`，`detail={render_uuid}`，同时设置 `dataset.viserCameraCaptureActive="true"`。只有交互相机在默认 framebuffer 完成正常 `scene.onAfterRender` 后才发 `viser:camera-capture-restored` 并设为 false。异常时也恢复尺寸、clear color/alpha 和排序索引。录像必须从正常相机完成帧复制到独立固定尺寸 canvas，并跳过 active 区间；直接对主 canvas 自动 captureStream 仍可能记录临时捕获帧。事件不承诺无成本，也不减少正常任务时钟。
+
+局部验证入口：`test_camera_capture.py` 在完整候选包的 PYTHONPATH 下测真实 SDK 请求/解码、错误与 UUID 关联；`cameraCapture.test.ts` 测 Three 相机投影和就绪/超时状态；`cameraGlbReadiness.test.ts` 测实际 useGlbLoader 生命周期与 LoadingManager 纹理失败。它们不代替真实浏览器像素、录像隔离和 VLM 图像输入验收。
 
 ## 可复现构建
 
-viser/ 子目录按安装包相对路径保存另外四个文件。CameraControls.tsx 在 ViewerCameraMessage 中发送真实 three_camera.aspect，字段名为 projection_aspect；image_width 和 image_height 继续表示实际绘图缓冲的整数尺寸。_messages.py 与 WebsocketMessages.ts 声明同一必需字段，_viser.py 保存此值并通过 CameraHandle.aspect 返回。DPR 舍入后的缓冲尺寸比不能代替投影比例。旧客户端不支持这个必需字段，部署时关闭本次旧连接，成套安装两个 Python 文件及新客户端并重启 viewer，不增加旧协议回退。
+viser/ 子目录按安装包相对路径保存协议、相机控制、环境和取图模块。CameraControls.tsx 在 ViewerCameraMessage 中发送真实 three_camera.aspect，字段名为 projection_aspect；image_width 和 image_height 继续表示实际绘图缓冲的整数尺寸。_messages.py 与 WebsocketMessages.ts 声明同一必需字段，_viser.py 保存此值并通过 CameraHandle.aspect 返回。DPR 舍入后的缓冲尺寸比不能代替投影比例。旧客户端不支持这个必需字段，部署时关闭本次旧连接，成套安装两个 Python 文件及新客户端并重启 viewer，不增加旧协议回退。
 
 Blender 消费端使用固定整数输出尺寸及像素宽高比补偿，保持相同投影。verify_consumed 读取实际 calc_matrix_camera 的横纵系数并与 live 相机比较，误差上限仍为 2e-5。深度约定依引擎而异，横纵系数一致不宣称全部矩阵或像素完全相同。
 
-在项目根目录执行，选择未使用的新目录并保留历史证据。下列命令显式设置项目 Python、输出目录及项目内临时目录、缓存、浏览器和 Python bytecode 路径，不依赖未跟踪的历史 task_env 文件。相对路径先转为绝对路径，RUN_DIR 必须位于项目内；Python 虚拟环境入口不解引用符号链接。Viser 安装目录由所选 Python 查询，适用于该环境实际使用的 Python 版本。必须保留 viser/{client,_assets} 相对布局。当前安装源已经修复，应记录为修复后的输入，不能标为原始上游。
+在项目根目录执行，选择未使用的新目录并保留历史证据。下列命令显式设置项目 Python、输出目录及项目内临时目录、缓存、浏览器和 Python bytecode 路径，不依赖未跟踪的历史 task_env 文件。相对路径先转为绝对路径，RUN_DIR 必须位于项目内；Python 虚拟环境入口不解引用符号链接。Viser 安装目录由所选 Python 查询，适用于该环境实际使用的 Python 版本。必须保留 viser/{client,_assets} 相对布局。当前整包安装源已经修复，应记录实际输入，不能将其整体标为原始上游。以下命令接受 CAMERA_RENDER 的两个文件均为已记录基线或均为已记录补丁结果的状态；前者应用补丁，后者不重复应用，其他状态一律拒绝。
 
 ~~~bash
 set -euo pipefail
@@ -69,6 +83,37 @@ find "$VISER_SOURCE" -type f -print0 \
 cp -a "$VISER_SOURCE/." "$VISER_WORK/viser/"
 diff -qr "$VISER_SOURCE" "$VISER_WORK/viser"
 cp -a scripts/patches/viser_1_1_1/viser/. "$VISER_WORK/viser/"
+(
+  cd "$VISER_WORK/viser/client"
+  camera_patch_state="$("$APP_PYTHON" -B - "$HOLOCUE_ROOT/scripts/patches/viser_1_1_1/CAMERA_RENDER.inputs.json" <<'PY'
+import hashlib, json, sys
+from pathlib import Path
+manifest = json.loads(Path(sys.argv[1]).read_text())
+actual = {}
+for name in manifest["sha256"]:
+    source = Path(name).resolve()
+    assert source.is_relative_to(Path.cwd()), name
+    actual[name] = hashlib.sha256(source.read_bytes()).hexdigest()
+if actual == manifest["sha256"]:
+    print("baseline")
+elif actual == manifest["patched_sha256"]:
+    print("patched")
+else:
+    raise SystemExit("CAMERA_RENDER inputs are unknown or mixed; refusing to patch")
+PY
+)"
+  if [ "$camera_patch_state" = baseline ]; then
+    git apply --check "$HOLOCUE_ROOT/scripts/patches/viser_1_1_1/CAMERA_RENDER.patch"
+    git apply "$HOLOCUE_ROOT/scripts/patches/viser_1_1_1/CAMERA_RENDER.patch"
+  fi
+  "$APP_PYTHON" -B - "$HOLOCUE_ROOT/scripts/patches/viser_1_1_1/CAMERA_RENDER.inputs.json" <<'PY'
+import hashlib, json, sys
+from pathlib import Path
+manifest = json.loads(Path(sys.argv[1]).read_text())
+for name, expected in manifest["patched_sha256"].items():
+    assert hashlib.sha256(Path(name).read_bytes()).hexdigest() == expected, name
+PY
+)
 ~~~
 
 Node 固定 24.12.0 linux-x64，npm 固定 11.6.2。下载官方归档到项目目录并校验已记录摘要；不调用会在虚拟环境内安装 Node 的 Viser 默认安装器。

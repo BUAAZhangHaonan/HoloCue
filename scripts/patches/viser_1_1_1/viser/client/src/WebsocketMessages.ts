@@ -1893,6 +1893,12 @@ export interface GetRenderRequestMessage {
   wxyz: [number, number, number, number];
   position: [number, number, number];
   fov: number;
+  near: number;
+  far: number;
+  projection_aspect: number;
+  expected_node_names: string[];
+  timeout_s: number;
+  transparent_background: boolean;
   render_uuid: string;
 }
 /** Message from client->server carrying a render.
@@ -1903,6 +1909,7 @@ export interface GetRenderResponseMessage {
   type: "GetRenderResponseMessage";
   payload: Uint8Array<ArrayBuffer>;
   render_uuid: string;
+  error: string | null;
 }
 /** Signal that a file is about to be sent.
  *

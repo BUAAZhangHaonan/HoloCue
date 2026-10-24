@@ -2385,6 +2385,12 @@ class GetRenderRequestMessage(Message, include_in_scene_serialization=False):
     wxyz: Tuple[float, float, float, float]
     position: Tuple[float, float, float]
     fov: float
+    near: float
+    far: float
+    projection_aspect: float
+    expected_node_names: Tuple[str, ...]
+    timeout_s: float
+    transparent_background: bool
 
     # Correlation ID echoed back in the response, so concurrent get_render()
     # calls on the same client can be matched to their responses.
@@ -2406,6 +2412,7 @@ class GetRenderResponseMessage(Message, include_in_scene_serialization=False):
     payload: bytes
     # Correlation ID matching the originating GetRenderRequestMessage.
     render_uuid: str
+    error: Optional[str] = None
 
 
 @dataclasses.dataclass

@@ -310,6 +310,7 @@ export function useGaussianSplatStore() {
 
 export const GaussianSplatsContext = React.createContext<{
   gaussianSplatState: ReturnType<typeof useGaussianSplatStore>;
+  captureStatus: React.MutableRefObject<null | (() => { ready: boolean; error?: string })>;
   updateCamera: React.MutableRefObject<
     null | ((camera: THREE.PerspectiveCamera, width: number, height: number, blockingSort: boolean) => void)
   >;

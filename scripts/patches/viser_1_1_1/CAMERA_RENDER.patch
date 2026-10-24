@@ -1,0 +1,346 @@
+--- a/src/MessageHandler.tsx
++++ b/src/MessageHandler.tsx
+@@ -24,6 +24,10 @@
+ import { ownerOf, rootNodeTemplate, SceneNode } from "./SceneTreeState";
+ import { applyGuiConfigUpdate } from "./ControlPanel/GuiState";
+ import { GaussianSplatsContext } from "./Splatting/GaussianSplatsHelpers";
++import type { GetRenderRequestMessage } from "./WebsocketMessages";
++import { type CaptureStatus, createCaptureCamera, createCaptureJob, environmentCaptureStatus, gaussianCaptureStatus, glbCaptureStatus, markCanvasCapture } from "./cameraCapture";
++
++const captureJobs = new WeakMap<GetRenderRequestMessage, ReturnType<typeof createCaptureJob>>();
+ 
+ /** Swap a background-material uniform to a new texture (or null), disposing the
+  * previous texture if there was one. */
+@@ -285,6 +289,12 @@
+       case "GetRenderRequestMessage": {
+         viewerMutable.getRenderRequest = message;
+         viewerMutable.getRenderRequestState = "commit_wait";
++        captureJobs.set(message, createCaptureJob(message, viewerMutable.sendMessage, () => {
++          if (viewerMutable.getRenderRequest === message) {
++            viewerMutable.getRenderRequestState = "ready";
++            viewerMutable.requestRender();
++          }
++        }));
+         return;
+       }
+       // Set the GUI panel label.
+@@ -1064,6 +1074,22 @@
+   const messageQueue = viewerMutable.messageQueue;
+   const splatContext = React.useContext(GaussianSplatsContext)!;
+   const gl = useThree((state) => state.gl);
++  const scene = useThree((state) => state.scene);
++  const pendingCanvasRestore = React.useRef<string | null>(null);
++  React.useEffect(() => {
++    const previous = scene.onAfterRender;
++    const afterRender: typeof scene.onAfterRender = function (...args) {
++      previous.apply(scene, args);
++      // Resizing back is insufficient: wait for a real normal-camera draw.
++      if (pendingCanvasRestore.current !== null && args[2] === viewerMutable.camera && gl.getRenderTarget() === null) {
++        const uuid = pendingCanvasRestore.current;
++        pendingCanvasRestore.current = null;
++        markCanvasCapture(gl.domElement, uuid, false);
++      }
++    };
++    scene.onAfterRender = afterRender;
++    return () => { if (scene.onAfterRender === afterRender) scene.onAfterRender = previous; };
++  }, [scene, gl, viewerMutable]);
+ 
+   // Drain the message queue. Called from the render loop (below) and, via
+   // viewerMutable.drainMessageQueue, from enqueueMessages() for the batches
+@@ -1282,6 +1308,39 @@
+       }
+       if (viewerMutable.getRenderRequestState !== "capture") return;
+ 
++      const request = viewerMutable.getRenderRequest!;
++      const job = captureJobs.get(request);
++      if (!job || !job.pending()) {
++        viewerMutable.getRenderRequestState = "ready";
++        viewerMutable.requestRender();
++        return;
++      }
++      const fail = (error: string) => job.respond(new Uint8Array(0), error);
++      const statuses: CaptureStatus[] = request.expected_node_names.map((name) => {
++        const node = viewer.useSceneTree.get(name);
++        if (!node) return { ready: false, waiting: `GLB node ${name}` };
++        if (node.message.type !== "GlbMessage" && node.message.type !== "BatchedGlbMessage") {
++          return { ready: false, error: `Expected GLB node has type ${node.message.type}: ${name}` };
++        }
++        const status = glbCaptureStatus(node.message.props.glb_data);
++        return { ...status, ready: status.ready && viewerMutable.nodeRefFromName[name] != null,
++          waiting: `GLB node/textures ${name}`, error: status.error ? `${name}: ${status.error}` : undefined };
++      });
++      const environment = viewer.useEnvironment.get().environmentMap;
++      statuses.push(environmentCaptureStatus(scene, environment === null ? undefined : environment.hdri_data ?? null));
++      statuses.push(gaussianCaptureStatus(
++        splatContext.gaussianSplatState.store.get().groupBufferFromId,
++        splatContext.captureStatus.current,
++      ));
++      const failed = statuses.find((status) => status.error);
++      if (failed) { fail(failed.error!); return; }
++      const waiting = statuses.find((status) => !status.ready);
++      if (waiting) {
++        job.waitFor(waiting.waiting ?? "current Gaussian sorter/buffer and transition");
++        viewerMutable.requestRender();
++        return;
++      }
++      job.waitFor("WebGL render and image encoding");
+       const targetWidth = viewerMutable.getRenderRequest!.width;
+       const targetHeight = viewerMutable.getRenderRequest!.height;
+       const format = viewerMutable.getRenderRequest!.format;
+@@ -1305,12 +1364,8 @@
+ 
+       // An empty payload is the failure sentinel: it lets the server's
+       // pending get_render() resolve instead of blocking forever.
+-      const sendRenderResponse = (payload: Uint8Array<ArrayBuffer>) =>
+-        viewerMutable.sendMessage({
+-          type: "GetRenderResponseMessage",
+-          payload,
+-          render_uuid: renderUuid,
+-        });
++      const sendRenderResponse = (payload: Uint8Array<ArrayBuffer>, error: string | null = null) =>
++        job.respond(payload, error);
+ 
+       // Once we enter capture we must always return to "ready" -- otherwise
+       // an exception (or a null toBlob) would wedge the render state machine
+@@ -1347,41 +1402,7 @@
+           if (!obj.matrixWorldAutoUpdate) obj.updateMatrixWorld();
+         }
+ 
+-        const cameraPosition = viewerMutable.getRenderRequest!.position;
+-        const cameraWxyz = viewerMutable.getRenderRequest!.wxyz;
+-        const cameraFov = viewerMutable.getRenderRequest!.fov;
+-
+-        // Render the scene using the virtual camera.
+-        const T_threeworld_world = computeT_threeworld_world(viewer);
+-
+-        // Create a new perspective camera.
+-        const camera = new THREE.PerspectiveCamera(
+-          THREE.MathUtils.radToDeg(cameraFov),
+-          targetWidth / targetHeight,
+-          0.01, // Near.
+-          1000.0, // Far.
+-        );
+-
+-        // Set camera pose.
+-        camera.position.set(...cameraPosition).applyMatrix4(T_threeworld_world);
+-        camera.setRotationFromQuaternion(
+-          new THREE.Quaternion(
+-            cameraWxyz[1],
+-            cameraWxyz[2],
+-            cameraWxyz[3],
+-            cameraWxyz[0],
+-          )
+-            .premultiply(
+-              new THREE.Quaternion().setFromRotationMatrix(T_threeworld_world),
+-            )
+-            .multiply(
+-              // OpenCV => OpenGL coordinate system conversion.
+-              new THREE.Quaternion().setFromAxisAngle(
+-                new THREE.Vector3(1, 0, 0),
+-                Math.PI,
+-              ),
+-            ),
+-        );
++        const camera = createCaptureCamera(request, computeT_threeworld_world(viewer));
+ 
+         // Update splatting camera if needed.
+         if (splatContext.updateCamera.current !== null)
+@@ -1394,10 +1415,14 @@
+ 
+         // Configure for capture. JPEG is an RGB result rendered on an opaque
+         // white background; PNG is RGBA with a transparent background.
+-        gl.setSize(targetWidth, targetHeight);
++        pendingCanvasRestore.current = renderUuid;
++        markCanvasCapture(gl.domElement, renderUuid, true);
++        gl.setSize(targetWidth, targetHeight, false);
+         gl.setClearColor(0xffffff);
+-        gl.setClearAlpha(format === "image/jpeg" ? 1.0 : 0.0);
+-
++        gl.setClearAlpha(request.transparent_background ? 0.0 : 1.0);
++
++        // A lost WebGL context must fail, not produce a successful blank image.
++        if (gl.getContext().isContextLost()) throw new Error("WebGL context is lost");
+         // Render the scene.
+         gl.render(viewerMutable.scene!, camera);
+ 
+@@ -1423,13 +1448,12 @@
+                 // fall back to an empty payload so the server's pending
+                 // request resolves instead of hanging forever.
+                 sendRenderResponse(
+-                  blob === null
+-                    ? new Uint8Array(0)
+-                    : new Uint8Array(await blob.arrayBuffer()),
++                  blob === null ? new Uint8Array(0) : new Uint8Array(await blob.arrayBuffer()),
++                  blob === null ? "Camera image encoder returned no data" : null,
+                 );
+               } catch (e) {
+                 console.error("Failed to read rendered image:", e);
+-                sendRenderResponse(new Uint8Array(0));
++                sendRenderResponse(new Uint8Array(0), String(e));
+               }
+             })();
+             // The quality argument applies to JPEG only (PNG's encoder has
+@@ -1444,11 +1468,11 @@
+         // The response wasn't sent above, so send the failure sentinel now --
+         // otherwise the server's get_render() blocks forever waiting for a
+         // response. Then resume message handling.
+-        sendRenderResponse(new Uint8Array(0));
++        sendRenderResponse(new Uint8Array(0), String(e));
+         viewerMutable.getRenderRequestState = "ready";
+       } finally {
+         // Restore the original renderer state.
+-        gl.setSize(originalSize.x, originalSize.y);
++        gl.setSize(originalSize.x, originalSize.y, false);
+         gl.setClearColor(originalClearColor);
+         gl.setClearAlpha(originalClearAlpha);
+ 
+--- a/src/mesh/GlbLoaderUtils.ts
++++ b/src/mesh/GlbLoaderUtils.ts
+@@ -1,5 +1,6 @@
+ import * as THREE from "three";
+ import React from "react";
++import { beginGlbLoad } from "../cameraCapture";
+ import { disposeMaterial } from "./meshMaterialUtils";
+ import { GLTF, GLTFLoader, DRACOLoader } from "three-stdlib";
+ 
+@@ -69,70 +70,84 @@
+       current?.source === glb_data ? current : undefined,
+     );
+ 
+-    const loader = new GLTFLoader();
++    const captureLoad = beginGlbLoad(glb_data);
++    // GLTFLoader may swallow a failed texture into null and still call onLoad.
++    // A per-decode LoadingManager records that actual failure without touching
++    // the shared/default manager used by unrelated resources.
++    const manager = new THREE.LoadingManager();
++    manager.onError = (url) => captureLoad.fail(`GLB texture/resource failed: ${url}`);
++    const loader = new GLTFLoader(manager);
+     loader.setDRACOLoader(dracoLoader);
+-    loader.parse(
+-      new Uint8Array(glb_data).buffer,
+-      "",
+-      (gltf) => {
+-        if (cancelled) {
+-          // Unmounted/changed before the parse finished: dispose the freshly
+-          // parsed resources rather than leaking them, and skip the state
+-          // updates (which would warn and write into a dead component).
+-          gltf.scene.traverse(disposeNode);
+-          return;
+-        }
+-        loadedScene = gltf.scene;
++    try {
++      loader.parse(
++        new Uint8Array(glb_data).buffer,
++        "",
++        (gltf) => {
++          if (cancelled) {
++            // Unmounted/changed before the parse finished: dispose the freshly
++            // parsed resources rather than leaking them, and skip the state
++            // updates (which would warn and write into a dead component).
++            gltf.scene.traverse(disposeNode);
++            return;
++          }
++          loadedScene = gltf.scene;
+ 
+-        // Setup animations if present.
+-        if (gltf.animations && gltf.animations.length) {
+-          mixerRef.current = new THREE.AnimationMixer(gltf.scene);
+-          gltf.animations.forEach((clip) => {
+-            mixerRef.current!.clipAction(clip).play();
++          // Setup animations if present.
++          if (gltf.animations && gltf.animations.length) {
++            mixerRef.current = new THREE.AnimationMixer(gltf.scene);
++            gltf.animations.forEach((clip) => {
++              mixerRef.current!.clipAction(clip).play();
++            });
++          }
++
++          // Compute world matrices relative to gltf.scene root before it gets
++          // attached to the live scene graph (after attach, matrixWorld is
++          // re-computed against the real scene).
++          gltf.scene.updateMatrixWorld(true);
++          const sceneInverse = new THREE.Matrix4()
++            .copy(gltf.scene.matrixWorld)
++            .invert();
++
++          // Process all meshes in the scene.
++          const meshes: THREE.Mesh[] = [];
++          const meshMatrices: THREE.Matrix4[] = [];
++          gltf?.scene.traverse((obj) => {
++            if (obj instanceof THREE.Mesh) {
++              obj.geometry.computeVertexNormals();
++              obj.geometry.computeBoundingSphere();
++              meshes.push(obj);
++              meshMatrices.push(
++                new THREE.Matrix4().multiplyMatrices(
++                  sceneInverse,
++                  obj.matrixWorld,
++                ),
++              );
++            }
+           });
+-        }
+ 
+-        // Compute world matrices relative to gltf.scene root before it gets
+-        // attached to the live scene graph (after attach, matrixWorld is
+-        // re-computed against the real scene).
+-        gltf.scene.updateMatrixWorld(true);
+-        const sceneInverse = new THREE.Matrix4()
+-          .copy(gltf.scene.matrixWorld)
+-          .invert();
+-
+-        // Process all meshes in the scene.
+-        const meshes: THREE.Mesh[] = [];
+-        const meshMatrices: THREE.Matrix4[] = [];
+-        gltf?.scene.traverse((obj) => {
+-          if (obj instanceof THREE.Mesh) {
+-            obj.geometry.computeVertexNormals();
+-            obj.geometry.computeBoundingSphere();
+-            meshes.push(obj);
+-            meshMatrices.push(
+-              new THREE.Matrix4().multiplyMatrices(
+-                sceneInverse,
+-                obj.matrixWorld,
+-              ),
+-            );
+-          }
+-        });
+-
+-        setLoaded({
+-          source: glb_data,
+-          gltf,
+-          meshes,
+-          meshMatrices,
+-        });
+-      },
+-      (error) => {
+-        console.log("Error loading GLB!");
+-        console.log(error);
+-      },
+-    );
++          captureLoad.ready();
++          setLoaded({
++            source: glb_data,
++            gltf,
++            meshes,
++            meshMatrices,
++          });
++        },
++        (error) => {
++          captureLoad.fail(error);
++          console.log("Error loading GLB!");
++          console.log(error);
++        },
++      );
++    } catch (error) {
++      captureLoad.fail(error);
++      console.error("GLB parse failed:", error);
++    }
+ 
+     // Cleanup function.
+     return () => {
+       cancelled = true;
++      captureLoad.dispose();
+       if (mixerRef.current) {
+         mixerRef.current.stopAllAction();
+         mixerRef.current = null;
