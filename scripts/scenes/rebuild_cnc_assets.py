@@ -12,6 +12,7 @@ import trimesh
 from holocue.config import root
 from holocue.modeling import Assembly, STEEL
 from scripts.scenes.asset_composition import mature_asset, textured_box
+from scripts.scenes.cnc_topology import copy_mesh, repair_er, repair_flange, repair_mature_scene, repair_post
 
 SOURCE = "assets/downloads/cnc_reconstruction"
 CONTROL = "assets/downloads/control_panel_reconstruction"
@@ -38,6 +39,12 @@ def _mesh(shape):
 def _source(name):
     s = trimesh.load_scene(root() / SOURCE / name, process=False)
     s.apply_transform(trimesh.transformations.rotation_matrix(np.pi / 2, [1, 0, 0]))
+    if name == "araki_bt_flange.glb":
+        s = trimesh.Scene(repair_flange(s.to_geometry()))
+    elif name == "araki_3030_post.glb":
+        s = trimesh.Scene(repair_post(s.to_geometry()))
+    elif name == "ubc_er_components.glb":
+        s = repair_er(s)
     return s
 
 
@@ -45,7 +52,7 @@ def _append(a, s, name):
     for node in s.graph.nodes_geometry:
         transform, key = s.graph[node]
         key2 = f"{a.name}/{a.index:04d}_{name}_{node}"
-        a.scene.add_geometry(s.geometry[key].copy(), node_name=key2, geom_name=key2, transform=transform)
+        a.scene.add_geometry(copy_mesh(s.geometry[key]), node_name=key2, geom_name=key2, transform=transform)
         a.index += 1
 
 
@@ -54,7 +61,12 @@ def _box(a, size, center, color, name, metal=0.65, rough=0.34):
 
 
 def _turned(a, profile, color, name, metal=0.86, rough=0.25):
-    m = trimesh.creation.revolve(np.asarray(profile), sections=128)
+    # A closed radial section produces the inner wall as well as the outer
+    # wall. Closing the section does not cap the through-bore on the axis.
+    section = np.asarray(profile)
+    if not np.array_equal(section[0], section[-1]):
+        section = np.vstack([section, section[0]])
+    m = trimesh.creation.revolve(section, sections=128)
     m.fix_normals()
     return a.add(m, color, metal=metal, rough=rough, name=name)
 
@@ -68,9 +80,8 @@ def _screw(a, center, axis=(0, 0, 1), r=0.003, name="socket_cap_screw"):
 def tool(obj):
     a = Assembly(obj.object_id)
     flange = _source("araki_bt_flange.glb").to_geometry()
-    # The open CAD source has inward winding: its 128 underside triangles
-    # face +Z. Reverse the complete flange, preserving every source position.
-    flange.invert()
+    # The repaired source keeps the V-groove and both drive notches. Its
+    # missing cropped bore wall and CAD planes are now part of this mesh.
     flange.apply_scale(FLANGE_SCALE)
     flange.apply_translation([0, 0, FLANGE_TOP])
     a.add(flange, (152, 161, 164), metal=0.88, rough=0.27, name="Araki_BT_source_V_groove_flange")
@@ -325,7 +336,7 @@ def magazine(obj):
 
 
 def _prop(a, name, xy, bottom, size, rx=0, rz=0):
-    s = mature_asset(name).copy()
+    s = repair_mature_scene(mature_asset(name), name)
     if rx:
         s.apply_transform(trimesh.transformations.rotation_matrix(np.radians(rx), [1, 0, 0]))
     if rz:
@@ -336,43 +347,25 @@ def _prop(a, name, xy, bottom, size, rx=0, rz=0):
 
 
 def _cart(a):
-    # Preserve every authored face. The source has a single white CAD material;
-    # separate its existing tyre surfaces by connected CAD component bounds.
-    raw = trimesh.load_scene(root() / SOURCE / "toolrack.glb", process=False).to_geometry()
-    raw.merge_vertices(digits_vertex=5)
-    components = trimesh.graph.connected_components(
-        raw.face_adjacency, nodes=np.arange(len(raw.faces)), min_len=1
+    # Reuse the complete licensed PolyHaven cart, including its original
+    # texture maps and all source surfaces. Hidden hardware ends are completed;
+    # its folded sheet parts receive inner walls while their openings remain.
+    source = repair_mature_scene(mature_asset("tool_cart"), "tool_cart")
+    source.apply_translation(
+        np.array([0.03, 1.12, 0]) - np.r_[source.bounds.mean(0)[:2], source.bounds[0, 2]]
     )
-    tyre_faces = []
-    frame_faces = []
-    for indices in components:
-        points = raw.vertices[raw.faces[indices]].reshape(-1, 3)
-        low, high = points.min(0), points.max(0)
-        tyre = low[2] > 17.9 and high[2] > 91 and high[2] - low[2] > 70 and max(high[:2] - low[:2]) < 60
-        (tyre_faces if tyre else frame_faces).extend(indices)
-    assert tyre_faces and len(tyre_faces) + len(frame_faces) == len(raw.faces)
-    raw.apply_transform(trimesh.transformations.rotation_matrix(np.pi, [1, 0, 0]))
-    raw.apply_scale(0.001)
-    raw.apply_translation(np.array([0.03, 0.98, 0]) - np.r_[raw.bounds.mean(0)[:2], raw.bounds[0, 2]])
-    for name, indices, color, metal, rough in [
-        ("frame", frame_faces, (88, 107, 117), 0.58, 0.43),
-        ("tyres", tyre_faces, (30, 34, 37), 0, 0.85),
-    ]:
-        mesh = raw.submesh([indices], append=True, repair=False)
-        a.add(mesh, color, metal=metal, rough=rough, name="Araki_complete_tool_service_cart_" + name)
+    _append(a, source, "PolyHaven_complete_tool_service_cart")
 
 
 def environment(spec):
     a = Assembly("cnc_environment")
-    table = mature_asset("WoodenTable_03").copy()
+    table = repair_mature_scene(mature_asset("WoodenTable_03"), "WoodenTable_03")
     table.apply_scale(0.980 / table.extents[2])
     table.apply_translation(-np.r_[table.bounds.mean(0)[:2], table.bounds[0, 2]])
     table.apply_translation((0.03, 0.02, 0))
     _append(a, table, "mature_workbench")
     _box(a, (1.55, 0.90, 0.015), (0.03, 0.02, 0.9875), (137, 146, 148), "clean_machining_worktop", 0.72, 0.38)
     textured_box(a, (3.4, 2.8, 0.04), (0, 0.25, -0.020), "concrete_floor_worn_001", name="visible_floor")
-    # Araki's source uses millimetres with wheels toward raw +Z. Rigidly turn
-    # that entire authored cart upright; do not infer orientation from AABB.
     _cart(a)
     # Source 3030 uprights are complete 1.5 m CAD components, uniformly 1.11x.
     for x in (-0.62, 0.55):
@@ -452,7 +445,7 @@ def environment(spec):
         rough=0.30,
         name="MODESWITCH_fixed_thrust_bearing",
     )
-    _box(a, (0.145, 0.010, 0.135), (-0.56, 0.4419, 1.34), (83, 99, 109), "MODESWITCH_mount_panel")
+    _box(a, (0.176, 0.010, 0.144), (-0.56, 0.4419, 1.34), (83, 99, 109), "MODESWITCH_mount_panel")
     _box(
         a,
         (0.045, POST_FRONT - 0.4469, 0.045),
@@ -460,8 +453,23 @@ def environment(spec):
         (73, 85, 93),
         "MODESWITCH_mount_arm",
     )
-    a.label("MANUAL", (-0.56, 0.4367, 1.391), 0.070, 0.012)
-    a.label("ATC", (-0.503, 0.4367, 1.34), 0.028, 0.013)
+    # Keep the two physical detent directions. Move only the fixed legends
+    # outside the unchanged Gaussian arc; fine leaders connect each legend
+    # to its original 12/3-o'clock index without changing the task or cue.
+    a.label("MANUAL", (-0.624, 0.4367, 1.402), 0.042, 0.012)
+    a.label("ATC", (-0.490, 0.4367, 1.280), 0.028, 0.013)
+    for name, points in (
+        ("manual", [(-0.602, 1.402), (-0.56, 1.402), (-0.56, 1.382)]),
+        ("atc", [(-0.490, 1.288), (-0.476, 1.288), (-0.476, 1.34), (-0.518, 1.34)]),
+    ):
+        for index, (start, end) in enumerate(zip(points, points[1:])):
+            a.rod(
+                (start[0], 0.4365, start[1]),
+                (end[0], 0.4365, end[1]),
+                0.0003,
+                (226, 232, 230),
+                f"mode_{name}_fixed_index_leader_{index}",
+            )
     _prop(a, "metal_toolbox", (-0.28, 0.29), TABLE_TOP, (0.31, 0.16, 0.14), rz=0)
     _prop(a, "ratchet_wrench", (0.15, -0.31), TABLE_TOP, (0.22, 0.06, 0.03), rx=90, rz=70)
     _prop(a, "lubricant_spray", (-0.53, 0.09), TABLE_TOP, (0.065, 0.065, 0.19))
