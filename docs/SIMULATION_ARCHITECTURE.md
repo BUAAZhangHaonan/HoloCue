@@ -1,5 +1,7 @@
 # HoloCue 仿真系统
 
+日常在线链路采用 [runtime_camera_v1](RUNTIME_CAMERA.md)：Viser 相机 RGB 与结构化任务上下文输入本地模型，Python 管理状态与运动学，Viser WebGL 绘制网格和提示。Blender 仅在离线建模/原生审计时启动，不是任务执行的依赖；Viser 也不承担物理接触求解。
+
 ## 场景与执行
 
 每个场景使用 `scenes/<scene-set>/<scene_id>/scene.json` 保存对象、尺寸、位姿、动作能力、接合坐标系、检查面和观察范围。scene-set 明确选择 legacy 或 reconstructed，默认 reconstructed；两套均含 scene.json、scene.blend 和 meshes，保留相同交互合同。配置入口 `scene_set()`、`scene_dir()` 和 `runtime_dir()` 统一供服务、构建与采集使用。场景模型采用标准 glTF 坐标，运行时统一使用米制、Z 轴向上的世界坐标。
@@ -8,13 +10,14 @@
 flowchart LR
     U[用户指令] --> A[本地模型解释任务]
     S[场景对象与任务状态] --> A
+    W[Viser 相机 RGB 与交互] --> A
     A --> V[结构化语义校验]
     V --> D[SQLite 版本化任务状态]
     D --> P[显示参数与对象位姿]
     G[场景几何契约] --> P
     P --> R[Gaussian 响应与动作轨迹]
-    R --> W[Viser 用户页面]
-    R --> B[Blender 场景]
+    R --> W
+    R -. 离线审计 .-> B[Blender 场景]
     W --> C[显式完成确认]
     C --> D
 ```
@@ -78,6 +81,7 @@ Viser 保持 1.1.1，客户端使用 `scripts/patches/viser_1_1_1` 中的局部�
 | camera.py 与 assets.py | 坐标转换、实际网格边界、观察范围与资产加载 |
 | response.py 与 bridge.py | Gaussian 响应、统一数据帧和原子文件交换 |
 | viewer.py 与 viewer_scene.py | 用户界面、连接隔离、相机与持续显示 |
+| observation.py | 冻结相机投影、真实 RGB 观测、图像与状态版本关联 |
 | modeling.py | 尺寸化部件、空腔、工作台、材质和标签 |
 
 ## 后续光学接口

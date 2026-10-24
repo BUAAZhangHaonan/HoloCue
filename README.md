@@ -2,7 +2,7 @@
 
 **面向实体操作任务的全息焦深提示与交互仿真系统。**
 
-HoloCue 将自然语言指令转化为有序操作步骤，并在三维场景中显示目标、动作轨迹与检查位置。项目结合本地大语言模型、Viser 交互页面和 Blender 场景，用于研究空间提示如何辅助装配、检修、搬运与结构检查，以及调试能够暂停、接受临时任务并恢复原流程的 Agent 系统。
+HoloCue 将自然语言指令转化为有序操作步骤，并在三维场景中显示目标、动作轨迹与检查位置。日常运行由本地多模态模型、Python 任务与运动学服务、Viser WebGL 客户端组成。Blender 用于离线建模与原生外观复核，不参与在线任务循环。
 
 ## 主要功能
 
@@ -20,15 +20,19 @@ HoloCue 将自然语言指令转化为有序操作步骤，并在三维场景中
 flowchart LR
     U[自然语言指令] --> M[本地模型与结构化校验]
     S[场景对象和任务状态] --> M
+    V[Viser 交互页面与相机 RGB] --> M
     M --> T[有序任务与持久状态]
     T --> D[几何计算与显示参数]
-    D --> V[Viser 交互页面]
-    D --> B[Blender 场景]
+    D --> V
+    B[Blender 离线建模] --> G[GLB 资产]
+    G --> V
     V --> C[用户确认完成]
     C --> T
 ```
 
 模型负责解释任务语义，确定性模块负责几何计算和显示预算。动画到达终点后保持提示，用户确认完成后才推进任务并更新实体位姿。临时检查保留原步骤的身份、参数和进度。
+
+默认每次发送任务使用 Viser 的 `ClientHandle.get_render()` 获取当前三维相机图像，连同对象和状态上下文送入模型。图像不来自浏览器页面截图。Viser 仍在浏览器的 WebGL 中绘制，需要实际可用的图形客户端；它不提供 MuJoCo 的接触动力学。相机、录像、计时及分批验收入口见 [轻量运行协议](docs/RUNTIME_CAMERA.md)。
 
 ## 场景
 
@@ -59,7 +63,7 @@ flowchart LR
 
 ### 环境准备
 
-需要 Python 3.11 或更新版本，以及提供 OpenAI 兼容接口的本地模型服务；默认模型配置为 Qwen3.5-4B。原生场景构建和渲染需要 Blender，场景 `.blend` 文件通过 Git LFS 管理。
+需要 Python 3.11 或更新版本、支持视觉输入的 OpenAI 兼容本地模型服务，以及硬件 WebGL 浏览器；默认模型配置为 Qwen3.5-4B。只有离线场景构建和原生审计需要 Blender，场景 `.blend` 文件通过 Git LFS 管理。
 
 在项目根目录准备应用环境：
 
@@ -76,7 +80,7 @@ source .venv-simulation/bin/activate
 python -m pip install -e '.[dev,simulation]'
 ```
 
-Viser 固定为 1.1.1，使用项目提供的绘制、相机协议和 HDR 透明度补丁。新环境按 [Viser 补丁说明](scripts/patches/viser_1_1_1/README.md) 和 [HDR 修复说明](scripts/patches/viser_1_1_1/HDR_OPACITY.md) 准备客户端。
+Viser 固定为 1.1.1，使用项目提供的绘制、相机协议、资源就绪和 HDR 透明度补丁。新环境按 [Viser 补丁说明](scripts/patches/viser_1_1_1/README.md) 和 [HDR 修复说明](scripts/patches/viser_1_1_1/HDR_OPACITY.md) 准备匹配的 Python SDK 与客户端。
 
 ### 启动交互页面
 
