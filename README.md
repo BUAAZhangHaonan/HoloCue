@@ -127,5 +127,6 @@ bash scripts/scenes/build_all.sh --scene-set reconstructed
 - [API 接口](docs/API.md)
 - [场景与建模约定](docs/SCENE_REVIEW.md)
 - [验证方法](docs/VALIDATION.md)
+- [重构版十二场景实测记录](docs/RECONSTRUCTED_VALIDATION.md)
 
 代码采用 [MIT License](LICENSE)。原创几何资产及第三方资产的授权范围见 [资产许可](assets/ASSET_LICENSE.md) 与 [资源来源](assets/downloads/SOURCES.md)；第三方依赖和模型权重遵循各自许可。
