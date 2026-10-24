@@ -264,7 +264,12 @@ def test_actual_training_label_texture_and_surface_are_visible(sid, identifier):
     # insertion. Exact text is checked on extracted images, not inferred from
     # semantic node names or by redrawing the implementation's font.
     weights = np.asarray([[i / 5, j / 5, 1 - (i + j) / 5] for i in range(1, 5) for j in range(1, 5 - i)])
-    local = np.unique(np.round(np.einsum("wj,tjk->twk", weights, label.triangles).reshape(-1, 3), 9), axis=0)
+    triangles = label.triangles
+    if sid == "infusion_ward":
+        # The label now has a physical 0.03 mm backing and edge wall. Only
+        # the original printed front is a visibility witness, not its back.
+        triangles = triangles[label.face_normals @ normal > 0.9]
+    local = np.unique(np.round(np.einsum("wj,tjk->twk", weights, triangles).reshape(-1, 3), 9), axis=0)
     world = transform_points(obj.pose, local)
     position, look, up = inspect_view(obj, obj.pose)
     projected, _ = project(world, position, look, aspect=1.6, up=up)

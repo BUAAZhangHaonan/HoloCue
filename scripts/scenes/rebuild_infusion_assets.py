@@ -9,6 +9,22 @@ import trimesh
 from holocue.config import root
 from holocue.modeling import Assembly, cad_mesh
 from scripts.scenes.asset_composition import textured_box
+from scripts.scenes.infusion_topology import (
+    assert_closed,
+    backing_plane,
+    boundary_loops,
+    bridge_matching_rings,
+    cap_contours,
+    caps,
+    interface_from_source,
+    inward_wall,
+    outward,
+    small_holes,
+    stitch_collinear_faces,
+    translated_sheet,
+    trim_cart_base_slivers,
+    wheel_tread,
+)
 
 SOURCE = "assets/downloads/infusion_reconstruction"
 PUMP_SCALE = 0.46
@@ -108,7 +124,9 @@ def bag_source():
 def bag(obj):
     a = Assembly(obj.object_id)
     m = bag_source().copy()
-    _put(a, m, "ethan_cragun_water_bag")
+    # A 0.10 mm inner film and annular outlet rims give the source sheet its
+    # actual material volume. The two source outlet channels remain open.
+    _put(a, inward_wall(m, 0.00010), "ethan_cragun_water_bag")
     # A removable teaching hanger reinforces the source's closed seal. It adds
     # a real open eye; the downloaded bag has no modeled hanging perforation.
     tab = cq.Workplane("XY").box(0.025, 0.003, 0.045).edges("|Y").fillet(0.004).translate((0, 0, 0.0875))
@@ -165,7 +183,10 @@ def bag(obj):
         start = len(points)
         points.extend(polygon)
         faces.extend([[start, start + i, start + i + 1] for i in range(1, len(polygon) - 1)])
-    points = np.asarray(points)
+    # Independent clipping paths can differ below a picometre at a shared
+    # intersection. Canonicalize this newly authored label before extrusion;
+    # this does not change any float32 exported front position.
+    points = np.round(np.asarray(points), 12)
     triangles = points[np.asarray(faces)]
     coverage = np.cross(triangles[:, 1] - triangles[:, 0], triangles[:, 2] - triangles[:, 0])[:, 1].sum() / 2
     if not np.isclose(coverage, 0.061 * 0.055, atol=1e-9):
@@ -175,7 +196,8 @@ def bag(obj):
     decal = trimesh.Trimesh(
         points, faces, process=False, visual=trimesh.visual.TextureVisuals(uv=uv, material=material)
     )
-    _put(a, decal, f"label_training_serial_label_{obj.object_id}")
+    # The existing printed front stays exactly at its reviewed surface.
+    _put(a, translated_sheet(decal, (0, -0.00003, 0)), f"label_training_serial_label_{obj.object_id}")
     return a
 
 
@@ -232,24 +254,66 @@ def cassette(obj):
     return a
 
 
+def _controls(source):
+    parts = {}
+    for node in ("Object_2", "Object_3", "Object_4"):
+        for i, mesh in enumerate(_components(_mesh(source, node))):
+            if mesh.bounds[1, 0] <= 0.009 and mesh.bounds[1, 1] <= -0.060:
+                parts[node, i] = _pump_transform(mesh)
+    repaired = {}
+    for key, mesh in parts.items():
+        node, index = key
+        rings = boundary_loops(mesh)
+        if node == "Object_2":
+            # Three existing button apertures have front and back rims but
+            # lack their cylindrical walls. Their channels remain open.
+            remaining = list(rings)
+            for ring in rings:
+                if len(ring) != 18 or mesh.vertices[ring, 1].mean() > -0.0322:
+                    continue
+                other = next(
+                    r
+                    for r in remaining
+                    if len(r) == 18
+                    and mesh.vertices[r, 1].mean() > -0.0322
+                    and np.allclose(
+                        mesh.vertices[r][:, [0, 2]].mean(0), mesh.vertices[ring][:, [0, 2]].mean(0), atol=1e-9
+                    )
+                )
+                mesh = bridge_matching_rings(mesh, ring, other, axis=1)
+                remaining = [r for r in remaining if r is not ring and r is not other]
+            if len(remaining) != 1 or len(remaining[0]) != 52:
+                raise ValueError("source control-panel boundary pattern changed")
+            # The last gap is a material interface traced across original
+            # neighboring button faces, not a hole that should receive a disk.
+            mesh = interface_from_source(mesh, remaining[0], parts["Object_4", 7])
+        elif node == "Object_3":
+            mesh = translated_sheet(mesh, (0, 0.00015, 0))
+        elif index == 0:
+            # Several frame regions are source sheets on the same plane.
+            # An 0.08 mm back avoids coincident front/back triangulations;
+            # its screen opening is retained by the annular contour.
+            mesh = backing_plane(mesh, 1, mesh.bounds[1, 1] + 0.00008)
+        else:
+            mesh = cap_contours(mesh, rings)
+        repaired[key] = outward(assert_closed(mesh))
+    return repaired
+
+
 def slot(obj):
     a = Assembly(obj.object_id)
     for node in _source("contec_receiver_case").graph.nodes_geometry:
         a.add(
-            _mesh(_source("contec_receiver_case"), node),
+            stitch_collinear_faces(_mesh(_source("contec_receiver_case"), node)),
             WHITE,
             rough=0.47,
             name="contec_source_open_receiver_case",
         )
     source = _source("contec_pump")
-    for node in ("Object_2", "Object_3", "Object_4"):
-        for i, m in enumerate(_components(_mesh(source, node))):
-            if m.bounds[1, 0] > 0.009 or m.bounds[1, 1] > -0.060:
-                continue
-            m = _pump_transform(m)
-            m.apply_translation([0, 0.0005, 0])
-            color = BLUE if node == "Object_2" else (31, 49, 57) if node == "Object_3" else (121, 143, 151)
-            a.add(m, color, rough=0.48, name=f"contec_source_control_{node}_{i}")
+    for (node, i), m in _controls(source).items():
+        m.apply_translation([0, 0.0005, 0])
+        color = BLUE if node == "Object_2" else (31, 49, 57) if node == "Object_3" else (121, 143, 151)
+        a.add(m, color, rough=0.48, name=f"contec_source_control_{node}_{i}")
     handle = _components(_mesh(source, "Object_5"))[0]
     handle = _pump_transform(handle)
     # Keep the mature handle over the fixed control half, clear of the
@@ -291,6 +355,7 @@ def monitor_source():
     selected = [q for q in _components(m) if q.bounds[0, 2] > 79 and q.bounds[0, 0] > 8.8]
     s = trimesh.Scene()
     for i, q in enumerate(selected):
+        q = small_holes(q)
         s.add_geometry(q, node_name=f"source_head_{i}")
     s.apply_transform(trimesh.transformations.rotation_matrix(-np.pi / 2, [0, 0, 1]))
     s.apply_scale(0.018)
@@ -335,7 +400,8 @@ def stopcock(obj):
         name="stopcock_rotating_spindle",
     )
     for i, angle in enumerate((0, 90, 180)):
-        # Baked flat flow arrows on the three fingers; all rotate with handle.
+        # A 0.04 mm paint layer follows the original arrow outline. The head
+        # shares the shaft edge, avoiding the source arrow's two T junctions.
         xy = np.array(
             [
                 [0.010, -0.0006],
@@ -351,13 +417,13 @@ def stopcock(obj):
         r = np.array([[np.cos(t), -np.sin(t)], [np.sin(t), np.cos(t)]])
         xy = xy @ r.T
         points = np.c_[xy[:, 0], np.full(len(xy), -0.00804), xy[:, 1]]
-        mesh = trimesh.Trimesh(points, [[0, 1, 5], [0, 5, 6], [2, 3, 4]], process=False)
+        mesh = trimesh.Trimesh(points, [[0, 1, 5], [0, 5, 6], [1, 2, 3], [1, 3, 5], [3, 4, 5]], process=False)
         mesh.visual = trimesh.visual.TextureVisuals(
             material=trimesh.visual.material.PBRMaterial(
                 baseColorFactor=[238, 244, 242, 255], metallicFactor=0, roughnessFactor=0.7, doubleSided=True
             )
         )
-        _put(a, mesh, f"label_rotating_flow_arrow_{i}")
+        _put(a, translated_sheet(mesh, (0, 0.00004, 0)), f"label_rotating_flow_arrow_{i}")
     return a
 
 
@@ -403,7 +469,26 @@ def cart_source():
     s.apply_translation([-3.740291986, 0.7017099, -s.bounds[0, 2]])
     s.apply_scale(scale)
     s.apply_translation([-0.20, -0.060, 0])
-    return s
+    result = trimesh.Scene()
+    back_patterns = {
+        "AttachesRoues_low_lambert1_0": [10] * 8,
+        "BasesRoues_low_lambert1_0": [10] * 12,
+        "EmplacementsBacs_low_lambert1_0": [12] * 6 + [10] * 3,
+        "embouts_low_lambert1_0": [20] * 6,
+    }
+    for node in s.graph.nodes_geometry:
+        mesh = _mesh(s, node)
+        if node in ("Armature_low_lambert1_0", "Liens_low_lambert1_0"):
+            # Genuine tubular frame and cross-ties retain open end bores.
+            mesh = inward_wall(mesh, 0.0008)
+        elif node in back_patterns:
+            # Caster brackets, layered spring washers, tray-support rods and
+            # end plugs lack their hidden component backs in the source.
+            mesh = caps(mesh, back_patterns[node])
+        elif node == "Base_low_lambert1_0":
+            mesh = trim_cart_base_slivers(mesh)
+        result.add_geometry(mesh, node_name=node)
+    return result
 
 
 def _tray_lid_support(a, tray, center, index):
@@ -468,6 +553,8 @@ def stand_source():
                 baseColorFactor=[*color, 255], metallicFactor=metallic, roughnessFactor=rough
             )
         )
+        if node.startswith("Wheel"):
+            m = wheel_tread(m)
         result.add_geometry(m, node_name=node)
     return result
 
