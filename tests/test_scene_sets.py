@@ -4,6 +4,7 @@ import json
 import os
 import subprocess
 import sys
+from pathlib import Path
 from types import SimpleNamespace
 
 import numpy as np
@@ -155,11 +156,33 @@ def test_serialized_schemas_include_scene_set():
         assert schema["properties"]["scene_set"]["enum"] == ["legacy", "reconstructed"]
 
 
-@pytest.mark.parametrize(
-    "options", [["--scene-set", "legacy", "--port", "8751"], ["--port", "8751", "--scene-set=legacy"]]
+LAUNCHER_WRITE_PATHS = (
+    "RUN_DIR",
+    "TMPDIR",
+    "TMP",
+    "TEMP",
+    "XDG_CACHE_HOME",
+    "PIP_CACHE_DIR",
+    "PLAYWRIGHT_BROWSERS_PATH",
+    "PYTHONPYCACHEPREFIX",
 )
-def test_service_launcher_preserves_caller_paths_and_cli_selection(tmp_path, options):
-    recorder = tmp_path / "python-recorder"
+
+
+@pytest.fixture
+def service_launcher(tmp_path):
+    project = tmp_path / "project"
+    scripts = project / "scripts"
+    scripts.mkdir(parents=True)
+    (scripts / "run_simulation.sh").write_bytes((root() / "scripts/run_simulation.sh").read_bytes())
+    for relative in ("scenes/build_all.sh", "guard/validate_runtime_paths.sh"):
+        destination = scripts / relative
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        destination.write_bytes((root() / "scripts" / relative).read_bytes())
+    for selected in ("legacy", "reconstructed"):
+        scene = project / "scenes" / selected / "blocks/scene.json"
+        scene.parent.mkdir(parents=True)
+        scene.write_text("{}")
+    recorder = project / "python-recorder"
     recorder.write_text(
         f"#!{sys.executable}\n"
         "import json, os, sys\n"
@@ -167,23 +190,32 @@ def test_service_launcher_preserves_caller_paths_and_cli_selection(tmp_path, opt
         "Path(os.environ['RECORDER_OUTPUT']).write_text(json.dumps({'argv': sys.argv[1:], 'env': dict(os.environ)}))\n"
     )
     recorder.chmod(0o755)
-    output = tmp_path / "launch.json"
+    output = project / "launch.json"
     supplied = {
         "APP_PYTHON": str(recorder),
+        "BLENDER_BIN": str(recorder),
         "RECORDER_OUTPUT": str(output),
-        "RUN_DIR": str(tmp_path / "run"),
-        "TMPDIR": str(tmp_path / "tmp"),
-        "TMP": str(tmp_path / "tmp"),
-        "TEMP": str(tmp_path / "tmp"),
-        "XDG_CACHE_HOME": str(tmp_path / "cache"),
-        "PIP_CACHE_DIR": str(tmp_path / "cache/pip"),
-        "PLAYWRIGHT_BROWSERS_PATH": str(tmp_path / "browsers"),
-        "PYTHONPYCACHEPREFIX": str(tmp_path / "pycache"),
+        "RUN_DIR": str(project / "run"),
+        "TMPDIR": str(project / "tmp"),
+        "TMP": str(project / "tmp"),
+        "TEMP": str(project / "tmp"),
+        "XDG_CACHE_HOME": str(project / "cache"),
+        "PIP_CACHE_DIR": str(project / "cache/pip"),
+        "PLAYWRIGHT_BROWSERS_PATH": str(project / "browsers"),
+        "PYTHONPYCACHEPREFIX": str(project / "pycache"),
         "PYTHONDONTWRITEBYTECODE": "1",
         "HOLOCUE_SCENE_SET": "reconstructed",
     }
+    return project, output, supplied
+
+
+@pytest.mark.parametrize(
+    "options", [["--scene-set", "legacy", "--port", "8751"], ["--port", "8751", "--scene-set=legacy"]]
+)
+def test_service_launcher_preserves_caller_paths_and_cli_selection(service_launcher, options):
+    project, output, supplied = service_launcher
     subprocess.run(
-        ["bash", str(root() / "scripts/run_simulation.sh"), "api", *options],
+        ["bash", str(project / "scripts/run_simulation.sh"), "api", *options],
         env={**os.environ, **supplied},
         check=True,
     )
@@ -193,3 +225,88 @@ def test_service_launcher_preserves_caller_paths_and_cli_selection(tmp_path, opt
         if name != "HOLOCUE_SCENE_SET":
             assert captured["env"][name] == value
     assert captured["argv"][-4:] == ["--scene-set", "legacy", "--port", "8751"]
+
+
+def test_service_launcher_accepts_project_relative_paths(service_launcher):
+    project, output, supplied = service_launcher
+    for name in LAUNCHER_WRITE_PATHS:
+        supplied[name] = str(Path(supplied[name]).relative_to(project))
+    subprocess.run(
+        ["bash", str(project / "scripts/run_simulation.sh"), "viewer"],
+        env={**os.environ, **supplied},
+        check=True,
+    )
+    captured = json.loads(output.read_text())
+    assert all(captured["env"][name] == supplied[name] for name in LAUNCHER_WRITE_PATHS)
+    assert captured["argv"][-8:] == [
+        "-m",
+        "holocue.viewer",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "8780",
+        "--scene-set",
+        "reconstructed",
+    ]
+    assert (project / "run").is_dir()
+
+
+@pytest.mark.parametrize("selected", ["legacy", "reconstructed"])
+def test_build_launcher_preserves_caller_paths_and_cli_selection(service_launcher, selected):
+    project, output, supplied = service_launcher
+    subprocess.run(
+        ["bash", str(project / "scripts/scenes/build_all.sh"), "--scene-set", selected],
+        env={**os.environ, **supplied},
+        check=True,
+    )
+    captured = json.loads(output.read_text())
+    assert all(captured["env"][name] == supplied[name] for name in LAUNCHER_WRITE_PATHS)
+    assert captured["env"]["HOLOCUE_SCENE_SET"] == selected
+    assert captured["argv"][-5:] == ["--scene", "blocks", "--scene-set", selected, "--render"]
+
+
+def assert_launcher_rejects_before_writing(project, output, supplied, name, entry):
+    arguments = (
+        [str(project / "scripts/run_simulation.sh"), "api"]
+        if entry == "service"
+        else [str(project / "scripts/scenes/build_all.sh")]
+    )
+    completed = subprocess.run(
+        ["bash", *arguments],
+        env={**os.environ, **supplied},
+        text=True,
+        capture_output=True,
+    )
+    assert completed.returncode != 0
+    assert name in completed.stderr and "inside the project" in completed.stderr
+    assert not output.exists()
+    assert not any((project / folder).exists() for folder in ("run", "tmp", "cache", "pycache"))
+
+
+@pytest.mark.parametrize("name", LAUNCHER_WRITE_PATHS)
+@pytest.mark.parametrize("entry", ["service", "build"])
+def test_launcher_rejects_outside_paths_before_writing(service_launcher, name, entry):
+    project, output, supplied = service_launcher
+    outside = project.parent / "outside"
+    supplied[name] = str(outside)
+    assert_launcher_rejects_before_writing(project, output, supplied, name, entry)
+    assert not outside.exists()
+
+
+@pytest.mark.parametrize("escape", ["parent", "symlink", "project_root", "prefix_sibling"])
+@pytest.mark.parametrize("entry", ["service", "build"])
+def test_launcher_resolves_run_directory_boundary(service_launcher, escape, entry):
+    project, output, supplied = service_launcher
+    outside = project.parent / "outside"
+    if escape == "parent":
+        supplied["RUN_DIR"] = "../outside"
+    elif escape == "symlink":
+        (project / "escape").symlink_to(outside, target_is_directory=True)
+        supplied["RUN_DIR"] = str(project / "escape/run")
+    elif escape == "project_root":
+        supplied["RUN_DIR"] = str(project)
+    else:
+        outside = project.with_name(project.name + "-outside")
+        supplied["RUN_DIR"] = str(outside)
+    assert_launcher_rejects_before_writing(project, output, supplied, "RUN_DIR", entry)
+    assert not outside.exists()

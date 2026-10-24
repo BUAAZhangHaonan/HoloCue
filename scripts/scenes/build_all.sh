@@ -28,6 +28,7 @@ case "$HOLOCUE_SCENE_SET" in
     ;;
 esac
 export RUN_DIR="${RUN_DIR:-$PWD/runs/simulation/$HOLOCUE_SCENE_SET}"
+source scripts/guard/validate_runtime_paths.sh
 mkdir -p "$TMPDIR" "$XDG_CACHE_HOME" "$PYTHONPYCACHEPREFIX" "$RUN_DIR"
 APP_PYTHON="${APP_PYTHON:-$PWD/.venv-simulation/bin/python}"
 test -x "$APP_PYTHON"
