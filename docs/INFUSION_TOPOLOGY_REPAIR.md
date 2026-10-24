@@ -24,7 +24,7 @@ separately; no audit exception is introduced by this builder.
 | Screen, frame and buttons | Add a 0.15 mm screen back, a 0.08 mm frame back with the screen opening retained, and the missing button backs. Orient the completed volumes outward. All remain left of the cassette channel. |
 | Monitor | Restore the documented three/four-edge missing surface patches without replacing the head geometry or texture. |
 | Cart frame and cross-ties | Add 0.8 mm inward tube walls while retaining their open bores. |
-| Cart caster brackets, spring washers, tray-support rods and end plugs | Restore their missing component backs from the existing boundary vertices. These are not the functional bag or cassette openings. |
+| Cart caster brackets, stacked wheel-base discs, tray-support rods and end plugs | Restore their missing component backs from the existing boundary vertices. The discs are separate source surfaces at different heights, without an annular through-hole. Each bracket/rod end is capped only within its own existing boundary; the U-shaped frame openings and functional bag/cassette openings remain open. |
 | Cart base | Retain the four original closed 260-face bodies. Trim four opposed-face, zero-thickness source burrs, eight faces total. They protruded about 0.15 mm from the body; this is an explicit local exterior change, not duplicate-body-face removal. |
 | Four stand wheels | Loft the missing lower tread through each wheel's two original 11-point curved side profiles and eight-point axial borders. The curved patch retains the source floor-contact positions. Close the separate near-planar eight-edge mounting back. |
 
